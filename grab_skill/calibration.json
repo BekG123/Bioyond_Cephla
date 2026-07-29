@@ -1,0 +1,83 @@
+{
+ "z_touch_offset_mm": 9.0,
+ "safety_margin_mm": 15.0,
+ "comment": "z_touch_offset = torque-probed contact Z minus vision grasp Z. Refresh via the calibrate flow (vision teach converge, then torque-guided descent to first band breach). grip Z = vision grasp Z + z_touch_offset + safety_margin.",
+ "claw_arm_tool_mm": [
+  191.6,
+  5.43
+ ],
+ "claw_arm_comment": "auto-derived from 6 stored anchor(s), max disagreement 0.64 mm",
+ "eye_cam_fit": {
+  "frame": "tool (rotates with Rz)",
+  "lever_arm_mm": [
+   17.77,
+   56.77
+  ],
+  "yaw_offset_deg": 90.5,
+  "mirror_f": -1.0,
+  "rms_mm": 0.26,
+  "aruco_marker_size_mm": 16.553,
+  "comment": "auto-calibrated 2026-07-28 21:19 from 9 poses (incl. tilt term); marker_world = TCP + R(Rz)@lever_arm + R(Rz+yaw_offset)@diag(1,f)@(u + tilt*H)",
+  "tilt_per_mm": [
+   0.04427,
+   -0.024
+  ],
+  "u_scale": 1.187,
+  "h_scale": 1.0501,
+  "fitted": "2026-07-25 19:05:00"
+ },
+ "history": [
+  {
+   "date": "2026-07-20",
+   "surface": "balance nest",
+   "vision_z": 41.25,
+   "contact_z": 49.9,
+   "offset": 8.7
+  },
+  {
+   "date": "2026-07-21",
+   "surface": "deck",
+   "vision_z": 43.49,
+   "contact_z": 52.5,
+   "offset": 9.0
+  },
+  {
+   "date": "2026-07-28 21:19",
+   "event": "camera refit REVERTED",
+   "bad_fit": {
+    "lever_arm_mm": [
+     37.45,
+     98.51
+    ],
+    "yaw_offset_deg": 91.25,
+    "tilt_per_mm": [
+     -0.1672,
+     -0.14358
+    ],
+    "u_scale": 1.1879,
+    "h_scale": -0.0099,
+    "rms_mm": 1.732
+   },
+   "why": "operator-run 1d calibration was poisoned: the target marker lay on the LOOSE RING PILE and shifted during the 12-pose drive -> impossible h_scale -0.0099, tilt x5, RMS 1.73 vs 0.26; restored the 07-25 12-row fit validated by two live grabs 07-28"
+  },
+  {
+   "date": "2026-07-28 22:15",
+   "source": "operator UI edit",
+   "offset": 9.0,
+   "margin": 15.0
+  }
+ ],
+ "marker_offsets": {
+  "3": {
+   "dx_mm": 0.81,
+   "dy_mm": -0.32,
+   "rel_yaw_deg": 179.76,
+   "length_mm": 104.7,
+   "width_mm": 70.1,
+   "note": "recal on deck under RESTORED camera model (marker centered; replaces the bad-model 21:20 run)",
+   "date": "2026-07-28 21:36"
+  }
+ },
+ "wrist_rel_deg": 88.38,
+ "claw_arm_model_version": "2026-07-25 19:05:00"
+}

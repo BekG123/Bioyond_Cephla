@@ -1,0 +1,12 @@
+function mod_Place1()
+  local LJ1=MJOINT(277.157,-68.103,-80.090,150.651,0,0,0,0,0,0,0,0)
+  local LJ2=MJOINT(106.920,-68.103,-80.090,150.651,0,0,0,0,0,0,0,0)
+  local LJ3=MJOINT(106.920,-68.103,-80.090,150.651,0,0,28,0,0,0,0,0)
+  local LVAR1=50
+  MOVABSJ(LJ1,LVAR1,0)
+  MOVABSJ(LJ2,LVAR1,0)
+  MOVEXTJ(LJ3,LVAR1,0,T0,U0)
+  MOVABSJ(LJ1,LVAR1,0)
+  mod003End()
+end--functionend
+--Fileinfomation:

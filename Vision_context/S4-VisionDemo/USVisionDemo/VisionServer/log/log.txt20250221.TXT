@@ -1,0 +1,319 @@
+2025-02-21 10:22:21,502 [1] INFO   - 宽边拍照点位为1527,1056,270.398804089737
+2025-02-21 10:22:21,512 [1] INFO   - 宽边拍照点位为1383,1080.75,90.9114468746865
+2025-02-21 10:22:21,512 [1] INFO   - 宽边拍照点位为1468.5,1013.25,2.35867590970193
+2025-02-21 10:22:21,519 [1] INFO   - 长边拍照点位为1468.5,1044,321.602921873979
+2025-02-21 10:22:21,519 [1] INFO   - 长边拍照点位为1609.5,964.5,183.274221763485
+2025-02-21 10:22:21,521 [1] INFO   - 长边拍照点位为1556.25,1045.5,246.989488063164
+2025-02-21 10:22:21,654 [1] DEBUG TerminatorProtocolServer-58577354 - Listener (0.0.0.0:60000) was started
+2025-02-21 10:22:21,660 [1] INFO  TerminatorProtocolServer-58577354 - The server instance TerminatorProtocolServer-58577354 has been started!
+2025-02-21 10:22:21,660 [1] INFO   - 服务端已开启，端口：60000
+2025-02-21 10:22:22,168 [3] INFO  TerminatorProtocolServer-58577354 - Session: 1d6e8a38-4344-4396-a1cb-eb050a290a13/127.0.0.1:50938
+A new session connected!
+2025-02-21 10:22:22,188 [6] INFO   - 新连接已建立127.0.0.1:50938
+2025-02-21 10:22:22,233 [6] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"2faef253-e982-494f-b861-c64d757560b6""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:22,254 [7] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:22,271 [7] INFO   - 当前曝光为:18000
+2025-02-21 10:22:22,276 [7] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:22,737 [7] INFO   - Enum device count : 0
+2025-02-21 10:22:22,738 [7] ERROR  - Camera handshake failed!
+2025-02-21 10:22:22,767 [7] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"2faef253-e982-494f-b861-c64d757560b6","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:22,768 [7] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:22,855 [7] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:22,927 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"974f6a55-b117-4d83-a85c-8066c27f45a1""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:22,928 [7] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:22,928 [7] INFO   - 当前曝光为:18000
+2025-02-21 10:22:22,932 [7] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:23,243 [7] INFO   - Enum device count : 0
+2025-02-21 10:22:23,247 [7] ERROR  - Camera handshake failed!
+2025-02-21 10:22:23,250 [7] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"974f6a55-b117-4d83-a85c-8066c27f45a1","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:23,250 [7] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:23,253 [7] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:23,357 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"703f287b-14c5-4b12-b3ef-964d04622bfc""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:23,357 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:23,362 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:23,365 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:23,681 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:23,684 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:23,686 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"703f287b-14c5-4b12-b3ef-964d04622bfc","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:23,687 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:23,690 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:23,792 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"496511d1-e5e2-4717-80b1-993ebb08dec0""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:23,795 [7] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:23,800 [7] INFO   - 当前曝光为:18000
+2025-02-21 10:22:23,800 [7] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:24,126 [7] INFO   - Enum device count : 0
+2025-02-21 10:22:24,126 [7] ERROR  - Camera handshake failed!
+2025-02-21 10:22:24,129 [7] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"496511d1-e5e2-4717-80b1-993ebb08dec0","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:24,129 [7] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:24,134 [7] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:24,240 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"d3c59389-dfc5-4056-9b92-7a874740ae94""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:24,240 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:24,244 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:24,246 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:24,574 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:24,575 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:24,576 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"d3c59389-dfc5-4056-9b92-7a874740ae94","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:24,580 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:24,582 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:24,689 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"953cdee2-e2e1-4a16-96d0-78d5095487b0""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:24,689 [7] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:24,690 [7] INFO   - 当前曝光为:18000
+2025-02-21 10:22:24,690 [7] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:25,022 [7] INFO   - Enum device count : 0
+2025-02-21 10:22:25,024 [7] ERROR  - Camera handshake failed!
+2025-02-21 10:22:25,027 [7] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"953cdee2-e2e1-4a16-96d0-78d5095487b0","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:25,030 [7] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:25,033 [7] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:25,131 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"0432e17f-a13a-4635-98c5-10c21fc1dbef""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:25,131 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:25,135 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:25,138 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:25,457 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:25,458 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:25,458 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"0432e17f-a13a-4635-98c5-10c21fc1dbef","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:25,458 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:25,464 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:25,579 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"ea2513b6-9916-4ca7-827a-16d2fd300e61""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:25,579 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:25,581 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:25,582 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:25,908 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:25,909 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:25,911 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"ea2513b6-9916-4ca7-827a-16d2fd300e61","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:25,913 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:25,916 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:26,025 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"3c6a6a8c-5f8f-4b9b-ba86-bd0cb78bf320""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:26,025 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:26,028 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:26,030 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:26,343 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:26,345 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:26,346 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"3c6a6a8c-5f8f-4b9b-ba86-bd0cb78bf320","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:26,349 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:26,351 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:26,455 [8] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"f4f0acba-0262-4829-94e9-3e1127a16b42""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:26,455 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:26,459 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:26,461 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:26,783 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:26,784 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:26,786 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"f4f0acba-0262-4829-94e9-3e1127a16b42","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:26,788 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:26,790 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:26,895 [7] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"234cc6b7-9ef5-402b-a47b-97f86ca0fcb2""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:26,895 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:26,899 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:26,902 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:27,224 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:27,224 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:27,224 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"234cc6b7-9ef5-402b-a47b-97f86ca0fcb2","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:27,224 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:27,233 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:27,340 [7] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"e769f7a6-47b6-478b-a4c4-c176c2c156dc""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:27,340 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:27,342 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:27,345 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:27,661 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:27,661 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:27,661 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"e769f7a6-47b6-478b-a4c4-c176c2c156dc","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:27,661 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:27,669 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:27,774 [7] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"13f1b1e6-171f-444b-bc9d-6e31d69170f0""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:27,774 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:27,779 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:27,779 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:28,093 [6] INFO   - Enum device count : 0
+2025-02-21 10:22:28,094 [6] ERROR  - Camera handshake failed!
+2025-02-21 10:22:28,096 [6] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"13f1b1e6-171f-444b-bc9d-6e31d69170f0","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:28,097 [6] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:28,100 [6] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:28,206 [7] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"c3125692-6c38-4147-82ce-e02874cb9b82""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:28,206 [8] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:28,206 [8] INFO   - 当前曝光为:18000
+2025-02-21 10:22:28,206 [8] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:28,539 [8] INFO   - Enum device count : 0
+2025-02-21 10:22:28,539 [8] ERROR  - Camera handshake failed!
+2025-02-21 10:22:28,539 [8] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"c3125692-6c38-4147-82ce-e02874cb9b82","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:28,546 [8] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:28,546 [8] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:28,653 [7] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"aae845a2-7135-4c4b-9e58-67276e01460f""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:28,653 [8] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:28,658 [8] INFO   - 当前曝光为:18000
+2025-02-21 10:22:28,660 [8] ERROR  - 相机列表为空，重新初始化
+2025-02-21 10:22:28,990 [8] INFO   - Enum device count : 0
+2025-02-21 10:22:28,990 [8] ERROR  - Camera handshake failed!
+2025-02-21 10:22:28,994 [8] DEBUG  - 服务端向客户端127.0.0.1:50938发送数据: {"ID":"aae845a2-7135-4c4b-9e58-67276e01460f","Version":"1.0","JobID":"Error","CamPosID":"1","Message":null,"isGripper":false,"PickMethod":0,"Progress":0}
+2025-02-21 10:22:28,996 [8] ERROR  - 数据帧格式错误!
+2025-02-21 10:22:28,996 [8] ERROR  - No valid leaving transitions are permitted from state 'Disconnected' for trigger 'ErrorDetected'. Consider ignoring the trigger.
+   在 Stateless.StateMachine`2.DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection`1 unmetGuardConditions)
+   在 Stateless.StateMachine`2.UnhandledTriggerAction.Sync.Execute(TState state, TTrigger trigger, ICollection`1 unmetGuards)
+   在 Stateless.StateMachine`2.InternalFireOne(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFireQueued(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.InternalFire(TTrigger trigger, Object[] args)
+   在 Stateless.StateMachine`2.Fire(TTrigger trigger)
+   在 VCS.Camera.HIKCamera.HIKCamera.GrabImg(CameraInfo info, ImageContainer& image) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Device\Camera\VCS.Camera.HIKCamera\HIKCamera.cs:行号 193
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.DoProcessObjDetection() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 632
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.StartObjDetectionLive(ReceiveFrame frame) 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 588
+   在 VCS.Vision.AutoTeachCV.AccAutoTeachCV.<>c__DisplayClass24_0.<ReceiveFrameHandler>b__0() 位置 C:\Users\chen.he\视觉服务\vision-4.8\vision\Src\Vision\VCS.Vision.AutoTeachCV\AccAutoTeachCV.cs:行号 670
+2025-02-21 10:22:29,108 [7] DEBUG  - 收到来自客户端127.0.0.1:50938数据: {"ID":"6bb3ef8d-f0fb-4cbd-9afe-1aa4ac63d6d4""Version":"1.0","JobID":"2","CamPosID":"1","Message":"","isGripper":false,"PickMethod":"Wide"}
+2025-02-21 10:22:29,108 [6] INFO   - 收到数据JobID：2, CamPosID:1
+2025-02-21 10:22:29,112 [6] INFO   - 当前曝光为:18000
+2025-02-21 10:22:29,113 [6] ERROR  - 相机列表为空，重新初始化
+2025-02-21 15:13:59,672 [1] INFO   - 宽边拍照点位为1527,1056,270.398804089737
+2025-02-21 15:13:59,687 [1] INFO   - 宽边拍照点位为1383,1080.75,90.9114468746865
+2025-02-21 15:13:59,687 [1] INFO   - 宽边拍照点位为1468.5,1013.25,2.35867590970193
+2025-02-21 15:13:59,692 [1] INFO   - 长边拍照点位为1468.5,1044,321.602921873979
+2025-02-21 15:13:59,698 [1] INFO   - 长边拍照点位为1609.5,964.5,183.274221763485
+2025-02-21 15:13:59,699 [1] INFO   - 长边拍照点位为1556.25,1045.5,246.989488063164
+2025-02-21 15:13:59,808 [1] DEBUG TerminatorProtocolServer-24749807 - Listener (0.0.0.0:60000) was started
+2025-02-21 15:13:59,808 [1] INFO  TerminatorProtocolServer-24749807 - The server instance TerminatorProtocolServer-24749807 has been started!
+2025-02-21 15:13:59,815 [1] INFO   - 服务端已开启，端口：60000
+2025-02-21 15:25:58,128 [1] INFO   - 宽边拍照点位为1527,1056,270.398804089737
+2025-02-21 15:25:58,141 [1] INFO   - 宽边拍照点位为1383,1080.75,90.9114468746865
+2025-02-21 15:25:58,141 [1] INFO   - 宽边拍照点位为1468.5,1013.25,2.35867590970193
+2025-02-21 15:25:58,147 [1] INFO   - 长边拍照点位为1468.5,1044,321.602921873979
+2025-02-21 15:25:58,149 [1] INFO   - 长边拍照点位为1609.5,964.5,183.274221763485
+2025-02-21 15:25:58,151 [1] INFO   - 长边拍照点位为1556.25,1045.5,246.989488063164
+2025-02-21 15:25:58,232 [1] DEBUG TerminatorProtocolServer-24749807 - Listener (0.0.0.0:60000) was started
+2025-02-21 15:25:58,232 [1] INFO  TerminatorProtocolServer-24749807 - The server instance TerminatorProtocolServer-24749807 has been started!
+2025-02-21 15:25:58,237 [1] INFO   - 服务端已开启，端口：60000

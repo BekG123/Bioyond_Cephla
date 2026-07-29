@@ -1,0 +1,661 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BR.PC.RobotSDK</name>
+    </assembly>
+    <members>
+        <member name="T:BR.PC.RobotSDK.IInstancePerDependency">
+            <summary>
+            瞬态注入，每次调用时实例化
+            </summary>
+        </member>
+        <member name="T:BR.PC.RobotSDK.ISingleInstanceDependency">
+            <summary>
+            单例注入
+            </summary>
+        </member>
+        <member name="T:BR.PC.RobotSDK.ILiquidSDK">
+            <summary>
+            定义移液站SDK的接口。
+            </summary>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.StartProtocolAsync(System.String,System.Collections.Generic.List{BR.PC.RobotSDK.LiqWorkflowParameterInfo},System.Collections.Generic.List{BR.PC.RobotSDK.LiqSampleInfo},System.Collections.Generic.List{BR.PC.RobotSDK.LiqTipRackStatusInfo})">
+            <summary>
+            启动协议。
+            </summary>
+            <param name="path">协议文件地址</param>
+            <param name="parameterInfos">参数信息列表,默认为null,表示不做任何修改</param>
+            <param name="sampleInfos">样本信息</param>
+            <param name="tipRackStatusInfos">枪头盒信息</param>
+            <returns>启动成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.LoadParameterInfosAsync(System.String)">
+            <summary>
+            获取可变参数信息。
+            </summary>
+            <param name="path">协议文件地址</param>
+            <returns>参数信息列表</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.GetSampleInfosAsync(System.String)">
+            <summary>
+            获取样品预设信息
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.GetTipRackStatusInfosAsync(System.String)">
+            <summary>
+            获取枪头状态预设信息
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.GetStepProcessInfosAsync">
+            <summary>
+            获取实验过程数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.StopRunAsync">
+            <summary>
+            停止运行。
+            </summary>
+            <returns>停止成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.PauseAsync">
+            <summary>
+            暂停执行
+            </summary>
+            <returns>暂停成功返回true</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.ContinueAsync">
+            <summary>
+            继续运行。
+            </summary>
+            <returns>继续成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.RetryAsync">
+            <summary>
+            重试。
+            </summary>
+            <returns>重试成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.ClearErrorAsync">
+            <summary>
+            清除错误。
+            </summary>
+            <returns>清除成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.QueryStateAsync">
+            <summary>
+            查询当前状态。
+            </summary>
+            <returns>返回当前状态的详细信息。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.ConnectAsync(System.String,System.Int32,System.Boolean)">
+            <summary>
+            连接
+            </summary>
+            <param name="ip">IP地址</param>
+            <param name="port">端口号</param>
+            <param name="enableReconnect">自动重连是否启用。默认开</param>
+            <returns>是否成功连接</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.DisconnectAsync">
+            <summary>
+            断开连接
+            </summary>
+            <returns>是否成功断开</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.ILiquidSDK.GetIsConnectedAsync">
+            <summary>
+            获取连接状态
+            </summary>
+            <returns>是否成功断开</returns>
+        </member>
+        <member name="T:BR.PC.RobotSDK.LiqWorkflowParameterInfo">
+            <summary>
+            表示参数信息的类。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqWorkflowParameterInfo.StepName">
+            <summary>
+            步骤名称。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqWorkflowParameterInfo.OrderNum">
+            <summary>
+            顺序号。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqWorkflowParameterInfo.Name">
+             <summary>
+            参数名称。
+             </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqWorkflowParameterInfo.CurrentValue">
+            <summary>
+            当前值。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqWorkflowParameterInfo.ParameterType">
+            <summary>
+            参数类型。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqWorkflowParameterInfo.UserDescription">
+             <summary>
+            用户描述。
+             </summary>
+        </member>
+        <member name="T:BR.PC.RobotSDK.LiqSampleInfo">
+            <summary>
+            样本信息
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:BR.PC.RobotSDK.LiqSampleInfo.TypeId" -->
+        <member name="P:BR.PC.RobotSDK.LiqSampleInfo.Name">
+            <summary>
+            耗材命名
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqSampleInfo.AliasName">
+            <summary>
+            别名
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqSampleInfo.SlotLoc">
+            <summary>
+            板位号
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqSampleInfo.HolePos">
+            <summary>
+            每个孔位的信息
+            </summary>
+        </member>
+        <member name="T:BR.PC.RobotSDK.LiqTipRackStatusInfo">
+            <summary>
+            枪头盒状态
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqTipRackStatusInfo.AliasName">
+            <summary>
+            别名
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqTipRackStatusInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqTipRackStatusInfo.TipRackTypeId">
+            <summary>
+            枪头盒类型
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqTipRackStatusInfo.TipTypeId">
+            <summary>
+            枪头类型
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqTipRackStatusInfo.SlotLoc">
+            <summary>
+            板位号
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqTipRackStatusInfo.ColCnt">
+            <summary>
+            枪头盒的列数（如：8*12规格，12列）；, 同时指定vColTipInfo的长度 
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqTipRackStatusInfo.RowCnt">
+            <summary>
+            枪头盒的行数
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqTipRackStatusInfo.VColTipInfo">
+            <summary>
+            每列中枪头的数量 （如：0,0,0,0,6,6,7,7,8,8,8,8 表示第1-4列枪头数为0, 第5列为6...）
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqTipRackStatusInfo.IsReusable">
+            <summary>
+            枪头盒是否是可回收1-是0-否
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqTipRackStatusInfo.SlotLayer">
+            <summary>
+            层数:底向上。底层1
+            </summary>
+        </member>
+        <member name="T:BR.PC.RobotSDK.RobotMode">
+            <summary>
+            手动模式和自动模式。
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.RobotMode.Manual">
+            <summary>
+            手动模式。
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.RobotMode.Auto">
+            <summary>
+            自动模式。
+            </summary>
+        </member>
+        <member name="T:BR.PC.RobotSDK.GripperControlMode">
+            <summary>
+            表示夹爪的控制模式。
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.GripperControlMode.Torque">
+            <summary>
+            力矩控制模式。
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.GripperControlMode.Position">
+            <summary>
+            位置控制模式。
+            </summary>
+        </member>
+        <member name="T:BR.PC.RobotSDK.LiqStepProcessInfo">
+            <summary>
+            步骤过程
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessInfo.StepName">
+            <summary>
+            步骤名称
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessInfo.OrderNum">
+            <summary>
+            顺序号。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessInfo.Description">
+            <summary>
+            步骤说明
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessInfo.CommandName">
+            <summary>
+            设备指令名称
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessInfo.StepGroup">
+            <summary>
+            分组名称
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessInfo.StartDt">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessInfo.EndDt">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessInfo.Details">
+            <summary>
+            步骤详情
+            </summary>
+        </member>
+        <member name="T:BR.PC.RobotSDK.LiqStepProcessDetailInfo">
+            <summary>
+            步骤过程详情
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessDetailInfo.Text">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.LiqStepProcessDetailInfo.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="M:BR.PC.RobotSDK.LiqStepProcessDetailInfo.#ctor(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            
+            </summary>
+            <param name="text"></param>
+            <param name="time"></param>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.IsConnected">
+            <summary>
+            检查机器人是否已连接。
+            </summary>
+            <returns>如果机器人已连接，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.SwitchModeAsync(BR.PC.RobotSDK.RobotMode)">
+            <summary>
+            切换机器人模式。
+            </summary>
+            <param name="mode">机器人模式。</param>
+            <returns>切换成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.EnableDragModeAsync(System.Boolean)">
+            <summary>
+            启用拖动模式。
+            </summary>
+            <param name="enable">true启用,fasle不启用</param>
+            <returns></returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.ConnectAsync(System.String,System.Int32,System.Boolean)">
+            <summary>
+            连接
+            </summary>
+            <param name="ip">IP地址</param>
+            <param name="port">端口号</param>
+            <param name="enableReconnect">自动重连是否启用。默认开</param>
+            <returns>是否成功连接</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.DisconnectAsync">
+            <summary>
+            断开连接
+            </summary>
+            <returns>是否成功断开</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.WriteDOAsync(System.String,System.Int32)">
+            <summary>
+            设置单个IO信号的值。
+            </summary>
+            <param name="signalName">信号名称。</param>
+            <param name="value">信号值。</param>
+            <returns>设置成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.WriteAOAsync(System.String,System.Single)">
+            <summary>
+            设置单个模拟IO信号的值。
+            </summary>
+            <param name="sianalName">信号名称。</param>
+            <param name="value">信号值。</param>
+            <returns>设置成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.ReadDIAsync(System.String)">
+            <summary>
+            获取单个IO信号的值。
+            </summary>
+            <param name="signalName">信号名称。</param>
+            <returns>信号值。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.ReadAIAsync(System.String)">
+            <summary>
+            获取单个模拟IO信号的值。
+            </summary>
+            <param name="signalName">信号名称。</param>
+            <returns>信号值。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.GetCurPoseAsync(System.Double[],System.Double[])">
+            <summary>
+            获取机器人当前姿态。
+            </summary>
+            <param name="user">用户坐标系。默认u0</param>
+            <param name="tool">工具坐标系。默认t0</param>
+            <returns>返回包含xyzrxryrz的数组。长度单位位mm,角度单位为度</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.GetCurJointAsync(System.Double[],System.Double[])">
+            <summary>
+            获取机器人当前关节位置或者角度。
+            </summary>
+            <param name="user">用户坐标系。默认u0</param>
+            <param name="tool">工具坐标系。默认t0</param>
+            <returns>返回包含J1-J6的数组。长度单位为mm,角度单位是度</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.GetCurExtJointAsync(System.Double[],System.Double[])">
+            <summary>
+            获取机器人当前外部关节位置。
+            </summary>
+            <param name="user">用户坐标系。默认u0</param>
+            <param name="tool">工具坐标系。默认t0</param>
+            <returns>返回包含E1-E6的数组。长度单位为mm,角度单位是度</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.StartProgramAsync">
+            <summary>
+            启动机器人程序。
+            </summary>
+            <returns>启动成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.PauseProgramAsync">
+            <summary>
+            暂停机器人程序。
+            </summary>
+            <returns>暂停成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.ResumeProgramAsync">
+            <summary>
+            恢复机器人程序。
+            </summary>
+            <returns>恢复成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.StopProgramAsync">
+            <summary>
+            停止机器人程序。
+            </summary>
+            <returns>停止成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.SetEnableAsync(System.Boolean)">
+            <summary>
+            设置机器人使能状态。
+            </summary>
+            <param name="isEnable">true表示使能，false表示禁能。</param>
+            <returns>设置成功返回true，否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.SetSpeedAsync(System.Double)">
+            <summary>
+            设置速度百分比
+            </summary>
+            <param name="speedPercentage">速度百分比0.01~1</param>
+            <returns>是否成功设置</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.DownloadProgramAsync(System.String)">
+            <summary>
+            下载程序文件
+            </summary>
+            <param name="savedFolder">保存文件夹</param>
+            <returns>是否成功下载</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.UploadProgramAsync(System.String)">
+            <summary>
+            上传程序文件
+            </summary>
+            <param name="dirPath">文件夹路径</param>
+            <returns>是否成功上传</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.JogLinearAsync(System.Int32,System.Double)">
+            <summary>
+            Jog机器人走直线运动。
+            </summary>
+            <param name="moveType">移动类型：1表示X轴，2表示Y轴，3表示Z轴。</param>
+            <param name="step">步进量，正负表示方向，单位为毫米。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.JogJointAsync(System.Int32,System.Double)">
+            <summary>
+            Jog机器人单关节运动。
+            </summary>
+            <param name="axisIndex">关节索引，应在1到8之间。</param>
+            <param name="step">步进量，正负表示方向，直接轴单位为mm,旋转轴单位为度。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.OpenGripperAsync(System.Single)">
+            <summary>
+            打开夹爪
+            </summary>
+            <param name="value">夹爪的开合度,单位mm</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.CloseGripperAsync(BR.PC.RobotSDK.GripperControlMode,System.Single)">
+            <summary>
+            关闭夹爪
+            </summary>
+            <param name="gripperControlMode">夹爪的控制模式。</param>
+            <param name="value">夹爪的加持力或位置，取决于控制模式。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.MoveLinearAsync(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double[],System.Double[],System.Double[])">
+            <summary>
+            走直线运动到目标点，路径为直线。
+            </summary>
+            <param name="x">目标点的X坐标。单位mm</param>
+            <param name="y">目标点的Y坐标。单位mm</param>
+            <param name="z">目标点的Z坐标。单位mm</param>
+            <param name="rx">目标点的RX旋转角度。单位度</param>
+            <param name="ry">目标点的RY旋转角度。单位度</param>
+            <param name="rz">目标点的RZ旋转角度。单位度</param>
+            <param name="speedPercentages">运动速度的百分比。系数为2000mm/s,手动模式最大速度为200mm/s,自动模式会大于此值</param>
+            <param name="zone">运动区域</param>
+            <param name="extJoint">外部关节位置数组，默认为空。直线轴单位为mm,旋转轴单位为度,8个元素,无补0</param>
+            <param name="user">坐标系</param>
+            <param name="tool">坐标系</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.MoveLinearAbsSpeedAsync(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double[],System.Double[],System.Double[])">
+            <summary>
+            走直线运动到目标点，路径为直线。
+            </summary>
+            <param name="x">目标点的X坐标。单位mm</param>
+            <param name="y">目标点的Y坐标。单位mm</param>
+            <param name="z">目标点的Z坐标。单位mm</param>
+            <param name="rx">目标点的RX旋转角度。单位度</param>
+            <param name="ry">目标点的RY旋转角度。单位度</param>
+            <param name="rz">目标点的RZ旋转角度。单位度</param>
+            <param name="speed">运动速度，单位mm/s 默认100,手动模式下最大200mm/s</param>
+            <param name="zone">运动区域，默认为0</param>
+            <param name="extJoint">外部关节位置数组，默认为空。直线轴单位为mm,旋转轴单位为度,8个元素,无补0</param>
+            <param name="user">用户坐标系，默认为空。必须为7个元素</param>
+            <param name="tool">工具坐标系，默认为空。必须为7个元素</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.MoveJointAsync(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double[],System.Double[],System.Double[])">
+            <summary>
+            走关节运动到目标点，路径轨迹不可控。
+            </summary>
+            <param name="x">目标点的X坐标。</param>
+            <param name="y">目标点的Y坐标。</param>
+            <param name="z">目标点的Z坐标。</param>
+            <param name="rx">目标点的RX旋转角度。</param>
+            <param name="ry">目标点的RY旋转角度。</param>
+            <param name="rz">目标点的RZ旋转角度。</param>
+            <param name="speedPercentages">运动速度的百分比。0.01~1</param>
+            <param name="extJoint">外部关节位置数组，直线轴单位为mm,旋转轴单位为度,默认为空。必须为8个元素,不足补0</param>
+            <param name="user">用户坐标系，默认为空。必须为7个元素</param>
+            <param name="tool">工具坐标系，默认为空。必须为7个元素</param>
+            <param name="zone">运动区域，默认为0。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.MoveExtJointAsync(System.Double[],System.Double,System.Double)">
+            <summary>
+            走外部关节运动到目标点。
+            </summary>
+            <param name="extJoint">外部关节位置数组。直线轴单位为mm,旋转轴单位为度。必须为8个元素,不足补0</param>
+            <param name="speedPercentages">运动速度的百分比。</param>
+            <param name="zone">运动区域，默认为0。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.MoveSingleExtJointAsync(System.Int32,System.Single,System.Double,System.Double)">
+            <summary>
+            走单个外部关节运动到目标点。
+            </summary>
+            <param name="axisIndex">外部关节索引。1~8</param>
+            <param name="extJoint">外部关节位置。直线轴单位为mm,旋转轴单位为度</param>
+            <param name="speedPercentages">运动速度的百分比。</param>
+            <param name="zone">区域，默认为0。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.JogExtJointAsync(System.Int32,System.Single)">
+            <summary>
+            Jog外部关节运动。
+            </summary>
+            <param name="index">外部关节索引。1~8,直线轴单位为mm,旋转轴单位为度</param>
+            <param name="step">步进量，正负表示方向。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.MoveAbsJointAsync(System.Double[],System.Double,System.Double,System.Double[],System.Double[],System.Double[])">
+            <summary>
+            走关节绝对运动到目标点。
+            </summary>
+            <param name="joint">关节位置数组.直线轴单位为mm,旋转轴单位为度。必须为8个元素,不足补0</param>
+            <param name="speedPercentages">运动速度的百分比。</param>
+            <param name="zone">区域，默认为0。</param>
+            <param name="extJoint">外部关节位置数组，默认为空。</param>
+            <param name="user">用户坐标系，默认为空。</param>
+            <param name="tool">工具坐标系，默认为空。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.JogRotationAsync(System.Int32,System.Double)">
+            <summary>
+            Jog机器人旋转运动。
+            </summary>
+            <param name="jogType">旋转类型。1-rx,2-ry,3-rz</param>
+            <param name="step">步进量(单位为度)，正负表示方向。</param>
+            <returns>如果操作成功，返回true；否则返回false。</returns>
+        </member>
+        <member name="M:BR.PC.RobotSDK.IRobotSDK.GetMotionInfo">
+            <summary>
+            获取机器人信息。
+            </summary>
+            <returns>返回包含机器人运动信息的MotionInfo对象。</returns>
+        </member>
+        <member name="T:BR.PC.RobotSDK.MotionInfo">
+            <summary>
+            包含机器人运动信息的类。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.MotionInfo.IsEnable">
+            <summary>
+            获取或设置机器人是否使能。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.MotionInfo.IsMoving">
+            <summary>
+            获取或设置机器人是否正在运动。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.MotionInfo.IsInDragMode">
+            <summary>
+            获取或设置机器人是否处于拖动模式。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.MotionInfo.IsInAutoMode">
+            <summary>
+            获取或设置机器人是否处于自动模式。
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.MotionInfo.SpeedPercentage">
+            <summary>
+            获取或设置机器人的速度百分比。
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqStateType.Idle">
+            <summary>
+            空闲
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqStateType.Running">
+            <summary>
+            运行
+            </summary>
+        </member>
+        <member name="F:BR.PC.RobotSDK.LiqStateType.Error">
+            <summary>
+            错误
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.StateData.IsInExperiment">
+            <summary>
+            是否在实验中
+            </summary>
+        </member>
+        <member name="P:BR.PC.RobotSDK.StateData.IsLastExperimentSuccess">
+            <summary>
+            上一个实验是否成功结束
+            </summary>
+        </member>
+    </members>
+</doc>

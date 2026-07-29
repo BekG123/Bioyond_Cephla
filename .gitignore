@@ -1,0 +1,22 @@
+# Python environment / caches (regenerable)
+venv/
+__pycache__/
+*.pyc
+
+# Session debug captures (1.3+ GB) — EXCEPT the load-bearing ones:
+# cap0035/cap0064 are ground-truth anchors (grab_skill/anchors.json,
+# rederive_claw_arm.py), cap0025/cap0041 are offline-test fixtures.
+bioyond-s4-mcp/captures/*
+!bioyond-s4-mcp/captures/cap0025_gige_raw.jpg
+!bioyond-s4-mcp/captures/cap0035_gige_raw.jpg
+!bioyond-s4-mcp/captures/cap0041_gige_grid.jpg
+!bioyond-s4-mcp/captures/cap0064_gige_raw.jpg
+operator_ui/captures/
+operator_ui/tests/_fake_*
+
+# Duplicate copy of the vendor demo tree (identical to USVisionDemo)
+Vision_context/S4-VisionDemo/美国SVisionDemo/
+
+# Runtime logs
+Logs/
+*.log

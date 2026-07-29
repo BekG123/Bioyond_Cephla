@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>S4 Operator Console</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font:13px/1.45 system-ui, sans-serif; background:#14171c;
+         color:#dde3ea; display:flex; flex-direction:column; height:100vh; }
+
+  /* header */
+  #hdr { display:flex; align-items:center; gap:8px; padding:8px 12px;
+         border-bottom:1px solid #2a2f37; flex-wrap:wrap; }
+  #hdr h1 { font-size:15px; margin:0 12px 0 0; }
+  .chip { padding:2px 10px; border-radius:12px; background:#2a2f37;
+          font-size:12px; white-space:nowrap; }
+  .chip.g { background:#14432b; color:#7ee08a; }
+  .chip.a { background:#4a3a12; color:#e2b34c; }
+  .chip.r { background:#4a1717; color:#ff8a8a; }
+  .chip.b { background:#173a5e; color:#7ec3ff; }
+
+  /* layout */
+  #main { flex:1; display:flex; min-height:0; }
+  #left { flex:1.5; display:flex; flex-direction:column; min-width:0;
+          padding:8px; gap:8px; }
+  #right { width:400px; overflow-y:auto; border-left:1px solid #2a2f37;
+           padding:8px; display:flex; flex-direction:column; gap:8px; }
+
+  /* camera — FIXED size box: other panels appearing/disappearing must never
+     resize or cover the feed; the raw frame letterboxes inside it */
+  #campanel { position:relative; background:#000; border:1px solid #2a2f37;
+              border-radius:8px; overflow:hidden; height:56vh;
+              flex:0 0 auto; }
+  #camimg { width:100%; height:100%; object-fit:contain; display:block;
+            cursor:crosshair; }
+  #camerr { position:absolute; bottom:6px; left:8px; background:#a33c;
+            padding:2px 8px; border-radius:4px; font-size:12px; display:none; }
+  #camtag { position:absolute; top:6px; left:8px; background:#000a;
+            padding:2px 8px; border-radius:4px; font-weight:600;
+            pointer-events:none; }
+  #cambtns { display:flex; gap:6px; align-items:center; flex:0 0 auto; }
+  #croprow { display:flex; gap:8px; min-height:100px; flex:1; }
+  #croppanel { display:none; background:#000; border:1px solid #2a2f37;
+               border-radius:8px; overflow:auto; width:280px;
+               flex:0 0 auto; }
+  #cropimg { width:100%; display:block; }
+
+  /* log */
+  #seqlog { flex:1; overflow-y:auto; background:#0e1116;
+            border:1px solid #2a2f37; border-radius:8px; padding:8px;
+            font:12px/1.5 ui-monospace, Consolas, monospace; min-height:80px; }
+  #seqlog .info  { color:#9fb0c3; }
+  #seqlog .warn  { color:#e2b34c; }
+  #seqlog .err   { color:#ff8a8a; }
+  #seqlog .good  { color:#7ee08a; }
+  #seqlog .toast { color:#7ec3ff; }
+
+  /* cards */
+  .card { background:#1a1f26; border:1px solid #2a2f37; border-radius:8px;
+          padding:10px; }
+  .card h2 { margin:0 0 8px; font-size:12px; text-transform:uppercase;
+             letter-spacing:.6px; color:#8fa0b3; }
+  .row { display:flex; gap:6px; flex-wrap:wrap; align-items:center;
+         margin-bottom:6px; }
+  .row:last-child { margin-bottom:0; }
+  .lbl { color:#8fa0b3; font-size:12px; }
+  .mono { font:12px ui-monospace, Consolas, monospace; }
+  #posebig { font:15px ui-monospace, Consolas, monospace; color:#dbe7f3; }
+
+  button { background:#2b6cb0; color:#fff; border:0; border-radius:6px;
+           padding:6px 12px; cursor:pointer; font-size:13px; }
+  button:hover { filter:brightness(1.15); }
+  button:disabled { opacity:.4; cursor:default; filter:none; }
+  button.ghost { background:#2a2f37; }
+  button.warn  { background:#8a6d1d; }
+  button.danger{ background:#9c2b2b; }
+  button.go    { background:#1f7a48; }
+  button.stop  { background:#c0392b; font-weight:700; padding:8px 18px; }
+  button.jog   { min-width:52px; }
+
+  input, select { background:#1d232b; color:#dde3ea; border:1px solid #2a2f37;
+                  border-radius:6px; padding:5px 7px; font-size:13px; }
+  input.num { width:74px; }
+  input.sm  { width:56px; }
+
+  #griplog { font:12px ui-monospace, Consolas, monospace; color:#9fb0c3; }
+  .tgt { background:#11202f; border:1px solid #234; border-radius:6px;
+         padding:6px 8px; margin-bottom:6px; }
+</style></head><body>
+
+<div id="hdr">
+  <h1>S4 Operator Console</h1>
+  <span class="chip" id="c-conn">disconnected</span>
+  <span class="chip" id="c-mode">mode ?</span>
+  <span class="chip" id="c-en">enable ?</span>
+  <span class="chip" id="c-prog">program ?</span>
+  <span class="chip" id="c-lua">lua ?</span>
+  <span class="chip" id="c-err">errors ?</span>
+  <span class="chip" id="c-seq">seq idle</span>
+  <span class="chip" id="c-env">env ?</span>
+  <span style="flex:1"></span>
+  <button class="ghost" id="tabbtn-console" onclick="showTab('console')"
+          style="background:#2b6cb0">Console</button>
+  <button class="ghost" id="tabbtn-points" onclick="showTab('points')">Points &amp; Trajectory</button>
+  <span class="lbl">E-stop is the human's job — stay at it during motion.</span>
+</div>
+
+<div id="tab-points" style="display:none; padding:10px">
+  <div class="card">
+    <h2>Saved points — isometric view (click a point, assign a role)</h2>
+    <div class="row">
+      <canvas id="iso" width="980" height="560"
+              style="background:#0d1218; border:1px solid #2a2f37; border-radius:8px; cursor:crosshair"></canvas>
+    </div>
+    <div class="row">
+      <span class="lbl">selected:</span><span class="lbl mono" id="selpt">—</span>
+      <button class="ghost" onclick="assignRole('start')">Set as START</button>
+      <button class="ghost" onclick="assignRole('end')">Set as END</button>
+      <button class="ghost" onclick="assignRole('home')">Set as HOME</button>
+      <button class="danger" onclick="deleteSelected()">Delete point</button>
+      <span style="flex:1"></span>
+      <span class="lbl mono" id="rolesum"></span>
+    </div>
+    <div class="row">
+      <input class="sm" id="ptname2" placeholder="point name" style="width:110px">
+      <button class="ghost" onclick="saveCurrentPose()">Add CURRENT pose as point</button>
+      <span class="lbl">stores the live X/Y/Rz + current Z — for home/park poses; grip points come from the grasp target (console tab)</span>
+    </div>
+    <div class="row">
+      <span class="lbl">motion order between points</span>
+      <select id="wforder" onchange="orderChanged()">
+        <option value="z,rz,xy">Z &rarr; Rz &rarr; XY (default)</option>
+        <option value="z,xy,rz">Z &rarr; XY &rarr; Rz</option>
+        <option value="rz,z,xy">Rz &rarr; Z &rarr; XY</option>
+        <option value="z,x,y,rz">Z &rarr; X &rarr; Y &rarr; Rz</option>
+        <option value="custom">custom…</option>
+      </select>
+      <input class="sm" id="wfcustom" placeholder="z,rz,xy" style="width:110px; display:none"
+             onchange="orderChanged()">
+      <span class="lbl">tokens: z (to travel Z), rz, xy, x, y — omitted axes auto-complete at the end</span>
+    </div>
+    <div class="row">
+      <button class="go" onclick="runWorkflow()">RUN workflow</button>
+      <span class="lbl">travel Z</span><input class="sm" id="wftz" value="300" onchange="drawIso()">
+      <span class="lbl">open E1</span><input class="sm" id="wfopen" value="28">
+      <span class="lbl">closed travel &rarr; open @ +20 &rarr; guarded descend &rarr; grip &rarr; lift &rarr; place &rarr; release &rarr; +20 &amp; close &rarr; home</span>
+    </div>
+  </div>
+</div>
+
+<div id="main">
+  <div id="left">
+    <div id="campanel">
+      <span id="camtag">eye-in-hand (GigE)</span>
+      <img id="camimg" alt="camera">
+      <span id="camerr"></span>
+    </div>
+    <div id="cambtns">
+      <button class="ghost" onclick="api('/camera/snapshot',{},null,'snapshot saved')">Snapshot</button>
+      <button class="ghost" onclick="api('/camera/release',{},null,'camera released')">Release cam</button>
+      <button class="ghost" onclick="api('/camera/resume',{},null,'camera resumed')">Resume cam</button>
+      <span class="lbl" id="clickinfo">click the image to zoom a region</span>
+    </div>
+    <div id="croprow">
+      <div id="seqlog"></div>
+      <div id="detpanel" style="display:none; width:340px; flex:0 0 auto;
+           background:#000; border:1px solid #2a2f37; border-radius:8px;
+           overflow:auto;">
+        <div style="padding:3px 8px; background:#11202f; font-size:11px;
+             color:#8fa0b3;">detection — green: big circle, orange: small,
+             red cross: mark</div>
+        <img id="detimg" style="width:100%; display:block;">
+      </div>
+      <div id="croppanel"><img id="cropimg"></div>
+    </div>
+  </div>
+
+  <div id="right">
+
+    <div class="card">
+      <h2>Connection &amp; state</h2>
+      <div class="row">
+        <button onclick="api('/connect')">Connect</button>
+        <button class="ghost" onclick="api('/disconnect')">Disconnect</button>
+        <button class="ghost" onclick="api('/mode',{mode:'auto'})">Auto</button>
+        <button class="ghost" onclick="api('/mode',{mode:'manual'})">Manual</button>
+      </div>
+      <div class="row">
+        <button class="warn" onclick="api('/enable',{confirm:true},
+          'ENABLE servo power?\nConfirm the cell is clear and you are at the E-stop.')">Enable</button>
+        <button class="ghost" onclick="api('/disable')">Disable</button>
+        <button class="warn" onclick="api('/clear_errors',{confirm:true},
+          'CLEAR controller errors?\nOnly after the cause is understood and resolved.')">Clear errors</button>
+      </div>
+      <div class="row">
+        <button class="ghost" onclick="startProg()">Start prog</button>
+        <button class="ghost" onclick="api('/program',{action:'stop'})">Stop prog</button>
+      </div>
+      <div class="row"><span id="posebig">pose: —</span></div>
+      <div class="row mono lbl" id="joints">joints: —</div>
+    </div>
+
+    <div class="card">
+      <h2>Jog</h2>
+      <div class="row">
+        <span class="lbl">step</span>
+        <select id="jogstep">
+          <option>0.1</option><option>0.2</option><option>0.5</option>
+          <option>1</option><option selected>5</option>
+          <option>10</option><option>20</option>
+        </select><span class="lbl">mm</span>
+        <span class="lbl" style="margin-left:10px">Rz step</span>
+        <select id="jogrz">
+          <option>1</option><option>5</option><option selected>15</option>
+          <option>30</option>
+        </select><span class="lbl">deg</span>
+      </div>
+      <div class="row">
+        <button class="jog ghost" onclick="jog('X',1)">X+</button>
+        <button class="jog ghost" onclick="jog('X',-1)">X−</button>
+        <button class="jog ghost" onclick="jog('Y',1)">Y+</button>
+        <button class="jog ghost" onclick="jog('Y',-1)">Y−</button>
+        <button class="jog ghost" onclick="jog('Z',1)">Z+</button>
+        <button class="jog ghost" onclick="jog('Z',-1)">Z−</button>
+        <button class="jog ghost" onclick="jogRz(1)">Rz+</button>
+        <button class="jog ghost" onclick="jogRz(-1)">Rz−</button>
+      </div>
+      <div class="row">
+        <span class="lbl">go to</span>
+        <input class="num" id="gx" placeholder="X">
+        <input class="num" id="gy" placeholder="Y">
+        <input class="num" id="gz" placeholder="Z">
+        <input class="num" id="grz" placeholder="Rz">
+        <button onclick="goTo()">Go</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Gripper (E1) — 28 = open</h2>
+      <div class="row">
+        <button class="ghost" onclick="api('/gripper',{action:'move',e1:28})">Open (28)</button>
+        <input class="sm" id="e1val" placeholder="E1">
+        <button class="ghost" onclick="gripMove()">Move E1</button>
+        <button class="ghost" onclick="api('/gripper',{action:'status'})">Status</button>
+        <button class="ghost" onclick="api('/gripper',{action:'torque'})">Torque J1-J4</button>
+      </div>
+      <div class="row" id="griplog">E1: — | torque: — | J: —</div>
+    </div>
+
+    <div class="card">
+      <h2>Grab pipeline — you decide every step</h2>
+      <div class="row">
+        <button class="go" onclick="findDisk()">1&nbsp; Find calibration disk</button>
+        <span class="lbl">iterative vision solve — moves the arm in small steps</span>
+      </div>
+      <div class="row">
+        <button class="go" onclick="findAruco()">1b&nbsp; Find ArUco marker</button>
+        <span class="lbl">anchor-free solve — centers the marker, compensates the 184&nbsp;mm claw arm</span>
+      </div>
+      <div class="row">
+        <button class="ghost" onclick="calAruco()">1c&nbsp; Calibrate disk ID</button>
+        <span class="lbl">one-time: contrast background, edge-detects the disk, saves marker→disk offset per id</span>
+      </div>
+      <div class="row">
+        <button class="ghost" onclick="calCamera()">1d&nbsp; Calibrate camera (auto)</button>
+        <span class="lbl">robot drives ~12 poses over a fixed marker, refits the mount incl. tilt — run if X/Y is biased</span>
+      </div>
+      <div class="row">
+        <button class="ghost" onclick="api('/seq/generate_anchor', {},
+          'GENERATE ANCHOR (vendor convergence)\nPlace the CALIBRATION DISK under the eye camera. The robot converges to the vendor\'s taught view (vendor code + vendor values); when it finishes you will be ASKED whether the run was successful before anything is saved. After saving, Calibrate camera auto-re-derives the claw arm + wrist relation on every refit — no jogging.',
+          null)">0&nbsp; Generate anchor (vendor)</button>
+        <span class="lbl">one-time per arm — makes camera recalibrations self-healing</span>
+      </div>
+      <div class="row" style="border:1px solid #345; border-radius:6px; padding:6px; margin:6px 0">
+        <span class="lbl">Z calibration:</span>
+        <span class="lbl mono">grip Z = vision Z +</span>
+        <input class="sm" id="zoff" placeholder="offset" style="width:56px">
+        <span class="lbl mono">+</span>
+        <input class="sm" id="zmar" placeholder="margin" style="width:56px">
+        <span class="lbl mono" id="zcalsum">= ?</span>
+        <button class="ghost" onclick="zcalSave()">Update</button>
+        <span class="lbl">(torque-probed touch offset; margin 0 = true value)</span>
+      </div>
+      <div class="tgt">
+        <div class="row"><span class="lbl">grasp target</span>
+          <span class="lbl mono" id="tgtinfo">none yet</span></div>
+        <div class="row">
+          <input class="num" id="tx" placeholder="X">
+          <input class="num" id="ty" placeholder="Y">
+          <input class="num" id="tz" placeholder="Z vis">
+          <input class="num" id="trz" placeholder="Rz">
+          <input class="num" id="tzc" placeholder="Z grip" title="calibrated grip Z (vision Z + touch offset + margin)">
+        </div>
+        <div class="row">
+          <input class="sm" id="ptname" placeholder="point name" style="width:110px">
+          <button class="ghost" onclick="savePoint()">Save this target as point</button>
+          <span class="lbl">stored: X/Y/Rz + grip Z from these fields — manage in the Points tab</span>
+        </div>
+      </div>
+      <div class="row">
+        <button class="go" onclick="align()">2&nbsp; Align</button>
+        <span class="lbl">hover Z</span><input class="sm" id="hoverz" placeholder="cur">
+        <button class="go" onclick="descend()">3&nbsp; Descend</button>
+        <span class="lbl">torque-guarded</span>
+      </div>
+      <div class="row">
+        <button class="ghost" onclick="api('/marker_offset', {},
+          'SAVE ArUco grasp correction?\nUses the CURRENT claw position vs the last Find\'s marker: jog until the claw is visually perfect first. Stored per marker id, rotates with the object.',
+          'marker offset learned')">Save ArUco offset (claw is perfect now)</button>
+        <button class="ghost" onclick="api('/claw_arm_save', {},
+          'CLAW ARM measurement (2-press, bias-immune)\nJog the CLAW MIDPOINT exactly onto the last Find\'s marker, press. Then ROTATE the wrist ~180°, jog onto the marker again, press again — the pair separates the true arm from camera bias.',
+          null)">Calibrate claw arm (2-press)</button>
+        <button class="ghost" onclick="api('/marker_offset_clear', {},
+          'CLEAR the learned offset for this marker id?\nGrabs then target the marker itself. Do this after recalibrating the claw arm; re-run 1c or jog-trim afterwards.',
+          'offset cleared')">Clear ArUco offset</button>
+        <button class="ghost" onclick="api('/wrist_rel_save', {},
+          'SAVE WRIST RELATION? (new-arm setup)\nWith the comb plates visually PARALLEL to the object\'s long edges, saves rz − marker yaw as the grab orientation rule.',
+          'wrist relation saved')">Save wrist relation (plates aligned now)</button>
+      </div>
+      <div class="row">
+        <button class="go" onclick="grip()">4&nbsp; Grip</button>
+        <span class="lbl">open</span><input class="sm" id="gripstart" value="18">
+        <span class="lbl">floor</span><input class="sm" id="gripfloor" value="1">
+        <button class="ghost" onclick="api('/gripper',{action:'move',e1:28},
+          'Open the gripper fully (release)?')">Release</button>
+      </div>
+      <div class="row">
+        <button class="go" onclick="lift()">5&nbsp; Lift</button>
+        <span class="lbl">to Z</span><input class="sm" id="liftz" value="150">
+        <span style="flex:1"></span>
+        <button class="stop" onclick="api('/seq/stop')">STOP SEQ</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Torque feedback — set the descent threshold by eye</h2>
+      <div class="row">
+        <button class="go" onclick="trqStart()">Start recording</button>
+        <button class="ghost" onclick="trqStop()">Stop</button>
+        <span class="lbl" id="trqstate">idle</span>
+        <span style="flex:1"></span>
+        <span class="lbl">saved threshold:</span>
+        <span class="lbl mono" id="trqsaved">±25 (default)</span>
+      </div>
+      <div class="row lbl">Record, then jog Z down manually with the fine buttons —
+        the chart shows each joint's deviation from its start value. CLICK the
+        chart at the deviation where contact clearly begins, then Save.</div>
+      <canvas id="trqchart" width="820" height="240"
+              style="width:100%; background:#0b1420; border:1px solid #345; border-radius:6px; cursor:crosshair"></canvas>
+      <div class="row">
+        <span class="lbl">picked:</span>
+        <span class="lbl mono" id="trqpick">click the chart</span>
+        <button class="ghost" onclick="trqSave()">Save threshold</button>
+        <span class="lbl mono" id="trqlegend">J1 <span style="color:#7fd7ff">━</span>
+          J2 <span style="color:#ffd27f">━</span> J3 <span style="color:#8fff9f">━</span>
+          J4 <span style="color:#ff9f9f">━</span></span>
+      </div>
+      <div class="row">
+        <span class="lbl">fine Z:</span>
+        <button class="jog ghost" onclick="api('/jog',{axis:'Z',delta:-0.1})">Z−0.1</button>
+        <button class="jog ghost" onclick="api('/jog',{axis:'Z',delta:-0.2})">Z−0.2</button>
+        <button class="jog ghost" onclick="api('/jog',{axis:'Z',delta:-0.5})">Z−0.5</button>
+        <button class="jog ghost" onclick="api('/jog',{axis:'Z',delta:-1})">Z−1</button>
+        <button class="jog ghost" onclick="api('/jog',{axis:'Z',delta:1})">Z+1</button>
+        <button class="jog ghost" onclick="api('/jog',{axis:'Z',delta:5})">Z+5</button>
+        <button class="jog ghost" onclick="api('/jog',{axis:'Z',delta:20})">Z+20</button>
+      </div>
+    </div>
+
+    <div class="card" id="envcard">
+      <h2>Workspace envelope (mm) <span id="envstate"></span></h2>
+      <div class="row">
+        <span class="lbl">X</span><input class="sm" id="exmin"><input class="sm" id="exmax">
+        <span class="lbl">Y</span><input class="sm" id="eymin"><input class="sm" id="eymax">
+      </div>
+      <div class="row">
+        <span class="lbl">Z</span><input class="sm" id="ezmin"><input class="sm" id="ezmax">
+        <button class="ghost" onclick="applyEnvelope()">Apply</button>
+        <button class="ghost" title="X 180-470, Y -400..-100, Z 35-420"
+          onclick="preset()">Work-area preset</button>
+        <button class="warn" id="envtoggle" onclick="toggleEnvelope()">Disable</button>
+      </div>
+      <div class="row lbl" id="envnote">Moves outside this box (or reach &gt; 480 mm) are refused.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const el = id => document.getElementById(id);
+let seqActive = false, lastTargetKey = "", lastDetTs = 0, lastAnchorStamp = "";
+
+// ---------------------------------------------------------------- helpers
+function say(msg, cls){
+  const d = document.createElement("div");
+  d.className = cls || "toast";
+  d.textContent = "· " + msg;
+  el("seqlog").appendChild(d);
+  el("seqlog").scrollTop = 1e9;
+}
+
+async function api(path, body, confirmMsg, okNote){
+  if(confirmMsg && !window.confirm(confirmMsg)) return null;
+  try{
+    const r = await fetch(path, {method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(body || {})});
+    const j = await r.json();
+    if(j.ok === false){ say(path + " → " + (j.error || "failed"), "err"); }
+    else if(okNote){ say(okNote, "good"); }
+    else if(j.reply !== undefined){ say(path + " → " + j.reply, "toast"); }
+    render(path, j);
+    return j;
+  }catch(e){ say(path + " failed: " + e, "err"); return null; }
+}
+
+function render(path, j){
+  if(!j) return;
+  const g = j.gripper || ((j.e1_position !== undefined) ? j : null);
+  if(g && g.e1_position !== undefined){
+    el("griplog").textContent =
+      "E1: " + g.e1_position + " | torque: " + g.e1_torque +
+      (g.grip_detected !== undefined ? " | grip: " + g.grip_detected : "") +
+      (j.joints ? " | J: " + JSON.stringify(j.joints) : "");
+  }
+  if(j.joints && j.telemetry_live !== undefined){
+    el("griplog").textContent = "E1: " + j.e1_position + " | torque: " +
+      j.e1_torque + " | J: " + JSON.stringify(j.joints) +
+      (j.telemetry_live ? "" : "  (TELEMETRY DEAD — trq bin not published!)");
+  }
+  if(j.path){ say("saved " + j.path, "toast"); }
+}
+
+// ------------------------------------------------------------------ state
+async function pollState(){
+  try{
+    const s = await (await fetch("/state")).json();
+    const r = s.robot || {};
+    chip("c-conn", r.connected ? "connected " + (r.endpoint||"") : "disconnected",
+         r.connected ? "g" : "");
+    if(r.connected){
+      chip("c-mode", "mode " + (r.control_mode ? r.control_mode.mode : "?"),
+           r.control_mode && r.control_mode.mode === "auto" ? "g" : "a");
+      chip("c-en", r.enabled ? "enabled" : "disabled", r.enabled ? "g" : "a");
+      const ps = r.program_state ? r.program_state.state : "?";
+      chip("c-prog", "prog " + ps, ps === "running" ? "g" : (ps === "error" ? "r" : "a"));
+      chip("c-lua", r.lua_app_initialized ? "lua ok" : "lua not init",
+           r.lua_app_initialized ? "g" : "a");
+      const ne = (r.errors || []).length;
+      chip("c-err", ne ? ne + " ERR: " + r.errors.map(e=>e.errCode).join(",") : "no errors",
+           ne ? "r" : "g");
+      if(r.pose_mm){
+        const p = r.pose_mm;
+        LASTPOSE = p;
+        el("posebig").textContent = "X " + p.X.toFixed(2) + "  Y " + p.Y.toFixed(2) +
+          "  Z " + p.Z.toFixed(2) + "  Rz " + p.Rz.toFixed(2);
+      }
+      if(r.joints){
+        el("joints").textContent = "joints: " +
+          Object.entries(r.joints).map(([k,v])=>k+" "+v.toFixed(2)).join("  ");
+      }
+    } else {
+      ["c-mode","c-en","c-prog","c-lua","c-err"].forEach(id=>chip(id, "—", ""));
+      el("posebig").textContent = "pose: —";
+    }
+    if(s.envelope && document.activeElement.tagName !== "INPUT"){
+      fillEnv(s.envelope);
+    }
+    if(s.envelope){ renderEnvState(s.envelope.enabled !== false); }
+    const cam = s.camera || {};
+    const ce = el("camerr");
+    if(cam.error && cam.error !== ""){ ce.textContent = cam.error; ce.style.display = "block"; }
+    else ce.style.display = "none";
+  }catch(e){}
+}
+function chip(id, text, cls){
+  const c = el(id); c.textContent = text; c.className = "chip " + (cls||"");
+}
+let envFilled = false;
+function fillEnv(env){
+  if(envFilled) return;
+  el("exmin").value = env.X.min; el("exmax").value = env.X.max;
+  el("eymin").value = env.Y.min; el("eymax").value = env.Y.max;
+  el("ezmin").value = env.Z.min; el("ezmax").value = env.Z.max;
+  envFilled = true;
+}
+
+// --------------------------------------------------------------- sequence
+async function pollSeq(){
+  try{
+    const s = await (await fetch("/seq")).json();
+    seqActive = s.active;
+    chip("c-seq", "seq " + (s.active ? s.name + " RUNNING" : (s.name ? s.name + " " + s.state : "idle")),
+         s.active ? "b" : (s.state === "error" ? "r" : (s.state === "done" ? "g" : "")));
+    const logDiv = el("seqlog");
+    const atBottom = logDiv.scrollTop + logDiv.clientHeight > logDiv.scrollHeight - 40;
+    const key = s.name + "|" + (s.log || []).length + "|" + s.state;
+    if(logDiv.dataset.key !== key){
+      logDiv.dataset.key = key;
+      logDiv.innerHTML = "";
+      (s.log || []).forEach(e => {
+        const d = document.createElement("div");
+        d.className = e.level;
+        d.textContent = "[" + e.t.toFixed(1).padStart(6) + "] " + e.msg;
+        logDiv.appendChild(d);
+      });
+      if(atBottom) logDiv.scrollTop = 1e9;
+    }
+    if(!s.active && s.name === "generate_anchor" && s.result
+       && s.result.anchor_pending && s.result.stamp !== lastAnchorStamp){
+      lastAnchorStamp = s.result.stamp;
+      const yes = confirm("GENERATE ANCHOR finished.\n\nWas the run successful " +
+        "(converged cleanly, disk did not move)?\n\nOK = SAVE it as the " +
+        "ground-truth anchor (Calibrate camera will then auto-re-derive the " +
+        "claw arm on every refit).\nCancel = DISCARD this run.");
+      const j = await api("/anchor_confirm", {save: yes}, null,
+                          yes ? "anchor saved" : "anchor discarded");
+      if(j && j.note) say(j.note, yes ? "toast" : "warn");
+    }
+    if(s.detection_ts && s.detection_ts !== lastDetTs){
+      lastDetTs = s.detection_ts;
+      el("detimg").src = "/teach_view?t=" + s.detection_ts;
+      el("detpanel").style.display = "block";
+    } else if(!s.detection_ts){
+      el("detpanel").style.display = "none";
+    }
+    if(s.target){
+      const k = JSON.stringify(s.target);
+      if(k !== lastTargetKey){
+        lastTargetKey = k;
+        el("tx").value = s.target.x; el("ty").value = s.target.y;
+        el("tz").value = s.target.z; el("trz").value = s.target.rz;
+        el("tzc").value = s.target.z_calibrated;
+        let zd = "";
+        if(s.target.z_detail){
+          const d = s.target.z_detail;
+          zd = " | Z calc: samples [" + d.samples.join(", ") + "] spread "
+             + d.spread + " -> vision " + d.vision_z + " + offset "
+             + d.touch_offset + " = " + s.target.z_calibrated;
+        }
+        el("tgtinfo").textContent = (s.target.config||"") + " @ " + (s.target.found_at||"")
+          + (s.target.rz_alt !== undefined ? " | other side: Rz " + s.target.rz_alt : "")
+          + zd;
+        if(s.target.config === "Long") el("gripstart").value = 28;
+        else if(s.target.config === "Wide") el("gripstart").value = 18;
+        else if((s.target.config||"").startsWith("ArUco")) el("gripstart").value = 28;
+      }
+    }
+    document.querySelectorAll("button.go, button.jog").forEach(b => b.disabled = seqActive);
+  }catch(e){}
+}
+
+// ----------------------------------------------------------------- camera
+async function pollFrame(){
+  try{
+    const r = await fetch("/frame?t=" + Date.now());
+    if(r.ok){
+      const b = await r.blob();
+      const url = URL.createObjectURL(b);
+      const img = el("camimg");
+      img.onload = () => URL.revokeObjectURL(url);
+      img.src = url;
+    }
+  }catch(e){}
+}
+let cropPt = null;
+el("camimg").addEventListener("click", ev => {
+  const img = el("camimg"), r = img.getBoundingClientRect();
+  if(!img.naturalWidth) return;
+  // object-fit:contain letterboxes the frame — map through the content rect
+  const scale = Math.min(r.width / img.naturalWidth,
+                         r.height / img.naturalHeight);
+  const cw = img.naturalWidth * scale, ch = img.naturalHeight * scale;
+  const ox = r.left + (r.width - cw) / 2, oy = r.top + (r.height - ch) / 2;
+  const x = Math.round((ev.clientX - ox) / scale);
+  const y = Math.round((ev.clientY - oy) / scale);
+  if(x < 0 || y < 0 || x >= img.naturalWidth || y >= img.naturalHeight)
+    return;   // click landed in the letterbox margin
+  cropPt = [x, y];
+  el("clickinfo").textContent = "zoom @ px " + x + ", " + y + " (click again to move, dbl-click to close)";
+  el("croppanel").style.display = "block";
+  refreshCrop();
+});
+el("camimg").addEventListener("dblclick", () => {
+  cropPt = null; el("croppanel").style.display = "none";
+  el("clickinfo").textContent = "click the image to zoom a region";
+});
+function refreshCrop(){
+  if(!cropPt) return;
+  el("cropimg").src = "/crop?cx=" + cropPt[0] + "&cy=" + cropPt[1] + "&t=" + Date.now();
+}
+
+// ------------------------------------------------------------------- jog
+function jog(axis, dir){
+  const step = parseFloat(el("jogstep").value) * dir;
+  api("/jog", {axis: axis, delta: step});
+}
+function jogRz(dir){
+  api("/jog", {axis: "RZ", delta: parseFloat(el("jogrz").value) * dir});
+}
+function goTo(){
+  const v = ["gx","gy","gz","grz"].map(id => parseFloat(el(id).value));
+  if(v.some(isNaN)){ say("fill all four go-to fields", "err"); return; }
+  api("/move", {x:v[0], y:v[1], z:v[2], rz:v[3]},
+      "Move to X " + v[0] + "  Y " + v[1] + "  Z " + v[2] + "  Rz " + v[3] + " ?");
+}
+async function startProg(){
+  const j = await api("/program", {action:"start"},
+    "START the Lua program?\nSafe-start: if it is paused it will be STOPPED " +
+    "first (a resume would continue the interrupted motion). The controller " +
+    "then re-zeroes E1 (plates close) — it refuses if an object looks held.");
+  if(j && j.notes){ j.notes.forEach(n => say(n, "warn")); }
+  if(j && j.gripper_after_start && j.gripper_after_start.e1_position !== undefined){
+    say("after start: E1 " + j.gripper_after_start.e1_position +
+        ", torque " + j.gripper_after_start.e1_torque, "toast");
+  }
+}
+function gripMove(){
+  const v = parseFloat(el("e1val").value);
+  if(isNaN(v)){ say("enter an E1 value", "err"); return; }
+  api("/gripper", {action:"move", e1:v});
+}
+
+// -------------------------------------------------------------- pipeline
+function targetBody(){
+  const v = ["tx","ty","tz","trz","tzc"].map(id => parseFloat(el(id).value));
+  if(v.slice(0,4).some(isNaN)) return null;
+  return {x:v[0], y:v[1], z:v[2], rz:v[3], z_calibrated: isNaN(v[4]) ? v[2] : v[4]};
+}
+function findDisk(){
+  api("/seq/find_disk", {},
+    "FIND CALIBRATION DISK?\nThe disk must already be placed below the eye " +
+    "camera — this does NOT search. If detected: rotates the wrist IN " +
+    "PLACE to the taught angle (≤30° chunks, J4-limit aware), then " +
+    "refines with small steps to full convergence (the proven MCP-skill " +
+    "flow). Lost detections recover; it can settle for the last good " +
+    "estimate. If not detected at all, it stops without moving." +
+    "\nStay at the E-stop.");
+}
+function findAruco(){
+  api("/seq/find_aruco", {},
+    "FIND ARUCO MARKER?\nThe marker must already be roughly below the eye " +
+    "camera — this does NOT search. It CENTERS the marker in view with " +
+    "small lateral moves (wrist does not rotate), then publishes a grab " +
+    "target with the claw lever arm already compensated.\nStay at the " +
+    "E-stop.");
+}
+function calAruco(){
+  api("/seq/calibrate_aruco", {},
+    "CALIBRATE DISK ID?\nPlace the marker-tagged disk on a plain CONTRASTING " +
+    "background (light sheet under a dark disk or vice versa), roughly below " +
+    "the eye camera. This centers the marker (small lateral moves), " +
+    "edge-detects the disk outline, and saves the marker→disk-center " +
+    "offset + spans for this id. CHECK the green rectangle in the detection " +
+    "panel afterwards.\nStay at the E-stop.");
+}
+function calCamera(){
+  api("/seq/calibrate_camera", {},
+    "CALIBRATE CAMERA MOUNT?\nPlace ANY ArUco marker firmly on the deck and " +
+    "center the camera over it first. The robot will AUTONOMOUSLY move " +
+    "through ~12 poses: ±30 mm hops, a +30 mm height, and wrist rotations " +
+    "up to ±90° (J4-aware) — the claw sweeps its 184 mm arc during " +
+    "rotations, so the area must be clear. The marker must NOT move.\n" +
+    "Fits the camera model incl. tilt and saves it if RMS < 4 mm.\n" +
+    "Stay at the E-stop.");
+}
+function align(){
+  const t = targetBody();
+  if(!t){ say("no target — run Find disk or fill the target fields", "err"); return; }
+  const h = parseFloat(el("hoverz").value);
+  if(!isNaN(h)) t.hover_z = h;
+  api("/seq/align", t,
+    "ALIGN over the target?\nRotates Rz to " + t.rz + " in-place, then moves " +
+    "linearly to X " + t.x + "  Y " + t.y + (t.hover_z ? (" at hover Z " + t.hover_z) : " at current height") + ".");
+}
+function descend(){
+  const t = targetBody();
+  if(!t){ say("no target — run Find disk or fill the target fields", "err"); return; }
+  api("/seq/descend", t,
+    "DESCEND to grip Z " + t.z_calibrated + " ?\nApproach to +20 mm, torque " +
+    "baseline, then 1.0/0.5 mm steps at speed 5 with per-joint torque bands.\n" +
+    "First breach stops and retreats. Stay at the E-stop.");
+}
+function grip(){
+  api("/seq/grip", {start: parseFloat(el("gripstart").value) || 28,
+                    floor: parseFloat(el("gripfloor").value) || 1},
+    "GRIP now?\nCloses in small steps until the torque crossing. Only do this " +
+    "at proper engagement depth — closing high on an edge jams the plates.");
+}
+function lift(){
+  api("/lift", {z: parseFloat(el("liftz").value) || 150},
+    "LIFT straight up to Z " + (el("liftz").value || 150) + " ?");
+}
+// ---------------------------------------------------- points & trajectory
+let PTS = {points: {}, roles: {}, motion_order: "z,rz,xy"};
+let selName = "";
+function showTab(t){
+  el("main").style.display = t === "console" ? "" : "none";
+  el("tab-points").style.display = t === "points" ? "" : "none";
+  el("tabbtn-console").style.background = t === "console" ? "#2b6cb0" : "#2a2f37";
+  el("tabbtn-points").style.background = t === "points" ? "#2b6cb0" : "#2a2f37";
+  if(t === "points"){ loadPoints(); }
+}
+async function loadPoints(){
+  try{
+    PTS = await (await fetch("/points")).json();
+    PTS.points = PTS.points || {}; PTS.roles = PTS.roles || {};
+    const ord = PTS.motion_order || "z,rz,xy";
+    const presets = ["z,rz,xy","z,xy,rz","rz,z,xy","z,x,y,rz"];
+    if(presets.includes(ord)){ el("wforder").value = ord; el("wfcustom").style.display = "none"; }
+    else { el("wforder").value = "custom"; el("wfcustom").style.display = ""; el("wfcustom").value = ord; }
+    el("rolesum").textContent = "start: " + (PTS.roles.start||"—")
+      + "   end: " + (PTS.roles.end||"—") + "   home: " + (PTS.roles.home||"—");
+    drawIso();
+  }catch(e){}
+}
+async function savePoint(){
+  const name = el("ptname").value.trim();
+  if(!name){ say("name the point first", "err"); return; }
+  const v = ["tx","ty","trz","tzc"].map(id => parseFloat(el(id).value));
+  if(v.some(isNaN)){ say("target fields incomplete (need X, Y, Rz, Z grip)", "err"); return; }
+  const j = await api("/points/save", {name, x:v[0], y:v[1], rz:v[2], z_grip:v[3]});
+  if(j && j.ok){ say("point '" + name + "' saved", "toast"); loadPoints(); }
+}
+async function saveCurrentPose(){
+  const name = el("ptname2").value.trim();
+  if(!name){ say("name the point first", "err"); return; }
+  const j = await api("/points/save", {name});   // no coords -> server uses live pose
+  if(j && j.ok){ say("point '" + name + "' saved from current pose", "toast"); loadPoints(); }
+}
+async function assignRole(role){
+  if(!selName){ say("click a point in the view first", "err"); return; }
+  const j = await api("/points/role", {role, name: selName});
+  if(j && j.ok){ say(role + " = " + selName, "toast"); loadPoints(); }
+}
+async function deleteSelected(){
+  if(!selName){ say("click a point in the view first", "err"); return; }
+  const j = await api("/points/delete", {name: selName},
+    "DELETE point '" + selName + "'? Roles using it are cleared.");
+  if(j && j.ok){ selName = ""; el("selpt").textContent = "—"; loadPoints(); }
+}
+function orderChanged(){
+  const sel = el("wforder").value;
+  el("wfcustom").style.display = sel === "custom" ? "" : "none";
+  const ord = sel === "custom" ? (el("wfcustom").value.trim() || "z,rz,xy") : sel;
+  api("/points/order", {order: ord}, null, "motion order saved").then(() => { PTS.motion_order = ord; drawIso(); });
+}
+function currentOrder(){
+  const sel = el("wforder").value;
+  return sel === "custom" ? (el("wfcustom").value.trim() || "z,rz,xy") : sel;
+}
+// isometric projection, AUTO-FITTED to the envelope box so deck-level
+// grip points (Z ~35-70) always land on the canvas
+let projPts = {};
+let proj = (x, y, z) => [0, 0];
+let LASTPOSE = null;
+function makeProj(ex0, ex1, ey0, ey1, ez0, ez1, W, H){
+  const a = Math.PI/6, ca = Math.cos(a), sa = Math.sin(a);
+  const raw = (x, y, z) => [(x - y) * ca, (x + y) * sa - z];
+  let minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9;
+  [[ex0,ey0,ez0],[ex1,ey0,ez0],[ex1,ey1,ez0],[ex0,ey1,ez0],
+   [ex0,ey0,ez1],[ex1,ey0,ez1],[ex1,ey1,ez1],[ex0,ey1,ez1]].forEach(c => {
+    const [px, py] = raw(...c);
+    minx = Math.min(minx, px); maxx = Math.max(maxx, px);
+    miny = Math.min(miny, py); maxy = Math.max(maxy, py);
+  });
+  const s = Math.min((W - 140) / (maxx - minx), (H - 60) / (maxy - miny));
+  const ox = 70 - minx * s, oy = 30 - miny * s;
+  return (x, y, z) => { const [px, py] = raw(x, y, z);
+                        return [px * s + ox, py * s + oy]; };
+}
+function drawIso(){
+  const cv = el("iso"); if(!cv) return;
+  const g = cv.getContext("2d");
+  g.clearRect(0, 0, cv.width, cv.height);
+  const [ex0, ex1] = [parseFloat(el("exmin").value)||180, parseFloat(el("exmax").value)||470];
+  const [ey0, ey1] = [parseFloat(el("eymin").value)||-400, parseFloat(el("eymax").value)||-100];
+  const [ez0, ez1] = [parseFloat(el("ezmin").value)||35, parseFloat(el("ezmax").value)||420];
+  proj = makeProj(ex0, ex1, ey0, ey1, ez0, ez1, cv.width, cv.height);
+  if(!Object.keys(PTS.points || {}).length){
+    g.fillStyle = "#5b6b7d"; g.font = "14px ui-monospace";
+    g.fillText("no saved points yet — save the grasp target (console tab) or press 'Add current pose'", 180, 40);
+  }
+  // envelope box wireframe
+  g.strokeStyle = "#26435f"; g.lineWidth = 1; g.setLineDash([]);
+  const C = [[ex0,ey0],[ex1,ey0],[ex1,ey1],[ex0,ey1]];
+  [[ez0],[ez1]].forEach(([z]) => {
+    g.beginPath();
+    C.concat([C[0]]).forEach(([x,y], i) => { const p = proj(x,y,z); i ? g.lineTo(...p) : g.moveTo(...p); });
+    g.stroke();
+  });
+  C.forEach(([x,y]) => { const a = proj(x,y,ez0), b = proj(x,y,ez1);
+    g.beginPath(); g.moveTo(...a); g.lineTo(...b); g.stroke(); });
+  // deck grid (Z = ez0) every 50 mm
+  g.strokeStyle = "#182a3c";
+  for(let x = Math.ceil(ex0/50)*50; x <= ex1; x += 50){
+    g.beginPath(); g.moveTo(...proj(x, ey0, ez0)); g.lineTo(...proj(x, ey1, ez0)); g.stroke(); }
+  for(let y = Math.ceil(ey0/50)*50; y <= ey1; y += 50){
+    g.beginPath(); g.moveTo(...proj(ex0, y, ez0)); g.lineTo(...proj(ex1, y, ez0)); g.stroke(); }
+  g.fillStyle = "#3a5675"; g.font = "11px ui-monospace";
+  g.fillText("X→", ...proj(ex1 + 15, ey0, ez0));
+  g.fillText("Y→", ...proj(ex0, ey1 + 15, ez0));
+  g.fillText("Z↑", ...proj(ex0 - 20, ey0, ez1));
+  // trajectory (start -> end -> home cycle, honoring the motion order)
+  const tz = parseFloat(el("wftz").value) || 300;
+  const roles = PTS.roles || {};
+  const P = n => PTS.points[n];
+  if(roles.start && roles.end && roles.home && P(roles.start) && P(roles.end) && P(roles.home)){
+    const s = P(roles.start), e = P(roles.end), h = P(roles.home);
+    const toks = currentOrder().split(",").map(t => t.trim());
+    function leg(a, b, za, zb){
+      // returns waypoint list from (a, za) to (b, zb=travel) per tokens
+      let cur = {x:a.x, y:a.y, z:za};
+      const w = [ [cur.x, cur.y, cur.z] ];
+      toks.forEach(t => {
+        if(t === "z") cur.z = zb;
+        else if(t === "x" || t === "xy") cur.x = b.x;
+        if(t === "y" || t === "xy") cur.y = b.y;
+        w.push([cur.x, cur.y, cur.z]);
+      });
+      cur.x = b.x; cur.y = b.y; cur.z = zb; w.push([cur.x, cur.y, cur.z]);
+      return w;
+    }
+    function drawPath(w, color, dash){
+      g.strokeStyle = color; g.lineWidth = 2; g.setLineDash(dash || []);
+      g.beginPath();
+      w.forEach((p, i) => { const q = proj(...p); i ? g.lineTo(...q) : g.moveTo(...q); });
+      g.stroke(); g.setLineDash([]);
+    }
+    // home -> start (travel), descend, up, start -> end, descend, up, end -> home
+    drawPath(leg(h, s, h.z_grip, tz), "#3f7fbf", [6,4]);
+    drawPath([[s.x, s.y, tz], [s.x, s.y, s.z_grip + 20], [s.x, s.y, s.z_grip]], "#37b06b");
+    drawPath([[s.x, s.y, s.z_grip], [s.x, s.y, tz]], "#37b06b", [2,3]);
+    drawPath(leg(s, e, tz, tz), "#3f7fbf", [6,4]);
+    drawPath([[e.x, e.y, tz], [e.x, e.y, e.z_grip + 20], [e.x, e.y, e.z_grip]], "#d08a2d");
+    drawPath([[e.x, e.y, e.z_grip], [e.x, e.y, e.z_grip + 20], [e.x, e.y, tz]], "#d08a2d", [2,3]);
+    drawPath(leg(e, h, tz, tz).concat([[h.x, h.y, h.z_grip]]), "#3f7fbf", [6,4]);
+  }
+  // points
+  projPts = {};
+  const roleOf = {}; Object.entries(roles).forEach(([r, n]) => { roleOf[n] = r; });
+  Object.entries(PTS.points).forEach(([n, p]) => {
+    const q = proj(p.x, p.y, p.z_grip);
+    const base = proj(p.x, p.y, ez0);
+    g.strokeStyle = "#2c3b4d"; g.setLineDash([2,3]);
+    g.beginPath(); g.moveTo(...q); g.lineTo(...base); g.stroke(); g.setLineDash([]);
+    const role = roleOf[n];
+    g.fillStyle = role === "start" ? "#37b06b" : role === "end" ? "#d08a2d"
+                : role === "home" ? "#3f7fbf" : "#8fa0b3";
+    g.beginPath(); g.arc(q[0], q[1], n === selName ? 8 : 5, 0, 7); g.fill();
+    if(n === selName){ g.strokeStyle = "#fff"; g.beginPath(); g.arc(q[0], q[1], 10, 0, 7); g.stroke(); }
+    g.fillStyle = "#c8d4e0"; g.font = "12px ui-monospace";
+    g.fillText(n + (role ? " [" + role.toUpperCase() + "]" : ""), q[0] + 12, q[1] - 4);
+    projPts[n] = q;
+  });
+  // live arm position (updated by the state poller)
+  if(LASTPOSE){
+    const q = proj(LASTPOSE.X, LASTPOSE.Y, LASTPOSE.Z);
+    g.strokeStyle = "#e8d44d"; g.lineWidth = 2;
+    g.beginPath(); g.moveTo(q[0]-8, q[1]); g.lineTo(q[0]+8, q[1]);
+    g.moveTo(q[0], q[1]-8); g.lineTo(q[0], q[1]+8); g.stroke();
+    g.fillStyle = "#e8d44d"; g.font = "11px ui-monospace";
+    g.fillText("arm", q[0] + 10, q[1] + 12);
+  }
+}
+el("iso") && el("iso").addEventListener("click", ev => {
+  const r = el("iso").getBoundingClientRect();
+  const mx = ev.clientX - r.left, my = ev.clientY - r.top;
+  let best = null, bd = 15;
+  Object.entries(projPts).forEach(([n, q]) => {
+    const d = Math.hypot(q[0] - mx, q[1] - my);
+    if(d < bd){ bd = d; best = n; }
+  });
+  if(best){ selName = best;
+    const p = PTS.points[best];
+    el("selpt").textContent = best + "  (X " + p.x + "  Y " + p.y + "  Rz " + p.rz + "  Zgrip " + p.z_grip + ")";
+    drawIso();
+  }
+});
+function runWorkflow(){
+  api("/seq/workflow", {travel_z: parseFloat(el("wftz").value) || 300,
+                        open_e1: parseFloat(el("wfopen").value) || 28,
+                        motion_order: currentOrder()},
+    "RUN the pick→place→home workflow?\nOrder " + currentOrder() + "; claw travels CLOSED; opens 20 mm above " +
+    "the START Z; torque-guarded descend + grip; slow lift; places at END " +
+    "(guarded touchdown); releases, rises 20 mm, CLOSES; parks at HOME.\n" +
+    "All moves envelope/kinematics-checked. Stay at the E-stop.");
+}
+function applyEnvelope(){
+  api("/envelope", {x_min: el("exmin").value, x_max: el("exmax").value,
+                    y_min: el("eymin").value, y_max: el("eymax").value,
+                    z_min: el("ezmin").value, z_max: el("ezmax").value},
+      null, "envelope applied");
+}
+function preset(){
+  el("exmin").value = 180; el("exmax").value = 470;
+  el("eymin").value = -400; el("eymax").value = -100;
+  el("ezmin").value = 35;  el("ezmax").value = 420;
+  say("preset filled — press Apply to activate", "warn");
+}
+let envOn = true;
+function renderEnvState(on){
+  envOn = on;
+  chip("c-env", on ? "env on" : "ENV OFF", on ? "g" : "r");
+  el("envtoggle").textContent = on ? "Disable" : "RE-ENABLE";
+  el("envtoggle").className = on ? "warn" : "danger";
+  el("envstate").textContent = on ? "" : "— DISABLED";
+  el("envcard").style.borderColor = on ? "" : "#9c2b2b";
+  el("envnote").textContent = on
+    ? "Moves outside this box (or reach > 480 mm) are refused."
+    : "ALL SOFT LIMITS OFF — no box, no reach guard. You are the envelope.";
+}
+function toggleEnvelope(){
+  if(envOn){
+    api("/envelope/enable", {enabled:false},
+      "DISABLE ALL soft motion limits?\nEnvelope box AND the 480 mm reach " +
+      "guard go off — every Cartesian target is accepted; the controller's " +
+      "own faults are the only backstop. You own collision safety until " +
+      "this is re-enabled.",
+      "ALL soft limits DISABLED");
+  } else {
+    api("/envelope/enable", {enabled:true}, null,
+        "soft limits re-enabled (box + reach)");
+  }
+}
+
+// ------------------------------------------------------ z-cal + torque tab
+async function zcalLoad(){
+  try{
+    const r = await (await fetch("/zcal")).json();
+    if(!r.ok) return;
+    el("zoff").value = r.z_touch_offset_mm;
+    el("zmar").value = r.safety_margin_mm;
+    el("zcalsum").textContent = "= +" + r.grip_extra_mm + " mm";
+  }catch(e){}
+}
+function zcalSave(){
+  const off = parseFloat(el("zoff").value), mar = parseFloat(el("zmar").value) || 0;
+  if(isNaN(off)){ say("bad Z offset", "err"); return; }
+  api("/zcal", {z_touch_offset_mm: off, safety_margin_mm: mar},
+      "Update Z calibration?\ngrip Z = vision Z + " + off + " + " + mar +
+      "\nSaved to calibration.json; applies to the NEXT Find.",
+      "Z calibration updated").then(zcalLoad);
+}
+
+let trqPolling = null, trqData = null, trqPick = null;
+function trqStart(){
+  api("/torque_rec/start", {}, null, "recording torque — jog Z with the fine buttons");
+  if(trqPolling) clearInterval(trqPolling);
+  trqPolling = setInterval(trqPoll, 700);
+  el("trqstate").textContent = "recording…";
+}
+function trqStop(){
+  api("/torque_rec/stop", {});
+  if(trqPolling){ clearInterval(trqPolling); trqPolling = null; }
+  el("trqstate").textContent = "stopped";
+}
+async function trqPoll(){
+  try{
+    const r = await (await fetch("/torque_rec/data")).json();
+    trqData = r;
+    el("trqstate").textContent = (r.recording ? "recording — " : "stopped — ")
+      + r.samples.length + " samples" + (r.error ? (" | " + r.error) : "");
+    trqDraw();
+  }catch(e){}
+}
+function trqDraw(){
+  const cv = el("trqchart"), ctx = cv.getContext("2d");
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  if(!trqData || !trqData.baseline || trqData.samples.length < 2){
+    ctx.fillStyle = "#456"; ctx.font = "14px monospace";
+    ctx.fillText("waiting for samples (baseline = first 3 reads)…", 20, 30);
+    return;
+  }
+  const S = trqData.samples, B = trqData.baseline;
+  const devs = S.map(s => s.j.map((v, i) => v - B[i]));
+  let m = 30;
+  devs.forEach(d => d.forEach(v => { m = Math.max(m, Math.abs(v)); }));
+  if(trqPick) m = Math.max(m, trqPick * 1.1);
+  m *= 1.15;
+  const W = cv.width, H = cv.height, x0 = 44;
+  const xs = i => x0 + (W - x0 - 6) * i / Math.max(1, S.length - 1);
+  const ys = v => H / 2 - (v / m) * (H / 2 - 14);
+  ctx.strokeStyle = "#234"; ctx.beginPath();
+  ctx.moveTo(x0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
+  ctx.fillStyle = "#678"; ctx.font = "11px monospace";
+  [m, m / 2, 0, -m / 2, -m].forEach(v => ctx.fillText(String(Math.round(v)), 4, ys(v) + 4));
+  const colors = ["#7fd7ff", "#ffd27f", "#8fff9f", "#ff9f9f"];
+  for(let j = 0; j < 4; j++){
+    ctx.strokeStyle = colors[j]; ctx.lineWidth = j === 0 ? 2 : 1.2;
+    ctx.beginPath();
+    devs.forEach((d, i) => { i ? ctx.lineTo(xs(i), ys(d[j])) : ctx.moveTo(xs(0), ys(d[j])); });
+    ctx.stroke();
+  }
+  if(trqPick){
+    ctx.strokeStyle = "#ff5577"; ctx.setLineDash([6, 4]); ctx.lineWidth = 1.5;
+    [trqPick, -trqPick].forEach(v => {
+      ctx.beginPath(); ctx.moveTo(x0, ys(v)); ctx.lineTo(W, ys(v)); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#ff5577";
+    ctx.fillText("±" + trqPick.toFixed(0), W - 46, ys(trqPick) - 4);
+  }
+  // annotate last Z on the right
+  const last = S[S.length - 1];
+  if(last && last.z != null){
+    ctx.fillStyle = "#9ab";
+    ctx.fillText("Z " + last.z.toFixed(2), W - 90, 14);
+  }
+}
+el("trqchart").addEventListener("click", ev => {
+  if(!trqData || !trqData.baseline){ return; }
+  const cv = el("trqchart"), rect = cv.getBoundingClientRect();
+  const y = (ev.clientY - rect.top) * (cv.height / rect.height);
+  const S = trqData.samples, B = trqData.baseline;
+  let m = 30;
+  S.forEach(s => s.j.forEach((v, i) => { m = Math.max(m, Math.abs(v - B[i])); }));
+  if(trqPick) m = Math.max(m, trqPick * 1.1);
+  m *= 1.15;
+  const v = Math.abs((cv.height / 2 - y) / (cv.height / 2 - 14) * m);
+  trqPick = Math.max(5, Math.round(v));
+  el("trqpick").textContent = "±" + trqPick + " counts";
+  trqDraw();
+});
+function trqSave(){
+  if(!trqPick){ say("click the chart first to pick a threshold", "err"); return; }
+  api("/torque_threshold", {band_counts: trqPick}, null,
+      "descent threshold saved: ±" + trqPick).then(trqLoadSaved);
+}
+async function trqLoadSaved(){
+  try{
+    const r = await (await fetch("/torque_threshold")).json();
+    if(r.ok) el("trqsaved").textContent = "±" + r.band_counts +
+      (r.band_counts === 25 ? " (default)" : " (operator)");
+  }catch(e){}
+}
+
+// ------------------------------------------------------------------ loops
+setInterval(pollState, 1500); pollState();
+setInterval(pollSeq, 1000); pollSeq();
+setInterval(() => { if(el("tab-points").style.display !== "none") drawIso(); }, 1500);
+loadPoints();
+setInterval(() => { pollFrame(); refreshCrop(); }, 1300); pollFrame();
+zcalLoad(); trqLoadSaved();
+say("console ready — Connect, check state, set the envelope, then work the pipeline", "toast");
+</script>
+</body></html>

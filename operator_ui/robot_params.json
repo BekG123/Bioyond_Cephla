@@ -1,0 +1,18 @@
+{
+ "comment": "Arm-specific limits + kinematics for the operator console and the standalone grabber. EDIT THIS (or let calibration flows update it) when porting to another arm - nothing is hardcoded in the code. The planar model (fitted EXACTLY, 0.00 mm residual on 8 live poses, 2026-07-28): P = base + link1*e^i(J2+j2_offset) + link2*e^i(J2+J3+j3_offset). Feasibility = |P-base| <= link1+link2-extension_margin AND predicted J2 >= j2_min+j2_margin. reach_hard_mm/inner_reach_mm are legacy origin-circle guards used only when the kinematic block is absent.",
+ "reach_hard_mm": 460.0,
+ "j4_pref_abs_deg": 150.0,
+ "j4_hard_abs_deg": 205.0,
+ "inner_reach_mm": 280.0,
+ "claw_gap_min_mm": 60.0,
+ "claw_gap_max_mm": 88.0,
+ "base_x_mm": 126.0,
+ "base_y_mm": 0.0,
+ "link1_mm": 200.0,
+ "link2_mm": 200.0,
+ "j2_offset_deg": 0.0,
+ "j3_offset_deg": 180.0,
+ "j2_min_deg": -95.0,
+ "j2_margin_deg": 2.0,
+ "extension_margin_mm": 15.0
+}
