@@ -13,6 +13,33 @@ the workcell in MuJoCo.
 | **D405 depth** | Live color, depth, and Viser 3D point cloud tested at 640 × 480, about 30 fps. Camera-to-arm calibration is pending. |
 | **Depth Anything V2 / Haiku** | Depth inference and scene-analysis tools are available. Metric-depth training needs reference labels; autonomous picking is not validated. |
 
+## Bioyond Works setup (Windows)
+
+This is Bioyond's own robot-control application, separate from our Flask console.
+The vendor manual specifies **Windows 10 or newer**; use a Windows PC for this
+step even if you run our Python tools on Linux.
+
+1. **Download** `BioyondWorks_Robot.exe` using the installer link supplied with
+   the robot. If you need the link, request it from [Bioyond](https://www.bioyond.com/en/about-us).
+2. **Install** and follow the prompts. Choose **Reinstall** only for a fresh
+   installation; choose **Upgrade** for an existing setup, since Reinstall clears
+   its saved user data. Allow network access if Windows prompts.
+3. **Log in** by opening **Bioyond Works-S**. The manual's factory login is
+   `admin` / `Admin@123`; use your current credentials if these were changed.
+   Change the factory password after first login.
+4. **Connect** the powered robot and PC by Ethernet. Put the PC on the same
+   subnet with a different, unused IP address. In **Module → network
+   configuration**, enter the controller's actual IP. This project's controller
+   is configured as `192.168.201.220`; the manual's factory example is
+   `192.168.3.200`.
+5. **Check** that the status bar shows an online connection. This finishes basic
+   software setup; it does not require running a robot motion program.
+6. **Disconnect Bioyond Works** before connecting through our Flask console;
+   only one application can own the robot connection at a time.
+
+Details: [Bioyond Works manual, Quick Start](Bioyond_S4_Agent_Context_Pack/04_Manuals/Bioyond%20Works%20Software%20Manual.pdf),
+printed pages 5–7. The installer is supplied separately, not stored in this repo.
+
 ## Get the project
 
 Install **Git and 64-bit Python 3.10**. Sign in to GitHub with access to this
