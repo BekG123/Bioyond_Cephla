@@ -1,0 +1,50 @@
+// Run with Node; no browser or hardware connection.
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const ui=path.resolve(__dirname,'..');
+const html=fs.readFileSync(path.join(ui,'static/index.html'),'utf8');
+for(const m of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) if(m[1].trim()) new vm.Script(m[1]);
+const ctx=vm.createContext({});
+vm.runInContext(fs.readFileSync(path.join(ui,'static/preview_limits.js'),'utf8')+';globalThis.P=S4Preview;',ctx);
+const P=ctx.P,p={...JSON.parse(fs.readFileSync(path.join(ui,'robot_params.json'))),...JSON.parse(fs.readFileSync(path.join(ui,'static/preview_config.json')))};
+const ref={zOffset:0,wristOffset:0},q={J2:45,J3:90,z:150,rz:135};
+assert.equal(P.error(q,p,ref),'');
+for(const z of [0,400]) assert.equal(P.error({...q,z},p,ref),'');
+for(const z of [-0.01,400.01]) assert.match(P.error({...q,z},p,ref),/J1/);
+for(const J2 of [-93,93]) assert.equal(P.error({...q,J2,rz:J2+90},p,ref),'');
+for(const J2 of [-93.01,93.01]) assert.match(P.error({...q,J2,rz:J2+90},p,ref),/J2/);
+for(const J3 of [-180.01,180.01]) assert.match(P.error({...q,J3},p,ref),/J3/);
+for(const J4 of [-150,150]) assert.equal(P.error({...q,rz:135+J4},p,ref),'');
+for(const J4 of [-150.01,150.01,720]) assert.match(P.error({...q,rz:135+J4},p,ref),/J4/);
+assert.match(P.error(q,{...p,j1_max_mm:undefined},ref),/configuration/);
+assert.match(P.error({...q,z:NaN},p,ref),/Incomplete/);
+assert.equal(P.error({...q,z:420},p,{...ref,zOffset:20}),'');
+assert.match(P.error({...q,z:420.1},p,{...ref,zOffset:20}),/J1/);
+assert.equal(P.transition(q,{...q,z:200},p,ref),'');
+assert.match(P.transition(q,{...q,J3:-90,rz:-45},p,ref),/reach/);
+assert.equal(P.near(-179,179),181);
+assert.match(P.error({...q,J3:P.near(-179,179)},p,ref),/J3/);
+const xy=P.forward(q,p),sol=P.solve(xy.x,xy.y,q.z,q.rz,p,ref,q);
+assert.ok(Math.abs(sol.J2-q.J2)<1e-8 && Math.abs(sol.J3-q.J3)<1e-8);
+assert.equal(P.solve(999,999,150,135,p,ref,q),null);
+
+// Exercise the actual GUI adapter: rejection must not move its model or fields.
+const elements={};const el=id=>elements[id]??=( {value:'',textContent:'',disabled:false} );
+const groups={carriage:{position:{z:0},visible:false},shoulder:{rotation:{z:0}},elbow:{rotation:{z:0}},wrist:{rotation:{z:0}}};
+const adapter=vm.createContext({S4Preview:P,RP:p,three:{ghostGroups:groups,Z_REF:150,RZ_REF:0},LASTPOSE:null,LASTJOINTS:null,
+  THREE:{MathUtils:{degToRad:x=>x*Math.PI/180}},RIG:{J2_HOME:45,J3_HOME:90},el});
+vm.runInContext(html.slice(html.indexOf('function applyGhostPose('),html.indexOf('// called from the state poll')),adapter);
+adapter.resetPreview();
+const before=JSON.stringify(adapter.three.previewPose);
+assert.equal(adapter.acceptPreview({...q,rz:720},true),false);
+assert.equal(JSON.stringify(adapter.three.previewPose),before);
+assert.equal(el('vrz').value,'135.000');
+adapter.setPreviewZ(200);
+assert.equal(groups.carriage.position.z,50);
+assert.equal(el('vz').value,'200.000');assert.equal(el('gz').value,'200.000');
+adapter.setPreviewZ(401);
+assert.equal(groups.carriage.position.z,50);assert.equal(el('vz').value,'200.000');
+adapter.three.dragOverride=null;el('vx').value='999';
+assert.equal(adapter.updatePreviewFromFields(),false);
+assert.equal(groups.carriage.position.z,50);assert.equal(el('preview-go').disabled,true);
+assert.match(html,/id="squid-x" value="75"/);assert.match(html,/id="squid-y" value="600"/);
+console.log('PASS: preview bounds, winding, intermediate sweep, live Z offset, IK, GUI rejection and Z controls.');

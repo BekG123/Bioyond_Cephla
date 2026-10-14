@@ -2,87 +2,160 @@
 <html><head><meta charset="utf-8"><title>S4 Operator Console</title>
 <style>
   * { box-sizing: border-box; }
-  body { margin:0; font:13px/1.45 system-ui, sans-serif; background:#14171c;
-         color:#dde3ea; display:flex; flex-direction:column; height:100vh; }
+  body { margin:0; font:13px/1.45 system-ui, sans-serif; background:#171717;
+         color:#e2e2e2; display:flex; flex-direction:column; height:100vh; }
 
   /* header */
   #hdr { display:flex; align-items:center; gap:8px; padding:8px 12px;
-         border-bottom:1px solid #2a2f37; flex-wrap:wrap; }
+         border-bottom:1px solid #2f2f2f; flex-wrap:wrap; }
   #hdr h1 { font-size:15px; margin:0 12px 0 0; }
-  .chip { padding:2px 10px; border-radius:12px; background:#2a2f37;
+  .chip { padding:2px 10px; border-radius:12px; background:#2f2f2f;
           font-size:12px; white-space:nowrap; }
-  .chip.g { background:#14432b; color:#7ee08a; }
-  .chip.a { background:#4a3a12; color:#e2b34c; }
-  .chip.r { background:#4a1717; color:#ff8a8a; }
-  .chip.b { background:#173a5e; color:#7ec3ff; }
+  .chip.g { background:#373737; color:#c5c5c5; }
+  .chip.a { background:#3b3b3b; color:#b6b6b6; }
+  .chip.r { background:#222222; color:#a3a3a3; }
+  .chip.b { background:#353535; color:#b9b9b9; }
 
   /* layout */
   #main { flex:1; display:flex; min-height:0; }
   #left { flex:1.5; display:flex; flex-direction:column; min-width:0;
           padding:8px; gap:8px; }
-  #right { width:400px; overflow-y:auto; border-left:1px solid #2a2f37;
+  #right { width:400px; overflow-y:auto; border-left:1px solid #2f2f2f;
            padding:8px; display:flex; flex-direction:column; gap:8px; }
 
   /* camera — FIXED size box: other panels appearing/disappearing must never
      resize or cover the feed; the raw frame letterboxes inside it */
-  #campanel { position:relative; background:#000; border:1px solid #2a2f37;
+  #campanel { position:relative; background:#000000; border:1px solid #2f2f2f;
               border-radius:8px; overflow:hidden; height:56vh;
               flex:0 0 auto; }
   #camimg { width:100%; height:100%; object-fit:contain; display:block;
             cursor:crosshair; }
-  #camerr { position:absolute; bottom:6px; left:8px; background:#a33c;
+  #camerr { position:absolute; bottom:6px; left:8px; background:#4c4c4ccc;
             padding:2px 8px; border-radius:4px; font-size:12px; display:none; }
-  #camtag { position:absolute; top:6px; left:8px; background:#000a;
+  #camtag { position:absolute; top:6px; left:8px; background:#000000aa;
             padding:2px 8px; border-radius:4px; font-weight:600;
             pointer-events:none; }
   #cambtns { display:flex; gap:6px; align-items:center; flex:0 0 auto; }
   #croprow { display:flex; gap:8px; min-height:100px; flex:1; }
-  #croppanel { display:none; background:#000; border:1px solid #2a2f37;
+  #croppanel { display:none; background:#000000; border:1px solid #2f2f2f;
                border-radius:8px; overflow:auto; width:280px;
                flex:0 0 auto; }
   #cropimg { width:100%; display:block; }
 
   /* log */
-  #seqlog { flex:1; overflow-y:auto; background:#0e1116;
-            border:1px solid #2a2f37; border-radius:8px; padding:8px;
+  #seqlog { flex:1; overflow-y:auto; background:#111111;
+            border:1px solid #2f2f2f; border-radius:8px; padding:8px;
             font:12px/1.5 ui-monospace, Consolas, monospace; min-height:80px; }
-  #seqlog .info  { color:#9fb0c3; }
-  #seqlog .warn  { color:#e2b34c; }
-  #seqlog .err   { color:#ff8a8a; }
-  #seqlog .good  { color:#7ee08a; }
-  #seqlog .toast { color:#7ec3ff; }
+  #seqlog .info  { color:#aeaeae; }
+  #seqlog .warn  { color:#b6b6b6; }
+  #seqlog .err   { color:#a3a3a3; }
+  #seqlog .good  { color:#c5c5c5; }
+  #seqlog .toast { color:#b9b9b9; }
 
   /* cards */
-  .card { background:#1a1f26; border:1px solid #2a2f37; border-radius:8px;
+  .card { background:#1e1e1e; border:1px solid #2f2f2f; border-radius:8px;
           padding:10px; }
   .card h2 { margin:0 0 8px; font-size:12px; text-transform:uppercase;
-             letter-spacing:.6px; color:#8fa0b3; }
+             letter-spacing:.6px; color:#9e9e9e; }
   .row { display:flex; gap:6px; flex-wrap:wrap; align-items:center;
          margin-bottom:6px; }
   .row:last-child { margin-bottom:0; }
-  .lbl { color:#8fa0b3; font-size:12px; }
+  .lbl { color:#9e9e9e; font-size:12px; }
   .mono { font:12px ui-monospace, Consolas, monospace; }
-  #posebig { font:15px ui-monospace, Consolas, monospace; color:#dbe7f3; }
+  #posebig { font:15px ui-monospace, Consolas, monospace; color:#e5e5e5; }
 
-  button { background:#2b6cb0; color:#fff; border:0; border-radius:6px;
+  button { background:#636363; color:#ffffff; border:0; border-radius:6px;
            padding:6px 12px; cursor:pointer; font-size:13px; }
   button:hover { filter:brightness(1.15); }
   button:disabled { opacity:.4; cursor:default; filter:none; }
-  button.ghost { background:#2a2f37; }
-  button.warn  { background:#8a6d1d; }
-  button.danger{ background:#9c2b2b; }
-  button.go    { background:#1f7a48; }
-  button.stop  { background:#c0392b; font-weight:700; padding:8px 18px; }
+  button.ghost { background:#2f2f2f; }
+  button.warn  { background:#6d6d6d; }
+  button.danger{ background:#434343; }
+  button.go    { background:#636363; }
+  button.stop  { background:#555555; font-weight:700; padding:8px 18px; }
   button.jog   { min-width:52px; }
 
-  input, select { background:#1d232b; color:#dde3ea; border:1px solid #2a2f37;
+  input, select { background:#222222; color:#e2e2e2; border:1px solid #2f2f2f;
                   border-radius:6px; padding:5px 7px; font-size:13px; }
   input.num { width:74px; }
+  input.num.scrollable { cursor: ns-resize; }
+  input.num.scrollable:hover { border-color:#868686; }
   input.sm  { width:56px; }
 
-  #griplog { font:12px ui-monospace, Consolas, monospace; color:#9fb0c3; }
-  .tgt { background:#11202f; border:1px solid #234; border-radius:6px;
+  #griplog { font:12px ui-monospace, Consolas, monospace; color:#aeaeae; }
+  .tgt { background:#1e1e1e; border:1px solid #313131; border-radius:6px;
          padding:6px 8px; margin-bottom:6px; }
+
+  /* Layered graphite surfaces and silver controls. */
+  :root { color-scheme:dark; accent-color:#dedede; }
+  body {
+    background:radial-gradient(ellipse at 15% 0%, #383838 0%, transparent 55%),
+               linear-gradient(135deg, #191919 0%, #101010 55%, #242424 100%);
+    background-attachment:fixed; color:#eeeeee;
+  }
+  #hdr {
+    background:linear-gradient(110deg, #383838 0%, #222222 50%, #151515 100%);
+    border-bottom-color:#555555;
+    box-shadow:0 3px 16px #00000055, inset 0 1px #ffffff14;
+  }
+  #right { background:linear-gradient(160deg, #252525cc, #101010dd); border-left-color:#444444; }
+  .card {
+    background:linear-gradient(145deg, #353535 0%, #252525 42%, #1a1a1a 100%);
+    border-color:#494949; border-radius:10px;
+    box-shadow:inset 0 1px #ffffff14, 0 5px 16px #00000033;
+  }
+  .card h2 { color:#c9c9c9; }
+  .lbl { color:#b5b5b5; }
+  .tgt { background:linear-gradient(125deg, #3b3b3b, #242424); border-color:#5a5a5a; box-shadow:inset 0 1px #ffffff12; }
+  #seqlog { background:linear-gradient(145deg, #202020, #111111); border-color:#424242; box-shadow:inset 0 2px 8px #00000055; }
+  #campanel, #croppanel { border-color:#505050; box-shadow:0 4px 20px #00000044; }
+  input, select { background:linear-gradient(180deg, #151515, #292929); border-color:#555555; color:#eeeeee; box-shadow:inset 0 1px 3px #00000066; }
+  select option { background:#242424; color:#eeeeee; }
+  button {
+    background:linear-gradient(180deg, #fafafa 0%, #dedede 48%, #bdbdbd 100%);
+    color:#171717; border:1px solid #dedede;
+    box-shadow:inset 0 1px #ffffffaa, 0 2px 5px #00000044;
+    transition:filter 120ms ease, box-shadow 120ms ease;
+  }
+  button:hover:not(:disabled) { filter:brightness(1.12); box-shadow:inset 0 1px #ffffff66, 0 3px 9px #00000066; }
+  button:active:not(:disabled) { box-shadow:inset 0 2px 5px #00000055; }
+  button.ghost { background:linear-gradient(180deg, #494949, #292929); color:#eeeeee; border-color:#626262; }
+  button.go { background:linear-gradient(180deg, #ffffff, #d2d2d2); color:#111111; }
+  button.warn { background:linear-gradient(180deg, #565656, #303030); color:#ffffff; border:1px dashed #bcbcbc; }
+  button.danger, button.stop { background:linear-gradient(180deg, #3c3c3c, #111111); color:#ffffff; border:2px solid #d5d5d5; }
+  button.stop { text-decoration:underline; text-underline-offset:3px; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline:2px solid #ffffff; outline-offset:3px; }
+  .chip { background:linear-gradient(180deg, #464646, #2b2b2b); border:1px solid #626262; box-shadow:inset 0 1px #ffffff14; }
+  .chip.g { background:linear-gradient(180deg, #eeeeee, #bcbcbc); color:#111111; }
+  .chip.a { background:linear-gradient(180deg, #555555, #303030); color:#ffffff; border-style:dashed; }
+  .chip.r { background:linear-gradient(180deg, #333333, #111111); color:#ffffff; border:2px solid #dddddd; font-weight:700; }
+  .chip.b { background:linear-gradient(180deg, #646464, #3b3b3b); color:#ffffff; }
+  #seqlog .warn { color:#dddddd; font-weight:600; }
+  #seqlog .err { color:#ffffff; font-weight:700; text-decoration:underline; }
+  .align-help { margin:0 0 10px; color:#cccccc; font-size:12px; }
+  @media (prefers-reduced-motion:reduce) { button { transition:none; } }
+  /* Persistent tab identities; selection also has an underline and inset ring. */
+  #tabbtn-console { --tab-top:#244b73; --tab-bottom:#142b46; --tab-accent:#85c5ff; }
+  #tabbtn-points { --tab-top:#215c50; --tab-bottom:#12392f; --tab-accent:#78dec0; }
+  #tabbtn-3d { --tab-top:#563b79; --tab-bottom:#302043; --tab-accent:#d3afff; }
+  #tabbtn-transfer { --tab-top:#6b481e; --tab-bottom:#402b12; --tab-accent:#ffd08a; }
+  #tabbtn-depth { --tab-top:#135d68; --tab-bottom:#12313d; --tab-accent:#8ce5ea; }
+  #rs-layout { display:grid; grid-template-columns:minmax(280px,1fr) minmax(420px,2fr); gap:12px; }
+  #rs-layout figure { margin:0 0 10px; }
+  #rs-layout img { width:100%; aspect-ratio:4/3; object-fit:contain; background:#111; }
+  #rs-layout iframe { width:100%; height:720px; border:1px solid #505050; border-radius:8px; background:#161a22; }
+  #rs-status { padding:10px; border:1px solid #427b82; margin:10px 0; white-space:pre-wrap; }
+  @media(max-width:1000px) { #rs-layout { grid-template-columns:1fr; } }
+  #hdr button[id^="tabbtn-"] {
+    background:linear-gradient(180deg, var(--tab-top), var(--tab-bottom));
+    color:#ffffff; border-color:var(--tab-accent);
+    border-top-width:3px; min-height:34px;
+  }
+  #hdr button[id^="tabbtn-"][aria-pressed="true"] {
+    box-shadow:inset 0 0 0 1px var(--tab-accent), 0 0 12px #ffffff18;
+    text-decoration:underline; text-decoration-thickness:2px;
+    text-underline-offset:4px; font-weight:700;
+  }
 </style></head><body>
 
 <div id="hdr">
@@ -97,9 +170,36 @@
   <span class="chip" id="c-env">env ?</span>
   <span style="flex:1"></span>
   <button class="ghost" id="tabbtn-console" onclick="showTab('console')"
-          style="background:#2b6cb0">Console</button>
-  <button class="ghost" id="tabbtn-points" onclick="showTab('points')">Points &amp; Trajectory</button>
+          aria-pressed="true">Console</button>
+  <button class="ghost" id="tabbtn-points" aria-pressed="false" onclick="showTab('points')">Points &amp; Trajectory</button>
+  <button class="ghost" id="tabbtn-3d" aria-pressed="false" onclick="showTab('3d')">3D View</button>
+  <button class="ghost" id="tabbtn-transfer" aria-pressed="false" onclick="showTab('transfer')">ArUco transfer</button>
+  <button class="ghost" id="tabbtn-depth" aria-pressed="false" onclick="showTab('depth')">D405 Depth</button>
   <span class="lbl">E-stop is the human's job — stay at it during motion.</span>
+</div>
+
+<div id="tab-depth" style="display:none; padding:12px">
+  <h2>RealSense D405 · Depth &amp; 3D view</h2>
+  <p>Explore measured surfaces by orbiting, panning and zooming the point cloud. Distances are in the camera frame; alignment to the arm has not been calibrated.</p>
+  <div class="row">
+    <button id="rs-start" onclick="RealSenseUI.command('start',{mode:'camera'})">Start D405</button>
+    <button id="rs-stop" class="ghost" onclick="RealSenseUI.command('stop',{})">Release camera</button>
+    <button id="rs-snapshot" class="ghost" disabled onclick="RealSenseUI.command('snapshot',{})">Save depth + color + cloud</button>
+    <button id="rs-export" class="ghost" disabled onclick="window.location.href='/realsense/cloud.ply'">Download full cloud</button>
+    <button id="rs-demo" class="ghost" onclick="RealSenseUI.command('start',{mode:'demo'})">Sample view (no camera)</button>
+    <a id="rs-open" target="_blank" rel="noopener" hidden>Open 3D viewer</a>
+  </div>
+  <div id="rs-status" role="status" aria-live="polite">Viewer not started. Connect the D405 with USB 3, then press Start D405.</div>
+  <p id="rs-result" role="status"></p>
+  <div id="rs-layout">
+    <div>
+      <figure><figcaption>Color</figcaption><img id="rs-color" alt="D405 color stream" hidden></figure>
+      <figure><figcaption>Depth · near to far: blue → green → red; black = no depth</figcaption><img id="rs-depth" alt="D405 metric depth preview" hidden></figure>
+      <p id="rs-stats">No depth frames yet.</p>
+      <p>Export keeps full-resolution depth and valid measured points. The 3D viewer's range and density controls affect only its display.</p>
+    </div>
+    <iframe id="rs-viewer" title="Interactive RealSense point cloud powered by Viser and mjviser" allow="fullscreen" loading="lazy"></iframe>
+  </div>
 </div>
 
 <div id="tab-points" style="display:none; padding:10px">
@@ -107,7 +207,7 @@
     <h2>Saved points — isometric view (click a point, assign a role)</h2>
     <div class="row">
       <canvas id="iso" width="980" height="560"
-              style="background:#0d1218; border:1px solid #2a2f37; border-radius:8px; cursor:crosshair"></canvas>
+              style="background:#111111; border:1px solid #2f2f2f; border-radius:8px; cursor:crosshair"></canvas>
     </div>
     <div class="row">
       <span class="lbl">selected:</span><span class="lbl mono" id="selpt">—</span>
@@ -145,6 +245,160 @@
   </div>
 </div>
 
+<div id="tab-transfer" style="display:none; padding:10px">
+  <div class="card">
+    <h2>ArUco plate transfer — one supervised cycle</h2>
+    <p>Center the commissioned plate marker in the eye camera (205–240 mm optical gap).
+       The robot detects the specified ID, picks the plate, places it at your destination, and retracts.
+       No roaming search, automatic retry, or microscope-stage control.</p>
+    <div class="row">
+      <label>Marker ID <input class="num" type="number" min="0" max="49" step="1" id="auto-id" value="3"></label>
+      <label>Verified marker → grip TCP Z offset <input class="num" type="number" step="0.5" id="auto-offset" placeholder="required"></label><span class="lbl">mm</span>
+      <label>Travel Z <input class="num" type="number" step="5" id="auto-travel" value="300"></label><span class="lbl">mm, ≥300 and clear of the entire Squid</span>
+    </div>
+    <h3>Destination: robot TCP placement pose (not plate center)</h3>
+    <div class="row">
+      <label>X <input class="num" type="number" step="1" id="auto-x"></label>
+      <label>Y <input class="num" type="number" step="1" id="auto-y"></label>
+      <label>Z <input class="num" type="number" step="0.5" id="auto-z"></label><span class="lbl">mm</span>
+      <label>Rz <input class="num" type="number" min="-180" max="180" step="1" id="auto-rz"></label><span class="lbl">deg</span>
+      <button class="ghost" onclick="transferUseCurrent()">Use current TCP</button>
+      <button class="ghost" onclick="saveTransferFields()">Save fields in this browser</button>
+    </div>
+    <p class="lbl" id="auto-calibration">Loading calibration information…</p>
+    <p><label><input type="checkbox" id="auto-clear"> I verified plate/marker calibration and grip depth, the destination support,
+      and the full arm/plate swept route; Squid is stationary and ready, obstacles are clear, gripper starts empty,
+      and a human is at the hardware E-stop.</label></p>
+    <div class="row">
+      <button class="go" onclick="startTransfer(true)">Detect &amp; preview route — no motion</button>
+      <button class="go" onclick="startTransfer(false)">Start one transfer</button>
+      <button class="stop" onclick="api('/seq/stop', {})">Stop after current step</button>
+      <button class="ghost" onclick="showTab('3d')">View route in 3D</button>
+    </div>
+    <p class="lbl">Software Stop is not an E-stop. The sampled TCP route checks reach, wrist headroom and envelope,
+      not CAD collisions. This prototype requires supervised commissioning, not unattended operation.
+      Preview/start both require a connected, ready controller; preview sends telemetry requests but no motion.</p>
+    <pre id="auto-status" style="white-space:pre-wrap">Idle</pre>
+    <pre id="auto-log" style="white-space:pre-wrap;max-height:320px;overflow:auto"></pre>
+  </div>
+</div>
+
+<div id="tab-3d" style="display:none; padding:10px">
+  <div class="card">
+    <h2>3D View — real CAD geometry, driven by the live joint values</h2>
+    <div class="row">
+      <div id="three3d" style="width:980px; height:560px; background:#111111;
+           border:1px solid #2f2f2f; border-radius:8px; cursor:grab"></div>
+    </div>
+    <div class="row">
+      <span class="lbl">step</span>
+      <select id="zoomstep">
+        <option>5</option><option>10</option><option selected>20</option>
+        <option>50</option><option>100</option>
+      </select><span class="lbl">mm</span>
+      <span class="lbl" style="margin-left:10px">Rz step</span>
+      <select id="rotatestep">
+        <option>1</option><option>5</option><option selected>15</option>
+        <option>30</option>
+      </select><span class="lbl">deg</span>
+    </div>
+    <div class="row">
+      <button class="jog ghost" onclick="camStep('zoom',1)">Zoom+</button>
+      <button class="jog ghost" onclick="camStep('zoom',-1)">Zoom&minus;</button>
+      <button class="jog ghost" onclick="camStep('rotate',1)">Rotate+</button>
+      <button class="jog ghost" onclick="camStep('rotate',-1)">Rotate&minus;</button>
+      <span class="lbl">— or drag to orbit freely, right-drag to pan, scroll to zoom by the step above</span>
+    </div>
+    <div class="row">
+      <button class="ghost" onclick="three && three.controls.reset()">Reset view</button>
+      <span class="lbl" id="loadmsg"></span>
+    </div>
+    <div class="row" aria-label="Arm color legend">
+      <span class="lbl" style="color:#f1f1f1">White: current arm</span>
+      <span class="lbl" style="color:#42a5f5">Preview J1 / carriage: blue</span>
+      <span class="lbl" style="color:#ffa726">J2 / shoulder: orange</span>
+      <span class="lbl" style="color:#66bb6a">J3 / elbow: green</span>
+      <span class="lbl" style="color:#ba68c8">J4 / wrist + gripper: purple</span>
+    </div>
+    <details class="card" open>
+      <summary>Plate rack — current training target</summary>
+      <p>400 mm tall · shelves 90 × 140 mm · 90 mm pitch · five shelves. Shelf thickness, lips and cutouts are estimates. Placement is illustrative.</p>
+      <div class="row">
+        <label><input type="checkbox" id="rack-visible" checked onchange="updateRack()"> Show rack</label>
+        <label>X <input class="num" type="number" id="rack-x" value="350" oninput="updateRack()"></label>
+        <label>Y <input class="num" type="number" id="rack-y" value="180" oninput="updateRack()"></label>
+        <label>Z <input class="num" type="number" id="rack-z" value="0" oninput="updateRack()"></label>
+        <label>Yaw <input class="num" type="number" id="rack-rz" value="0" oninput="updateRack()"></label>
+        <label>Target shelf <select id="rack-shelf" onchange="updateRack()"><option value="1">1 — bottom</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5 — top</option></select></label>
+        <button class="ghost" onclick="saveRackPlacement()">Save rack placement</button>
+        <button class="ghost" onclick="focusRack()">Focus rack</button>
+      </div>
+      <p class="lbl" id="rack-status">Model loads when this view opens.</p>
+      <a href="/static/models/plate_rack.step" download>Download rack STEP</a>
+    </details>
+    <details class="card">
+      <summary>Squid+ microscope — parked for a later task</summary>
+      <p>Squid+ with C-mount and 4 position turret, from your supplied STEP assembly.
+        CAD is normalized to its footprint center at its bottom; enter that point in robot-frame mm.
+        Default placement is illustrative, not measured. Robot CAD itself is not a registered collision model.</p>
+      <div class="row">
+        <label><input type="checkbox" id="squid-visible" onchange="updateSquid()"> Show Squid</label>
+        <label>X <input class="num" type="number" id="squid-x" value="75" step="10" oninput="updateSquid()"></label>
+        <label>Y <input class="num" type="number" id="squid-y" value="600" step="10" oninput="updateSquid()"></label>
+        <label>Z <input class="num" type="number" id="squid-z" value="0" step="10" oninput="updateSquid()"></label><span class="lbl">mm</span>
+        <label>Yaw <input class="num" type="number" id="squid-rz" value="0" step="5" oninput="updateSquid()"></label><span class="lbl">deg</span>
+        <label>CAD up <select id="squid-up" onchange="updateSquid()"><option>Z</option><option selected>Y</option><option>X</option></select></label>
+        <button class="ghost" onclick="saveSquidPlacement()">Save placement</button>
+        <button class="ghost" onclick="focusSquid()">Focus Squid</button>
+      </div>
+      <p id="squid-status" class="lbl">Model loads when this view is opened.</p>
+      <p class="lbl">Cyan line: planned TCP path only, not the claw/plate swept volume.
+        <a href="https://github.com/Cephla-Lab/Squid" target="_blank" rel="noopener">Cephla Squid source</a></p>
+    </details>
+    <div class="row">
+      <span class="lbl" style="color:#cfcfcf">&#72727299; current:</span>
+      <span class="lbl mono" id="cur3d">—</span>
+    </div>
+    <div class="row">
+      <span class="lbl" style="color:#868686">&#6d6d6d22; target</span>
+      <input class="num scrollable" id="vx" placeholder="X" title="scroll to adjust by the Jog step">
+      <input class="num scrollable" id="vy" placeholder="Y" title="scroll to adjust by the Jog step">
+      <input class="num scrollable" id="vz" placeholder="Z" title="scroll to adjust by the Jog step">
+      <input class="num scrollable" id="vrz" placeholder="Rz" title="scroll to adjust by the Rz step">
+      <button class="go" id="preview-go" onclick="goTo()">Go</button>
+      <span class="lbl mono" id="tgt3d">enter X/Y/Z/Rz to preview where the arm would move</span>
+    </div>
+    <div class="row">
+      <button class="ghost" onclick="resetPreview()">Initialize preview</button>
+      <label>Preview Z step <select id="preview-z-step"><option>1</option><option selected>5</option><option>10</option><option>20</option></select> mm</label>
+      <button class="ghost" onclick="stepPreviewZ(-1)">Preview Z−</button>
+      <button class="ghost" onclick="stepPreviewZ(1)">Preview Z+</button>
+      <label>Height <input id="preview-z" type="range" min="0" max="400" step="1" value="150" oninput="setPreviewZ(Number(this.value))"></label>
+      <output id="preview-z-value">150 mm</output>
+    </div>
+    <p class="lbl" id="preview-limits">Preview controls move the colored model only. Joint and reach limits apply; collision/contact physics is not simulated.</p>
+    <details class="card" open>
+      <summary>Offline demonstration recorder</summary>
+      <p>Initialize the preview, start recording, then drag the colored arm or edit its target/Z. Cyan line records TCP keyframes. Contact physics runs separately in MuJoCo, not in this browser.</p>
+      <div class="row">
+        <label>Plate center X <input data-demo-scene id="demo-x" type="number" value="350" class="num"></label>
+        <label>Y <input data-demo-scene id="demo-y" type="number" value="-180" class="num"></label>
+        <label>Support top Z <input data-demo-scene id="demo-support" type="number" min="1" value="20" class="num"></label>
+        <label>Plate yaw <input data-demo-scene id="demo-yaw" type="number" value="0" class="num"></label>
+      </div>
+      <p class="lbl">Plate estimate: 127.76 × 85.48 × 14.4 mm, 120 g. Cyan plate stays at its starting position in this view; simulated grasp/release is shown in MuJoCo. Purple jaws use an estimated shape with gap = E1 + 60 mm. Positions in robot-frame mm; support is an illustrative pedestal. Rack placement and reference are frozen for each recording.</p>
+      <div class="row">
+        <label>Phase <select id="demo-phase" onchange="S4Demo.sample()"><option>approach</option><option>grasp</option><option>lift</option><option>insert</option><option>release</option><option>withdraw</option></select></label>
+        <label>Simulated E1 <input id="demo-e1" type="number" min="0" max="28" step="0.1" value="28" onchange="S4Demo.sample()"> mm (28 open)</label>
+        <button class="ghost" onclick="S4Demo.start()">Start recording</button>
+        <button class="ghost" onclick="S4Demo.stop()">Stop recording</button>
+        <button class="ghost" onclick="S4Demo.save()">Export demonstration JSON</button>
+      </div>
+      <p id="demo-status" role="status">Offline only. These buttons never command the real arm or gripper.</p>
+    </details>
+  </div>
+</div>
+
 <div id="main">
   <div id="left">
     <div id="campanel">
@@ -161,10 +415,10 @@
     <div id="croprow">
       <div id="seqlog"></div>
       <div id="detpanel" style="display:none; width:340px; flex:0 0 auto;
-           background:#000; border:1px solid #2a2f37; border-radius:8px;
+           background:#000000; border:1px solid #2f2f2f; border-radius:8px;
            overflow:auto;">
-        <div style="padding:3px 8px; background:#11202f; font-size:11px;
-             color:#8fa0b3;">detection — green: big circle, orange: small,
+        <div style="padding:3px 8px; background:#1e1e1e; font-size:11px;
+             color:#9e9e9e;">detection — green: big circle, orange: small,
              red cross: mark</div>
         <img id="detimg" style="width:100%; display:block;">
       </div>
@@ -224,10 +478,10 @@
       </div>
       <div class="row">
         <span class="lbl">go to</span>
-        <input class="num" id="gx" placeholder="X">
-        <input class="num" id="gy" placeholder="Y">
-        <input class="num" id="gz" placeholder="Z">
-        <input class="num" id="grz" placeholder="Rz">
+        <input class="num scrollable" id="gx" placeholder="X" title="scroll to adjust by the step above">
+        <input class="num scrollable" id="gy" placeholder="Y" title="scroll to adjust by the step above">
+        <input class="num scrollable" id="gz" placeholder="Z" title="scroll to adjust by the step above">
+        <input class="num scrollable" id="grz" placeholder="Rz" title="scroll to adjust by the Rz step above">
         <button onclick="goTo()">Go</button>
       </div>
     </div>
@@ -245,11 +499,51 @@
     </div>
 
     <div class="card">
+      <h2>Scene camera agent <span id="agent-stage">idle</span></h2>
+      <p class="lbl">Depth Anything V2 Small + Haiku. Camera observation and dataset capture only.</p>
+      <div class="row">
+        <input id="agent-message" aria-label="Plate instruction" value="Find plate" style="flex:1;min-width:140px" maxlength="500">
+        <button id="agent-send" class="go">Analyze with Haiku</button><button id="agent-stop" class="stop">Stop</button>
+      </div>
+      <div class="row" id="agent-shortcuts">
+        <button id="agent-local" data-mode="depth">Local depth</button>
+        <button id="agent-capture" data-mode="capture" class="ghost">Save training capture</button>
+      </div>
+      <div class="row">
+        <label class="lbl">Capture session <input id="agent-session" value="scene" maxlength="48" pattern="[A-Za-z0-9][A-Za-z0-9_-]*" aria-label="Capture session"></label>
+      </div>
+      <p class="lbl">Relative depth has no millimeter scale. This pipeline does not move the robot or change camera calibration. Training requires independent measured depth labels.</p>
+      <p id="agent-depth-info" class="lbl"></p>
+      <details id="agent-settings"><summary>Vision connection</summary>
+        <p class="lbl">Analyze sends the image, depth visualization and coordinates to Anthropic. Local depth and captures stay on this PC and need no API key. The key stays in server memory.</p>
+        <div class="row"><input id="agent-key" type="password" autocomplete="off" aria-label="Anthropic API key" placeholder="Anthropic API key" style="flex:1;min-width:140px"><button id="agent-key-save">Connect vision</button></div>
+        <span id="agent-model" class="lbl"></span>
+      </details>
+      <p id="agent-status" role="status" style="white-space:pre-wrap">Checking vision connection…</p>
+      <p id="agent-observation" style="white-space:pre-wrap"></p><p id="agent-sample" class="mono" style="overflow-wrap:anywhere"></p>
+      <div class="row"><a href="/agent/image" target="_blank" rel="noopener">Latest camera image</a><a href="/agent/image?kind=depth" target="_blank" rel="noopener">Depth map</a><a href="/agent/training" target="_blank" rel="noopener">How to train</a></div>
+      <img id="agent-depth-preview" alt="Depth visualization" hidden style="width:100%;margin-top:10px">
+    </div>
+
+    <div class="card">
       <h2>Grab pipeline — you decide every step</h2>
       <div class="row">
-        <button class="go" onclick="findDisk()">1&nbsp; Find calibration disk</button>
-        <span class="lbl">iterative vision solve — moves the arm in small steps</span>
+        <button class="go" onclick="findDiskOriginal()">1&nbsp; Calibrate two-circle plate (original)</button>
+        <span class="lbl">unchanged Git 99ebe5d calibration script; original steps, speeds and Z refinement</span>
       </div>
+      <details><summary>Alternative calibration / edge-centering tools</summary>
+      <div class="row">
+        <button class="go" onclick="api('/seq/preview_plate_edges',{})">Preview plate edges (no motion)</button>
+        <button class="go" onclick="centerPlateEdges()">Center plate (edges)</button>
+        <label class="lbl" for="edgegap">Camera-to-plate distance, not TCP Z (mm):</label>
+        <input class="sm" id="edgegap" type="number" min="205" max="240" step="1" value="205" style="width:65px">
+      </div>
+      <div class="row"><span class="lbl">Edge centering: XY only, fixed Z/wrist; preview and verify the outline first. Does not create a grasp target.</span></div>
+      <div class="row">
+        <button class="go" onclick="findDisk()">1&nbsp; Fast calibrate disk</button>
+        <span class="lbl">continues in small steps until convergence, Stop, or a fault; live residuals in the log</span>
+      </div>
+      </details>
       <div class="row">
         <button class="go" onclick="findAruco()">1b&nbsp; Find ArUco marker</button>
         <span class="lbl">anchor-free solve — centers the marker, compensates the 184&nbsp;mm claw arm</span>
@@ -268,7 +562,7 @@
           null)">0&nbsp; Generate anchor (vendor)</button>
         <span class="lbl">one-time per arm — makes camera recalibrations self-healing</span>
       </div>
-      <div class="row" style="border:1px solid #345; border-radius:6px; padding:6px; margin:6px 0">
+      <div class="row" style="border:1px solid #424242; border-radius:6px; padding:6px; margin:6px 0">
         <span class="lbl">Z calibration:</span>
         <span class="lbl mono">grip Z = vision Z +</span>
         <input class="sm" id="zoff" placeholder="offset" style="width:56px">
@@ -294,9 +588,46 @@
           <span class="lbl">stored: X/Y/Rz + grip Z from these fields — manage in the Points tab</span>
         </div>
       </div>
+      <details id="ic-panel" open>
+        <summary>IC visual alignment — reference capture and preview</summary>
+        <p>Later, manually align the open jaws with the plate at a repeatable hover height and leave the arm stationary.
+          Capture a reference batch, then compare new views. These controls capture images and read pose only.</p>
+        <div class="row">
+          <label>Reference name <input id="ic-label" value="Wide aligned plate" maxlength="80"></label>
+          <label>Images <input id="ic-count" class="sm" type="number" min="3" max="30" value="10"></label>
+        </div>
+        <div class="row">
+          <label>Plate region <select id="ic-roi-mode"><option value="auto">Automatic: both disks</option><option value="manual">Custom rectangle</option></select></label>
+          <input id="ic-roi" placeholder="x, y, width, height (native pixels)" style="width:270px" aria-label="IC region x y width height">
+        </div>
+        <p class="lbl">Use plate features only. Exclude gripper jaws and unrelated background; include both disks when possible.
+          Review the green region on the saved reference before trusting a match. Physical camera mounting must remain unchanged.</p>
+        <label><input id="ic-aligned" type="checkbox"> I have manually verified jaw alignment and the arm is stationary at hover height.</label><br>
+        <label><input id="ic-plate-only" type="checkbox"> The selected region contains visible plate features, without gripper occlusion.</label>
+        <div class="row">
+          <button class="ghost" id="ic-capture">Capture reference batch — no movement</button>
+          <button class="stop" onclick="api('/seq/stop')">Stop capture / preview</button>
+        </div>
+        <div class="row">
+          <select id="ic-reference" aria-label="Saved IC reference"><option value="">No references yet</option></select>
+          <button class="ghost" id="ic-preview">Compare current image — no movement</button>
+        </div>
+        <p id="ic-status" role="status">No IC reference captured yet.</p>
+        <pre id="ic-result" style="white-space:pre-wrap"></pre>
+        <div class="row" style="align-items:flex-start">
+          <img id="ic-reference-image" alt="Saved IC reference and plate region" hidden style="width:48%">
+          <img id="ic-live-image" alt="Current IC match preview" hidden style="width:48%">
+        </div>
+        <p class="lbl">IC reports pixels, image rotation and relative scale. It does not command Align/Descend, set the grasp target,
+          or verify physical jaw contact. Camera-to-gripper motion mapping needs separate validation.</p>
+      </details>
+      <p class="align-help">After Find, review the grasp target, then press <strong>2 Align</strong>.
+        It lifts to hover Z, rotates the wrist in small steps, then moves over X/Y.
+        Verify clearance for the whole arm and gripper; rotation requires Z at least 300 mm.
+        Blank hover Z uses the higher of 300 mm and current Z. Align also checks the planned descent, but does not descend or grip.</p>
       <div class="row">
         <button class="go" onclick="align()">2&nbsp; Align</button>
-        <span class="lbl">hover Z</span><input class="sm" id="hoverz" placeholder="cur">
+        <span class="lbl">hover Z</span><input class="sm" id="hoverz" placeholder="auto">
         <button class="go" onclick="descend()">3&nbsp; Descend</button>
         <span class="lbl">torque-guarded</span>
       </div>
@@ -322,13 +653,33 @@
           'Open the gripper fully (release)?')">Release</button>
       </div>
       <div class="row">
-        <button class="go" onclick="lift()">5&nbsp; Lift</button>
+        <button class="go" onclick="lift()">Manual lift (not pickup verification)</button>
         <span class="lbl">to Z</span><input class="sm" id="liftz" value="150">
         <span style="flex:1"></span>
         <button class="stop" onclick="api('/seq/stop')">STOP SEQ</button>
       </div>
     </div>
 
+    <div class="card">
+      <h2>5 Verify pickup — supervised handoff</h2>
+      <p>Requires a freshly confirmed Grip, armed envelope, and a visible calibrated rigid plate marker. No transfer starts automatically.</p>
+      <div class="row">
+        <label>Plate marker ID <input class="sm" id="pickup-marker" type="number" min="0" max="49"></label>
+        <label>Marker plane to plate center Z (mm) <input class="sm" id="pickup-dz" type="number" step="0.1"></label>
+        <label>Lift mm <input class="sm" id="pickup-lift" type="number" min="2" max="5" value="5"></label>
+      </div>
+      <label><input type="checkbox" id="pickup-calibrated"> Marker is rigidly attached; plate XY/yaw calibration and center-Z offset are verified; plate is level.</label>
+      <div class="row"><button class="go" onclick="startPickupVerification()">Verify pickup: approve small lift…</button><button class="stop" onclick="api('/seq/stop')">STOP verification</button></div>
+      <p id="pickup-status" role="status">Not verified.</p>
+      <div id="pickup-review" hidden>
+        <p>Inspect both images AND the physical plate. Is the plate clear of its support, securely held, and level? Reject if obscured or uncertain.</p>
+        <div class="row"><img id="pickup-before" alt="Before lift" style="width:46%"><img id="pickup-after" alt="After lift" style="width:46%"></div>
+        <button class="go" onclick="confirmPickupVisual(true)">I see the plate lifted securely and level</button>
+        <button class="stop" onclick="confirmPickupVisual(false)">Reject / uncertain</button>
+      </div>
+      <button id="pickup-export" class="ghost" disabled onclick="exportPickupSnapshot()">Export fresh post-grasp snapshot</button>
+      <p class="lbl">XYZ + yaw only; roll/pitch are not measured. Snapshot expires after 30 seconds and is invalidated by another command. This does not authorize robot motion.</p>
+    </div>
     <div class="card">
       <h2>Torque feedback — set the descent threshold by eye</h2>
       <div class="row">
@@ -343,14 +694,14 @@
         the chart shows each joint's deviation from its start value. CLICK the
         chart at the deviation where contact clearly begins, then Save.</div>
       <canvas id="trqchart" width="820" height="240"
-              style="width:100%; background:#0b1420; border:1px solid #345; border-radius:6px; cursor:crosshair"></canvas>
+              style="width:100%; background:#131313; border:1px solid #424242; border-radius:6px; cursor:crosshair"></canvas>
       <div class="row">
         <span class="lbl">picked:</span>
         <span class="lbl mono" id="trqpick">click the chart</span>
         <button class="ghost" onclick="trqSave()">Save threshold</button>
-        <span class="lbl mono" id="trqlegend">J1 <span style="color:#7fd7ff">━</span>
-          J2 <span style="color:#ffd27f">━</span> J3 <span style="color:#8fff9f">━</span>
-          J4 <span style="color:#ff9f9f">━</span></span>
+        <span class="lbl mono" id="trqlegend">J1 <span style="color:#c7c7c7">━</span>
+          J2 <span style="color:#d6d6d6">━</span> J3 <span style="color:#e0e0e0">━</span>
+          J4 <span style="color:#b3b3b3">━</span></span>
       </div>
       <div class="row">
         <span class="lbl">fine Z:</span>
@@ -383,6 +734,10 @@
   </div>
 </div>
 
+<script src="/static/vendor/three.min.js"></script>
+<script src="/static/vendor/OBJLoader.js"></script>
+<script src="/static/vendor/OrbitControls.js"></script>
+<script src="/static/preview_limits.js?v=20260914"></script>
 <script>
 const el = id => document.getElementById(id);
 let seqActive = false, lastTargetKey = "", lastDetTs = 0, lastAnchorStamp = "";
@@ -402,6 +757,9 @@ async function api(path, body, confirmMsg, okNote){
     const r = await fetch(path, {method:"POST",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify(body || {})});
+    if(!(r.headers.get("content-type") || "").includes("application/json")){
+      throw new Error("HTTP " + r.status + ": backend returned a non-JSON page. If this is a new button, reload the updated Flask backend.");
+    }
     const j = await r.json();
     if(j.ok === false){ say(path + " → " + (j.error || "failed"), "err"); }
     else if(okNote){ say(okNote, "good"); }
@@ -453,10 +811,12 @@ async function pollState(){
           "  Z " + p.Z.toFixed(2) + "  Rz " + p.Rz.toFixed(2);
       }
       if(r.joints){
+        LASTJOINTS = r.joints;
         el("joints").textContent = "joints: " +
           Object.entries(r.joints).map(([k,v])=>k+" "+v.toFixed(2)).join("  ");
       }
     } else {
+      LASTJOINTS = null;
       ["c-mode","c-en","c-prog","c-lua","c-err"].forEach(id=>chip(id, "—", ""));
       el("posebig").textContent = "pose: —";
     }
@@ -486,6 +846,7 @@ function fillEnv(env){
 async function pollSeq(){
   try{
     const s = await (await fetch("/seq")).json();
+    renderTransfer(s);
     seqActive = s.active;
     chip("c-seq", "seq " + (s.active ? s.name + " RUNNING" : (s.name ? s.name + " " + s.state : "idle")),
          s.active ? "b" : (s.state === "error" ? "r" : (s.state === "done" ? "g" : "")));
@@ -542,6 +903,10 @@ async function pollSeq(){
         else if(s.target.config === "Wide") el("gripstart").value = 18;
         else if((s.target.config||"").startsWith("ArUco")) el("gripstart").value = 28;
       }
+    } else if((["find_disk","center_plate_edges"].includes(s.name) || (!s.name && s.state === "idle")) && lastTargetKey){
+      lastTargetKey = "";
+      ["tx","ty","tz","trz","tzc"].forEach(id => el(id).value = "");
+      el("tgtinfo").textContent = "No calibrated target. Find must converge before alignment.";
     }
     document.querySelectorAll("button.go, button.jog").forEach(b => b.disabled = seqActive);
   }catch(e){}
@@ -596,11 +961,27 @@ function jogRz(dir){
   api("/jog", {axis: "RZ", delta: parseFloat(el("jogrz").value) * dir});
 }
 function goTo(){
+  if(el('tab-3d').style.display !== 'none' && !updatePreviewFromFields()) return;
   const v = ["gx","gy","gz","grz"].map(id => parseFloat(el(id).value));
   if(v.some(isNaN)){ say("fill all four go-to fields", "err"); return; }
   api("/move", {x:v[0], y:v[1], z:v[2], rz:v[3]},
       "Move to X " + v[0] + "  Y " + v[1] + "  Z " + v[2] + "  Rz " + v[3] + " ?");
 }
+// scroll-to-adjust: wheel over a go-to box nudges it by the current jog
+// step (same step selector the +/- buttons use) instead of retyping numbers.
+function scrollAdjust(inp, stepEl){
+  inp.addEventListener("wheel", e => {
+    e.preventDefault();
+    const step = parseFloat(stepEl.value) || 1;
+    const cur = parseFloat(inp.value);
+    const base = isNaN(cur) ? 0 : cur;
+    const dir = e.deltaY < 0 ? 1 : -1;
+    inp.value = +(base + step * dir).toFixed(2);
+    inp.dispatchEvent(new Event("input"));   // let listeners (3D preview sync) know
+  }, {passive:false});
+}
+["gx","gy","gz"].forEach(id => scrollAdjust(el(id), el("jogstep")));
+scrollAdjust(el("grz"), el("jogrz"));
 async function startProg(){
   const j = await api("/program", {action:"start"},
     "START the Lua program?\nSafe-start: if it is paused it will be STOPPED " +
@@ -624,15 +1005,42 @@ function targetBody(){
   if(v.slice(0,4).some(isNaN)) return null;
   return {x:v[0], y:v[1], z:v[2], rz:v[3], z_calibrated: isNaN(v[4]) ? v[2] : v[4]};
 }
+function findDiskOriginal(){
+  api("/seq/find_disk_original", {confirm:true,cell_clear:true,empty_gripper:true},
+    "ORIGINAL TWO-CIRCLE CALIBRATION?\nPlace the two-circle plate under the eye camera. " +
+    "Uses the original vendor teach loop, wrist correction, XY/Z steps, lost-view recovery and Z-refinement hop. " +
+    "Runs the unchanged Git 99ebe5d script with its original speeds and steps, without the added calibration wrapper. " +
+    "Robot-service and controller protections remain. Verify wrist-sweep clearance at the current height before starting. " +
+    "The original loop may return a last-good estimate without full convergence: review residuals before Align. " +
+    "No automatic Align, grasp descent or grip. Confirm empty gripper and clear swept volume; stay at the E-stop.");
+}
 function findDisk(){
-  api("/seq/find_disk", {},
-    "FIND CALIBRATION DISK?\nThe disk must already be placed below the eye " +
-    "camera — this does NOT search. If detected: rotates the wrist IN " +
-    "PLACE to the taught angle (≤30° chunks, J4-limit aware), then " +
-    "refines with small steps to full convergence (the proven MCP-skill " +
-    "flow). Lost detections recover; it can settle for the last good " +
-    "estimate. If not detected at all, it stops without moving." +
+  // Fail on an old backend instead of silently running the legacy algorithm.
+  api("/seq/find_disk_fast", {confirm:true, cell_clear:true, empty_gripper:true},
+    "FAST CALIBRATE DISK?\nThe two-circle disk must already be visible. " +
+    "Uses vendor math, checked steps up to 10 mm XY / 5 mm Z at speed 5, " +
+    "and continues until convergence, Stop, or a detection/motion fault, without an iteration, time, or total-travel cap. " +
+    "Success requires two agreeing converged images. Small yaw corrections wait for XY/Z " +
+    "centering and three consistent stationary images. Wrist correction lifts to TCP Z " +
+    "300 mm or higher before a guarded wrist-only joint move, then approaches " +
+    "the corrected observation height without an unnecessary down/up detour. " +
+    "Lost detection or non-convergence stops without publishing a target. " +
+    "No search, grasp descent, grip, automatic alignment or limit changes. " +
+    "Confirm empty gripper and clear swept volume, including the lift/rotation. " +
     "\nStay at the E-stop.");
+}
+function centerPlateEdges(){
+  const gap = Number(el("edgegap").value);
+  if(!Number.isFinite(gap) || gap < 205 || gap > 240){
+    say("Enter camera-to-plate distance 205–240 mm, NOT robot TCP Z.","err"); return;
+  }
+  api("/seq/center_plate_edges",
+      {confirm:true,cell_clear:true,empty_gripper:true,outline_verified:true,camera_distance_mm:gap},
+      "CENTER PLATE USING EDGES?\nFirst preview and verify all four sides/corners are the intended plate. " +
+      "Confirm the camera-to-plate distance is approximately " + gap + " mm (NOT TCP Z). " +
+      "The robot makes a checked XY pilot up to 2 mm, verifies the image response, then steps up to 5 mm at speed 5. " +
+      "Z and wrist stay fixed. No rotation, grasp descent, grip or grasp target. " +
+      "Existing grasp target will be cleared. Confirm empty gripper, clear XY swept volume and stay at the E-stop.");
 }
 function findAruco(){
   api("/seq/find_aruco", {},
@@ -667,8 +1075,8 @@ function align(){
   const h = parseFloat(el("hoverz").value);
   if(!isNaN(h)) t.hover_z = h;
   api("/seq/align", t,
-    "ALIGN over the target?\nRotates Rz to " + t.rz + " in-place, then moves " +
-    "linearly to X " + t.x + "  Y " + t.y + (t.hover_z ? (" at hover Z " + t.hover_z) : " at current height") + ".");
+    "ALIGN over the target?\nLifts to " + (t.hover_z ? ("hover Z " + t.hover_z + " or current Z, whichever is higher") : "the higher of Z300 and current Z") +
+    ", rotates Rz to " + t.rz + " in small steps, then moves linearly to X " + t.x + "  Y " + t.y + ". No descent or grip.");
 }
 function descend(){
   const t = targetBody();
@@ -692,11 +1100,28 @@ function lift(){
 let PTS = {points: {}, roles: {}, motion_order: "z,rz,xy"};
 let selName = "";
 function showTab(t){
+  for(const name of ["console", "points", "3d", "transfer", "depth"]){
+    el("tabbtn-" + name).setAttribute("aria-pressed", String(t === name));
+  }
+  el("tab-transfer").style.display = t === "transfer" ? "" : "none";
+  el("tab-depth").style.display = t === "depth" ? "" : "none";
+  if(t === "depth" && window.RealSenseUI) RealSenseUI.open();
   el("main").style.display = t === "console" ? "" : "none";
   el("tab-points").style.display = t === "points" ? "" : "none";
-  el("tabbtn-console").style.background = t === "console" ? "#2b6cb0" : "#2a2f37";
-  el("tabbtn-points").style.background = t === "points" ? "#2b6cb0" : "#2a2f37";
+  el("tab-3d").style.display = t === "3d" ? "" : "none";
   if(t === "points"){ loadPoints(); }
+  if(t === "3d"){
+    initThree();
+    // seed the target from the live pose so the ghost (and its drag
+    // handles) is visible right away, instead of starting blank
+    if(LASTPOSE && el("vx").value === ""){
+      el("vx").value = el("gx").value = LASTPOSE.X.toFixed(1);
+      el("vy").value = el("gy").value = LASTPOSE.Y.toFixed(1);
+      el("vz").value = el("gz").value = LASTPOSE.Z.toFixed(1);
+      el("vrz").value = el("grz").value = LASTPOSE.Rz.toFixed(1);
+    }
+    updateRig();
+  }
 }
 async function loadPoints(){
   try{
@@ -766,20 +1191,9 @@ function makeProj(ex0, ex1, ey0, ey1, ez0, ez1, W, H){
   return (x, y, z) => { const [px, py] = raw(x, y, z);
                         return [px * s + ox, py * s + oy]; };
 }
-function drawIso(){
-  const cv = el("iso"); if(!cv) return;
-  const g = cv.getContext("2d");
-  g.clearRect(0, 0, cv.width, cv.height);
-  const [ex0, ex1] = [parseFloat(el("exmin").value)||180, parseFloat(el("exmax").value)||470];
-  const [ey0, ey1] = [parseFloat(el("eymin").value)||-400, parseFloat(el("eymax").value)||-100];
-  const [ez0, ez1] = [parseFloat(el("ezmin").value)||35, parseFloat(el("ezmax").value)||420];
-  proj = makeProj(ex0, ex1, ey0, ey1, ez0, ez1, cv.width, cv.height);
-  if(!Object.keys(PTS.points || {}).length){
-    g.fillStyle = "#5b6b7d"; g.font = "14px ui-monospace";
-    g.fillText("no saved points yet — save the grasp target (console tab) or press 'Add current pose'", 180, 40);
-  }
-  // envelope box wireframe
-  g.strokeStyle = "#26435f"; g.lineWidth = 1; g.setLineDash([]);
+// shared by drawIso() and draw3D(): envelope wireframe + deck grid + axes
+function drawEnvelopeGrid(g, proj, ex0, ex1, ey0, ey1, ez0, ez1){
+  g.strokeStyle = "#3f3f3f"; g.lineWidth = 1; g.setLineDash([]);
   const C = [[ex0,ey0],[ex1,ey0],[ex1,ey1],[ex0,ey1]];
   [[ez0],[ez1]].forEach(([z]) => {
     g.beginPath();
@@ -789,15 +1203,32 @@ function drawIso(){
   C.forEach(([x,y]) => { const a = proj(x,y,ez0), b = proj(x,y,ez1);
     g.beginPath(); g.moveTo(...a); g.lineTo(...b); g.stroke(); });
   // deck grid (Z = ez0) every 50 mm
-  g.strokeStyle = "#182a3c";
+  g.strokeStyle = "#272727";
   for(let x = Math.ceil(ex0/50)*50; x <= ex1; x += 50){
     g.beginPath(); g.moveTo(...proj(x, ey0, ez0)); g.lineTo(...proj(x, ey1, ez0)); g.stroke(); }
   for(let y = Math.ceil(ey0/50)*50; y <= ey1; y += 50){
     g.beginPath(); g.moveTo(...proj(ex0, y, ez0)); g.lineTo(...proj(ex1, y, ez0)); g.stroke(); }
-  g.fillStyle = "#3a5675"; g.font = "11px ui-monospace";
+  g.fillStyle = "#525252"; g.font = "11px ui-monospace";
   g.fillText("X→", ...proj(ex1 + 15, ey0, ez0));
   g.fillText("Y→", ...proj(ex0, ey1 + 15, ez0));
   g.fillText("Z↑", ...proj(ex0 - 20, ey0, ez1));
+}
+function envelopeBounds(){
+  return [parseFloat(el("exmin").value)||180, parseFloat(el("exmax").value)||470,
+          parseFloat(el("eymin").value)||-400, parseFloat(el("eymax").value)||-100,
+          parseFloat(el("ezmin").value)||35, parseFloat(el("ezmax").value)||420];
+}
+function drawIso(){
+  const cv = el("iso"); if(!cv) return;
+  const g = cv.getContext("2d");
+  g.clearRect(0, 0, cv.width, cv.height);
+  const [ex0, ex1, ey0, ey1, ez0, ez1] = envelopeBounds();
+  proj = makeProj(ex0, ex1, ey0, ey1, ez0, ez1, cv.width, cv.height);
+  if(!Object.keys(PTS.points || {}).length){
+    g.fillStyle = "#696969"; g.font = "14px ui-monospace";
+    g.fillText("no saved points yet — save the grasp target (console tab) or press 'Add current pose'", 180, 40);
+  }
+  drawEnvelopeGrid(g, proj, ex0, ex1, ey0, ey1, ez0, ez1);
   // trajectory (start -> end -> home cycle, honoring the motion order)
   const tz = parseFloat(el("wftz").value) || 300;
   const roles = PTS.roles || {};
@@ -825,13 +1256,13 @@ function drawIso(){
       g.stroke(); g.setLineDash([]);
     }
     // home -> start (travel), descend, up, start -> end, descend, up, end -> home
-    drawPath(leg(h, s, h.z_grip, tz), "#3f7fbf", [6,4]);
-    drawPath([[s.x, s.y, tz], [s.x, s.y, s.z_grip + 20], [s.x, s.y, s.z_grip]], "#37b06b");
-    drawPath([[s.x, s.y, s.z_grip], [s.x, s.y, tz]], "#37b06b", [2,3]);
-    drawPath(leg(s, e, tz, tz), "#3f7fbf", [6,4]);
-    drawPath([[e.x, e.y, tz], [e.x, e.y, e.z_grip + 20], [e.x, e.y, e.z_grip]], "#d08a2d");
-    drawPath([[e.x, e.y, e.z_grip], [e.x, e.y, e.z_grip + 20], [e.x, e.y, tz]], "#d08a2d", [2,3]);
-    drawPath(leg(e, h, tz, tz).concat([[h.x, h.y, h.z_grip]]), "#3f7fbf", [6,4]);
+    drawPath(leg(h, s, h.z_grip, tz), "#767676", [6,4]);
+    drawPath([[s.x, s.y, tz], [s.x, s.y, s.z_grip + 20], [s.x, s.y, s.z_grip]], "#919191");
+    drawPath([[s.x, s.y, s.z_grip], [s.x, s.y, tz]], "#919191", [2,3]);
+    drawPath(leg(s, e, tz, tz), "#767676", [6,4]);
+    drawPath([[e.x, e.y, tz], [e.x, e.y, e.z_grip + 20], [e.x, e.y, e.z_grip]], "#929292");
+    drawPath([[e.x, e.y, e.z_grip], [e.x, e.y, e.z_grip + 20], [e.x, e.y, tz]], "#929292", [2,3]);
+    drawPath(leg(e, h, tz, tz).concat([[h.x, h.y, h.z_grip]]), "#767676", [6,4]);
   }
   // points
   projPts = {};
@@ -839,27 +1270,428 @@ function drawIso(){
   Object.entries(PTS.points).forEach(([n, p]) => {
     const q = proj(p.x, p.y, p.z_grip);
     const base = proj(p.x, p.y, ez0);
-    g.strokeStyle = "#2c3b4d"; g.setLineDash([2,3]);
+    g.strokeStyle = "#393939"; g.setLineDash([2,3]);
     g.beginPath(); g.moveTo(...q); g.lineTo(...base); g.stroke(); g.setLineDash([]);
     const role = roleOf[n];
-    g.fillStyle = role === "start" ? "#37b06b" : role === "end" ? "#d08a2d"
-                : role === "home" ? "#3f7fbf" : "#8fa0b3";
+    g.fillStyle = role === "start" ? "#919191" : role === "end" ? "#929292"
+                : role === "home" ? "#767676" : "#9e9e9e";
     g.beginPath(); g.arc(q[0], q[1], n === selName ? 8 : 5, 0, 7); g.fill();
-    if(n === selName){ g.strokeStyle = "#fff"; g.beginPath(); g.arc(q[0], q[1], 10, 0, 7); g.stroke(); }
-    g.fillStyle = "#c8d4e0"; g.font = "12px ui-monospace";
+    if(n === selName){ g.strokeStyle = "#ffffff"; g.beginPath(); g.arc(q[0], q[1], 10, 0, 7); g.stroke(); }
+    g.fillStyle = "#d2d2d2"; g.font = "12px ui-monospace";
     g.fillText(n + (role ? " [" + role.toUpperCase() + "]" : ""), q[0] + 12, q[1] - 4);
     projPts[n] = q;
   });
   // live arm position (updated by the state poller)
   if(LASTPOSE){
     const q = proj(LASTPOSE.X, LASTPOSE.Y, LASTPOSE.Z);
-    g.strokeStyle = "#e8d44d"; g.lineWidth = 2;
+    g.strokeStyle = "#cfcfcf"; g.lineWidth = 2;
     g.beginPath(); g.moveTo(q[0]-8, q[1]); g.lineTo(q[0]+8, q[1]);
     g.moveTo(q[0], q[1]-8); g.lineTo(q[0], q[1]+8); g.stroke();
-    g.fillStyle = "#e8d44d"; g.font = "11px ui-monospace";
+    g.fillStyle = "#cfcfcf"; g.font = "11px ui-monospace";
     g.fillText("arm", q[0] + 10, q[1] + 12);
   }
 }
+
+// ------------------------------------------------------------- 3D View tab
+// Schematic illustration only (planar 2-link SCARA + Z lift, base/link
+// lengths from robot_params.json) — not a CAD twin. Mirrors the server's
+// exact planar IK (sequences.py:_ik_j2j3) so the elbow lands where the
+// real arm's would, and flags targets outside that model's reach.
+let RP = null;
+async function loadRobotParams(){
+  try{
+    const values=await Promise.all(['/robot_params','/static/preview_config.json'].map(async url=>{
+      const r=await fetch(url,{cache:'no-store'}); if(!r.ok) throw new Error('Cannot load '+url); return r.json();
+    }));
+    RP={...values[0],...values[1]}; if(three) updateRig();
+  }catch(e){ RP=null; el('preview-limits').textContent='Preview unavailable: '+e.message; }
+}
+loadRobotParams();
+// A 2-link planar arm has TWO elbow configurations (mirror images about the
+// base->target line) that reach the same X/Y — this is a genuine kinematic
+// ambiguity, not a bug in either solve. sequences.py:_ik_j2j3 always takes
+// one fixed branch (its "+" acos solution); verified live 2026-09-12 that
+// the arm can be sitting on the OTHER branch (server IK gave J2=-44.6 for
+// a pose whose actual live J2 was +82.3 — an exact mirror). For a "preview
+// from here" ghost, the right answer isn't a global default, it's whichever
+// branch is continuous with the arm's CURRENT elbow side.
+function ikJ2J3(x, y){
+  if(!RP || !(RP.link1_mm > 0 && RP.link2_mm > 0)) return null;
+  const l1 = RP.link1_mm, l2 = RP.link2_mm;
+  const px = x - RP.base_x_mm, py = y - RP.base_y_mm;
+  const r2 = px*px + py*py;
+  const c = (r2 - l1*l1 - l2*l2) / (2*l1*l2);
+  if(Math.abs(c) > 1) return null;
+  const wrap = a => ((a + 180) % 360 + 360) % 360 - 180;
+  const phi = Math.atan2(py, px) * 180 / Math.PI;
+  const gAbs = Math.acos(c) * 180 / Math.PI;
+  const branch = g => {
+    const alpha = Math.atan2(l2 * Math.sin(g*Math.PI/180),
+                             l1 + l2 * Math.cos(g*Math.PI/180)) * 180 / Math.PI;
+    return [wrap(phi - alpha - RP.j2_offset_deg),
+            wrap(g - (RP.j3_offset_deg - RP.j2_offset_deg))];
+  };
+  const a = branch(gAbs), b = branch(-gAbs);
+  if (LASTJOINTS){
+    const dist = v => Math.abs(wrap(v - LASTJOINTS.J2));
+    return dist(a[0]) <= dist(b[0]) ? a : b;
+  }
+  return a;   // no live pose to anchor to — fall back to the server's default
+}
+
+
+// ---- CAD-based 3D View ----------------------------------------------
+// Meshes exported from the vendor STEP assembly (grab_skill's calibration
+// doc / Desktop "LabGenius S4..." folder), tessellated via FreeCAD and
+// cleaned of a bundled customer fixture that was duplicated into two of
+// the parts (see the export scripts for how these were derived). Pivot
+// points and J2/J3 home angles below were MEASURED off that CAD (largest
+// cylindrical face at each joint interface, then solved so the CAD's own
+// authored elbow bend matches robot_params.json's link lengths exactly).
+//
+// The wrist is NOT independent, though: live data (2026-09-13) shows
+// Rz == J2 + J3 + J4 (mod 360) almost exactly (two samples both landed
+// within 0.01 deg of an exact multiple of 360) — this arm's last joint is
+// mechanically coupled to the shoulder/elbow, so J4 alone is not "how far
+// the gripper is twisted." Driving the wrist mesh from raw J4 (as an early
+// version of this did) rotates it by however much J2+J3 happen to be,
+// which is why the gripper ended up pointing somewhere unrelated to the
+// rest of the arm. Fix: drive the wrist's OWN rotation from the actual Rz
+// reading minus the shoulder/elbow contributions (see updateRig()) instead
+// of from J4 at all — that sidesteps needing to know the coupling's exact
+// constant term.
+const RIG = {
+  SHOULDER: {x: 135.9, y: 0.0, z: 500.0},   // J2 axis (matches base_x/y_mm closely)
+  ELBOW:    {x: 277.32, y: 141.42, z: 429.0}, // J3 axis — 200.0mm from SHOULDER
+  WRIST:    {x: 418.74, y: 0.0, z: 315.3},    // J4 axis — 200.0mm from ELBOW
+  J2_HOME: 45.0,   // CAD's authored J2/J3 at the pose above — measured,
+  J3_HOME: 90.0,   // not commanded — see the comment above
+};
+let three = null;      // set once the WebGL scene + meshes are ready
+let LASTJOINTS = null; // raw J1-J4 from /state, captured by pollState()
+
+function initThree(){
+  if (three) return;
+  const container = el("three3d");
+  const W = container.clientWidth || 980, H = container.clientHeight || 560;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x111111);
+  const camera = new THREE.PerspectiveCamera(45, W / H, 1, 20000);
+  const renderer = new THREE.WebGLRenderer({antialias: true});
+  renderer.setSize(W, H);
+  container.appendChild(renderer.domElement);
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableZoom = false;   // replaced with our own mm-stepped wheel zoom below
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+  const key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(600, 900, 400);
+  scene.add(key);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.35); fill.position.set(-500, -200, 500);
+  scene.add(fill);
+
+  // the STEP data is Z-up; three.js/OrbitControls assume Y-up — one fixed
+  // corrective rotation at the root instead of remapping every coordinate
+  const world = new THREE.Group();
+  world.rotation.x = -Math.PI / 2;
+  scene.add(world);
+
+  camera.position.set(1400, 900, 1400);
+  controls.target.set(150, 0, 250);
+  controls.update();
+
+  // builds one carriage->shoulder->elbow->wrist chain; used once for the
+  // real current-pose arm and again (semi-transparent) for the target ghost
+  function buildChain(){
+    const carriageGroup = new THREE.Group(); world.add(carriageGroup);      // J1 (Z)
+    const shoulderGroup = new THREE.Group();                                // J2
+    shoulderGroup.position.set(RIG.SHOULDER.x, RIG.SHOULDER.y, RIG.SHOULDER.z);
+    carriageGroup.add(shoulderGroup);
+    const elbowGroup = new THREE.Group();                                   // J3
+    elbowGroup.position.set(RIG.ELBOW.x - RIG.SHOULDER.x, RIG.ELBOW.y - RIG.SHOULDER.y,
+                            RIG.ELBOW.z - RIG.SHOULDER.z);
+    shoulderGroup.add(elbowGroup);
+    const wristGroup = new THREE.Group();                                   // J4
+    wristGroup.position.set(RIG.WRIST.x - RIG.ELBOW.x, RIG.WRIST.y - RIG.ELBOW.y,
+                            RIG.WRIST.z - RIG.ELBOW.z);
+    elbowGroup.add(wristGroup);
+    return {carriage: carriageGroup, shoulder: shoulderGroup, elbow: elbowGroup, wrist: wristGroup};
+  }
+  const staticGroup = new THREE.Group(); world.add(staticGroup);
+  const real = buildChain();
+  const ghost = buildChain();
+  ghost.carriage.visible = false;   // shown only once target fields are valid
+
+  three = {scene, camera, renderer, controls, world,
+           groups: real, ghostGroups: ghost,
+           Z_REF: null, RZ_REF: null, dragOverride: null, pending: 6};
+  loadSquidModel();
+  loadRackModel();
+  if(typeof S4Demo!=='undefined'){S4Demo.gripper();S4Demo.plate();}
+
+  const loader = new THREE.OBJLoader();
+  const MAT_STATIC = new THREE.MeshStandardMaterial({color: 0xc1c1c1, metalness: 0.25, roughness: 0.6});
+  const MAT_MOVING = new THREE.MeshStandardMaterial({color: 0xf1f1f1, metalness: 0.15, roughness: 0.5});
+  const PREVIEW_COLORS = [0x42a5f5, 0xffa726, 0x66bb6a, 0xba68c8];
+  const PREVIEW_MATERIALS = PREVIEW_COLORS.map(color => new THREE.MeshStandardMaterial({
+    color, metalness: 0.05, roughness: 0.6, transparent: true, opacity: 0.8, depthWrite: false
+  }));
+  function loadInto(url, mat, place, ghostPlace, previewIndex){
+    loader.load(url, obj => {
+      obj.traverse(c => { if (c.isMesh) c.material = mat; });
+      place(obj);
+      if (ghostPlace){
+        const g = obj.clone(true);          // shares geometry, own material/transform
+        g.traverse(c => { if (c.isMesh) c.material = PREVIEW_MATERIALS[previewIndex]; });
+        ghostPlace(g);
+      }
+      three.pending--;
+      el("loadmsg").textContent = three.pending > 0 ? `loading model… (${three.pending} left)` : "";
+    }, undefined, err => {
+      three.pending--;
+      el("loadmsg").textContent = "failed to load " + url;
+      console.error("OBJ load failed", url, err);
+    });
+  }
+  const M = "/static/models/";
+  loadInto(M + "base_plate.obj", MAT_STATIC, o => staticGroup.add(o));
+  loadInto(M + "column.obj",     MAT_STATIC, o => staticGroup.add(o));
+  loadInto(M + "upper_arm.obj",  MAT_MOVING,
+    o => real.carriage.add(o), o => ghost.carriage.add(o), 0);            // already at world origin
+  loadInto(M + "mid_arm.obj",    MAT_MOVING,
+    o => { o.position.set(-RIG.SHOULDER.x, -RIG.SHOULDER.y, -RIG.SHOULDER.z); real.shoulder.add(o); },
+    o => { o.position.set(-RIG.SHOULDER.x, -RIG.SHOULDER.y, -RIG.SHOULDER.z); ghost.shoulder.add(o); }, 1);
+  loadInto(M + "lower_arm.obj",  MAT_MOVING,
+    o => { o.position.set(-RIG.ELBOW.x, -RIG.ELBOW.y, -RIG.ELBOW.z); real.elbow.add(o); },
+    o => { o.position.set(-RIG.ELBOW.x, -RIG.ELBOW.y, -RIG.ELBOW.z); ghost.elbow.add(o); }, 2);
+  loadInto(M + "gripper.obj",    MAT_MOVING,
+    o => { o.position.set(-RIG.WRIST.x, -RIG.WRIST.y, -RIG.WRIST.z); real.wrist.add(o); },
+    o => { o.position.set(-RIG.WRIST.x, -RIG.WRIST.y, -RIG.WRIST.z); ghost.wrist.add(o); }, 3);
+
+  // wheel = zoom by exactly the configured mm step per notch (not a speed
+  // multiplier) — OrbitControls' own zoom is disabled above so this is the
+  // only zoom path
+  renderer.domElement.addEventListener("wheel", e => {
+    e.preventDefault();
+    camStep("zoom", e.deltaY < 0 ? 1 : -1);
+  }, {passive: false});
+
+  // ---- draggable joint handles: bend the ghost by grabbing elbow/wrist/
+  // gripper directly, instead of typing X/Y/Z/Rz. Elbow drag sets J2 (its
+  // position is constrained to the link1 circle around the shoulder);
+  // wrist drag sets J3 (constrained to the link2 circle around the elbow);
+  // the grip handle (offset from the wrist) sets Rz by dragging around it.
+  const handleGeo = new THREE.SphereGeometry(14, 16, 16);
+  const elbowHandle = new THREE.Mesh(handleGeo, new THREE.MeshBasicMaterial({color: PREVIEW_COLORS[1]}));
+  ghost.elbow.add(elbowHandle);
+  const wristHandle = new THREE.Mesh(handleGeo, new THREE.MeshBasicMaterial({color: PREVIEW_COLORS[2]}));
+  ghost.wrist.add(wristHandle);
+  const gripHandle = new THREE.Mesh(handleGeo, new THREE.MeshBasicMaterial({color: PREVIEW_COLORS[3]}));
+  gripHandle.position.set(70, 0, 0);   // offset from the wrist so it's grabbable for Rz
+  ghost.wrist.add(gripHandle);
+  const handles = {elbow: elbowHandle, wrist: wristHandle, grip: gripHandle};
+
+  const raycaster = new THREE.Raycaster();
+  const dragPlane = new THREE.Plane();
+  let dragging = null;
+  const ndc = e => {
+    const r = renderer.domElement.getBoundingClientRect();
+    return new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1,
+                             -((e.clientY - r.top) / r.height) * 2 + 1);
+  };
+  // ray-plane hit, converted into the robot-native (Z-up) frame the RIG
+  // constants and IK math are already expressed in
+  function hitLocalXY(e, zLocal){
+    raycaster.setFromCamera(ndc(e), camera);
+    world.updateMatrixWorld();
+    const n = new THREE.Vector3(0, 0, 1).transformDirection(world.matrixWorld);
+    const p0 = world.localToWorld(new THREE.Vector3(0, 0, zLocal));
+    dragPlane.setFromNormalAndCoplanarPoint(n, p0);
+    const hit = new THREE.Vector3();
+    if (!raycaster.ray.intersectPlane(dragPlane, hit)) return null;
+    return world.worldToLocal(hit);
+  }
+  renderer.domElement.addEventListener("pointerdown", e => {
+    if (!ghost.carriage.visible) return;   // no target set yet — nothing to grab
+    raycaster.setFromCamera(ndc(e), camera);
+    const hit = raycaster.intersectObjects([handles.elbow, handles.wrist, handles.grip], false);
+    if (!hit.length) return;
+    dragging = hit[0].object === handles.elbow ? "elbow"
+             : hit[0].object === handles.wrist ? "wrist" : "grip";
+    controls.enabled = false;
+    e.preventDefault();
+  });
+  window.addEventListener("pointermove", e => {
+    if (!dragging || !RP) return;
+    const l1 = RP.link1_mm, l2 = RP.link2_mm, j3off = RP.j3_offset_deg - RP.j2_offset_deg;
+    const tv = ["vx","vy","vz","vrz"].map(id => parseFloat(el(id).value));
+    const handle=handles[dragging];
+    const zLocal=world.worldToLocal(handle.getWorldPosition(new THREE.Vector3())).z;
+    const local = hitLocalXY(e, zLocal);
+    if (!local) return;
+    let J2 = THREE.MathUtils.radToDeg(ghost.shoulder.rotation.z) + RIG.J2_HOME;
+    let J3 = THREE.MathUtils.radToDeg(ghost.elbow.rotation.z) + RIG.J3_HOME;
+    let rz = isNaN(tv[3]) ? 0 : tv[3];
+    const previous=three.previewPose;
+    if(!previous) return;
+    if (dragging === "elbow"){
+      J2 = S4Preview.near(Math.atan2(local.y - RIG.SHOULDER.y, local.x - RIG.SHOULDER.x) * 180 / Math.PI-RP.j2_offset_deg,previous.J2);
+    } else if (dragging === "wrist"){
+      const ex = RIG.SHOULDER.x + l1 * Math.cos(J2 * Math.PI / 180);
+      const ey = RIG.SHOULDER.y + l1 * Math.sin(J2 * Math.PI / 180);
+      const ang = Math.atan2(local.y - ey, local.x - ex) * 180 / Math.PI;
+      J3 = S4Preview.near(ang - J2 - j3off,previous.J3);
+    } else {
+      const ex = RIG.SHOULDER.x + l1 * Math.cos(J2 * Math.PI / 180);
+      const ey = RIG.SHOULDER.y + l1 * Math.sin(J2 * Math.PI / 180);
+      const wang = (J2 + J3 + j3off) * Math.PI / 180;
+      const wx = ex + l2 * Math.cos(wang), wy = ey + l2 * Math.sin(wang);
+      const wristHome=RIG.J2_HOME+RIG.J3_HOME;
+      rz = S4Preview.near(Math.atan2(local.y - wy, local.x - wx) * 180 / Math.PI+(three.RZ_REF||0)-wristHome,previous.rz);
+    }
+    acceptPreview({J2,J3,z:previous.z,rz},true);
+  });
+  window.addEventListener("pointerup", () => {
+    if (dragging){ dragging = null; controls.enabled = true; }
+  });
+
+  (function animate(){
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  })();
+}
+
+// discrete camera step, in real units: kind "zoom" moves the camera toward/
+// away from the orbit target by the configured mm step; kind "rotate" spins
+// it around the target (azimuth) by the configured degree step. Used by
+// both the Zoom/Rotate buttons and the mouse wheel.
+function camStep(kind, dir){
+  if (!three) return;
+  const {camera, controls} = three;
+  const offset = camera.position.clone().sub(controls.target);
+  const sph = new THREE.Spherical().setFromVector3(offset);
+  if (kind === "zoom"){
+    const step = parseFloat(el("zoomstep").value) || 20;
+    sph.radius = Math.max(50, sph.radius - step * dir);
+  } else {
+    const step = parseFloat(el("rotatestep").value) || 15;
+    sph.theta += THREE.MathUtils.degToRad(step * dir);
+  }
+  offset.setFromSpherical(sph);
+  camera.position.copy(controls.target).add(offset);
+  controls.update();
+}
+
+// applies an explicit (J2, J3, Rz) pose to the ghost chain — shared by the
+// normal IK-solved path (updateRig) and the drag handles (dragOverride),
+// so both go through the identical coupling-aware wrist formula
+function applyGhostPose(J2, J3, rz){
+  const dJ2 = J2 - RIG.J2_HOME, dJ3 = J3 - RIG.J3_HOME;
+  const rzRef = three.RZ_REF === null ? 0 : three.RZ_REF;
+  three.ghostGroups.shoulder.rotation.z = THREE.MathUtils.degToRad(dJ2);
+  three.ghostGroups.elbow.rotation.z    = THREE.MathUtils.degToRad(dJ3);
+  three.ghostGroups.wrist.rotation.z    = THREE.MathUtils.degToRad(rz - rzRef - dJ2 - dJ3);
+}
+
+function previewReference(){
+  const live=LASTJOINTS && LASTPOSE;
+  return {zOffset:live ? LASTPOSE.Z-LASTJOINTS.J1 : 0,
+    wristOffset:live ? LASTPOSE.Rz-LASTJOINTS.J2-LASTJOINTS.J3-LASTJOINTS.J4 : 0};
+}
+function previewMessage(why){
+  el('tgt3d').textContent='Preview stopped: '+why;
+  el('preview-go').disabled=true;
+}
+function acceptPreview(q,writeFields=false){
+  if(!three || !RP) return false;
+  const ref=previewReference();
+  const why=three.previewPose ? S4Preview.transition(three.previewPose,q,RP,ref) : S4Preview.error(q,RP,ref);
+  if(why){ previewMessage(why); return false; }
+  three.previewPose={...q};
+  if(typeof S4Demo!=='undefined') S4Demo.sample();
+  three.dragOverride={J2:q.J2,J3:q.J3};
+  three.ghostGroups.carriage.visible=true;
+  three.ghostGroups.carriage.position.z=q.z-(three.Z_REF ?? 150);
+  applyGhostPose(q.J2,q.J3,q.rz);
+  if(writeFields){
+    const xy=S4Preview.forward(q,RP);
+    for(const [a,b,v] of [['vx','gx',xy.x],['vy','gy',xy.y],['vz','gz',q.z],['vrz','grz',q.rz]]) el(a).value=el(b).value=v.toFixed(3);
+  }
+  el('preview-z').min=RP.j1_min_mm+ref.zOffset;
+  el('preview-z').max=RP.j1_max_mm+ref.zOffset;
+  el('preview-z').value=q.z;
+  el('preview-z-value').textContent=q.z.toFixed(1)+' mm';
+  const j4=q.rz-q.J2-q.J3-ref.wristOffset;
+  el('tgt3d').textContent=`Preview: J2 ${q.J2.toFixed(1)}° · J3 ${q.J3.toFixed(1)}° · J4 ${j4.toFixed(1)}° · Z ${q.z.toFixed(1)} mm`;
+  el('preview-limits').textContent=`Preview only · J1 ${RP.j1_min_mm}–${RP.j1_max_mm} mm · J2 ±${Math.abs(RP.j2_min_deg)-RP.j2_margin_deg}° · J3 ±${RP.j3_hard_abs_deg}° · J4 ±${Math.min(RP.j4_pref_abs_deg,RP.j4_hard_abs_deg)}°. ${LASTPOSE&&LASTJOINTS?'Live joint reference.':'Offline joint reference; initialize from live pose before execution.'} No collision/contact simulation.`;
+  el('preview-go').disabled=false;
+  return true;
+}
+function resetPreview(){
+  if(!three || !RP) return;
+  three.previewPose=null;
+  const live=LASTPOSE&&LASTJOINTS;
+  const q=live ? {J2:LASTJOINTS.J2,J3:LASTJOINTS.J3,z:LASTPOSE.Z,rz:LASTPOSE.Rz} : {J2:45,J3:90,z:150,rz:135};
+  if(!acceptPreview(q,true)) three.ghostGroups.carriage.visible=false;
+}
+function updatePreviewFromFields(){
+  if(!three || !RP){previewMessage('Waiting for robot parameters');return false;}
+  const tv=['vx','vy','vz','vrz'].map(id=>parseFloat(el(id).value));
+  if(tv.some(v=>!Number.isFinite(v))){previewMessage('Enter all four target coordinates');return false;}
+  const prev=three.previewPose || (LASTJOINTS ? {J2:LASTJOINTS.J2,J3:LASTJOINTS.J3} : {J2:45,J3:90});
+  const q=three.dragOverride ? {...three.dragOverride,z:tv[2],rz:tv[3]} : S4Preview.solve(...tv,RP,previewReference(),prev);
+  if(!q){previewMessage('Target outside arm reach');return false;}
+  return acceptPreview(q);
+}
+function setPreviewZ(z){
+  if(!three?.previewPose) resetPreview();
+  if(!three?.previewPose) return;
+  if(!acceptPreview({...three.previewPose,z},true)) el('preview-z').value=three.previewPose.z;
+}
+function stepPreviewZ(dir){
+  if(!three?.previewPose) resetPreview();
+  if(three?.previewPose) setPreviewZ(three.previewPose.z+dir*Number(el('preview-z-step').value));
+}
+
+// called from the state poll (current pose, real J1-J4) and from the
+// target boxes (preview marker) — either may be missing on a given call
+function updateRig(){
+  if (!three) return;
+  if (LASTJOINTS && LASTPOSE){
+    if (three.Z_REF === null) three.Z_REF = LASTPOSE.Z;   // anchor Z on first read — see RIG comment
+    const dJ2 = LASTJOINTS.J2 - RIG.J2_HOME, dJ3 = LASTJOINTS.J3 - RIG.J3_HOME;
+    if (three.RZ_REF === null) three.RZ_REF = LASTPOSE.Rz - dJ2 - dJ3;  // anchor on first read too
+    three.groups.carriage.position.z = LASTPOSE.Z - three.Z_REF;
+    three.groups.shoulder.rotation.z = THREE.MathUtils.degToRad(dJ2);
+    three.groups.elbow.rotation.z    = THREE.MathUtils.degToRad(dJ3);
+    // wrist driven from Rz (not raw J4 — it's coupled to J2+J3, see RIG comment)
+    three.groups.wrist.rotation.z    = THREE.MathUtils.degToRad(LASTPOSE.Rz - three.RZ_REF - dJ2 - dJ3);
+    el("cur3d").textContent = "X " + LASTPOSE.X.toFixed(1) + "  Y " + LASTPOSE.Y.toFixed(1) +
+      "  Z " + LASTPOSE.Z.toFixed(1) + "  Rz " + LASTPOSE.Rz.toFixed(1) +
+      "   (J1-J4: " + ["J1","J2","J3","J4"].map(k => LASTJOINTS[k].toFixed(1)).join(", ") + ")";
+  } else {
+    el("cur3d").textContent = "— (not connected)";
+  }
+
+  if(!three.previewPose && ['vx','vy','vz','vrz'].every(id=>el(id).value==='')) resetPreview();
+  else updatePreviewFromFields();
+}
+// keep the 3D tab's target boxes and the Jog "go to" boxes in lockstep —
+// either one can be typed/scrolled into and both drive the same Go
+function syncPair(aId, bId){
+  el(aId).addEventListener("input", () => {
+    el(bId).value = el(aId).value;
+    if (three) three.dragOverride = null;   // typed/scrolled by hand — back to normal IK
+    updateRig();
+  });
+}
+["gx","gy","gz","grz"].forEach((id, i) => syncPair(id, ["vx","vy","vz","vrz"][i]));
+["vx","vy","vz","vrz"].forEach((id, i) => syncPair(id, ["gx","gy","gz","grz"][i]));
+["vx","vy","vz"].forEach(id => scrollAdjust(el(id), el("jogstep")));
+scrollAdjust(el("vrz"), el("jogrz"));
+setInterval(() => { if(el("tab-3d").style.display !== "none") updateRig(); }, 1000);
+
 el("iso") && el("iso").addEventListener("click", ev => {
   const r = el("iso").getBoundingClientRect();
   const mx = ev.clientX - r.left, my = ev.clientY - r.top;
@@ -902,7 +1734,7 @@ function renderEnvState(on){
   el("envtoggle").textContent = on ? "Disable" : "RE-ENABLE";
   el("envtoggle").className = on ? "warn" : "danger";
   el("envstate").textContent = on ? "" : "— DISABLED";
-  el("envcard").style.borderColor = on ? "" : "#9c2b2b";
+  el("envcard").style.borderColor = on ? "" : "#434343";
   el("envnote").textContent = on
     ? "Moves outside this box (or reach > 480 mm) are refused."
     : "ALL SOFT LIMITS OFF — no box, no reach guard. You are the envelope.";
@@ -965,7 +1797,7 @@ function trqDraw(){
   const cv = el("trqchart"), ctx = cv.getContext("2d");
   ctx.clearRect(0, 0, cv.width, cv.height);
   if(!trqData || !trqData.baseline || trqData.samples.length < 2){
-    ctx.fillStyle = "#456"; ctx.font = "14px monospace";
+    ctx.fillStyle = "#535353"; ctx.font = "14px monospace";
     ctx.fillText("waiting for samples (baseline = first 3 reads)…", 20, 30);
     return;
   }
@@ -978,11 +1810,11 @@ function trqDraw(){
   const W = cv.width, H = cv.height, x0 = 44;
   const xs = i => x0 + (W - x0 - 6) * i / Math.max(1, S.length - 1);
   const ys = v => H / 2 - (v / m) * (H / 2 - 14);
-  ctx.strokeStyle = "#234"; ctx.beginPath();
+  ctx.strokeStyle = "#313131"; ctx.beginPath();
   ctx.moveTo(x0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
-  ctx.fillStyle = "#678"; ctx.font = "11px monospace";
+  ctx.fillStyle = "#757575"; ctx.font = "11px monospace";
   [m, m / 2, 0, -m / 2, -m].forEach(v => ctx.fillText(String(Math.round(v)), 4, ys(v) + 4));
-  const colors = ["#7fd7ff", "#ffd27f", "#8fff9f", "#ff9f9f"];
+  const colors = ["#c7c7c7", "#d6d6d6", "#e0e0e0", "#b3b3b3"];
   for(let j = 0; j < 4; j++){
     ctx.strokeStyle = colors[j]; ctx.lineWidth = j === 0 ? 2 : 1.2;
     ctx.beginPath();
@@ -990,18 +1822,18 @@ function trqDraw(){
     ctx.stroke();
   }
   if(trqPick){
-    ctx.strokeStyle = "#ff5577"; ctx.setLineDash([6, 4]); ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "#7c7c7c"; ctx.setLineDash([6, 4]); ctx.lineWidth = 1.5;
     [trqPick, -trqPick].forEach(v => {
       ctx.beginPath(); ctx.moveTo(x0, ys(v)); ctx.lineTo(W, ys(v)); ctx.stroke();
     });
     ctx.setLineDash([]);
-    ctx.fillStyle = "#ff5577";
+    ctx.fillStyle = "#7c7c7c";
     ctx.fillText("±" + trqPick.toFixed(0), W - 46, ys(trqPick) - 4);
   }
   // annotate last Z on the right
   const last = S[S.length - 1];
   if(last && last.z != null){
-    ctx.fillStyle = "#9ab";
+    ctx.fillStyle = "#a8a8a8";
     ctx.fillText("Z " + last.z.toFixed(2), W - 90, 14);
   }
 }
@@ -1041,4 +1873,11 @@ setInterval(() => { pollFrame(); refreshCrop(); }, 1300); pollFrame();
 zcalLoad(); trqLoadSaved();
 say("console ready — Connect, check state, set the envelope, then work the pipeline", "toast");
 </script>
+<script src="/static/transfer.js?v=squid-plus-colors-20260914"></script>
+<script src="/static/rack.js?v=1"></script>
+<script src="/static/demonstration.js?v=1"></script>
+<script src="/static/pickup.js?v=1"></script>
+<script src="/static/ic_alignment.js?v=1"></script>
+<script src="/static/plate_agent.js?v=2"></script>
+<script src="/static/realsense.js?v=1"></script>
 </body></html>

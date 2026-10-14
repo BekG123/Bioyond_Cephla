@@ -1,4 +1,7 @@
 {
+ "marker_sizes_mm": {
+  "1": 20.0
+ },
  "z_touch_offset_mm": 9.0,
  "safety_margin_mm": 15.0,
  "comment": "z_touch_offset = torque-probed contact Z minus vision grasp Z. Refresh via the calibrate flow (vision teach converge, then torque-guided descent to first band breach). grip Z = vision grasp Z + z_touch_offset + safety_margin.",
@@ -68,6 +71,18 @@
   }
  ],
  "marker_offsets": {
+  "1": {
+   "dx_mm": -2.24,
+   "dy_mm": -1.22,
+   "rel_yaw_deg": -1.17,
+   "length_mm": 128.6,
+   "width_mm": 85.0,
+   "vision_width_mm": 88.3,
+   "width_source": "operator measured 8.5 cm; vision estimated 88.3 mm, discrepancy unresolved",
+   "date": "2026-09-14",
+   "note": "Stationary per-ID plate calibration from full visible outline, visually checked. Marker 20 mm, center error 3.75 mm, optical distance 215.48 mm. Width discrepancy retained; jaw clearance and grip depth not physically verified. No motion authorization.",
+   "camera_model_version": "2026-07-25 19:05:00"
+  },
   "3": {
    "dx_mm": 0.81,
    "dy_mm": -0.32,

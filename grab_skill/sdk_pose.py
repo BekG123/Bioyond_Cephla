@@ -1,64 +1,11 @@
-"""Faithful port of the Bioyond SDK pose math (from decompiled VCS.Vision.CVUtility).
-
-Pose = [X, Y, Z, Rx, Ry, Rz]  (mm, degrees).
-RotationMatrixFromEulerAngles(a,b,g) = Rz(g) @ Ry(b) @ Rx(a).
-ComposePoses(p1,p2): R = R1@R2, t = R1@t2 + t1.
-Grasp = ComposePoses(convergedCameraPose, TeachInTrigger).
-"""
+"""Compatibility import for vendor pose math, now in Calibration/fast_disk.py."""
+from pathlib import Path
+import sys
 import numpy as np
-
-
-def _rot(a, b, g):
-    a, b, g = np.radians([a, b, g])
-    Rx = np.array([[1, 0, 0], [0, np.cos(a), -np.sin(a)], [0, np.sin(a), np.cos(a)]])
-    Ry = np.array([[np.cos(b), 0, np.sin(b)], [0, 1, 0], [-np.sin(b), 0, np.cos(b)]])
-    Rz = np.array([[np.cos(g), -np.sin(g), 0], [np.sin(g), np.cos(g), 0], [0, 0, 1]])
-    return Rz @ Ry @ Rx
-
-
-def _to_euler(R):
-    sy = np.hypot(R[0, 0], R[1, 0])
-    if sy > 1e-6:
-        rx = np.arctan2(R[2, 1], R[2, 2])
-        ry = np.arctan2(-R[2, 0], sy)
-        rz = np.arctan2(R[1, 0], R[0, 0])
-    else:
-        rx = np.arctan2(-R[1, 2], R[1, 1])
-        ry = np.arctan2(-R[2, 0], sy)
-        rz = 0.0
-    return np.degrees([rx, ry, rz])
-
-
-def _norm360(a):
-    while a > 360.0:
-        a -= 360.0
-    while a < 0.0:
-        a += 360.0
-    return a
-
-
-def compose(p1, p2):
-    p1, p2 = np.asarray(p1, float), np.asarray(p2, float)
-    R1 = _rot(p1[3], p1[4], p1[5])
-    R = R1 @ _rot(p2[3], p2[4], p2[5])
-    t = R1 @ p2[:3] + p1[:3]
-    e = _to_euler(R)
-    return np.array([t[0], t[1], t[2], _norm360(e[0]), _norm360(e[1]), _norm360(e[2])])
-
-
-def invert(p):
-    p = np.asarray(p, float)
-    T = np.eye(4)
-    T[:3, :3] = _rot(p[3], p[4], p[5])
-    T[:3, 3] = p[:3]
-    Ti = np.linalg.inv(T)
-    e = _to_euler(Ti[:3, :3])
-    return np.array([Ti[0, 3], Ti[1, 3], Ti[2, 3], e[0], e[1], e[2]])
-
-
-def wrap180(a):
-    return (a + 180.0) % 360.0 - 180.0
-
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "operator_ui"))
+from pick_and_hold.Calibration.fast_disk import (
+    _rot, _to_euler, _norm360, compose, invert, wrap180,
+)
 
 if __name__ == "__main__":
     # --- VALIDATION against run 6 (known-good grasp that lifted the board) ---

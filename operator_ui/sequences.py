@@ -18,8 +18,8 @@ Sequences:
               estimate). If NO safe J4 winding exists, falls back to
               centering the mark without rotation (the grasp estimate
               composes the virtual rotation and stays valid).
-  align     — rotate Rz in place (<=30 deg joint chunks), then move linearly
-              to the target X/Y at hover height.
+  align     — lift to hover, rotate Rz in place (<=30 deg joint chunks),
+              then move linearly to the target X/Y at hover height.
   descend   — approach to target Z + 20, take a J1-J4 torque baseline, then
               step down 1.0/0.5 mm at speed 5 checking torque after every
               step; FIRST band breach stops, retreats 1 mm and classifies
@@ -35,6 +35,7 @@ import math
 import os
 import threading
 import time
+from autonomy import AlignmentGuard, GuardedService, TransferError, alignment_plan, ensure_arrival
 
 TORQUE_CFG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                "torque_config.json")
@@ -66,16 +67,33 @@ def _robot_params() -> dict:
 _RP = _robot_params()
 
 
+def get_robot_params() -> dict:
+    """Kinematic/limit constants, for the operator UI's 3D illustration to
+    mirror the same planar IK client-side (see _ik_j2j3)."""
+    return dict(_RP)
+
+
 def _kinematics_on() -> bool:
     return _RP["link1_mm"] > 0 and _RP["link2_mm"] > 0
 
 
-def _ik_j2j3(x: float, y: float):
-    """Exact planar IK on the fitted model (our elbow branch — the one all
-    live poses use: J3 in (-180, 0)). Returns (J2, J3) in degrees, or None
-    when the kinematic block is unconfigured or the point lies beyond full
-    extension. Fitted 2026-07-28 with 0.00 mm residual over 8 live poses;
-    reproduced the live J2 soft-limit stop (-95.10) to the decimal."""
+def _ik_j2j3(x: float, y: float, ref_j2: float | None = None):
+    """Exact planar IK on the fitted model. Returns (J2, J3) in degrees, or
+    None when the kinematic block is unconfigured or the point lies beyond
+    full extension. Fitted 2026-07-28 with 0.00 mm residual over 8 live
+    poses.
+
+    A 2-link arm reaches a given (x, y) via TWO elbow branches (mirror
+    images of each other). This is a genuine kinematic ambiguity, not a
+    bug: which branch the real arm is on depends on its physical winding
+    history, not on the target point alone. Confirmed live 2026-09-13/14
+    that this arm can be sitting on EITHER branch (a target's "+" branch
+    predicted J2 -44.6 while the arm's actual live J2 was +82.3 — an exact
+    mirror) — so a fixed branch choice is wrong whenever the arm has
+    wound the other way since the model was fitted. When ref_j2 (the
+    CURRENT live J2) is given, pick whichever branch is continuous with
+    it; only fall back to the "+" branch when no live reading is
+    available. autonomy.py's ik() already does this — mirrored here."""
     if not _kinematics_on():
         return None
     l1, l2 = _RP["link1_mm"], _RP["link2_mm"]
@@ -84,14 +102,21 @@ def _ik_j2j3(x: float, y: float):
     c = (r2 - l1 * l1 - l2 * l2) / (2.0 * l1 * l2)
     if abs(c) > 1.0:
         return None
-    g = math.degrees(math.acos(c))          # + branch = observed elbow side
-    alpha = math.degrees(math.atan2(
-        l2 * math.sin(math.radians(g)),
-        l1 + l2 * math.cos(math.radians(g))))
     phi = math.degrees(math.atan2(py, px))
-    j2 = _wrap180(phi - alpha - _RP["j2_offset_deg"])
-    j3 = _wrap180(g - (_RP["j3_offset_deg"] - _RP["j2_offset_deg"]))
-    return j2, j3
+
+    def branch(g):
+        alpha = math.degrees(math.atan2(
+            l2 * math.sin(math.radians(g)),
+            l1 + l2 * math.cos(math.radians(g))))
+        j2 = _wrap180(phi - alpha - _RP["j2_offset_deg"])
+        j3 = _wrap180(g - (_RP["j3_offset_deg"] - _RP["j2_offset_deg"]))
+        return j2, j3
+
+    g = math.degrees(math.acos(c))
+    a, b = branch(g), branch(-g)
+    if ref_j2 is None:
+        return a
+    return min((a, b), key=lambda q: abs(_wrap180(q[0] - ref_j2)))
 
 
 def _extension_mm(x: float, y: float) -> float:
@@ -100,11 +125,18 @@ def _extension_mm(x: float, y: float) -> float:
     return math.hypot(x - _RP["base_x_mm"], y - _RP["base_y_mm"])
 
 
-def _reach_block(x: float, y: float):
+def _reach_block(x: float, y: float, ref_j2: float | None = None):
     """Why (x, y) is kinematically unreachable, or None if it is fine.
     With the fitted model: exact extension circle around the base + the
-    measured J2 soft limit (fault 3571 froze J2 at -95.10 live). Without
-    it: the legacy origin-circle guard."""
+    measured J2 soft limit (fault 3571, hit live at BOTH -95.10 and
+    +95.10 — the limit is symmetric, not one-sided; a version of this
+    check that only refused ik[0] < -93 missed the +93..+95 side entirely
+    and let the controller fault there instead, live 2026-09-14). Without
+    the fitted model: the legacy origin-circle guard.
+
+    ref_j2 should be the arm's CURRENT live J2 so _ik_j2j3 evaluates the
+    branch the arm is actually on (see _ik_j2j3's docstring) — omitting it
+    silently falls back to the "+" branch, which may not be live-correct."""
     if _kinematics_on():
         lim = _RP["link1_mm"] + _RP["link2_mm"] - _RP["extension_margin_mm"]
         ext = _extension_mm(x, y)
@@ -113,14 +145,14 @@ def _reach_block(x: float, y: float):
                     f"{lim - REACH_MARGIN_MM:.0f} (full stretch "
                     f"{_RP['link1_mm'] + _RP['link2_mm']:g} minus tracking "
                     "margin — controller faults 3570 out there)")
-        ik = _ik_j2j3(x, y)
+        ik = _ik_j2j3(x, y, ref_j2)
         if ik is None:
             return "no IK solution"
-        j2_lim = _RP["j2_min_deg"] + _RP["j2_margin_deg"]
-        if _RP["j2_min_deg"] > -900 and ik[0] < j2_lim:
-            return (f"predicted J2 {ik[0]:.1f} deg is below the soft limit "
-                    f"{_RP['j2_min_deg']:g} (+{_RP['j2_margin_deg']:g} "
-                    "margin — fault 3571 territory)")
+        j2_bound = abs(_RP["j2_min_deg"]) - _RP["j2_margin_deg"]
+        if _RP["j2_min_deg"] > -900 and abs(ik[0]) > j2_bound:
+            return (f"predicted J2 {ik[0]:.1f} deg is beyond the soft limit "
+                    f"±{abs(_RP['j2_min_deg']):g} (-{_RP['j2_margin_deg']:g}"
+                    " margin — fault 3571 territory)")
         return None
     if math.hypot(x, y) > REACH_HARD_MM - REACH_MARGIN_MM:
         return (f"radius {math.hypot(x, y):.1f} beyond the legacy reach "
@@ -225,8 +257,14 @@ def _j4_safe_delta(svc, delta: float):
 
 def _feasible(svc, x: float, y: float, z: float) -> bool:
     """Can the tool stand at (x, y, z)? Kinematic reach (extension circle
-    around the BASE + J2 limit — physics, always on); box if armed."""
-    if _reach_block(x, y) is not None:
+    around the BASE + J2 limit — physics, always on); box if armed.
+
+    Passes the arm's CURRENT live J2 into _reach_block so the IK branch
+    checked is the one the arm is actually on, not an assumed default —
+    see _ik_j2j3's docstring for why that matters."""
+    j = svc.joints()
+    ref_j2 = j.get("J2") if j else None
+    if _reach_block(x, y, ref_j2) is not None:
         return False
     if svc.envelope_enabled:
         for axis, v in (("X", x), ("Y", y), ("Z", z)):
@@ -333,7 +371,7 @@ class Runner:
             self.state, self.name = "running", name
             self.log, self.result = [], None
             if name in ("find_disk", "find_aruco", "calibrate_aruco",
-                        "generate_anchor"):  # stale highlight
+                        "generate_anchor", "preview_plate_edges", "center_plate_edges"):  # stale highlight
                 self.detection_path, self.detection_ts = None, 0.0
             self._t0 = time.time()
             self._thread = threading.Thread(
@@ -387,7 +425,11 @@ def _move(run: Runner, svc, x, y, z, rz, speed, why: str) -> dict | None:
     failure. Never retried."""
     run.say(f"{why}: linear to X {x:.2f} Y {y:.2f} Z {z:.2f} "
             f"Rz {rz:.2f} @ {speed:g}")
-    res = svc.move_cartesian(x, y, z, rz, speed, "linear")
+    try:
+        guard = svc if isinstance(svc, GuardedService) else GuardedService(svc, run, _RP)
+        res = guard.move_cartesian(x, y, z, rz, speed, "linear")
+    except TransferError as ex:
+        return _abort(run, str(ex))
     if not res.get("ok"):
         return _abort(run, f"move refused/failed — {res.get('error')}")
     return None
@@ -397,6 +439,13 @@ def _move(run: Runner, svc, x, y, z, rz, speed, why: str) -> dict | None:
 
 
 def seq_find_disk(run: Runner, svc, cam, teach) -> dict:
+    """Compatibility adapter to the complete two-disk calibration module."""
+    from fast_disk import start_calibration
+    return start_calibration(run, svc, cam, _RP, vision=teach)
+
+
+def seq_find_disk_legacy(run: Runner, svc, cam, teach) -> dict:
+    """Original vendor teach loop; Flask calls it through OriginalDiskGuard."""
     ok, out = teach.selftest()
     tail = out.splitlines()[-1] if out else ""
     if not ok:
@@ -860,7 +909,7 @@ ARUCO_INNER_REACH = _RP["inner_reach_mm"]  # TCPs closer risk the inner
                                            # joint limits (arm-specific)
 
 
-def seq_find_aruco(run: Runner, svc, cam, aruco) -> dict:
+def seq_find_aruco(run: Runner, svc, cam, aruco, marker_id=None) -> dict:
     """Anchor-free ArUco target: fitted-camera solve + claw-arm-compensated
     TCP (the aruco-grab skill flow, validated on three blind placements).
     Publishes the SAME target shape the Align/Descend/Grip buttons use —
@@ -868,13 +917,11 @@ def seq_find_aruco(run: Runner, svc, cam, aruco) -> dict:
     refusal = svc._preflight()
     if refusal:
         return _abort(run, refusal)
+    run.target = None
+    aruco.reload_calibration()
     cam_v, arm_v = aruco.model_stamps()
-    if cam_v and arm_v and str(cam_v) != str(arm_v):
-        run.say("WARNING: the camera model (fitted " + str(cam_v) + ") is "
-                "NEWER than the claw-arm derivation (" + str(arm_v) + ") — "
-                "published TCP targets may be off by millimetres. "
-                "Re-derive the claw arm (Calibrate claw arm + Save wrist "
-                "relation) before trusting a grab.", "warn")
+    if not cam_v or not arm_v or str(cam_v) != str(arm_v):
+        return _abort(run, "camera/claw calibration stamps missing or mismatched; recalibrate before Find")
     pose = svc.pose_mm()
     run.say(f"start pose: X {pose['X']} Y {pose['Y']} Z {pose['Z']} "
             f"Rz {pose['Rz']}")
@@ -891,7 +938,7 @@ def seq_find_aruco(run: Runner, svc, cam, aruco) -> dict:
             frame = cam.snap()
             path = cam.save(frame, prefix="aruco")
             s = aruco.solve(path, pose["X"], pose["Y"], pose["Z"],
-                            pose["Rz"])
+                            pose["Rz"], marker_id=marker_id)
             if s.get("detected"):
                 break
             run.say(f"iter {it}: no marker (attempt {attempt}/"
@@ -906,6 +953,11 @@ def seq_find_aruco(run: Runner, svc, cam, aruco) -> dict:
             return _abort(run, f"marker lost at iteration {it} while "
                                "centering — re-check the view and press "
                                "Find ArUco again.")
+        marker_id = int(s["id"])
+        if not (aruco.W.CAL.get("marker_offsets") or {}).get(str(marker_id)):
+            return _abort(run, "calibrate this marker's plate center and orientation before Find")
+        if not 205 <= float(s["H_mm"]) <= 240:
+            return _abort(run, "camera distance outside commissioned 205-240 mm range")
         mw = s["marker_world"]
         z_samples.append(float(mw[2]))
         vcx, vcy = aruco.view_center_world(pose["X"], pose["Y"], pose["Rz"],
@@ -966,7 +1018,7 @@ def seq_find_aruco(run: Runner, svc, cam, aruco) -> dict:
         for _ in range(DETECT_RETRIES):
             frame = cam.snap()
             pth = cam.save(frame, prefix="aruco")
-            s2 = aruco.solve(pth, vp["X"], vp["Y"], vp["Z"], vp["Rz"])
+            s2 = aruco.solve(pth, vp["X"], vp["Y"], vp["Z"], vp["Rz"], marker_id=marker_id)
             if s2.get("detected"):
                 break
             s2 = None
@@ -1000,10 +1052,12 @@ def seq_find_aruco(run: Runner, svc, cam, aruco) -> dict:
     # reach — the claw extends ~191 mm past the TCP, so only the TCP's own
     # position decides feasibility (claw-overhang placements are valid).
     pose = svc.pose_mm()
+    j = svc.joints()
+    ref_j2 = j.get("J2") if j else None
     cands = []
     for c in sol["grab_candidates"]:
         tcp = c["tcp"]
-        why = _reach_block(tcp[0], tcp[1])
+        why = _reach_block(tcp[0], tcp[1], ref_j2)
         # NOTE: span-vs-claw-window is NOT a gate (operator decision
         # 2026-07-28: "remove the claw guard, I will take care of that")
         # — it is logged per way and warned on the pick, nothing more.
@@ -1011,11 +1065,18 @@ def seq_find_aruco(run: Runner, svc, cam, aruco) -> dict:
                 and c["reach"] < ARUCO_INNER_REACH:
             why = (f"reach {c['reach']} inside the legacy inner guard "
                    f"{ARUCO_INNER_REACH:g} (no kinematic model configured)")
+        if why is None:
+            try:
+                alignment_plan(pose, dict(x=tcp[0], y=tcp[1], rz=c["rz"],
+                                          z_calibrated=sol["grip_z"]),
+                               j or {}, _RP, svc.envelope, max(300, pose["Z"]))
+            except (TransferError, KeyError, TypeError) as ex:
+                why = str(ex)
         env_ok = _feasible(svc, tcp[0], tcp[1], pose["Z"])
         ok = why is None and env_ok
         c["feasible"] = ok
         cands.append((ok, c))
-        ik = _ik_j2j3(tcp[0], tcp[1])
+        ik = _ik_j2j3(tcp[0], tcp[1], ref_j2)
         span_txt = (f" span {c['span_mm']}" if c.get("span_mm") is not None
                     else " span ?")
         run.say(f"way {c.get('axis', '?')}{span_txt} Rz {c['rz']}: TCP "
@@ -1158,7 +1219,8 @@ def seq_generate_anchor(run: Runner, svc, cam, teach, aruco) -> dict:
                         float(sol["move_xyrz"][1]),
                         float(sol["move_xyrz"][3]))
         t_z = float(sol["move_z"][2])
-        why = _reach_block(tx, ty)
+        j = svc.joints()
+        why = _reach_block(tx, ty, j.get("J2") if j else None)
         if why:
             return _abort(run, "vendor convergence target "
                                f"({tx:.1f}, {ty:.1f}) is outside the "
@@ -1414,12 +1476,14 @@ def seq_calibrate_camera(run: Runner, svc, cam, aruco) -> dict:
 # ---------------------------------------------------- calibrate disk id
 
 
-def seq_calibrate_aruco(run: Runner, svc, cam, aruco) -> dict:
+def seq_calibrate_aruco(run: Runner, svc, cam, aruco, marker_id=None) -> dict:
     """One-time per-ID disk calibration: the operator places the marker-
     tagged disk on a CONTRASTING background; this centers the marker,
     edge-detects the actual disk, measures the marker->disk-center offset
     (marker frame), relative yaw and true spans, and saves them for the id.
     Afterwards Find ArUco needs one image from ANY background."""
+    run.target = None
+    aruco.reload_calibration()
     refusal = svc._preflight()
     if refusal:
         return _abort(run, refusal)
@@ -1437,7 +1501,7 @@ def seq_calibrate_aruco(run: Runner, svc, cam, aruco) -> dict:
             frame = cam.snap()
             path = cam.save(frame, prefix="acal")
             s = aruco.solve(path, pose["X"], pose["Y"], pose["Z"],
-                            pose["Rz"])
+                            pose["Rz"], marker_id=marker_id)
             if s.get("detected"):
                 break
             s = None
@@ -1449,7 +1513,7 @@ def seq_calibrate_aruco(run: Runner, svc, cam, aruco) -> dict:
                           "marker lost while centering — press Calibrate "
                           "again.")
         mw = s["marker_world"]
-        vcx, vcy = aruco.view_center_world(pose["X"], pose["Y"], pose["Rz"])
+        vcx, vcy = aruco.view_center_world(pose["X"], pose["Y"], pose["Rz"], s.get("H_mm"))
         off = math.hypot(mw[0] - vcx, mw[1] - vcy)
         run.say(f"iter {it}: id {s['id']} — {off:.1f} mm from view center")
         if off <= ARUCO_CENTER_MM:
@@ -1469,7 +1533,7 @@ def seq_calibrate_aruco(run: Runner, svc, cam, aruco) -> dict:
 
     pose = svc.pose_mm()
     cal = aruco.calibrate(path, pose["X"], pose["Y"], pose["Z"],
-                          pose["Rz"])
+                          pose["Rz"], marker_id=marker_id)
     if not cal.get("ok"):
         return _abort(run, f"disk edge detection failed: {cal.get('error')}")
     try:
@@ -1510,54 +1574,12 @@ def seq_calibrate_aruco(run: Runner, svc, cam, aruco) -> dict:
 # ----------------------------------------------------------------- align
 
 
-def seq_align(run: Runner, svc, target: dict, hover_z: float) -> dict:
-    refusal = svc._preflight()
-    if refusal:
-        return _abort(run, refusal)
-    pose = svc.pose_mm()
-    hover = float(hover_z) if hover_z else pose["Z"]
-    if hover < float(target["z_calibrated"]) + 10:
-        return _abort(run, f"hover Z {hover} is within 10 mm of grip Z "
-                           f"{target['z_calibrated']} — align happens at "
-                           "safe height; raise hover Z")
+def seq_align(run, svc, target, hover_z, validate_descent=True):
+    """Compatibility entry point for Pick and Hold/Align."""
+    from pick_and_hold.Align.motion import seq_align as execute
+    return execute(run, svc, target, hover_z, validate_descent=validate_descent)
 
-    run.say(f"align to X {target['x']} Y {target['y']} Rz {target['rz']} "
-            f"at hover Z {hover}")
-    pose = svc.pose_mm()
-    delta, note = _j4_safe_delta(svc, _wrap180(float(target["rz"])
-                                               - pose["Rz"]))
-    if note:
-        run.say(note, "warn")
-    if delta is None:
-        alt_rz = target.get("rz_alt")
-        return _abort(run, "cannot rotate to the target Rz without hitting "
-                           "the J4 soft limit from this arm configuration"
-                           + (f" — try the opposite-side grab: put Rz "
-                              f"{alt_rz} into the target's Rz field and "
-                              "Align again" if alt_rz is not None else ""))
-    res = svc.rotate_to_rz(float(target["rz"]), TRAVEL_SPEED,
-                           force_delta=delta)
-    if not res.get("ok"):
-        return _abort(run, f"rotation failed — {res.get('error')}")
-    if run.stopped():
-        return _halt(run)
 
-    if abs(pose["Z"] - hover) > 0.5:
-        err = _move(run, svc, pose["X"], pose["Y"], hover, float(target["rz"]),
-                    TRAVEL_SPEED, "move to hover height")
-        if err:
-            return err
-        if run.stopped():
-            return _halt(run)
-
-    err = _move(run, svc, float(target["x"]), float(target["y"]), hover,
-                float(target["rz"]), TRAVEL_SPEED, "translate to target XY")
-    if err:
-        return err
-    pose = svc.pose_mm()
-    run.say(f"aligned at X {pose['X']} Y {pose['Y']} Z {pose['Z']} "
-            f"Rz {pose['Rz']} — set the claw opening, then Descend", "good")
-    return {"ok": True, "pose": pose}
 
 
 # --------------------------------------------------------------- descend
@@ -1571,150 +1593,10 @@ def _read_torque(run: Runner, svc) -> dict | None:
     return r
 
 
-def seq_descend(run: Runner, svc, target: dict) -> dict:
-    refusal = svc._preflight()
-    if refusal:
-        return _abort(run, refusal)
-    grip_z = float(target["z_calibrated"])
-    pose = svc.pose_mm()
-
-    if math.hypot(pose["X"] - float(target["x"]),
-                  pose["Y"] - float(target["y"])) > 1.0:
-        return _abort(run, f"tool is at X {pose['X']} Y {pose['Y']} but the "
-                           f"target is X {target['x']} Y {target['y']} — run "
-                           "Align first")
-
-    r = _read_torque(run, svc)
-    if r is None:
-        return {"ok": False}
-    if not r["telemetry_live"]:
-        return _abort(run, "J1-J4 torque slots read ZERO — "
-                           "main_hostpoint_trq.bin is not the running "
-                           "program; torque-guarded descent unavailable")
-
-    approach_z = grip_z + APPROACH_OFFSET
-    if pose["Z"] > approach_z + 0.5:
-        err = _move(run, svc, pose["X"], pose["Y"], approach_z, pose["Rz"],
-                    DESCEND_SPEED, "approach")
-        if err:
-            return err
-    if run.stopped():
-        return _halt(run)
-
-    run.say(f"taking torque baseline ({BASELINE_N} stationary reads)...")
-    samples = []
-    for _ in range(BASELINE_N):
-        r = _read_torque(run, svc)
-        if r is None:
-            return {"ok": False}
-        samples.append([r["joints"][f"J{i}"] for i in (1, 2, 3, 4)])
-        if run.stopped():
-            return _halt(run)
-    n = len(samples)
-    mean = [sum(s[i] for s in samples) / n for i in range(4)]
-    std = [(sum((s[i] - mean[i]) ** 2 for s in samples) / n) ** 0.5
-           for i in range(4)]
-    floor = band_floor()
-    band = [max(3.0 * sd, floor) for sd in std]
-    run.say("baseline mean " + str([round(m) for m in mean])
-            + " band " + str([round(b) for b in band])
-            + (f" (operator-set floor ±{floor:g} from the torque tab)"
-               if floor != MIN_BAND else ""))
-
-    # J1's stationary hold torque is NOT comparable to its post-step
-    # readings (observed live: 493 stationary -> 384 right after a free
-    # 1 mm step — a false CONTACT stop). Per the skill, J1 is judged ONLY
-    # against the local trend of previous post-step readings; the first
-    # step seeds that trend and is guarded by J2-J4 alone.
-    j1_trend = []
-    pose = svc.pose_mm()
-    cur_z = pose["Z"]
-    run.say(f"stepping down from Z {cur_z:.2f} to grip Z {grip_z:.2f} "
-            f"at speed {PROBE_SPEED:g} (1.0 mm steps, 0.5 mm within "
-            f"{FINE_ZONE:g} mm)")
-
-    while cur_z > grip_z + 1e-6:
-        if run.stopped():
-            return _halt(run)
-        step = STEP_FINE if cur_z - grip_z <= FINE_ZONE else STEP_COARSE
-        next_z = max(grip_z, cur_z - step)
-        res = svc.move_cartesian(pose["X"], pose["Y"], next_z, pose["Rz"],
-                                 PROBE_SPEED, "linear")
-        if not res.get("ok"):
-            return _abort(run, f"step refused/failed — {res.get('error')}")
-        cur_z = next_z
-
-        r = _read_torque(run, svc)
-        if r is None:
-            return {"ok": False}
-        j = [r["joints"][f"J{i}"] for i in (1, 2, 3, 4)]
-        # J1 (Z ram, gravity-loaded) drifts with Z and reads differently
-        # right after a move: judge vs the local trend of POST-STEP reads
-        # only; J2-J4 idle near zero: judge vs the static baseline
-        if j1_trend:
-            j1_ref = sum(j1_trend) / len(j1_trend)
-            devs = [j[0] - j1_ref] + [j[i] - mean[i] for i in (1, 2, 3)]
-            hit = [i for i in range(4) if abs(devs[i]) > band[i]]
-        else:
-            j1_ref = j[0]     # first post-step read seeds the J1 trend
-            devs = [0.0] + [j[i] - mean[i] for i in (1, 2, 3)]
-            hit = [i for i in range(1, 4) if abs(devs[i]) > band[i]]
-            run.say(f"first step: J1 {j[0]} seeds the local trend "
-                    "(stationary baseline is not comparable to post-step "
-                    "reads) — J2-J4 guard this step")
-        run.say(f"Z {cur_z:7.2f}  J " + str([round(v) for v in j])
-                + "  dev " + str([round(d) for d in devs])
-                + ("  BREACH " + str([f"J{i+1}" for i in hit]) if hit else ""))
-
-        if hit:
-            breach_devs = list(devs)
-            run.say("torque band breach — STOP. Retreating 1 mm to "
-                    "discriminate contact vs drift", "warn")
-            res = svc.move_cartesian(pose["X"], pose["Y"], cur_z + 1.0,
-                                     pose["Rz"], PROBE_SPEED, "linear")
-            if not res.get("ok"):
-                return _abort(run, f"retreat failed — {res.get('error')} — "
-                                   "physical state must be checked")
-            # read twice and judge on the settled second read — a report
-            # taken right after the up-move carries the same post-move
-            # artifact that motivated the J1 trend rule
-            r2 = _read_torque(run, svc)
-            if r2 is not None:
-                r2 = _read_torque(run, svc)
-            if r2 is None:
-                return {"ok": False}
-            j2v = [r2["joints"][f"J{i}"] for i in (1, 2, 3, 4)]
-            devs2 = [j2v[0] - j1_ref] + [j2v[i] - mean[i] for i in (1, 2, 3)]
-            verdicts = {}
-            for i in hit:
-                unloaded = abs(devs2[i]) < 0.5 * abs(breach_devs[i])
-                verdicts[f"J{i+1}"] = "CONTACT (unloaded on retreat)" \
-                    if unloaded else "drift (deviation persists)"
-            contact = any("CONTACT" in v for v in verdicts.values())
-            for jn, v in verdicts.items():
-                run.say(f"{jn}: {v}", "warn" if contact else "info")
-            above = cur_z - grip_z
-            if contact and above > 0.5:
-                run.say(f"CONTACT {above:.1f} mm ABOVE grip depth — do NOT "
-                        "grip here. Check the camera: what was touched? "
-                        "Re-find or reseat the object.", "err")
-            elif contact:
-                run.say("contact at grip depth — the surface/backstop was "
-                        "reached; you may grip from the retreated height",
-                        "warn")
-            else:
-                run.say("looks like sensor drift, not contact. You may "
-                        "re-run Descend to continue from here.", "info")
-            return {"ok": True, "breach": True, "contact": contact,
-                    "verdicts": verdicts, "stopped_z": cur_z,
-                    "retreated_to": cur_z + 1.0}
-
-        j1_trend.append(j[0])
-        del j1_trend[:-J1_TREND_LEN]
-
-    run.say(f"reached calibrated grip Z {grip_z:.2f} with no torque breach "
-            "— ready to Grip", "good")
-    return {"ok": True, "breach": False, "at_z": grip_z}
+def seq_descend(run, svc, target):
+    """Compatibility entry point for Pick and Hold/Descend."""
+    from pick_and_hold.Descend.motion import seq_descend as execute
+    return execute(run, svc, target)
 
 
 # -------------------------------------------------------------- workflow
@@ -1782,8 +1664,10 @@ def seq_workflow(run: Runner, svc, points: dict, params: dict) -> dict:
     if order is None:
         return _abort(run, f"bad motion order: {oerr}")
     run.say("travel-leg motion order: " + " -> ".join(order))
+    j = svc.joints()
+    ref_j2 = j.get("J2") if j else None
     for role, p in (("start", ps), ("end", pe), ("home", ph)):
-        why = _reach_block(float(p["x"]), float(p["y"]))
+        why = _reach_block(float(p["x"]), float(p["y"]), ref_j2)
         if why:
             return _abort(run, f"'{role}' point unreachable: {why}")
     for role, p in (("start", ps), ("end", pe)):
@@ -1933,57 +1817,7 @@ def seq_workflow(run: Runner, svc, points: dict, params: dict) -> dict:
 # ------------------------------------------------------------------ grip
 
 
-def seq_grip(run: Runner, svc, params: dict) -> dict:
-    refusal = svc._preflight()
-    if refusal:
-        return _abort(run, refusal)
-    threshold = float(params.get("threshold", -100.0))
-    start = float(params.get("start", 28.0))
-    floor = float(params.get("floor", 1.0))
-    step = float(params.get("step", 0.1))
-    coarse = float(params.get("coarse_step", 0.5))
-    fine_from = float(params.get("fine_from", 8.0))
-    if step <= 0 or start <= floor:
-        return _abort(run, "need step > 0 and start > floor")
-
-    run.say(f"grip: open to {start}, close in {coarse}/{step} steps until "
-            f"torque <= {threshold} (floor {floor})")
-    g = svc.move_gripper(start)
-    if not g.get("ok"):
-        return _abort(run, f"open failed — {g.get('error')}")
-    target = start
-    steps = 0
-    while target - step >= floor - 1e-9:
-        if run.stopped():
-            run.say("stopped — gripper left where it is", "warn")
-            return {"ok": False, "stopped": True}
-        if coarse > step and target - coarse > max(fine_from, floor):
-            target = round(target - coarse, 3)
-        else:
-            target = round(target - step, 3)
-        g = svc.move_gripper(target)
-        if not g.get("ok"):
-            return _abort(run, f"close step to {target} failed — "
-                               f"{g.get('error')}")
-        gr = g.get("gripper", {})
-        steps += 1
-        if steps % 10 == 0 or gr.get("e1_torque", 999) <= threshold:
-            run.say(f"E1 cmd {target:6.2f}  pos {gr.get('e1_position')}  "
-                    f"torque {gr.get('e1_torque')}")
-        if gr.get("e1_torque", 999) <= threshold:
-            detected = (gr.get("position_error", 0) > 0.15
-                        and gr.get("e1_torque", 0) < -100)
-            run.say(f"TORQUE CROSSING at cmd {target}: pos "
-                    f"{gr.get('e1_position')}, torque {gr.get('e1_torque')}"
-                    f" — grip_detected={detected}",
-                    "good" if detected else "warn")
-            if not detected:
-                run.say("torque crossed but no position stall — verify "
-                        "visually before lifting", "warn")
-            return {"ok": True, "gripped": True, "grip": gr,
-                    "stopped_at_command": target}
-    run.say(f"floor {floor} reached with no torque crossing — nothing "
-            "between the plates. Reopening.", "err")
-    svc.move_gripper(start)
-    return {"ok": False, "gripped": False,
-            "error": "no object detected between the plates"}
+def seq_grip(run, svc, params):
+    """Compatibility entry point for Pick and Hold/Grip."""
+    from pick_and_hold.Grip.motion import seq_grip as execute
+    return execute(run, svc, params)

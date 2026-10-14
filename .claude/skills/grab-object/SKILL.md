@@ -43,7 +43,12 @@ Helper scripts live in `grab_skill/` at the workspace root:
    object's top edge jams the plates and trips J4 collision. If descent is
    blocked before grip depth, the placement or approach is wrong — reseat the
    object or approach from another side; do not close anyway.
-6. After any collision trip (error 3873, servos drop): report to the user,
+6. After any collision trip (error 3873, servos drop): first verify clearance
+   for BOTH jaw opening and the upward retreat. Near a rack, a free claw and
+   clear upward path do not imply that spreading the jaws is clear (rack
+   recovery fault, 2026-10-09). If either is unknown, keep disabled/stopped
+   for physical inspection; do not automatically open or restart (restart
+   closes E1). Once both are established: report to the user,
    wait for their all-clear, then clear errors, enable, OPEN THE GRIPPER
    FIRST (releases jams without arm motion), and retreat straight UP.
 

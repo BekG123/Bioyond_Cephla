@@ -1,0 +1,40 @@
+{
+  "measurement_date": "2026-10-12",
+  "units": "inches",
+  "rack": {
+    "outer_height": 16.0,
+    "outer_width": 4.25,
+    "outer_depth": 5.5,
+    "shelf_width": 3.5,
+    "shelf_depth": 5.5,
+    "shelf_pitch": 3.5
+  },
+  "calibration_plate_placement": {
+    "side": "left",
+    "lateral_gap": 5.5,
+    "toward_arm": 6.0,
+    "offset_reference": "nearest_edges",
+    "long_edge": "rack_width",
+    "interpretation_confirmed": true
+  },
+  "calibration_plate": {"length": 5.5, "width": 3.5},
+  "assumptions_mm": {
+    "rack_pose": {"x": 580, "y": -120, "z": 0, "rz": -90},
+    "shelf_count": 5,
+    "first_shelf_top": 20,
+    "shelf_thickness": 3,
+    "post_width": 8,
+    "base_thickness": 8,
+    "lip_height": 4,
+    "lip_thickness": 2,
+    "calibration_plate_thickness": 14.4,
+    "calibration_plate_support_top": 20
+  },
+  "notes": [
+    "Overall rack, shelf tray and calibration plate dimensions are user supplied. Shelf trays and calibration plate are both 3.5 x 5.5 in.",
+    "Vertical spacing is confirmed top-to-top pitch, not clear opening. Placement offsets are confirmed nearest-edge gaps.",
+    "Corrected by user: plate is on the arm's LEFT when facing the rack. Left means rack-local -X; toward arm means rack-local -Y. Lateral edge gap remains 5.5 in.",
+    "Horizontal calibration plate means its long edge follows rack width in the top view.",
+    "Absolute rack-to-robot pose, plate thickness/support height, shelf count/first height, structural thicknesses and jaw geometry remain estimates."
+  ]
+}

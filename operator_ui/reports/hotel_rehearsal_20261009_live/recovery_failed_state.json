@@ -1,0 +1,120 @@
+﻿{
+    "camera":  {
+                   "age_s":  0.6,
+                   "device":  {
+                                  "ip":  "192.168.201.89",
+                                  "model":  "JHEM600GM-HM",
+                                  "serial":  "457108625727"
+                              },
+                   "enabled":  true,
+                   "error":  "",
+                   "open":  true
+               },
+    "envelope":  {
+                     "X":  {
+                               "max":  450.0,
+                               "min":  200.0
+                           },
+                     "Y":  {
+                               "max":  100.0,
+                               "min":  -250.0
+                           },
+                     "Z":  {
+                               "max":  400.0,
+                               "min":  70.0
+                           },
+                     "enabled":  true
+                 },
+    "robot":  {
+                  "connected":  true,
+                  "control_mode":  {
+                                       "mode":  "auto",
+                                       "value":  1
+                                   },
+                  "enabled":  false,
+                  "endpoint":  "192.168.201.220:56788",
+                  "errors":  [
+                                 {
+                                     "errCode":  3873,
+                                     "errMsg":  "2026-10-09 13:42:13 Motion error: axis 4 collision detected"
+                                 },
+                                 {
+                                     "errCode":  3873,
+                                     "errMsg":  "2026-10-09 13:42:13 Motion error: axis 4 collision detected"
+                                 },
+                                 {
+                                     "errCode":  3960,
+                                     "errMsg":  "2026-10-09 13:42:13 Motion error: failed to enable axis 2 servo"
+                                 },
+                                 {
+                                     "errCode":  3960,
+                                     "errMsg":  "2026-10-09 13:42:13 Motion error: failed to enable axis 3 servo"
+                                 },
+                                 {
+                                     "errCode":  3960,
+                                     "errMsg":  "2026-10-09 13:42:13 Motion error: failed to enable axis 4 servo"
+                                 },
+                                 {
+                                     "errCode":  3929,
+                                     "errMsg":  "2026-10-09 13:42:13 Motion error: external axis 1 servo enable failed"
+                                 },
+                                 {
+                                     "errCode":  3929,
+                                     "errMsg":  "2026-10-09 13:42:13 Motion error: external axis 2 servo enable failed"
+                                 }
+                             ],
+                  "joints":  {
+                                 "J1":  291.38702369898925,
+                                 "J2":  57.43293540213275,
+                                 "J3":  44.78193922039116,
+                                 "J4":  -102.00712940762823
+                             },
+                  "lua_app_initialized":  true,
+                  "ok":  true,
+                  "pose_mm":  {
+                                  "Rx":  0.0,
+                                  "Ry":  0.0,
+                                  "Rz":  0.208,
+                                  "X":  275.973,
+                                  "Y":  -26.92,
+                                  "Z":  329.986
+                              },
+                  "program_state":  {
+                                        "state":  "stopped",
+                                        "value":  0
+                                    },
+                  "system_state":  {
+                                       "state":  "error",
+                                       "value":  3
+                                   }
+              },
+    "sequence":  {
+                     "active":  false,
+                     "name":  "camera_agent",
+                     "state":  "error"
+                 },
+    "target":  {
+                   "alignment_requires_preflight":  true,
+                   "big_r":  189.95,
+                   "calibrated_at":  1789977133.0475883,
+                   "config":  "Wide",
+                   "converged":  true,
+                   "found_at":  "00:52:13",
+                   "rz":  92.0471,
+                   "source":  "fast_disk",
+                   "x":  317.584,
+                   "y":  -69.60650000000001,
+                   "z":  61.4475,
+                   "z_calibrated":  70.44749999999999,
+                   "z_detail":  {
+                                    "samples":  [
+                                                    61.611,
+                                                    61.284
+                                                ],
+                                    "spread":  0.3269999999999982,
+                                    "touch_offset":  9.0,
+                                    "vision_z":  61.4475
+                                }
+               },
+    "ts":  1791578882.0895326
+}

@@ -1,0 +1,341 @@
+{
+  "note": "Read-only candidate conversion, NOT commissioned or executable. Assumes identical joint coordinates and uses one live TCP-Z minus J1 observation. Shelf/tool vertical registration remains unverified.",
+  "observed_tcp_z_minus_j1_mm": 38.599362957540166,
+  "scene_reference": {
+    "zOffset": 0,
+    "wristOffset": 0
+  },
+  "rack": {
+    "height_mm": 400,
+    "shelf_width_mm": 90,
+    "shelf_depth_mm": 140,
+    "shelf_pitch_mm": 90,
+    "shelf_count": 5,
+    "first_shelf_top_mm": 20,
+    "shelf_thickness_mm": 3,
+    "lip_height_mm": 4,
+    "lip_thickness_mm": 2,
+    "post_width_mm": 8,
+    "base_thickness_mm": 8,
+    "front_notch_width_mm": 30,
+    "front_notch_depth_mm": 18,
+    "center_hole_radius_mm": 15,
+    "notes": "Height, shelf width/depth and spacing supplied by user. Spacing interpreted as top-to-top pitch. Five shelves, first shelf height, thicknesses, lips, posts, cutouts and base footprint are estimates from photo. Shelf coordinates are rack-local, Z-up, entry from -Y. Not commissioned collision geometry.",
+    "x": 580,
+    "y": -120,
+    "z": 0,
+    "rz": -90,
+    "shelf": 2
+  },
+  "waypoints": [
+    {
+      "phase": "ready",
+      "duration_s": 1.5,
+      "simulation_claw_mm": [
+        350,
+        -180,
+        75
+      ],
+      "e1_mm": 28,
+      "candidate_controller_tcp_mm": {
+        "X": 158.4,
+        "Y": -185.43,
+        "Z": 113.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        75,
+        -18.161962411910533,
+        56.14628383446435,
+        -37.98432142255382
+      ],
+      "envelope_violations": [
+        "X"
+      ]
+    },
+    {
+      "phase": "approach",
+      "duration_s": 4,
+      "simulation_claw_mm": [
+        350,
+        -180,
+        41
+      ],
+      "e1_mm": 28,
+      "candidate_controller_tcp_mm": {
+        "X": 158.4,
+        "Y": -185.43,
+        "Z": 79.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        41,
+        -18.161962411910533,
+        56.14628383446435,
+        -37.98432142255382
+      ],
+      "envelope_violations": [
+        "X"
+      ]
+    },
+    {
+      "phase": "grasp",
+      "duration_s": 2,
+      "simulation_claw_mm": [
+        350,
+        -180,
+        41
+      ],
+      "e1_mm": 18,
+      "candidate_controller_tcp_mm": {
+        "X": 158.4,
+        "Y": -185.43,
+        "Z": 79.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        41,
+        -18.161962411910533,
+        56.14628383446435,
+        -37.98432142255382
+      ],
+      "envelope_violations": [
+        "X"
+      ]
+    },
+    {
+      "phase": "lift",
+      "duration_s": 8,
+      "simulation_claw_mm": [
+        350,
+        -180,
+        145
+      ],
+      "e1_mm": 18,
+      "candidate_controller_tcp_mm": {
+        "X": 158.4,
+        "Y": -185.43,
+        "Z": 183.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        145,
+        -18.161962411910533,
+        56.14628383446435,
+        -37.98432142255382
+      ],
+      "envelope_violations": [
+        "X"
+      ]
+    },
+    {
+      "phase": "approach rack",
+      "duration_s": 9,
+      "simulation_claw_mm": [
+        475,
+        -120,
+        145
+      ],
+      "e1_mm": 18,
+      "candidate_controller_tcp_mm": {
+        "X": 283.4,
+        "Y": -125.43,
+        "Z": 183.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        145,
+        21.23973040796527,
+        60.41877370744349,
+        -81.65850411540876
+      ],
+      "envelope_violations": []
+    },
+    {
+      "phase": "align shelf 2",
+      "duration_s": 2,
+      "simulation_claw_mm": [
+        475,
+        -120,
+        145
+      ],
+      "e1_mm": 18,
+      "candidate_controller_tcp_mm": {
+        "X": 283.4,
+        "Y": -125.43,
+        "Z": 183.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        145,
+        21.23973040796527,
+        60.41877370744349,
+        -81.65850411540876
+      ],
+      "envelope_violations": []
+    },
+    {
+      "phase": "insert",
+      "duration_s": 9,
+      "simulation_claw_mm": [
+        580,
+        -120,
+        145
+      ],
+      "e1_mm": 18,
+      "candidate_controller_tcp_mm": {
+        "X": 388.4,
+        "Y": -125.43,
+        "Z": 183.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        145,
+        17.808402086990014,
+        93.28660127269504,
+        -111.09500335968505
+      ],
+      "envelope_violations": []
+    },
+    {
+      "phase": "lower to release",
+      "duration_s": 2,
+      "simulation_claw_mm": [
+        580,
+        -120,
+        140
+      ],
+      "e1_mm": 18,
+      "candidate_controller_tcp_mm": {
+        "X": 388.4,
+        "Y": -125.43,
+        "Z": 178.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        140,
+        17.808402086990014,
+        93.28660127269504,
+        -111.09500335968505
+      ],
+      "envelope_violations": []
+    },
+    {
+      "phase": "release",
+      "duration_s": 2,
+      "simulation_claw_mm": [
+        580,
+        -120,
+        140
+      ],
+      "e1_mm": 28,
+      "candidate_controller_tcp_mm": {
+        "X": 388.4,
+        "Y": -125.43,
+        "Z": 178.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        140,
+        17.808402086990014,
+        93.28660127269504,
+        -111.09500335968505
+      ],
+      "envelope_violations": []
+    },
+    {
+      "phase": "settle",
+      "duration_s": 2,
+      "simulation_claw_mm": [
+        580,
+        -120,
+        140
+      ],
+      "e1_mm": 28,
+      "candidate_controller_tcp_mm": {
+        "X": 388.4,
+        "Y": -125.43,
+        "Z": 178.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        140,
+        17.808402086990014,
+        93.28660127269504,
+        -111.09500335968505
+      ],
+      "envelope_violations": []
+    },
+    {
+      "phase": "withdraw",
+      "duration_s": 9,
+      "simulation_claw_mm": [
+        460,
+        -120,
+        140
+      ],
+      "e1_mm": 28,
+      "candidate_controller_tcp_mm": {
+        "X": 268.4,
+        "Y": -125.43,
+        "Z": 178.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        140,
+        20.30450461455123,
+        56.64194361621927,
+        -76.94644823077051
+      ],
+      "envelope_violations": []
+    },
+    {
+      "phase": "finished",
+      "duration_s": 3,
+      "simulation_claw_mm": [
+        460,
+        -120,
+        160
+      ],
+      "e1_mm": 28,
+      "candidate_controller_tcp_mm": {
+        "X": 268.4,
+        "Y": -125.43,
+        "Z": 198.59936295754017,
+        "Rz": 0
+      },
+      "joints_mm_deg": [
+        160,
+        20.30450461455123,
+        56.64194361621927,
+        -76.94644823077051
+      ],
+      "envelope_violations": []
+    }
+  ],
+  "execution_authorized_by_user": {
+    "empty_gripper": true,
+    "swept_area_clear": true,
+    "rack_unchanged": true,
+    "human_at_estop": true
+  },
+  "execution_performed": false,
+  "blockers": [
+    "Haiku client configured=false and robot_tools=[]; existing agent supports observation only.",
+    "Exact simulation start requires controller TCP X=158.4 mm, below current envelope X minimum 200 mm.",
+    "Simulation zOffset=0; observed physical TCP Z minus J1 is 38.5994 mm. Vertical registration to the real shelf and tool has not been commissioned.",
+    "No validated entry path from the current physical pose into this simulation trajectory."
+  ],
+  "live_pose_mm": {
+    "X": 291.412,
+    "Y": 16.055,
+    "Z": 279.833,
+    "Rz": 10.153
+  },
+  "live_controller": {
+    "mode": "manual",
+    "enabled": true,
+    "program": "paused",
+    "errors": []
+  }
+}

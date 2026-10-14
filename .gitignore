@@ -20,3 +20,34 @@ Vision_context/S4-VisionDemo/美国SVisionDemo/
 # Runtime logs
 Logs/
 *.log
+
+# Local Depth Anything checkout, weights, environment and captured datasets
+third_party/Depth-Anything-V2/
+.venv-depth/
+.venv-realsense/
+third_party/mjviser/
+tools/realsense/
+operator_ui/realsense_captures/
+models/depth_anything_v2/
+operator_ui/datasets/
+operator_ui/depth_runs/
+operator_ui/depth_baselines/
+Pick and Hold/Align/references/
+
+# Local simulation environments and generated runs
+.venv/
+mujoco_sim/runs/
+MUJOCO_LOG.TXT
+
+# Generated diagnostic captures and duplicate pre-refactor backup
+operator_ui/reports/pre_refactor_capture_backup_20260921/
+operator_ui/reports/**/*.png
+operator_ui/reports/**/*.jpg
+operator_ui/reports/**/*.jpeg
+operator_ui/reports/**/*.npz
+operator_ui/reports/**/*.npy
+
+# Local credentials
+.env
+.env.*
+!.env.example

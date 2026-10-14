@@ -20,12 +20,26 @@
    "rz": -91.033,
    "z_grip": 353.016,
    "saved_at": "22:00:55"
+  },
+  "Home": {
+   "x": 147.245,
+   "y": 0.553,
+   "rz": 6.794,
+   "z_grip": 291.895,
+   "saved_at": "21:25:29",
+   "joint_reference": {
+    "J1": 253.296,
+    "J2": 88.4441,
+    "J3": 6.0913,
+    "J4": -87.7412
+   },
+   "note": "Operator-defined Home; joint reference records elbow branch. Not controller homing or authorization for an unchecked return move."
   }
  },
  "roles": {
   "start": "tray",
   "end": "desk",
-  "home": "h"
+  "home": "Home"
  },
  "motion_order": "z,rz,xy"
 }

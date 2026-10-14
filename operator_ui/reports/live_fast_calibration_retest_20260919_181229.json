@@ -1,0 +1,190 @@
+{
+  "sequence": {
+    "active": false,
+    "detection_ts": 1789866749.411961,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Fast disk v4: vendor selftest ALL PASS; continue until confirmed convergence, operator stop or fault; no observation/time/travel caps",
+        "t": 0
+      },
+      {
+        "level": "warn",
+        "msg": "Long: CAMERA path blocked: path requires J4 -150.1 deg; automatic headroom is +/-150. Reposition manually",
+        "t": 0.4
+      },
+      {
+        "level": "info",
+        "msg": "Selected Wide: shortest checked camera route. Grasp is validated separately.",
+        "t": 0.4
+      },
+      {
+        "level": "info",
+        "msg": "View 1: Wide, XY 0.119 mm, yaw 0.073 deg, Z 0.161 mm; 0 moves, 0.5 s, 0.0 mm travel",
+        "t": 0.5
+      },
+      {
+        "level": "info",
+        "msg": "Converged; confirming with a second fresh stationary image",
+        "t": 0.5
+      },
+      {
+        "level": "info",
+        "msg": "View 2: Wide, XY 0.175 mm, yaw 0.055 deg, Z 0.161 mm; 0 moves, 0.9 s, 0.0 mm travel",
+        "t": 0.9
+      },
+      {
+        "level": "good",
+        "msg": "CALIBRATED: 2 views, 0 moves, 0.9 s. Review target, then Align separately. No descent or grip.",
+        "t": 0.9
+      }
+    ],
+    "name": "find_disk",
+    "result": {
+      "elapsed_s": 0.906,
+      "moves": 0,
+      "observations": 2,
+      "ok": true,
+      "target": {
+        "alignment_requires_preflight": true,
+        "big_r": 190.7,
+        "calibrated_at": 1789866749.4242682,
+        "config": "Wide",
+        "converged": true,
+        "found_at": "18:12:29",
+        "rz": 92.084,
+        "source": "fast_disk",
+        "x": 317.669,
+        "y": -69.7755,
+        "z": 62.715,
+        "z_calibrated": 71.715,
+        "z_detail": {
+          "samples": [
+            62.715,
+            62.715
+          ],
+          "spread": 0,
+          "touch_offset": 9,
+          "vision_z": 62.715
+        }
+      },
+      "travel_mm": 0,
+      "warnings": []
+    },
+    "state": "done",
+    "target": {
+      "alignment_requires_preflight": true,
+      "big_r": 190.7,
+      "calibrated_at": 1789866749.4242682,
+      "config": "Wide",
+      "converged": true,
+      "found_at": "18:12:29",
+      "rz": 92.084,
+      "source": "fast_disk",
+      "x": 317.669,
+      "y": -69.7755,
+      "z": 62.715,
+      "z_calibrated": 71.715,
+      "z_detail": {
+        "samples": [
+          62.715,
+          62.715
+        ],
+        "spread": 0,
+        "touch_offset": 9,
+        "vision_z": 62.715
+      }
+    }
+  },
+  "state": {
+    "camera": {
+      "age_s": 0.5,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450,
+        "min": 200
+      },
+      "Y": {
+        "max": 100,
+        "min": -250
+      },
+      "Z": {
+        "max": 400,
+        "min": 70
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "joints": {
+        "J1": 247.5470467676225,
+        "J2": 70.13444486065802,
+        "J3": 53.31798061016885,
+        "J4": -113.29541037624098
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0,
+        "Ry": 0,
+        "Rz": 10.157,
+        "X": 304.212,
+        "Y": 21.23,
+        "Z": 286.146
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "find_disk",
+      "state": "done"
+    },
+    "target": {
+      "alignment_requires_preflight": true,
+      "big_r": 190.7,
+      "calibrated_at": 1789866749.4242682,
+      "config": "Wide",
+      "converged": true,
+      "found_at": "18:12:29",
+      "rz": 92.084,
+      "source": "fast_disk",
+      "x": 317.669,
+      "y": -69.7755,
+      "z": 62.715,
+      "z_calibrated": 71.715,
+      "z_detail": {
+        "samples": [
+          62.715,
+          62.715
+        ],
+        "spread": 0,
+        "touch_offset": 9,
+        "vision_z": 62.715
+      }
+    },
+    "ts": 1789866786.3809934
+  }
+}

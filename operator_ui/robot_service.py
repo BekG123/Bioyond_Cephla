@@ -212,15 +212,9 @@ class RobotService:
     # --------------------------------------------------------------- queries
 
     def pose_mm(self) -> dict:
-        """Pose in mm/deg — the only units ever fed back into moves."""
-        raw = self.robot.get_cartesian_pose()
-        out = {}
-        for k, v in raw.items():
-            if k in ("X", "Y", "Z"):
-                out[k] = round(v * 1000.0, 3)
-            elif k in ("Rx", "Ry", "Rz"):
-                out[k] = round(math.degrees(v), 3)
-        return out
+        """Read the controller pose; unit conversion is documented with calibration."""
+        from pick_and_hold.Calibration.fast_disk import controller_pose_mm
+        return controller_pose_mm(self.robot.get_cartesian_pose())
 
     def status(self) -> dict:
         if not self.robot.connected:
@@ -250,23 +244,8 @@ class RobotService:
     # ---------------------------------------------------------------- guards
 
     def _preflight(self) -> Optional[str]:
-        if not self.robot.connected:
-            return "not connected — press Connect first"
-        errors = self.robot.get_robot_errors()
-        if errors:
-            return ("robot has active errors, refusing to move: "
-                    f"{errors} — resolve the cause, then Clear errors "
-                    "(operator-confirmed)")
-        if self.robot.get_ctrl_mode()["mode"] != "auto":
-            return "robot is in manual mode — switch to auto first"
-        if not self.robot.get_enable_status():
-            return "robot is disabled — Enable first (operator-confirmed)"
-        prog = self.robot.get_prog_state()
-        if prog["state"] != "running":
-            return f"Lua program is '{prog['state']}' — Start program first"
-        if not self.robot.get_lua_app_status():
-            return "Lua app reports uninitialized — wait or restart the program"
-        return None
+        from pick_and_hold.Calibration.fast_disk import controller_preflight
+        return controller_preflight(self.robot)
 
     def _check_envelope(self, x: float, y: float, z: float,
                         current_xy: Optional[tuple] = None) -> Optional[str]:
@@ -420,14 +399,9 @@ class RobotService:
                 if self.robot.connected:
                     v = self.robot.get_sys_var_i([0, 1, 4])
                     if v.get(0) == HOSTPOINT_DEVICE:
-                        self.robot.request(
-                            "setSysVarI",
-                            [{"index": i, "value": 0} for i in range(7)])
-                        return _fail(
-                            "the Lua program never consumed the job (trigger "
-                            "cleared, no motion). Publish main_hostpoint_trq"
-                            ".bin and restart the program.")
-                    note = " Trigger was consumed — the robot may be moving."
+                        note = " Device trigger is still present; this does not prove whether motion began. Registers left unchanged."
+                    else:
+                        note = " Trigger was consumed — the robot may be moving."
             except RobotError:
                 note = " Could not re-query state."
             return _fail(
@@ -549,8 +523,10 @@ class RobotService:
             if res.get("ok") and "recovered" not in res:
                 try:
                     res["pose_after"] = self.pose_mm()
-                except RobotError:
-                    return res    # verified next time state is queried
+                except RobotError as ex:
+                    res["ok"] = False
+                    res["error"] = f"arrival could not be verified: {ex}; inspect state before any retry"
+                    return res
                 bad = self._arrival_error(res["pose_after"], x, y, z, rz)
                 if bad:
                     res["ok"] = False

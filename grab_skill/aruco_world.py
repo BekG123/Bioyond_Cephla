@@ -17,6 +17,7 @@ Usage:
   py aruco_world.py solve IMG X Y Z RZ [size_mm]
 """
 import json
+import math
 import os
 import sys
 
@@ -170,24 +171,59 @@ def find_disk_rect(img_path, marker):
             "contour": best[1]}
 
 
-def calibrate_disk(img_path, x, y, z, rz, size_mm=SIZE_MM):
+def detect_sized(img_path, size_mm=None):
+    """Keep the camera fit intact; apply each sticker's actual metric size.
+
+    PnP translation scales linearly with square size; image corners and rotation
+    do not. Explicit size overrides the registry (legacy CLI support).
+    """
+    base = SIZE_MM if size_mm is None else float(size_mm)
+    if not math.isfinite(base) or base <= 0:
+        raise ValueError('marker size must be positive and finite')
+    markers = A.detect(img_path, base)
+    result = []
+    for marker in markers:
+        actual = float(CAL.get('marker_sizes_mm', {}).get(str(int(marker['id'])), base)) if size_mm is None else base
+        if not math.isfinite(actual) or actual <= 0:
+            raise ValueError('registered marker size must be positive and finite')
+        row = dict(marker)
+        row['cam_xyz_mm'] = [float(v)*actual/base for v in marker['cam_xyz_mm']]
+        row['marker_size_mm'] = actual
+        result.append(row)
+    return result
+
+
+def calibrate_disk(img_path, x, y, z, rz, size_mm=None, marker_id=None):
     """One-time per-ID calibration on a contrasting background: measure the
     marker AND the disk's edges; return the marker->disk-center offset in
     the MARKER frame, the disk yaw relative to the marker, and the true
     spans in mm. Save with save_disk_cal() — afterwards a single image of
     the marker on ANY background yields the correct grab."""
-    ms = A.detect(img_path, size_mm)
+    ms = detect_sized(img_path, size_mm)
+    if marker_id is not None:
+        ms = [m for m in ms if int(m['id']) == marker_id]
     if not ms:
         return {"ok": False, "error": "no marker detected"}
+    if len(ms) != 1:
+        return {'ok':False,'error':'Multiple markers detected; select one marker ID explicitly for calibration'}
     m = ms[0]
+    size_mm = m['marker_size_mm']
     rect = find_disk_rect(img_path, m)
     if rect is None:
         return {"ok": False, "error": "disk edges not found — increase the "
                 "background contrast (plain light/dark sheet under the "
                 "disk) and retry"}
     import cv2
+    image = cv2.imread(img_path)
+    if image is None:
+        return {"ok": False, "error": "calibration image unavailable"}
+    height, width = image.shape[:2]
+    if any(not (2 < px < width-3 and 2 < py < height-3) for px, py in rect["box"]):
+        return {"ok": False, "error": "plate outline clipped; calibration not saved"}
     K, dist, _ = A.intrinsics()
     H = float(m["cam_xyz_mm"][2])
+    if not 205 <= H <= 240:
+        return {"ok": False, "error": "camera distance outside commissioned 205-240 mm range"}
     pts = np.array([[m["center_px"]], [rect["center_px"]]], np.float32)
     n = cv2.undistortPoints(pts, K, dist).reshape(2, 2)
     # camera-frame mm at the marker plane (disk top == marker plane)
@@ -236,10 +272,16 @@ def save_disk_cal(marker_id: int, entry: dict, note: str = "") -> dict:
     return e
 
 
-def solve(img_path, x, y, z, rz, size_mm=SIZE_MM):
-    ms = A.detect(img_path, size_mm)
+def solve(img_path, x, y, z, rz, size_mm=None, marker_id=None):
+    ms = detect_sized(img_path, size_mm)
+    if marker_id is not None:
+        ms = [m for m in ms if int(m["id"]) == marker_id]
+        if len(ms) != 1:  # duplicate IDs / reflections are ambiguous
+            return {"detected": False, "reason": "requested marker missing or ambiguous"}
     if not ms:
         return {"detected": False}
+    if len(ms) != 1:
+        return {"detected": False, "reason": "multiple markers; select a unique marker ID"}
     m = ms[0]
     H = float(m["cam_xyz_mm"][2])
     # u_scale: parallax-scale correction (spread-test 2026-07-25 showed a
@@ -257,6 +299,7 @@ def solve(img_path, x, y, z, rz, size_mm=SIZE_MM):
     mz = z - CAM_Z_OFF - HSCALE * H
     out = {"detected": True, "id": m["id"], "center_px": m["center_px"],
            "side_px": m["side_px"], "H_mm": m["cam_xyz_mm"][2],
+           "marker_size_mm": m['marker_size_mm'],
            "marker_world": [round(float(mw[0]), 2), round(float(mw[1]), 2),
                             round(float(mz), 2)],
            "marker_yaw_deg": round(float(yaw), 2),
@@ -464,6 +507,6 @@ if __name__ == "__main__":
         print("usage: py aruco_world.py solve IMG X Y Z RZ [size_mm]",
               file=sys.stderr)
         sys.exit(2)
-    size = float(sys.argv[7]) if len(sys.argv) > 7 else SIZE_MM
+    size = float(sys.argv[7]) if len(sys.argv) > 7 else None
     r = solve(sys.argv[2], *[float(v) for v in sys.argv[3:7]], size_mm=size)
     print(json.dumps(r, indent=1))

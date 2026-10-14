@@ -29,11 +29,17 @@ Z_TOUCH = W.Z_TOUCH            # grip Z = marker Z + this (no safety margin)
 MARKER_SIZE_MM = W.SIZE_MM
 
 
-def solve(img_path: str, x: float, y: float, z: float, rz: float) -> dict:
+def reload_calibration():
+    """Reload the on-disk model and per-marker sizes before a new sequence."""
+    import importlib
+    importlib.reload(W)
+
+
+def solve(img_path: str, x: float, y: float, z: float, rz: float, marker_id=None) -> dict:
     """One anchor-free solve at the given pose (mm/deg). Returns the
     aruco_world dict: marker_world, marker_yaw_deg, grab_candidates
     (claw-arm-compensated TCP + wrist Rz, reach/feasibility), grip_z."""
-    return W.solve(img_path, x, y, z, rz)
+    return W.solve(img_path, x, y, z, rz, marker_id=marker_id)
 
 
 def view_center_world(x: float, y: float, rz: float, h_mm: float = None):
@@ -105,10 +111,10 @@ def save_wrist_rel(rel_deg: float) -> dict:
 
 
 def calibrate(img_path: str, x: float, y: float, z: float,
-              rz: float) -> dict:
+              rz: float, marker_id=None) -> dict:
     """Edge-detect the disk carrying the marker (contrast background) and
     measure the marker->disk relation; see aruco_world.calibrate_disk."""
-    return W.calibrate_disk(img_path, x, y, z, rz)
+    return W.calibrate_disk(img_path, x, y, z, rz, marker_id=marker_id)
 
 
 def save_disk(marker_id: int, entry: dict, note: str = "") -> dict:

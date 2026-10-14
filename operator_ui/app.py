@@ -28,10 +28,16 @@ sys.path.insert(0, HERE)
 
 import aruco  # noqa: E402
 import teach  # noqa: E402
+from autonomy import TransferError, validate_request, seq_transfer  # noqa: E402
 from camera_service import CameraService  # noqa: E402
+from realsense_service import register_realsense  # noqa: E402
 from robot_service import RobotService  # noqa: E402
+from pickup import PickupVerification  # noqa: E402
+from plate_agent import PlateAgent, AgentError, parse_request as parse_agent_request  # noqa: E402
+from pick_and_hold.Align.references import ICReferences, ICError  # noqa: E402
 from sequences import (  # noqa: E402
     Runner,
+    get_robot_params,
     seq_align,
     seq_calibrate_aruco,
     seq_calibrate_camera,
@@ -44,9 +50,13 @@ from sequences import (  # noqa: E402
 )
 
 app = Flask(__name__, static_folder="static")
+realsense = register_realsense(app)
 svc = RobotService()
 cam = CameraService()
 runner = Runner()
+pickup = PickupVerification()
+plate_agent = PlateAgent()
+ic_references = ICReferences()
 
 CAL_PATH = os.path.join(os.path.dirname(HERE), "grab_skill",
                         "calibration.json")
@@ -113,6 +123,40 @@ class TorqueRecorder:
 
 recorder = TorqueRecorder(svc)
 
+# Serialize mutating requests through dispatch. This closes the race between
+# a manual command being admitted and a new sequence acquiring ownership.
+_dispatch_lock = threading.RLock()
+
+
+@app.before_request
+def command_ownership():
+    if request.method != "POST":
+        return None
+    if request.path.startswith('/realsense/'):
+        return None  # Independent USB camera/viewer; no robot or GigE access.
+    if request.path == '/pickup/confirm':
+        return None  # Token-checked answer only; never commands hardware.
+    # Stop/disable must never queue behind a long synchronous manual move.
+    emergency = request.path in ("/seq/stop", "/disable", "/torque_rec/stop")
+    program_stop = request.path == "/program" and _body().get("action") in ("stop", "pause")
+    if emergency or program_stop:
+        pickup.invalidate()
+        if request.path == "/disable" or program_stop:
+            runner.request_stop()
+        return None
+    _dispatch_lock.acquire()
+    request.environ["bioyond.dispatch_locked"] = True
+    if runner.active:
+        return jsonify(ok=False, error="A sequence owns the robot/camera/configuration; stop it before changing controls"), 409
+    if request.path != '/seq/verify_pickup':
+        pickup.invalidate()
+
+
+@app.teardown_request
+def release_command_ownership(_error):
+    if request.environ.pop("bioyond.dispatch_locked", False):
+        _dispatch_lock.release()
+
 
 def _body() -> dict:
     return request.get_json(silent=True) or {}
@@ -133,7 +177,108 @@ def index():
     return send_from_directory(os.path.join(HERE, "static"), "index.html")
 
 
+# ----------------------------------------------------------- camera agent
+
+@app.get('/ic/state')
+def ic_state():
+    return jsonify(**ic_references.public(), active=runner.active and runner.name in ('ic_reference','ic_preview'))
+
+
+@app.post('/ic/reference/capture')
+def ic_capture_reference():
+    try:
+        options = ic_references.options(_body())
+        if recorder._run:
+            raise ICError('Stop torque recording before capturing an IC reference')
+        if not svc.status().get('connected'):
+            raise ICError('Connect the robot for read-only pose recording; this action does not move it')
+        return jsonify(runner.start('ic_reference', ic_references.capture, cam, svc.pose_mm, options))
+    except (ICError, ValueError, TypeError) as ex:
+        return jsonify(ok=False,error=str(ex)),400
+
+
+@app.post('/ic/reference/select')
+def ic_select_reference():
+    try:
+        return jsonify(ic_references.select(_body().get('id')))
+    except (ICError, OSError, ValueError, KeyError) as ex:
+        return jsonify(ok=False,error=str(ex)),400
+
+
+@app.post('/ic/preview')
+def ic_preview():
+    try:
+        identifier=_body().get('id')
+        ic_references.load(identifier)
+        if recorder._run:
+            raise ICError('Stop torque recording before IC preview')
+        if not svc.status().get('connected'):
+            raise ICError('Connect the robot for read-only pose recording')
+        return jsonify(runner.start('ic_preview',ic_references.preview,cam,svc.pose_mm,identifier))
+    except (ICError,OSError,ValueError,KeyError) as ex:
+        return jsonify(ok=False,error=str(ex)),400
+
+
+@app.get('/ic/image')
+def ic_image():
+    try:
+        if request.args.get('kind')=='preview':
+            path=ic_references.preview_path
+            if path is None: raise ICError('No IC preview yet')
+        else:
+            meta,_=ic_references.load(request.args.get('id'))
+            path=ic_references.folder(meta['id'])/'reference_preview.jpg'
+        response=send_from_directory(str(path.parent),path.name)
+        response.headers['Cache-Control']='no-store'
+        return response
+    except (ICError,OSError,ValueError,KeyError) as ex:
+        return jsonify(ok=False,error=str(ex)),404
+
+@app.get('/agent/state')
+def agent_state():
+    response = jsonify(**plate_agent.public(), active=runner.active and runner.name == 'camera_agent')
+    response.headers['Cache-Control'] = 'no-store'
+    return response
+
+
+@app.post('/agent/settings')
+def agent_settings():
+    try:
+        plate_agent.client.set_key(_body().get('api_key', ''))
+        return jsonify(ok=True, configured=plate_agent.client.ready())
+    except AgentError as ex:
+        return jsonify(ok=False, error=str(ex)), 400
+
+
+@app.post('/agent/run')
+def agent_run():
+    try:
+        config = parse_agent_request(_body())
+        if config['mode'] == 'analyze' and not plate_agent.client.ready():
+            raise AgentError('Add the vision API key in Camera agent settings')
+        if recorder._run:
+            raise AgentError('Stop torque recording before running the camera agent')
+    except AgentError as ex:
+        return jsonify(ok=False, error=str(ex)), 400
+    return jsonify(runner.start('camera_agent', plate_agent.execute,
+                                cam, svc.status, config))
+
+
+@app.get('/agent/image')
+def agent_image():
+    path = plate_agent.depth_path if request.args.get('kind') == 'depth' else plate_agent.image_path
+    if not path:
+        return jsonify(error='No agent image yet'), 404
+    response = send_from_directory(os.path.dirname(path), os.path.basename(path))
+    response.headers['Cache-Control'] = 'no-store'
+    return response
+
+
 # ----------------------------------------------------------------- camera
+
+@app.get('/agent/training')
+def agent_training():
+    return send_from_directory(HERE, 'DEPTH_TRAINING.md', mimetype='text/plain')
 
 @app.get("/frame")
 def frame():
@@ -193,6 +338,12 @@ def state():
 @app.get("/seq")
 def seq():
     return jsonify(runner.snapshot())
+
+@app.get("/robot_params")
+def robot_params():
+    """Kinematic constants (link lengths, base offset) for the 3D View tab
+    to draw the arm and mirror the server's planar IK client-side."""
+    return jsonify(get_robot_params())
 
 @app.get("/teach_view")
 def teach_view():
@@ -604,21 +755,86 @@ def torque_threshold_set():
 
 # -------------------------------------------------------------- sequences
 
+@app.get("/transfer/config")
+def transfer_config():
+    return jsonify(ok=True, markers=aruco.W.CAL.get("marker_offsets", {}),
+                   model_stamps=aruco.model_stamps(),
+                   marker_size_mm=aruco.MARKER_SIZE_MM,
+                   note="One supervised cycle, starting with the marker centered in the eye camera. Destination is TCP, not plate center.")
+
+
+@app.post("/seq/transfer")
+def transfer_start():
+    try:
+        config = validate_request(_body())
+    except TransferError as ex:
+        return jsonify(ok=False, error=str(ex)), 400
+    if recorder._run:
+        return jsonify(ok=False, error="Stop torque recording before automatic transfer"), 409
+    return jsonify(runner.start("aruco_transfer", seq_transfer, svc, cam,
+                                aruco, config, get_robot_params()))
+
+
+@app.post("/seq/transfer_preview")
+def transfer_preview():
+    try:
+        config = validate_request(_body(), preview=True)
+    except TransferError as ex:
+        return jsonify(ok=False, error=str(ex)), 400
+    if recorder._run:
+        return jsonify(ok=False, error="Stop torque recording before preview"), 409
+    return jsonify(runner.start("aruco_transfer_preview", seq_transfer, svc,
+                                cam, aruco, config, get_robot_params()))
+
 @app.post("/seq/find_disk")
+@app.post("/seq/find_disk_original")
+def seq_find_original():
+    from sequences_original import seq_find_disk as original_find_disk
+    body = _body()
+    if any(body.get(key) is not True for key in ("confirm", "cell_clear", "empty_gripper")):
+        return jsonify(ok=False, error="Confirm E-stop supervision, clear swept volume and empty gripper before original two-circle calibration"), 400
+    if recorder._run:
+        return jsonify(ok=False, error="Stop torque recording before calibration"), 409
+    return jsonify(runner.start("find_disk", original_find_disk, svc, cam, teach))
+
+
+@app.post("/seq/find_disk_fast")
 def seq_find():
+    body = _body()
+    if any(body.get(key) is not True for key in ("confirm", "cell_clear", "empty_gripper")):
+        return jsonify(ok=False, error="Confirm supervision at E-stop, clear camera-motion "
+                       "swept volume, and an empty gripper before Fast calibrate disk"), 400
     return jsonify(runner.start("find_disk", seq_find_disk, svc, cam, teach))
+
+
+@app.post("/seq/preview_plate_edges")
+def preview_plate_edges():
+    from edge_center import preview
+    return jsonify(runner.start('preview_plate_edges',preview,cam))
+
+
+@app.post("/seq/center_plate_edges")
+def center_plate_edges():
+    from edge_center import center, validate_request as validate_edges
+    try:
+        config=validate_edges(_body())
+    except TransferError as ex:
+        return jsonify(ok=False,error=str(ex)),400
+    if recorder._run:
+        return jsonify(ok=False,error='Stop torque recording before centering'),409
+    return jsonify(runner.start('center_plate_edges',center,svc,cam,get_robot_params(),config))
 
 
 @app.post("/seq/find_aruco")
 def seq_find_aruco_route():
     return jsonify(runner.start("find_aruco", seq_find_aruco, svc, cam,
-                                aruco))
+                                aruco, _body().get("marker_id")))
 
 
 @app.post("/seq/calibrate_aruco")
 def seq_calibrate_aruco_route():
     return jsonify(runner.start("calibrate_aruco", seq_calibrate_aruco,
-                                svc, cam, aruco))
+                                svc, cam, aruco, _body().get("marker_id")))
 
 
 @app.post("/seq/calibrate_camera")
@@ -780,6 +996,39 @@ def seq_grip_route():
 @app.post("/seq/stop")
 def seq_stop():
     return jsonify(runner.request_stop())
+
+
+@app.post('/seq/verify_pickup')
+def verify_pickup_route():
+    b=_body()
+    if b.get('operator_confirmed') is not True or b.get('cell_clear') is not True:
+        return jsonify(ok=False,error='Explicit supervised lift approval required'),400
+    previous=dict(runner.result or {}) if runner.name=='grip' else None
+    return jsonify(runner.start('verify_pickup',pickup.run,svc,cam,aruco,b,previous,get_robot_params()))
+
+
+@app.get('/pickup/state')
+def pickup_state():
+    response=jsonify(pickup.public());response.headers['Cache-Control']='no-store';return response
+
+
+@app.post('/pickup/confirm')
+def pickup_confirm():
+    try:
+        pickup.confirm(_body().get('token'),_body().get('confirmed'))
+        return jsonify(ok=True)
+    except TransferError as ex:
+        return jsonify(ok=False,error=str(ex)),400
+
+
+@app.get('/pickup/image/<which>')
+def pickup_image(which):
+    state=pickup.public()
+    if which not in ('before','after') or state.get('phase')!='awaiting_visual':
+        return jsonify(ok=False,error='No pending pickup image'),404
+    path=state[which]['image']
+    response=send_from_directory(os.path.dirname(path),os.path.basename(path))
+    response.headers['Cache-Control']='no-store';return response
 
 @app.post("/target")
 def set_target():
