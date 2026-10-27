@@ -1934,56 +1934,6 @@ def seq_workflow(run: Runner, svc, points: dict, params: dict) -> dict:
 
 
 def seq_grip(run: Runner, svc, params: dict) -> dict:
-    refusal = svc._preflight()
-    if refusal:
-        return _abort(run, refusal)
-    threshold = float(params.get("threshold", -100.0))
-    start = float(params.get("start", 28.0))
-    floor = float(params.get("floor", 1.0))
-    step = float(params.get("step", 0.1))
-    coarse = float(params.get("coarse_step", 0.5))
-    fine_from = float(params.get("fine_from", 8.0))
-    if step <= 0 or start <= floor:
-        return _abort(run, "need step > 0 and start > floor")
-
-    run.say(f"grip: open to {start}, close in {coarse}/{step} steps until "
-            f"torque <= {threshold} (floor {floor})")
-    g = svc.move_gripper(start)
-    if not g.get("ok"):
-        return _abort(run, f"open failed — {g.get('error')}")
-    target = start
-    steps = 0
-    while target - step >= floor - 1e-9:
-        if run.stopped():
-            run.say("stopped — gripper left where it is", "warn")
-            return {"ok": False, "stopped": True}
-        if coarse > step and target - coarse > max(fine_from, floor):
-            target = round(target - coarse, 3)
-        else:
-            target = round(target - step, 3)
-        g = svc.move_gripper(target)
-        if not g.get("ok"):
-            return _abort(run, f"close step to {target} failed — "
-                               f"{g.get('error')}")
-        gr = g.get("gripper", {})
-        steps += 1
-        if steps % 10 == 0 or gr.get("e1_torque", 999) <= threshold:
-            run.say(f"E1 cmd {target:6.2f}  pos {gr.get('e1_position')}  "
-                    f"torque {gr.get('e1_torque')}")
-        if gr.get("e1_torque", 999) <= threshold:
-            detected = (gr.get("position_error", 0) > 0.15
-                        and gr.get("e1_torque", 0) < -100)
-            run.say(f"TORQUE CROSSING at cmd {target}: pos "
-                    f"{gr.get('e1_position')}, torque {gr.get('e1_torque')}"
-                    f" — grip_detected={detected}",
-                    "good" if detected else "warn")
-            if not detected:
-                run.say("torque crossed but no position stall — verify "
-                        "visually before lifting", "warn")
-            return {"ok": True, "gripped": True, "grip": gr,
-                    "stopped_at_command": target}
-    run.say(f"floor {floor} reached with no torque crossing — nothing "
-            "between the plates. Reopening.", "err")
-    svc.move_gripper(start)
-    return {"ok": False, "gripped": False,
-            "error": "no object detected between the plates"}
+    """Legacy entry point; closing implementation was removed."""
+    from pick_and_hold.Grip.motion import seq_grip as unavailable
+    return unavailable(run, svc, params)

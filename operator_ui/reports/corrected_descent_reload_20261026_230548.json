@@ -1,0 +1,666 @@
+﻿{
+    "arm_and_plate_supported_confirmation":  false,
+    "sequence":  {
+                     "active":  false,
+                     "detection_ts":  0.0,
+                     "log":  [
+                                 {
+                                     "level":  "good",
+                                     "msg":  "Transferred observation height reached and checked; XY must be rechecked before alignment.",
+                                     "t":  10.2
+                                 }
+                             ],
+                     "name":  "projected_height_pilot",
+                     "result":  {
+                                    "absolute_depth_verified":  false,
+                                    "after":  {
+                                                  "depth_estimated":  false,
+                                                  "grasp_target_created":  false,
+                                                  "purpose":  "Real-plate relative scale measurement only",
+                                                  "tracking":  {
+                                                                   "H_preview_from_reference_preview":  [
+                                                                                                            [
+                                                                                                                0.9076652973231609,
+                                                                                                                0.002734590625332215,
+                                                                                                                177.9592288086369
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                0.000968632834813981,
+                                                                                                                0.9090991008652214,
+                                                                                                                49.483601693429684
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                0.0,
+                                                                                                                0.0,
+                                                                                                                1.0
+                                                                                                            ]
+                                                                                                        ],
+                                                                   "anchor_sha256":  "ac9288192e08a1f0eb35bf607f1adb7cd5f10108c6e84d5c5459a151b6b67a45",
+                                                                   "coordinate_frame":  "preview_image_pixels",
+                                                                   "corners_px":  [
+                                                                                      [
+                                                                                          383.7606201171875,
+                                                                                          241.41539001464844
+                                                                                      ],
+                                                                                      [
+                                                                                          1125.811767578125,
+                                                                                          230.3853302001953
+                                                                                      ],
+                                                                                      [
+                                                                                          1133.3809814453125,
+                                                                                          714.9449462890625
+                                                                                      ],
+                                                                                      [
+                                                                                          388.01702880859375,
+                                                                                          723.79150390625
+                                                                                      ]
+                                                                                  ],
+                                                                   "disk_group_spread_px":  0.3176532906504212,
+                                                                   "extent_group_spread_px":  0.85321491939123,
+                                                                   "group_homographies":  [
+                                                                                              [
+                                                                                                  [
+                                                                                                      0.9073958724167484,
+                                                                                                      0.00417736291690368,
+                                                                                                      177.37383993791408
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0.0017777803690650906,
+                                                                                                      0.9079219464833508,
+                                                                                                      49.42982527406365
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0.0,
+                                                                                                      0.0,
+                                                                                                      1.0
+                                                                                                  ]
+                                                                                              ],
+                                                                                              [
+                                                                                                  [
+                                                                                                      0.9076652973231609,
+                                                                                                      0.002734590625332215,
+                                                                                                      177.9592288086369
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0.000968632834813981,
+                                                                                                      0.9090991008652214,
+                                                                                                      49.483601693429684
+                                                                                                  ],
+                                                                                                  [
+                                                                                                      0.0,
+                                                                                                      0.0,
+                                                                                                      1.0
+                                                                                                  ]
+                                                                                              ]
+                                                                                          ],
+                                                                   "image_size_px":  [
+                                                                                         1200,
+                                                                                         800
+                                                                                     ],
+                                                                   "initialization":  {
+                                                                                          "accepted_pose":  false,
+                                                                                          "method":  "previous_verified_initialization"
+                                                                                      },
+                                                                   "metric_pose_estimated":  false,
+                                                                   "motion_authorized":  false,
+                                                                   "orientation_resolved":  false,
+                                                                   "original_disk_mapping_validated":  false,
+                                                                   "pattern_correlations":  [
+                                                                                                0.8367591890754835,
+                                                                                                0.8510757089381401
+                                                                                            ],
+                                                                   "reference_frame":  "frozen_same_plate_anchor",
+                                                                   "reference_updates":  0,
+                                                                   "status":  "tracking",
+                                                                   "supported_wells":  47,
+                                                                   "total_wells":  48,
+                                                                   "tracking_mode":  "experimental_grid_pattern",
+                                                                   "well_correlations":  [
+                                                                                             0.8130236364229753,
+                                                                                             0.6795396960846593,
+                                                                                             0.5962296333081402,
+                                                                                             0.6913155234063604,
+                                                                                             0.7558931500699917,
+                                                                                             0.8216299077569363,
+                                                                                             0.7395415020151602,
+                                                                                             0.9069034027539875,
+                                                                                             0.7294809342112433,
+                                                                                             0.7740078370750729,
+                                                                                             0.7244750080314407,
+                                                                                             0.7678939690500602,
+                                                                                             0.7778880612471575,
+                                                                                             0.8158124302805769,
+                                                                                             0.8472434788595783,
+                                                                                             0.8827779947465424,
+                                                                                             0.8278794689653434,
+                                                                                             0.7814105439290729,
+                                                                                             0.8433821341017583,
+                                                                                             0.7515131001351885,
+                                                                                             0.78153502929197,
+                                                                                             0.8487528449874608,
+                                                                                             0.8832169200209115,
+                                                                                             0.9002166882447067,
+                                                                                             0.8037910188957654,
+                                                                                             0.741805118996295,
+                                                                                             0.8355260081374041,
+                                                                                             0.7373821409781921,
+                                                                                             0.8603965635846204,
+                                                                                             0.8541895149117064,
+                                                                                             0.8486684815547763,
+                                                                                             0.8962554368133947,
+                                                                                             0.7339046744752556,
+                                                                                             0.7887796744984749,
+                                                                                             0.8153758800219257,
+                                                                                             0.8780645539648317,
+                                                                                             0.8073146523580921,
+                                                                                             0.7428781574490199,
+                                                                                             0.860225618051139,
+                                                                                             0.8646263555053119,
+                                                                                             0.8308873395277249,
+                                                                                             0.6898621404657992,
+                                                                                             0.7248610481043084,
+                                                                                             0.7593025673466763,
+                                                                                             0.7742547487056827,
+                                                                                             0.8629914229906348,
+                                                                                             0.730398515528588,
+                                                                                             0.8706055681625932
+                                                                                         ]
+                                                               }
+                                              },
+                                    "before":  {
+                                                   "depth_estimated":  false,
+                                                   "grasp_target_created":  false,
+                                                   "purpose":  "Real-plate relative scale measurement only",
+                                                   "tracking":  {
+                                                                    "H_preview_from_reference_preview":  [
+                                                                                                             [
+                                                                                                                 0.9077358049278463,
+                                                                                                                 0.0027475288583219295,
+                                                                                                                 177.90596128101743
+                                                                                                             ],
+                                                                                                             [
+                                                                                                                 0.0010076918969908072,
+                                                                                                                 0.9091681519901934,
+                                                                                                                 49.42061083594029
+                                                                                                             ],
+                                                                                                             [
+                                                                                                                 0.0,
+                                                                                                                 0.0,
+                                                                                                                 1.0
+                                                                                                             ]
+                                                                                                         ],
+                                                                    "anchor_sha256":  "ac9288192e08a1f0eb35bf607f1adb7cd5f10108c6e84d5c5459a151b6b67a45",
+                                                                    "coordinate_frame":  "preview_image_pixels",
+                                                                    "corners_px":  [
+                                                                                       [
+                                                                                           383.7260437011719,
+                                                                                           241.37579345703125
+                                                                                       ],
+                                                                                       [
+                                                                                           1125.8345947265625,
+                                                                                           230.37677001953125
+                                                                                       ],
+                                                                                       [
+                                                                                           1133.4112548828125,
+                                                                                           714.9734497070312
+                                                                                       ],
+                                                                                       [
+                                                                                           387.9895324707031,
+                                                                                           723.7886352539062
+                                                                                       ]
+                                                                                   ],
+                                                                    "disk_group_spread_px":  0.3227878385431,
+                                                                    "extent_group_spread_px":  0.8667416333999274,
+                                                                    "group_homographies":  [
+                                                                                               [
+                                                                                                   [
+                                                                                                       0.9074315155168767,
+                                                                                                       0.004155079285454325,
+                                                                                                       177.35178507937047
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0.0018326367330117948,
+                                                                                                       0.9079547840422503,
+                                                                                                       49.372923928056
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0.0,
+                                                                                                       0.0,
+                                                                                                       1.0
+                                                                                                   ]
+                                                                                               ],
+                                                                                               [
+                                                                                                   [
+                                                                                                       0.9077358049278463,
+                                                                                                       0.0027475288583219295,
+                                                                                                       177.90596128101743
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0.0010076918969908072,
+                                                                                                       0.9091681519901934,
+                                                                                                       49.42061083594029
+                                                                                                   ],
+                                                                                                   [
+                                                                                                       0.0,
+                                                                                                       0.0,
+                                                                                                       1.0
+                                                                                                   ]
+                                                                                               ]
+                                                                                           ],
+                                                                    "image_size_px":  [
+                                                                                          1200,
+                                                                                          800
+                                                                                      ],
+                                                                    "initialization":  {
+                                                                                           "accepted_pose":  false,
+                                                                                           "method":  "previous_verified_initialization"
+                                                                                       },
+                                                                    "metric_pose_estimated":  false,
+                                                                    "motion_authorized":  false,
+                                                                    "orientation_resolved":  false,
+                                                                    "original_disk_mapping_validated":  false,
+                                                                    "pattern_correlations":  [
+                                                                                                 0.8368119160963138,
+                                                                                                 0.8510420777618153
+                                                                                             ],
+                                                                    "reference_frame":  "frozen_same_plate_anchor",
+                                                                    "reference_updates":  0,
+                                                                    "status":  "tracking",
+                                                                    "supported_wells":  47,
+                                                                    "total_wells":  48,
+                                                                    "tracking_mode":  "experimental_grid_pattern",
+                                                                    "well_correlations":  [
+                                                                                              0.8138097024386436,
+                                                                                              0.6779657950941745,
+                                                                                              0.5952646485683495,
+                                                                                              0.6913752428326105,
+                                                                                              0.7558207814863264,
+                                                                                              0.8227981703744126,
+                                                                                              0.7392816485351205,
+                                                                                              0.9073298211009512,
+                                                                                              0.727915569427754,
+                                                                                              0.7733827297889091,
+                                                                                              0.7247800315703451,
+                                                                                              0.768882158259674,
+                                                                                              0.77816262195104,
+                                                                                              0.8155516867008321,
+                                                                                              0.8463394981737803,
+                                                                                              0.8826118723465132,
+                                                                                              0.8268929172293827,
+                                                                                              0.7818926802852861,
+                                                                                              0.8420820180728591,
+                                                                                              0.7508772163899554,
+                                                                                              0.7829864041929455,
+                                                                                              0.8489155506281754,
+                                                                                              0.8836218534881964,
+                                                                                              0.9005631767797915,
+                                                                                              0.8026776415757032,
+                                                                                              0.7427633719911725,
+                                                                                              0.8364213512431242,
+                                                                                              0.737139488065142,
+                                                                                              0.8606940781751505,
+                                                                                              0.8543518480497329,
+                                                                                              0.8494577606000963,
+                                                                                              0.8955046124254387,
+                                                                                              0.7347445132718521,
+                                                                                              0.7880976898302822,
+                                                                                              0.8155139322539635,
+                                                                                              0.8788669166238565,
+                                                                                              0.8066778875365381,
+                                                                                              0.74203222523436,
+                                                                                              0.8592143708562329,
+                                                                                              0.8644222978512537,
+                                                                                              0.8304895297932193,
+                                                                                              0.6880015642426577,
+                                                                                              0.724430370089869,
+                                                                                              0.758408149348655,
+                                                                                              0.7745093988396242,
+                                                                                              0.8621082006781364,
+                                                                                              0.7303902069046038,
+                                                                                              0.8715458494431517
+                                                                                          ]
+                                                                }
+                                               },
+                                    "calibration_complete":  false,
+                                    "final_pose":  {
+                                                       "Rx":  0.0,
+                                                       "Ry":  0.0,
+                                                       "Rz":  -3.889,
+                                                       "X":  280.3,
+                                                       "Y":  29.255,
+                                                       "Z":  289.129
+                                                   },
+                                    "grasp_target_created":  false,
+                                    "height_reference_reached":  true,
+                                    "log_file":  "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\projected_height_pilot\\20261026_230306_864789bf.jsonl",
+                                    "motion_requested":  false,
+                                    "ok":  true,
+                                    "original_disk_mapping_validated":  false,
+                                    "pilot_verified":  false,
+                                    "reference":  {
+                                                      "current_plate_height_mm":  20.0,
+                                                      "height_model_sha256":  "d2dd9c46e512e602bcbe064418fd03b697e68b371d7d6cf085c138e814a27810",
+                                                      "method":  "Transferred physical observation-height reference, same bottom support; not independent optical depth.",
+                                                      "original_plate_height_mm":  15.0,
+                                                      "source_log":  "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\calibration\\20261024_211431_04c13f94.jsonl",
+                                                      "source_sha256":  "f71e66f3073149a3eeaccd0a2d47656e959e8d4aba588d3580bdb9fa87e28031",
+                                                      "source_z":  284.129,
+                                                      "target_z":  289.129
+                                                  },
+                                    "scale_response":  null,
+                                    "start":  {
+                                                  "Rx":  0.0,
+                                                  "Ry":  0.0,
+                                                  "Rz":  -3.889,
+                                                  "X":  280.3,
+                                                  "Y":  29.255,
+                                                  "Z":  289.129
+                                              }
+                                },
+                     "state":  "done",
+                     "target":  null
+                 },
+    "researcher":  {
+                       "busy":  false,
+                       "camera":  "Camera connected",
+                       "camera_note":  "Camera images are not needed for station capture. Depth tools are in Developer view.",
+                       "capabilities":  {
+                                            "capture":  true,
+                                            "connect":  false,
+                                            "pause":  false,
+                                            "record":  false,
+                                            "run":  false,
+                                            "stop":  false
+                                        },
+                       "checked_at":  1793081145.5180252,
+                       "connected":  true,
+                       "descent":  {
+                                       "active":  false,
+                                       "blocker":  "Run Align before Descend.",
+                                       "can_start":  false,
+                                       "message":  "Descend adjusts the claws above the plate, opens them, then lowers to the taught position."
+                                   },
+                       "draft":  {
+                                     "capture_kind":  "positions_and_observed_actions",
+                                     "complete":  false,
+                                     "created_at":  "2026-10-17T00:38:28.681194+00:00",
+                                     "executable":  false,
+                                     "id":  "f4e29ac5d3e1453ebfe2a9c86b145cd7",
+                                     "name":  "Home to Hamilton",
+                                     "next_station":  "Descend",
+                                     "reviewed":  false,
+                                     "revision":  175,
+                                     "saved_at":  null,
+                                     "waypoints":  [
+                                                       {
+                                                           "captured_at":  "2026-10-17T00:38:31.068256+00:00",
+                                                           "kind":  "position",
+                                                           "label":  "Home",
+                                                           "station":  "Home"
+                                                       },
+                                                       {
+                                                           "captured_at":  "2026-10-25T04:15:31.549728+00:00",
+                                                           "kind":  "executed_algorithm",
+                                                           "label":  "Calibrate",
+                                                           "station":  "Calibrate"
+                                                       },
+                                                       {
+                                                           "captured_at":  "2026-10-25T04:16:14.443653+00:00",
+                                                           "kind":  "executed_algorithm",
+                                                           "label":  "Align",
+                                                           "station":  "Align"
+                                                       }
+                                                   ],
+                                     "workflow":  [
+                                                      "Home",
+                                                      "Calibrate",
+                                                      "Align",
+                                                      "Descend",
+                                                      "Grip",
+                                                      "Hamilton"
+                                                  ]
+                                 },
+                       "grip":  {
+                                    "active":  false,
+                                    "blocker":  "Complete Descent before Grip.",
+                                    "can_start":  false,
+                                    "descent_id":  null,
+                                    "force_control":  false,
+                                    "grasp_verified":  false,
+                                    "increment_phases_mm":  [
+                                                                1,
+                                                                0.2,
+                                                                0.1
+                                                            ],
+                                    "message":  "After Descent, close to the configured setting and inspect before lifting.",
+                                    "method":  "staged_reference_position",
+                                    "speed":  5,
+                                    "supervised_validation":  true,
+                                    "target_e1_mm":  3.7
+                                },
+                       "hand_claw":  {
+                                         "active":  false,
+                                         "blocker":  "",
+                                         "can_open":  true,
+                                         "message":  "Uses the same gripper command as Developer Open.",
+                                         "needs_prepare":  false
+                                     },
+                       "hand_guiding":  {
+                                            "active":  false,
+                                            "blocked":  false,
+                                            "can_end":  false,
+                                            "can_start":  true,
+                                            "message":  "Ready. Start will stop the idle controller program, then enable hand-guiding. Keep the arm supported.",
+                                            "state":  "off"
+                                        },
+                       "home":  {
+                                    "active":  false,
+                                    "area_target_id":  null,
+                                    "at_home":  false,
+                                    "blocker":  "",
+                                    "can_go_to_area":  false,
+                                    "can_start":  true,
+                                    "message":  "Return to your saved Home position.",
+                                    "target_id":  "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                                    "translation_speed":  137
+                                },
+                       "imitation":  {
+                                         "active":  false,
+                                         "blocker":  "A reviewed Descend/Grip reference is needed. Complete manual teaching, then review it in Developer view.",
+                                         "can_descend":  false,
+                                         "can_grip":  false,
+                                         "configured":  true,
+                                         "grip_unavailable":  true,
+                                         "message":  "Ready to check the saved reference.",
+                                         "reference_id":  null,
+                                         "stage":  "idle"
+                                     },
+                       "issues":  [
+                                      "Full routine playback is not available yet. Separate taught Descend and Grip actions are in Run."
+                                  ],
+                       "latest_hamilton":  {
+                                               "active":  false,
+                                               "blocker":  "Move to the recorded Home-area or Hamilton endpoint first. No connecting move is added.",
+                                               "can_start":  false,
+                                               "direction":  null,
+                                               "message":  "Latest tested route: Home-area ↔ Hamilton.",
+                                               "path_id":  "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+                                               "progress":  0,
+                                               "speed":  137
+                                           },
+                       "ok":  true,
+                       "pickup_plan":  {
+                                           "active":  false,
+                                           "configured":  true,
+                                           "message":  "Ask Haiku to interpret the recorded pickup.",
+                                           "stage":  "idle"
+                                       },
+                       "plate_workflow":  {
+                                              "active":  false,
+                                              "can_align":  false,
+                                              "can_calibrate":  true,
+                                              "can_stop":  false,
+                                              "guidance":  null,
+                                              "message":  "Run calibration and alignment separately. Record Descend and Grip after performing them manually.",
+                                              "setup_message":  "Calibrate is available again. Run it to create a fresh target for Align.",
+                                              "step":  null
+                                          },
+                       "recorded_return":  {
+                                               "active":  false,
+                                               "blocker":  "The selected path must start at X276.03, Y79.94, Z166.41, Rz1.98. Position and joint configuration must match; no approach movement is added.",
+                                               "can_start":  false,
+                                               "direction":  "to_hamilton",
+                                               "executor":  "stepwise",
+                                               "message":  "Replay the taught Hamilton return to its demonstrated endpoint.",
+                                               "path_id":  "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                                               "progress":  0,
+                                               "queue":  {
+                                                             "available":  true,
+                                                             "max_speed_mm_s":  137,
+                                                             "message":  "Controller queue available. Groups nearby taught points into longer movements.",
+                                                             "state":  0,
+                                                             "submitted":  0,
+                                                             "version":  220108
+                                                         }
+                                           },
+                       "robot":  "Robot connected",
+                       "routines":  [
+                                        {
+                                            "capture_kind":  "positions_and_observed_actions",
+                                            "complete":  true,
+                                            "created_at":  "2026-10-16T17:39:01.042814+00:00",
+                                            "executable":  false,
+                                            "id":  "820cc19904d449cca2a8994990cc197a",
+                                            "name":  "Home to Hamilton",
+                                            "next_station":  null,
+                                            "reviewed":  true,
+                                            "revision":  7,
+                                            "saved_at":  "2026-10-16T17:48:50.848550+00:00",
+                                            "waypoints":  [
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:40:28.046236+00:00",
+                                                                  "kind":  "position",
+                                                                  "label":  "Home",
+                                                                  "station":  "Home"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:41:25.392613+00:00",
+                                                                  "kind":  "executed_algorithm",
+                                                                  "label":  "Calibrate",
+                                                                  "station":  "Calibrate"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:42:31.519559+00:00",
+                                                                  "kind":  "executed_algorithm",
+                                                                  "label":  "Align",
+                                                                  "station":  "Align"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:42:56.888387+00:00",
+                                                                  "kind":  "manual_action",
+                                                                  "label":  "Descend",
+                                                                  "station":  "Descend"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:47:15.739275+00:00",
+                                                                  "kind":  "manual_action",
+                                                                  "label":  "Grip",
+                                                                  "station":  "Grip"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:48:46.659428+00:00",
+                                                                  "kind":  "position",
+                                                                  "label":  "Hamilton",
+                                                                  "station":  "Hamilton"
+                                                              }
+                                                          ],
+                                            "workflow":  [
+                                                             "Home",
+                                                             "Calibrate",
+                                                             "Align",
+                                                             "Descend",
+                                                             "Grip",
+                                                             "Hamilton"
+                                                         ]
+                                        }
+                                    ]
+                   },
+    "state":  {
+                  "camera":  {
+                                 "age_s":  1.5,
+                                 "device":  {
+                                                "ip":  "192.168.201.89",
+                                                "model":  "JHEM600GM-HM",
+                                                "serial":  "457108625727"
+                                            },
+                                 "enabled":  true,
+                                 "error":  "",
+                                 "open":  true
+                             },
+                  "envelope":  {
+                                   "X":  {
+                                             "max":  450.0,
+                                             "min":  200.0
+                                         },
+                                   "Y":  {
+                                             "max":  380.0,
+                                             "min":  -250.0
+                                         },
+                                   "Z":  {
+                                             "max":  400.0,
+                                             "min":  70.0
+                                         },
+                                   "enabled":  true
+                               },
+                  "robot":  {
+                                "connected":  true,
+                                "control_mode":  {
+                                                     "mode":  "auto",
+                                                     "value":  1
+                                                 },
+                                "enabled":  true,
+                                "endpoint":  "192.168.201.220:56788",
+                                "errors":  [
+
+                                           ],
+                                "external_axes":  {
+                                                      "E1":  0.022476397134596482
+                                                  },
+                                "external_axes_source":  "native_motion_status",
+                                "external_axes_units":  {
+                                                            "E1":  "mm"
+                                                        },
+                                "joints":  {
+                                               "J1":  250.5300213642329,
+                                               "J2":  77.61795829009287,
+                                               "J3":  46.235551249999574,
+                                               "J4":  -127.74249949582169
+                                           },
+                                "lua_app_initialized":  true,
+                                "ok":  true,
+                                "pose_mm":  {
+                                                "Rx":  0.0,
+                                                "Ry":  0.0,
+                                                "Rz":  -3.889,
+                                                "X":  280.3,
+                                                "Y":  29.255,
+                                                "Z":  289.129
+                                            },
+                                "program_state":  {
+                                                      "state":  "running",
+                                                      "value":  1
+                                                  },
+                                "system_state":  {
+                                                     "state":  "running",
+                                                     "value":  2
+                                                 }
+                            },
+                  "sequence":  {
+                                   "active":  false,
+                                   "name":  "projected_height_pilot",
+                                   "state":  "done"
+                               },
+                  "target":  null,
+                  "ts":  1793081145.4544916
+              }
+}

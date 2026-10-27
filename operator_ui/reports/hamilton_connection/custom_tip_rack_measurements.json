@@ -1,0 +1,40 @@
+{
+  "status": "measurement_draft_not_controller_labware",
+  "controller_modified": false,
+  "motion_authorized_for_this_file": false,
+  "description": "Operator-reported custom Hamilton tips in Biotix box; proposed geometry for evaluation only.",
+  "reported_tip_reference": "235903, custom clear/white version per operator; custom drawing unavailable",
+  "rack_brand": "Biotix",
+  "observed_deck_site": 3,
+  "measurements_mm": {
+    "tip_opening_above_visible_metal_deck": 70.0,
+    "tip_opening_height_precision": "Approximate; tape photograph with perspective, adopted by operator",
+    "reported_nozzle_insertion_depth": 7.0,
+    "insertion_depth_source": "Operator physical measurement; controller reference point not established",
+    "pitch_x": 9.0,
+    "pitch_y": 9.0,
+    "first_tip_from_left_edge": 11.7,
+    "first_tip_from_back_edge": 9.8,
+    "reported_rack_width": 122.4,
+    "reported_rack_depth": 82.6,
+    "earlier_reported_rack_height": 20.0,
+    "earlier_height_status": "Not established as complete assembled box height; do not use as total height"
+  },
+  "installed_reference": {
+    "labware_id": 273,
+    "name": "235903",
+    "display_name": "300 uL Framed Conductive Filtered",
+    "vision_labware_height_mm": 63.0,
+    "vision_height_is_not_verified_pickup_z": true,
+    "export_file": "hamilton_235903_definition.zip",
+    "rack_document": "235903-v1.json",
+    "tip_document": "T1t300FbebleHAM-v1.json"
+  },
+  "unresolved": [
+    "Transform between visible metal deck surface, site alignment, rack origin, tip origin and channel pickup reference",
+    "Custom tip equivalence to standard 235903 geometry and coupling",
+    "Full box collision envelope including lid and actual support",
+    "Documented creation or teaching workflow for a separate custom Prep labware definition"
+  ],
+  "not_an_executable_configuration": true
+}

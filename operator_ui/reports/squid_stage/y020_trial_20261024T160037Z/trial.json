@@ -1,0 +1,209 @@
+{
+  "status": "passed_stage_only",
+  "target_mm": {
+    "x_mm": 0.05,
+    "y_mm": 0.2,
+    "z_mm": 1.05
+  },
+  "tolerance_mm": 0.02,
+  "authorization": "Approve Y0.200 mm trial\u2014stage clear, E-stop supervised",
+  "robot_transfer_authorized": false,
+  "events": [
+    {
+      "at": 1792857637.4998255,
+      "event": "no_current_sites",
+      "reason": "Select the wells or imaging locations in Squid first.",
+      "existing_history_preserved": true
+    },
+    {
+      "at": 1792857637.5022135,
+      "event": "preflight_passed",
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.697872394695878
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.4211879334902,
+          "J2": 84.87684236708007,
+          "J3": 52.05604823491838,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "stage": {
+        "x_mm": 0.05000625,
+        "y_mm": 0.10556875,
+        "z_mm": 1.05
+      },
+      "acquisition": {
+        "in_progress": false,
+        "status": "idle",
+        "base_path": "C:\\Users\\Cephla\\Downloads",
+        "cleanup": {
+          "version": 1,
+          "status": "idle",
+          "experiment_id": null,
+          "error": ""
+        }
+      }
+    },
+    {
+      "at": 1792857637.6894362,
+      "event": "command_requested",
+      "command": "return_to_recorded_dropoff",
+      "reference_hash": "b3a9c9ba513f8868e3153eb1c2c1cde931492ae878d972098eea6700ff2771eb"
+    },
+    {
+      "at": 1792857641.3651783,
+      "event": "command_result",
+      "result": {
+        "at_dropoff": true,
+        "position": {
+          "x_mm": 0.05000625,
+          "y_mm": 0.200025,
+          "z_mm": 1.05
+        }
+      }
+    },
+    {
+      "at": 1792857641.3672028,
+      "event": "arrival_readback",
+      "measured": {
+        "x_mm": 0.05000625,
+        "y_mm": 0.200025,
+        "z_mm": 1.05
+      },
+      "error_mm": {
+        "x_mm": 6.249999999999312e-06,
+        "y_mm": 2.4999999999997247e-05,
+        "z_mm": 0.0
+      }
+    },
+    {
+      "at": 1792857641.6797526,
+      "event": "arrival_readback",
+      "measured": {
+        "x_mm": 0.05000625,
+        "y_mm": 0.200025,
+        "z_mm": 1.05
+      },
+      "error_mm": {
+        "x_mm": 6.249999999999312e-06,
+        "y_mm": 2.4999999999997247e-05,
+        "z_mm": 0.0
+      }
+    },
+    {
+      "at": 1792857641.9834304,
+      "event": "arrival_readback",
+      "measured": {
+        "x_mm": 0.05000625,
+        "y_mm": 0.200025,
+        "z_mm": 1.05
+      },
+      "error_mm": {
+        "x_mm": 6.249999999999312e-06,
+        "y_mm": 2.4999999999997247e-05,
+        "z_mm": 0.0
+      }
+    },
+    {
+      "at": 1792857642.4325118,
+      "event": "trial_passed",
+      "robot_remained_home": true
+    },
+    {
+      "at": 1792857642.4349287,
+      "event": "original_reference_restored",
+      "new_reference_acceptance_pending": true
+    }
+  ],
+  "measurements": [
+    {
+      "x_mm": 0.05000625,
+      "y_mm": 0.200025,
+      "z_mm": 1.05
+    },
+    {
+      "x_mm": 0.05000625,
+      "y_mm": 0.200025,
+      "z_mm": 1.05
+    },
+    {
+      "x_mm": 0.05000625,
+      "y_mm": 0.200025,
+      "z_mm": 1.05
+    }
+  ],
+  "final_robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 3.697872394695878
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 209.4211879334902,
+      "J2": 84.87686575379037,
+      "J3": 52.05575074968141,
+      "J4": -140.81300299826242
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": -3.88,
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02
+    },
+    "program_state": {
+      "state": "running",
+      "value": 1
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "accepted_for_robot_loading": false
+}

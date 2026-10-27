@@ -1,0 +1,14 @@
+{
+  "source": "Passive observation of operator touchscreen run; recorder sent GET requests and subscribed to events only",
+  "capture_started_mid_run": true,
+  "procedure_at_attachment": "MlPrepHeightAndSqueezeCalibration",
+  "observed_terminal_state": "Idle after Aborted event",
+  "channel_result": {
+    "id": 1011,
+    "status": "Fail",
+    "message": "The provided Z position would exceed the travel limits"
+  },
+  "conclusion": "A channel-calibration failure was observed while the touchscreen owned the procedure. This does not identify the physical cause or establish that all earlier Lacry failures had the same cause.",
+  "coverage": "Events, error dialogs, status/result changes, and overlapping MNE/MLP/RCE trace windows. Historical traces are also included; filter by their native timestamps. No continuous measured-axis telemetry is available in this recording.",
+  "recorder_note": "Recorder later stopped on a Windows snapshot replacement lock after the instrument had returned Idle. The recording preserves the failure and abort. Snapshot publishing was subsequently changed to tolerate transient sharing locks."
+}

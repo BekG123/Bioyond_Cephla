@@ -1,0 +1,180 @@
+{
+  "status": "failed_or_uncertain",
+  "started_at": 1792495807.3834174,
+  "before": {
+    "camera": {
+      "age_s": 50.4,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": -0.014374633792613167
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 0.5339318646878258,
+        "J2": -55.63855815376214,
+        "J3": 133.05830341100284,
+        "J4": -79.29913204488372
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -1.879,
+        "X": 195.321,
+        "Y": -360.297,
+        "Z": 39.133
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "",
+      "state": "idle"
+    },
+    "target": null,
+    "ts": 1792495807.2904162
+  },
+  "route": {
+    "parent_sha256": "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+    "endpoint_reference": {
+      "schema": "cephla.hamilton-endpoint.v1",
+      "parent_sha256": "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+      "pose": {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      },
+      "requested_j1_mm": 0.0,
+      "reference_z_minus_j1_mm": 38.60109389686886,
+      "expected_j1_mm": 0.008906103131139709,
+      "source": "Operator requested J1=0.00 on 2026-10-20; saved Home measurement supplies conservative Z/J1 offset.",
+      "quantization": "Ceil zero-height to queue resolution 0.01 mm so predicted J1 remains nonnegative.",
+      "clearance_feedback": "Operator checked the lower Z36.925 placement; revised endpoint is 1.685 mm above that placement.",
+      "automatic_trial_completed": false
+    },
+    "reverse": [
+      {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    ],
+    "forward": [
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      }
+    ],
+    "old_home_area": {
+      "X": 276.03,
+      "Y": 79.94,
+      "Z": 166.41,
+      "Rz": 1.98
+    },
+    "physical_clearance_verified": false,
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    }
+  },
+  "authorization": "Operator: Removed plate, gripper empty, path clear, E-stop confirmed. Earlier confirmed arm released and both directions clear.",
+  "speed": 137,
+  "empty_gripper": true,
+  "phases": [],
+  "operator_acceptance": null,
+  "error": "'actions'",
+  "finished_at": 1792495807.3848188
+}

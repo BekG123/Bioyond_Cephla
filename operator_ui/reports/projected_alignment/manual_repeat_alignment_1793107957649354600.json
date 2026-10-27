@@ -1,0 +1,503 @@
+{
+  "profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+  "events": [
+    {
+      "at": 1793107957.6493545,
+      "event": "start",
+      "state": {
+        "camera": {
+          "age_s": 0.6,
+          "device": {
+            "ip": "192.168.201.89",
+            "model": "JHEM600GM-HM",
+            "serial": "457108625727"
+          },
+          "enabled": true,
+          "error": "",
+          "open": true
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.010612162441248074
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 250.5300213642329,
+            "J2": 76.87082305608506,
+            "J3": 45.76978853064144,
+            "J4": -126.52053353708402
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "projected_disk_pilot",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1793107957.6412778
+      }
+    },
+    {
+      "at": 1793107957.6583128,
+      "event": "sequence_requested",
+      "endpoint": "/seq/projected_alignment",
+      "body": {
+        "confirm": true,
+        "cell_clear": true,
+        "empty_gripper": true,
+        "expected_start": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 279.303,
+          "Y": 26.358,
+          "Z": 289.129
+        },
+        "expected_target": {
+          "x": 306.018053853007,
+          "y": -73.30999317699343,
+          "rz": 89.79291542355736
+        }
+      }
+    },
+    {
+      "at": 1793107957.6654305,
+      "event": "sequence_started",
+      "response": {
+        "ok": true,
+        "started": "projected_alignment"
+      }
+    },
+    {
+      "at": 1793108011.9823923,
+      "event": "sequence_finished",
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Aligning above the 48-well plate; descent and grip remain idle.",
+            "t": 14.1
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 279.303 Y 26.358 Z 294.565",
+            "t": 14.1
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 294.5645, 'Rz': -3.88}",
+            "t": 16.1
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 279.303 Y 26.358 Z 300.000",
+            "t": 16.1
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': -3.88}",
+            "t": 18.0
+          },
+          {
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 19.538 at Z 300.000",
+            "t": 18.0
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': 19.53817872530392}",
+            "t": 19.2
+          },
+          {
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 42.956 at Z 300.000",
+            "t": 19.2
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': 42.95635745060783}",
+            "t": 20.4
+          },
+          {
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 66.375 at Z 300.000",
+            "t": 20.4
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': 66.37453617591176}",
+            "t": 21.6
+          },
+          {
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 89.793 at Z 300.000",
+            "t": 21.6
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 22.7
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 281.974 Y 16.392 Z 300.000",
+            "t": 22.7
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 281.97436245785735, 'Y': 16.391680651837184, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 25.8
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 284.646 Y 6.425 Z 300.000",
+            "t": 25.8
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 284.64572491571477, 'Y': 6.4253613036743715, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 28.9
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 287.317 Y -3.541 Z 300.000",
+            "t": 28.9
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 287.3170873735721, 'Y': -3.5409580444884448, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 32.0
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 289.988 Y -13.507 Z 300.000",
+            "t": 32.0
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 289.98844983142953, 'Y': -13.507277392651257, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 35.2
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 292.660 Y -23.474 Z 300.000",
+            "t": 35.2
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 292.6598122892869, 'Y': -23.47359674081407, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 38.4
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 295.331 Y -33.440 Z 300.000",
+            "t": 38.4
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 295.33117474714425, 'Y': -33.43991608897689, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 41.5
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 298.003 Y -43.406 Z 300.000",
+            "t": 41.5
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 298.00253720500166, 'Y': -43.4062354371397, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 44.6
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 300.674 Y -53.373 Z 300.000",
+            "t": 44.6
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 300.673899662859, 'Y': -53.37255478530251, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 47.7
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 303.345 Y -63.339 Z 300.000",
+            "t": 47.7
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 303.3452621207164, 'Y': -63.338874133465325, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 50.8
+          },
+          {
+            "level": "info",
+            "msg": "alignment MoveL to X 306.017 Y -73.305 Z 300.000",
+            "t": 50.8
+          },
+          {
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 306.0166245785738, 'Y': -73.30519348162814, 'Z': 300.0, 'Rz': 89.79271490121567}",
+            "t": 53.9
+          }
+        ],
+        "name": "projected_alignment",
+        "result": {
+          "alignment_pose_reached": true,
+          "descent_executed": false,
+          "full_calibration_complete": false,
+          "grasp_target_created": false,
+          "grip_executed": false,
+          "gripped": false,
+          "log_file": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\projected_alignment\\20261027_063237_51d0d03c.jsonl",
+          "ok": true,
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.793,
+            "X": 306.016,
+            "Y": -73.305,
+            "Z": 300.0
+          },
+          "route": {
+            "descent_authorized": false,
+            "grasp_target_created": false,
+            "hover_z": 300.0,
+            "target": {
+              "rz": 89.79271490121567,
+              "x": 306.0166245785738,
+              "y": -73.30519348162814
+            },
+            "translation_speed": 5,
+            "waypoints": [
+              {
+                "Rz": -3.88,
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 294.5645
+              },
+              {
+                "Rz": -3.88,
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0
+              },
+              {
+                "Rz": 19.53817872530392,
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0
+              },
+              {
+                "Rz": 42.95635745060783,
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0
+              },
+              {
+                "Rz": 66.37453617591176,
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 281.97436245785735,
+                "Y": 16.391680651837184,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 284.64572491571477,
+                "Y": 6.4253613036743715,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 287.3170873735721,
+                "Y": -3.5409580444884448,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 289.98844983142953,
+                "Y": -13.507277392651257,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 292.6598122892869,
+                "Y": -23.47359674081407,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 295.33117474714425,
+                "Y": -33.43991608897689,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 298.00253720500166,
+                "Y": -43.4062354371397,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 300.673899662859,
+                "Y": -53.37255478530251,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 303.3452621207164,
+                "Y": -63.338874133465325,
+                "Z": 300.0
+              },
+              {
+                "Rz": 89.79271490121567,
+                "X": 306.0166245785738,
+                "Y": -73.30519348162814,
+                "Z": 300.0
+              }
+            ],
+            "wrist_speed": 30
+          },
+          "visual_acceptance_pending": true
+        },
+        "state": "done",
+        "target": null
+      }
+    },
+    {
+      "at": 1793108012.0607872,
+      "event": "completed",
+      "state": {
+        "camera": {
+          "age_s": 0.2,
+          "device": {
+            "ip": "192.168.201.89",
+            "model": "JHEM600GM-HM",
+            "serial": "457108625727"
+          },
+          "enabled": true,
+          "error": "",
+          "open": true
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.010791923159558792
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40107607285375,
+            "J2": 38.770106714288424,
+            "J3": 58.14596768279142,
+            "J4": -7.123303045823032
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.793,
+            "X": 306.016,
+            "Y": -73.305,
+            "Z": 300.0
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "projected_alignment",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1793108012.0587904
+      }
+    }
+  ]
+}

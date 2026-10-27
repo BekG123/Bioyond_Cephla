@@ -1,0 +1,100 @@
+﻿{
+    "pending":  {
+                    "blockers":  [
+                                     "Automatic Hamilton door access is not commissioned. A supported door actuator or Hamilton-approved robot access arrangement is required for unattended plate transfers.",
+                                     "Hamilton unattended loaded handling is not commissioned. Saved travel and completed supervised handoffs are separate evidence; use the supervised pickup/drop-off routines.",
+                                     "Exactly 5 two-tip pickup/ejection pairs needs a commissioned exact-count method. The native pickup diagnostic has no pair-count parameter and can consume multiple pairs; repeating it is not equivalent.",
+                                     "Squid imaging state is unavailable or needs review: Connect to Squid to follow imaging progress."
+                                 ],
+                    "counts":  {
+                                   "complete_roundtrips":  0,
+                                   "imaging_runs":  1,
+                                   "tip_pairs":  5,
+                                   "tips":  10
+                               },
+                    "executable":  false,
+                    "id":  "c52e5b58cdf14c399be383d21ce07ed1",
+                    "labels":  [
+                                   "5 two-tip pairs, then one imaging run"
+                               ],
+                    "pickup_step_count":  0,
+                    "repetitions":  1,
+                    "requirements":  [
+                                         "This is a preview only; no partial sequence starts while any blocker remains.",
+                                         "The pair count covers the pickup/waste test only; calibration may consume additional tips.",
+                                         "A ready complete plan uses one confirmation; no confirmation between successful commissioned steps.",
+                                         "Verify tip inventory, waste capacity, plate support, the taught holder positions and actual door status."
+                                     ],
+                    "steps":  [
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Hamilton full calibration once: initialize, self-calibrate, calibrate channel height/squeeze"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Arm full calibration once: calibrate, pick up the plate, lift and return Home"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Deliver the plate from Home to Hamilton; release it and return Home empty"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Pair 1/5: pick up two tips at site 7, eject both to waste, and verify completion"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Pair 2/5: pick up two tips at site 7, eject both to waste, and verify completion"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Pair 3/5: pick up two tips at site 7, eject both to waste, and verify completion"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Pair 4/5: pick up two tips at site 7, eject both to waste, and verify completion"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Pair 5/5: pick up two tips at site 7, eject both to waste, and verify completion"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Retrieve the plate from Hamilton and return Home"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Prepare Squid loading position"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Deliver and release the plate at Squid; return Home empty"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Move Squid into the imaging area"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Start one Squid imaging run using current settings"
+                                  },
+                                  {
+                                      "kind":  "tip_experiment_preview",
+                                      "label":  "Wait at Home for that imaging run to finish; leave the plate at Squid"
+                                  }
+                              ],
+                    "summary":  "Calibrate Hamilton once. Calibrate the arm and pick up the plate once. Deliver the plate to Hamilton, perform exactly 5 two-tip pickup/ejection pairs (10 tips), then transfer via Home for one Squid imaging run using current settings. Leave the plate at Squid and the arm at Home."
+                },
+    "running":  {
+                    "active":  false,
+                    "done":  [
+
+                             ],
+                    "error":  "",
+                    "message":  "Nothing running.",
+                    "ok":  null,
+                    "step":  null
+                },
+    "last_reply":  "Calibrate Hamilton once. Calibrate the arm and pick up the plate once. Deliver the plate to Hamilton, perform exactly 5 two-tip pickup/ejection pairs (10 tips), then transfer via Home for one Squid imaging run using current settings. Leave the plate at Squid and the arm at Home.\nPreview only. Automatic Hamilton door access is not commissioned. A supported door actuator or Hamilton-approved robot access arrangement is required for unattended plate transfers. Hamilton unattended loaded handling is not commissioned. Saved travel and completed supervised handoffs are separate evidence; use the supervised pickup/drop-off routines. Exactly 5 two-tip pickup/ejection pairs needs a commissioned exact-count method. The native pickup diagnostic has no pair-count parameter and can consume multiple pairs; repeating it is not equivalent. Squid imaging state is unavailable or needs review: Connect to Squid to follow imaging progress.",
+    "hamilton_state":  "Idle"
+}

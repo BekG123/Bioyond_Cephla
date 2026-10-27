@@ -1,0 +1,259 @@
+{
+  "schema": "cephla.pickup-home-review.v1",
+  "created_at": "2026-10-20T08:21:34.708106+00:00",
+  "live_robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 3.8001565262675285
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 45.119030127836574,
+      "J2": 40.79939495387557,
+      "J3": 59.32995892595429,
+      "J4": -10.264156490121946
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.865,
+      "X": 312.575,
+      "Y": -66.2,
+      "Z": 83.718
+    },
+    "program_state": {
+      "state": "running",
+      "value": 1
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "start": {
+    "X": 312.575,
+    "Y": -66.2,
+    "Z": 83.718,
+    "Rz": 89.865
+  },
+  "home": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "source_home_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+  "stages": [
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 312.58,
+          "Y": -66.2,
+          "Z": 300.0,
+          "Rz": 89.87
+        }
+      ]
+    },
+    {
+      "kind": "rotate",
+      "rz": 66.42875
+    },
+    {
+      "kind": "rotate",
+      "rz": 42.9925
+    },
+    {
+      "kind": "rotate",
+      "rz": 19.556250000000006
+    },
+    {
+      "kind": "rotate",
+      "rz": -3.8799999999999955
+    },
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        }
+      ]
+    }
+  ],
+  "checked_waypoints": [
+    {
+      "kind": "queue",
+      "pose": {
+        "X": 312.58,
+        "Y": -66.2,
+        "Z": 300.0,
+        "Rz": 89.87
+      },
+      "expected_planar_joints": {
+        "J2": 40.79911821899349,
+        "J3": 59.33162105530366,
+        "J4": -10.26054188458925
+      }
+    },
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 312.58,
+        "Y": -66.2,
+        "Z": 300.0,
+        "Rz": 66.42875
+      },
+      "expected_planar_joints": {
+        "J2": 40.79911821899349,
+        "J3": 59.33162105530366,
+        "J4": -33.701791884589284
+      }
+    },
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 312.58,
+        "Y": -66.2,
+        "Z": 300.0,
+        "Rz": 42.9925
+      },
+      "expected_planar_joints": {
+        "J2": 40.79911821899349,
+        "J3": 59.33162105530366,
+        "J4": -57.13804188458929
+      }
+    },
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 312.58,
+        "Y": -66.2,
+        "Z": 300.0,
+        "Rz": 19.556250000000006
+      },
+      "expected_planar_joints": {
+        "J2": 40.79911821899349,
+        "J3": 59.33162105530366,
+        "J4": -80.57429188458929
+      }
+    },
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 312.58,
+        "Y": -66.2,
+        "Z": 300.0,
+        "Rz": -3.8799999999999955
+      },
+      "expected_planar_joints": {
+        "J2": 40.79911821899349,
+        "J3": 59.33162105530366,
+        "J4": -104.01054188458929
+      }
+    },
+    {
+      "kind": "queue",
+      "pose": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 300.0,
+        "Rz": -3.88
+      },
+      "expected_planar_joints": {
+        "J2": 84.87688206683333,
+        "J3": 52.05596109242012,
+        "J4": -140.81264576954558
+      }
+    },
+    {
+      "kind": "queue",
+      "pose": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      "expected_planar_joints": {
+        "J2": 84.87688206683333,
+        "J3": 52.05596109242012,
+        "J4": -140.81264576954558
+      }
+    }
+  ],
+  "translation_length_mm": 399.06100999288583,
+  "config": {
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "claw_gap_max_mm": 88.0,
+    "claw_gap_min_mm": 60.0,
+    "extension_margin_mm": 8.0,
+    "inner_reach_mm": 280.0,
+    "j2_margin_deg": 2.0,
+    "j2_min_deg": -95.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j4_hard_abs_deg": 220.0,
+    "j4_pref_abs_deg": 220.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "reach_hard_mm": 460.0
+  },
+  "envelope": {
+    "X": [
+      200.0,
+      450.0
+    ],
+    "Y": [
+      -250.0,
+      380.0
+    ],
+    "Z": [
+      70.0,
+      400.0
+    ]
+  },
+  "ik_and_envelope_passed": true,
+  "existing_empty_home_translation_speed": 137,
+  "existing_wrist_speed": 30,
+  "execution_authorized": false,
+  "physical_clearance_verified": false,
+  "payload": "Plate held at E1=3.8 mm. Operator accepted first 5 mm lift as level without slipping; second 5 mm lift completed. Operator requests Home transfer as third grip test.",
+  "completed_lift_trials": [
+    "../../demonstrations/supervised_grip/contact_3p8_proof_lift_plan_proof_lift.json",
+    "../../demonstrations/supervised_grip/contact_3p8_second_lift_plan_proof_lift.json"
+  ],
+  "operator_request": "As a final third test for our grip here, move to home with the plate still gripped",
+  "candidate_translation_speed": 10,
+  "candidate_wrist_speed": 5,
+  "preserve_gripper": true,
+  "allow_program_restart": false,
+  "blockers": [
+    "Confirm physical clearance for the loaded vertical departure, full wrist sweep at Z300, across-to-Home and final descent."
+  ],
+  "limits": [
+    "IK is a sampled kinematic check, not a collision or payload-retention test.",
+    "J1 is not predicted by the planar IK model; controller vertical travel is bounded by the Z envelope.",
+    "Existing 137 speed has not been commissioned for this loaded departure."
+  ]
+}

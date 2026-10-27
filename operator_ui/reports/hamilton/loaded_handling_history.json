@@ -1,0 +1,1814 @@
+{
+  "status": "recovered_supervised_history",
+  "automatic_acceptance": false,
+  "completed": {
+    "hamilton_dropoff": {
+      "action": "hamilton_dropoff",
+      "events": [
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 6364,
+          "line_sha256": "ee350afc3ae29e228f4d10ecaef6aa6782364d7198bb0d6e1498b80b13643756",
+          "event": {
+            "timestamp": "2026-10-20T12:17:25.740976+00:00",
+            "event": "lacry_plan_started",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "plan": {
+              "dispatch": "hamilton_handling",
+              "executable": true,
+              "prepare": false,
+              "actions": [
+                "hamilton_dropoff"
+              ],
+              "steps": [
+                {
+                  "kind": "travel",
+                  "label": "Travel from true Home to the taught Hamilton entrance",
+                  "start": {
+                    "X": 289.97,
+                    "Y": 62.63,
+                    "Z": 248.02,
+                    "Rx": 0.0,
+                    "Ry": 0.0,
+                    "Rz": -3.88
+                  },
+                  "joints": {
+                    "J1": 209.4211879334902,
+                    "J2": 84.87686575379037,
+                    "J3": 52.05594907317273,
+                    "J4": -140.8128286807219
+                  },
+                  "points": [
+                    {
+                      "X": 215.74,
+                      "Y": -249.0,
+                      "Z": 212.0,
+                      "Rz": -0.94
+                    },
+                    {
+                      "X": 195.88,
+                      "Y": -357.36,
+                      "Z": 212.0,
+                      "Rz": -1.9
+                    },
+                    {
+                      "X": 195.34,
+                      "Y": -360.31,
+                      "Z": 38.61,
+                      "Rz": -1.9
+                    }
+                  ],
+                  "profile": {
+                    "hamilton_home": true
+                  },
+                  "sources": {
+                    "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+                    "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+                    "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+                    "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+                    "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+                    "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                    "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                    "hamilton_true_home": "c42cfa8fa4e23fcbad6bf66d8e08c0c1388f7f757921e03d230b843a8c3f7c15"
+                  },
+                  "expected_e1": 3.7
+                },
+                {
+                  "kind": "hamilton_inspect",
+                  "label": "Check the plate at Hamilton",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32815999265434
+                  },
+                  "expected_e1": 3.7,
+                  "review_label": "Confirm the plate rests flat and fully supported at Hamilton, with the jaws clear to open."
+                },
+                {
+                  "kind": "hamilton_jaw",
+                  "label": "Leave the plate at Hamilton",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32815999265434
+                  },
+                  "expected_e1": 3.7,
+                  "target_e1": 5.0,
+                  "speed": 5
+                },
+                {
+                  "kind": "hamilton_lift",
+                  "label": "Lift the empty jaws clear",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32815999265434
+                  },
+                  "expected_e1": 5.0,
+                  "points": [
+                    {
+                      "X": 195.34,
+                      "Y": -360.31,
+                      "Z": 43.61,
+                      "Rz": -1.9
+                    }
+                  ],
+                  "speed": 5
+                },
+                {
+                  "kind": "hamilton_inspect",
+                  "label": "Check the Hamilton lift",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 43.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 5.011187933490177,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32815999265434
+                  },
+                  "expected_e1": 5.0,
+                  "review_label": "Confirm the plate remains flat in Hamilton and the empty jaws are clear for the return Home."
+                },
+                {
+                  "kind": "travel",
+                  "label": "Return directly from Hamilton to true Home",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 43.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 5.011187933490177,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32815999265434
+                  },
+                  "points": [
+                    {
+                      "X": 195.88,
+                      "Y": -357.36,
+                      "Z": 212.0,
+                      "Rz": -1.9
+                    },
+                    {
+                      "X": 215.74,
+                      "Y": -249.0,
+                      "Z": 212.0,
+                      "Rz": -0.94
+                    },
+                    {
+                      "X": 289.97,
+                      "Y": 62.63,
+                      "Z": 248.02,
+                      "Rz": -3.88
+                    }
+                  ],
+                  "profile": {
+                    "hamilton_home": true
+                  },
+                  "sources": {
+                    "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+                    "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+                    "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+                    "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+                    "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+                    "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                    "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                    "hamilton_true_home": "c42cfa8fa4e23fcbad6bf66d8e08c0c1388f7f757921e03d230b843a8c3f7c15"
+                  },
+                  "expected_e1": 5.0
+                }
+              ],
+              "start": {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rx": 0.0,
+                "Ry": 0.0,
+                "Rz": -3.88
+              },
+              "joints": {
+                "J1": 209.4211879334902,
+                "J2": 84.87686575379037,
+                "J3": 52.05594907317273,
+                "J4": -140.8128286807219
+              },
+              "e1": 3.6976926494389772,
+              "cfg": {
+                "reach_hard_mm": 460.0,
+                "j4_pref_abs_deg": 220.0,
+                "j4_hard_abs_deg": 220.0,
+                "inner_reach_mm": 280.0,
+                "claw_gap_min_mm": 60.0,
+                "claw_gap_max_mm": 88.0,
+                "base_x_mm": 126.0,
+                "base_y_mm": 0.0,
+                "link1_mm": 200.0,
+                "link2_mm": 200.0,
+                "j2_offset_deg": 0.0,
+                "j3_offset_deg": 180.0,
+                "j2_min_deg": -95.0,
+                "j2_margin_deg": 2.0,
+                "extension_margin_mm": 8.0
+              },
+              "envelope": {
+                "X": [
+                  200.0,
+                  450.0
+                ],
+                "Y": [
+                  -250.0,
+                  380.0
+                ],
+                "Z": [
+                  70.0,
+                  400.0
+                ]
+              },
+              "handling_evidence": {
+                "hamilton_endpoint": "34e06abd9dc3573f49a9e54038fd073541fb79f45a11f658c5879739951b42e0",
+                "empty_travel_trial": "a6763453e9bf4e6ad3c01c0aa73f85c0cb6e6b0867fff77bc609ce489d86dae8",
+                "local_handling": "supervised_trial_open5_close3.7_lift5_speed5_v1"
+              },
+              "camera_required": false,
+              "summary": "Drop off the plate at Hamilton.",
+              "supervised_trial": true,
+              "requirements": [
+                "The plate is securely held; the Hamilton holder is empty and ready to support it.",
+                "The Hamilton holder remains in its taught loading position; jaw clearance, 5 mm lift headroom and loaded return are clear.",
+                "Hands are clear, the arm is released, and the emergency stop is supervised.",
+                "The instrument is not started by this routine.",
+                "Hamilton local handling is a supervised trial: inspect arrival before jaw motion and inspect the lift before returning Home."
+              ],
+              "id": "2026-10-20T12:17:22.383109+00:00:1792498642383",
+              "at": 1792498642.3831093,
+              "source": "chat",
+              "labels": [
+                "Leave plate at Hamilton"
+              ],
+              "confirmation_source": "researcher_chat"
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 7951,
+          "line_sha256": "5fce20754b64ea7c913b4088676b7a2ad9505ddec8412411f4d81f1a457649a4",
+          "event": {
+            "timestamp": "2026-10-20T12:17:53.422098+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "label": "Travel from true Home to the taught Hamilton entrance",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "executor": "lua_queue",
+              "points": 3,
+              "zone": -1,
+              "endpoint": {
+                "X": 195.34,
+                "Y": -360.31,
+                "Z": 38.61,
+                "Rz": -1.9
+              },
+              "grouping": null
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 9992,
+          "line_sha256": "d9b6e2f5c2255f914133842d81c772a3161c57130a8e1ba42c6b8b6c372a5d90",
+          "event": {
+            "timestamp": "2026-10-20T12:18:31.580953+00:00",
+            "event": "station_handling_inspection_accepted",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "label": "Confirm the plate rests flat and fully supported at Hamilton, with the jaws clear to open."
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 9993,
+          "line_sha256": "8e9d1eda58c8c5fbcfd037222144e464afd09cb25eb0a0eeb5a05884d748d857",
+          "event": {
+            "timestamp": "2026-10-20T12:18:31.580953+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "label": "Check the plate at Hamilton",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "review_required": true,
+              "review_kind": "station_handling",
+              "review_label": "Confirm the plate rests flat and fully supported at Hamilton, with the jaws clear to open."
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 10155,
+          "line_sha256": "dfb8864d014c3c844e486d613d388cb0ff518ef1497acbf8b699357d603ab414",
+          "event": {
+            "timestamp": "2026-10-20T12:18:34.251511+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "label": "Leave the plate at Hamilton",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "gripper": {
+                "ok": true,
+                "completion_reply": {
+                  "index": 1,
+                  "value": 1
+                },
+                "commanded": {
+                  "e1": 5.0,
+                  "speed": 5
+                },
+                "gripper": {
+                  "e1_position": 4.994,
+                  "e1_torque": 117.601,
+                  "e1_torque_normalized": 0.441,
+                  "joints": {
+                    "J1": 406,
+                    "J2": -44,
+                    "J3": -50,
+                    "J4": -78
+                  },
+                  "telemetry_live": true,
+                  "position_error": -0.006,
+                  "grip_detected": false
+                }
+              },
+              "settled_report": {
+                "ok": true,
+                "e1_position": 5.001,
+                "e1_torque": 110.935,
+                "joints": {
+                  "J1": 399,
+                  "J2": -55,
+                  "J3": 185,
+                  "J4": -66
+                },
+                "telemetry_live": true
+              },
+              "grasp_verified": false
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 10614,
+          "line_sha256": "8f0b276fcd26d529f918d86f1b7af941bdf3b0549ed34319ca0b1d51c474500e",
+          "event": {
+            "timestamp": "2026-10-20T12:18:42.173353+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "label": "Lift the empty jaws clear",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "result": {
+                "ok": true,
+                "executor": "lua_queue",
+                "points": 1,
+                "zone": -1,
+                "endpoint": {
+                  "X": 195.34,
+                  "Y": -360.31,
+                  "Z": 43.61,
+                  "Rz": -1.9
+                },
+                "grouping": null
+              },
+              "pose_mm": {
+                "X": 195.337,
+                "Y": -360.309,
+                "Z": 43.612,
+                "Rx": 0.0,
+                "Ry": 0.0,
+                "Rz": -1.901
+              }
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 11100,
+          "line_sha256": "785ada779a3cc7351b180bc87fcc312cecef407749774d3d591ab8b9f889c6a9",
+          "event": {
+            "timestamp": "2026-10-20T12:18:51.351517+00:00",
+            "event": "station_handling_inspection_accepted",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "label": "Confirm the plate remains flat in Hamilton and the empty jaws are clear for the return Home."
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 11101,
+          "line_sha256": "3132c60871ae769de65fc325e24884dcdc1292366da32eb1d4c924e4ceb850aa",
+          "event": {
+            "timestamp": "2026-10-20T12:18:51.351517+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "label": "Check the Hamilton lift",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "review_required": true,
+              "review_kind": "station_handling",
+              "review_label": "Confirm the plate remains flat in Hamilton and the empty jaws are clear for the return Home."
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 12736,
+          "line_sha256": "7a1e5bcd0d308c7321d91dccfdf8cee7984a927d1cdecb85fc044a8fff6149ce",
+          "event": {
+            "timestamp": "2026-10-20T12:19:18.557456+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "label": "Return directly from Hamilton to true Home",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "executor": "lua_queue",
+              "points": 3,
+              "zone": -1,
+              "endpoint": {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rz": -3.88
+              },
+              "grouping": null
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 12737,
+          "line_sha256": "d8884dc124c04894fb4ebc31077c40b5ef5afd413e5cc334624a393e5284fe85",
+          "event": {
+            "timestamp": "2026-10-20T12:19:18.558449+00:00",
+            "event": "sequence_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "365b2dca45b8476a88f11689097c05f8",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "d7640e94944347848e1bd690345be291",
+              "view": "researcher"
+            },
+            "state": "done",
+            "result": {
+              "ok": true,
+              "done": [
+                "Travel from true Home to the taught Hamilton entrance",
+                "Check the plate at Hamilton",
+                "Leave the plate at Hamilton",
+                "Lift the empty jaws clear",
+                "Check the Hamilton lift",
+                "Return directly from Hamilton to true Home"
+              ]
+            },
+            "target": null
+          }
+        }
+      ]
+    },
+    "hamilton_retrieve": {
+      "action": "hamilton_retrieve",
+      "events": [
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 15961,
+          "line_sha256": "f1c4646839de6bea8399fa64dda77caf6acc8dacf591ba2327d33302520ea562",
+          "event": {
+            "timestamp": "2026-10-20T12:20:07.915286+00:00",
+            "event": "lacry_plan_started",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "plan": {
+              "dispatch": "hamilton_handling",
+              "executable": true,
+              "prepare": false,
+              "actions": [
+                "hamilton_retrieve"
+              ],
+              "steps": [
+                {
+                  "kind": "travel",
+                  "label": "Travel from true Home to the taught Hamilton entrance",
+                  "start": {
+                    "X": 289.97,
+                    "Y": 62.63,
+                    "Z": 248.02,
+                    "Rx": 0.0,
+                    "Ry": 0.0,
+                    "Rz": -3.88
+                  },
+                  "joints": {
+                    "J1": 209.4211879334902,
+                    "J2": 84.87684236708007,
+                    "J3": 52.05604823491838,
+                    "J4": -140.8128286807219
+                  },
+                  "points": [
+                    {
+                      "X": 215.74,
+                      "Y": -249.0,
+                      "Z": 212.0,
+                      "Rz": -0.94
+                    },
+                    {
+                      "X": 195.88,
+                      "Y": -357.36,
+                      "Z": 212.0,
+                      "Rz": -1.9
+                    },
+                    {
+                      "X": 195.34,
+                      "Y": -360.31,
+                      "Z": 38.61,
+                      "Rz": -1.9
+                    }
+                  ],
+                  "profile": {
+                    "hamilton_home": true
+                  },
+                  "sources": {
+                    "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+                    "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+                    "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+                    "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+                    "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+                    "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                    "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                    "hamilton_true_home": "c42cfa8fa4e23fcbad6bf66d8e08c0c1388f7f757921e03d230b843a8c3f7c15"
+                  },
+                  "expected_e1": 5.0
+                },
+                {
+                  "kind": "hamilton_inspect",
+                  "label": "Check the plate at Hamilton",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32808421761898
+                  },
+                  "expected_e1": 5.0,
+                  "review_label": "Confirm both jaws surround the flat, supported plate at the correct gripping height."
+                },
+                {
+                  "kind": "hamilton_jaw",
+                  "label": "Grip the plate at Hamilton",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32808421761898
+                  },
+                  "expected_e1": 5.0,
+                  "target_e1": 3.7,
+                  "speed": 5
+                },
+                {
+                  "kind": "hamilton_lift",
+                  "label": "Lift the plate slowly",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32808421761898
+                  },
+                  "expected_e1": 3.7,
+                  "points": [
+                    {
+                      "X": 195.34,
+                      "Y": -360.31,
+                      "Z": 43.61,
+                      "Rz": -1.9
+                    }
+                  ],
+                  "speed": 5
+                },
+                {
+                  "kind": "hamilton_inspect",
+                  "label": "Check the Hamilton lift",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 43.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 5.011187933490177,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32808421761898
+                  },
+                  "expected_e1": 3.7,
+                  "review_label": "Confirm the plate lifted evenly and stays secure without slipping before returning Home."
+                },
+                {
+                  "kind": "travel",
+                  "label": "Return directly from Hamilton to true Home",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 43.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 5.011187933490177,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32808421761898
+                  },
+                  "points": [
+                    {
+                      "X": 195.88,
+                      "Y": -357.36,
+                      "Z": 212.0,
+                      "Rz": -1.9
+                    },
+                    {
+                      "X": 215.74,
+                      "Y": -249.0,
+                      "Z": 212.0,
+                      "Rz": -0.94
+                    },
+                    {
+                      "X": 289.97,
+                      "Y": 62.63,
+                      "Z": 248.02,
+                      "Rz": -3.88
+                    }
+                  ],
+                  "profile": {
+                    "hamilton_home": true
+                  },
+                  "sources": {
+                    "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+                    "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+                    "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+                    "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+                    "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+                    "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                    "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                    "hamilton_true_home": "c42cfa8fa4e23fcbad6bf66d8e08c0c1388f7f757921e03d230b843a8c3f7c15"
+                  },
+                  "expected_e1": 3.7
+                }
+              ],
+              "start": {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rx": 0.0,
+                "Ry": 0.0,
+                "Rz": -3.88
+              },
+              "joints": {
+                "J1": 209.4211879334902,
+                "J2": 84.87684236708007,
+                "J3": 52.05604823491838,
+                "J4": -140.8128286807219
+              },
+              "e1": 5.0004213117063046,
+              "cfg": {
+                "reach_hard_mm": 460.0,
+                "j4_pref_abs_deg": 220.0,
+                "j4_hard_abs_deg": 220.0,
+                "inner_reach_mm": 280.0,
+                "claw_gap_min_mm": 60.0,
+                "claw_gap_max_mm": 88.0,
+                "base_x_mm": 126.0,
+                "base_y_mm": 0.0,
+                "link1_mm": 200.0,
+                "link2_mm": 200.0,
+                "j2_offset_deg": 0.0,
+                "j3_offset_deg": 180.0,
+                "j2_min_deg": -95.0,
+                "j2_margin_deg": 2.0,
+                "extension_margin_mm": 8.0
+              },
+              "envelope": {
+                "X": [
+                  200.0,
+                  450.0
+                ],
+                "Y": [
+                  -250.0,
+                  380.0
+                ],
+                "Z": [
+                  70.0,
+                  400.0
+                ]
+              },
+              "handling_evidence": {
+                "hamilton_endpoint": "34e06abd9dc3573f49a9e54038fd073541fb79f45a11f658c5879739951b42e0",
+                "empty_travel_trial": "a6763453e9bf4e6ad3c01c0aa73f85c0cb6e6b0867fff77bc609ce489d86dae8",
+                "local_handling": "supervised_trial_open5_close3.7_lift5_speed5_v1"
+              },
+              "camera_required": false,
+              "summary": "Pick up the plate from Hamilton.",
+              "supervised_trial": true,
+              "requirements": [
+                "The gripper is empty; the plate is flat in the taught Hamilton holder, and you authorize retrieval now.",
+                "The Hamilton holder remains in its taught loading position; jaw clearance, 5 mm lift headroom and loaded return are clear.",
+                "Hands are clear, the arm is released, and the emergency stop is supervised.",
+                "Instrument completion is not connected. Confirm only after it is finished, or for an explicit simulated-completion test.",
+                "Hamilton local handling is a supervised trial: inspect arrival before jaw motion and inspect the lift before returning Home."
+              ],
+              "id": "2026-10-20T12:20:04.499847+00:00:1792498804499",
+              "at": 1792498804.4998477,
+              "source": "chat",
+              "labels": [
+                "Retrieve plate from Hamilton"
+              ],
+              "confirmation_source": "researcher_chat"
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 17634,
+          "line_sha256": "48f66a57ea19abfa8f0ca521c369a6ac6c27e58dcb84fecf54f3dad656bb0504",
+          "event": {
+            "timestamp": "2026-10-20T12:20:35.467611+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "label": "Travel from true Home to the taught Hamilton entrance",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "executor": "lua_queue",
+              "points": 3,
+              "zone": -1,
+              "endpoint": {
+                "X": 195.34,
+                "Y": -360.31,
+                "Z": 38.61,
+                "Rz": -1.9
+              },
+              "grouping": null
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 18240,
+          "line_sha256": "edae2fd47032aecb476eb24b0284bbbfd298d876d01bfccd1aedaf5cd639faa2",
+          "event": {
+            "timestamp": "2026-10-20T12:20:46.881508+00:00",
+            "event": "station_handling_inspection_accepted",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "label": "Confirm both jaws surround the flat, supported plate at the correct gripping height."
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 18241,
+          "line_sha256": "e4198512a9649f25b8deefc38252018fd67ab260fd3f09013079b8d684269470",
+          "event": {
+            "timestamp": "2026-10-20T12:20:46.882397+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "label": "Check the plate at Hamilton",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "review_required": true,
+              "review_kind": "station_handling",
+              "review_label": "Confirm both jaws surround the flat, supported plate at the correct gripping height."
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 18420,
+          "line_sha256": "354e1b562058e6f5abce88f2c01e8844804926164c3dd12ddc9d284e24581955",
+          "event": {
+            "timestamp": "2026-10-20T12:20:49.802604+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "label": "Grip the plate at Hamilton",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "gripper": {
+                "ok": true,
+                "completion_reply": {
+                  "index": 1,
+                  "value": 1
+                },
+                "commanded": {
+                  "e1": 3.7,
+                  "speed": 5
+                },
+                "gripper": {
+                  "e1_position": 3.839,
+                  "e1_torque": -8.0,
+                  "e1_torque_normalized": -0.03,
+                  "joints": {
+                    "J1": 399,
+                    "J2": -52,
+                    "J3": 141,
+                    "J4": -75
+                  },
+                  "telemetry_live": true,
+                  "position_error": 0.139,
+                  "grip_detected": false
+                }
+              },
+              "settled_report": {
+                "ok": true,
+                "e1_position": 3.698,
+                "e1_torque": -45.601,
+                "joints": {
+                  "J1": 399,
+                  "J2": -46,
+                  "J3": -44,
+                  "J4": -67
+                },
+                "telemetry_live": true
+              },
+              "grasp_verified": false
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 18888,
+          "line_sha256": "d937a64f63cd01692a70fb433ab930923f59416b7dcbf7cc5c239d6277c301aa",
+          "event": {
+            "timestamp": "2026-10-20T12:20:57.865099+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "label": "Lift the plate slowly",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "result": {
+                "ok": true,
+                "executor": "lua_queue",
+                "points": 1,
+                "zone": -1,
+                "endpoint": {
+                  "X": 195.34,
+                  "Y": -360.31,
+                  "Z": 43.61,
+                  "Rz": -1.9
+                },
+                "grouping": null
+              },
+              "pose_mm": {
+                "X": 195.344,
+                "Y": -360.311,
+                "Z": 43.611,
+                "Rx": 0.0,
+                "Ry": 0.0,
+                "Rz": -1.899
+              }
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 19331,
+          "line_sha256": "a88a634766711954856fc4441bf04f5c2b125cfbf621e0c1dc8dc34c8391426d",
+          "event": {
+            "timestamp": "2026-10-20T12:21:06.171296+00:00",
+            "event": "station_handling_inspection_accepted",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "label": "Confirm the plate lifted evenly and stays secure without slipping before returning Home."
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 19333,
+          "line_sha256": "3c0fe6220d7169ceefc9edbb3550be30f90d14c9ed44bd5aee1ffe48d9d61cc5",
+          "event": {
+            "timestamp": "2026-10-20T12:21:06.172574+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "label": "Check the Hamilton lift",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "review_required": true,
+              "review_kind": "station_handling",
+              "review_label": "Confirm the plate lifted evenly and stays secure without slipping before returning Home."
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 20911,
+          "line_sha256": "8900815d937327f737ae9492ea10618f4a5b38ec3a863f71e6edfeb802f67154",
+          "event": {
+            "timestamp": "2026-10-20T12:21:33.323985+00:00",
+            "event": "lacry_step_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "label": "Return directly from Hamilton to true Home",
+            "cycle": null,
+            "result": {
+              "ok": true,
+              "executor": "lua_queue",
+              "points": 3,
+              "zone": -1,
+              "endpoint": {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rz": -3.88
+              },
+              "grouping": null
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T121524Z_d37ba039/events_0001.jsonl",
+          "line": 20920,
+          "line_sha256": "45b022248bb41670271d78ca3b49c0603b218956f33e0dfd5656e43e94462732",
+          "event": {
+            "timestamp": "2026-10-20T12:21:33.438543+00:00",
+            "event": "sequence_finished",
+            "session": "20261020T121524Z_d37ba039",
+            "run_id": "81319e3378bd4db3b0a6a5f104542db7",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "fee77a1263d64e6f8928aa10bebabaf3",
+              "view": "researcher"
+            },
+            "state": "done",
+            "result": {
+              "ok": true,
+              "done": [
+                "Travel from true Home to the taught Hamilton entrance",
+                "Check the plate at Hamilton",
+                "Grip the plate at Hamilton",
+                "Lift the plate slowly",
+                "Check the Hamilton lift",
+                "Return directly from Hamilton to true Home"
+              ]
+            },
+            "target": null
+          }
+        }
+      ]
+    }
+  },
+  "later_failures": [
+    {
+      "action": "hamilton_retrieve",
+      "events": [
+        {
+          "source": "logs/audit/20261020T134515Z_cb236337/events_0001.jsonl",
+          "line": 23438,
+          "line_sha256": "bc8bdfefbf73bb7f027cdc0778441678e9c0024e11dcd722427bd3f0200332ce",
+          "event": {
+            "timestamp": "2026-10-20T13:53:03.848782+00:00",
+            "event": "lacry_plan_started",
+            "session": "20261020T134515Z_cb236337",
+            "run_id": "728fa862b531490abcfb013dbb6301ac",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "f16a368b9fa3417b9e510f00ae175295",
+              "view": "researcher"
+            },
+            "plan": {
+              "dispatch": "hamilton_handling",
+              "executable": true,
+              "prepare": false,
+              "actions": [
+                "hamilton_retrieve"
+              ],
+              "steps": [
+                {
+                  "kind": "travel",
+                  "label": "Travel from true Home to the taught Hamilton entrance",
+                  "start": {
+                    "X": 289.97,
+                    "Y": 62.63,
+                    "Z": 248.02,
+                    "Rx": 0.0,
+                    "Ry": 0.0,
+                    "Rz": -3.88
+                  },
+                  "joints": {
+                    "J1": 209.4211879334902,
+                    "J2": 84.87686575379037,
+                    "J3": 52.05604823491838,
+                    "J4": -140.81265436318145
+                  },
+                  "points": [
+                    {
+                      "X": 215.74,
+                      "Y": -249.0,
+                      "Z": 212.0,
+                      "Rz": -0.94
+                    },
+                    {
+                      "X": 195.88,
+                      "Y": -357.36,
+                      "Z": 212.0,
+                      "Rz": -1.9
+                    },
+                    {
+                      "X": 195.34,
+                      "Y": -360.31,
+                      "Z": 38.61,
+                      "Rz": -1.9
+                    }
+                  ],
+                  "profile": {
+                    "hamilton_home": true
+                  },
+                  "sources": {
+                    "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+                    "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+                    "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+                    "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+                    "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+                    "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                    "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                    "hamilton_true_home": "c42cfa8fa4e23fcbad6bf66d8e08c0c1388f7f757921e03d230b843a8c3f7c15"
+                  },
+                  "expected_e1": 5.0
+                },
+                {
+                  "kind": "hamilton_inspect",
+                  "label": "Check the plate at Hamilton",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32788651336823
+                  },
+                  "expected_e1": 5.0,
+                  "review_label": "Confirm both jaws surround the flat, supported plate at the correct gripping height."
+                },
+                {
+                  "kind": "hamilton_jaw",
+                  "label": "Grip the plate at Hamilton",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32788651336823
+                  },
+                  "expected_e1": 5.0,
+                  "target_e1": 3.7,
+                  "speed": 5
+                },
+                {
+                  "kind": "hamilton_lift",
+                  "label": "Lift the plate slowly",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.011187933490177215,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32788651336823
+                  },
+                  "expected_e1": 3.7,
+                  "points": [
+                    {
+                      "X": 195.34,
+                      "Y": -360.31,
+                      "Z": 43.61,
+                      "Rz": -1.9
+                    }
+                  ],
+                  "speed": 5
+                },
+                {
+                  "kind": "hamilton_inspect",
+                  "label": "Check the Hamilton lift",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 43.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 5.011187933490177,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32788651336823
+                  },
+                  "expected_e1": 3.7,
+                  "review_label": "Confirm the plate lifted evenly and stays secure without slipping before returning Home."
+                },
+                {
+                  "kind": "travel",
+                  "label": "Return directly from Hamilton to true Home",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 43.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 5.011187933490177,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.32788651336823
+                  },
+                  "points": [
+                    {
+                      "X": 195.88,
+                      "Y": -357.36,
+                      "Z": 212.0,
+                      "Rz": -1.9
+                    },
+                    {
+                      "X": 215.74,
+                      "Y": -249.0,
+                      "Z": 212.0,
+                      "Rz": -0.94
+                    },
+                    {
+                      "X": 289.97,
+                      "Y": 62.63,
+                      "Z": 248.02,
+                      "Rz": -3.88
+                    }
+                  ],
+                  "profile": {
+                    "hamilton_home": true
+                  },
+                  "sources": {
+                    "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+                    "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+                    "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+                    "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+                    "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+                    "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                    "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                    "hamilton_true_home": "c42cfa8fa4e23fcbad6bf66d8e08c0c1388f7f757921e03d230b843a8c3f7c15"
+                  },
+                  "expected_e1": 3.7
+                }
+              ],
+              "start": {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rx": 0.0,
+                "Ry": 0.0,
+                "Rz": -3.88
+              },
+              "joints": {
+                "J1": 209.4211879334902,
+                "J2": 84.87686575379037,
+                "J3": 52.05604823491838,
+                "J4": -140.81265436318145
+              },
+              "e1": 5.000061821192503,
+              "cfg": {
+                "reach_hard_mm": 460.0,
+                "j4_pref_abs_deg": 220.0,
+                "j4_hard_abs_deg": 220.0,
+                "inner_reach_mm": 280.0,
+                "claw_gap_min_mm": 60.0,
+                "claw_gap_max_mm": 88.0,
+                "base_x_mm": 126.0,
+                "base_y_mm": 0.0,
+                "link1_mm": 200.0,
+                "link2_mm": 200.0,
+                "j2_offset_deg": 0.0,
+                "j3_offset_deg": 180.0,
+                "j2_min_deg": -95.0,
+                "j2_margin_deg": 2.0,
+                "extension_margin_mm": 8.0
+              },
+              "envelope": {
+                "X": [
+                  200.0,
+                  450.0
+                ],
+                "Y": [
+                  -250.0,
+                  380.0
+                ],
+                "Z": [
+                  70.0,
+                  400.0
+                ]
+              },
+              "handling_evidence": {
+                "hamilton_endpoint": "34e06abd9dc3573f49a9e54038fd073541fb79f45a11f658c5879739951b42e0",
+                "empty_travel_trial": "a6763453e9bf4e6ad3c01c0aa73f85c0cb6e6b0867fff77bc609ce489d86dae8",
+                "local_handling": "supervised_trial_open5_close3.7_lift5_speed5_v1"
+              },
+              "camera_required": false,
+              "summary": "Retrieve the plate from Hamilton with inspection pauses before and after jaw motion.",
+              "supervised_trial": true,
+              "requirements": [
+                "The gripper is empty; the plate is flat in the taught Hamilton holder, and you authorize retrieval now.",
+                "The Hamilton holder remains in its taught loading position; jaw clearance, 5 mm lift headroom and loaded return are clear.",
+                "Hands are clear, the arm is released, and the emergency stop is supervised.",
+                "Instrument completion is not connected. Confirm only after it is finished, or for an explicit simulated-completion test.",
+                "Hamilton local handling is a supervised trial: inspect arrival before jaw motion and inspect the lift before returning Home."
+              ],
+              "id": "2026-10-20T13:53:00.775952+00:00:1792504380775",
+              "at": 1792504380.7759528,
+              "source": "chat",
+              "labels": [
+                "Retrieve plate from Hamilton"
+              ],
+              "confirmation_source": "researcher_chat"
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T134515Z_cb236337/events_0001.jsonl",
+          "line": 23837,
+          "line_sha256": "91679ce5948defcb7dbafb245aca59ce49759267400d7ddd070fedb37959bf0a",
+          "event": {
+            "timestamp": "2026-10-20T13:53:11.756916+00:00",
+            "event": "lacry_plan_failed",
+            "session": "20261020T134515Z_cb236337",
+            "run_id": "728fa862b531490abcfb013dbb6301ac",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "f16a368b9fa3417b9e510f00ae175295",
+              "view": "researcher"
+            },
+            "step": "Travel from true Home to the taught Hamilton entrance",
+            "error": "robot has active errors, refusing to move: [{'errCode': 3960, 'errMsg': '2026-10-20 06:53:10 Motion error: failed to enable axis 2 servo'}, {'errCode': 3960, 'errMsg': '2026-10-20 06:53:10 Motion error: failed to enable axis 3 servo'}, {'errCode': 3960, 'errMsg': '2026-10-20 06:53:10 Motion error: failed to enable axis 4 servo'}, {'errCode': 3929, 'errMsg': '2026-10-20 06:53:10 Motion error: external axis 1 servo enable failed'}, {'errCode': 3929, 'errMsg': '2026-10-20 06:53:10 Motion error: external axis 2 servo enable failed'}, {'errCode': 3873, 'errMsg': '2026-10-20 06:53:10 Motion error: axis 1 collision detected'}, {'errCode': 3873, 'errMsg': '2026-10-20 06:53:10 Motion error: axis 1 collision detected'}, {'errCode': 3873, 'errMsg': '2026-10-20 06:53:10 Motion error: axis 1 collision detected'}, {'errCode': 3873, 'errMsg': '2026-10-20 06:53:10 Motion error: axis 4 collision detected'}, {'errCode': 3960, 'errMsg': '2026-10-20 06:53:10 Motion error: failed to enable axis 1 servo'}] \u2014 resolve the cause, then Clear errors (operator-confirmed)",
+            "completed": []
+          }
+        },
+        {
+          "source": "logs/audit/20261020T134515Z_cb236337/events_0001.jsonl",
+          "line": 23838,
+          "line_sha256": "f2bc1539bed0f55c98b50a3ad0696bb684145ca12e8717c02b0237b256c2619f",
+          "event": {
+            "timestamp": "2026-10-20T13:53:11.758429+00:00",
+            "event": "sequence_finished",
+            "session": "20261020T134515Z_cb236337",
+            "run_id": "728fa862b531490abcfb013dbb6301ac",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "f16a368b9fa3417b9e510f00ae175295",
+              "view": "researcher"
+            },
+            "state": "error",
+            "result": {
+              "ok": false,
+              "error": "robot has active errors, refusing to move: [{'errCode': 3960, 'errMsg': '2026-10-20 06:53:10 Motion error: failed to enable axis 2 servo'}, {'errCode': 3960, 'errMsg': '2026-10-20 06:53:10 Motion error: failed to enable axis 3 servo'}, {'errCode': 3960, 'errMsg': '2026-10-20 06:53:10 Motion error: failed to enable axis 4 servo'}, {'errCode': 3929, 'errMsg': '2026-10-20 06:53:10 Motion error: external axis 1 servo enable failed'}, {'errCode': 3929, 'errMsg': '2026-10-20 06:53:10 Motion error: external axis 2 servo enable failed'}, {'errCode': 3873, 'errMsg': '2026-10-20 06:53:10 Motion error: axis 1 collision detected'}, {'errCode': 3873, 'errMsg': '2026-10-20 06:53:10 Motion error: axis 1 collision detected'}, {'errCode': 3873, 'errMsg': '2026-10-20 06:53:10 Motion error: axis 1 collision detected'}, {'errCode': 3873, 'errMsg': '2026-10-20 06:53:10 Motion error: axis 4 collision detected'}, {'errCode': 3960, 'errMsg': '2026-10-20 06:53:10 Motion error: failed to enable axis 1 servo'}] \u2014 resolve the cause, then Clear errors (operator-confirmed)",
+              "done": []
+            },
+            "target": {
+              "x": 312.575,
+              "y": -66.2,
+              "z": 73.718,
+              "rz": 89.865,
+              "z_calibrated": 73.718,
+              "config": "Wide",
+              "big_r": 190.4,
+              "found_at": "06:47:31",
+              "calibrated_at": 1792504051.3337493,
+              "source": "fast_disk",
+              "converged": true,
+              "alignment_requires_preflight": true,
+              "z_detail": {
+                "samples": [
+                  62.379,
+                  62.377
+                ],
+                "spread": 0.001999999999995339,
+                "vision_z": 62.378,
+                "touch_offset": 9.0
+              },
+              "descent_correction_id": "accepted_grip_endpoint_20261020"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "action": "hamilton_dropoff",
+      "events": [
+        {
+          "source": "logs/audit/20261020T134515Z_cb236337/events_0003.jsonl",
+          "line": 21142,
+          "line_sha256": "56490d7a64daa01f8e619fb11312ef08271af35cc7dec6a1f0cefdfc75a64ca7",
+          "event": {
+            "timestamp": "2026-10-20T14:08:32.253533+00:00",
+            "event": "lacry_plan_started",
+            "session": "20261020T134515Z_cb236337",
+            "run_id": "e72acb9943c34487b438614a4da77b4c",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "2a2dc00729484bb68ebdab0443d60d15",
+              "view": "researcher"
+            },
+            "plan": {
+              "dispatch": "hamilton_handling",
+              "executable": true,
+              "prepare": false,
+              "actions": [
+                "hamilton_dropoff"
+              ],
+              "steps": [
+                {
+                  "kind": "travel",
+                  "label": "Travel from true Home to the taught Hamilton entrance",
+                  "start": {
+                    "X": 289.97,
+                    "Y": 62.63,
+                    "Z": 248.02,
+                    "Rx": 0.0,
+                    "Ry": 0.0,
+                    "Rz": -3.88
+                  },
+                  "joints": {
+                    "J1": 209.42098049436663,
+                    "J2": 84.87686575379037,
+                    "J3": 52.05584991142706,
+                    "J4": -140.8128286807219
+                  },
+                  "points": [
+                    {
+                      "X": 215.74,
+                      "Y": -249.0,
+                      "Z": 212.0,
+                      "Rz": -0.94
+                    },
+                    {
+                      "X": 195.88,
+                      "Y": -357.36,
+                      "Z": 212.0,
+                      "Rz": -1.9
+                    },
+                    {
+                      "X": 195.34,
+                      "Y": -360.31,
+                      "Z": 38.61,
+                      "Rz": -1.9
+                    }
+                  ],
+                  "profile": {
+                    "hamilton_home": true
+                  },
+                  "sources": {
+                    "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+                    "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+                    "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+                    "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+                    "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+                    "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                    "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                    "hamilton_true_home": "c42cfa8fa4e23fcbad6bf66d8e08c0c1388f7f757921e03d230b843a8c3f7c15"
+                  },
+                  "expected_e1": 3.7
+                },
+                {
+                  "kind": "hamilton_inspect",
+                  "label": "Check the plate at Hamilton",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.010980494366620519,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.3282591544
+                  },
+                  "expected_e1": 3.7,
+                  "review_label": "Confirm the plate rests flat and fully supported at Hamilton, with the jaws clear to open."
+                },
+                {
+                  "kind": "hamilton_jaw",
+                  "label": "Leave the plate at Hamilton",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.010980494366620519,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.3282591544
+                  },
+                  "expected_e1": 3.7,
+                  "target_e1": 5.0,
+                  "speed": 5
+                },
+                {
+                  "kind": "hamilton_lift",
+                  "label": "Lift the empty jaws clear",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 38.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 0.010980494366620519,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.3282591544
+                  },
+                  "expected_e1": 5.0,
+                  "points": [
+                    {
+                      "X": 195.34,
+                      "Y": -360.31,
+                      "Z": 43.61,
+                      "Rz": -1.9
+                    }
+                  ],
+                  "speed": 5
+                },
+                {
+                  "kind": "hamilton_inspect",
+                  "label": "Check the Hamilton lift",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 43.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 5.0109804943666205,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.3282591544
+                  },
+                  "expected_e1": 5.0,
+                  "review_label": "Confirm the plate remains flat in Hamilton and the empty jaws are clear for the return Home."
+                },
+                {
+                  "kind": "travel",
+                  "label": "Return directly from Hamilton to true Home",
+                  "start": {
+                    "X": 195.34,
+                    "Y": -360.31,
+                    "Z": 43.61,
+                    "Rz": -1.9
+                  },
+                  "joints": {
+                    "J1": 5.0109804943666205,
+                    "J2": -55.64187568761234,
+                    "J3": 133.07002182650785,
+                    "J4": -79.3282591544
+                  },
+                  "points": [
+                    {
+                      "X": 195.88,
+                      "Y": -357.36,
+                      "Z": 212.0,
+                      "Rz": -1.9
+                    },
+                    {
+                      "X": 215.74,
+                      "Y": -249.0,
+                      "Z": 212.0,
+                      "Rz": -0.94
+                    },
+                    {
+                      "X": 289.97,
+                      "Y": 62.63,
+                      "Z": 248.02,
+                      "Rz": -3.88
+                    }
+                  ],
+                  "profile": {
+                    "hamilton_home": true
+                  },
+                  "sources": {
+                    "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+                    "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+                    "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+                    "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+                    "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+                    "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                    "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                    "hamilton_true_home": "c42cfa8fa4e23fcbad6bf66d8e08c0c1388f7f757921e03d230b843a8c3f7c15"
+                  },
+                  "expected_e1": 5.0
+                }
+              ],
+              "start": {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rx": 0.0,
+                "Ry": 0.0,
+                "Rz": -3.88
+              },
+              "joints": {
+                "J1": 209.42098049436663,
+                "J2": 84.87686575379037,
+                "J3": 52.05584991142706,
+                "J4": -140.8128286807219
+              },
+              "e1": 3.6976926494389772,
+              "cfg": {
+                "reach_hard_mm": 460.0,
+                "j4_pref_abs_deg": 220.0,
+                "j4_hard_abs_deg": 220.0,
+                "inner_reach_mm": 280.0,
+                "claw_gap_min_mm": 60.0,
+                "claw_gap_max_mm": 88.0,
+                "base_x_mm": 126.0,
+                "base_y_mm": 0.0,
+                "link1_mm": 200.0,
+                "link2_mm": 200.0,
+                "j2_offset_deg": 0.0,
+                "j3_offset_deg": 180.0,
+                "j2_min_deg": -95.0,
+                "j2_margin_deg": 2.0,
+                "extension_margin_mm": 8.0
+              },
+              "envelope": {
+                "X": [
+                  200.0,
+                  450.0
+                ],
+                "Y": [
+                  -250.0,
+                  380.0
+                ],
+                "Z": [
+                  70.0,
+                  400.0
+                ]
+              },
+              "handling_evidence": {
+                "hamilton_endpoint": "34e06abd9dc3573f49a9e54038fd073541fb79f45a11f658c5879739951b42e0",
+                "empty_travel_trial": "a6763453e9bf4e6ad3c01c0aa73f85c0cb6e6b0867fff77bc609ce489d86dae8",
+                "local_handling": "supervised_trial_open5_close3.7_lift5_speed5_v1"
+              },
+              "camera_required": false,
+              "summary": "Drop off the plate at Hamilton with inspection pauses before and after jaw motion.",
+              "supervised_trial": true,
+              "requirements": [
+                "The plate is securely held; the Hamilton holder is empty and ready to support it.",
+                "The Hamilton holder remains in its taught loading position; jaw clearance, 5 mm lift headroom and loaded return are clear.",
+                "Hands are clear, the arm is released, and the emergency stop is supervised.",
+                "The instrument is not started by this routine.",
+                "Hamilton local handling is a supervised trial: inspect arrival before jaw motion and inspect the lift before returning Home."
+              ],
+              "id": "2026-10-20T14:08:23.863899+00:00:1792505303863",
+              "at": 1792505303.8638992,
+              "source": "chat",
+              "labels": [
+                "Leave plate at Hamilton"
+              ],
+              "confirmation_source": "researcher_chat"
+            }
+          }
+        },
+        {
+          "source": "logs/audit/20261020T134515Z_cb236337/events_0003.jsonl",
+          "line": 21577,
+          "line_sha256": "540f07a529f730c9d6be9290dfd0c20a2baaa4e4aec0d8c33f9539e1f529f17c",
+          "event": {
+            "timestamp": "2026-10-20T14:08:39.816569+00:00",
+            "event": "lacry_plan_failed",
+            "session": "20261020T134515Z_cb236337",
+            "run_id": "e72acb9943c34487b438614a4da77b4c",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "2a2dc00729484bb68ebdab0443d60d15",
+              "view": "researcher"
+            },
+            "step": "Travel from true Home to the taught Hamilton entrance",
+            "error": "Gripper feedback changed; inspect before continuing.",
+            "completed": []
+          }
+        },
+        {
+          "source": "logs/audit/20261020T134515Z_cb236337/events_0003.jsonl",
+          "line": 21578,
+          "line_sha256": "3ae3f26b3efd7e2ba9c3f73f08abd4d520d191c414635b4b758fc233c5845692",
+          "event": {
+            "timestamp": "2026-10-20T14:08:39.817973+00:00",
+            "event": "sequence_finished",
+            "session": "20261020T134515Z_cb236337",
+            "run_id": "e72acb9943c34487b438614a4da77b4c",
+            "sequence": "lacry_plan",
+            "sequence_origin": {
+              "request_id": "2a2dc00729484bb68ebdab0443d60d15",
+              "view": "researcher"
+            },
+            "state": "error",
+            "result": {
+              "ok": false,
+              "error": "Gripper feedback changed; inspect before continuing.",
+              "done": []
+            },
+            "target": {
+              "x": 312.575,
+              "y": -66.2,
+              "z": 73.718,
+              "rz": 89.865,
+              "z_calibrated": 73.718,
+              "config": "Wide",
+              "big_r": 190.85,
+              "found_at": "07:05:49",
+              "calibrated_at": 1792505149.7664227,
+              "source": "fast_disk",
+              "converged": true,
+              "alignment_requires_preflight": true,
+              "z_detail": {
+                "samples": [
+                  61.466,
+                  61.705
+                ],
+                "spread": 0.23899999999999721,
+                "vision_z": 61.585499999999996,
+                "touch_offset": 9.0
+              },
+              "descent_correction_id": "accepted_grip_endpoint_20261020"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

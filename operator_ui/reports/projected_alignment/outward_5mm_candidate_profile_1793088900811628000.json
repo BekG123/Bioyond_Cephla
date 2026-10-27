@@ -1,0 +1,39 @@
+{
+  "schema": "cephla.projected-pickup-profile.v1",
+  "id": "48_well_projected_20261026",
+  "acceptance": "operator_ui/reports/projected_alignment/outward_5mm_trial_authorization_1793088900811628000.json",
+  "acceptance_sha256": "286c6bc4b6de09b5959814ab6abbfffa64d3b1362e771228a71b3cfd4f8ad40f",
+  "alignment_log": "operator_ui/reports/projected_alignment/20261027_010310_88ba99b3.jsonl",
+  "alignment_log_sha256": "6a561c8b6d754a861cb44a9ae8c29a1e8f8c2b9430d73107889221278387746f",
+  "alignment_pose_mm": {
+    "X": 311.827048108826,
+    "Y": -76.21328197557138,
+    "Z": 300.0,
+    "Rz": 89.757
+  },
+  "descent_status": "pending_supervised_open_claw_trial",
+  "gripping_edge_height": "unknown; operator requested supervised verification",
+  "candidate_endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.757,
+    "X": 311.827048108826,
+    "Y": -76.21328197557138,
+    "Z": 78.718
+  },
+  "candidate_z_basis": "Reuse previous supervised 48-well trial height Z78.718 at the corrected alignment for an open-claw trial; no automatic grip.",
+  "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+  "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+  "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+  "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5 to E1=3.7",
+  "automatic_lift_enabled": false,
+  "full_pickup_verified": false,
+  "inward_correction_already_applied": false,
+  "previous_profile": "operator_ui/reports/projected_alignment/profile_before_additional_outward_5mm_1793088900811628000.json",
+  "previous_profile_sha256": "e62d9dd25cad8624aae7180353743ebfece0137f958df4b174e267a49359e5d2",
+  "outward_correction_already_applied": true,
+  "additional_outward_correction": "operator_ui/reports/projected_alignment/additional_outward_5mm_1793088900811628000.json",
+  "additional_outward_correction_sha256": "ff5ad09ae3f3075bd3060d861bae94e51e697cbaed86df92f086570b8fd104f0",
+  "jaw_sequence": "Open to E1=28 mm at Z300 before lowering; verify opening before descent.",
+  "total_outward_correction_mm": 7
+}

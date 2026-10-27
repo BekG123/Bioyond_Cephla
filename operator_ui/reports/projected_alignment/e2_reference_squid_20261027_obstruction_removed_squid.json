@@ -1,0 +1,148 @@
+{
+  "at": 1793108162.6099539,
+  "phase": "squid",
+  "authorization": "Continue same successful full calibration, then the previously authorized nearby Squid endpoint; stop before release.",
+  "dispatch": {
+    "ok": true,
+    "started": "squid_48well_endpoint_trial"
+  },
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "48-well Squid transit at 137; stop before release.",
+        "t": 0.2
+      },
+      {
+        "level": "info",
+        "msg": "Executing 3 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 0.2
+      },
+      {
+        "level": "info",
+        "msg": "48-well Squid descent at 5; stop before release.",
+        "t": 6.3
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 6.3
+      }
+    ],
+    "name": "squid_48well_endpoint_trial",
+    "result": {
+      "clearance_checkpoint": true,
+      "ok": true,
+      "pose": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 85.69,
+        "X": 216.1,
+        "Y": 374.52,
+        "Z": 269.997
+      },
+      "record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\projected_alignment\\squid_48well_obstruction_removed_20261027_trial.json",
+      "release_executed": false,
+      "seating_inspection_required": true
+    },
+    "state": "done",
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": false,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+      "rz": 89.87662180784821,
+      "x": 312.5035022963445,
+      "y": -76.1016698296062,
+      "z_calibrated": 73.718
+    }
+  },
+  "final_state": {
+    "camera": {
+      "age_s": 27.9,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.898126306012273
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 231.3989481950815,
+        "J2": 92.10483259975875,
+        "J3": 148.73666785532757,
+        "J4": -155.1511436550455
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 85.69,
+        "X": 216.1,
+        "Y": 374.52,
+        "Z": 269.998
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "squid_48well_endpoint_trial",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": false,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+      "rz": 89.87662180784821,
+      "x": 312.5035022963445,
+      "y": -76.1016698296062,
+      "z_calibrated": 73.718
+    },
+    "ts": 1793108174.7150514
+  },
+  "status": "motion_complete_inspection_pending"
+}

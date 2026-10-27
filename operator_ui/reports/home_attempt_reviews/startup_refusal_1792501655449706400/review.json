@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "reason": "gripper_held_start_refused",
+  "program_start_sent": false,
+  "home_travel_dispatched": false,
+  "diagnostic": "refusing to start: last gripper reading (E1 3.695, torque -111.735) says an object is HELD, and program start re-zeroes E1 (slams the plates to 0). Release it first (Open 28), or resend with force=true if the reading is stale.",
+  "review_id": "startup_refusal_1792501655449706400",
+  "original_sha256": {
+    "reports/ik_home/1792501655449706400_a194efc4f79d4817b82ca7ce7b41337b.json": "7c1902abe32552c45c80c5becdcb967737fdff5ea15c5231bc3567340b924d1f",
+    "reports/trajectory_smoothing/latest_button_runs/1792501655633024200_saved_home.json": "0533fa2a0d132726719fe590c846a5fff30655aefd5150dd333c4b3cde0b9100"
+  },
+  "basis": "Exact recorded refusal in _safe_start before prog_start; Home executor exited its preparation phase before travel."
+}

@@ -15,6 +15,7 @@ import cv2
 import numpy as np
 
 from depth_scene import DepthScene, capture_sample, write_json
+from credential_store import CredentialError
 
 MODEL = 'claude-haiku-4-5-20251001'
 SYSTEM = """You describe camera scenes for calibration data collection.
@@ -53,8 +54,15 @@ def parse_request(body):
 
 
 class VisionClient:
-    def __init__(self):
+    def __init__(self, store=None):
         self.key = ''
+        self.store = store
+        self.credential_error = ''
+        if store:
+            try:
+                self.key = store.load()
+            except CredentialError as ex:
+                self.credential_error = str(ex)
         self.model = os.environ.get('BIOYOND_AGENT_MODEL', MODEL)
 
     def ready(self):
@@ -63,7 +71,14 @@ class VisionClient:
     def set_key(self, key):
         if not isinstance(key, str) or not 10 <= len(key.strip()) <= 500:
             raise AgentError('Enter a valid Anthropic API key')
-        self.key = key.strip()
+        key = key.strip()
+        if self.store:
+            try:
+                self.store.save(key)
+            except CredentialError as ex:
+                raise AgentError(str(ex)) from None
+        self.key = key
+        self.credential_error = ''
 
     @staticmethod
     def image(frame):
@@ -118,6 +133,7 @@ class PlateAgent:
 
     def public(self):
         return dict(configured=self.client.ready(), model=self.client.model,
+                    credential_error=getattr(self.client, 'credential_error', ''),
                     stage=self.stage, observation=self.observation, depth=self.depth.public(),
                     image_available=bool(self.image_path), depth_available=bool(self.depth_path),
                     sample_path=str(self.sample_path) if self.sample_path else None,

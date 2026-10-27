@@ -1,0 +1,110 @@
+{
+  "home_area": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 1.977,
+    "X": 276.032,
+    "Y": 79.938,
+    "Z": 166.407
+  },
+  "saved_home": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "to_home": [
+    {
+      "X": 276.03,
+      "Y": 79.94,
+      "Z": 300.0,
+      "Rz": 1.98
+    },
+    {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 300.0,
+      "Rz": -3.88
+    },
+    {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    }
+  ],
+  "to_home_area": [
+    {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 300.0,
+      "Rz": -3.88
+    },
+    {
+      "X": 276.03,
+      "Y": 79.94,
+      "Z": 300.0,
+      "Rz": 1.98
+    },
+    {
+      "X": 276.03,
+      "Y": 79.94,
+      "Z": 166.41,
+      "Rz": 1.98
+    }
+  ],
+  "waypoints_each_direction": 3,
+  "speed": 137,
+  "clearance_height_mm": 300,
+  "checks": {
+    "ik_both_directions": true,
+    "workspace_both_directions": true
+  },
+  "physical_clearance_verified": false,
+  "hardware_executed": false,
+  "note": "Speed-137 code candidate, not a hardware result. Home translations use the Lua queue; wrist-only rotation retains the existing guarded limit. Full workspace/IK preflight remains mandatory.",
+  "parent_sha256": "3bd4f993406f245bdce4303255d55460d34cc67d16a3730958f72241afdf50ee",
+  "created_at": "2026-10-17T06:10:29.766463+00:00",
+  "ordinary_home_example": [
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 293.15,
+          "Y": -69.08,
+          "Z": 300.0,
+          "Rz": 84.98
+        }
+      ]
+    },
+    {
+      "kind": "rotate",
+      "rz": 55.358000000000004
+    },
+    {
+      "kind": "rotate",
+      "rz": 25.739000000000004
+    },
+    {
+      "kind": "rotate",
+      "rz": -3.8800000000000097
+    },
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        }
+      ]
+    }
+  ]
+}

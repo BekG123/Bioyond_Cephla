@@ -1,0 +1,628 @@
+{
+  "status": "completed",
+  "started_at": 1792235437.1652317,
+  "plan": {
+    "parent_sha256": "978b25350f22b665c75ee80331930fed8fa4cdfd4c521f3c58b7fbf79ce9094a",
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "pickup": {
+      "X": 298.78,
+      "Y": -65.68,
+      "Z": 70.46,
+      "Rz": 85.67
+    },
+    "translation_speed": 137,
+    "wrist_speed": 30,
+    "config": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 150.0,
+      "j4_hard_abs_deg": 205.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 15.0
+    },
+    "directions": [
+      {
+        "name": "Home to pickup",
+        "stages": [
+          {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 300.0,
+                "Rz": -3.88
+              },
+              {
+                "X": 298.78,
+                "Y": -65.68,
+                "Z": 300.0,
+                "Rz": -3.88
+              }
+            ]
+          },
+          {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 25.97
+            }
+          },
+          {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 55.82
+            }
+          },
+          {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 85.67
+            }
+          },
+          {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 298.78,
+                "Y": -65.68,
+                "Z": 70.46,
+                "Rz": 85.67
+              }
+            ]
+          }
+        ],
+        "endpoint": {
+          "X": 298.78,
+          "Y": -65.68,
+          "Z": 70.46,
+          "Rz": 85.67
+        }
+      },
+      {
+        "name": "Pickup to Home",
+        "stages": [
+          {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 298.78,
+                "Y": -65.68,
+                "Z": 300.0,
+                "Rz": 85.67
+              }
+            ]
+          },
+          {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 55.82
+            }
+          },
+          {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 25.97
+            }
+          },
+          {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": -3.88
+            }
+          },
+          {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 300.0,
+                "Rz": -3.88
+              },
+              {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rz": -3.88
+              }
+            ]
+          }
+        ],
+        "endpoint": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        }
+      }
+    ]
+  },
+  "directions": [
+    {
+      "name": "Home to pickup",
+      "started_at": 1792235437.1662338,
+      "steps": [
+        {
+          "stage": {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 300.0,
+                "Rz": -3.88
+              },
+              {
+                "X": 298.78,
+                "Y": -65.68,
+                "Z": 300.0,
+                "Rz": -3.88
+              }
+            ]
+          },
+          "result": {
+            "ok": true,
+            "executor": "lua_queue",
+            "points": 2,
+            "zone": -1,
+            "endpoint": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": -3.88
+            },
+            "grouping": null
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 300.0,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88
+          },
+          "e1": 3.8008755072951317
+        },
+        {
+          "stage": {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 25.97
+            }
+          },
+          "result": {
+            "ok": true,
+            "completion_reply": {
+              "index": 1,
+              "value": 1
+            },
+            "commanded": {
+              "rz": 25.969999999999995,
+              "chunks": 1,
+              "speed": 30.0
+            },
+            "pose_after": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 25.97
+            }
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 300.0,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 25.97
+          },
+          "e1": 3.8010552525520325
+        },
+        {
+          "stage": {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 55.82
+            }
+          },
+          "result": {
+            "ok": true,
+            "completion_reply": {
+              "index": 1,
+              "value": 1
+            },
+            "commanded": {
+              "rz": 55.81999999999999,
+              "chunks": 1,
+              "speed": 30.0
+            },
+            "pose_after": {
+              "X": 298.779,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 55.82
+            }
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 300.0,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 55.82
+          },
+          "e1": 3.8008755072951317
+        },
+        {
+          "stage": {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 85.67
+            }
+          },
+          "result": {
+            "ok": true,
+            "completion_reply": {
+              "index": 1,
+              "value": 1
+            },
+            "commanded": {
+              "rz": 85.66999999999999,
+              "chunks": 1,
+              "speed": 30.0
+            },
+            "pose_after": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 85.67
+            }
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 300.0,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 85.67
+          },
+          "e1": 3.8010552525520325
+        },
+        {
+          "stage": {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 298.78,
+                "Y": -65.68,
+                "Z": 70.46,
+                "Rz": 85.67
+              }
+            ]
+          },
+          "result": {
+            "ok": true,
+            "executor": "lua_queue",
+            "points": 1,
+            "zone": -1,
+            "endpoint": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 70.46,
+              "Rz": 85.67
+            },
+            "grouping": null
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 70.458,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 85.67
+          },
+          "e1": 3.8010552525520325
+        }
+      ],
+      "finished_at": 1792235452.8110948,
+      "status": "completed"
+    },
+    {
+      "name": "Pickup to Home",
+      "started_at": 1792235452.8122694,
+      "steps": [
+        {
+          "stage": {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 298.78,
+                "Y": -65.68,
+                "Z": 300.0,
+                "Rz": 85.67
+              }
+            ]
+          },
+          "result": {
+            "ok": true,
+            "executor": "lua_queue",
+            "points": 1,
+            "zone": -1,
+            "endpoint": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 85.67
+            },
+            "grouping": null
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 300.003,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 85.67
+          },
+          "e1": 3.8010552525520325
+        },
+        {
+          "stage": {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 55.82
+            }
+          },
+          "result": {
+            "ok": true,
+            "completion_reply": {
+              "index": 1,
+              "value": 1
+            },
+            "commanded": {
+              "rz": 55.82000000000001,
+              "chunks": 1,
+              "speed": 30.0
+            },
+            "pose_after": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.002,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 55.82
+            }
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 300.002,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 55.82
+          },
+          "e1": 3.8008755072951317
+        },
+        {
+          "stage": {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": 25.97
+            }
+          },
+          "result": {
+            "ok": true,
+            "completion_reply": {
+              "index": 1,
+              "value": 1
+            },
+            "commanded": {
+              "rz": 25.970000000000006,
+              "chunks": 1,
+              "speed": 30.0
+            },
+            "pose_after": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.002,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 25.97
+            }
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 300.002,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 25.97
+          },
+          "e1": 3.8010552525520325
+        },
+        {
+          "stage": {
+            "kind": "rotate",
+            "target": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.0,
+              "Rz": -3.88
+            }
+          },
+          "result": {
+            "ok": true,
+            "completion_reply": {
+              "index": 1,
+              "value": 1
+            },
+            "commanded": {
+              "rz": -3.8799999999999955,
+              "chunks": 1,
+              "speed": 30.0
+            },
+            "pose_after": {
+              "X": 298.78,
+              "Y": -65.68,
+              "Z": 300.002,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": -3.88
+            }
+          },
+          "pose_mm": {
+            "X": 298.78,
+            "Y": -65.68,
+            "Z": 300.002,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88
+          },
+          "e1": 3.8008755072951317
+        },
+        {
+          "stage": {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 300.0,
+                "Rz": -3.88
+              },
+              {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rz": -3.88
+              }
+            ]
+          },
+          "result": {
+            "ok": true,
+            "executor": "lua_queue",
+            "points": 2,
+            "zone": -1,
+            "endpoint": {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 248.02,
+              "Rz": -3.88
+            },
+            "grouping": null
+          },
+          "pose_mm": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.019,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88
+          },
+          "e1": 3.8010552525520325
+        }
+      ],
+      "finished_at": 1792235468.5084853,
+      "status": "completed"
+    }
+  ],
+  "authorization": "Operator requested return to pickup and back to Home at speed 137, preserving held plate.",
+  "gripper_commands": false,
+  "program_restart": false,
+  "repeat_of_sha256": "d37ef8f0947527648a7801a1ecbe5ab56fa1b09d40d4405de0c9cda0a9ff8015",
+  "final_robot": {
+    "ok": true,
+    "connected": true,
+    "endpoint": "192.168.201.220:56788",
+    "system_state": {
+      "value": 2,
+      "state": "running"
+    },
+    "control_mode": {
+      "value": 1,
+      "mode": "auto"
+    },
+    "enabled": true,
+    "program_state": {
+      "value": 1,
+      "state": "running"
+    },
+    "lua_app_initialized": true,
+    "errors": [],
+    "pose_mm": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.019,
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": -3.88
+    },
+    "joints": {
+      "J1": 209.41994329874888,
+      "J2": 84.87686575379037,
+      "J3": 52.05594907317273,
+      "J4": -140.81300299826242
+    },
+    "external_axes": {
+      "E1": 3.8012349978089333
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    }
+  },
+  "finished_at": 1792235468.56155
+}

@@ -5,6 +5,8 @@
  "z_touch_offset_mm": 9.0,
  "safety_margin_mm": 15.0,
  "comment": "z_touch_offset = torque-probed contact Z minus vision grasp Z. Refresh via the calibrate flow (vision teach converge, then torque-guided descent to first band breach). grip Z = vision grasp Z + z_touch_offset + safety_margin.",
+ "plate_grip_e1_mm": 3.8,
+ "plate_grip_comment": "Operator feel-test 2026-10-17 at the parked grasp pose (X 300.09, Y -67.93, Z 70.47, Rz 85.75), via the fast grip stage (Pick and Hold/Grip/motion.py): E1 4.1 -> torque +57.9 (no resistance), E1 3.0 -> torque -186.9 stalled at 3.307 (full saturation, maxed out), E1 3.8 chosen as a firm grip short of saturation. Re-run the feel-test and update this value if the plate or its size changes.",
  "claw_arm_tool_mm": [
   191.6,
   5.43

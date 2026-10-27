@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-24",
+  "local_interface": "Ethernet",
+  "local_ipv4": "192.168.100.15",
+  "identification_source": "Operator confirmed REF 6600200-02 and both IP addresses; live Hamilton API confirmed MLPrepTwoChannel_0, serial PRPGD2427",
+  "recorded_instrument": {
+    "ip": "192.168.100.102",
+    "port": 2000,
+    "mac": "00-60-35-2D-55-F0",
+    "tcp_connection_succeeded": true,
+    "unsolicited_banner": "None within 1 second",
+    "instrument_commands_sent": false,
+    "test_connection_closed": true
+  },
+  "recorded_control_pc": {
+    "ip": "192.168.100.101",
+    "mac": "48-21-0B-79-71-1C",
+    "tcp_ports_open": [80, 3389],
+    "http_status": 200,
+    "http_server": "Microsoft-IIS/10.0",
+    "http_page_title": "IIS Windows",
+    "remote_desktop_authenticated": false
+  },
+  "hamilton_rest_api_verified": true,
+  "api_base_url": "http://192.168.100.101/NimbusLite/api/v1",
+  "api_documentation_url": "http://192.168.100.101/NimbusLite/api-docs/index.html",
+  "instrument_serial": "PRPGD2427",
+  "live_state": "Idle",
+  "initialization_status": "Not Initialized",
+  "live_status_record": "live_status.json",
+  "local_workflow_bridge_integrated": false,
+  "remaining_requirements": [
+    "Initialization is required before an instrument run; no initialization was requested or performed",
+    "For future local workflow integration, implement the bridge against the discovered REST API rather than the controller board socket"
+  ],
+  "existing_bridge_configuration_modified": false
+}

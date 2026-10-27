@@ -1,0 +1,347 @@
+{
+  "checked_at": "2026-10-25T03:32:29.159935+00:00",
+  "responses": {
+    "instruments/global-run-state": {
+      "status": 200,
+      "body": "Idle"
+    },
+    "service-software-api/is-parked": {
+      "status": 200,
+      "body": true
+    },
+    "service-software-api/has-tips": {
+      "status": 200,
+      "body": false
+    },
+    "service-software-api/sensor-status": {
+      "status": 200,
+      "body": {
+        "isEnclosurePresent": true,
+        "isDoorClosed": true,
+        "isXHome": true,
+        "fan1Rpm": 4293,
+        "fan2Rpm": 0,
+        "mphSensorState": {
+          "present": false,
+          "sleeveSensors": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "yHome": false,
+          "zHome": false,
+          "squeezeHome": false,
+          "dispenserHome": false
+        },
+        "independentChannelsSensorState": {
+          "present": true,
+          "frontChannel": {
+            "sleeveSensor": false,
+            "yHome": true,
+            "zHome": true,
+            "squeezeHome": true,
+            "dispenserHome": false
+          },
+          "rearChannel": {
+            "sleeveSensor": false,
+            "yHome": true,
+            "zHome": true,
+            "squeezeHome": true,
+            "dispenserHome": false
+          }
+        }
+      }
+    },
+    "errors/check-for-pending-errors": {
+      "status": 200,
+      "body": []
+    },
+    "protocol-run": {
+      "status": 200,
+      "body": {
+        "protocolId": 0,
+        "runDatalId": null,
+        "isRunInProgress": false,
+        "isSimulation": false,
+        "protocolRunState": 0,
+        "startTime": "0001-01-01T00:00:00",
+        "estimatedEndTime": "0001-01-01T00:00:00",
+        "endPauseTime": "0001-01-01T00:00:00",
+        "protocolName": "TipPickupDiagnosticAssay",
+        "currentStep": 0,
+        "preLoadThermalDeviceUsed": "None",
+        "preLoadHepaFiltration": false
+      }
+    },
+    "traces?offset=0&limit=30&sources=RTE,SDE": {
+      "status": 200,
+      "body": {
+        "totalItemCount": 846,
+        "currentOffset": 0,
+        "items": [
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:06.1243467Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:06.1242958Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:06.1242403Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Termination - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:06.0074215Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Termination - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:05.9815523Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Unload - 1 - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:05.9815518Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Unload Dialog' closed automatically",
+            "type": "High",
+            "date": "2026-10-25T02:42:05.9812761Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Unload Dialog', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:42:03.256882Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Unload - 1 - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:03.2227999Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:03.2217362Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "TipPickupDiagnosticAssay - Assay 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:03.22168Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "TipPickupDiagnosticAssay - Assay 1 < Activity : Tip_Pickup_Test_2_Channel - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:42:03.2201132Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "TipPickupDiagnosticAssay - Assay 1 > Activity : Tip_Pickup_Test_2_Channel - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:06.317075Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "TipPickupDiagnosticAssay - Assay 1 : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:06.3168983Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:06.3168315Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Load - 1 - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:05.7836902Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Load Dialog' closed automatically",
+            "type": "High",
+            "date": "2026-10-25T02:41:05.7614883Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Load Dialog', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:41:04.4703307Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Load - 1 - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.432123Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Traffic Control Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.4321228Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Traffic Control Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.4312636Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Default Arm Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.4310985Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Default Arm Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.3191013Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Prepare for Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.3186767Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Prepare for Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.3155181Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.3153359Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:04.3152531Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution started",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:01.9722126Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling completed : Duration = 00:00:00.0140479",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:01.8817256Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling started",
+            "type": "Processing",
+            "date": "2026-10-25T02:41:01.8603588Z",
+            "source": "SDE"
+          }
+        ]
+      }
+    },
+    "errors?offset=0&limit=1": {
+      "status": 200,
+      "body": {
+        "totalItemCount": 152,
+        "currentOffset": 0,
+        "items": [
+          {
+            "id": "1e50d8f7db19496ca7247d2a163b778b",
+            "message": "The assay 'TipPickupDiagnosticAssay - Assay 1' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+            "date": "2026-10-25T02:00:46.9845435Z",
+            "severity": 1,
+            "handled": true
+          }
+        ]
+      }
+    }
+  }
+}

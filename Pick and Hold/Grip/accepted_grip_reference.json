@@ -1,0 +1,189 @@
+{
+  "schema": "cephla.accepted-grip-reference.v1",
+  "id": "two_disk_plate_e1_3p8_accepted_20261020",
+  "created_utc": "2026-10-20T08:29:25.114755+00:00",
+  "purpose": "Evidence reference for the final Grip stage after Calibrate -> Align -> Descend.",
+  "status": "operator_accepted_supervised_closure_and_loaded_home_transfer",
+  "settings": {
+    "control": "E1 position increments",
+    "target_e1_mm": 3.8,
+    "closing_speed": 5,
+    "increment_mm": 0.1,
+    "evidenced_final_steps_mm": [
+      4.0,
+      3.9,
+      3.8
+    ],
+    "controller_mode": "auto",
+    "preserve_other_axes": true,
+    "startup_with_plate_allowed": false
+  },
+  "closure": {
+    "pose_mm_degrees": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.865,
+      "X": 312.575,
+      "Y": -66.2,
+      "Z": 73.718
+    },
+    "joints": {
+      "J1": 35.119012298991,
+      "J2": 40.79930140703436,
+      "J3": 59.33005808769994,
+      "J4": -10.26485376028385
+    },
+    "settled_e1_mm": 3.799617290496826,
+    "stationary_reports": [
+      {
+        "e1_position": 3.8,
+        "e1_torque": 95.468,
+        "joints": {
+          "J1": 492,
+          "J2": 4,
+          "J3": -17,
+          "J4": 11
+        },
+        "ok": true,
+        "telemetry_live": true
+      },
+      {
+        "e1_position": 3.8,
+        "e1_torque": 96.268,
+        "joints": {
+          "J1": 494,
+          "J2": 5,
+          "J3": -1,
+          "J4": -1
+        },
+        "ok": true,
+        "telemetry_live": true
+      },
+      {
+        "e1_position": 3.8,
+        "e1_torque": 95.735,
+        "joints": {
+          "J1": 492,
+          "J2": 2,
+          "J3": -4,
+          "J4": 6
+        },
+        "ok": true,
+        "telemetry_live": true
+      }
+    ],
+    "raw_e1_torque": {
+      "samples": [
+        95.468,
+        96.268,
+        95.735
+      ],
+      "mean": 95.82366666666667,
+      "minimum": 95.468,
+      "maximum": 96.268,
+      "units": "controller-reported, physical force/torque units unestablished"
+    },
+    "immediate_completion": {
+      "e1_position": 3.806,
+      "e1_torque": 95.468,
+      "e1_torque_normalized": 0.358,
+      "grip_detected": false,
+      "joints": {
+        "J1": 492,
+        "J2": 5,
+        "J3": -1,
+        "J4": -3
+      },
+      "position_error": 0.006,
+      "telemetry_live": true
+    },
+    "controller_grip_detected": false,
+    "acceptance_basis": "Operator confirmed even contact without gap, level proof lift and successful loaded Home transfer."
+  },
+  "validation": {
+    "proof_lifts_mm": [
+      5,
+      5
+    ],
+    "total_lift_mm": 10,
+    "lift_speed": 5,
+    "loaded_home_algorithm": "Lacry IKHomeConnection -> ResearcherHome -> Lua queue",
+    "translation_speed": 137,
+    "wrist_speed": 30,
+    "home_pose_mm_degrees": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "home_e1_mm": 3.7999767810106277,
+    "controller_errors": [],
+    "operator_outcome": "Yes, it stayed level. Nice. This was a succesful test."
+  },
+  "interpretation": {
+    "torque_is_observation_not_setpoint": true,
+    "force_limits": null,
+    "force_units": null,
+    "contact_torque_threshold": null,
+    "closing_torque_sign": null,
+    "matched_empty_baseline_at_this_pose": false,
+    "transferable_force_model_validated": false
+  },
+  "integration": {
+    "runtime_activated": false,
+    "installed_grip": "pick_and_hold.Grip.torque.TorqueGrip",
+    "installed_vendor_profile_still_unreviewed": true,
+    "descent_profile": {
+      "path": "Pick and Hold/Grip/accepted_grip_previous_descent.json",
+      "sha256": "d2ab1f41a7a61fadc8d6d5dace82626834d2c184f472ac3cfe93d41e63a63371"
+    },
+    "successful_pose_minus_saved_descent": {
+      "X": 2.3396973115127935,
+      "Y": 0.05691807978408292,
+      "Z": 3.257000000000005,
+      "Rz": 0.6912999999999982
+    },
+    "same_as_saved_descent_endpoint": false,
+    "responsibilities": "Descend owns arm positioning. Grip owns E1 closure only.",
+    "next_review": "Reconcile the accepted grip pose with the descent profile and validate the staged Grip implementation. Do not add the delta to arbitrary future placements.",
+    "initial_closure_from_28mm_at_successful_pose_validated": false
+  },
+  "evidence": [
+    {
+      "path": "operator_ui/demonstrations/supervised_grip/cdcc8e1f0c774b5ab0fe3cafed7b4ffe.json",
+      "sha256": "665dd8608880c87426c770920f939fc7163fb790e662d1d13f9dae7696ada58b"
+    },
+    {
+      "path": "operator_ui/demonstrations/supervised_grip/5b78a0334fc34f2885208bc453e3a7bf.json",
+      "sha256": "db1230e76c0721254d90331f9ab07ef55c7700453887545bc9c96ed0f78b0aaf"
+    },
+    {
+      "path": "operator_ui/demonstrations/supervised_grip/5b78a0334fc34f2885208bc453e3a7bf_review.json",
+      "sha256": "31804e7ce0d70d0941c10a4e771216b14d1b7207cfb8ba912bb8066a242b640c"
+    },
+    {
+      "path": "operator_ui/demonstrations/supervised_grip/contact_3p8_first_lift_acceptance.json",
+      "sha256": "76b1762111cb450254c61b80d790aae69e5152196a916af8db0a9e588b44e142"
+    },
+    {
+      "path": "operator_ui/demonstrations/supervised_grip/contact_3p8_proof_lift_plan_proof_lift.json",
+      "sha256": "ef26317b94fe4c046ab432e36559e9d4987af909d83c0c51d36c4906b2692e9e"
+    },
+    {
+      "path": "operator_ui/demonstrations/supervised_grip/contact_3p8_second_lift_plan_proof_lift.json",
+      "sha256": "ac9e25f64cf7f1c4cf658d6632921a06b5f81cf9b51dd2d7e4a16ac39f78a308"
+    },
+    {
+      "path": "operator_ui/demonstrations/supervised_grip/contact_3p8_lacry_home_trial.json",
+      "sha256": "3885bcba52dd2afaf89da90c5da0ef21c83bfec64daf8d278d4e8586b7d88ad9"
+    },
+    {
+      "path": "operator_ui/reports/ik_home/1792484685745825600_5245de30b33e4c25b5dc686c6320ddeb.json",
+      "sha256": "05e0afa808a22c682803a41a35062c73f73e63941faf67af51fb9deb9c15c2c6"
+    },
+    {
+      "path": "Pick and Hold/Grip/accepted_grip_previous_descent.json",
+      "sha256": "d2ab1f41a7a61fadc8d6d5dace82626834d2c184f472ac3cfe93d41e63a63371"
+    }
+  ]
+}

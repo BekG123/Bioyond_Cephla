@@ -1,0 +1,68 @@
+<div id="well48-animation">
+<h2>From 48 wells to two virtual disks</h2>
+<div class="viz-row"><span id="well48-phase" aria-live="polite">1 / 6 · Observe the plate</span><span class="text-small text-muted">30-second schematic · no hardware connection</span></div>
+<canvas id="well48-canvas" role="img" aria-label="3D schematic: well-grid tracking, virtual disk mapping, camera centering, separate height reference, and gripper alignment."></canvas>
+<div id="well48-detail" class="text-small">Eye-in-hand camera observes the stationary plate.</div>
+<div class="viz-controls"><button class="btn btn-primary" id="well48-play" type="button">Play animation</button><button class="btn" id="well48-replay" type="button">Replay</button><span id="well48-clock" class="tabular-nums text-small">0 / 30 s</span></div>
+<label class="form-label" for="well48-time">Animation timeline</label>
+<input class="form-range" id="well48-time" type="range" min="0" max="30" step="0.05" value="0">
+<style>
+#well48-animation canvas{display:block;width:100%;height:400px;}
+#well48-animation #well48-detail{min-height:2.8em;margin-bottom:12px;}
+@media(max-width:460px){#well48-animation canvas{height:340px;}}
+</style>
+<script>
+(()=>{
+const root=document.getElementById('well48-animation'),canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d');
+const play=root.querySelector('#well48-play'),replay=root.querySelector('#well48-replay'),slider=root.querySelector('#well48-time'),clock=root.querySelector('#well48-clock'),title=root.querySelector('#well48-phase'),detail=root.querySelector('#well48-detail');
+const phases=['Observe the plate','Track the 6 × 8 grid','Map the virtual disks','Center the camera','Set height separately','Align the gripper'];
+const captions=['Eye-in-hand camera observes the stationary plate.','Well-ring patterns register in two independent groups; both must agree.','Perspective mapping transfers the taught disks. These are software overlays.','The virtual midpoint drives small XY corrections, followed by new observations.','20 mm vs 15 mm plate height → +5 mm observation height on the same support.','Disk angle + taught camera-to-claw transform set XY and yaw; grip height is taught separately.'];
+let time=0,playing=false,last=0,phase=-1,W=0,H=0,scale=1,colors={};
+const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+function color(name){const e=document.createElement('span');e.style.color='var('+name+')';root.appendChild(e);const c=getComputedStyle(e).color;e.remove();return c;}
+function palette(){colors={fg:color('--foreground'),muted:color('--muted-foreground'),surface:color('--card'),bg:color('--background'),border:color('--border'),a:color('--viz-series-1'),b:color('--viz-series-2'),v:color('--viz-series-3')};}
+function p(x,y,z){const a=-.39,u=x*Math.cos(a)-y*Math.sin(a),v=x*Math.sin(a)+y*Math.cos(a);return [W/2+u*scale,H*.73+(v*.56-z*.84)*scale];}
+function path(points,stroke,fill,width=1,alpha=1,dash=[]){ctx.save();ctx.globalAlpha=alpha;ctx.beginPath();points.forEach((v,i)=>{let q=p(...v);i?ctx.lineTo(...q):ctx.moveTo(...q);});if(fill){ctx.closePath();ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.setLineDash(dash);ctx.stroke();}ctx.restore();}
+function line(a,b,c,width=1,alpha=1,dash=[]){path([a,b],c,null,width,alpha,dash);}
+function ring(x,y,z,r,c,width=1,alpha=1,fill=null){let pts=[];for(let i=0;i<=48;i++){let a=i*Math.PI/24;pts.push([x+r*Math.cos(a),y+r*Math.sin(a),z]);}path(pts,c,fill,width,alpha);}
+function box(x,y,z,w,d,h){const pts=[[-1,-1],[1,-1],[1,1],[-1,1]].map(v=>[x+v[0]*w/2,y+v[1]*d/2,z]);path([pts[1],pts[2],[pts[2][0],pts[2][1],z+h],[pts[1][0],pts[1][1],z+h]],colors.border,colors.surface);path([pts[2],pts[3],[pts[3][0],pts[3][1],z+h],[pts[2][0],pts[2][1],z+h]],colors.border,colors.surface);path(pts.map(v=>[v[0],v[1],z+h]),colors.border,colors.bg);}
+function label(text,x,y,z){const q=p(x,y,z);ctx.fillStyle=colors.fg;ctx.textAlign='center';ctx.fillText(text,q[0],q[1]);}
+function draw(){
+if(!W)return;ctx.clearRect(0,0,W,H);ctx.font=getComputedStyle(detail).font;ctx.textBaseline='middle';
+const stage=Math.min(5,Math.floor(time/5)),u=(time-stage*5)/5;
+if(stage!==phase){phase=stage;title.textContent=`${stage+1} / 6 · ${phases[stage]}`;detail.textContent=captions[stage];}
+scale=Math.min(W/260,H/190);
+for(let x=-100;x<=100;x+=20)line([x,-65,0],[x,65,0],colors.border,1,.5);
+for(let y=-60;y<=60;y+=20)line([-100,y,0],[100,y,0],colors.border,1,.5);
+box(0,0,0,140,94,20);
+const tracked=stage>1?48:stage===1?Math.min(48,Math.floor(u*64)):0;
+for(let r=0;r<6;r++)for(let c=0;c<8;c++){let x=-52.5+c*15,y=-37.5+r*15,i=r*8+c;ring(x,y,20.2,5.9,colors.border,1,1,colors.surface);ring(x,y,19.6,3.8,colors.border,1,.65);if(i<tracked)ring(x,y,20.5,6.2,(c+r)%2?colors.b:colors.a,1.6,.95);}
+if(stage===1)label('Two independent well groups',0,72,0);
+if(stage>=2){const map=stage===2?ease(u*1.7):1,z=20.9+(1-map)*55;
+if(stage===2&&map<1){for(const [x,y] of [[-70,-47],[70,-47],[70,47],[-70,47]])line([x,y,76],[x,y,21],colors.v,1,.35,[4,4]);path([[-70,-47,z],[70,-47,z],[70,47,z],[-70,47,z],[-70,-47,z]],colors.v,null,1,.6);}
+ring(-24,0,z,17,colors.v,2.6,.95);ring(24,0,z,10,colors.v,2.6,.95);line([-24,0,z],[24,0,z],colors.v,2,.9,[5,4]);ring(0,0,z,1.4,colors.v,1,1,colors.v);
+if(stage===2)label('Virtual landmarks · software overlay',0,72,0);}
+if(stage<5){const centered=stage<3?0:stage===3?ease(u):1,cx=25*(1-centered),cy=-17*(1-centered),cz=115+(stage===4?5*ease(u):0);
+for(const [x,y] of [[-70,-47],[70,-47],[70,47],[-70,47]])line([cx,cy,cz],[x,y,20],colors.a,1,.19);
+box(cx,cy,cz,20,15,12);ring(cx,cy,cz-.5,5,colors.a,2);label('Camera',cx,cy,cz+23);
+if(stage===3){line([cx-5,cy,22],[cx+5,cy,22],colors.a,2);line([cx,cy-5,22],[cx,cy+5,22],colors.a,2);line([cx,cy,22],[0,0,22],colors.a,2,.8,[3,3]);label('XY correction → re-observe',0,72,0);}
+if(stage===4){line([83,0,0],[83,0,20],colors.fg,1.5);line([79,0,20],[88,0,20],colors.fg,1.5);line([79,0,15],[88,0,15],colors.fg,1.5);label('+5 mm',85,0,36);label('Separate physical height reference',0,72,0);}
+}else{const k=ease(u),angle=(1-k)*.45,dx=(1-k)*23,dy=(1-k)*-17,z=70;const tr=(x,y,h)=>[dx+x*Math.cos(angle)-y*Math.sin(angle),dy+x*Math.sin(angle)+y*Math.cos(angle),h];
+path([tr(-43,-53,z),tr(43,-53,z),tr(43,53,z),tr(-43,53,z)],colors.border,colors.surface,1);
+for(const sy of [-1,1]){path([tr(-35,sy*53,z),tr(35,sy*53,z),tr(35,sy*53,z-32),tr(-35,sy*53,z-32)],colors.fg,colors.surface,1.4);line(tr(0,sy*53,z-32),[0,sy*47,21],colors.a,1,.6,[4,4]);}
+label(k>.98?'Aligned above plate':'Align XY + wrist angle',0,0,113);label('Descent height: separately taught',0,72,0);}
+if(W>=460){ctx.textAlign='left';ctx.fillStyle=colors.muted;ctx.fillText('48-well plate · schematic geometry',12,24);}
+canvas.dataset.rendered='true';canvas.dataset.phase=String(stage);slider.value=time;clock.textContent=`${Math.floor(time)} / 30 s`;
+}
+function size(){W=canvas.clientWidth;H=canvas.clientHeight;let d=devicePixelRatio||1;canvas.width=W*d;canvas.height=H*d;ctx.setTransform(d,0,0,d,0,0);palette();draw();}
+function persist(){window.openai?.setWidgetState?.({modelContent:{animation:'48-well calibration'},privateContent:{time}})?.catch(()=>{});}
+function tick(now){if(playing){time=Math.min(30,time+(now-last)/1000);draw();if(time===30){playing=false;play.textContent='Play again';}}last=now;requestAnimationFrame(tick);}
+play.onclick=()=>{if(time>=30)time=0;playing=!playing;last=performance.now();play.textContent=playing?'Pause':'Play animation';draw();};
+replay.onclick=()=>{time=0;playing=true;last=performance.now();play.textContent='Pause';draw();};
+slider.oninput=()=>{playing=false;time=Number(slider.value);play.textContent='Play animation';draw();};slider.onchange=persist;
+const saved=window.openai?.widgetState?.privateContent;if(saved&&Number.isFinite(saved.time))time=Math.max(0,Math.min(30,saved.time));
+window.addEventListener('openai:set_globals',e=>{const s=e.detail?.globals?.widgetState?.privateContent;if(s&&Number.isFinite(s.time)){time=Math.max(0,Math.min(30,s.time));playing=false;draw();}});
+new ResizeObserver(size).observe(canvas);new MutationObserver(()=>{palette();draw();}).observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});size();requestAnimationFrame(tick);
+})();
+</script>
+</div>

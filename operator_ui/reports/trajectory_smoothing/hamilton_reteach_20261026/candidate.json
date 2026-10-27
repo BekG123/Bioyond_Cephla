@@ -1,0 +1,390 @@
+{
+  "schema": "cephla.hamilton-endpoint-proposal.v1",
+  "created_at": "2026-10-27T02:41:55.495663+00:00",
+  "status": "offline_proposal_not_active",
+  "snapshot": "operator_ui\\reports\\trajectory_smoothing\\hamilton_reteach_20261026\\taught_state.json",
+  "snapshot_sha256": "ad328fddccb360ade1f9069aadf5fd7f7815c4326763a5fb5a181c3948606331",
+  "snapshot_ts": 1793068861.5757463,
+  "operator_feedback": "Hamilton was moved up. Save the current arm coordinate and keep the same path with this final destination.",
+  "measured_pose": {
+    "X": 144.499,
+    "Y": -350.676,
+    "Z": 61.221,
+    "Rz": -3.0
+  },
+  "measured_joints": {
+    "J1": 22.621427422635676,
+    "J2": -58.371505732906265,
+    "J3": 122.78237003190056,
+    "J4": -67.41102441949262
+  },
+  "measured_e1_mm": 3.8075267802923918,
+  "payload": "unknown; E1 feedback does not establish plate presence",
+  "endpoint": {
+    "X": 144.5,
+    "Y": -350.68,
+    "Z": 61.22,
+    "Rz": -3.0
+  },
+  "endpoint_delta": {
+    "X": -50.84100000000001,
+    "Y": 9.634000000000015,
+    "Z": 22.610999999999997,
+    "Rz": -1.1
+  },
+  "parent": {
+    "parent_sha256": "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+    "measured_return_start": {
+      "name": "Measured Hamilton return start, 2026-10-20",
+      "parent_sha256": "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+      "pose": {
+        "X": 195.051,
+        "Y": -360.241,
+        "Z": 49.087,
+        "Rz": -2.149
+      },
+      "joints": {
+        "J1": 10.48810564722949,
+        "J2": -55.64014845006266,
+        "J3": 132.9820480285914,
+        "J4": -79.49053270432651
+      },
+      "physical_clearance_verified": false,
+      "reason": "User requested Home from this measured position near the former taught Hamilton endpoint. Use the existing Hamilton exit, boundary and true Home targets; review physical clearance before execution."
+    },
+    "endpoint_reference": {
+      "schema": "cephla.hamilton-endpoint.v1",
+      "parent_sha256": "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+      "pose": {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      },
+      "requested_j1_mm": 0.0,
+      "reference_z_minus_j1_mm": 38.60109389686886,
+      "expected_j1_mm": 0.008906103131139709,
+      "source": "Operator requested J1=0.00 on 2026-10-20; saved Home measurement supplies conservative Z/J1 offset.",
+      "quantization": "Ceil zero-height to queue resolution 0.01 mm so predicted J1 remains nonnegative.",
+      "clearance_feedback": "Operator checked the lower Z36.925 placement; revised endpoint is 1.685 mm above that placement.",
+      "automatic_trial_completed": true,
+      "automatic_trial_payload": "empty_gripper",
+      "automatic_trial_record": "reports/hamilton/zero_roundtrip_20261020T113048Z.json",
+      "loaded_handling_validated": false
+    },
+    "reverse": [
+      {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    ],
+    "forward": [
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      }
+    ],
+    "old_home_area": {
+      "X": 276.03,
+      "Y": 79.94,
+      "Z": 166.41,
+      "Rz": 1.98
+    },
+    "physical_clearance_verified": false,
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    }
+  },
+  "parent_sha256": "a4c6917048a2261401afd09aab141b9b69ca1ca3cd85c1a8c718c443550eec0f",
+  "source_hashes": {
+    "hamilton_endpoint.json": "34e06abd9dc3573f49a9e54038fd073541fb79f45a11f658c5879739951b42e0",
+    "points.json": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "robot_params.json": "392405eec594dc656070faa59f08ba5c8387cdcdd6f844f021670fff0de2d7ba",
+    "envelope.json": "45553546a9236b3943593b3621e38988a9f495994afdbfb7c4f41007d00c8963"
+  },
+  "routes": {
+    "forward": [
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 144.5,
+        "Y": -350.68,
+        "Z": 61.22,
+        "Rz": -3.0
+      }
+    ],
+    "reverse": [
+      {
+        "X": 144.5,
+        "Y": -350.68,
+        "Z": 61.22,
+        "Rz": -3.0
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    ]
+  },
+  "cfg": {
+    "comment": "Arm-specific limits + kinematics for the operator console and the standalone grabber. EDIT THIS (or let calibration flows update it) when porting to another arm - nothing is hardcoded in the code. The planar model (fitted EXACTLY, 0.00 mm residual on 8 live poses, 2026-07-28): P = base + link1*e^i(J2+j2_offset) + link2*e^i(J2+J3+j3_offset). Feasibility = |P-base| <= link1+link2-extension_margin AND predicted J2 >= j2_min+j2_margin. reach_hard_mm/inner_reach_mm are legacy origin-circle guards used only when the kinematic block is absent.",
+    "reach_hard_mm": 460.0,
+    "j4_pref_abs_deg": 220.0,
+    "j4_hard_abs_deg": 220.0,
+    "j4_limit_note": "Operator-authorized envelope +/-220 degrees, matching S4 Hardware Manual p15. Automatic planning/queue checks retain their 5-degree buffer: effective +/-215. Preserve continuous actual joint winding; no modulo-360 reset. The Home-to-scope solution starts at measured Home J4=-140.81 and stays between -180.83 and -83.75. No +/-280 envelope is authorized or applied.",
+    "inner_reach_mm": 280.0,
+    "claw_gap_min_mm": 60.0,
+    "claw_gap_max_mm": 88.0,
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j2_min_deg": -95.0,
+    "j2_margin_deg": 2.0,
+    "extension_margin_mm": 8.0,
+    "reach_limit_note": "Automatic planar reach is 390 mm from base (126, 0): 400 mm links minus 8 mm extension margin minus 2 mm planning/tracking buffer. Workspace Y maximum is 380 mm. Updated at operator request 2026-10-17; joint/wrist limits unchanged."
+  },
+  "validation": {
+    "forward": {
+      "ik_continuity_and_joint_limits_passed": true,
+      "checked": [
+        {
+          "pose": {
+            "X": 215.74,
+            "Y": -249.0,
+            "Z": 212.0,
+            "Rz": -0.94
+          },
+          "joints": {
+            "J1": 173.4004274226357,
+            "J2": -21.609963942234387,
+            "J3": 82.85841608840936,
+            "J4": -62.188512773354375
+          },
+          "changed_segment": false
+        },
+        {
+          "pose": {
+            "X": 195.88,
+            "Y": -357.36,
+            "Z": 212.0,
+            "Rz": -1.9
+          },
+          "joints": {
+            "J1": 173.4004274226357,
+            "J2": -54.485403697344296,
+            "J3": 131.09939585922382,
+            "J4": -78.51405278905894
+          },
+          "changed_segment": false
+        },
+        {
+          "pose": {
+            "X": 144.5,
+            "Y": -350.68,
+            "Z": 61.22,
+            "Rz": -3.0
+          },
+          "joints": {
+            "J1": 22.62042742263568,
+            "J2": -58.372536641260794,
+            "J3": 122.78471192974496,
+            "J4": -67.41223591566357
+          },
+          "changed_segment": true
+        }
+      ],
+      "ordinary_workspace_passed": false,
+      "ordinary_workspace_refusals": [
+        {
+          "segment": 2,
+          "reason": "path outside Y envelope"
+        },
+        {
+          "segment": 3,
+          "reason": "path outside X envelope"
+        }
+      ],
+      "length_mm": 591.9661908129843
+    },
+    "reverse": {
+      "ik_continuity_and_joint_limits_passed": true,
+      "checked": [
+        {
+          "pose": {
+            "X": 195.88,
+            "Y": -357.36,
+            "Z": 212.0,
+            "Rz": -1.9
+          },
+          "joints": {
+            "J1": 173.4004274226357,
+            "J2": -54.48540369734429,
+            "J3": 131.09939585922376,
+            "J4": -78.51415228237781
+          },
+          "changed_segment": true
+        },
+        {
+          "pose": {
+            "X": 215.74,
+            "Y": -249.0,
+            "Z": 212.0,
+            "Rz": -0.94
+          },
+          "joints": {
+            "J1": 173.4004274226357,
+            "J2": -21.60996394223438,
+            "J3": 82.85841608840934,
+            "J4": -62.18861226667329
+          },
+          "changed_segment": false
+        },
+        {
+          "pose": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          },
+          "joints": {
+            "J1": 209.4204274226357,
+            "J2": 84.87688206683333,
+            "J3": 52.05596109242009,
+            "J4": -140.81300327975174
+          },
+          "changed_segment": false
+        }
+      ],
+      "ordinary_workspace_passed": false,
+      "ordinary_workspace_refusals": [
+        {
+          "segment": 1,
+          "reason": "path outside X envelope"
+        },
+        {
+          "segment": 2,
+          "reason": "path outside X envelope"
+        }
+      ],
+      "length_mm": 591.9661908129843
+    }
+  },
+  "arrival_joint_error": {
+    "J1": -0.0009999999999976694,
+    "J2": -0.0010309083545294584,
+    "J3": 0.0023418978444027516,
+    "J4": -0.0012114961709528416
+  },
+  "preserved_waypoints": [
+    {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    {
+      "X": 215.74,
+      "Y": -249.0,
+      "Z": 212.0,
+      "Rz": -0.94
+    },
+    {
+      "X": 195.88,
+      "Y": -357.36,
+      "Z": 212.0,
+      "Rz": -1.9
+    }
+  ],
+  "queued_targets": 3,
+  "speed": 137,
+  "zone": -1,
+  "final_segment_horizontal_mm": 51.81241936061276,
+  "physical_clearance_verified": false,
+  "hardware_execution": false,
+  "runtime_promoted": false,
+  "limitation": "Endpoint-only replacement makes the final descent diagonal. New Hamilton geometry has not been surveyed. Existing runtime pins the old XY/yaw and must not execute this proposal. No workspace limits or route exceptions were changed."
+}

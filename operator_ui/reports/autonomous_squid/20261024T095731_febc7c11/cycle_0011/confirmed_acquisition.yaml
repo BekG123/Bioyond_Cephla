@@ -1,0 +1,65 @@
+acquisition:
+  experiment_id: current_Squid_settings
+  skip_saving: false
+  start_time: 0
+  widget_type: flexible
+  xy_mode: Current Position
+autofocus:
+  contrast_af: false
+  laser_af: false
+channels:
+- camera: null
+  camera_settings:
+    exposure_time_ms: 20.0
+    gain_mode: 10.0
+    pixel_format: null
+  confocal_hardware_settings: null
+  confocal_override: null
+  display_color: '#FFFFFF'
+  enabled: true
+  filter_position: 1
+  filter_wheel: null
+  illumination_settings:
+    illumination_channel: BF LED matrix full
+    intensity: 5.0
+  name: BF LED matrix full
+  z_offset_um: 0.0
+flexible_scan:
+  delta_x_mm: 0.9
+  delta_y_mm: 0.9
+  nx: 1
+  ny: 1
+  overlap_percent: 10.0
+  positions:
+  - center_mm:
+    - 100.2839625
+    - 45.669200000000004
+    fovs:
+    - - 100.2839625
+      - 45.669200000000004
+    name: current
+mosaic_view:
+  resolution_um: 2.0
+  save_overview: true
+  save_well_images: false
+objective:
+  camera_binning:
+  - 2
+  - 2
+  name: 20x
+plate:
+  num_cols: 12
+  num_rows: 8
+sample:
+  wellplate_format: 96 well plate
+time_series:
+  delta_t_s: 2.0
+  nt: 5
+z_stack:
+  config: FROM BOTTOM
+  delta_z_mm: 0.0015
+  nz: 1
+  use_piezo: false
+  z_range_mm:
+  - 1.05
+  - 1.05

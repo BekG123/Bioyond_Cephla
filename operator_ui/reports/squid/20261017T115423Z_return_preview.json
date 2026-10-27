@@ -1,0 +1,268 @@
+{
+  "schema": "cephla.squid-ik-preview.v1",
+  "created_at": "2026-10-17T11:54:23.906478+00:00",
+  "screenshot_goal": {
+    "X": 197.21,
+    "Y": 392.78,
+    "Z": 266.08,
+    "Rz": 91.31
+  },
+  "screenshot_path": "C:/Users/Cephla/Pictures/Screenshots/Screenshot 2026-10-17 045016.png",
+  "live_robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "manual",
+      "value": 0
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 3.513617208227515
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 227.47834876003716,
+      "J2": 83.39000887294041,
+      "J3": 172.66796690557487,
+      "J4": -164.74662698809456
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 91.311,
+      "X": 197.21,
+      "Y": 392.779,
+      "Z": 266.077
+    },
+    "program_state": {
+      "state": "stopped",
+      "value": 0
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "live_vs_screenshot": {
+    "X": 0.0,
+    "Y": -0.001,
+    "Z": -0.003,
+    "Rz": 0.001
+  },
+  "geometric_goal_joints": [
+    83.38687583959823,
+    172.67432616211204
+  ],
+  "goal_reach_mm": 399.1829060718908,
+  "runtime_reach_limit_mm": 383.0,
+  "requested_translation_speed": 137,
+  "wrist_speed_max": 30,
+  "waypoints": [
+    {
+      "label": "Current Squid pose",
+      "X": 197.21,
+      "Y": 392.779,
+      "Z": 266.077,
+      "Rz": 91.311
+    },
+    {
+      "label": "Raise at Squid",
+      "X": 197.21,
+      "Y": 392.779,
+      "Z": 300.0,
+      "Rz": 91.311,
+      "diagnostic_joints": {
+        "J2": 83.38905575181683,
+        "J3": 172.66991512814207,
+        "J4": -164.74762208953817
+      }
+    },
+    {
+      "label": "Bent-elbow staging",
+      "X": 313.939,
+      "Y": 325.519,
+      "Z": 300.0,
+      "Rz": 91.311,
+      "diagnostic_joints": {
+        "J2": 79.99985832232856,
+        "J3": 140.00014666580847,
+        "J4": -128.6886561977163
+      }
+    },
+    {
+      "label": "Return corridor",
+      "X": 350.0,
+      "Y": 200.0,
+      "Z": 300.0,
+      "Rz": 91.311,
+      "diagnostic_joints": {
+        "J2": 83.10638929607681,
+        "J3": 97.30782081564212,
+        "J4": -89.10286132129822
+      }
+    },
+    {
+      "label": "Above Home, preserve yaw",
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 300.0,
+      "Rz": 91.311,
+      "diagnostic_joints": {
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242009,
+        "J4": -45.621494368832714
+      }
+    },
+    {
+      "label": "Home wrist segment 1/4",
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 300.0,
+      "Rz": 67.51325,
+      "diagnostic_joints": {
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242009,
+        "J4": -69.41924436883271
+      }
+    },
+    {
+      "label": "Home wrist segment 2/4",
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 300.0,
+      "Rz": 43.715500000000006,
+      "diagnostic_joints": {
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242009,
+        "J4": -93.2169943688327
+      }
+    },
+    {
+      "label": "Home wrist segment 3/4",
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 300.0,
+      "Rz": 19.917750000000012,
+      "diagnostic_joints": {
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242009,
+        "J4": -117.0147443688327
+      }
+    },
+    {
+      "label": "Home wrist segment 4/4",
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 300.0,
+      "Rz": -3.8799999999999955,
+      "diagnostic_joints": {
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242009,
+        "J4": -140.8124943688327
+      }
+    },
+    {
+      "label": "Saved Home",
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88,
+      "diagnostic_joints": {
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242009,
+        "J4": -140.8124943688327
+      }
+    }
+  ],
+  "runtime_leg_checks": [
+    {
+      "leg": 1,
+      "passed": false,
+      "error": "path enters the folded/extended singularity margin"
+    },
+    {
+      "leg": 2,
+      "passed": false,
+      "error": "path enters the folded/extended singularity margin"
+    },
+    {
+      "leg": 3,
+      "passed": false,
+      "error": "path outside Y envelope"
+    },
+    {
+      "leg": 4,
+      "passed": false,
+      "error": "path outside Y envelope"
+    },
+    {
+      "leg": 5,
+      "passed": true
+    },
+    {
+      "leg": 6,
+      "passed": true
+    },
+    {
+      "leg": 7,
+      "passed": true
+    },
+    {
+      "leg": 8,
+      "passed": true
+    },
+    {
+      "leg": 9,
+      "passed": true
+    }
+  ],
+  "diagnostic_peak_abs_J2": 88.48086036019863,
+  "diagnostic_peak_abs_J4": 164.74762208953817,
+  "runtime_config": {
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "claw_gap_max_mm": 88.0,
+    "claw_gap_min_mm": 60.0,
+    "extension_margin_mm": 15.0,
+    "inner_reach_mm": 280.0,
+    "j2_margin_deg": 2.0,
+    "j2_min_deg": -95.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j4_hard_abs_deg": 205.0,
+    "j4_pref_abs_deg": 150.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "reach_hard_mm": 460.0
+  },
+  "workspace": {
+    "X": [
+      200.0,
+      450.0
+    ],
+    "Y": [
+      -250.0,
+      100.0
+    ],
+    "Z": [
+      70.0,
+      400.0
+    ]
+  },
+  "executable": false,
+  "physical_clearance_verified": false,
+  "reasons": [
+    "Current pose and departure violate unchanged automatic reach, wrist and workspace limits.",
+    "Diagnostic geometric solutions are not runtime approval or collision checks.",
+    "137 has not been commissioned for this near-full-extension Squid departure.",
+    "Manual mode/program stopped; any loaded transition must avoid claw reset."
+  ],
+  "no_motion_commands": true,
+  "no_limits_changed": true
+}

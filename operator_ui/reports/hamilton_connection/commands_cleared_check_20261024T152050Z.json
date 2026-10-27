@@ -1,0 +1,315 @@
+{
+  "checked_at": "2026-10-24T15:20:48.992799+00:00",
+  "read_only": true,
+  "responses": {
+    "instruments/global-run-state": {
+      "status": 200,
+      "data": "CalibrationAssayRunning"
+    },
+    "protocol-run": {
+      "status": 200,
+      "data": {
+        "protocolId": 0,
+        "runDatalId": null,
+        "isRunInProgress": false,
+        "isSimulation": false,
+        "protocolRunState": 0,
+        "startTime": "0001-01-01T00:00:00",
+        "estimatedEndTime": "0001-01-01T00:00:00",
+        "endPauseTime": "0001-01-01T00:00:00",
+        "protocolName": "MlPrepSelfCalibration",
+        "currentStep": 0,
+        "preLoadThermalDeviceUsed": "None",
+        "preLoadHepaFiltration": false
+      }
+    },
+    "verification/status": {
+      "status": 200,
+      "data": {
+        "isWorkflowInProgress": false,
+        "isRunInProgress": false,
+        "isServiceRoutineInProgress": false,
+        "startTime": "2026-10-24T07:01:54.7899022-07:00",
+        "currentIndex": 0,
+        "runs": [],
+        "serviceRoutine": null
+      }
+    },
+    "errors/check-for-pending-errors": {
+      "status": 200,
+      "data": []
+    },
+    "maintenance/errors": {
+      "status": 200,
+      "data": [
+        {
+          "message": "Close the door and continue the assay",
+          "response": "Close Door and Continue"
+        }
+      ]
+    },
+    "instruments/get-active-system": {
+      "status": 200,
+      "data": {
+        "name": "TiprackTestSystem",
+        "description": "MicroLab Prep Template system with 2 channels and MPH8",
+        "instrumentName": "eb0bfbec50c044aba9068fcdcaa5e1ae",
+        "workspaceName": "eb0bfbec50c044aba9068fcdcaa5e1ae",
+        "isConnected": true,
+        "isConnecting": false,
+        "connectedInstrumentName": "PRPGD2427"
+      }
+    },
+    "instruments/connection-info": {
+      "status": 200,
+      "data": [
+        "Serial Number: PRPGD2427",
+        "Instrument Name: PRPGD2427",
+        "Connected: True",
+        "Controlling PC Name: DESKTOP-9DPRVQ3",
+        "Initialization Status: Initialized",
+        "Enclosure Status: Present",
+        "Individual Channels: Present",
+        "MPH8: Not Present",
+        "HHS: Not Present",
+        "HHC: Not Present",
+        "HEPAUV: Not Present"
+      ]
+    },
+    "errors?offset=0&limit=6": {
+      "status": 200,
+      "data": {
+        "totalItemCount": 40,
+        "currentOffset": 0,
+        "items": [
+          {
+            "id": "e75f02056af74b25b027b1475a1e6334",
+            "message": "Cannot perform the requested operation because the affected document is currently used in execution!",
+            "date": "2026-10-24T14:28:51.3153962Z",
+            "severity": 1,
+            "handled": false
+          },
+          {
+            "id": "ddd1a18265aa4c93aba8f93252e34158",
+            "message": "Cannot perform the requested operation because the affected document is currently used in execution!",
+            "date": "2026-10-24T14:25:19.341172Z",
+            "severity": 1,
+            "handled": false
+          },
+          {
+            "id": "3b45ba04fb82417d8e58043d3ea8522b",
+            "message": "One or more errors occurred in XSL Command Initialize. Select a recovery action for each error.",
+            "date": "2026-10-24T14:10:21.4239168Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "5c5e7619201f46bcbcd5e1307d79c4e0",
+            "message": "Close the door and continue the assay",
+            "date": "2026-10-24T14:10:21.4134177Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "1ef48ada52754a3a95bbde2674c17f65",
+            "message": "Failed to load Active System: 'TiprackTestSystem, Ver. 1'.  Attempting to load Empty System.",
+            "date": "2026-10-24T14:00:48.5882835Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "65d6dfd264cf43d9be49ff1982b1c486",
+            "message": "Could not load system configuration 'TiprackTestSystem'.",
+            "date": "2026-10-24T14:00:48.5610914Z",
+            "severity": 1,
+            "handled": true
+          }
+        ]
+      }
+    },
+    "traces?offset=0&limit=15&sources=SDE,RTE": {
+      "status": 200,
+      "data": {
+        "totalItemCount": 84,
+        "currentOffset": 0,
+        "items": [
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Close Door', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-24T14:24:57.6855387Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-24T14:24:56.7807897Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution completed",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.5209151Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.520617Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.5205364Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Termination - complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.4088945Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Termination - start",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.370142Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.3681773Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Initialize Instrument - Assay 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.3681224Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Initialize Instrument - Assay 1 < Activity : Activity - complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.3672903Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Initialize Instrument - Assay 1 > Activity : Activity - start",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.3664915Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Initialize Instrument - Assay 1 : start",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.3663782Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : start",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:45.3662921Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Traffic Control Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:44.9783452Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Traffic Control Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-24T14:10:44.975955Z",
+            "source": "SDE"
+          }
+        ]
+      }
+    },
+    "calibration/channel-results": {
+      "status": 200,
+      "data": [
+        {
+          "id": 1003,
+          "calibrationDate": "2026-08-31T14:52:59.7989953",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1002,
+          "calibrationDate": "2026-08-31T14:52:58.813912",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 3,
+          "calibrationDate": "2026-07-17T17:07:46.264014",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 2,
+          "calibrationDate": "2026-07-17T17:07:45.2742482",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1,
+          "calibrationDate": "2026-07-17T17:04:39.1692295",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        }
+      ]
+    }
+  }
+}

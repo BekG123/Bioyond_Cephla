@@ -1,0 +1,65 @@
+{
+  "captured_at": 1792854556.8566008,
+  "source": "live_gui",
+  "plan": {
+    "profile": {
+      "label": "Live Squid XYZ stage with selected imaging settings (simulated camera)",
+      "simulation": true,
+      "camera_simulated": true,
+      "simulation_scope": "camera_only",
+      "command": "run_acquisition_from_yaml",
+      "params": {
+        "settings_sha256": "c3435b9f26761055401f1153e270a507a7f7575da2d52c56910d13e5c1740ee6"
+      },
+      "timeout_s": 86400,
+      "stage_simulated": false,
+      "stage_controller_serial": "12769210",
+      "loading_acceptance": "Operator accepted the successful physical-stage return and corrected loading position on 2026-10-23.",
+      "loading_command": "return_to_recorded_dropoff",
+      "loading_position": {
+        "x_mm": 0.05,
+        "y_mm": 0.0508,
+        "z_mm": 1.05
+      },
+      "return_waypoints": [],
+      "id": "current",
+      "loading_reference_hash": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+      "captured_yaml": "acquisition:\n  experiment_id: current_Squid_settings\n  skip_saving: false\n  start_time: 0\n  widget_type: flexible\n  xy_mode: Current Position\nautofocus:\n  contrast_af: false\n  laser_af: false\nchannels:\n- camera: null\n  camera_settings:\n    exposure_time_ms: 20.0\n    gain_mode: 10.0\n    pixel_format: null\n  confocal_hardware_settings: null\n  confocal_override: null\n  display_color: '#FFFFFF'\n  enabled: true\n  filter_position: 1\n  filter_wheel: null\n  illumination_settings:\n    illumination_channel: BF LED matrix full\n    intensity: 5.0\n  name: BF LED matrix full\n  z_offset_um: 0.0\nflexible_scan:\n  delta_x_mm: 0.9\n  delta_y_mm: 0.9\n  nx: 1\n  ny: 1\n  overlap_percent: 10.0\n  positions:\n  - center_mm:\n    - 100.2839625\n    - 45.669200000000004\n    fovs:\n    - - 100.2839625\n      - 45.669200000000004\n    name: current\nmosaic_view:\n  resolution_um: 2.0\n  save_overview: true\n  save_well_images: false\nobjective:\n  camera_binning:\n  - 2\n  - 2\n  name: 20x\nplate:\n  num_cols: 12\n  num_rows: 8\nsample:\n  wellplate_format: 96 well plate\ntime_series:\n  delta_t_s: 2.0\n  nt: 5\nz_stack:\n  config: FROM BOTTOM\n  delta_z_mm: 0.0015\n  nz: 1\n  use_piezo: false\n  z_range_mm:\n  - 1.05\n  - 1.05\n",
+      "selected_settings": {
+        "channels": [
+          "BF LED matrix full"
+        ],
+        "fovs": 1,
+        "nz": 1,
+        "nt": 5,
+        "total_images": 5,
+        "objective": "20x",
+        "widget_type": "flexible"
+      },
+      "settings_capture_position": {
+        "x_mm": 100.2839625,
+        "y_mm": 45.669200000000004,
+        "z_mm": 1.05
+      },
+      "scan_entry": {
+        "x_mm": 100.2839625,
+        "y_mm": 45.669200000000004,
+        "z_mm": 1.05
+      },
+      "imaging_lifecycle_version": 1
+    },
+    "profile_hash": "88576a5fb520a5f64acb076c45fd5694aa8a150656f8d374917d2febdeae5758",
+    "configured_hash": "f646263260fddf2209959196e062b1afb6156308d83f962762a038d74a65c0bc",
+    "session": {
+      "pid": 24124,
+      "created_at": 1792843295.9006052
+    },
+    "loading_position": {
+      "x_mm": 0.05,
+      "y_mm": 0.0508,
+      "z_mm": 1.05
+    },
+    "simulation": true,
+    "stage_simulated": false
+  }
+}

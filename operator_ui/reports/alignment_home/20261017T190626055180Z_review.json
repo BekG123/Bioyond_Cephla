@@ -1,0 +1,195 @@
+{
+  "schema": "cephla.alignment-home-review.v1",
+  "created_at": "2026-10-17T19:06:26.055180+00:00",
+  "start": {
+    "X": 318.973,
+    "Y": -69.629,
+    "Z": 300.0,
+    "Rz": 92.485
+  },
+  "start_joints": {
+    "J1": 261.40107607285375,
+    "J2": 39.30355757626977,
+    "J3": 61.71142740968958,
+    "J4": -8.530045597465403
+  },
+  "observed_e1": 0.028228752853465267,
+  "home": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+  "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+  "stages": [
+    {
+      "kind": "rotate",
+      "rz": 68.39375
+    },
+    {
+      "kind": "rotate",
+      "rz": 44.3025
+    },
+    {
+      "kind": "rotate",
+      "rz": 20.211250000000007
+    },
+    {
+      "kind": "rotate",
+      "rz": -3.8799999999999955
+    },
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        }
+      ]
+    }
+  ],
+  "checked_waypoints": [
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 318.973,
+        "Y": -69.629,
+        "Z": 300.0,
+        "Rz": 68.39375
+      },
+      "joints": {
+        "J1": 261.4010760728538,
+        "J2": 39.30378991075382,
+        "J3": 61.71125151021954,
+        "J4": -32.62135203247942
+      }
+    },
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 318.973,
+        "Y": -69.629,
+        "Z": 300.0,
+        "Rz": 44.3025
+      },
+      "joints": {
+        "J1": 261.4010760728538,
+        "J2": 39.30378991075382,
+        "J3": 61.71125151021954,
+        "J4": -56.712602032479424
+      }
+    },
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 318.973,
+        "Y": -69.629,
+        "Z": 300.0,
+        "Rz": 20.211250000000007
+      },
+      "joints": {
+        "J1": 261.4010760728538,
+        "J2": 39.30378991075382,
+        "J3": 61.71125151021954,
+        "J4": -80.80385203247943
+      }
+    },
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 318.973,
+        "Y": -69.629,
+        "Z": 300.0,
+        "Rz": -3.8799999999999955
+      },
+      "joints": {
+        "J1": 261.4010760728538,
+        "J2": 39.30378991075382,
+        "J3": 61.71125151021954,
+        "J4": -104.89510203247943
+      }
+    },
+    {
+      "kind": "queue",
+      "pose": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 300.0,
+        "Rz": -3.88
+      },
+      "joints": {
+        "J1": 261.4010760728538,
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242009,
+        "J4": -140.81290377075948
+      }
+    },
+    {
+      "kind": "queue",
+      "pose": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      "joints": {
+        "J1": 209.4210760728538,
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242009,
+        "J4": -140.81290377075948
+      }
+    }
+  ],
+  "config": {
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "claw_gap_max_mm": 88.0,
+    "claw_gap_min_mm": 60.0,
+    "extension_margin_mm": 8.0,
+    "inner_reach_mm": 280.0,
+    "j2_margin_deg": 2.0,
+    "j2_min_deg": -95.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j4_hard_abs_deg": 220.0,
+    "j4_pref_abs_deg": 220.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "reach_hard_mm": 460.0
+  },
+  "envelope": {
+    "X": [
+      200.0,
+      450.0
+    ],
+    "Y": [
+      -250.0,
+      380.0
+    ],
+    "Z": [
+      70.0,
+      400.0
+    ]
+  },
+  "translation_speed": 137,
+  "wrist_speed": 30,
+  "ik_and_limits_passed": true,
+  "execution_authorized": false,
+  "physical_clearance_verified": false,
+  "requires": [
+    "Empty gripper confirmed",
+    "Wrist sweep at Z300 and across-to-Home corridor clear",
+    "Final lowering to saved Home clear",
+    "Arm released, hands clear, E-stop supervised"
+  ],
+  "policy": "One reviewed connection only; does not enable arbitrary Home fallbacks."
+}

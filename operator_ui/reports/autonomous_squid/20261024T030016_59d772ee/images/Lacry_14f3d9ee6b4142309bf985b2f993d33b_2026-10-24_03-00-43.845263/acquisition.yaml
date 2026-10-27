@@ -1,0 +1,69 @@
+# Acquisition Parameters - Lacry_14f3d9ee6b4142309bf985b2f993d33b_2026-10-24_03-00-43.845263
+
+acquisition:
+  experiment_id: Lacry_14f3d9ee6b4142309bf985b2f993d33b_2026-10-24_03-00-43.845263
+  start_time: 1792836043.9183145
+  widget_type: wellplate
+  xy_mode: Current Position
+  skip_saving: false
+objective:
+  name: 20x
+  magnification: 20.0
+  NA: 0.8
+  pixel_size_um: 0.376
+  camera_binning:
+  - 2
+  - 2
+  sensor_pixel_size_um: 7.52
+sample:
+  wellplate_format: 96 well plate
+z_stack:
+  nz: 1
+  delta_z_mm: 0.0015
+  config: FROM BOTTOM
+  z_range_mm:
+  - 1.05
+  - 1.05
+  use_piezo: false
+time_series:
+  nt: 1
+  delta_t_s: 0.0
+autofocus:
+  contrast_af: false
+  laser_af: false
+channels:
+- name: BF LED matrix full
+  enabled: true
+  display_color: '#FFFFFF'
+  camera: null
+  camera_settings:
+    exposure_time_ms: 20.0
+    gain_mode: 10.0
+    pixel_format: null
+  filter_wheel: null
+  filter_position: 1
+  z_offset_um: 0.0
+  illumination_settings:
+    illumination_channel: BF LED matrix full
+    intensity: 5.0
+  confocal_hardware_settings: null
+  confocal_override: null
+wellplate_scan:
+  scan_size_mm: 0.1
+  overlap_percent: 10.0
+  regions:
+  - name: current
+    center_mm:
+    - 14.516100000000002
+    - 12.023724999999999
+    shape: Square
+    fovs:
+    - - 14.516100000000002
+      - 12.023724999999999
+mosaic_view:
+  save_overview: true
+  save_well_images: false
+  resolution_um: 2.0
+plate:
+  num_rows: 8
+  num_cols: 12

@@ -1,0 +1,37 @@
+{
+  "schema": "cephla.staged-position-grip.v1",
+  "status": "operator_accepted_3p7_pickup_home",
+  "live_enabled": true,
+  "accepted_sequence": "operator_ui/demonstrations/reference_grip/full_calibration_to_home_3p7_20261020_accepted.json",
+  "trial_authorization": "operator_ui/demonstrations/reference_grip/e1_3p7_20261020.json",
+  "supervised_trial": "e1_3p7_20261020",
+  "prior_failure": "Operator reported slipping at 3.8 mm with both direct departure and a 5 mm lift at speed 5. Requested one Full Calibration comparison ending at 3.7 mm.",
+  "reference": "accepted_grip_reference.json",
+  "target_e1_mm": 3.7,
+  "speed": 5,
+  "phases": [
+    {
+      "until_e1_mm": 5.0,
+      "max_step_mm": 1.0
+    },
+    {
+      "until_e1_mm": 4.0,
+      "max_step_mm": 0.2
+    },
+    {
+      "until_e1_mm": 3.7,
+      "max_step_mm": 0.1
+    }
+  ],
+  "commands_from_28mm": 31,
+  "old_commands_from_28mm": 242,
+  "between_steps": "Require completed movement, fresh controller/position feedback and unchanged arm pose; stop on fault, uncertainty or operator Stop.",
+  "torque_role": "Record raw observations; no calibrated force limit or contact threshold inferred.",
+  "grip_alone_does_not_lift": true,
+  "full_calibration_followup": "5 mm vertical lift at speed 5, then existing Lacry Home at translation 137 / wrist 30. No separate 25 mm lift.",
+  "physical_full_approach_validated": true,
+  "validation_record": "operator_ui/demonstrations/reference_grip/full_calibration_to_home_3p7_20261020_accepted.json",
+  "validation_scope": "Operator accepted 3.7 mm pickup, both regrip comparisons and loaded Home. Combined automatic 5 mm then immediate Home integration is newly configured; historical supervised trials remain unchanged.",
+  "activation_utc": "2026-10-20T08:41:28.759945+00:00",
+  "attempted_record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\demonstrations\\reference_grip\\917f9536b09c4f04b24b748c59187e97.json"
+}

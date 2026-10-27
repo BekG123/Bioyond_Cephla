@@ -1,0 +1,39 @@
+{
+  "schema": "cephla.projected-pickup-profile.v1",
+  "id": "48_well_projected_20261026",
+  "acceptance": "operator_ui/reports/projected_alignment/manual_alignment_acceptance_20261027.json",
+  "acceptance_sha256": "f3fb93317d5c772d126bd710cfde22f898b148120acf487f016ad4262e626799",
+  "alignment_log": "operator_ui/reports/projected_alignment/20261027_010310_88ba99b3.jsonl",
+  "alignment_log_sha256": "6a561c8b6d754a861cb44a9ae8c29a1e8f8c2b9430d73107889221278387746f",
+  "alignment_pose_mm": {
+    "X": 308.971,
+    "Y": -64.539,
+    "Rz": 89.439,
+    "Z": 300.0
+  },
+  "descent_status": "pending_supervised_open_claw_trial",
+  "gripping_edge_height": "unknown; operator requested supervised verification",
+  "candidate_endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.439,
+    "X": 308.971,
+    "Y": -64.539,
+    "Z": 73.718
+  },
+  "candidate_z_basis": "Retain operator-accepted Z73.718; raised teaching Z107.079 is not the descent height.",
+  "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+  "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+  "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+  "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5 to E1=3.7",
+  "automatic_lift_enabled": false,
+  "full_pickup_verified": false,
+  "previous_profile": "operator_ui/reports/projected_alignment/profile_before_manual_alignment_20261027.json",
+  "previous_profile_sha256": "7a6b065a536254e0f2b9ad6512267a144bd22f08f44c4b4b93b03603589a509a",
+  "jaw_sequence": "Open to E1=28 mm at Z300 before lowering; verify opening before descent.",
+  "additional_down_mm": 5.0,
+  "physical_grip_validated_for_plate": false,
+  "alignment_source": "absolute operator-taught X/Y/Rz, replacing inferred offsets for this plate placement",
+  "manual_alignment": "operator_ui/reports/projected_alignment/manual_alignment_teaching_20261027.json",
+  "manual_alignment_sha256": "089d40c1868b7d18b496f553e6edaa5ecb77fa2fd6c391bcfb458b28d739adc9"
+}

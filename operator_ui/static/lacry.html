@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cephla · Lacry lab agent</title>
+<link rel="icon" href="/static/cephla-logo.jpg">
+<link rel="stylesheet" href="/static/lacry.css?v=20261026-hamilton-park">
+<script defer src="/static/lacry.js?v=20261026-single-composer"></script>
+<script defer src="/static/hamilton.js?v=20261026-accepted-route"></script>
+</head>
+<body>
+<a class="skip" href="#tiles">Skip to controls</a>
+
+<header class="topbar">
+  <a class="cephla" href="/" aria-label="Cephla"><img src="/static/cephla-logo.jpg" alt="Cephla"><b>Cephla</b></a>
+  <span class="divider" aria-hidden="true"></span>
+
+  <div class="agent">
+    <button class="logo-button" id="logo-button" aria-label="Lacry — click me">
+      <!-- Lacrymaria olor: ring of cilia, and the neck that reaches out. -->
+      <svg class="mark" width="38" height="38" viewBox="0 0 38 38" aria-hidden="true">
+        <g class="ring">
+          <circle cx="19" cy="19" r="13.5" fill="none" stroke="#2FC2F0" stroke-width="1.6"
+                  stroke-opacity=".4" stroke-dasharray="3 6" stroke-linecap="round"></circle>
+        </g>
+        <g fill="#2FC2F0">
+          <circle cx="19" cy="4.6" r="2.3"></circle><circle cx="31.4" cy="12.4" r="1.5" fill-opacity=".75"></circle>
+          <circle cx="31.4" cy="25.6" r="2" fill-opacity=".55"></circle><circle cx="19" cy="33.4" r="1.4" fill-opacity=".8"></circle>
+          <circle cx="6.6" cy="25.6" r="2.2" fill-opacity=".65"></circle><circle cx="6.6" cy="12.4" r="1.6" fill-opacity=".85"></circle>
+        </g>
+        <circle class="halo" cx="16.5" cy="21.5" r="6.2" fill="#2FC2F0"></circle>
+        <path class="neck" d="M16 22 C 20 20, 24 17, 25.5 13.5" fill="none" stroke="#0B5E78"
+              stroke-width="2.4" stroke-linecap="round"></path>
+        <g class="head">
+          <circle cx="25.8" cy="13" r="2.6" fill="#0B5E78"></circle>
+          <g class="eye" fill="#FFFFFF"><circle cx="25" cy="12.4" r=".55"></circle><circle cx="26.8" cy="12.4" r=".55"></circle></g>
+          <g class="blush" fill="#FF8FA3"><circle cx="24.2" cy="13.8" r=".7"></circle><circle cx="27.4" cy="13.8" r=".7"></circle></g>
+        </g>
+      </svg>
+    </button>
+    <div><div class="agent-name">LACRY</div><div class="agent-role">Cephla AI Lab Agent</div><div class="agent-tag">An Agentic Platform</div></div>
+  </div>
+
+  <span class="spacer"></span>
+  <button class="connect" id="connect-button" hidden>Connect robot</button>
+  <span class="pill"><span class="dot" id="state-dot"></span><span id="state-label">Checking…</span></span>
+  <a class="devlink" href="/developer">Developer ↗</a>
+  <section class="experiment-status" aria-label="Experiment status">
+    <div class="experiment-heading">Experiment status <span>Live updates</span></div>
+    <div id="experiment-bars" aria-live="polite"><p class="experiment-empty">Checking experiment status…</p></div>
+  </section>
+</header>
+
+<div class="shell">
+  <main class="main">
+    <h1 class="sr-only">Lacry, Cephla AI Lab Agent</h1>
+    <div id="alert" class="notice bad" role="status" hidden></div>
+
+    <section id="review" class="panel plan" aria-labelledby="review-title" hidden>
+      <h2 id="review-title">Lacry needs your eyes</h2>
+      <p class="sub" id="review-label"></p>
+      <div class="row">
+        <button class="go" id="review-yes">Looks right — continue</button>
+        <button class="reject" id="review-no">Reject</button>
+      </div>
+    </section>
+
+    <details id="running" class="panel running-panel" aria-labelledby="running-title" hidden>
+      <summary>
+        <div class="running-summary">
+          <div class="running-heading"><h2 id="running-title">Running</h2><span id="running-count"></span></div>
+          <p id="running-message"></p>
+          <span class="running-hint"><span class="when-closed">Show step history</span><span class="when-open">Hide step history</span></span>
+        </div>
+      </summary>
+      <div class="running-history" tabindex="0" aria-label="Workflow step history"><ol class="steps" id="running-steps"></ol></div>
+    </details>
+
+    <section id="tiles" aria-label="Instruments">
+      <p class="group-label">Instruments</p>
+      <div class="control-grid instrument-grid">
+        <div class="control-cell">
+          <button class="control-button instrument-button" data-link="hamilton" aria-describedby="hamilton-help">
+            <span class="control-face">Hamilton</span>
+            <span class="state"><i class="dot" data-dot="hamilton"></i><em data-state="hamilton">checking</em></span>
+          </button>
+          <span class="button-tooltip" role="tooltip" id="hamilton-help">Open Hamilton controls, deck camera, protocols and instrument status.</span>
+        </div>
+        <div class="control-cell">
+          <button class="control-button instrument-button" data-link="squid" aria-describedby="squid-help">
+            <span class="control-face">Squid</span>
+            <span class="state"><i class="dot" data-dot="squid"></i><em data-state="squid">checking</em></span>
+          </button>
+          <span class="button-tooltip" role="tooltip" id="squid-help">Connect Lacry to Squid to follow imaging progress and completion.</span>
+        </div>
+        <div class="control-cell">
+          <button class="control-button instrument-button" data-link="arm" aria-describedby="arm-help">
+            <span class="control-face">S4 robot arm</span>
+            <span class="state"><i class="dot" data-dot="arm"></i><em data-state="arm">checking</em></span>
+          </button>
+          <span class="button-tooltip" role="tooltip" id="arm-help">Check the arm connection. Ask Lacry to move plates between instruments.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="researcher-controls" aria-label="Controls">
+      <p class="group-label">Controls</p>
+      <div class="control-grid">
+        <div class="control-cell">
+          <button class="control-button calibrate" data-action="full_calibration" aria-describedby="calibration-help">
+            <span class="control-face">Full Calibration</span>
+          </button>
+          <span class="button-tooltip" role="tooltip" id="calibration-help">Calibrate, align, descend and grip, then lift slowly and return Home. Confirm with Lacry before starting.</span>
+        </div>
+        <div class="control-cell">
+          <button class="control-button stop-control" id="stop-button" aria-describedby="stop-help">
+            <span class="stop-face">STOP</span>
+          </button>
+          <span class="button-tooltip" role="tooltip" id="stop-help">Stop the workflow after the current movement finishes. Use the physical E-stop for an immediate stop.</span>
+        </div>
+        <div class="control-cell">
+          <button class="control-button recover-control" data-action="recover" aria-describedby="recovery-help">
+            <span class="control-face">Recover from fault</span>
+          </button>
+          <span class="button-tooltip" role="tooltip" id="recovery-help">Review the fault and confirm with Lacry before clearing it and re-enabling the arm.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <aside class="rail">
+    <section class="panel cam" aria-label="Camera views">
+      <div class="cam-tabs" role="tablist" aria-label="Camera views">
+        <button class="cam-tab active" role="tab" aria-selected="true" data-cam="eye">Eye-in-hand</button>
+        <button class="cam-tab" role="tab" aria-selected="false" data-cam="hamilton">Inside Hamilton</button>
+        <button class="cam-tab" role="tab" aria-selected="false" data-cam="squid">Squid</button>
+      </div>
+      <div class="cam-frame">
+        <div class="placeholder" id="cam-placeholder">CAMERA VIEW<br>waiting for the eye-in-hand camera</div>
+        <img id="cam-image" alt="Live camera view" hidden>
+        <span id="cam-live" class="cam-live" role="status" aria-label="Camera feed is live" hidden><span aria-hidden="true"></span>LIVE</span>
+      </div>
+      <div class="cam-bar"><span id="cam-name">Eye-in-hand</span><span id="cam-state">checking…</span></div>
+    </section>
+
+    <section class="panel chat" aria-label="Conversation with Lacry">
+      <div class="chat-head"><div class="chat-identity"><span class="chat-avatar" aria-hidden="true">L</span><div><strong>Lacry</strong><span id="chat-hint">Your lab assistant</span></div></div><span class="chat-caption">Cephla</span></div>
+      <div class="log" id="chat-log" tabindex="0" role="log" aria-label="Conversation with Lacry" aria-live="polite" aria-relevant="additions text"></div>
+      <form class="composer" id="composer">
+        <label class="skip" for="chat-input">Message Lacry</label>
+        <textarea id="chat-input" rows="2" wrap="soft" autocomplete="off" maxlength="4000" placeholder="Message Lacry…" aria-describedby="chat-input-help"></textarea>
+        <button class="send" id="chat-send" type="submit" aria-label="Send message" title="Send message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span class="composer-help" id="chat-input-help">Enter to send · Shift+Enter for a new line</span>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Activity">
+      <p class="group-label" style="margin-bottom:9px">Activity</p>
+      <ul class="activity" id="activity"><li class="empty">Nothing run yet in this session.</li></ul>
+    </section>
+  </aside>
+</div>
+
+<dialog id="hamilton-panel" aria-labelledby="hamilton-title">
+  <header class="hamilton-heading"><div><p class="group-label">Liquid handling</p><h2 id="hamilton-title">Hamilton Prep</h2></div><button id="hamilton-close" aria-label="Close Hamilton panel">Close</button></header>
+  <p id="hamilton-status" role="status">Checking connection…</p>
+  <button id="hamilton-park" class="control-button" title="Return Hamilton’s heads to their native parked position. Review the plan in chat; the robot arm stays still."><span class="control-face">Park Hamilton</span></button>
+  <p id="hamilton-door-note" class="notice"></p>
+  <div class="hamilton-layout">
+    <section>
+      <div class="hamilton-camera"><img id="hamilton-camera" alt="Hamilton deck snapshot" hidden><p id="hamilton-camera-note">Take a fresh deck snapshot before reviewing the setup.</p></div>
+      <button id="hamilton-snapshot">Refresh deck image</button>
+      <p class="sub">The snapshot shows the deck; it does not verify the door or tip fit.</p>
+      <h3>Plate transfer with the arm</h3>
+      <p id="hamilton-travel-status" role="status">Checking saved travel and plate-handling history...</p>
+      <div class="hamilton-actions">
+        <button data-hamilton-handling="hamilton_dropoff">Leave plate at Hamilton</button>
+        <button data-hamilton-handling="hamilton_retrieve">Retrieve plate to Home</button>
+      </div>
+      <p class="sub">Both routines start and finish at Home. Review the complete plan in chat before starting. These supervised routines pause to check plate alignment and the lift.</p>
+      <h3>Liquid handling</h3>
+      <label for="hamilton-protocol">Commissioned recipe</label>
+      <select id="hamilton-protocol"><option value="">No recipe selected</option></select>
+      <label for="hamilton-cycles">Cycles</label><input id="hamilton-cycles" type="number" min="1" max="100" value="1">
+      <button id="hamilton-plan-protocol">Review liquid-handling plan</button>
+      <p class="sub">One confirmation covers all cycles. For Hamilton + Squid experiments, tell Lacry the recipe and number of cycles in chat.</p>
+      <p id="hamilton-recipes-note"></p>
+      <button class="reject" id="hamilton-abort">Abort Lacry’s Hamilton operation</button>
+    </section>
+    <section>
+      <div id="hamilton-prompt" class="notice" hidden><h3>Hamilton needs attention</h3><p id="hamilton-prompt-text"></p><label><input id="hamilton-prompt-ready" type="checkbox">I have completed this instruction.</label><button id="hamilton-prompt-ok">Continue</button></div>
+      <h3>Current operation</h3><p id="hamilton-operation">None</p><ol id="hamilton-calibration-steps"></ol>
+      <h3>Saved protocols</h3><ul id="hamilton-protocols"></ul>
+      <h3>Recent errors</h3><p class="sub">History can include earlier faults; it is separate from the current operation.</p><ul id="hamilton-errors"></ul>
+    </section>
+  </div>
+</dialog>
+
+<details class="console" id="console">
+  <summary>
+    <span class="console-title">Console log</span>
+    <span class="console-meta" id="console-meta">idle</span>
+    <span class="console-hint">click to expand</span>
+  </summary>
+  <div class="console-body" id="console-body"><div class="toast">· waiting for the first sequence…</div></div>
+</details>
+
+<footer>
+  Lacry proposes; you confirm; the console runs it with its existing safety checks.
+  Diagnostics and calibration detail are in the <a href="/developer">Developer view</a>;
+  the previous researcher console is at <a href="/researcher/classic">/researcher/classic</a>.
+  <span class="byline">Lacry · Cephla AI Lab Agent — by Bekhruz Malikov</span>
+</footer>
+
+<noscript>This workspace needs JavaScript. No robot commands have been sent.</noscript>
+</body>
+</html>

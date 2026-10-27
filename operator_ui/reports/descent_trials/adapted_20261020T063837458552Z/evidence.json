@@ -1,0 +1,208 @@
+{
+  "schema": "cephla.adapted-descent-evidence.v1",
+  "created_at": "20261020T063837458552Z",
+  "baseline_path": "operator_ui\\demonstrations\\pipeline_feedback_20261017T105725Z\\operator_feedback.json",
+  "baseline_sha256": "e0c0f432fa85cd577cb5e0e3246822910f4fa1af71d20758486603e0d17c9890",
+  "parent_profile_sha256": "8fd444b7d85d9404712108779a1d317c7ed93127164a2a49d8d6b2ac432325d6",
+  "original_target": {
+    "x": 297.837,
+    "y": -68.918,
+    "z": 61.1495,
+    "rz": 86.10910000000001,
+    "z_calibrated": 70.1495,
+    "config": "Wide",
+    "big_r": 190.55,
+    "found_at": "03:53:24",
+    "calibrated_at": 1792234404.2861369,
+    "source": "fast_disk",
+    "converged": true,
+    "alignment_requires_preflight": true,
+    "z_detail": {
+      "samples": [
+        60.986,
+        61.313
+      ],
+      "spread": 0.3270000000000053,
+      "vision_z": 61.1495,
+      "touch_offset": 9.0
+    }
+  },
+  "original_endpoint": {
+    "X": 298.78,
+    "Y": -65.683,
+    "Z": 70.461,
+    "Rz": 85.671
+  },
+  "current_target": {
+    "alignment_requires_preflight": true,
+    "big_r": 190.85,
+    "calibrated_at": 1792478133.0068293,
+    "config": "Wide",
+    "converged": true,
+    "found_at": "23:35:33",
+    "rz": 89.5849,
+    "source": "fast_disk",
+    "x": 309.4365,
+    "y": -69.79050000000001,
+    "z": 60.5745,
+    "z_calibrated": 69.5745,
+    "z_detail": {
+      "samples": [
+        60.412,
+        60.737
+      ],
+      "spread": 0.32500000000000284,
+      "touch_offset": 9.0,
+      "vision_z": 60.5745
+    }
+  },
+  "endpoint": {
+    "X": 310.2353026884872,
+    "Y": -66.25691807978409,
+    "Z": 70.461,
+    "Rz": 89.1737
+  },
+  "method": "Measured-pose centering offset; fresh calibration verifies plate direction and placement. No additional placement transform.",
+  "assumptions": [
+    "Same plate/tool geometry",
+    "Same support surface and plate height"
+  ],
+  "hardware_validated": false,
+  "execution_authorized": false,
+  "operator_centering": {
+    "schema": "cephla.measured-gap-centering.v1",
+    "measured_pose": {
+      "X": 309.508,
+      "Y": -66.073,
+      "Z": 70.461,
+      "Rz": 89.174
+    },
+    "delta_base_mm": {
+      "X": 0.7272084741022599,
+      "Y": -0.18348797016116017
+    },
+    "mapping": {
+      "big_to_small_base_unit": [
+        0.2446506268815469,
+        0.9696112988030131
+      ],
+      "left_base_unit": [
+        0.9696112988030131,
+        -0.2446506268815469
+      ],
+      "distance_mm": 0.75,
+      "distance_range_mm": [
+        0.5,
+        1.0
+      ]
+    },
+    "feedback_path": "operator_ui\\demonstrations\\supervised_grip\\fce738dcaeb24a4ebee238795f4cc539_operator_feedback.json",
+    "feedback_sha256": "656ee03b770cd86a82862b0d41d2a0baa335a85ec2afbc152a7a25f1ab94f47d",
+    "calibration_report": "operator_ui\\reports\\grip_centering\\20261020T063344834044Z\\calibration_align.json",
+    "calibration_report_sha256": "c78ced4f9d00d8c158a38ca0169507d9c154d8abdfc28b8096eec7ab68340fb9",
+    "image": "operator_ui\\reports\\grip_centering\\20261020T063344834044Z\\calibrated.jpg",
+    "image_sha256": "e643dc1cd1ea6a74d0359d5241c6540b65e28b39eb21ed2822373f302b3e3ddb",
+    "capture_pose": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 7.586,
+      "X": 299.785,
+      "Y": 21.544,
+      "Z": 284.088
+    },
+    "detection": {
+      "mark": [
+        1992.75,
+        1230.75,
+        7.2281899099778375
+      ],
+      "big_r": 192.20001220703125,
+      "small_r": 94.55000305175781,
+      "big_c": [
+        1685.25,
+        1191.75
+      ],
+      "small_c": [
+        2300.25,
+        1269.75
+      ]
+    },
+    "big_tool_mm": [
+      37.19734801967242,
+      62.30462840731895,
+      -237.23618790553573
+    ],
+    "small_tool_mm": [
+      50.63241075081774,
+      95.9846820161786,
+      -237.32695700574152
+    ],
+    "camera_config": {
+      "name": "Wide",
+      "cam_in_tool_raw": [
+        180.585503317684,
+        0.0703280755072963,
+        75.4793759802526,
+        28.3478458192592,
+        55.4571963458042,
+        -32.1444670842033
+      ],
+      "cal_tab_raw": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.205
+      ],
+      "cam_param": [
+        0.00841283402865056,
+        467.050729044741,
+        -3612431.90854082,
+        -1520740078548.04,
+        0.128203582814226,
+        0.0699934350008722,
+        2.40042628032061e-06,
+        2.4e-06,
+        1529.68698242068,
+        1038.79206532811,
+        3072.0,
+        2048.0
+      ]
+    },
+    "previous_target": {
+      "alignment_requires_preflight": true,
+      "big_r": 189.95,
+      "calibrated_at": 1792472571.1420777,
+      "config": "Wide",
+      "converged": true,
+      "found_at": "22:02:51",
+      "rz": 89.61180000000002,
+      "source": "fast_disk",
+      "x": 308.7645,
+      "y": -69.36,
+      "z": 62.128,
+      "z_calibrated": 71.128,
+      "z_detail": {
+        "samples": [
+          62.37,
+          61.886
+        ],
+        "spread": 0.48399999999999466,
+        "touch_offset": 9.0,
+        "vision_z": 62.128
+      }
+    },
+    "target_difference": {
+      "xy_mm": 0.7980690759577408,
+      "yaw_deg": 0.026900000000011914
+    },
+    "assumptions": [
+      "Plate has not moved since gap measurement; same support and tool.",
+      "Gap estimates refer to parallel gripping faces, viewed from above with big disk above small.",
+      "Use measured endpoint plus offset once; no extra vision placement shift."
+    ],
+    "physical_centering_verified": false,
+    "motion_sent": false
+  }
+}

@@ -193,10 +193,8 @@ DIRECT_STEP_MM = 25.0    # this close -> apply the full correction at once
 RZ_CONV_DEG = 0.2        # wrist convergence threshold (rotation mode)
 ROTATE_MIN_DEG = 2.0     # pending rotation above this -> explicit in-place
                          # rotation phase (<=30 deg chunks, J4-aware)
-J4_PREF_ABS = _RP["j4_pref_abs_deg"]   # prefer windings landing |J4| under
-                                       # this (margin for the translation)
-J4_HARD_ABS = _RP["j4_hard_abs_deg"]   # refuse beyond this (controller
-                                       # faults near the wrist soft limit)
+J4_PREF_ABS = min(_RP["j4_pref_abs_deg"], _RP["j4_hard_abs_deg"] - 5)
+J4_HARD_ABS = J4_PREF_ABS  # same buffered envelope as path and Lua checks
 RZ_RIDE_CAP = 10.0       # max Rz correction riding along one linear move
 Z_RIDE_MAX = 15.0        # max height change riding along one move — a bad
                          # radius read must never become one big Z plunge
@@ -345,7 +343,7 @@ J1_TREND_LEN = 3
 class Runner:
     """Owns the one background sequence thread and its log/result/target."""
 
-    def __init__(self) -> None:
+    def __init__(self, event_sink=None, context_provider=None) -> None:
         self._lock = threading.Lock()
         self._thread: threading.Thread | None = None
         self.stop_event = threading.Event()
@@ -357,6 +355,47 @@ class Runner:
         self.detection_path: str | None = None   # annotated detection image
         self.detection_ts: float = 0.0
         self._t0 = 0.0
+        self.event_sink = event_sink
+        self.context_provider = context_provider
+        self.audit_origin = {}
+        self.run_id = None
+        self._reservation = None
+
+    @property
+    def reserved(self):
+        return self._reservation is not None
+
+    @property
+    def owns_reservation(self):
+        """Only the workflow dispatch thread may plan between its own jobs."""
+        with self._lock:
+            return (self._reservation is not None
+                    and self._reservation[1] == threading.get_ident()
+                    and not self._reservation[2].is_set())
+
+    def reserve(self, token, cancel):
+        """Hold dispatch ownership across the gaps in a multi-stage workflow."""
+        with self._lock:
+            if self.active or self._reservation is not None:
+                return False
+            self._reservation = (token, None, cancel)
+            return True
+
+    def claim(self, token):
+        with self._lock:
+            if self._reservation is None or self._reservation[0] is not token:
+                raise RuntimeError('Workflow reservation was lost.')
+            self._reservation = (token, threading.get_ident(), self._reservation[2])
+
+    def release(self, token):
+        with self._lock:
+            if self._reservation is not None and self._reservation[0] is token:
+                self._reservation = None
+
+    def audit(self, event, **fields):
+        if self.event_sink:
+            self.event_sink(event, run_id=self.run_id, sequence=self.name,
+                            sequence_origin=self.audit_origin, **fields)
 
     @property
     def active(self) -> bool:
@@ -364,6 +403,10 @@ class Runner:
 
     def start(self, name: str, fn, *args) -> dict:
         with self._lock:
+            if self._reservation is not None:
+                _, owner, cancel = self._reservation
+                if owner != threading.get_ident() or cancel.is_set():
+                    return dict(ok=False, error='The pickup workflow owns the runner or was stopped.')
             if self.active:
                 return {"ok": False,
                         "error": f"sequence '{self.name}' is still running"}
@@ -374,6 +417,10 @@ class Runner:
                         "generate_anchor", "preview_plate_edges", "center_plate_edges"):  # stale highlight
                 self.detection_path, self.detection_ts = None, 0.0
             self._t0 = time.time()
+            from uuid import uuid4
+            self.run_id = uuid4().hex
+            self.audit_origin = self.context_provider() if self.context_provider else {}
+            self.audit('sequence_started')
             self._thread = threading.Thread(
                 target=self._run, args=(fn,) + args, daemon=True)
             self._thread.start()
@@ -388,10 +435,24 @@ class Runner:
         except Exception as ex:  # noqa: BLE001 — surfaced to the operator
             self.say(f"SEQUENCE ERROR: {type(ex).__name__}: {ex}", "err")
             self.result = {"ok": False, "error": str(ex)}
+            try:
+                from developer_diagnostics import capture_failure
+                self.result['failure_context'] = capture_failure(ex)
+            except Exception:
+                pass  # Diagnostics must never replace the actual hardware failure.
+            from home_attempts import HomeTravelNotStarted
+            if isinstance(ex, HomeTravelNotStarted):
+                self.result['home_startup_refusal'] = dict(ex.evidence)
             self.state = "error"
+        finally:
+            self.audit('sequence_finished', state=self.state,result=self.result,target=self.target)
 
     def request_stop(self) -> dict:
-        self.stop_event.set()
+        with self._lock:
+            self.stop_event.set()
+            if self._reservation is not None:
+                self._reservation[2].set()
+        self.audit('sequence_stop_requested')
         return {"ok": True, "note": "stop requested — the sequence halts "
                                     "after the step in progress"}
 
@@ -402,6 +463,7 @@ class Runner:
         self.log.append({"t": round(time.time() - self._t0, 1),
                          "level": level, "msg": msg})
         del self.log[:-400]
+        self.audit('sequence_progress', **self.log[-1])
 
     def snapshot(self) -> dict:
         return {"state": self.state, "name": self.name, "active": self.active,
@@ -412,7 +474,13 @@ class Runner:
 def _abort(run: Runner, msg: str) -> dict:
     run.say(msg, "err")
     run.state = "error"
-    return {"ok": False, "error": msg}
+    result = {"ok": False, "error": msg}
+    try:
+        from developer_diagnostics import capture_failure
+        result['failure_context'] = capture_failure()
+    except Exception:
+        pass
+    return result
 
 
 def _halt(run: Runner) -> dict:

@@ -5,6 +5,44 @@ the workcell in MuJoCo.
 
 ## Progress so far
 
+The default page at **http://127.0.0.1:5002** is the **Cephla researcher workspace**:
+**Prepare → Teach → Run**. Start with **Home → Hamilton**: connect the robot,
+start a teaching draft, capture **Home**, run **plate calibration**, then **Align**,
+record your manually performed **Descend** and **Grip**, then capture **Hamilton**.
+Intermediate route points can be captured after Grip. Review and save; drafts
+survive page reloads. Existing Home-only drafts can adopt this workflow.
+After placing the plate in view, release the arm, confirm readiness and click
+**Calibrate**. It exits DragGo and runs automatic corrections with **Wide** fixed,
+showing errors and completed corrections. It uses the existing convergence math,
+has no workspace-envelope activation prompt, and saves each attempt's log.
+Align remains a separate automatic action with its existing checks. Manual record buttons read
+arm/gripper positions; they do not execute the actions or verify a secure grasp.
+The full Home → Hamilton → Home → Octopi routine comes later.
+
+Both views automatically log JSON requests/responses, robot status (including E1),
+and sequence progress under `operator_ui/logs/audit/`. Developer view provides
+**Download audit JSON** and **Log status**. Credentials and binary images are omitted;
+the logs are evidence for review, not an executable teaching routine.
+
+This captures **individual station positions**, not continuous hand-guided
+motion. Teach now has direct **Start / End hand-guiding (DragGo)** controls;
+Bioyond Works is not needed. See [hand-guiding instructions](operator_ui/DRAGGO.md).
+Researcher **Run** now has separate **Descend** and **Grip** buttons backed by
+Haiku and a **Stop** button. Add the API key and review measured pickup references
+in Developer view. Haiku uses selected log summaries as context; it does not train
+model weights. The earlier collision-session export is diagnostic evidence and
+cannot supply its missing descent/E1 targets. Hardware validation is pending.
+Enter the Haiku key once: Windows saves it encrypted for your user account and
+restores it after restarts. Linux needs `keyring` with an unlocked Secret Service,
+or the `ANTHROPIC_API_KEY` environment variable.
+Full routine playback and Pause remain unavailable. Connecting and capturing
+never enable or move the arm.
+
+The existing technical console is at **http://127.0.0.1:5002/developer**.
+Calibration, coordinates, torque, model settings, camera/depth tools, and logs
+remain there. These are separate views, not separate authenticated user roles.
+See [researcher UI developer notes](operator_ui/RESEARCHER_UI.md).
+
 | Feature | Status |
 | --- | --- |
 | **Faster calibration — plate only** | Implemented and tested on the two-disk calibration plate. Continues until confirmed convergence, operator stop, or fault. This does not complete alignment or pickup. |
@@ -59,7 +97,7 @@ Install and start the Flask console:
 
 ```powershell
 py -3.10 -m venv .venv
-.venv/Scripts/python.exe -m pip install flask numpy opencv-python
+.venv/Scripts/python.exe -m pip install flask numpy opencv-python PyYAML
 .venv/Scripts/python.exe operator_ui/app.py
 ```
 
@@ -76,7 +114,7 @@ mujoco_sim/.venv/Scripts/python.exe mujoco_sim/open_project.py
 ```
 
 For the D405, run `./operator_ui/setup_realsense.ps1` once. Connect the camera
-to the computer's USB 3 port, then select **D405 Depth → Start D405** in Flask.
+to the computer's USB 3 port, then select **Developer view → D405 Depth → Start D405**.
 
 ## Linux (Ubuntu 22.04 desktop)
 
@@ -87,7 +125,7 @@ On other distributions, install the equivalent packages for your system.
 sudo apt update
 sudo apt install git python3.10-venv libgl1 libglib2.0-0 libglfw3
 python3.10 -m venv .venv
-.venv/bin/python -m pip install flask numpy opencv-python
+.venv/bin/python -m pip install flask numpy opencv-python PyYAML
 .venv/bin/python operator_ui/app.py
 ```
 
@@ -118,6 +156,7 @@ Linux camera/robot hardware operation still needs validation.
 
 ## Where to look next
 
+- [Developer pickup corrections and taught Hamilton buttons](operator_ui/COACTIVE_PICKUP.md) — hand-demonstrated preferences for Descend/Grip; latest tested route in both views.
 - [Calibration observations](Pick%20and%20Hold/Calibration/Observations.md) — live results and changes.
 - [IC alignment](Pick%20and%20Hold/Align/README.md) — capture the reference images needed next.
 - [MuJoCo](mujoco_sim/README.md) — simulation instructions; edit [workcell dimensions](mujoco_sim/workcell_dimensions.json).

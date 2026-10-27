@@ -1,0 +1,40 @@
+{
+  "schema": "cephla.projected-pickup-profile.v1",
+  "id": "48_well_projected_20261026",
+  "acceptance": "operator_ui/reports/projected_alignment/forward_lower_trial_authorization_20261027.json",
+  "acceptance_sha256": "44bafd719a1d0a82daf10fbc3b7cafe2e18d3f048f89c37c915d2c0fa2fd2795",
+  "alignment_log": "operator_ui/reports/projected_alignment/20261027_014621_755bd5a6.jsonl",
+  "alignment_log_sha256": "bbde8c80489a4d002c280c2976490ffc9a2736b61ae9e6cbba69a01cbed4ba56",
+  "alignment_pose_mm": {
+    "X": 309.346794012965,
+    "Y": -85.90054758759283,
+    "Z": 300.0,
+    "Rz": 89.757
+  },
+  "descent_status": "pending_supervised_open_claw_trial",
+  "gripping_edge_height": "unknown; operator requested supervised verification",
+  "candidate_endpoint": {
+    "X": 309.346794012965,
+    "Y": -85.90054758759283,
+    "Z": 73.718,
+    "Rz": 89.757
+  },
+  "candidate_z_basis": "Operator-requested 5 mm below prior accepted Z78.718; new Z73.718 awaits open-claw trial.",
+  "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+  "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+  "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+  "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5 to E1=3.7",
+  "automatic_lift_enabled": false,
+  "full_pickup_verified": false,
+  "inward_correction_already_applied": false,
+  "previous_profile": "operator_ui/reports/projected_alignment/profile_before_forward_lower_20261027.json",
+  "previous_profile_sha256": "f3932615fca0640033099d35726290317cfee7f8e1658ff3aaed42ff01f13075",
+  "outward_correction_already_applied": true,
+  "additional_outward_correction": "operator_ui/reports/projected_alignment/additional_outward_5mm_1793088900811628000.json",
+  "additional_outward_correction_sha256": "ff5ad09ae3f3075bd3060d861bae94e51e697cbaed86df92f086570b8fd104f0",
+  "jaw_sequence": "Open to E1=28 mm at Z300 before lowering; verify opening before descent.",
+  "total_outward_correction_mm": 7,
+  "forward_along_plate_long_edge_mm": 10,
+  "additional_down_mm": 5,
+  "physical_grip_validated_for_plate": false
+}

@@ -1,0 +1,174 @@
+[
+  {
+    "at": "2026-10-24T15:27:55.025915+00:00",
+    "method": "POST",
+    "path": "calibration/close-view",
+    "status": 200,
+    "data": ""
+  },
+  {
+    "at": "2026-10-24T15:28:00.043773+00:00",
+    "method": "GET",
+    "path": "instruments/global-run-state",
+    "status": 200,
+    "data": "CalibrationAssayRunning"
+  },
+  {
+    "at": "2026-10-24T15:28:05.060993+00:00",
+    "method": "GET",
+    "path": "instruments/global-run-state",
+    "status": 200,
+    "data": "Idle"
+  },
+  {
+    "at": "2026-10-24T15:28:10.079137+00:00",
+    "method": "GET",
+    "path": "instruments/global-run-state",
+    "status": 200,
+    "data": "Idle"
+  },
+  {
+    "at": "2026-10-24T15:28:10.120798+00:00",
+    "method": "GET",
+    "path": "instruments/connection-info",
+    "status": 200,
+    "data": [
+      "Serial Number: PRPGD2427",
+      "Instrument Name: PRPGD2427",
+      "Connected: True",
+      "Controlling PC Name: DESKTOP-9DPRVQ3",
+      "Initialization Status: Initialized",
+      "Enclosure Status: Present",
+      "Individual Channels: Present",
+      "MPH8: Not Present",
+      "HHS: Not Present",
+      "HHC: Not Present",
+      "HEPAUV: Not Present"
+    ]
+  },
+  {
+    "at": "2026-10-24T15:28:10.139005+00:00",
+    "method": "GET",
+    "path": "calibration/channel-results",
+    "status": 200,
+    "data": [
+      {
+        "id": 1003,
+        "calibrationDate": "2026-08-31T14:52:59.7989953",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1002,
+        "calibrationDate": "2026-08-31T14:52:58.813912",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 3,
+        "calibrationDate": "2026-07-17T17:07:46.264014",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 2,
+        "calibrationDate": "2026-07-17T17:07:45.2742482",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1,
+        "calibrationDate": "2026-07-17T17:04:39.1692295",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      }
+    ]
+  },
+  {
+    "at": "2026-10-24T15:28:10.154141+00:00",
+    "method": "GET",
+    "path": "errors/check-for-pending-errors",
+    "status": 200,
+    "data": []
+  },
+  {
+    "at": "2026-10-24T15:28:10.178126+00:00",
+    "method": "GET",
+    "path": "traces?offset=0&limit=6&sources=SDE,RTE",
+    "status": 200,
+    "data": {
+      "totalItemCount": 113,
+      "currentOffset": 0,
+      "items": [
+        {
+          "affectedUser": "Server",
+          "level": "Information",
+          "message": "Execution completed",
+          "type": "Processing",
+          "date": "2026-10-24T14:37:49.1611349Z",
+          "source": "SDE"
+        },
+        {
+          "affectedUser": "Server",
+          "level": "Information",
+          "message": "Preparation - Workflow : complete",
+          "type": "Processing",
+          "date": "2026-10-24T14:37:49.1534766Z",
+          "source": "SDE"
+        },
+        {
+          "affectedUser": "Server",
+          "level": "Information",
+          "message": "Preparation - Assay : complete",
+          "type": "Processing",
+          "date": "2026-10-24T14:37:49.1533924Z",
+          "source": "SDE"
+        },
+        {
+          "affectedUser": "Server",
+          "level": "Information",
+          "message": "Preparation - Assay < Activity : Termination - complete",
+          "type": "Processing",
+          "date": "2026-10-24T14:37:48.9813865Z",
+          "source": "SDE"
+        },
+        {
+          "affectedUser": "Server",
+          "level": "Information",
+          "message": "Preparation - Assay > Activity : Termination - start",
+          "type": "Processing",
+          "date": "2026-10-24T14:37:39.5967321Z",
+          "source": "SDE"
+        },
+        {
+          "affectedUser": "Server",
+          "level": "Information",
+          "message": "Workflow 1 : complete",
+          "type": "Processing",
+          "date": "2026-10-24T14:37:39.5965677Z",
+          "source": "SDE"
+        }
+      ]
+    }
+  }
+]

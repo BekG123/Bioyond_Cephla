@@ -1,0 +1,2186 @@
+{
+  "status": "completed",
+  "at": 1793105057.187294,
+  "plan_id": "2026-10-27T12:44:00.041835+00:00:1793105040041",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 255.752,
+      "Y": 56.951,
+      "Z": 315.143,
+      "Rz": -22.801
+    },
+    "joints": {
+      "J1": 276.5445469700551,
+      "J2": 92.95016863032332,
+      "J3": 41.49492567530216,
+      "J4": -157.2457432214067
+    },
+    "e1": 0.024993052647914737,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "rotate",
+        "rz": -3.880000000000006
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 315.14,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 255.752,
+          "Y": 56.951,
+          "Z": 315.143,
+          "Rz": -3.880000000000006
+        },
+        "joints": {
+          "J1": 276.54454697005514,
+          "J2": 92.95018058387267,
+          "J3": 41.495087882861974,
+          "J4": -138.32491738251588
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 315.14,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 276.5415469700551,
+          "J2": 84.87688206683332,
+          "J3": 52.055961092420084,
+          "J4": -140.81249207503464
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.4215469700551,
+          "J2": 84.87688206683332,
+          "J3": 52.055961092420084,
+          "J4": -140.81249207503464
+        }
+      }
+    ],
+    "preserve_gripper": false,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z315.14 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+    "id": "2026-10-27T12:44:00.041835+00:00:1793105040041",
+    "at": 1793105040.0418355,
+    "source": "button",
+    "confirmation_source": "researcher_button"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1793105170.866827,
+  "sequence": {
+    "state": "done",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 58.8,
+        "level": "info",
+        "msg": "Home: motion 27/100"
+      },
+      {
+        "t": 59.0,
+        "level": "info",
+        "msg": "Home: motion 27/100"
+      },
+      {
+        "t": 59.1,
+        "level": "info",
+        "msg": "Home: motion 28/100"
+      },
+      {
+        "t": 59.2,
+        "level": "info",
+        "msg": "Home: motion 28/100"
+      },
+      {
+        "t": 59.4,
+        "level": "info",
+        "msg": "Home: motion 28/100"
+      },
+      {
+        "t": 59.5,
+        "level": "info",
+        "msg": "Home: motion 28/100"
+      },
+      {
+        "t": 59.6,
+        "level": "info",
+        "msg": "Home: motion 28/100"
+      },
+      {
+        "t": 59.8,
+        "level": "info",
+        "msg": "Home: motion 28/100"
+      },
+      {
+        "t": 59.9,
+        "level": "info",
+        "msg": "Home: motion 29/100"
+      },
+      {
+        "t": 60.0,
+        "level": "info",
+        "msg": "Home: motion 29/100"
+      },
+      {
+        "t": 60.2,
+        "level": "info",
+        "msg": "Home: motion 29/100"
+      },
+      {
+        "t": 60.3,
+        "level": "info",
+        "msg": "Home: motion 29/100"
+      },
+      {
+        "t": 60.4,
+        "level": "info",
+        "msg": "Home: motion 29/100"
+      },
+      {
+        "t": 60.6,
+        "level": "info",
+        "msg": "Home: motion 30/100"
+      },
+      {
+        "t": 60.7,
+        "level": "info",
+        "msg": "Home: motion 30/100"
+      },
+      {
+        "t": 60.8,
+        "level": "info",
+        "msg": "Home: motion 30/100"
+      },
+      {
+        "t": 60.9,
+        "level": "info",
+        "msg": "Home: motion 30/100"
+      },
+      {
+        "t": 61.1,
+        "level": "info",
+        "msg": "Home: motion 30/100"
+      },
+      {
+        "t": 61.2,
+        "level": "info",
+        "msg": "Home: motion 30/100"
+      },
+      {
+        "t": 61.3,
+        "level": "info",
+        "msg": "Home: motion 31/100"
+      },
+      {
+        "t": 61.5,
+        "level": "info",
+        "msg": "Home: motion 31/100"
+      },
+      {
+        "t": 61.6,
+        "level": "info",
+        "msg": "Home: motion 31/100"
+      },
+      {
+        "t": 61.7,
+        "level": "info",
+        "msg": "Home: motion 31/100"
+      },
+      {
+        "t": 61.9,
+        "level": "info",
+        "msg": "Home: motion 31/100"
+      },
+      {
+        "t": 62.0,
+        "level": "info",
+        "msg": "Home: motion 32/100"
+      },
+      {
+        "t": 62.2,
+        "level": "info",
+        "msg": "Home: motion 32/100"
+      },
+      {
+        "t": 62.3,
+        "level": "info",
+        "msg": "Home: motion 32/100"
+      },
+      {
+        "t": 62.5,
+        "level": "info",
+        "msg": "Home: motion 32/100"
+      },
+      {
+        "t": 62.6,
+        "level": "info",
+        "msg": "Home: motion 32/100"
+      },
+      {
+        "t": 62.7,
+        "level": "info",
+        "msg": "Home: motion 32/100"
+      },
+      {
+        "t": 62.9,
+        "level": "info",
+        "msg": "Home: motion 33/100"
+      },
+      {
+        "t": 63.0,
+        "level": "info",
+        "msg": "Home: motion 33/100"
+      },
+      {
+        "t": 63.1,
+        "level": "info",
+        "msg": "Home: motion 33/100"
+      },
+      {
+        "t": 63.3,
+        "level": "info",
+        "msg": "Home: motion 33/100"
+      },
+      {
+        "t": 63.4,
+        "level": "info",
+        "msg": "Home: motion 33/100"
+      },
+      {
+        "t": 63.5,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 63.7,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 63.8,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 63.9,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 64.1,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 64.2,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 64.3,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 64.5,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 64.6,
+        "level": "info",
+        "msg": "Home: motion 35/100"
+      },
+      {
+        "t": 64.7,
+        "level": "info",
+        "msg": "Home: motion 35/100"
+      },
+      {
+        "t": 64.9,
+        "level": "info",
+        "msg": "Home: motion 35/100"
+      },
+      {
+        "t": 65.0,
+        "level": "info",
+        "msg": "Home: motion 35/100"
+      },
+      {
+        "t": 65.1,
+        "level": "info",
+        "msg": "Home: motion 35/100"
+      },
+      {
+        "t": 65.3,
+        "level": "info",
+        "msg": "Home: motion 35/100"
+      },
+      {
+        "t": 65.4,
+        "level": "info",
+        "msg": "Home: motion 36/100"
+      },
+      {
+        "t": 65.5,
+        "level": "info",
+        "msg": "Home: motion 36/100"
+      },
+      {
+        "t": 65.7,
+        "level": "info",
+        "msg": "Home: motion 36/100"
+      },
+      {
+        "t": 65.8,
+        "level": "info",
+        "msg": "Home: motion 36/100"
+      },
+      {
+        "t": 66.0,
+        "level": "info",
+        "msg": "Home: motion 36/100"
+      },
+      {
+        "t": 66.1,
+        "level": "info",
+        "msg": "Home: motion 37/100"
+      },
+      {
+        "t": 66.3,
+        "level": "info",
+        "msg": "Home: motion 37/100"
+      },
+      {
+        "t": 66.5,
+        "level": "info",
+        "msg": "Home: motion 37/100"
+      },
+      {
+        "t": 66.6,
+        "level": "info",
+        "msg": "Home: motion 37/100"
+      },
+      {
+        "t": 66.8,
+        "level": "info",
+        "msg": "Home: motion 37/100"
+      },
+      {
+        "t": 66.9,
+        "level": "info",
+        "msg": "Home: motion 38/100"
+      },
+      {
+        "t": 67.0,
+        "level": "info",
+        "msg": "Home: motion 38/100"
+      },
+      {
+        "t": 67.2,
+        "level": "info",
+        "msg": "Home: motion 38/100"
+      },
+      {
+        "t": 67.3,
+        "level": "info",
+        "msg": "Home: motion 38/100"
+      },
+      {
+        "t": 67.5,
+        "level": "info",
+        "msg": "Home: motion 38/100"
+      },
+      {
+        "t": 67.6,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 67.7,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 67.9,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 68.0,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 68.1,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 68.3,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 68.4,
+        "level": "info",
+        "msg": "Home: motion 40/100"
+      },
+      {
+        "t": 68.5,
+        "level": "info",
+        "msg": "Home: motion 40/100"
+      },
+      {
+        "t": 68.7,
+        "level": "info",
+        "msg": "Home: motion 40/100"
+      },
+      {
+        "t": 68.8,
+        "level": "info",
+        "msg": "Home: motion 40/100"
+      },
+      {
+        "t": 68.9,
+        "level": "info",
+        "msg": "Home: motion 40/100"
+      },
+      {
+        "t": 69.1,
+        "level": "info",
+        "msg": "Home: motion 41/100"
+      },
+      {
+        "t": 69.3,
+        "level": "info",
+        "msg": "Home: motion 41/100"
+      },
+      {
+        "t": 69.4,
+        "level": "info",
+        "msg": "Home: motion 41/100"
+      },
+      {
+        "t": 69.5,
+        "level": "info",
+        "msg": "Home: motion 41/100"
+      },
+      {
+        "t": 69.6,
+        "level": "info",
+        "msg": "Home: motion 41/100"
+      },
+      {
+        "t": 69.8,
+        "level": "info",
+        "msg": "Home: motion 42/100"
+      },
+      {
+        "t": 70.0,
+        "level": "info",
+        "msg": "Home: motion 42/100"
+      },
+      {
+        "t": 70.1,
+        "level": "info",
+        "msg": "Home: motion 42/100"
+      },
+      {
+        "t": 70.3,
+        "level": "info",
+        "msg": "Home: motion 42/100"
+      },
+      {
+        "t": 70.4,
+        "level": "info",
+        "msg": "Home: motion 42/100"
+      },
+      {
+        "t": 70.5,
+        "level": "info",
+        "msg": "Home: motion 43/100"
+      },
+      {
+        "t": 70.7,
+        "level": "info",
+        "msg": "Home: motion 43/100"
+      },
+      {
+        "t": 70.8,
+        "level": "info",
+        "msg": "Home: motion 43/100"
+      },
+      {
+        "t": 70.9,
+        "level": "info",
+        "msg": "Home: motion 43/100"
+      },
+      {
+        "t": 71.0,
+        "level": "info",
+        "msg": "Home: motion 43/100"
+      },
+      {
+        "t": 71.2,
+        "level": "info",
+        "msg": "Home: motion 43/100"
+      },
+      {
+        "t": 71.3,
+        "level": "info",
+        "msg": "Home: motion 44/100"
+      },
+      {
+        "t": 71.4,
+        "level": "info",
+        "msg": "Home: motion 44/100"
+      },
+      {
+        "t": 71.6,
+        "level": "info",
+        "msg": "Home: motion 44/100"
+      },
+      {
+        "t": 71.7,
+        "level": "info",
+        "msg": "Home: motion 44/100"
+      },
+      {
+        "t": 71.8,
+        "level": "info",
+        "msg": "Home: motion 44/100"
+      },
+      {
+        "t": 72.0,
+        "level": "info",
+        "msg": "Home: motion 44/100"
+      },
+      {
+        "t": 72.1,
+        "level": "info",
+        "msg": "Home: motion 45/100"
+      },
+      {
+        "t": 72.2,
+        "level": "info",
+        "msg": "Home: motion 45/100"
+      },
+      {
+        "t": 72.4,
+        "level": "info",
+        "msg": "Home: motion 45/100"
+      },
+      {
+        "t": 72.5,
+        "level": "info",
+        "msg": "Home: motion 45/100"
+      },
+      {
+        "t": 72.6,
+        "level": "info",
+        "msg": "Home: motion 45/100"
+      },
+      {
+        "t": 72.8,
+        "level": "info",
+        "msg": "Home: motion 46/100"
+      },
+      {
+        "t": 72.9,
+        "level": "info",
+        "msg": "Home: motion 46/100"
+      },
+      {
+        "t": 73.1,
+        "level": "info",
+        "msg": "Home: motion 46/100"
+      },
+      {
+        "t": 73.2,
+        "level": "info",
+        "msg": "Home: motion 46/100"
+      },
+      {
+        "t": 73.3,
+        "level": "info",
+        "msg": "Home: motion 46/100"
+      },
+      {
+        "t": 73.5,
+        "level": "info",
+        "msg": "Home: motion 46/100"
+      },
+      {
+        "t": 73.6,
+        "level": "info",
+        "msg": "Home: motion 47/100"
+      },
+      {
+        "t": 73.8,
+        "level": "info",
+        "msg": "Home: motion 47/100"
+      },
+      {
+        "t": 73.9,
+        "level": "info",
+        "msg": "Home: motion 47/100"
+      },
+      {
+        "t": 74.0,
+        "level": "info",
+        "msg": "Home: motion 47/100"
+      },
+      {
+        "t": 74.2,
+        "level": "info",
+        "msg": "Home: motion 47/100"
+      },
+      {
+        "t": 74.3,
+        "level": "info",
+        "msg": "Home: motion 48/100"
+      },
+      {
+        "t": 74.4,
+        "level": "info",
+        "msg": "Home: motion 48/100"
+      },
+      {
+        "t": 74.6,
+        "level": "info",
+        "msg": "Home: motion 48/100"
+      },
+      {
+        "t": 74.7,
+        "level": "info",
+        "msg": "Home: motion 48/100"
+      },
+      {
+        "t": 74.8,
+        "level": "info",
+        "msg": "Home: motion 48/100"
+      },
+      {
+        "t": 74.9,
+        "level": "info",
+        "msg": "Home: motion 48/100"
+      },
+      {
+        "t": 75.1,
+        "level": "info",
+        "msg": "Home: motion 49/100"
+      },
+      {
+        "t": 75.2,
+        "level": "info",
+        "msg": "Home: motion 49/100"
+      },
+      {
+        "t": 75.3,
+        "level": "info",
+        "msg": "Home: motion 49/100"
+      },
+      {
+        "t": 75.5,
+        "level": "info",
+        "msg": "Home: motion 49/100"
+      },
+      {
+        "t": 75.6,
+        "level": "info",
+        "msg": "Home: motion 49/100"
+      },
+      {
+        "t": 75.7,
+        "level": "info",
+        "msg": "Home: motion 50/100"
+      },
+      {
+        "t": 75.9,
+        "level": "info",
+        "msg": "Home: motion 50/100"
+      },
+      {
+        "t": 76.0,
+        "level": "info",
+        "msg": "Home: motion 50/100"
+      },
+      {
+        "t": 76.1,
+        "level": "info",
+        "msg": "Home: motion 50/100"
+      },
+      {
+        "t": 76.3,
+        "level": "info",
+        "msg": "Home: motion 50/100"
+      },
+      {
+        "t": 76.4,
+        "level": "info",
+        "msg": "Home: motion 50/100"
+      },
+      {
+        "t": 76.5,
+        "level": "info",
+        "msg": "Home: motion 51/100"
+      },
+      {
+        "t": 76.7,
+        "level": "info",
+        "msg": "Home: motion 51/100"
+      },
+      {
+        "t": 76.8,
+        "level": "info",
+        "msg": "Home: motion 51/100"
+      },
+      {
+        "t": 77.0,
+        "level": "info",
+        "msg": "Home: motion 51/100"
+      },
+      {
+        "t": 77.1,
+        "level": "info",
+        "msg": "Home: motion 51/100"
+      },
+      {
+        "t": 77.2,
+        "level": "info",
+        "msg": "Home: motion 52/100"
+      },
+      {
+        "t": 77.4,
+        "level": "info",
+        "msg": "Home: motion 52/100"
+      },
+      {
+        "t": 77.5,
+        "level": "info",
+        "msg": "Home: motion 52/100"
+      },
+      {
+        "t": 77.6,
+        "level": "info",
+        "msg": "Home: motion 52/100"
+      },
+      {
+        "t": 77.7,
+        "level": "info",
+        "msg": "Home: motion 52/100"
+      },
+      {
+        "t": 77.9,
+        "level": "info",
+        "msg": "Home: motion 52/100"
+      },
+      {
+        "t": 78.0,
+        "level": "info",
+        "msg": "Home: motion 53/100"
+      },
+      {
+        "t": 78.1,
+        "level": "info",
+        "msg": "Home: motion 53/100"
+      },
+      {
+        "t": 78.3,
+        "level": "info",
+        "msg": "Home: motion 53/100"
+      },
+      {
+        "t": 78.4,
+        "level": "info",
+        "msg": "Home: motion 53/100"
+      },
+      {
+        "t": 78.6,
+        "level": "info",
+        "msg": "Home: motion 53/100"
+      },
+      {
+        "t": 78.7,
+        "level": "info",
+        "msg": "Home: motion 53/100"
+      },
+      {
+        "t": 78.8,
+        "level": "info",
+        "msg": "Home: motion 54/100"
+      },
+      {
+        "t": 79.0,
+        "level": "info",
+        "msg": "Home: motion 54/100"
+      },
+      {
+        "t": 79.1,
+        "level": "info",
+        "msg": "Home: motion 54/100"
+      },
+      {
+        "t": 79.2,
+        "level": "info",
+        "msg": "Home: motion 54/100"
+      },
+      {
+        "t": 79.4,
+        "level": "info",
+        "msg": "Home: motion 54/100"
+      },
+      {
+        "t": 79.5,
+        "level": "info",
+        "msg": "Home: motion 55/100"
+      },
+      {
+        "t": 79.7,
+        "level": "info",
+        "msg": "Home: motion 55/100"
+      },
+      {
+        "t": 79.8,
+        "level": "info",
+        "msg": "Home: motion 55/100"
+      },
+      {
+        "t": 79.9,
+        "level": "info",
+        "msg": "Home: motion 55/100"
+      },
+      {
+        "t": 80.1,
+        "level": "info",
+        "msg": "Home: motion 55/100"
+      },
+      {
+        "t": 80.2,
+        "level": "info",
+        "msg": "Home: motion 56/100"
+      },
+      {
+        "t": 80.3,
+        "level": "info",
+        "msg": "Home: motion 56/100"
+      },
+      {
+        "t": 80.5,
+        "level": "info",
+        "msg": "Home: motion 56/100"
+      },
+      {
+        "t": 80.6,
+        "level": "info",
+        "msg": "Home: motion 56/100"
+      },
+      {
+        "t": 80.7,
+        "level": "info",
+        "msg": "Home: motion 56/100"
+      },
+      {
+        "t": 80.9,
+        "level": "info",
+        "msg": "Home: motion 56/100"
+      },
+      {
+        "t": 81.0,
+        "level": "info",
+        "msg": "Home: motion 57/100"
+      },
+      {
+        "t": 81.2,
+        "level": "info",
+        "msg": "Home: motion 57/100"
+      },
+      {
+        "t": 81.4,
+        "level": "info",
+        "msg": "Home: motion 57/100"
+      },
+      {
+        "t": 81.5,
+        "level": "info",
+        "msg": "Home: motion 57/100"
+      },
+      {
+        "t": 81.6,
+        "level": "info",
+        "msg": "Home: motion 57/100"
+      },
+      {
+        "t": 81.7,
+        "level": "info",
+        "msg": "Home: motion 58/100"
+      },
+      {
+        "t": 81.9,
+        "level": "info",
+        "msg": "Home: motion 58/100"
+      },
+      {
+        "t": 82.0,
+        "level": "info",
+        "msg": "Home: motion 58/100"
+      },
+      {
+        "t": 82.1,
+        "level": "info",
+        "msg": "Home: motion 58/100"
+      },
+      {
+        "t": 82.3,
+        "level": "info",
+        "msg": "Home: motion 58/100"
+      },
+      {
+        "t": 82.5,
+        "level": "info",
+        "msg": "Home: motion 59/100"
+      },
+      {
+        "t": 82.6,
+        "level": "info",
+        "msg": "Home: motion 59/100"
+      },
+      {
+        "t": 82.8,
+        "level": "info",
+        "msg": "Home: motion 59/100"
+      },
+      {
+        "t": 82.9,
+        "level": "info",
+        "msg": "Home: motion 59/100"
+      },
+      {
+        "t": 83.1,
+        "level": "info",
+        "msg": "Home: motion 59/100"
+      },
+      {
+        "t": 83.3,
+        "level": "info",
+        "msg": "Home: motion 60/100"
+      },
+      {
+        "t": 83.4,
+        "level": "info",
+        "msg": "Home: motion 60/100"
+      },
+      {
+        "t": 83.5,
+        "level": "info",
+        "msg": "Home: motion 60/100"
+      },
+      {
+        "t": 83.6,
+        "level": "info",
+        "msg": "Home: motion 60/100"
+      },
+      {
+        "t": 83.8,
+        "level": "info",
+        "msg": "Home: motion 60/100"
+      },
+      {
+        "t": 83.9,
+        "level": "info",
+        "msg": "Home: motion 61/100"
+      },
+      {
+        "t": 84.0,
+        "level": "info",
+        "msg": "Home: motion 61/100"
+      },
+      {
+        "t": 84.2,
+        "level": "info",
+        "msg": "Home: motion 61/100"
+      },
+      {
+        "t": 84.3,
+        "level": "info",
+        "msg": "Home: motion 61/100"
+      },
+      {
+        "t": 84.4,
+        "level": "info",
+        "msg": "Home: motion 61/100"
+      },
+      {
+        "t": 84.6,
+        "level": "info",
+        "msg": "Home: motion 61/100"
+      },
+      {
+        "t": 84.7,
+        "level": "info",
+        "msg": "Home: motion 62/100"
+      },
+      {
+        "t": 84.9,
+        "level": "info",
+        "msg": "Home: motion 62/100"
+      },
+      {
+        "t": 85.0,
+        "level": "info",
+        "msg": "Home: motion 62/100"
+      },
+      {
+        "t": 85.1,
+        "level": "info",
+        "msg": "Home: motion 62/100"
+      },
+      {
+        "t": 85.3,
+        "level": "info",
+        "msg": "Home: motion 62/100"
+      },
+      {
+        "t": 85.4,
+        "level": "info",
+        "msg": "Home: motion 63/100"
+      },
+      {
+        "t": 85.5,
+        "level": "info",
+        "msg": "Home: motion 63/100"
+      },
+      {
+        "t": 85.7,
+        "level": "info",
+        "msg": "Home: motion 63/100"
+      },
+      {
+        "t": 85.8,
+        "level": "info",
+        "msg": "Home: motion 63/100"
+      },
+      {
+        "t": 85.9,
+        "level": "info",
+        "msg": "Home: motion 63/100"
+      },
+      {
+        "t": 86.1,
+        "level": "info",
+        "msg": "Home: motion 63/100"
+      },
+      {
+        "t": 86.2,
+        "level": "info",
+        "msg": "Home: motion 64/100"
+      },
+      {
+        "t": 86.3,
+        "level": "info",
+        "msg": "Home: motion 64/100"
+      },
+      {
+        "t": 86.5,
+        "level": "info",
+        "msg": "Home: motion 64/100"
+      },
+      {
+        "t": 86.6,
+        "level": "info",
+        "msg": "Home: motion 64/100"
+      },
+      {
+        "t": 86.7,
+        "level": "info",
+        "msg": "Home: motion 64/100"
+      },
+      {
+        "t": 86.9,
+        "level": "info",
+        "msg": "Home: motion 64/100"
+      },
+      {
+        "t": 87.0,
+        "level": "info",
+        "msg": "Home: motion 65/100"
+      },
+      {
+        "t": 87.1,
+        "level": "info",
+        "msg": "Home: motion 65/100"
+      },
+      {
+        "t": 87.3,
+        "level": "info",
+        "msg": "Home: motion 65/100"
+      },
+      {
+        "t": 87.4,
+        "level": "info",
+        "msg": "Home: motion 65/100"
+      },
+      {
+        "t": 87.6,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 87.7,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 87.9,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 88.0,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 88.1,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 88.3,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 88.4,
+        "level": "info",
+        "msg": "Home: motion 67/100"
+      },
+      {
+        "t": 88.5,
+        "level": "info",
+        "msg": "Home: motion 67/100"
+      },
+      {
+        "t": 88.7,
+        "level": "info",
+        "msg": "Home: motion 67/100"
+      },
+      {
+        "t": 88.8,
+        "level": "info",
+        "msg": "Home: motion 67/100"
+      },
+      {
+        "t": 89.0,
+        "level": "info",
+        "msg": "Home: motion 67/100"
+      },
+      {
+        "t": 89.1,
+        "level": "info",
+        "msg": "Home: motion 67/100"
+      },
+      {
+        "t": 89.3,
+        "level": "info",
+        "msg": "Home: motion 68/100"
+      },
+      {
+        "t": 89.4,
+        "level": "info",
+        "msg": "Home: motion 68/100"
+      },
+      {
+        "t": 89.5,
+        "level": "info",
+        "msg": "Home: motion 68/100"
+      },
+      {
+        "t": 89.7,
+        "level": "info",
+        "msg": "Home: motion 68/100"
+      },
+      {
+        "t": 89.9,
+        "level": "info",
+        "msg": "Home: motion 69/100"
+      },
+      {
+        "t": 90.0,
+        "level": "info",
+        "msg": "Home: motion 69/100"
+      },
+      {
+        "t": 90.2,
+        "level": "info",
+        "msg": "Home: motion 69/100"
+      },
+      {
+        "t": 90.4,
+        "level": "info",
+        "msg": "Home: motion 69/100"
+      },
+      {
+        "t": 90.5,
+        "level": "info",
+        "msg": "Home: motion 69/100"
+      },
+      {
+        "t": 90.6,
+        "level": "info",
+        "msg": "Home: motion 70/100"
+      },
+      {
+        "t": 90.8,
+        "level": "info",
+        "msg": "Home: motion 70/100"
+      },
+      {
+        "t": 90.9,
+        "level": "info",
+        "msg": "Home: motion 70/100"
+      },
+      {
+        "t": 91.0,
+        "level": "info",
+        "msg": "Home: motion 70/100"
+      },
+      {
+        "t": 91.2,
+        "level": "info",
+        "msg": "Home: motion 70/100"
+      },
+      {
+        "t": 91.3,
+        "level": "info",
+        "msg": "Home: motion 70/100"
+      },
+      {
+        "t": 91.4,
+        "level": "info",
+        "msg": "Home: motion 71/100"
+      },
+      {
+        "t": 91.6,
+        "level": "info",
+        "msg": "Home: motion 71/100"
+      },
+      {
+        "t": 91.7,
+        "level": "info",
+        "msg": "Home: motion 71/100"
+      },
+      {
+        "t": 91.9,
+        "level": "info",
+        "msg": "Home: motion 71/100"
+      },
+      {
+        "t": 92.0,
+        "level": "info",
+        "msg": "Home: motion 71/100"
+      },
+      {
+        "t": 92.2,
+        "level": "info",
+        "msg": "Home: motion 72/100"
+      },
+      {
+        "t": 92.3,
+        "level": "info",
+        "msg": "Home: motion 72/100"
+      },
+      {
+        "t": 92.4,
+        "level": "info",
+        "msg": "Home: motion 72/100"
+      },
+      {
+        "t": 92.5,
+        "level": "info",
+        "msg": "Home: motion 72/100"
+      },
+      {
+        "t": 92.7,
+        "level": "info",
+        "msg": "Home: motion 72/100"
+      },
+      {
+        "t": 92.8,
+        "level": "info",
+        "msg": "Home: motion 73/100"
+      },
+      {
+        "t": 92.9,
+        "level": "info",
+        "msg": "Home: motion 73/100"
+      },
+      {
+        "t": 93.1,
+        "level": "info",
+        "msg": "Home: motion 73/100"
+      },
+      {
+        "t": 93.2,
+        "level": "info",
+        "msg": "Home: motion 73/100"
+      },
+      {
+        "t": 93.3,
+        "level": "info",
+        "msg": "Home: motion 73/100"
+      },
+      {
+        "t": 93.5,
+        "level": "info",
+        "msg": "Home: motion 73/100"
+      },
+      {
+        "t": 93.6,
+        "level": "info",
+        "msg": "Home: motion 74/100"
+      },
+      {
+        "t": 93.7,
+        "level": "info",
+        "msg": "Home: motion 74/100"
+      },
+      {
+        "t": 93.9,
+        "level": "info",
+        "msg": "Home: motion 74/100"
+      },
+      {
+        "t": 94.0,
+        "level": "info",
+        "msg": "Home: motion 74/100"
+      },
+      {
+        "t": 94.1,
+        "level": "info",
+        "msg": "Home: motion 74/100"
+      },
+      {
+        "t": 94.3,
+        "level": "info",
+        "msg": "Home: motion 74/100"
+      },
+      {
+        "t": 94.4,
+        "level": "info",
+        "msg": "Home: motion 75/100"
+      },
+      {
+        "t": 94.5,
+        "level": "info",
+        "msg": "Home: motion 75/100"
+      },
+      {
+        "t": 94.7,
+        "level": "info",
+        "msg": "Home: motion 75/100"
+      },
+      {
+        "t": 94.8,
+        "level": "info",
+        "msg": "Home: motion 75/100"
+      },
+      {
+        "t": 94.9,
+        "level": "info",
+        "msg": "Home: motion 75/100"
+      },
+      {
+        "t": 95.1,
+        "level": "info",
+        "msg": "Home: motion 76/100"
+      },
+      {
+        "t": 95.2,
+        "level": "info",
+        "msg": "Home: motion 76/100"
+      },
+      {
+        "t": 95.3,
+        "level": "info",
+        "msg": "Home: motion 76/100"
+      },
+      {
+        "t": 95.5,
+        "level": "info",
+        "msg": "Home: motion 76/100"
+      },
+      {
+        "t": 95.6,
+        "level": "info",
+        "msg": "Home: motion 76/100"
+      },
+      {
+        "t": 95.7,
+        "level": "info",
+        "msg": "Home: motion 76/100"
+      },
+      {
+        "t": 95.8,
+        "level": "info",
+        "msg": "Home: motion 77/100"
+      },
+      {
+        "t": 96.0,
+        "level": "info",
+        "msg": "Home: motion 77/100"
+      },
+      {
+        "t": 96.1,
+        "level": "info",
+        "msg": "Home: motion 77/100"
+      },
+      {
+        "t": 96.2,
+        "level": "info",
+        "msg": "Home: motion 77/100"
+      },
+      {
+        "t": 96.4,
+        "level": "info",
+        "msg": "Home: motion 77/100"
+      },
+      {
+        "t": 96.5,
+        "level": "info",
+        "msg": "Home: motion 78/100"
+      },
+      {
+        "t": 96.7,
+        "level": "info",
+        "msg": "Home: motion 78/100"
+      },
+      {
+        "t": 96.8,
+        "level": "info",
+        "msg": "Home: motion 78/100"
+      },
+      {
+        "t": 96.9,
+        "level": "info",
+        "msg": "Home: motion 78/100"
+      },
+      {
+        "t": 97.1,
+        "level": "info",
+        "msg": "Home: motion 78/100"
+      },
+      {
+        "t": 97.2,
+        "level": "info",
+        "msg": "Home: motion 78/100"
+      },
+      {
+        "t": 97.4,
+        "level": "info",
+        "msg": "Home: motion 79/100"
+      },
+      {
+        "t": 97.5,
+        "level": "info",
+        "msg": "Home: motion 79/100"
+      },
+      {
+        "t": 97.6,
+        "level": "info",
+        "msg": "Home: motion 79/100"
+      },
+      {
+        "t": 97.8,
+        "level": "info",
+        "msg": "Home: motion 79/100"
+      },
+      {
+        "t": 97.9,
+        "level": "info",
+        "msg": "Home: motion 79/100"
+      },
+      {
+        "t": 98.1,
+        "level": "info",
+        "msg": "Home: motion 80/100"
+      },
+      {
+        "t": 98.2,
+        "level": "info",
+        "msg": "Home: motion 80/100"
+      },
+      {
+        "t": 98.3,
+        "level": "info",
+        "msg": "Home: motion 80/100"
+      },
+      {
+        "t": 98.5,
+        "level": "info",
+        "msg": "Home: motion 80/100"
+      },
+      {
+        "t": 98.6,
+        "level": "info",
+        "msg": "Home: motion 80/100"
+      },
+      {
+        "t": 98.7,
+        "level": "info",
+        "msg": "Home: motion 80/100"
+      },
+      {
+        "t": 98.9,
+        "level": "info",
+        "msg": "Home: motion 81/100"
+      },
+      {
+        "t": 99.0,
+        "level": "info",
+        "msg": "Home: motion 81/100"
+      },
+      {
+        "t": 99.1,
+        "level": "info",
+        "msg": "Home: motion 81/100"
+      },
+      {
+        "t": 99.3,
+        "level": "info",
+        "msg": "Home: motion 81/100"
+      },
+      {
+        "t": 99.4,
+        "level": "info",
+        "msg": "Home: motion 81/100"
+      },
+      {
+        "t": 99.5,
+        "level": "info",
+        "msg": "Home: motion 82/100"
+      },
+      {
+        "t": 99.7,
+        "level": "info",
+        "msg": "Home: motion 82/100"
+      },
+      {
+        "t": 99.8,
+        "level": "info",
+        "msg": "Home: motion 82/100"
+      },
+      {
+        "t": 100.0,
+        "level": "info",
+        "msg": "Home: motion 82/100"
+      },
+      {
+        "t": 100.1,
+        "level": "info",
+        "msg": "Home: motion 82/100"
+      },
+      {
+        "t": 100.2,
+        "level": "info",
+        "msg": "Home: motion 82/100"
+      },
+      {
+        "t": 100.4,
+        "level": "info",
+        "msg": "Home: motion 83/100"
+      },
+      {
+        "t": 100.5,
+        "level": "info",
+        "msg": "Home: motion 83/100"
+      },
+      {
+        "t": 100.6,
+        "level": "info",
+        "msg": "Home: motion 83/100"
+      },
+      {
+        "t": 100.8,
+        "level": "info",
+        "msg": "Home: motion 83/100"
+      },
+      {
+        "t": 101.0,
+        "level": "info",
+        "msg": "Home: motion 83/100"
+      },
+      {
+        "t": 101.1,
+        "level": "info",
+        "msg": "Home: motion 84/100"
+      },
+      {
+        "t": 101.2,
+        "level": "info",
+        "msg": "Home: motion 84/100"
+      },
+      {
+        "t": 101.4,
+        "level": "info",
+        "msg": "Home: motion 84/100"
+      },
+      {
+        "t": 101.5,
+        "level": "info",
+        "msg": "Home: motion 84/100"
+      },
+      {
+        "t": 101.6,
+        "level": "info",
+        "msg": "Home: motion 84/100"
+      },
+      {
+        "t": 101.8,
+        "level": "info",
+        "msg": "Home: motion 85/100"
+      },
+      {
+        "t": 101.9,
+        "level": "info",
+        "msg": "Home: motion 85/100"
+      },
+      {
+        "t": 102.0,
+        "level": "info",
+        "msg": "Home: motion 85/100"
+      },
+      {
+        "t": 102.2,
+        "level": "info",
+        "msg": "Home: motion 85/100"
+      },
+      {
+        "t": 102.3,
+        "level": "info",
+        "msg": "Home: motion 85/100"
+      },
+      {
+        "t": 102.4,
+        "level": "info",
+        "msg": "Home: motion 85/100"
+      },
+      {
+        "t": 102.6,
+        "level": "info",
+        "msg": "Home: motion 86/100"
+      },
+      {
+        "t": 102.7,
+        "level": "info",
+        "msg": "Home: motion 86/100"
+      },
+      {
+        "t": 102.9,
+        "level": "info",
+        "msg": "Home: motion 86/100"
+      },
+      {
+        "t": 103.0,
+        "level": "info",
+        "msg": "Home: motion 86/100"
+      },
+      {
+        "t": 103.1,
+        "level": "info",
+        "msg": "Home: motion 86/100"
+      },
+      {
+        "t": 103.3,
+        "level": "info",
+        "msg": "Home: motion 87/100"
+      },
+      {
+        "t": 103.4,
+        "level": "info",
+        "msg": "Home: motion 87/100"
+      },
+      {
+        "t": 103.6,
+        "level": "info",
+        "msg": "Home: motion 87/100"
+      },
+      {
+        "t": 103.7,
+        "level": "info",
+        "msg": "Home: motion 87/100"
+      },
+      {
+        "t": 103.8,
+        "level": "info",
+        "msg": "Home: motion 87/100"
+      },
+      {
+        "t": 103.9,
+        "level": "info",
+        "msg": "Home: motion 87/100"
+      },
+      {
+        "t": 104.1,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 104.2,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 104.3,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 104.5,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 104.6,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 104.8,
+        "level": "info",
+        "msg": "Home: motion 89/100"
+      },
+      {
+        "t": 104.9,
+        "level": "info",
+        "msg": "Home: motion 89/100"
+      },
+      {
+        "t": 105.0,
+        "level": "info",
+        "msg": "Home: motion 89/100"
+      },
+      {
+        "t": 105.2,
+        "level": "info",
+        "msg": "Home: motion 89/100"
+      },
+      {
+        "t": 105.3,
+        "level": "info",
+        "msg": "Home: motion 89/100"
+      },
+      {
+        "t": 105.4,
+        "level": "info",
+        "msg": "Home: motion 89/100"
+      },
+      {
+        "t": 105.6,
+        "level": "info",
+        "msg": "Home: motion 90/100"
+      },
+      {
+        "t": 105.7,
+        "level": "info",
+        "msg": "Home: motion 90/100"
+      },
+      {
+        "t": 105.8,
+        "level": "info",
+        "msg": "Home: motion 90/100"
+      },
+      {
+        "t": 106.0,
+        "level": "info",
+        "msg": "Home: motion 90/100"
+      },
+      {
+        "t": 106.1,
+        "level": "info",
+        "msg": "Home: motion 90/100"
+      },
+      {
+        "t": 106.2,
+        "level": "info",
+        "msg": "Home: motion 91/100"
+      },
+      {
+        "t": 106.4,
+        "level": "info",
+        "msg": "Home: motion 91/100"
+      },
+      {
+        "t": 106.5,
+        "level": "info",
+        "msg": "Home: motion 91/100"
+      },
+      {
+        "t": 106.7,
+        "level": "info",
+        "msg": "Home: motion 91/100"
+      },
+      {
+        "t": 106.8,
+        "level": "info",
+        "msg": "Home: motion 91/100"
+      },
+      {
+        "t": 106.9,
+        "level": "info",
+        "msg": "Home: motion 92/100"
+      },
+      {
+        "t": 107.1,
+        "level": "info",
+        "msg": "Home: motion 92/100"
+      },
+      {
+        "t": 107.2,
+        "level": "info",
+        "msg": "Home: motion 92/100"
+      },
+      {
+        "t": 107.3,
+        "level": "info",
+        "msg": "Home: motion 92/100"
+      },
+      {
+        "t": 107.5,
+        "level": "info",
+        "msg": "Home: motion 92/100"
+      },
+      {
+        "t": 107.6,
+        "level": "info",
+        "msg": "Home: motion 92/100"
+      },
+      {
+        "t": 107.7,
+        "level": "info",
+        "msg": "Home: motion 93/100"
+      },
+      {
+        "t": 107.9,
+        "level": "info",
+        "msg": "Home: motion 93/100"
+      },
+      {
+        "t": 108.0,
+        "level": "info",
+        "msg": "Home: motion 93/100"
+      },
+      {
+        "t": 108.1,
+        "level": "info",
+        "msg": "Home: motion 93/100"
+      },
+      {
+        "t": 108.2,
+        "level": "info",
+        "msg": "Home: motion 93/100"
+      },
+      {
+        "t": 108.4,
+        "level": "info",
+        "msg": "Home: motion 93/100"
+      },
+      {
+        "t": 108.5,
+        "level": "info",
+        "msg": "Home: motion 94/100"
+      },
+      {
+        "t": 108.6,
+        "level": "info",
+        "msg": "Home: motion 94/100"
+      },
+      {
+        "t": 108.8,
+        "level": "info",
+        "msg": "Home: motion 94/100"
+      },
+      {
+        "t": 108.9,
+        "level": "info",
+        "msg": "Home: motion 94/100"
+      },
+      {
+        "t": 109.1,
+        "level": "info",
+        "msg": "Home: motion 94/100"
+      },
+      {
+        "t": 109.3,
+        "level": "info",
+        "msg": "Home: motion 95/100"
+      },
+      {
+        "t": 109.4,
+        "level": "info",
+        "msg": "Home: motion 95/100"
+      },
+      {
+        "t": 109.6,
+        "level": "info",
+        "msg": "Home: motion 95/100"
+      },
+      {
+        "t": 109.7,
+        "level": "info",
+        "msg": "Home: motion 95/100"
+      },
+      {
+        "t": 109.9,
+        "level": "info",
+        "msg": "Home: motion 95/100"
+      },
+      {
+        "t": 110.0,
+        "level": "info",
+        "msg": "Home: motion 96/100"
+      },
+      {
+        "t": 110.1,
+        "level": "info",
+        "msg": "Home: motion 96/100"
+      },
+      {
+        "t": 110.3,
+        "level": "info",
+        "msg": "Home: motion 96/100"
+      },
+      {
+        "t": 110.4,
+        "level": "info",
+        "msg": "Home: motion 96/100"
+      },
+      {
+        "t": 110.5,
+        "level": "info",
+        "msg": "Home: motion 96/100"
+      },
+      {
+        "t": 110.7,
+        "level": "info",
+        "msg": "Home: motion 97/100"
+      },
+      {
+        "t": 110.8,
+        "level": "info",
+        "msg": "Home: motion 97/100"
+      },
+      {
+        "t": 111.0,
+        "level": "info",
+        "msg": "Home: motion 97/100"
+      },
+      {
+        "t": 111.1,
+        "level": "info",
+        "msg": "Home: motion 97/100"
+      },
+      {
+        "t": 111.2,
+        "level": "info",
+        "msg": "Home: motion 97/100"
+      },
+      {
+        "t": 111.4,
+        "level": "info",
+        "msg": "Home: motion 98/100"
+      },
+      {
+        "t": 111.5,
+        "level": "info",
+        "msg": "Home: motion 98/100"
+      },
+      {
+        "t": 111.7,
+        "level": "info",
+        "msg": "Home: motion 98/100"
+      },
+      {
+        "t": 111.9,
+        "level": "info",
+        "msg": "Home: motion 98/100"
+      },
+      {
+        "t": 112.0,
+        "level": "info",
+        "msg": "Home: motion 98/100"
+      },
+      {
+        "t": 112.1,
+        "level": "info",
+        "msg": "Home: motion 98/100"
+      },
+      {
+        "t": 112.2,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 112.4,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 112.5,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 112.6,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 112.8,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 112.9,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 113.0,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 113.2,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 113.3,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 113.4,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 113.5,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      }
+    ],
+    "result": {
+      "ok": true,
+      "home": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    },
+    "target": null,
+    "detection_ts": 0.0
+  }
+}

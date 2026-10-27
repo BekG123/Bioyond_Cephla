@@ -1,0 +1,172 @@
+{
+  "status": "failed_to_start",
+  "at": 1792503633.2766075,
+  "plan_id": "2026-10-20T13:40:29.364005+00:00:1792503629364",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 216.157,
+      "Y": 4.225,
+      "Z": 356.848,
+      "Rz": -11.638
+    },
+    "joints": {
+      "J1": 318.24893812450216,
+      "J2": 79.64245225406816,
+      "J3": 26.08092644490308,
+      "J4": -117.36171564292769
+    },
+    "e1": 0.03272278263466433,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "rotate",
+        "rz": -3.87999999999999
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 356.85,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 216.157,
+          "Y": 4.225,
+          "Z": 356.848,
+          "Rz": -3.87999999999999
+        },
+        "joints": {
+          "J1": 318.2489381245022,
+          "J2": 79.64256473443888,
+          "J3": 26.081013900308346,
+          "J4": -109.60391557870366
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 356.85,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 318.25093812450217,
+          "J2": 84.87688206683333,
+          "J3": 52.055961092420105,
+          "J4": -140.81318010320987
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.42093812450213,
+          "J2": 84.87688206683333,
+          "J3": 52.055961092420105,
+          "J4": -140.81318010320985
+        }
+      }
+    ],
+    "preserve_gripper": false,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z356.85 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+    ],
+    "summary": "Return to Home from the current position using IK planner.",
+    "id": "2026-10-20T13:40:29.364005+00:00:1792503629364",
+    "at": 1792503629.3640053,
+    "source": "chat",
+    "confirmation_source": "researcher_chat"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+  ],
+  "physical_clearance_confirmed": true,
+  "error": "Hand-guiding status needs attention. Resolve it before returning Home.",
+  "home_preflight_refusal": {
+    "schema": 1,
+    "reason": "home_preflight_rejected",
+    "runner_start_called": false,
+    "home_travel_dispatched": false,
+    "original_sha256": "702d2cb501a6ad5514dfaeadd73f2a7bd8840d0a9d3d776996c8820af86a874f",
+    "diagnostic": "Hand-guiding status needs attention. Resolve it before returning Home.",
+    "basis": "Exact HomeReturn.start readiness rejection before Runner.start; no sequence was created. Current robot state recorded with review."
+  }
+}

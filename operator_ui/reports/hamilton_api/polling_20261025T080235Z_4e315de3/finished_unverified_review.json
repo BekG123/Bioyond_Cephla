@@ -1,0 +1,346 @@
+{
+  "at": 1792916583.5702252,
+  "status": "finished_unverified",
+  "operation": {
+    "action": "channel_calibration",
+    "calibration_display": {
+      "buttonText": "Finish",
+      "id": "calibration",
+      "imageName": "",
+      "inputType": null,
+      "labwarePosition": 0,
+      "selectionCaptions": null,
+      "selectionImages": null,
+      "spinnerShown": true,
+      "textSections": [
+        [
+          "Please wait while calibration completes. Please do not power off your device.",
+          null,
+          null
+        ],
+        [
+          "",
+          null,
+          null
+        ],
+        [
+          "",
+          null,
+          null
+        ]
+      ]
+    },
+    "calibration_setup": {
+      "label": "300 \u00b5L Framed Conductive Filtered",
+      "labware_hash": "6354ecc26aad8c8d1b9ce12798d23ac57d824f4a729d159678bb1f41fe1ff5fa",
+      "reference_id": "235903",
+      "tip_labware_id": 273,
+      "tip_site": 7
+    },
+    "completed_steps": [],
+    "observed_activity": true,
+    "request_id": "731faefc2a214375916c3a4825f47c00",
+    "session_id": "e98d88d5ea6747ddbcd34847360733a0",
+    "status": "finished_unverified",
+    "step": "channel_calibration",
+    "write_attempted": true,
+    "native_finished": true,
+    "error": "Native finished and Idle, but no new channel result was published. Host monitor stopped by guarded reload without another abort; marker retained for review."
+  },
+  "native": {
+    "instruments/global-run-state": "Idle",
+    "protocol-run": {
+      "protocolId": 0,
+      "runDatalId": null,
+      "isRunInProgress": false,
+      "isSimulation": false,
+      "protocolRunState": 0,
+      "startTime": "0001-01-01T00:00:00",
+      "estimatedEndTime": "0001-01-01T00:00:00",
+      "endPauseTime": "0001-01-01T00:00:00",
+      "protocolName": "MlPrepHeightAndSqueezeCalibration",
+      "currentStep": 0,
+      "preLoadThermalDeviceUsed": "None",
+      "preLoadHepaFiltration": false
+    },
+    "service-software-api/is-parked": true,
+    "service-software-api/has-tips": false,
+    "errors/check-for-pending-errors": [],
+    "calibration/channel-results": [
+      {
+        "id": 3009,
+        "calibrationDate": "2026-10-24T23:23:18.9212113",
+        "status": "Pass",
+        "message": null,
+        "hasError": false,
+        "channelSkew": {
+          "mphSkewX": 0.0,
+          "mphSkewZ": 0.0,
+          "independentSkewX": -0.06899643,
+          "independentSkewZ": 0.2038269
+        },
+        "channelOffset": {
+          "mphOffsetX": 0.0,
+          "independentOffsetX": -0.7285061,
+          "yzAxisOffsets": [
+            {
+              "index": 1,
+              "offsetY": 102.671005,
+              "offsetZ": 171.1443,
+              "offsetZValid": true
+            },
+            {
+              "index": 0,
+              "offsetY": 113.702454,
+              "offsetZ": 170.940475,
+              "offsetZValid": true
+            }
+          ]
+        },
+        "channelWarnings": []
+      },
+      {
+        "id": 2010,
+        "calibrationDate": "2026-10-24T23:03:06.8288403",
+        "status": "Fail",
+        "message": "Failed to start Channel Self Calibration: Unable to get default instrument PRPGD2427 as it is not present.",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 2009,
+        "calibrationDate": "2026-10-24T23:00:51.1914596",
+        "status": "Fail",
+        "message": "Failed to start Channel Self Calibration: Unable to get default instrument PRPGD2427 as it is not present.",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1011,
+        "calibrationDate": "2026-10-24T22:28:44.0679331",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n The provided Z position would exceed the travel limits",
+        "hasError": true,
+        "channelSkew": {
+          "mphSkewX": 0.0,
+          "mphSkewZ": 0.0,
+          "independentSkewX": -0.04349518,
+          "independentSkewZ": 0.210983276
+        },
+        "channelOffset": {
+          "mphOffsetX": 0.0,
+          "independentOffsetX": -0.720264435,
+          "yzAxisOffsets": [
+            {
+              "index": 1,
+              "offsetY": 102.728867,
+              "offsetZ": 171.1586,
+              "offsetZValid": true
+            },
+            {
+              "index": 0,
+              "offsetY": 113.841354,
+              "offsetZ": 170.947617,
+              "offsetZValid": true
+            }
+          ]
+        },
+        "channelWarnings": []
+      },
+      {
+        "id": 1010,
+        "calibrationDate": "2026-10-24T22:28:43.0744579",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n The provided Z position would exceed the travel limits",
+        "hasError": true,
+        "channelSkew": {
+          "mphSkewX": 0.0,
+          "mphSkewZ": 0.0,
+          "independentSkewX": -0.04349518,
+          "independentSkewZ": 0.210983276
+        },
+        "channelOffset": {
+          "mphOffsetX": 0.0,
+          "independentOffsetX": -0.720264435,
+          "yzAxisOffsets": [
+            {
+              "index": 1,
+              "offsetY": 102.728867,
+              "offsetZ": 171.1586,
+              "offsetZValid": true
+            },
+            {
+              "index": 0,
+              "offsetY": 113.841354,
+              "offsetZ": 170.947617,
+              "offsetZValid": true
+            }
+          ]
+        },
+        "channelWarnings": []
+      },
+      {
+        "id": 1009,
+        "calibrationDate": "2026-10-24T21:28:46.0322809",
+        "status": "Pass",
+        "message": null,
+        "hasError": false,
+        "channelSkew": {
+          "mphSkewX": 0.0,
+          "mphSkewZ": 0.0,
+          "independentSkewX": -0.213001251,
+          "independentSkewZ": 0.214553833
+        },
+        "channelOffset": {
+          "mphOffsetX": 0.0,
+          "independentOffsetX": -0.860506058,
+          "yzAxisOffsets": [
+            {
+              "index": 1,
+              "offsetY": 102.682571,
+              "offsetZ": 171.2015,
+              "offsetZValid": true
+            },
+            {
+              "index": 0,
+              "offsetY": 113.748764,
+              "offsetZ": 170.986954,
+              "offsetZValid": true
+            }
+          ]
+        },
+        "channelWarnings": []
+      },
+      {
+        "id": 1008,
+        "calibrationDate": "2026-10-24T19:38:17.4323269",
+        "status": "Pass",
+        "message": null,
+        "hasError": false,
+        "channelSkew": {
+          "mphSkewX": 0.0,
+          "mphSkewZ": 0.0,
+          "independentSkewX": -0.256500244,
+          "independentSkewZ": 0.232437134
+        },
+        "channelOffset": {
+          "mphOffsetX": 0.0,
+          "independentOffsetX": -0.840263367,
+          "yzAxisOffsets": [
+            {
+              "index": 1,
+              "offsetY": 102.682571,
+              "offsetZ": 171.208664,
+              "offsetZValid": true
+            },
+            {
+              "index": 0,
+              "offsetY": 113.795059,
+              "offsetZ": 170.976227,
+              "offsetZValid": true
+            }
+          ]
+        },
+        "channelWarnings": []
+      },
+      {
+        "id": 1007,
+        "calibrationDate": "2026-10-24T19:13:15.5299898",
+        "status": "Fail",
+        "message": "Calibration was aborted.",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1006,
+        "calibrationDate": "2026-10-24T19:12:54.1123222",
+        "status": "Fail",
+        "message": "Calibration was aborted.",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1005,
+        "calibrationDate": "2026-10-24T19:12:53.1178098",
+        "status": "Fail",
+        "message": "Calibration was aborted.",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1004,
+        "calibrationDate": "2026-10-24T19:09:37.0158115",
+        "status": "Fail",
+        "message": "Calibration was aborted.",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1003,
+        "calibrationDate": "2026-08-31T14:52:59.7989953",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1002,
+        "calibrationDate": "2026-08-31T14:52:58.813912",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 3,
+        "calibrationDate": "2026-07-17T17:07:46.264014",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 2,
+        "calibrationDate": "2026-07-17T17:07:45.2742482",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      },
+      {
+        "id": 1,
+        "calibrationDate": "2026-07-17T17:04:39.1692295",
+        "status": "Fail",
+        "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+        "hasError": true,
+        "channelSkew": null,
+        "channelOffset": null,
+        "channelWarnings": []
+      }
+    ]
+  },
+  "controller_writes_sent_by_this_script": 0,
+  "marker_retained": true,
+  "evidence": "Native finished event, Idle, parked, no attached tips, no pending errors, unchanged channel-result IDs.",
+  "operator_observation": "Old tool-not-detected popup remained; no new Finish screen visible."
+}

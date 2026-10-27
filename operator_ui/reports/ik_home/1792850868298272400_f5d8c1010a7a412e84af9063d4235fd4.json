@@ -1,0 +1,318 @@
+{
+  "status": "completed",
+  "at": 1792850868.2982726,
+  "plan_id": "2026-10-24T14:07:41.072292+00:00:1792850861072:initial-home",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 285.925,
+      "Y": -52.989,
+      "Z": 306.313,
+      "Rz": 6.641
+    },
+    "joints": {
+      "J1": 267.7140709197693,
+      "J2": 46.75867953939838,
+      "J3": 49.81925673809889,
+      "J4": -89.93703426998005
+    },
+    "e1": 0.03847513653454371,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "rotate",
+        "rz": -3.880000000000015
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 306.31,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 285.925,
+          "Y": -52.989,
+          "Z": 306.313,
+          "Rz": -3.880000000000015
+        },
+        "joints": {
+          "J1": 267.71407091976937,
+          "J2": 46.75848992307949,
+          "J3": 49.81917733757883,
+          "J4": -100.4577652531411
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 306.31,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 267.7110709197693,
+          "J2": 84.87688206683333,
+          "J3": 52.0559610924201,
+          "J4": -140.8129411517362
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.42107091976936,
+          "J2": 84.87688206683333,
+          "J3": 52.0559610924201,
+          "J4": -140.8129411517362
+        }
+      }
+    ],
+    "preserve_gripper": false,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z306.31 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+    "pickup_home_target": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "pickup_home_target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "id": "2026-10-24T14:07:41.072292+00:00:1792850861072:initial-home"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1792850875.5426974,
+  "sequence": {
+    "state": "done",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 0.0,
+        "level": "info",
+        "msg": "Preparing Auto motion for Home. Keep hands clear."
+      },
+      {
+        "t": 3.0,
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 3.7,
+        "level": "info",
+        "msg": "Home: upload 2/2"
+      },
+      {
+        "t": 4.2,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 4.3,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 4.5,
+        "level": "info",
+        "msg": "Home: motion 4/100"
+      },
+      {
+        "t": 4.6,
+        "level": "info",
+        "msg": "Home: motion 11/100"
+      },
+      {
+        "t": 4.8,
+        "level": "info",
+        "msg": "Home: motion 19/100"
+      },
+      {
+        "t": 4.9,
+        "level": "info",
+        "msg": "Home: motion 30/100"
+      },
+      {
+        "t": 5.0,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 5.2,
+        "level": "info",
+        "msg": "Home: motion 48/100"
+      },
+      {
+        "t": 5.4,
+        "level": "info",
+        "msg": "Home: motion 58/100"
+      },
+      {
+        "t": 5.5,
+        "level": "info",
+        "msg": "Home: motion 65/100"
+      },
+      {
+        "t": 5.7,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 5.8,
+        "level": "info",
+        "msg": "Home: motion 67/100"
+      },
+      {
+        "t": 6.0,
+        "level": "info",
+        "msg": "Home: motion 71/100"
+      },
+      {
+        "t": 6.1,
+        "level": "info",
+        "msg": "Home: motion 80/100"
+      },
+      {
+        "t": 6.3,
+        "level": "info",
+        "msg": "Home: motion 90/100"
+      },
+      {
+        "t": 6.4,
+        "level": "info",
+        "msg": "Home: motion 97/100"
+      },
+      {
+        "t": 6.6,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 6.8,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      }
+    ],
+    "result": {
+      "ok": true,
+      "home": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    },
+    "target": {
+      "x": 312.575,
+      "y": -66.2,
+      "z": 73.718,
+      "rz": 89.865,
+      "z_calibrated": 73.718,
+      "config": "Wide",
+      "big_r": 190.25,
+      "found_at": "06:59:02",
+      "calibrated_at": 1792850342.323663,
+      "source": "fast_disk",
+      "converged": true,
+      "alignment_requires_preflight": true,
+      "z_detail": {
+        "samples": [
+          61.105,
+          61.185
+        ],
+        "spread": 0.0800000000000054,
+        "vision_z": 61.144999999999996,
+        "touch_offset": 9.0
+      },
+      "descent_correction_id": "accepted_grip_endpoint_20261020"
+    },
+    "detection_ts": 1792850342.2628229
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "motion_started": false,
+  "reference_sha256": "6147a4b492c8cb666d74c044db6b5e4e470860b9a7d51b59fa65110468f4e092",
+  "tracker_sha256": "9c9e63864b9cc9ab5f7bd17c6a14213e2b90350b2d8811fd9372ab85579d0a06",
+  "unchanged_quality_gates": true,
+  "initial_pose": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": -3.88,
+    "X": 287.993,
+    "Y": 59.153,
+    "Z": 248.02
+  },
+  "final_pose": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": -3.88,
+    "X": 287.993,
+    "Y": 59.153,
+    "Z": 248.02
+  },
+  "summary": {
+    "development": {
+      "count": 1,
+      "before_pass": 0,
+      "after_pass": 1,
+      "min_agreement": 0.8024691358024691,
+      "max_rms_px": 0.6327354083757689
+    },
+    "heldout_current": {
+      "count": 4,
+      "before_pass": 0,
+      "after_pass": 4,
+      "min_agreement": 0.7702702702702703,
+      "max_rms_px": 0.6913734390377501
+    },
+    "historical": {
+      "count": 5,
+      "before_pass": 5,
+      "after_pass": 5,
+      "min_agreement": 0.8058252427184466,
+      "max_rms_px": 0.5691032454968018
+    },
+    "heldout_fresh": {
+      "count": 5,
+      "before_pass": 0,
+      "after_pass": 5,
+      "min_agreement": 0.7848101265822784,
+      "max_rms_px": 0.6929328796472514
+    }
+  },
+  "results": [
+    {
+      "kind": "development",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\validation_1.jpg",
+      "sha256": "70700f80755d058e815c0af9ca33620098e464c86273fb013a4243a9cb40cd59",
+      "before": {
+        "accepted": false,
+        "inliers": 47,
+        "matches": 81,
+        "inlier_fraction": 0.5802469135802469,
+        "rmse_px": 0.7511729597364484,
+        "coverage": 0.7766247880478663
+      },
+      "after": {
+        "inlier_fraction": 0.8024691358024691,
+        "inliers": 65,
+        "matches": 81,
+        "registration_rmse_px": 0.6327354083757689,
+        "coverage_fraction": 0.8859259251614311,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_current",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\validation_2.jpg",
+      "sha256": "21e9c56d38239a56474793532eabfca1472a60eaabc452f4d06cc0a6e0f58d87",
+      "before": {
+        "accepted": false,
+        "inliers": 47,
+        "matches": 77,
+        "inlier_fraction": 0.6103896103896104,
+        "rmse_px": 0.6922176781072503,
+        "coverage": 0.934811516719701
+      },
+      "after": {
+        "inlier_fraction": 0.7792207792207793,
+        "inliers": 60,
+        "matches": 77,
+        "registration_rmse_px": 0.6527952109643296,
+        "coverage_fraction": 0.9361556172767547,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_current",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\validation_3.jpg",
+      "sha256": "a7b4b18ec7e96df177988c784b1c4e748b61db31ee8cf0bef3069c81a7e3eee8",
+      "before": {
+        "accepted": false,
+        "inliers": 45,
+        "matches": 73,
+        "inlier_fraction": 0.6164383561643836,
+        "rmse_px": 0.7009521293541843,
+        "coverage": 0.9113136014627751
+      },
+      "after": {
+        "inlier_fraction": 0.7945205479452054,
+        "inliers": 58,
+        "matches": 73,
+        "registration_rmse_px": 0.6543697650563867,
+        "coverage_fraction": 0.9199563177483432,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_current",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\validation_4.jpg",
+      "sha256": "a1a0a20108414221728d1d7f6df4e0b1df9a1e5461c0beffb880e7af49bc8512",
+      "before": {
+        "accepted": false,
+        "inliers": 42,
+        "matches": 74,
+        "inlier_fraction": 0.5675675675675675,
+        "rmse_px": 0.74890781007833,
+        "coverage": 0.8138424702635904
+      },
+      "after": {
+        "inlier_fraction": 0.7702702702702703,
+        "inliers": 57,
+        "matches": 74,
+        "registration_rmse_px": 0.6913734390377501,
+        "coverage_fraction": 0.936125176488508,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_current",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\validation_5.jpg",
+      "sha256": "cc23d9f5d0466e88f850e289a062330e083a1253da1dd3651b6284101083e0a8",
+      "before": {
+        "accepted": false,
+        "inliers": 42,
+        "matches": 76,
+        "inlier_fraction": 0.5526315789473685,
+        "rmse_px": 0.7422077047738769,
+        "coverage": 0.6305563688289805
+      },
+      "after": {
+        "inlier_fraction": 0.7894736842105263,
+        "inliers": 60,
+        "matches": 76,
+        "registration_rmse_px": 0.6743430377607424,
+        "coverage_fraction": 0.9109995376570184,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "historical",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\strict_matches_validation\\validation_1.jpg",
+      "sha256": "c8aed315b8b27e1fd29ef4a9b983463e9b4940b4a096e3a4d1e93fe4d740fddb",
+      "before": {
+        "accepted": true,
+        "inliers": 66,
+        "matches": 97,
+        "inlier_fraction": 0.6804123711340206,
+        "rmse_px": 0.6501492995406123,
+        "coverage": 0.9390628763046844
+      },
+      "after": {
+        "inlier_fraction": 0.8350515463917526,
+        "inliers": 81,
+        "matches": 97,
+        "registration_rmse_px": 0.5691032454968018,
+        "coverage_fraction": 0.9394913736108763,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "historical",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\strict_matches_validation\\validation_2.jpg",
+      "sha256": "e7fdb3307647a1442458b0b94dfc1343d5e907451f343f98aa38cf8ce41446e0",
+      "before": {
+        "accepted": true,
+        "inliers": 74,
+        "matches": 101,
+        "inlier_fraction": 0.7326732673267327,
+        "rmse_px": 0.5887505688529296,
+        "coverage": 0.939218360949416
+      },
+      "after": {
+        "inlier_fraction": 0.8811881188118812,
+        "inliers": 89,
+        "matches": 101,
+        "registration_rmse_px": 0.5628004931991712,
+        "coverage_fraction": 0.9412473420824304,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "historical",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\strict_matches_validation\\validation_3.jpg",
+      "sha256": "02f9c3a5cacfc6e5f71c33e0ad69063fffa77ad4418deef0334744587cbc9b9b",
+      "before": {
+        "accepted": true,
+        "inliers": 67,
+        "matches": 100,
+        "inlier_fraction": 0.67,
+        "rmse_px": 0.6460751844968846,
+        "coverage": 0.8914844018816698
+      },
+      "after": {
+        "inlier_fraction": 0.83,
+        "inliers": 83,
+        "matches": 100,
+        "registration_rmse_px": 0.5264736931118262,
+        "coverage_fraction": 0.8962394960175124,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "historical",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\strict_matches_validation\\validation_4.jpg",
+      "sha256": "9b774e29908cef57d5bca683eacbc0429d29b9b8f2240e1e1a17a4804e391ca3",
+      "before": {
+        "accepted": true,
+        "inliers": 74,
+        "matches": 108,
+        "inlier_fraction": 0.6851851851851852,
+        "rmse_px": 0.5900735487369959,
+        "coverage": 0.8910024473433799
+      },
+      "after": {
+        "inlier_fraction": 0.8333333333333334,
+        "inliers": 90,
+        "matches": 108,
+        "registration_rmse_px": 0.5588678772522486,
+        "coverage_fraction": 0.8986378554709689,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "historical",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\strict_matches_validation\\validation_5.jpg",
+      "sha256": "4f435217ca82880bc9693927a7a765c8e2f453178355243f2b54033ffe48bb0c",
+      "before": {
+        "accepted": true,
+        "inliers": 71,
+        "matches": 103,
+        "inlier_fraction": 0.6893203883495146,
+        "rmse_px": 0.6073535553837303,
+        "coverage": 0.927742885485738
+      },
+      "after": {
+        "inlier_fraction": 0.8058252427184466,
+        "inliers": 83,
+        "matches": 103,
+        "registration_rmse_px": 0.544159537555194,
+        "coverage_fraction": 0.9281713827919298,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_fresh",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\heldout_fresh_1.jpg",
+      "sha256": "0df2712cc1d021df97f9d774d2146ab085ced81d07a8d7fdd3861003acadc676",
+      "before": {
+        "accepted": false,
+        "inliers": 50,
+        "matches": 79,
+        "inlier_fraction": 0.6329113924050633,
+        "rmse_px": 0.6958482046412798,
+        "coverage": 0.9058772156079077
+      },
+      "after": {
+        "inlier_fraction": 0.7848101265822784,
+        "inliers": 62,
+        "matches": 79,
+        "registration_rmse_px": 0.6732191203537058,
+        "coverage_fraction": 0.9080821580037525,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_fresh",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\heldout_fresh_2.jpg",
+      "sha256": "0df2712cc1d021df97f9d774d2146ab085ced81d07a8d7fdd3861003acadc676",
+      "before": {
+        "accepted": false,
+        "inliers": 50,
+        "matches": 79,
+        "inlier_fraction": 0.6329113924050633,
+        "rmse_px": 0.6958482046412798,
+        "coverage": 0.9058772156079077
+      },
+      "after": {
+        "inlier_fraction": 0.7848101265822784,
+        "inliers": 62,
+        "matches": 79,
+        "registration_rmse_px": 0.6732191203537058,
+        "coverage_fraction": 0.9080821580037525,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_fresh",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\heldout_fresh_3.jpg",
+      "sha256": "68040e1e7f4c9b54d20a64606f66f1f88dd2e9149924b7e7ff886ce739184f56",
+      "before": {
+        "accepted": false,
+        "inliers": 47,
+        "matches": 73,
+        "inlier_fraction": 0.6438356164383562,
+        "rmse_px": 0.8932102418459797,
+        "coverage": 0.8647010141269242
+      },
+      "after": {
+        "inlier_fraction": 0.8082191780821918,
+        "inliers": 59,
+        "matches": 73,
+        "registration_rmse_px": 0.6929328796472514,
+        "coverage_fraction": 0.9119419791413333,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_fresh",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\heldout_fresh_4.jpg",
+      "sha256": "68040e1e7f4c9b54d20a64606f66f1f88dd2e9149924b7e7ff886ce739184f56",
+      "before": {
+        "accepted": false,
+        "inliers": 47,
+        "matches": 73,
+        "inlier_fraction": 0.6438356164383562,
+        "rmse_px": 0.8932102418459797,
+        "coverage": 0.8647010141269242
+      },
+      "after": {
+        "inlier_fraction": 0.8082191780821918,
+        "inliers": 59,
+        "matches": 73,
+        "registration_rmse_px": 0.6929328796472514,
+        "coverage_fraction": 0.9119419791413333,
+        "accepted": true
+      }
+    },
+    {
+      "kind": "heldout_fresh",
+      "image": "operator_ui\\reports\\projected_disk_pilot\\rim_refinement_20261026\\heldout_fresh_5.jpg",
+      "sha256": "6b35e92b224b1fda2f31c286ff89b8e53a8be022df3a9bebd6a24eb1b33e3c7c",
+      "before": {
+        "accepted": false,
+        "inliers": 45,
+        "matches": 73,
+        "inlier_fraction": 0.6164383561643836,
+        "rmse_px": 0.6700789978345469,
+        "coverage": 0.8895637679965903
+      },
+      "after": {
+        "inlier_fraction": 0.7945205479452054,
+        "inliers": 58,
+        "matches": 73,
+        "registration_rmse_px": 0.6808603157948374,
+        "coverage_fraction": 0.895921777964088,
+        "accepted": true
+      }
+    }
+  ]
+}

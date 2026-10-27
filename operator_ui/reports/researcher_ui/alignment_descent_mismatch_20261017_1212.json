@@ -1,0 +1,130 @@
+﻿{
+    "kind":  "alignment_descent_reference_diagnosis",
+    "generated_at":  "2026-10-17T19:15:23.1332883Z",
+    "current_state":  {
+                          "camera":  {
+                                         "age_s":  4.4,
+                                         "device":  {
+                                                        "ip":  "192.168.201.89",
+                                                        "model":  "JHEM600GM-HM",
+                                                        "serial":  "457108625727"
+                                                    },
+                                         "enabled":  true,
+                                         "error":  "",
+                                         "open":  true
+                                     },
+                          "envelope":  {
+                                           "X":  {
+                                                     "max":  450.0,
+                                                     "min":  200.0
+                                                 },
+                                           "Y":  {
+                                                     "max":  380.0,
+                                                     "min":  -250.0
+                                                 },
+                                           "Z":  {
+                                                     "max":  400.0,
+                                                     "min":  70.0
+                                                 },
+                                           "enabled":  true
+                                       },
+                          "robot":  {
+                                        "connected":  true,
+                                        "control_mode":  {
+                                                             "mode":  "auto",
+                                                             "value":  1
+                                                         },
+                                        "enabled":  true,
+                                        "endpoint":  "192.168.201.220:56788",
+                                        "errors":  [
+
+                                                   ],
+                                        "external_axes":  {
+                                                              "E1":  0.028408514481270686
+                                                          },
+                                        "external_axes_source":  "native_motion_status",
+                                        "external_axes_units":  {
+                                                                    "E1":  "mm"
+                                                                },
+                                        "joints":  {
+                                                       "J1":  261.4012835119773,
+                                                       "J2":  39.32614913842119,
+                                                       "J3":  61.571212701328406,
+                                                       "J4":  -8.523770166008264
+                                                   },
+                                        "lua_app_initialized":  true,
+                                        "ok":  true,
+                                        "pose_mm":  {
+                                                        "Rx":  0.0,
+                                                        "Ry":  0.0,
+                                                        "Rz":  92.373,
+                                                        "X":  318.52,
+                                                        "Y":  -69.647,
+                                                        "Z":  300.0
+                                                    },
+                                        "program_state":  {
+                                                              "state":  "running",
+                                                              "value":  1
+                                                          },
+                                        "system_state":  {
+                                                             "state":  "running",
+                                                             "value":  2
+                                                         }
+                                    },
+                          "sequence":  {
+                                           "active":  false,
+                                           "name":  "researcher_align",
+                                           "state":  "done"
+                                       },
+                          "target":  {
+                                         "alignment_requires_preflight":  true,
+                                         "big_r":  190.55,
+                                         "calibrated_at":  1792264341.2687857,
+                                         "config":  "Wide",
+                                         "converged":  true,
+                                         "found_at":  "12:12:21",
+                                         "rz":  92.37349999999998,
+                                         "source":  "fast_disk",
+                                         "x":  318.5205,
+                                         "y":  -69.6465,
+                                         "z":  62.174,
+                                         "z_calibrated":  71.174,
+                                         "z_detail":  {
+                                                          "samples":  [
+                                                                          62.216,
+                                                                          62.132
+                                                                      ],
+                                                          "spread":  0.08400000000000318,
+                                                          "touch_offset":  9.0,
+                                                          "vision_z":  62.174
+                                                      }
+                                     },
+                          "ts":  1792264523.0754793
+                      },
+    "taught_profile":  {
+                           "id":  "two_disk_manual_endpoint_20261017T103806Z",
+                           "enabled":  true,
+                           "frame":  "robot_base_mm_degrees",
+                           "scope":  "Two-disk plate at the unchanged taught location and orientation, confirmed by operator on 2026-10-17.",
+                           "endpoint":  {
+                                            "X":  298.78,
+                                            "Y":  -65.683,
+                                            "Z":  70.461,
+                                            "Rz":  85.671
+                                        },
+                           "correction_height_mm":  300.0,
+                           "max_xy_correction_mm":  10.0,
+                           "max_yaw_correction_deg":  5.0,
+                           "max_depth_difference_mm":  2.0,
+                           "evidence":  "operator_ui/demonstrations/descent_endpoint_adjustment_20261017T103806Z/endpoint_record.json",
+                           "evidence_sha256":  "fabd62899007c1564461c8439bcf831799592c222d6856d617ac22751bce51c1",
+                           "note":  "Operator-requested manual refinement of the exact endpoint. Apply at hover before vertical descent. Not hardware-replayed; controller fault must be resolved before execution. No cumulative offsets."
+                       },
+    "successful_home_disk_line_deg":  359.649,
+    "latest_home_disk_line_deg":  353.092,
+    "successful_trace":  "20261017_035215_6e7d8a12",
+    "latest_trace":  "20261017_121122_f8643dfd",
+    "operator_feedback":  "Plate was left where it was; not restored to the original successful pose.",
+    "diagnosis":  "Align uses current vision while Descend corrects to an absolute taught endpoint. Current reference mismatch remains. Physical cause of changed image geometry is not conclusively established.",
+    "actions":  "Read-only diagnosis; no hardware commands, target changes, or limit changes."
+}

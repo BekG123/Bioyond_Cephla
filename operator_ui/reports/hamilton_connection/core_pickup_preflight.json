@@ -1,0 +1,115 @@
+{
+  "time": "2026-10-24T17:36:44.619739+00:00",
+  "instruments/connection-info": [
+    "Serial Number: PRPGD2427",
+    "Instrument Name: PRPGD2427",
+    "Connected: True",
+    "Controlling PC Name: DESKTOP-9DPRVQ3",
+    "Initialization Status: Initialized",
+    "Enclosure Status: Present",
+    "Individual Channels: Present",
+    "MPH8: Not Present",
+    "HHS: Not Present",
+    "HHC: Not Present",
+    "HEPAUV: Not Present"
+  ],
+  "instruments/global-run-state": "Idle",
+  "protocol-run": {
+    "protocolId": 0,
+    "runDatalId": null,
+    "isRunInProgress": false,
+    "isSimulation": false,
+    "protocolRunState": 0,
+    "startTime": "0001-01-01T00:00:00",
+    "estimatedEndTime": "0001-01-01T00:00:00",
+    "endPauseTime": "0001-01-01T00:00:00",
+    "protocolName": "MlPrepSelfCalibration",
+    "currentStep": 0,
+    "preLoadThermalDeviceUsed": "None",
+    "preLoadHepaFiltration": false
+  },
+  "verification/status": {
+    "isWorkflowInProgress": false,
+    "isRunInProgress": false,
+    "isServiceRoutineInProgress": false,
+    "startTime": "2026-10-24T07:01:54.7899022-07:00",
+    "currentIndex": 0,
+    "runs": [],
+    "serviceRoutine": null
+  },
+  "errors/check-for-pending-errors": [],
+  "errors?offset=0&limit=3": {
+    "totalItemCount": 40,
+    "currentOffset": 0,
+    "items": [
+      {
+        "id": "e75f02056af74b25b027b1475a1e6334",
+        "message": "Cannot perform the requested operation because the affected document is currently used in execution!",
+        "date": "2026-10-24T14:28:51.3153962Z",
+        "severity": 1,
+        "handled": false
+      },
+      {
+        "id": "ddd1a18265aa4c93aba8f93252e34158",
+        "message": "Cannot perform the requested operation because the affected document is currently used in execution!",
+        "date": "2026-10-24T14:25:19.341172Z",
+        "severity": 1,
+        "handled": false
+      },
+      {
+        "id": "3b45ba04fb82417d8e58043d3ea8522b",
+        "message": "One or more errors occurred in XSL Command Initialize. Select a recovery action for each error.",
+        "date": "2026-10-24T14:10:21.4239168Z",
+        "severity": 1,
+        "handled": true
+      }
+    ]
+  },
+  "service-software-api/has-tips": false,
+  "traces?offset=0&limit=5&sources=RTE,SDE": {
+    "totalItemCount": 113,
+    "currentOffset": 0,
+    "items": [
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Execution completed",
+        "type": "Processing",
+        "date": "2026-10-24T14:37:49.1611349Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Preparation - Workflow : complete",
+        "type": "Processing",
+        "date": "2026-10-24T14:37:49.1534766Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Preparation - Assay : complete",
+        "type": "Processing",
+        "date": "2026-10-24T14:37:49.1533924Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Preparation - Assay < Activity : Termination - complete",
+        "type": "Processing",
+        "date": "2026-10-24T14:37:48.9813865Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Preparation - Assay > Activity : Termination - start",
+        "type": "Processing",
+        "date": "2026-10-24T14:37:39.5967321Z",
+        "source": "SDE"
+      }
+    ]
+  }
+}

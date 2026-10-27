@@ -1,0 +1,76 @@
+<div id="cephla-film">
+  <div class="cf-screen">
+    <canvas id="cf-canvas" aria-label="Thirty-second 3D film explaining well-grid tracking, virtual landmarks, camera centering, height transfer and gripper alignment." role="img"></canvas>
+    <div class="cf-caption" id="cf-caption" aria-live="polite">A fixed camera sees a familiar pattern: six rows, eight columns.</div>
+    <div class="cf-note">Illustrative geometry and motion · no live hardware</div>
+  </div>
+  <div class="viz-controls cf-controls"><button type="button" class="btn btn-primary" id="cf-play">Play film</button><button type="button" class="btn" id="cf-replay">Replay</button><span id="cf-clock" class="tabular-nums">00:00 / 00:30</span></div>
+  <label class="sr-only" for="cf-seek">Film timeline</label><input id="cf-seek" class="form-range" type="range" min="0" max="30" step="0.01" value="0">
+  <style>
+  #cephla-film{width:100%;}
+  #cephla-film .cf-screen{position:relative;width:100%;min-width:0;aspect-ratio:16/9;min-height:390px;overflow:hidden;background:#111536;color:#f5f3ff;border-radius:16px;}
+  #cephla-film canvas{width:100%;height:100%;display:block;position:absolute;inset:0;}
+  #cephla-film .cf-caption{position:absolute;bottom:8%;left:5%;width:90%;text-align:center;font:500 clamp(13px,1.65vw,22px)/1.4 system-ui;color:#fff;pointer-events:none;text-wrap:balance;}
+  #cephla-film .cf-note{position:absolute;bottom:2.4%;width:100%;text-align:center;font:400 11px system-ui;color:#b6b4d5;}
+  #cephla-film .cf-controls{margin-top:14px;}
+  @media(max-width:480px){#cephla-film .cf-screen{min-height:420px;}#cephla-film .cf-caption{bottom:9%;}}
+  </style>
+  <script>
+  (()=>{
+  const root=document.getElementById('cephla-film'),canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d'),play=root.querySelector('#cf-play'),replay=root.querySelector('#cf-replay'),seek=root.querySelector('#cf-seek'),clock=root.querySelector('#cf-clock');
+  const captions=['The eye-in-hand camera observes a stationary 6 × 8 well plate.','Two independent groups of well rings must agree on the plate transform.','A perspective map transfers the taught disks onto the measured plate image.','Their midpoint guides small XY corrections. Each move gets a fresh image.','20 mm plate − 15 mm reference = +5 mm camera height, on the same support.','The disk angle and taught camera-to-claw transform guide XY and wrist alignment.'];
+  const cuts=[0,4,9,14,19,24,30];
+  const views=[[0,-.50,.64,1],[4,-.12,1.42,1.25],[8,0,1.56,1.28],[12,.28,1.08,1.06],[16,.45,1.42,1.12],[19,.68,.55,.94],[23,1.1,.36,.96],[26,.65,.88,.95],[30,-.35,.9,1.02]];
+  const C={navy:'#111536',floor:'#202454',side:'#5465b1',rim:'#aab9ff',top:'#d6ddff',inside:'#354780',bottom:'#17254e',a:'#5ce6cf',b:'#ffb363',disk:'#ffdc6b',white:'#f3f1ff',coral:'#ff768f',purple:'#ac87fc'};
+  let t=0,playing=false,last=0,stage=-1,W=0,H=0,yaw=0,elev=1,zoom=1,shapes=[],labels=[];
+  const clamp=x=>Math.max(0,Math.min(1,x)),smooth=x=>{x=clamp(x);return x*x*(3-2*x);},lerp=(a,b,f)=>a+(b-a)*f;
+  const q=(x,y,z)=>[x,y,z];
+  function project(v){let x=v[0]*Math.cos(yaw)-v[1]*Math.sin(yaw),y=v[0]*Math.sin(yaw)+v[1]*Math.cos(yaw),z=v[2]-20;let s=Math.min(W/290,H/220)*zoom;return [W*.53+x*s,H*.56+(y*Math.sin(elev)-z*Math.cos(elev))*s,-y*Math.cos(elev)-z*Math.sin(elev)];}
+  function poly(v,fill,stroke=null,width=1,alpha=1){shapes.push({v,fill,stroke,width,alpha});}
+  function line(v,color,width=1,alpha=1,dash=[]){shapes.push({v,fill:null,stroke:color,width,alpha,dash});}
+  function ring(x,y,z,r,color,width=2,alpha=1){let v=[];for(let i=0;i<=40;i++){let a=i*Math.PI/20;v.push(q(x+r*Math.cos(a),y+r*Math.sin(a),z));}line(v,color,width,alpha);}
+  function disk(x,y,z,r,color,alpha=1){let v=[];for(let i=0;i<40;i++){let a=i*Math.PI/20;v.push(q(x+r*Math.cos(a),y+r*Math.sin(a),z));}poly(v,color,null,1,alpha);}
+  function cube(x,y,z,w,d,h,top=C.top,side=C.side,transform=v=>v){let a=[q(x-w/2,y-d/2,z),q(x+w/2,y-d/2,z),q(x+w/2,y+d/2,z),q(x-w/2,y+d/2,z)],b=a.map(v=>q(v[0],v[1],z+h));for(let i=0;i<4;i++)poly([a[i],a[(i+1)%4],b[(i+1)%4],b[i]].map(transform),side);poly(b.map(transform),top);}
+  function text(s,v,color=C.white){labels.push({s,v,color});}
+  function paintShapes(){shapes.forEach(a=>{a.p=a.v.map(project);a.depth=a.p.reduce((n,v)=>n+v[2],0)/a.p.length;});shapes.sort((a,b)=>b.depth-a.depth);for(const a of shapes){ctx.save();ctx.globalAlpha=a.alpha;ctx.beginPath();a.p.forEach((v,i)=>i?ctx.lineTo(v[0],v[1]):ctx.moveTo(v[0],v[1]));if(a.fill){ctx.closePath();ctx.fillStyle=a.fill;ctx.fill();ctx.strokeStyle=a.fill;ctx.lineWidth=.5;ctx.stroke();}if(a.stroke){ctx.strokeStyle=a.stroke;ctx.lineWidth=a.width;ctx.setLineDash(a.dash||[]);ctx.stroke();}ctx.restore();}}
+  function well(x,y,z,highlight,color){const n=16,ro=6.1,ri=4.8;for(let i=0;i<n;i++){let a=i*2*Math.PI/n,b=(i+1)*2*Math.PI/n;const at=(r,k,h)=>q(x+r*Math.cos(k),y+r*Math.sin(k),h);const sq=k=>at(7.5/Math.max(Math.abs(Math.cos(k)),Math.abs(Math.sin(k))),k,z);poly([sq(a),sq(b),at(ro,b,z),at(ro,a,z)],C.top);poly([at(ri,a,z),at(ri,b,z),at(ri,b,4),at(ri,a,4)],C.inside);poly([at(ro,a,z),at(ro,b,z),at(ri,b,z),at(ri,a,z)],highlight?color:C.rim);}disk(x,y,4,ri,C.bottom);}
+  function render(){
+  let s=5;for(let i=0;i<6;i++)if(t<cuts[i+1]){s=i;break;}let u=clamp((t-cuts[s])/(cuts[s+1]-cuts[s]));
+  if(s!==stage){stage=s;root.querySelector('#cf-caption').textContent=captions[s];}
+  let j=0;while(j<views.length-2&&t>views[j+1][0])j++;let f=smooth((t-views[j][0])/(views[j+1][0]-views[j][0]));yaw=lerp(views[j][1],views[j+1][1],f);elev=lerp(views[j][2],views[j+1][2],f);zoom=lerp(views[j][3],views[j+1][3],f);
+  const grad=ctx.createRadialGradient(W*.65,H*.48,0,W*.5,H*.5,W*.75);grad.addColorStop(0,'#29235b');grad.addColorStop(1,C.navy);ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+  for(let i=0;i<36;i++){let x=((i*173+67)%997)/997*W,y=((i*107+21)%617)/617*H;ctx.fillStyle='rgba(152,145,215,.17)';ctx.beginPath();ctx.arc(x,y,i%3===0?2:1,0,7);ctx.fill();}
+  shapes=[];labels=[];
+  disk(0,0,-2,112,C.floor);ring(0,0,-1.8,112,'#35376b',1);ring(0,0,-1.7,100,'#35376b',1);
+  paintShapes();shapes=[];
+  for(let r=0;r<8;r++)for(let c=0;c<10;c++)cube(-65.25+c*14.5,-45.5+r*13,-2,14.5,13,3,'#7887cf','#38467b');
+  for(let i=0;i<8;i++)for(const side of [-1,1])cube(-52.5+i*15,side*47,0,15,4,20);
+  for(let i=0;i<6;i++)for(const side of [-1,1])cube(side*64.5,-37.5+i*15,0,9,15,20);
+  for(let r=0;r<6;r++)for(let c=0;c<8;c++){let index=r*8+c,lit=s>=2||(s===1&&index<Math.floor(u*65));well(-52.5+c*15,-37.5+r*15,20.2,lit,(r+c)%2?C.b:C.a);}
+  if(s===1){let scan=-67+134*clamp(u*1.3);line([q(scan,-47,22),q(scan,47,22)],C.a,3,.8);if(u>.7)text('6 × 8 wells',q(0,65,21));}
+  if(s>=2){let a=s===2?smooth(u*1.6):1,z=21+(1-a)*36,off=(1-a)*-15,rot=(1-a)*-.25;let tr=v=>q(v[0]*Math.cos(rot)-v[1]*Math.sin(rot)+off,v[0]*Math.sin(rot)+v[1]*Math.cos(rot),z);let boundary=[q(-69,-49,z),q(69,-49,z),q(69,49,z),q(-69,49,z),q(-69,-49,z)];if(s===2&&a<1){line(boundary.map(tr),C.disk,2,.65);for(const v of boundary.slice(0,4))line([tr(v),q(v[0],v[1],21)],C.disk,1,.35,[4,4]);}
+  for(const [x,r] of [[-24,17],[24,10]]){const ctr=tr(q(x,0,0));disk(...ctr,r,C.disk,.16);ring(...ctr,r,C.disk,3);}
+  const left=tr(q(-24,0,0)),right=tr(q(24,0,0));line([left,right],C.disk,2,1,[5,4]);disk(...tr(q(0,0,0)),1.5,C.coral);
+  if(s===2&&u>.65)text('Virtual disks · image overlay',q(0,69,22),C.disk);}
+  if(s===0||s===3){let k=s===3?smooth(u):0,cx=22*(1-k),cy=-15*(1-k),cz=95;cube(cx,cy,cz,23,18,17,C.a,'#23898f');cube(cx,cy,cz-5,12,12,6,'#79fff0','#196b77');disk(cx,cy,cz-5.2,4.5,C.bottom);
+    for(const v of [q(-69,-49,21),q(69,-49,21),q(69,49,21),q(-69,49,21)])line([q(cx,cy,cz-5),v],C.a,1,.20);
+    if(s===3){line([q(cx-6,cy,23),q(cx+6,cy,23)],C.coral,3);line([q(cx,cy-6,23),q(cx,cy+6,23)],C.coral,3);line([q(cx,cy,23),q(0,0,23)],C.coral,2,1,[4,4]);if(u>.75)text('Centered → new image check',q(0,69,22),C.a);}
+  }
+  if(s===4){for(let x=-69;x<69;x+=8)line([q(x,-49,15),q(x+4,-49,15)],C.coral,2);line([q(80,-32,0),q(80,-32,20)],C.disk,2);line([q(75,-32,20),q(85,-32,20)],C.disk,2);line([q(75,-32,15),q(85,-32,15)],C.coral,2);text('20 mm',q(95,-32,25),C.disk);text('15 mm reference',q(0,-64,15),C.coral);text('+5 mm camera observation height',q(0,73,30),C.a);}
+  if(s===5){let k=smooth(u*1.3),angle=(1-k)*.38,dx=(1-k)*18,dy=(1-k)*-12;const tr=v=>q(dx+v[0]*Math.cos(angle)-v[1]*Math.sin(angle),dy+v[0]*Math.sin(angle)+v[1]*Math.cos(angle),v[2]);cube(0,-61,55,94,13,11,C.purple,'#6952ae',tr);for(let side of [-1,1]){cube(side*44,-15,50,9,85,7,C.purple,'#6952ae',tr);cube(side*44,27,32,9,9,24,C.top,C.side,tr);line([tr(q(side*44,27,32)),q(side*44,27,21)],C.a,1.5,.65,[4,4]);}if(u>.65)text('XY + yaw aligned',q(0,72,30),C.a);}
+  paintShapes();
+  ctx.font=`500 ${Math.max(11,Math.min(17,W/62))}px system-ui`;ctx.textAlign='center';for(const a of labels){const v=project(a.v);ctx.fillStyle=a.color;ctx.fillText(a.s,Math.max(105,Math.min(W-105,v[0])),Math.max(H*.28,Math.min(H*.79,v[1])));}
+  const rowY=H*.84;for(let i=0;i<6;i++){ctx.fillStyle=i===s?C.a:'#676087';ctx.beginPath();ctx.arc(W/2+(i-2.5)*16,rowY,3,0,7);ctx.fill();}
+  seek.value=t;clock.textContent=`00:${String(Math.floor(t)).padStart(2,'0')} / 00:30`;canvas.dataset.time=t.toFixed(3);canvas.dataset.phase=String(s);canvas.dataset.yaw=yaw.toFixed(3);canvas.dataset.elevation=elev.toFixed(3);canvas.dataset.rendered='true';
+  }
+  function resize(){W=canvas.clientWidth;H=canvas.clientHeight;const d=Math.min(2,devicePixelRatio||1);canvas.width=W*d;canvas.height=H*d;ctx.setTransform(d,0,0,d,0,0);render();}
+  function tick(now){if(playing){t=Math.min(30,t+Math.min(.1,(now-last)/1000));render();if(t>=30){playing=false;play.textContent='Play again';}}last=now;requestAnimationFrame(tick);}
+  function start(){if(t>=30)t=0;playing=true;last=performance.now();play.textContent='Pause';render();}
+  play.addEventListener('click',()=>{if(playing){playing=false;play.textContent='Resume';}else start();});
+  replay.addEventListener('click',()=>{t=0;start();});
+  seek.addEventListener('input',()=>{t=Number(seek.value);playing=false;play.textContent='Resume';render();});
+  // Playback is local. Host persistence events must never toggle the player.
+  new ResizeObserver(resize).observe(canvas);resize();requestAnimationFrame(tick);
+  })();
+  </script>
+</div>

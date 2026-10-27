@@ -1,0 +1,434 @@
+{
+  "time_utc": "2026-10-25T02:25:50.259045+00:00",
+  "read_only": true,
+  "motion_sent": false,
+  "tip_rack_site": 4,
+  "plate_site": 8,
+  "output_directory": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\hamilton_connection\\coordinate_probe_20261025T022550Z",
+  "http_before": {
+    "instruments/connection-info": [
+      "Serial Number: PRPGD2427",
+      "Instrument Name: PRPGD2427",
+      "Connected: True",
+      "Controlling PC Name: DESKTOP-9DPRVQ3",
+      "Initialization Status: Initialized",
+      "Enclosure Status: Present",
+      "Individual Channels: Present",
+      "MPH8: Not Present",
+      "HHS: Not Present",
+      "HHC: Not Present",
+      "HEPAUV: Not Present"
+    ],
+    "instruments/global-run-state": "Idle",
+    "service-software-api/sensor-status": {
+      "isEnclosurePresent": true,
+      "isDoorClosed": true,
+      "isXHome": true,
+      "fan1Rpm": 4271,
+      "fan2Rpm": 0,
+      "mphSensorState": {
+        "present": false,
+        "sleeveSensors": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "yHome": false,
+        "zHome": false,
+        "squeezeHome": false,
+        "dispenserHome": false
+      },
+      "independentChannelsSensorState": {
+        "present": true,
+        "frontChannel": {
+          "sleeveSensor": false,
+          "yHome": true,
+          "zHome": true,
+          "squeezeHome": true,
+          "dispenserHome": false
+        },
+        "rearChannel": {
+          "sleeveSensor": false,
+          "yHome": true,
+          "zHome": true,
+          "squeezeHome": true,
+          "dispenserHome": false
+        }
+      }
+    },
+    "service-software-api/is-parked": true,
+    "service-software-api/has-tips": false,
+    "errors/check-for-pending-errors": [],
+    "calibration_members": [
+      "channel-calibration-results.log",
+      "camera-calibration-results.log",
+      "deck-calibration.png",
+      "deck-calibration.json",
+      "calibration-status.json"
+    ]
+  },
+  "pylabrobot_commit": "fc5ae129c39ef645a2a11234dce97f933a317a9c",
+  "tcp_queries": {
+    "PrepGetIsInitialized": {
+      "value": true
+    },
+    "PrepGetPositions": {
+      "positions": [
+        {
+          "default_values": false,
+          "channel": 1,
+          "position_x": 289.3044738769531,
+          "position_y": 344.9891357421875,
+          "position_z": 165.4965057373047
+        },
+        {
+          "default_values": false,
+          "channel": 2,
+          "position_x": 289.3044738769531,
+          "position_y": 365.0147705078125,
+          "position_z": 165.49647521972656
+        }
+      ]
+    },
+    "PrepGetChannelBounds": {
+      "bounds": [
+        {
+          "channel": 1,
+          "x_min": 0.7825088500976562,
+          "x_max": 299.7825012207031,
+          "y_min": -9.0,
+          "y_max": 376.0,
+          "z_min": 18.200000762939453,
+          "z_max": 165.60000610351562
+        },
+        {
+          "channel": 2,
+          "x_min": 0.7825088500976562,
+          "x_max": 299.7825012207031,
+          "y_min": 0.0,
+          "y_max": 385.0,
+          "z_min": 18.200000762939453,
+          "z_max": 165.60000610351562
+        }
+      ]
+    },
+    "PrepGetPresentChannels": {
+      "channels": [
+        1,
+        2
+      ]
+    },
+    "PrepGetIsEnclosurePresent": {
+      "value": true
+    },
+    "PrepGetSafeSpeedsEnabled": {
+      "value": false
+    },
+    "PrepGetDefaultTraverseHeight": {
+      "value": 165.60000610351562
+    },
+    "PrepGetDeckBounds": {
+      "min_x": 0.0,
+      "max_x": 299.0,
+      "min_y": -9.0,
+      "max_y": 385.0,
+      "min_z": 19.5,
+      "max_z": 167.5
+    },
+    "PrepGetDeckSiteDefinitions": {
+      "sites": [
+        {
+          "default_values": true,
+          "id": 0,
+          "left_bottom_front_x": -2.2300000190734863,
+          "left_bottom_front_y": 390.0,
+          "left_bottom_front_z": 0.0,
+          "length": 310.0,
+          "width": 100.0,
+          "height": 165.60000610351562
+        },
+        {
+          "default_values": true,
+          "id": 1,
+          "left_bottom_front_x": 270.0,
+          "left_bottom_front_y": -3.0,
+          "left_bottom_front_z": 0.0,
+          "length": 100.0,
+          "width": 400.0,
+          "height": 73.0
+        },
+        {
+          "default_values": true,
+          "id": 2,
+          "left_bottom_front_x": 284.760009765625,
+          "left_bottom_front_y": 214.2899932861328,
+          "left_bottom_front_z": 0.0,
+          "length": 6.0,
+          "width": 6.0,
+          "height": 85.0
+        }
+      ]
+    },
+    "PrepGetCalibrationSiteDefinitions": {
+      "sites": [
+        {
+          "default_values": true,
+          "id": 0,
+          "left_bottom_front_x": 129.10000610351562,
+          "left_bottom_front_y": 184.39999389648438,
+          "left_bottom_front_z": 0.0,
+          "length": 6.0,
+          "width": 6.0,
+          "height": 22.100000381469727,
+          "post": true
+        }
+      ]
+    },
+    "PrepGetTipAndNeedleDefinitions": {
+      "definitions": [
+        {
+          "default_values": true,
+          "id": 0,
+          "volume": 0.0,
+          "length": 0.0,
+          "tip_type": 0,
+          "has_filter": false,
+          "is_needle": false,
+          "is_tool": false,
+          "label": "No Tip"
+        },
+        {
+          "default_values": true,
+          "id": 1,
+          "volume": 400.0,
+          "length": 51.900001525878906,
+          "tip_type": 2,
+          "has_filter": false,
+          "is_needle": false,
+          "is_tool": false,
+          "label": "300uL StdVol"
+        },
+        {
+          "default_values": true,
+          "id": 2,
+          "volume": 360.0,
+          "length": 51.900001525878906,
+          "tip_type": 2,
+          "has_filter": true,
+          "is_needle": false,
+          "is_tool": false,
+          "label": "300uL StdVolFilter"
+        },
+        {
+          "default_values": true,
+          "id": 3,
+          "volume": 15.0,
+          "length": 21.899999618530273,
+          "tip_type": 1,
+          "has_filter": false,
+          "is_needle": false,
+          "is_tool": false,
+          "label": "10uL LowVol"
+        },
+        {
+          "default_values": true,
+          "id": 4,
+          "volume": 10.0,
+          "length": 21.899999618530273,
+          "tip_type": 1,
+          "has_filter": true,
+          "is_needle": false,
+          "is_tool": false,
+          "label": "5uL LowVolFilter"
+        },
+        {
+          "default_values": true,
+          "id": 5,
+          "volume": 1250.0,
+          "length": 87.0999984741211,
+          "tip_type": 3,
+          "has_filter": false,
+          "is_needle": false,
+          "is_tool": false,
+          "label": "1000uL HiVol"
+        },
+        {
+          "default_values": true,
+          "id": 6,
+          "volume": 1065.0,
+          "length": 87.0999984741211,
+          "tip_type": 3,
+          "has_filter": true,
+          "is_needle": false,
+          "is_tool": false,
+          "label": "1000uL HiVolFilter"
+        },
+        {
+          "default_values": true,
+          "id": 7,
+          "volume": 700.0,
+          "length": 51.900001525878906,
+          "tip_type": 2,
+          "has_filter": false,
+          "is_needle": true,
+          "is_tool": false,
+          "label": "600uL StdVolNeedle"
+        },
+        {
+          "default_values": true,
+          "id": 8,
+          "volume": 350.0,
+          "length": 51.900001525878906,
+          "tip_type": 2,
+          "has_filter": false,
+          "is_needle": true,
+          "is_tool": false,
+          "label": "300uL StdVolNeedle"
+        },
+        {
+          "default_values": true,
+          "id": 9,
+          "volume": 1250.0,
+          "length": 87.0999984741211,
+          "tip_type": 3,
+          "has_filter": false,
+          "is_needle": true,
+          "is_tool": false,
+          "label": "1000uL HiVolNeedle"
+        },
+        {
+          "default_values": true,
+          "id": 10,
+          "volume": 400.0,
+          "length": 51.900001525878906,
+          "tip_type": 0,
+          "has_filter": false,
+          "is_needle": false,
+          "is_tool": false,
+          "label": "300uL NoType"
+        },
+        {
+          "default_values": true,
+          "id": 11,
+          "volume": 1.0,
+          "length": 22.899999618530273,
+          "tip_type": 0,
+          "has_filter": false,
+          "is_needle": false,
+          "is_tool": true,
+          "label": "CO-RE Gripper"
+        },
+        {
+          "default_values": true,
+          "id": 12,
+          "volume": 15.0,
+          "length": 49.0,
+          "tip_type": 2,
+          "has_filter": false,
+          "is_needle": true,
+          "is_tool": false,
+          "label": "10uL StdVolNeedle"
+        },
+        {
+          "default_values": true,
+          "id": 13,
+          "volume": 350.0,
+          "length": 49.0,
+          "tip_type": 2,
+          "has_filter": false,
+          "is_needle": true,
+          "is_tool": false,
+          "label": "300uL StdVolNeedleShort"
+        },
+        {
+          "default_values": true,
+          "id": 14,
+          "volume": 1250.0,
+          "length": 82.0,
+          "tip_type": 3,
+          "has_filter": false,
+          "is_needle": true,
+          "is_tool": false,
+          "label": "1000uL HiVolNeedleShort"
+        },
+        {
+          "default_values": true,
+          "id": 15,
+          "volume": 1.0,
+          "length": 22.0,
+          "tip_type": 0,
+          "has_filter": false,
+          "is_needle": false,
+          "is_tool": true,
+          "label": "Suction Gripper"
+        }
+      ]
+    }
+  },
+  "tcp_connected": true,
+  "http_after": {
+    "instruments/connection-info": [
+      "Serial Number: PRPGD2427",
+      "Instrument Name: PRPGD2427",
+      "Connected: True",
+      "Controlling PC Name: DESKTOP-9DPRVQ3",
+      "Initialization Status: Initialized",
+      "Enclosure Status: Present",
+      "Individual Channels: Present",
+      "MPH8: Not Present",
+      "HHS: Not Present",
+      "HHC: Not Present",
+      "HEPAUV: Not Present"
+    ],
+    "instruments/global-run-state": "Idle",
+    "service-software-api/sensor-status": {
+      "isEnclosurePresent": true,
+      "isDoorClosed": true,
+      "isXHome": true,
+      "fan1Rpm": 4271,
+      "fan2Rpm": 0,
+      "mphSensorState": {
+        "present": false,
+        "sleeveSensors": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "yHome": false,
+        "zHome": false,
+        "squeezeHome": false,
+        "dispenserHome": false
+      },
+      "independentChannelsSensorState": {
+        "present": true,
+        "frontChannel": {
+          "sleeveSensor": false,
+          "yHome": true,
+          "zHome": true,
+          "squeezeHome": true,
+          "dispenserHome": false
+        },
+        "rearChannel": {
+          "sleeveSensor": false,
+          "yHome": true,
+          "zHome": true,
+          "squeezeHome": true,
+          "dispenserHome": false
+        }
+      }
+    },
+    "service-software-api/is-parked": true,
+    "service-software-api/has-tips": false,
+    "errors/check-for-pending-errors": []
+  }
+}

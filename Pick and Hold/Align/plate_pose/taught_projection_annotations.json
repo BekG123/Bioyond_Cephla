@@ -1,0 +1,26 @@
+{
+  "description": "Provisional image annotations: corresponding top-face rectangle corners, extrapolated across rounded/chamfered corners. Not physical measurements or reviewed grasp targets.",
+  "source": {
+    "image": "operator_ui/captures/teach_fast_20261017_035215_6e7d8a12_0001.png",
+    "annotation_size_px": [900, 600],
+    "corners_px": [[76, 110], [746, 105], [748, 554], [77, 559]],
+    "disk_seeds_px": {"large": [307, 330], "small": [522, 330]}
+  },
+  "target": {
+    "image": "operator_ui/reports/plate_projection_current/taught_wide_48_preflight.png",
+    "annotation_size_px": [1200, 800],
+    "corners_px": [[78, 178], [980, 113], [1021, 699], [116, 764]]
+  },
+  "orientation_assumption": "Map source left to target left, top to top; not identified from symmetric grid.",
+  "operator_orientation_confirmation": "Large disk left, small disk right confirmed by operator on 2026-10-25; not automatic A1 recognition.",
+  "same_outer_dimensions": "Confirmed by user; numerical dimensions not needed for this pixel overlay.",
+  "height_reference": {
+    "original_top_above_resting_bottom_mm": 15.0,
+    "target_top_above_resting_bottom_mm": 20.0,
+    "top_surface_offset_mm": 5.0,
+    "source": "operator measurement, 2026-10-25",
+    "same_resting_plane_required": true,
+    "gripping_edge_offset_mm": null
+  },
+  "reviewed": false
+}

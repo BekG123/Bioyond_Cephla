@@ -1,0 +1,31 @@
+{
+  "schema": "cephla.projected-pickup-profile.v1",
+  "id": "48_well_projected_20261026",
+  "acceptance": "operator_ui/reports/projected_alignment/accepted_round_20261026.json",
+  "acceptance_sha256": "85a5545057c861e6b0c34a9008df5c09744ecfaf5e1907e1183b14299bd472d4",
+  "alignment_log": "operator_ui/reports/projected_alignment/20261026_232305_920d2cde.jsonl",
+  "alignment_log_sha256": "7439b6efac4f5ee099427fb0a04e24c9757c142d9b6a8d84cb60443e2a427134",
+  "alignment_pose_mm": {
+    "X": 294.941,
+    "Y": -71.704,
+    "Z": 300.0,
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 86.389
+  },
+  "descent_status": "pending_supervised_open_claw_trial",
+  "gripping_edge_height": "unknown; operator requested supervised verification",
+  "candidate_endpoint": {
+    "X": 294.941,
+    "Y": -71.704,
+    "Z": 78.718,
+    "Rz": 86.389
+  },
+  "candidate_z_basis": "Trial candidate only: old taught jaw height +5 mm top-height difference; not a measured gripping height.",
+  "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+  "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+  "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+  "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5 to E1=3.7",
+  "automatic_lift_enabled": false,
+  "full_pickup_verified": false
+}

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-20",
+  "status": "offline_tests_passed_not_loaded",
+  "physical_robot_motion": false,
+  "native_imaging_started": false,
+  "running_squid_restarted": false,
+  "flask_restarted": false,
+  "shipped_squid_files_modified": false,
+  "python_exec_enabled": false,
+  "suites": {
+    "test_autonomous_squid.py": 18,
+    "squid_bridge/test_bridge.py": 7,
+    "test_lacry*.py": 51,
+    "test_squid*.py": 22,
+    "test_home_then_calibration.py": 12,
+    "test_calibration_to_squid.py": 10
+  },
+  "browser_fixture": "passed; hardware_calls=0",
+  "coverage": [
+    "one chat Yes runs pickup, delivery, imaging wait and retrieval",
+    "actual planner and Lua queue against fake robot hardware",
+    "native Squid serializer and Qt threading against fake acquisition objects",
+    "GUI settings checksum and channel exposure preservation",
+    "exact experiment/run/session identity; stale, failed and disconnected jobs stop",
+    "Stop in imaging-start/wait gap cancels only the owned job",
+    "reservation prevents competing robot tasks during imaging",
+    "loading-position mismatch prevents retrieval",
+    "unfinished workflow journal never auto-resumes",
+    "standalone launcher leaves shipped source unchanged"
+  ],
+  "pending": [
+    "Restart Squid with the optional launcher and reselect desired GUI settings",
+    "Load the updated Lacry backend when the station is supervised",
+    "Validate the native simulator integration with the selected settings",
+    "Supervised full physical workflow trial",
+    "Configure a reviewed real microscope loading pose before real imaging"
+  ]
+}

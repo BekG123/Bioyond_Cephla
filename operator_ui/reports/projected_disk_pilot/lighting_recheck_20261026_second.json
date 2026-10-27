@@ -1,0 +1,14 @@
+{
+  "purpose": "Second stationary lighting recheck requested by operator",
+  "hardware_motion_commanded": false,
+  "method": "check_grid_burst.py; three bursts of five fresh frames, median per burst; unchanged tracker thresholds",
+  "results": [
+    {"burst": 1, "ok": true, "wells": 48, "disk_spread": 0.5986463485256177, "extent_spread": 1.551049472616331, "correlations": [0.8841593843322907, 0.8905844275809985]},
+    {"burst": 2, "ok": true, "wells": 48, "disk_spread": 0.7350723880809362, "extent_spread": 1.5214360066705717, "correlations": [0.8718947429381994, 0.88298305013316]},
+    {"burst": 3, "ok": true, "wells": 48, "disk_spread": 0.6347468152254896, "extent_spread": 1.5377781359314784, "correlations": [0.8859339006703754, 0.8905827518047303]}
+  ],
+  "snapshot": "operator_ui/captures/snap_0014.png",
+  "snapshot_note": "Fresh single frame saved during the diagnostic; not a tested median",
+  "comparison": "3 of 3 batches accepted versus 1 of 3 in preceding lighting recheck",
+  "conclusion": "Improved short stationary test. Does not establish metric pose accuracy or completed calibration. No motion performed."
+}

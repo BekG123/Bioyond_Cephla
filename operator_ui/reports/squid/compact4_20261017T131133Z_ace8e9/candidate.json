@@ -1,0 +1,166 @@
+{
+  "source_trial": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid\\home_scope_solved_20261017T125835Z_f3c36d\\stepwise40_trial.json",
+  "source_sha256": "3510d04f4510c388ec0cee5fc7e3e7e2c13183ce92804c5c169e0e827fef2782",
+  "created_at": "2026-10-17T13:11:33.144386+00:00",
+  "start": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "points": [
+    {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 286.24,
+      "Rz": -3.88
+    },
+    {
+      "X": 354.0,
+      "Y": 270.0,
+      "Z": 286.24,
+      "Rz": 49.02
+    },
+    {
+      "X": 226.28,
+      "Y": 373.6,
+      "Z": 286.24,
+      "Rz": 89.11
+    },
+    {
+      "X": 226.3,
+      "Y": 373.59,
+      "Z": 266.19,
+      "Rz": 89.11
+    }
+  ],
+  "point_count": 4,
+  "validation": {
+    "runtime_passed": true,
+    "failures": [],
+    "ranges": {
+      "X": [
+        226.28,
+        354.0
+      ],
+      "Y": [
+        62.63,
+        373.6
+      ],
+      "Z": [
+        248.02,
+        286.24
+      ],
+      "J2": [
+        77.75654438733913,
+        90.90306731878498
+      ],
+      "J3": [
+        52.055961092420105,
+        150.5066659531479
+      ],
+      "J4": [
+        -152.86517594014546,
+        -140.81303133055277
+      ],
+      "reach": [
+        175.52400918392905,
+        386.8242991333404
+      ]
+    },
+    "workspace_passed": true,
+    "reach_passed": true
+  },
+  "reverse_validation": {
+    "runtime_passed": true,
+    "failures": [],
+    "ranges": {
+      "X": [
+        226.28,
+        354.0
+      ],
+      "Y": [
+        62.629999999999995,
+        373.6
+      ],
+      "Z": [
+        248.02,
+        286.24
+      ],
+      "J2": [
+        77.75654438733913,
+        90.90306731878498
+      ],
+      "J3": [
+        52.05596109242009,
+        150.5066659531479
+      ],
+      "J4": [
+        -152.8651759401455,
+        -140.81303133055275
+      ],
+      "reach": [
+        175.52400918392905,
+        386.8242991333404
+      ]
+    },
+    "workspace_passed": true,
+    "reach_passed": true
+  },
+  "direct_three_point_check": {
+    "passed": false,
+    "error": "path crosses J2 limit (predicted 93.2 deg, limit +/-93.0)"
+  },
+  "params": {
+    "reach_hard_mm": 460.0,
+    "j4_pref_abs_deg": 220.0,
+    "j4_hard_abs_deg": 220.0,
+    "inner_reach_mm": 280.0,
+    "claw_gap_min_mm": 60.0,
+    "claw_gap_max_mm": 88.0,
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j2_min_deg": -95.0,
+    "j2_margin_deg": 2.0,
+    "extension_margin_mm": 8.0
+  },
+  "envelope": {
+    "X": [
+      200.0,
+      450.0
+    ],
+    "Y": [
+      -250.0,
+      380.0
+    ],
+    "Z": [
+      70.0,
+      400.0
+    ]
+  },
+  "baseline_point_count": 121,
+  "baseline_length_mm": 1258.262873341403,
+  "candidate_length_mm": 439.7550584119497,
+  "distance_reduction_percent": 65.05062115961906,
+  "search": "2 mm corridor grid; shortest sampled passing candidate with |J2| <=91; not a global optimality claim",
+  "candidate_speed_for_next_comparison_mm_s": 40,
+  "eventual_requested_speed_mm_s": 137,
+  "accepted_final_segment_exactly_preserved": true,
+  "transit_height_mm": 286.24,
+  "prior_upper_transit_height_mm": 326.13,
+  "physical_clearance_verified": false,
+  "execution_authorized": false,
+  "motion_commands_sent": false,
+  "notes": [
+    "This is four commanded points after Home, not four macros hiding the old points.",
+    "Removes approximate-Home connector and middle loops. Prior recording and trial remain untouched.",
+    "Retains the exact successful final insertion; the broader earlier entry is archived, not claimed identical.",
+    "New corridor at Z286.24 needs clearance review; it is 39.89 mm below prior upper transit.",
+    "Current queue route profiles do not accept this four-point shape; executor integration and tests required before any queue run.",
+    "Distance reduced; energy and execution time are not measured or inferred."
+  ]
+}

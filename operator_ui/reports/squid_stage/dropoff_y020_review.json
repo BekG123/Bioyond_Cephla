@@ -1,0 +1,17 @@
+{
+  "status": "proposed_not_authorized",
+  "motion_authorized": false,
+  "controller_serial": "12769210",
+  "source_reference_sha256": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+  "original_target_mm": {"x_mm": 0.05, "y_mm": 0.0508, "z_mm": 1.05},
+  "proposed_target_mm": {"x_mm": 0.05, "y_mm": 0.2, "z_mm": 1.05},
+  "change_mm": {"x_mm": 0.0, "y_mm": 0.1492, "z_mm": 0.0},
+  "tolerance_mm": 0.02,
+  "observations": [
+    {"report": "ecd94d96b03b412faad6044305b5d746.json", "y_mm": 0.1063625},
+    {"report": "7ed75b2825e14781977c3370671adff0.json", "y_mm": 0.10556875}
+  ],
+  "diagnosis": "Both native loading calls returned completion while Y remained about 0.055 mm above target. Later readback is unchanged. This is a repeatable near-home short-stop, consistent with a limit-switch stop; the live firmware limit event is not exposed, so that cause is not proven. The available firmware source can acknowledge limit-switch stops without reaching the requested target.",
+  "trial": "After explicit approval, run the existing native loading corridor with only Y changed to 0.200 mm. Keep the arm at Home. Verify repeated stage feedback within the original 0.020 mm tolerance; stop on any discrepancy. No automatic retries, no robot delivery or retrieval. Inspect the plate-holder relationship before accepting this reference for robot loading.",
+  "integration": "Only after acceptance update the saved stage reference and Squid protocol loading position together, preserve old records, invalidate older plans, and retain imaging XY history with explicit reference-migration provenance. Do not alter robot trajectories or widen arrival tolerance."
+}

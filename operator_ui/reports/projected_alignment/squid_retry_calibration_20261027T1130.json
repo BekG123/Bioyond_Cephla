@@ -1,0 +1,57 @@
+{
+  "schema": "cephla.supervised-48well-calibration-trial.v1",
+  "date": "2026-10-27",
+  "request": "Return Home, repeat full calibration, then attempt Squid drop-off and pickup, stopping for seating inspection before release.",
+  "operator_confirmation": "All confirmed—start Home and calibration",
+  "confirmed_setup": {"empty_jaws": true, "plate_flat_in_calibration_holder": true, "home_route_clear": true, "arm_released": true, "hands_clear": true, "estop_supervised": true, "repaired_squid_holder_empty_at_taught_loading_position": true},
+  "profile_sha256": "b417c0a99452b4cfa721475d9d6d7792f8fbad73dee86f29fce0ea2111a72d8e",
+  "status": "stopped_at_alignment_preparation_vision_check",
+  "startup": {
+    "initial_home_travel_dispatched": false,
+    "initial_refusal": "Cached previous loaded-gripper report prevented program startup.",
+    "recovery": "Existing stale-reading startup option after operator-confirmed empty jaws and live E1 near zero.",
+    "program_response_at_utc": "2026-10-27T11:26:02.695182+00:00",
+    "ok": true,
+    "fresh_e1_mm": 0.027,
+    "fresh_e1_torque_raw": 0.0
+  },
+  "home": {
+    "plan_id": "2026-10-27T11:28:59.734581+00:00:1793100539734",
+    "completed": true,
+    "target": {"X":289.97,"Y":62.63,"Z":248.02,"Rz":-3.88},
+    "translation_speed": 137,
+    "wrist_speed": 30
+  },
+  "observation_record": "operator_ui/reports/projected_alignment/manual_repeat_observation_1793100562002858300.json",
+  "centering": {
+    "log": "operator_ui/reports/projected_disk_pilot/20261027_042955_e5072526.jsonl",
+    "supported_wells": 48,
+    "total_wells": 48,
+    "error_xy_mm": [0.19963479234627357,-0.2205860812216791],
+    "xy_centered": true,
+    "motion_requested": false,
+    "observation_z_mm": 289.129,
+    "height_source": "Existing physically verified same-support reference; no depth derived from virtual disk radii."
+  },
+  "alignment_preparation": {
+    "command": "prepare_projected_alignment.py --output operator_ui/reports/projected_alignment/prepared_squid_retry_20261027T1130.json",
+    "output_created": false,
+    "failure": "Composed grid groups disagree: disks 0.843 px; extent 1.860 px.",
+    "disk_disagreement_limit_px": 0.8,
+    "extent_disagreement_limit_px": 2.0,
+    "frames": ["operator_ui/captures/snap_0103.png","operator_ui/captures/snap_0104.png","operator_ui/captures/snap_0105.png","operator_ui/captures/snap_0106.png","operator_ui/captures/snap_0107.png"],
+    "visual_check": "Full plate visible; well and rim edges blurred with reflections. Root cause of disagreement not established.",
+    "preview": "work/current_48well_check.jpg"
+  },
+  "last_checked_pose": {"X":279.302,"Y":26.358,"Z":289.129,"Rz":-3.88},
+  "last_checked_program_state": "running",
+  "last_checked_controller_errors": [],
+  "alignment_motion_started": false,
+  "descent_started": false,
+  "grip_started": false,
+  "squid_travel_started": false,
+  "plate_released": false,
+  "full_calibration_success": false,
+  "limits_changed": false,
+  "audit": "operator_ui/logs/audit/20261027T100002Z_daf90af4/events_0002.jsonl"
+}

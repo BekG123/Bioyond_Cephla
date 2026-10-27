@@ -30,8 +30,12 @@ tools/realsense/
 operator_ui/realsense_captures/
 models/depth_anything_v2/
 operator_ui/datasets/
+operator_ui/demonstrations/
 operator_ui/depth_runs/
 operator_ui/depth_baselines/
+operator_ui/reports/calibration/
+operator_ui/logs/audit/
+operator_ui/logs/lacry_memory/
 Pick and Hold/Align/references/
 
 # Local simulation environments and generated runs
@@ -51,3 +55,14 @@ operator_ui/reports/**/*.npy
 .env
 .env.*
 !.env.example
+
+# Generated local training exports; retain the dataset guide and exporter in git.
+training_data/snapshot_*/
+
+# Local scratch checkouts, crash dumps and generated acquisition/diagnostic binaries.
+# Keep structured trial records and source code in Git; retain these artifacts locally.
+operator_ui/tmp/
+*.stackdump
+operator_ui/reports/**/*.tif
+operator_ui/reports/**/*.tiff
+operator_ui/reports/**/*.zip

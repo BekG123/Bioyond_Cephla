@@ -1,0 +1,55 @@
+{
+  "schema": "cephla.projected-plate-acceptance.v1",
+  "id": "48_well_calibration_alignment_20261026",
+  "recorded_at": "2026-10-27T06:30:02.167805+00:00",
+  "status": "operator_accepted_calibration_and_alignment_round",
+  "operator_feedback": "Yes! Great job; save this as a successful calibration and alignment round.",
+  "plate": {
+    "wells": 48,
+    "rows": 6,
+    "columns": 8,
+    "height_mm": 20,
+    "original_height_mm": 15,
+    "same_support": true
+  },
+  "observation_height_mm": 289.129,
+  "alignment_pose_mm": {
+    "X": 294.941,
+    "Y": -71.704,
+    "Z": 300.0,
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 86.389
+  },
+  "physical_alignment_executed": true,
+  "visual_alignment_accepted": true,
+  "independent_absolute_depth_verified": false,
+  "gripping_height_verified": false,
+  "descent_verified": false,
+  "grip_verified": false,
+  "full_pickup_verified": false,
+  "methods": [
+    "Track the real 6x8 well pattern using frozen image references and independent well-group registration.",
+    "Project the original two disk landmarks through the measured image transform; never use virtual radius as depth.",
+    "Transfer the original observation height by the measured +5 mm plate height on the same support.",
+    "Use a fixed image at the verified height, retaining all eight upstream/current transform combinations.",
+    "Use vendor Wide XY/yaw and camera-to-claw transforms, then the existing guarded IK alignment at Z300."
+  ],
+  "lessons": [
+    "A large total well count alone is insufficient; check spatial coverage and independent transform agreement.",
+    "Height changes can alter blur/reflections enough to invalidate the earlier fixed-height photometric reference.",
+    "A validated height-matched reference recovered 48/48 wells without relaxing uncertainty limits.",
+    "The accepted round includes reviewed intermediate failures; it is not proof of an unattended repeat from Home.",
+    "Plate-top height, jaw-contact height and secure grip are separate quantities; the last two await a physical trial."
+  ],
+  "evidence": [
+    {
+      "path": "operator_ui/reports/projected_alignment/20261026_232305_920d2cde.jsonl",
+      "sha256": "7439b6efac4f5ee099427fb0a04e24c9757c142d9b6a8d84cb60443e2a427134"
+    },
+    {
+      "path": "Pick and Hold/Calibration/plate_48_height_reference_20261026.json",
+      "sha256": "0a130004bb4e5b631c2e0d2ee829e8ac217dcb046bd12ec8e8a5cc454a70adf2"
+    }
+  ]
+}

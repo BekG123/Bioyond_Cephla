@@ -1,0 +1,259 @@
+﻿{
+    "checked_at":  "2026-10-24T00:12:41.7756600-07:00",
+    "verification":  "Planning only; no confirmation sent",
+    "plan":  {
+                 "blockers":  [
+                                  "Hamilton start/finished connection: Coming Soon. Configure the local bridge before running this experiment.",
+                                  "Hamilton loaded drop-off and retrieval still need a recorded supervised acceptance before one-confirmation automatic use.",
+                                  "Cannot read the selected Squid settings. Launch Squid with the Lacry settings add-on, then request the experiment again. Select the wells or imaging locations in Squid first."
+                              ],
+                 "executable":  false,
+                 "id":  "f07c345331364076a614be75e16a4cc2",
+                 "labels":  [
+                                "Hamilton and Squid round trip × 5"
+                            ],
+                 "requirements":  [
+                                      "The arm is already at saved Home; its position will be checked again before calibration.",
+                                      "Both disks must be visible from Home after the initial return.",
+                                      "The calibration plate is in its taught location and orientation.",
+                                      "The gripper is empty, the area is clear, and you are supervising the emergency stop.",
+                                      "Each step runs exactly as its button does in the classic view, including the controller preparation it does for itself.",
+                                      "The plate and holder match the accepted pickup setup.",
+                                      "Confirm the upward path, wrist sweep, crossing and lowering to Home are clear.",
+                                      "After gripping, the arm lifts 5 mm slowly and immediately returns Home with the claw unchanged.",
+                                      "Both station holders and all taught travel, loading and pickup paths are clear; supervise the E-stop.",
+                                      "One Yes authorizes the entire listed run, including pickup and release at both stations and all requested cycles.",
+                                      "Waits use exact instrument job completion. Failures or uncertain results stop the run without retry.",
+                                      "Stop prevents further robot steps after the current move. Hamilton may keep running: its abort control is not configured."
+                                  ],
+                 "steps":  [
+                               {
+                                   "kind":  "home_return",
+                                   "label":  "Return Home"
+                               },
+                               {
+                                   "kind":  "classic",
+                                   "label":  "Calibrate the two-disk plate"
+                               },
+                               {
+                                   "kind":  "classic",
+                                   "label":  "Align with the plate"
+                               },
+                               {
+                                   "kind":  "classic",
+                                   "label":  "Descent"
+                               },
+                               {
+                                   "kind":  "classic",
+                                   "label":  "Grip the plate"
+                               },
+                               {
+                                   "kind":  "classic",
+                                   "label":  "Lift the plate 5 mm"
+                               },
+                               {
+                                   "kind":  "classic",
+                                   "label":  "Return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Leave the plate at Hamilton and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Start Hamilton dispensing"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Wait at Home for this Hamilton job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Retrieve from Hamilton and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Leave the plate at Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Start Squid imaging"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Wait at Home for this imaging job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Return Squid stage to the accepted drop-off"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Retrieve from Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 1/5: Return the plate to Hamilton and park at Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Start Hamilton dispensing"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Wait at Home for this Hamilton job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Retrieve from Hamilton and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Leave the plate at Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Start Squid imaging"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Wait at Home for this imaging job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Return Squid stage to the accepted drop-off"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Retrieve from Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 2/5: Return the plate to Hamilton and park at Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Start Hamilton dispensing"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Wait at Home for this Hamilton job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Retrieve from Hamilton and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Leave the plate at Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Start Squid imaging"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Wait at Home for this imaging job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Return Squid stage to the accepted drop-off"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Retrieve from Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 3/5: Return the plate to Hamilton and park at Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Start Hamilton dispensing"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Wait at Home for this Hamilton job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Retrieve from Hamilton and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Leave the plate at Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Start Squid imaging"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Wait at Home for this imaging job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Return Squid stage to the accepted drop-off"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Retrieve from Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 4/5: Return the plate to Hamilton and park at Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Start Hamilton dispensing"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Wait at Home for this Hamilton job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Retrieve from Hamilton and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Leave the plate at Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Start Squid imaging"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Wait at Home for this imaging job"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Return Squid stage to the accepted drop-off"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Retrieve from Squid and return Home"
+                               },
+                               {
+                                   "kind":  "lab_cycle",
+                                   "label":  "Cycle 5/5: Return the plate to Hamilton and park at Home"
+                               }
+                           ],
+                 "summary":  "Run 5 complete cycle(s) with the same plate: Hamilton dispensing, Squid imaging, then return the plate to Hamilton via Home. Finish with the arm at Home."
+             },
+    "robot_pose":  {
+                       "Rx":  0.0,
+                       "Ry":  0.0,
+                       "Rz":  -3.88,
+                       "X":  289.97,
+                       "Y":  62.63,
+                       "Z":  248.02
+                   },
+    "controller_errors":  [
+
+                          ],
+    "motion_active":  false,
+    "focused_tests_passed":  77,
+    "browser_fixture_hardware_calls":  0
+}

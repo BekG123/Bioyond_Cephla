@@ -1,0 +1,150 @@
+{
+  "mock": true,
+  "simulation": true,
+  "owner": {
+    "pid": 12472,
+    "created_at": 1792502512.3911724,
+    "simulation": true,
+    "software": "C:\\Users\\Cephla\\AppData\\Local\\Temp\\claude\\squid-latest\\software",
+    "state_file": "C:\\Users\\Cephla\\AppData\\Local\\cephla\\squid\\watchdog\\run.json"
+  },
+  "request": {
+    "wells": "A1",
+    "channels": [
+      "BF LED matrix full"
+    ],
+    "nx": 1,
+    "ny": 1,
+    "experiment_id": "Lacry_mock_20261020T062329_9bc9c1",
+    "base_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_connection\\Lacry_mock_20261020T062329_9bc9c1\\images",
+    "wellplate_format": "96 well plate"
+  },
+  "snapshots": [
+    {
+      "available": true,
+      "checked_at": 1792502608.99165,
+      "completion_confirmed": false,
+      "connected": true,
+      "job": null,
+      "message": "Squid mock ready; no imaging run in progress.",
+      "monitoring_only": true,
+      "real_imaging_complete": false,
+      "retrieval_authorized": false,
+      "session": {
+        "created_at": 1792502512.3911724,
+        "pid": 12472
+      },
+      "simulation": true,
+      "status": "idle"
+    },
+    {
+      "available": true,
+      "checked_at": 1792502610.002864,
+      "completion_confirmed": true,
+      "connected": true,
+      "job": {
+        "ended_at": 1792502609.7202945,
+        "expected": {
+          "channels": 1,
+          "fovs": 1,
+          "regions": 1,
+          "timepoints": 1,
+          "z": 1
+        },
+        "experiment_id": "Lacry_mock_20261020T062329_9bc9c1_2026-10-20_06-23-29.070225",
+        "heartbeat_at": 1792502609.1500752,
+        "output_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_connection\\Lacry_mock_20261020T062329_9bc9c1\\images\\Lacry_mock_20261020T062329_9bc9c1_2026-10-20_06-23-29.070225",
+        "progress": {},
+        "reason": "completed",
+        "run_id": "00c5f47e334f46cd94ac29486be9ea61",
+        "started_at": 1792502609.1500752,
+        "stats": {
+          "errors_encountered": 0,
+          "total_duration_seconds": 0.5778341293334961,
+          "total_images": 1,
+          "total_timepoints": 1
+        }
+      },
+      "message": "Squid mock imaging complete.",
+      "monitoring_only": true,
+      "real_imaging_complete": false,
+      "retrieval_authorized": false,
+      "session": {
+        "created_at": 1792502512.3911724,
+        "pid": 12472
+      },
+      "simulation": true,
+      "status": "completed"
+    }
+  ],
+  "status": "passed",
+  "hardware_commands": 0,
+  "response": {
+    "started": true,
+    "wells": "A1",
+    "well_count": 1,
+    "channels": [
+      "BF LED matrix full"
+    ],
+    "sites_per_well": 1,
+    "total_fovs": 1,
+    "total_images": 1,
+    "experiment_id": "Lacry_mock_20261020T062329_9bc9c1_2026-10-20_06-23-29.070225",
+    "save_dir": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_connection\\Lacry_mock_20261020T062329_9bc9c1\\images\\Lacry_mock_20261020T062329_9bc9c1_2026-10-20_06-23-29.070225"
+  },
+  "job_id": "00c5f47e334f46cd94ac29486be9ea61",
+  "final": {
+    "available": true,
+    "checked_at": 1792502610.002864,
+    "completion_confirmed": true,
+    "connected": true,
+    "job": {
+      "ended_at": 1792502609.7202945,
+      "expected": {
+        "channels": 1,
+        "fovs": 1,
+        "regions": 1,
+        "timepoints": 1,
+        "z": 1
+      },
+      "experiment_id": "Lacry_mock_20261020T062329_9bc9c1_2026-10-20_06-23-29.070225",
+      "heartbeat_at": 1792502609.1500752,
+      "output_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_connection\\Lacry_mock_20261020T062329_9bc9c1\\images\\Lacry_mock_20261020T062329_9bc9c1_2026-10-20_06-23-29.070225",
+      "progress": {},
+      "reason": "completed",
+      "run_id": "00c5f47e334f46cd94ac29486be9ea61",
+      "started_at": 1792502609.1500752,
+      "stats": {
+        "errors_encountered": 0,
+        "total_duration_seconds": 0.5778341293334961,
+        "total_images": 1,
+        "total_timepoints": 1
+      }
+    },
+    "message": "Squid mock imaging complete.",
+    "monitoring_only": true,
+    "real_imaging_complete": false,
+    "retrieval_authorized": false,
+    "session": {
+      "created_at": 1792502512.3911724,
+      "pid": 12472
+    },
+    "simulation": true,
+    "status": "completed"
+  },
+  "transcript_tail": [
+    {
+      "at": "2026-10-20T13:23:29.002022+00:00",
+      "role": "lacry",
+      "text": "Squid mock ready; no imaging run in progress."
+    },
+    {
+      "at": "2026-10-20T13:23:30.062452+00:00",
+      "role": "lacry",
+      "text": "Squid mock imaging complete. Experiment: Lacry_mock_20261020T062329_9bc9c1_2026-10-20_06-23-29.070225. No plate movement has started."
+    }
+  ],
+  "image_files": [
+    "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_connection\\Lacry_mock_20261020T062329_9bc9c1\\images\\Lacry_mock_20261020T062329_9bc9c1_2026-10-20_06-23-29.070225\\0\\A1_0_0_BF_LED_matrix_full.tiff"
+  ]
+}

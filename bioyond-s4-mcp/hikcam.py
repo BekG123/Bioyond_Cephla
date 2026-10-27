@@ -134,6 +134,12 @@ class HikCamera:
         if psize > 0:
             cam.MV_CC_SetIntValue("GevSCPSPacketSize", psize)
         cam.MV_CC_SetEnumValue("TriggerMode", 0)  # free-run
+        # Apply on every connection, without relying on the last MVS session.
+        ret = cam.MV_CC_SetBoolValue("GammaEnable", False)
+        if ret != 0:
+            cam.MV_CC_CloseDevice()
+            cam.MV_CC_DestroyHandle()
+            raise HikError(f"could not disable GammaEnable (0x{ret:x})")
         if cam.MV_CC_StartGrabbing() != 0:
             cam.MV_CC_CloseDevice()
             cam.MV_CC_DestroyHandle()

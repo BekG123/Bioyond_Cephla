@@ -1,0 +1,104 @@
+{
+  "synthetic": true,
+  "model_id": "falcon_96_provisional_synthetic",
+  "calibration_id": "synthetic_camera_only",
+  "reference_id": "synthetic_grasp_only",
+  "T_base_camera": [
+    [
+      0.9418008996556875,
+      0.13236148456107347,
+      0.30901699437494745,
+      231.17490168751578
+    ],
+    [
+      -0.209069502632142,
+      0.9504485754797438,
+      0.23008139524453985,
+      -106.28441857336195
+    ],
+    [
+      -0.26325084705825047,
+      -0.28129689435419314,
+      0.9228060732081252,
+      -201.84182196243756
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_plate_tcp": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      40.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      40.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "start_pose": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "start_joints": {
+    "J2": 84.87686,
+    "J3": 52.05595,
+    "J4": -140.81283
+  },
+  "robot_params": {
+    "comment": "Arm-specific limits + kinematics for the operator console and the standalone grabber. EDIT THIS (or let calibration flows update it) when porting to another arm - nothing is hardcoded in the code. The planar model (fitted EXACTLY, 0.00 mm residual on 8 live poses, 2026-07-28): P = base + link1*e^i(J2+j2_offset) + link2*e^i(J2+J3+j3_offset). Feasibility = |P-base| <= link1+link2-extension_margin AND predicted J2 >= j2_min+j2_margin. reach_hard_mm/inner_reach_mm are legacy origin-circle guards used only when the kinematic block is absent.",
+    "reach_hard_mm": 460.0,
+    "j4_pref_abs_deg": 220.0,
+    "j4_hard_abs_deg": 220.0,
+    "j4_limit_note": "Operator-authorized envelope +/-220 degrees, matching S4 Hardware Manual p15. Automatic planning/queue checks retain their 5-degree buffer: effective +/-215. Preserve continuous actual joint winding; no modulo-360 reset. The Home-to-scope solution starts at measured Home J4=-140.81 and stays between -180.83 and -83.75. No +/-280 envelope is authorized or applied.",
+    "inner_reach_mm": 280.0,
+    "claw_gap_min_mm": 60.0,
+    "claw_gap_max_mm": 88.0,
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j2_min_deg": -95.0,
+    "j2_margin_deg": 2.0,
+    "extension_margin_mm": 8.0,
+    "reach_limit_note": "Automatic planar reach is 390 mm from base (126, 0): 400 mm links minus 8 mm extension margin minus 2 mm planning/tracking buffer. Workspace Y maximum is 380 mm. Updated at operator request 2026-10-17; joint/wrist limits unchanged."
+  },
+  "envelope": {
+    "X": [
+      200,
+      450
+    ],
+    "Y": [
+      -250,
+      380
+    ],
+    "Z": [
+      70,
+      400
+    ]
+  },
+  "hover_z": 300.0
+}

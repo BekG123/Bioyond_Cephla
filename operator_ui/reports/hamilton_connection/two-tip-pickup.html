@@ -1,0 +1,74 @@
+<div id="prep-pickup-explainer">
+  <div class="viz-controls" aria-label="Pickup sequence">
+    <button class="btn" type="button" data-step="0" aria-pressed="true">1 · Align</button>
+    <button class="btn" type="button" data-step="1" aria-pressed="false">2 · Lower</button>
+    <button class="btn" type="button" data-step="2" aria-pressed="false">3 · Attach</button>
+    <button class="btn" type="button" data-step="3" aria-pressed="false">4 · Lift</button>
+  </div>
+  <div class="prep-views">
+    <div><div class="text-small">TOP VIEW · illustrative tip positions</div><svg class="prep-top" role="img" aria-label="Two channel centers align with two separate tips in the same rack column"></svg></div>
+    <div><div class="text-small">SIDE VIEW · schematic, not to scale</div><svg class="prep-side" role="img" aria-label="Two independent channels lower into separate tips, attach, and lift them from a supported rack"></svg></div>
+  </div>
+  <div class="text-small" id="prep-step-caption" aria-live="polite">Each channel centers over its own tip opening.</div>
+  <style>
+    #prep-pickup-explainer .prep-views {display:grid;grid-template-columns:minmax(180px, .8fr) minmax(300px, 1.2fr);gap:20px;margin:16px 0;}
+    #prep-pickup-explainer .prep-top,#prep-pickup-explainer .prep-side {display:block;width:100%;overflow:visible;}
+    #prep-pickup-explainer svg text {fill:var(--foreground);font-size:12px;}
+    #prep-pickup-explainer .prep-moving {transition:transform .55s ease;}
+    @media(max-width:600px){#prep-pickup-explainer .prep-views {grid-template-columns:minmax(0,1fr);}}
+    @media(prefers-reduced-motion:reduce){#prep-pickup-explainer .prep-moving {transition:none;}}
+  </style>
+  <script>
+    (()=>{
+      const root=document.getElementById('prep-pickup-explainer');
+      const top=root.querySelector('.prep-top'), side=root.querySelector('.prep-side');
+      const captions=['Each channel centers over its own tip opening.','The couplings enter the openings; the rack supports the tips.','The CO-RE couplings lock and seal; tip attachment is sensed.','Each attached tip rises with its channel; the rack stays seated.'];
+      let step=0;
+      const ns='http://www.w3.org/2000/svg';
+      function node(parent,tag,attrs,text){const el=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));if(text!==undefined)el.textContent=text;parent.appendChild(el);return el;}
+      function label(parent,x,y,text,anchor='middle'){return node(parent,'text',{x,y,'text-anchor':anchor},text);}
+      function paint(){
+        top.replaceChildren();side.replaceChildren();
+        const tw=top.parentElement.clientWidth, sw=side.parentElement.clientWidth;
+        top.setAttribute('viewBox',`0 0 ${tw} 330`);top.setAttribute('height','330');
+        side.setAttribute('viewBox',`0 0 ${sw} 365`);side.setAttribute('height','365');
+        const pitch=Math.min((tw-90)/7,19), x0=(tw-7*pitch)/2,y0=39;
+        node(top,'rect',{x:x0-15,y:y0-16,width:pitch*7+30,height:11*pitch+32,rx:4,fill:'none',stroke:'var(--border)'});
+        for(let row=0;row<12;row++)for(let col=0;col<8;col++){
+          const selected=col===3&&(row===3||row===7);
+          node(top,'circle',{cx:x0+col*pitch,cy:y0+row*pitch,r:pitch*.30,fill:selected?'var(--viz-series-1)':'none',stroke:selected?'var(--viz-series-1)':'var(--border)'});
+          if(selected){const yy=y0+row*pitch;node(top,'line',{x1:x0+3*pitch+pitch*.4,y1:yy,x2:tw-28,y2:yy,stroke:'var(--foreground)'});label(top,tw-16,yy+4,row===3?'R':'F');}
+        }
+        label(top,tw/2,18,'BACK');label(top,tw/2,Math.min(315,y0+11*pitch+40),'FRONT');
+        label(top,tw/2,326,'R = rear · F = front');
+        node(side,'rect',{x:14,y:259,width:sw-28,height:16,fill:'var(--muted)',stroke:'var(--border)'});
+        node(side,'path',{d:`M30 275 V333 H${sw-30} V275`,fill:'none',stroke:'var(--border)','stroke-width':2});
+        label(side,sw/2,355,'Rack and holder stay on the deck');
+        const xs=[sw*.29,sw*.71];
+        xs.forEach((x,i)=>{
+          label(side,x,25,i===0?'Rear channel':'Front channel');
+          node(side,'line',{x1:x,y1:36,x2:x,y2:328,stroke:'var(--border)','stroke-dasharray':'3 5'});
+          const tip=node(side,'g',{'data-tip':i,class:'prep-moving'});
+          node(tip,'path',{d:`M${x-18} 226 L${x-15} 275 L${x-4} 322 H${x+4} L${x+15} 275 L${x+18} 226 Z`,fill:'var(--background)',stroke:'var(--foreground)','stroke-width':2});
+          node(tip,'line',{x1:x-13,y1:253,x2:x+13,y2:253,stroke:'var(--muted-foreground)','stroke-width':6});
+          const head=node(side,'g',{'data-head':i,class:'prep-moving'});
+          node(head,'rect',{x:x-23,y:55,width:46,height:60,rx:4,fill:'var(--muted)',stroke:'var(--foreground)'});
+          node(head,'path',{d:`M${x-9} 115 V144 H${x+9} V115`,fill:'var(--background)',stroke:'var(--foreground)','stroke-width':2});
+          node(head,'line',{x1:x-10,y1:137,x2:x+10,y2:137,'data-lock':i,stroke:'var(--muted-foreground)','stroke-width':4});
+        });
+        update();
+      }
+      function update(){
+        const headShift=[0,96,96,0][step];
+        root.querySelectorAll('[data-head]').forEach(g=>g.style.transform=`translateY(${headShift}px)`);
+        root.querySelectorAll('[data-tip]').forEach(g=>g.style.transform=`translateY(${step===3?-96:0}px)`);
+        root.querySelectorAll('[data-lock]').forEach(g=>g.setAttribute('stroke',step>=2?'var(--viz-series-1)':'var(--muted-foreground)'));
+        root.querySelectorAll('[data-step]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.step)===step)));
+        root.querySelector('#prep-step-caption').textContent=captions[step];
+      }
+      root.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>{step=Number(b.dataset.step);update();}));
+      new ResizeObserver(paint).observe(root.querySelector('.prep-views'));
+      paint();
+    })();
+  </script>
+</div>

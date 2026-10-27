@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "requested_trial": "Empty-claw baseline at speed 5, stop closing at E1=3.8 mm",
+  "operator_confirmed_empty": true,
+  "outcome": "aborted_before_gripper_motion_command",
+  "actions": [
+    {"endpoint": "/enable", "request": {"confirm": true}, "reply": "CmdDone"},
+    {"endpoint": "/program", "request": {"action": "start"}, "reply": "CmdDone", "startup_torque_report": "UNKNOWN STATE: setSysVarI acknowledged but no completion reply within 10 seconds; trigger consumed"},
+    {"endpoint": "/program", "request": {"action": "stop"}, "reply": "CmdDone"},
+    {"endpoint": "/disable", "reply": "CmdDone"}
+  ],
+  "before": {"E1_mm": -0.0363054932677187, "X": 324.167, "Y": -65.214, "Z": 194.59, "Rz": 69.725},
+  "after": {"E1_mm": -0.03612572982092388, "X": 324.168, "Y": -65.214, "Z": 194.587, "Rz": 69.725, "enabled": false, "program": "stopped", "errors": []},
+  "position_commands_sent": [],
+  "force_limits_changed": false,
+  "fresh_torque_samples": [],
+  "diagnosis": "No fresh torque completion. Local program contains Device 21 mode 5 report and completion reply; installed program version not verified. A startup race is also possible: readiness flag was already true before program start and mod_Init clears trigger registers. Neither cause is established by this trial.",
+  "next_requirement": "Establish acknowledged fresh nonmoving torque reports before any empty-claw sweep; do not silently retry the failed request."
+}

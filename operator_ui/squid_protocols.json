@@ -1,0 +1,41 @@
+{
+  "default": "current",
+  "profiles": {
+    "current": {
+      "label": "Live Squid XYZ stage with selected imaging settings (simulated camera)",
+      "simulation": true,
+      "camera_simulated": true,
+      "simulation_scope": "camera_only",
+      "command": "current_settings",
+      "params": {},
+      "timeout_s": 86400,
+      "stage_simulated": false,
+      "stage_controller_serial": "12769210",
+      "loading_acceptance": "2026-10-24: operator confirmed the holder remains correctly positioned for taught robot drop-off and pickup after the Y0.200 stage-only trial.",
+      "loading_command": "return_to_recorded_dropoff",
+      "loading_position": {
+        "x_mm": 0.05,
+        "y_mm": 0.2,
+        "z_mm": 1.05
+      },
+      "return_waypoints": []
+    },
+    "mock": {
+      "label": "Mock imaging: one brightfield image at A1",
+      "simulation": true,
+      "command": "run_acquisition",
+      "params": {
+        "wells": "A1",
+        "channels": [
+          "BF LED matrix full"
+        ],
+        "nx": 1,
+        "ny": 1,
+        "wellplate_format": "96 well plate"
+      },
+      "timeout_s": 600,
+      "loading_position": null,
+      "return_waypoints": []
+    }
+  }
+}

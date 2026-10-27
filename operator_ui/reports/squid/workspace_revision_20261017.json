@@ -1,0 +1,32 @@
+{
+  "status": "loaded_and_verified_20261017_052320",
+  "reload_evidence": "workspace_reload_20261017_052320_after.json",
+  "operator_request": "Y maximum 380 mm; arm reach 390 mm",
+  "previous": {
+    "workspace_Y_mm": [-250, 100],
+    "extension_margin_mm": 15,
+    "planner_reach_mm": 383,
+    "direct_motion_reach_mm": 385
+  },
+  "revised": {
+    "workspace_Y_mm": [-250, 380],
+    "extension_margin_mm": 8,
+    "planning_tracking_buffer_mm": 2,
+    "planner_reach_mm": 390,
+    "direct_motion_reach_mm": 390,
+    "reach_origin_XY_mm": [126, 0]
+  },
+  "unchanged": ["workspace enabled", "X and Z workspace bounds", "joint limits", "wrist limits", "speed settings"],
+  "screenshot_pose": {
+    "X": 226.422, "Y": 373.524, "Z": 266.187, "Rz": 89.097,
+    "J2": 89.719, "J3": 150.46585, "J4": 208.91191
+  },
+  "offline_result": "Screenshot pose passes revised workspace/reach; full path check still rejects J4 winding. No physical clearance or 137-speed route validation claimed.",
+  "motion_commands_sent": false,
+  "verification": {
+    "reach_workspace_tests": "4 passed",
+    "home_tests": "18 passed; historical 383 mm rejection fixtures retain their original policy explicitly",
+    "legacy_transfer_tests": "22 passed, 5 failed; the same 5 failures reproduced with the old 15 mm extension margin (legacy grip expectations and retired transfer endpoint)"
+  },
+  "prior_trial_artifacts": "Preserved. Routes bound to old configuration hashes require renewed review; their evidence is not rewritten."
+}

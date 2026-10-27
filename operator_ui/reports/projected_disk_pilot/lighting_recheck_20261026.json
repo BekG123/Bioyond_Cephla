@@ -1,0 +1,13 @@
+{
+  "purpose": "Stationary tracking assessment after operator lighting changes and MVS camera release",
+  "hardware_motion_commanded": false,
+  "method": "check_grid_burst.py; three bursts of five frames, median per burst",
+  "results": [
+    {"burst": 1, "ok": false, "error": "No distributed 40-of-48 grid initialization."},
+    {"burst": 2, "ok": true, "wells": 48, "disk_spread": 0.7160698378254926, "extent_spread": 1.897237125443809, "correlations": [0.8737333815955106, 0.8865331407787129]},
+    {"burst": 3, "ok": false, "error": "No distributed 40-of-48 grid initialization."}
+  ],
+  "snapshot": "operator_ui/captures/snap_0013.png",
+  "snapshot_note": "Fresh single frame saved during the diagnostic; not the median used for any reported result",
+  "conclusion": "Camera access restored. One of three bursts accepted; stationary tracking remains unreliable. Calibration not completed."
+}

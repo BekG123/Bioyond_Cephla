@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "diagnosis": "Startup readiness race supported by live recovery after a stable-running/initialized barrier. Old code accepted a persistent initialized flag immediately after remoteStart, allowing mod_Init to clear the new request. Old code also returned ok=true after report failure.",
+  "controller_file_read": {
+    "interface": "Existing documented native RPC port 20202, read-only command 35 (SysDownloadFile), User folder 1",
+    "sdk_provenance": "C:/Bioyond/RobStudio/BR.PC.BYSDK.dll: CmdType, FolderType, SysDownloadFile_req, SysDownloadFile_respOld",
+    "comparison": "main_hostpoint_descent_137.bin",
+    "matches": {
+      "main.lua": "55b45723dfb25efe8bebd8a0e9977cece57df13c85a19fbe2debab6f56517e09",
+      "mod_Init.lua": "645c0ba1cf7303f2d468bb3fb92ca391104f69dd5ad0a2013b3d97bc860970af",
+      "mod_HostPoint.lua": "24aef46740d767a0fbb4e0b1f7edd9ee8c1876abeedc10290104e94c0f6211f9",
+      "mod_End.lua": "6461ace0515292b1e76113f69380ccb78b42b7c8d45a05309b5ae1959723536a"
+    },
+    "loader_exact_match": false,
+    "loader_contains": ["mod_HostPoint", "mod_Descent", "mod_Trajectory"],
+    "socket_has_device24_grip": false,
+    "all_project_files_verified": false,
+    "files_written_on_controller": false
+  },
+  "before": {
+    "program": "stopped",
+    "initialized": true,
+    "cached_e1_mm": 3.944,
+    "cached_raw_torque": 22.134,
+    "native_e1_approx_mm": 0.017,
+    "torque_snapshot_fresh": false
+  },
+  "fix": {
+    "stable_running_and_initialized_seconds": 0.5,
+    "readiness_timeout_seconds": 5,
+    "report_attempts": 1,
+    "failed_report_returns_ok_false": true,
+    "failed_report_stops_program": true,
+    "diagnostic_endpoint": "/developer/api/lua/diagnostics",
+    "force_limits_changed": false
+  },
+  "live_verification": {
+    "startup_request_elapsed_seconds": 1.294,
+    "startup_report": {"e1_position": 0.017, "e1_torque": -1.333},
+    "subsequent_fresh_reports": [
+      {"at_utc": "2026-10-20T00:09:09.4421443Z", "e1_mm": 0.017, "raw_torque": 0.267},
+      {"at_utc": "2026-10-20T00:09:09.7100225Z", "e1_mm": 0.017, "raw_torque": 0.0},
+      {"at_utc": "2026-10-20T00:09:09.9756778Z", "e1_mm": 0.017, "raw_torque": -0.267}
+    ],
+    "subsequent_empty_open": {"target_mm": 28, "speed": 5, "measured_completion_mm": 28.007, "ok": true},
+    "faults": []
+  },
+  "offline_tests": {"startup": 8, "hand_claw": 11, "empty_baseline": 5},
+  "limits": "Readiness stability is a settling barrier, not a boot-epoch guarantee. Fresh completion is still required. Vendor force-grip candidate was not published or executed."
+}

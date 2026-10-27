@@ -1,0 +1,23 @@
+{
+  "trial": "stepwise40_trial.json",
+  "status": "completed",
+  "direction": "exact Home to taught scope endpoint",
+  "executor": "individual MoveL commands, no Lua trajectory queue",
+  "speed_mm_s": 40,
+  "moves": 121,
+  "duration_s": 173.527,
+  "all_arrivals_verified": true,
+  "arrival_J4_range_deg": [-180.8323009881509, -83.74684409013219],
+  "arrival_E1_range_mm": [3.6975129041820765, 3.7034449633210897],
+  "final_pose": {"X":226.3,"Y":373.59,"Z":266.188,"Rz":89.11},
+  "final_controller_errors": [],
+  "j4_configured_envelope_deg": [-220,220],
+  "j4_buffered_automatic_bound_deg": [-215,215],
+  "configuration_activation": "Loaded before this trial; supersedes earlier pending/unactivated J4 proposals. No +/-280 change.",
+  "operator_clearance": "Both new Home connection and reverse taught route confirmed clear; arm released; E-stop supervised.",
+  "operator_acceptance_after_run": "not yet provided",
+  "requested_later_candidate_speed_mm_s": 137,
+  "speed137_validated": false,
+  "comparison_note": "173.527 seconds includes individual command overhead and verification. Compare the same geometry, direction, payload and speed before attributing timing differences to Lua queueing.",
+  "continuous_recordings": ["demonstrations/home_to_squid_attempt2_20261017_043419/samples.jsonl", "demonstrations/return_path_trials_20261016_131713/samples.jsonl"]
+}

@@ -40,7 +40,7 @@ async def check(ws_url, console_url, live=False):
             raise AssertionError('UI did not reach: '+expression)
         await call('Page.enable'); await call('Runtime.enable')
         await call('Emulation.setDeviceMetricsOverride',dict(width=1500,height=1100,deviceScaleFactor=1,mobile=False))
-        await call('Page.navigate',dict(url=console_url))
+        await call('Page.navigate',dict(url=console_url + ('/developer' if ':5002' in console_url else '/')))
         await until("typeof RealSenseUI !== 'undefined'")
         await evaluate("document.getElementById('tabbtn-depth').click()")
         if live:

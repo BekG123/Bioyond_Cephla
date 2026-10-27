@@ -1,0 +1,323 @@
+{
+  "status": "completed",
+  "at": 1793085700.017891,
+  "plan_id": "2026-10-27T07:21:29.139866+00:00:1793085689139",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 279.363,
+      "Y": 30.936,
+      "Z": 268.02,
+      "Rz": -3.88
+    },
+    "joints": {
+      "J1": 229.4210161520578,
+      "J2": 78.37959328448771,
+      "J3": 46.04972213863548,
+      "J4": -128.30955445499055
+    },
+    "e1": 0.042609641241142526,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 279.36,
+            "Y": 30.94,
+            "Z": 300.0,
+            "Rz": -3.88
+          }
+        ]
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 300.0,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 279.36,
+          "Y": 30.94,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 261.40101615205776,
+          "J2": 78.38167096014105,
+          "J3": 46.04900747717384,
+          "J4": -128.31091746918224
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 261.40101615205776,
+          "J2": 84.87688206683332,
+          "J3": 52.05596109242007,
+          "J4": -140.81308219112074
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.42101615205786,
+          "J2": 84.87688206683332,
+          "J3": 52.05596109242007,
+          "J4": -140.81308219112074
+        }
+      }
+    ],
+    "preserve_gripper": true,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Move to X279.36 / Y30.94 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+    "id": "2026-10-27T07:21:29.139866+00:00:1793085689139",
+    "at": 1793085689.139866,
+    "source": "button",
+    "confirmation_source": "researcher_button"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1793085705.020902,
+  "sequence": {
+    "state": "done",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 0.1,
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 0.9,
+        "level": "info",
+        "msg": "Home: upload 1/1"
+      },
+      {
+        "t": 1.2,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.4,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.6,
+        "level": "info",
+        "msg": "Home: motion 23/100"
+      },
+      {
+        "t": 1.7,
+        "level": "info",
+        "msg": "Home: motion 65/100"
+      },
+      {
+        "t": 1.9,
+        "level": "info",
+        "msg": "Home: motion 95/100"
+      },
+      {
+        "t": 2.0,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 2.1,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      },
+      {
+        "t": 2.1,
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 2.8,
+        "level": "info",
+        "msg": "Home: upload 2/2"
+      },
+      {
+        "t": 3.1,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 3.2,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 3.4,
+        "level": "info",
+        "msg": "Home: motion 1/100"
+      },
+      {
+        "t": 3.5,
+        "level": "info",
+        "msg": "Home: motion 9/100"
+      },
+      {
+        "t": 3.6,
+        "level": "info",
+        "msg": "Home: motion 24/100"
+      },
+      {
+        "t": 3.7,
+        "level": "info",
+        "msg": "Home: motion 36/100"
+      },
+      {
+        "t": 3.9,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 4.0,
+        "level": "info",
+        "msg": "Home: motion 39/100"
+      },
+      {
+        "t": 4.1,
+        "level": "info",
+        "msg": "Home: motion 44/100"
+      },
+      {
+        "t": 4.2,
+        "level": "info",
+        "msg": "Home: motion 57/100"
+      },
+      {
+        "t": 4.4,
+        "level": "info",
+        "msg": "Home: motion 73/100"
+      },
+      {
+        "t": 4.5,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 4.6,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 4.8,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 4.9,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      }
+    ],
+    "result": {
+      "ok": true,
+      "home": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    },
+    "target": null,
+    "detection_ts": 0.0
+  }
+}

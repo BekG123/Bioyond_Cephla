@@ -1,0 +1,195 @@
+{
+  "proposal": {
+    "evidence_id": "1f63cb7719aed211629068255066a1a9887a11864edd9761e34e8437ba1e5725",
+    "summary": "Corrected three-stage pickup sequence based on measured closure and lift events. Descend stage captures the final approach with gripper opening (E1 ~0 mm). Grip stage records the closed-jaw position after E1 closure from 10.734 to 3.784 mm during samples 9994\u20139997, overlapping descent from Z85.504 to Z72.593. Pickup stage identifies the first sustained lift after closure, from Z72.139 (sample 10074) to Z145.456 (sample 10081), with concurrent lateral and wrist motion beginning during ascent. Later stationary samples at Hamilton destination (Z36.23) are excluded as they represent travel completion, not a pickup event.",
+    "stages": [
+      {
+        "action": "Descend",
+        "from_sample": 8763,
+        "to_sample": 9994,
+        "explanation": "Descend stage spans from the Align capture (sample 8637, Z300.0) through the final approach. Sample 8763 marks the logged Descend capture at Z278.459 with E1 near 0 mm (gripper open). Samples 9986\u20139994 show continued descent to Z85.504 with E1 increasing to 10.734 mm, indicating gripper opening during approach. This stage ends just before closure begins at sample 9994, establishing the pre-closure position and confirming the gripper is open at the start of the pickup sequence."
+      },
+      {
+        "action": "Grip",
+        "from_sample": 9994,
+        "to_sample": 10013,
+        "explanation": "Grip stage captures the closure event and return to pickup height. Samples 9994\u20139997 show E1 decreasing from 10.734 to 3.784 mm while Z descends from 85.504 to 72.593 mm, indicating simultaneous jaw closure and final descent. Sample 10006 shows Z at 84.076 mm with E1 at 3.545 mm (closed). Sample 10007 records a brief upward excursion to Z102.892 (likely exploratory or contact verification), then sample 10013 returns to Z72.074 mm with E1 at 3.556 mm. This stage ends at the stable grip position, confirming closure but not inferring secure grasp from E1 alone."
+      },
+      {
+        "action": "Pickup",
+        "from_sample": 10074,
+        "to_sample": 10081,
+        "explanation": "Pickup stage is the first sustained lift after grip closure. Sample 10074 marks the start at Z72.139 mm (the saved Grip-stage pose) with E1 at 3.579 mm. Samples 10077\u201310081 show rapid Z ascent from 88.456 to 145.456 mm with concurrent lateral motion (X from 293.751 to 286.018 mm, Y from -68.729 to -69.213 mm) and wrist rotation (Rz from 83.914 to 79.228 degrees). This is the first recorded lift event; the later stationary samples at Hamilton (Z36.23) are destination arrival, not a pickup. Lateral and wrist motion during lift reflects the actual observed path and does not validate a straight vertical execution."
+      }
+    ],
+    "review_needed": [
+      "Descend stage ends at Z85.504 (sample 9994), not at the logged Descend capture Z278.459. The 206 mm gap reflects the time between the capture timestamp and the actual closure event in continuous samples. Future teaching should record Descend at the final pickup depth with jaws open.",
+      "Grip closure occurs during samples 9994\u20139997 with overlapping descent. E1 decreases from 10.734 to 3.784 mm, confirming a closing event, but E1 alone does not prove object presence or secure grasp. Contact force and load were not recorded.",
+      "Pickup lift (samples 10074\u201310081) includes lateral drift (~7.7 mm in X, ~0.5 mm in Y) and wrist rotation (~4.7 degrees in Rz) during ascent. This is not a validated vertical path and reflects manual or exploratory motion during the lift.",
+      "The brief upward excursion at sample 10007 (Z102.892 mm) is distinct from the sustained departure lift at sample 10074. Both are lift events; only the later one is selected as Pickup because it is sustained and followed by travel.",
+      "Hamilton destination samples (10480\u201310520) are stationary at Z36.23 mm, far below the pickup height. These are not part of the pickup sequence and must not be selected as Pickup.",
+      "Workspace and reach checks show Hamilton is outside the automatic planner envelope. No execution is authorized without addressing workspace limits and reach constraints.",
+      "Future staged execution will require: (1) re-teaching Descend at the final pickup depth with gripper open and stationary; (2) re-teaching Grip with vertical descent and stationary closure; (3) verifying object presence and grasp security before lift (not inferred from E1); (4) executing Pickup as a controlled vertical lift with minimal lateral motion; (5) validating workspace and reach before any motion is sent."
+    ]
+  },
+  "grounded_stages": [
+    {
+      "action": "Descend",
+      "start": {
+        "index": 8763,
+        "at": "2026-10-16T17:42:56.676935+00:00",
+        "pose_mm": {
+          "X": 291.834,
+          "Y": -68.881,
+          "Z": 278.459,
+          "Rz": 84.292
+        },
+        "joints": {
+          "J1": 239.859767727206,
+          "J2": 40.769226097586404,
+          "J3": 53.34941488354261,
+          "J4": -9.826793781067334
+        },
+        "e1_mm": 0.00018601704709908518,
+        "mode": "manual",
+        "program": "stopped"
+      },
+      "end": {
+        "index": 9994,
+        "at": "2026-10-16T17:47:04.862198+00:00",
+        "pose_mm": {
+          "X": 294.131,
+          "Y": -68.697,
+          "Z": 85.504,
+          "Rz": 84.21
+        },
+        "joints": {
+          "J1": 46.904873542455434,
+          "J2": 40.77102687427963,
+          "J3": 54.008939653917494,
+          "J4": -10.569735138576602
+        },
+        "e1_mm": 10.734261944890022,
+        "mode": "manual",
+        "program": "stopped"
+      }
+    },
+    {
+      "action": "Grip",
+      "start": {
+        "index": 9994,
+        "at": "2026-10-16T17:47:04.862198+00:00",
+        "pose_mm": {
+          "X": 294.131,
+          "Y": -68.697,
+          "Z": 85.504,
+          "Rz": 84.21
+        },
+        "joints": {
+          "J1": 46.904873542455434,
+          "J2": 40.77102687427963,
+          "J3": 54.008939653917494,
+          "J4": -10.569735138576602
+        },
+        "e1_mm": 10.734261944890022,
+        "mode": "manual",
+        "program": "stopped"
+      },
+      "end": {
+        "index": 10013,
+        "at": "2026-10-16T17:47:08.716014+00:00",
+        "pose_mm": {
+          "X": 293.84,
+          "Y": -68.719,
+          "Z": 72.074,
+          "Rz": 83.943
+        },
+        "joints": {
+          "J1": 33.47464236663138,
+          "J2": 40.77179863571959,
+          "J3": 53.92504881709038,
+          "J4": -10.754163096400344
+        },
+        "e1_mm": 3.555501578375697,
+        "mode": "manual",
+        "program": "stopped"
+      }
+    },
+    {
+      "action": "Pickup",
+      "start": {
+        "index": 10074,
+        "at": "2026-10-16T17:47:21.030059+00:00",
+        "pose_mm": {
+          "X": 293.857,
+          "Y": -68.717,
+          "Z": 72.139,
+          "Rz": 83.946
+        },
+        "joints": {
+          "J1": 33.54040056879585,
+          "J2": 40.77184540914019,
+          "J3": 53.92980858088199,
+          "J4": -10.75590627180511
+        },
+        "e1_mm": 3.579949028789997,
+        "mode": "manual",
+        "program": "stopped"
+      },
+      "end": {
+        "index": 10081,
+        "at": "2026-10-16T17:47:22.452497+00:00",
+        "pose_mm": {
+          "X": 286.018,
+          "Y": -69.213,
+          "Z": 145.456,
+          "Rz": 79.228
+        },
+        "joints": {
+          "J1": 106.85726951711307,
+          "J2": 40.76981076534394,
+          "J3": 51.68042354236387,
+          "J4": -13.222673787082822
+        },
+        "e1_mm": 3.629383398219943,
+        "mode": "manual",
+        "program": "stopped"
+      }
+    }
+  ],
+  "execution_ready": false,
+  "hardware_commands_sent": 0,
+  "host_blockers": [
+    {
+      "code": "workspace",
+      "message": "Hamilton: X 175.629 outside 200 to 450, Y -386.510 outside -250 to 100, Z 36.231 outside 70 to 400 mm. Review the physical workspace; limits were not changed."
+    },
+    {
+      "code": "reach",
+      "message": "Hamilton extension is 389.683 mm from the arm base; the automatic planner allows 383.000 mm. Teach a closer position or commission the reach limit; it was not relaxed."
+    },
+    {
+      "code": "pickup_depth",
+      "message": "Descend was captured at Z278.459, but Grip at Z72.139: 206.320 mm of descent is missing between stages. Record Descend at the final pickup depth before closing the jaws."
+    },
+    {
+      "code": "pickup_alignment",
+      "message": "The pickup captures include lateral or wrist changes. Record a vertical descent after Align, followed by a stationary grip."
+    },
+    {
+      "code": "grip_direction",
+      "message": "Taught E1 goes from 0.000 to 3.579 mm. Record Descend with the jaws open, then Grip after closing; an opening is not a pickup command."
+    },
+    {
+      "code": "route",
+      "message": "Home to Hamilton: path outside Y envelope. No motion was sent."
+    },
+    {
+      "code": "route",
+      "message": "Grip to Hamilton: path outside Y envelope. No motion was sent."
+    }
+  ],
+  "evidence_id": "1f63cb7719aed211629068255066a1a9887a11864edd9761e34e8437ba1e5725",
+  "notice": "Proposal only. No reference approval, movement, grip or lift was issued.",
+  "created_at": "2026-10-16T19:51:40.411404+00:00"
+}

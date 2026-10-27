@@ -1,0 +1,282 @@
+{
+  "schema": "cephla.hamilton-true-home-review.v1",
+  "at": "2026-10-20T11:12:39.692409+00:00",
+  "status": "offline_validated_pending_clearance",
+  "operator_feedback": "Direct true Home route; Hamilton height requested at J1=0.00, rounded upward to queue resolution.",
+  "candidate": {
+    "parent_sha256": "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+    "endpoint_reference": {
+      "schema": "cephla.hamilton-endpoint.v1",
+      "parent_sha256": "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+      "pose": {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      },
+      "requested_j1_mm": 0.0,
+      "reference_z_minus_j1_mm": 38.60109389686886,
+      "expected_j1_mm": 0.008906103131139709,
+      "source": "Operator requested J1=0.00 on 2026-10-20; saved Home measurement supplies conservative Z/J1 offset.",
+      "quantization": "Ceil zero-height to queue resolution 0.01 mm so predicted J1 remains nonnegative.",
+      "clearance_feedback": "Operator checked the lower Z36.925 placement; revised endpoint is 1.685 mm above that placement.",
+      "automatic_trial_completed": false
+    },
+    "reverse": [
+      {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    ],
+    "forward": [
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 38.61,
+        "Rz": -1.9
+      }
+    ],
+    "old_home_area": {
+      "X": 276.03,
+      "Y": 79.94,
+      "Z": 166.41,
+      "Rz": 1.98
+    },
+    "physical_clearance_verified": false,
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    }
+  },
+  "source_sha256": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+  "home_file_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+  "cfg": {
+    "comment": "Arm-specific limits + kinematics for the operator console and the standalone grabber. EDIT THIS (or let calibration flows update it) when porting to another arm - nothing is hardcoded in the code. The planar model (fitted EXACTLY, 0.00 mm residual on 8 live poses, 2026-07-28): P = base + link1*e^i(J2+j2_offset) + link2*e^i(J2+J3+j3_offset). Feasibility = |P-base| <= link1+link2-extension_margin AND predicted J2 >= j2_min+j2_margin. reach_hard_mm/inner_reach_mm are legacy origin-circle guards used only when the kinematic block is absent.",
+    "reach_hard_mm": 460.0,
+    "j4_pref_abs_deg": 220.0,
+    "j4_hard_abs_deg": 220.0,
+    "j4_limit_note": "Operator-authorized envelope +/-220 degrees, matching S4 Hardware Manual p15. Automatic planning/queue checks retain their 5-degree buffer: effective +/-215. Preserve continuous actual joint winding; no modulo-360 reset. The Home-to-scope solution starts at measured Home J4=-140.81 and stays between -180.83 and -83.75. No +/-280 envelope is authorized or applied.",
+    "inner_reach_mm": 280.0,
+    "claw_gap_min_mm": 60.0,
+    "claw_gap_max_mm": 88.0,
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j2_min_deg": -95.0,
+    "j2_margin_deg": 2.0,
+    "extension_margin_mm": 8.0,
+    "reach_limit_note": "Automatic planar reach is 390 mm from base (126, 0): 400 mm links minus 8 mm extension margin minus 2 mm planning/tracking buffer. Workspace Y maximum is 380 mm. Updated at operator request 2026-10-17; joint/wrist limits unchanged."
+  },
+  "validation": {
+    "forward": {
+      "ik_passed": true,
+      "checked": [
+        {
+          "pose": {
+            "X": 215.74,
+            "Y": -249.0,
+            "Z": 212.0,
+            "Rz": -0.94
+          },
+          "joints": {
+            "J1": 173.39890610313114,
+            "J2": -21.609963942234387,
+            "J3": 82.85841608840936,
+            "J4": -62.188512773354375
+          }
+        },
+        {
+          "pose": {
+            "X": 195.88,
+            "Y": -357.36,
+            "Z": 212.0,
+            "Rz": -1.9
+          },
+          "joints": {
+            "J1": 173.39890610313114,
+            "J2": -54.485403697344296,
+            "J3": 131.09939585922382,
+            "J4": -78.51405278905894
+          }
+        },
+        {
+          "pose": {
+            "X": 195.34,
+            "Y": -360.31,
+            "Z": 38.61,
+            "Rz": -1.9
+          },
+          "joints": {
+            "J1": 0.00890610313113882,
+            "J2": -55.64187568761234,
+            "J3": 133.07002182650785,
+            "J4": -79.32820676607493
+          }
+        }
+      ],
+      "final_joints": {
+        "J1": 0.00890610313113882,
+        "J2": -55.64187568761234,
+        "J3": 133.07002182650785,
+        "J4": -79.32820676607493
+      },
+      "length_mm": 605.9483292490987,
+      "commands": 3
+    },
+    "reverse": {
+      "ik_passed": true,
+      "checked": [
+        {
+          "pose": {
+            "X": 195.88,
+            "Y": -357.36,
+            "Z": 212.0,
+            "Rz": -1.9
+          },
+          "joints": {
+            "J1": 173.40129895446455,
+            "J2": -54.48540369734427,
+            "J3": 131.0993958592238,
+            "J4": -78.51838790056229
+          }
+        },
+        {
+          "pose": {
+            "X": 215.74,
+            "Y": -249.0,
+            "Z": 212.0,
+            "Rz": -0.94
+          },
+          "joints": {
+            "J1": 173.40129895446455,
+            "J2": -21.609963942234387,
+            "J3": 82.85841608840937,
+            "J4": -62.19284788485774
+          }
+        },
+        {
+          "pose": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          },
+          "joints": {
+            "J1": 209.42129895446453,
+            "J2": 84.87688206683335,
+            "J3": 52.05596109242012,
+            "J4": -140.81723889793625
+          }
+        }
+      ],
+      "final_joints": {
+        "J1": 209.42129895446453,
+        "J2": 84.87688206683335,
+        "J3": 52.05596109242012,
+        "J4": -140.81723889793625
+      },
+      "length_mm": 605.9483292490986,
+      "commands": 3
+    }
+  },
+  "baseline": {
+    "commands": 6,
+    "length_mm": 861.3871519937867,
+    "points": [
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 276.03,
+        "Y": 79.94,
+        "Z": 212.0,
+        "Rz": 1.98
+      },
+      {
+        "X": 276.03,
+        "Y": 79.94,
+        "Z": 166.41,
+        "Rz": 1.98
+      },
+      {
+        "X": 276.03,
+        "Y": 79.94,
+        "Z": 300.0,
+        "Rz": 1.98
+      },
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 300.0,
+        "Rz": -3.88
+      },
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    ]
+  },
+  "clearance_requirement": "New direct Hamilton/Home connector: X215.74/Y-249.00/Z212.00 to true Home X289.97/Y62.63/Z248.02, including wrist rotation. Confirm the full arm, claw and any plate sweep is clear before this first revised-route test. Hamilton arrival is now Z38.61 mm, near J1 zero; the revised height has not yet had an automatic trial. IK checks do not verify physical clearance.",
+  "speed": 137,
+  "zone": -1,
+  "physical_clearance_verified": false,
+  "hardware_execution": false,
+  "collision_geometry": "No surveyed obstacle model for this new connector; IK is not collision verification.",
+  "scope": "Original Hamilton XY/wrist preserved; endpoint height revised separately. New connector remains inside normal workspace. No Home-area endpoint or hover. Original recordings retained."
+}

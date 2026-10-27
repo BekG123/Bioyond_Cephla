@@ -1,0 +1,92 @@
+{
+  "time": "2026-10-25T00:36:15.807982+00:00",
+  "read_only": true,
+  "instruments/connection-info": [
+    "Serial Number: PRPGD2427",
+    "Instrument Name: PRPGD2427",
+    "Connected: True",
+    "Controlling PC Name: DESKTOP-9DPRVQ3",
+    "Initialization Status: Not Initialized",
+    "Enclosure Status: Present",
+    "Individual Channels: Present",
+    "MPH8: Not Present",
+    "HHS: Not Present",
+    "HHC: Not Present",
+    "HEPAUV: Not Present"
+  ],
+  "instruments/global-run-state": "Idle",
+  "service-software-api/sensor-status": {
+    "isEnclosurePresent": true,
+    "isDoorClosed": true,
+    "isXHome": false,
+    "fan1Rpm": 4292,
+    "fan2Rpm": 0,
+    "mphSensorState": {
+      "present": false,
+      "sleeveSensors": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "yHome": false,
+      "zHome": false,
+      "squeezeHome": false,
+      "dispenserHome": false
+    },
+    "independentChannelsSensorState": {
+      "present": true,
+      "frontChannel": {
+        "sleeveSensor": false,
+        "yHome": false,
+        "zHome": false,
+        "squeezeHome": true,
+        "dispenserHome": false
+      },
+      "rearChannel": {
+        "sleeveSensor": false,
+        "yHome": false,
+        "zHome": false,
+        "squeezeHome": true,
+        "dispenserHome": false
+      }
+    }
+  },
+  "service-software-api/is-parked": false,
+  "service-software-api/has-tips": false,
+  "errors/check-for-pending-errors": [],
+  "deck/calibrate": [
+    {
+      "id": 2,
+      "status": "Pass",
+      "message": "",
+      "hasError": false,
+      "calibrationDate": "2026-09-09T12:19:34.83991"
+    },
+    {
+      "id": 1,
+      "status": "Fail",
+      "message": "Check that the deck is clear of all labware and that all base plates are seated within the respective deck locations.",
+      "hasError": true,
+      "calibrationDate": "2026-07-17T17:06:17.5846615"
+    }
+  ],
+  "camera/true": {
+    "file": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\hamilton_connection\\restored_camera_true.png",
+    "dimensions": [
+      2592,
+      1944
+    ]
+  },
+  "camera/calibration-pattern": {
+    "file": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\hamilton_connection\\restored_camera_calibration-pattern.png",
+    "dimensions": [
+      2592,
+      1944
+    ]
+  }
+}

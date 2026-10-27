@@ -1,0 +1,19 @@
+{
+  "source": "Hamilton touchscreen, confirmed successful by operator",
+  "serial": "PRPGD2427",
+  "channel_result_id": 1009,
+  "controller_calibration_date": "2026-10-24T21:28:46.0322809",
+  "status": "Pass",
+  "has_error": false,
+  "channel_warnings": [],
+  "channel_z_offsets_valid": {"0": true, "1": true},
+  "native_stages": ["calibration/self-calibration", "calibration/channel-height-squeeze"],
+  "separate_lacry_initialize": false,
+  "tip_reference_id": "235903",
+  "tip_labware_id": 273,
+  "tip_site": 7,
+  "tip_site_evidence": "Touchscreen SelectTipLabware dialog accepted strLabwareName=235903, strTipRackPosResName=PR_7 at controller trace 2026-10-25T04:23:31.6567563Z.",
+  "self_calibration_command": {"channels": ["FrontChannel", "RearChannel"], "axis": true, "pressure": true, "touchOff": true},
+  "calibration_ownership": "Hamilton firmware owns calibration movements and internal preparation. Lacry calls native routines and verifies their completion.",
+  "validation_scope": "Successful physical touchscreen workflow; revised Lacry two-stage orchestration has offline tests but has not been physically rerun."
+}

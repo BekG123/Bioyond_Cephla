@@ -1,0 +1,73 @@
+<div id="tip-height-explainer">
+  <div class="text-small text-muted">Side cutaway · illustrative, not to scale</div>
+  <svg role="img" aria-labelledby="tip-height-title tip-height-desc" style="width:100%;display:block;color:var(--foreground)">
+    <title id="tip-height-title">Measure from the metal deck to the top opening of a seated tip</title>
+    <desc id="tip-height-desc">Three hollow pipette tips hang through a tray inside a box. The tray is the insert, not a tip. A vertical double arrow spans from the metal deck beneath the box to the wide upper opening of a tip. No measurement value is assumed.</desc>
+    <g class="drawing"></g>
+  </svg>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('tip-height-explainer');
+  const svg = root.querySelector('svg');
+  const group = root.querySelector('.drawing');
+  const ns = 'http://www.w3.org/2000/svg';
+  function draw() {
+    const w = root.getBoundingClientRect().width;
+    if (!w) return;
+    svg.setAttribute('viewBox', `0 0 ${w} 430`);
+    svg.setAttribute('height', '430');
+    group.replaceChildren();
+    const boxL = 68, boxR = w * .58, labelX = w * .64;
+    const top = 94, tray = 166, deck = 354;
+    function el(tag, attrs, text) {
+      const node = document.createElementNS(ns, tag);
+      Object.entries(attrs).forEach(([k,v]) => node.setAttribute(k, String(v)));
+      if (text) node.textContent = text;
+      group.appendChild(node);
+      return node;
+    }
+    function line(x1,y1,x2,y2,color='var(--border)',dash='') {
+      return el('line',{x1,y1,x2,y2,stroke:color,'stroke-width':1.5,'stroke-dasharray':dash});
+    }
+    function label(x,y,lines) {
+      const text = el('text',{x,y,fill:'currentColor'});
+      lines.forEach((s,i) => {
+        const t = document.createElementNS(ns,'tspan');
+        t.setAttribute('x',x); t.setAttribute('dy',i ? '1.35em' : 0);
+        t.textContent=s; text.appendChild(t);
+      });
+    }
+    el('path',{d:`M ${boxL} ${tray+8} V ${deck} H ${boxR} V ${tray+8}`,fill:'var(--muted)', 'fill-opacity':.4,stroke:'var(--border)','stroke-width':1.5});
+    const tipXs=[.2,.5,.8].map(f => boxL+(boxR-boxL)*f);
+    tipXs.forEach(x => {
+      el('path',{d:`M ${x-10} ${top} L ${x-10} ${tray+10} L ${x-3} 306 L ${x+3} 306 L ${x+10} ${tray+10} L ${x+10} ${top}`,fill:'var(--background)',stroke:'currentColor','stroke-width':1.5});
+      el('ellipse',{cx:x,cy:top,rx:10,ry:4,fill:'var(--background)',stroke:'currentColor','stroke-width':1.5});
+    });
+    let start=boxL-4;
+    tipXs.forEach(x => {
+      el('rect',{x:start,y:tray,width:Math.max(0,x-11-start),height:8,fill:'var(--viz-series-2)'});
+      start=x+11;
+    });
+    el('rect',{x:start,y:tray,width:Math.max(0,boxR+4-start),height:8,fill:'var(--viz-series-2)'});
+    line(40,deck,w-12,deck,'currentColor');
+    label(boxL,deck+27,['Metal Hamilton deck']);
+    line(39,top,boxR+10,top,'var(--viz-series-1)','4 4');
+    line(39,deck,boxL,deck,'var(--viz-series-1)','4 4');
+    line(44,top+4,44,deck-4,'var(--viz-series-1)');
+    el('path',{d:`M 39 ${top+10} L 44 ${top} L 49 ${top+10} M 39 ${deck-10} L 44 ${deck} L 49 ${deck-10}`,fill:'none',stroke:'var(--viz-series-1)','stroke-width':2});
+    el('text',{x:20,y:(top+deck)/2,'text-anchor':'middle',transform:`rotate(-90 20 ${(top+deck)/2})`,fill:'currentColor'},'TOTAL HEIGHT TO MEASURE');
+    line(boxR+10,top,labelX-6,top,'currentColor');
+    label(labelX,top-15,['Top opening','of a tip']);
+    line(tipXs[2]+10,132,labelX-6,132,'currentColor');
+    label(labelX,138,['Pipette tip']);
+    line(boxR+5,tray+4,labelX-6,195,'var(--viz-series-2)');
+    label(labelX,202,['Tray / insert','with holes']);
+    line(boxR,270,labelX-6,270,'currentColor');
+    label(labelX,275,['Outer box']);
+    label(boxL,413,['Everything stays assembled.']);
+  }
+  new ResizeObserver(draw).observe(root);
+  draw();
+})();
+</script>

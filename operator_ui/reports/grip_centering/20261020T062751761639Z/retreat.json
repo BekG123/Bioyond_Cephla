@@ -1,0 +1,299 @@
+{
+  "authorization": "Operator confirmed opening to 28 mm and straight retreat to Z300 clear; plate supported, hands clear, E-stop supervised.",
+  "started_at": 1792477671.7626464,
+  "events": [
+    {
+      "at": 1792477671.8503745,
+      "path": "/gripper",
+      "request": {
+        "action": "move",
+        "e1": 28,
+        "speed": 5
+      },
+      "response": {
+        "commanded": {
+          "e1": 28.0,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 28.008,
+          "e1_torque": 196.269,
+          "e1_torque_normalized": 0.736,
+          "grip_detected": false,
+          "joints": {
+            "J1": 408,
+            "J2": 38,
+            "J3": -1,
+            "J4": -37
+          },
+          "position_error": 0.008,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    },
+    {
+      "at": 1792477673.2940636,
+      "path": "/move",
+      "request": {
+        "x": 309.508,
+        "y": -66.073,
+        "z": 300.0,
+        "rz": 89.174,
+        "speed": 10,
+        "interpolation": "linear"
+      },
+      "response": {
+        "commanded": {
+          "interpolation": "linear",
+          "rz": 89.174,
+          "speed": 10.0,
+          "x": 309.508,
+          "y": -66.073,
+          "z": 300.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "ok": true,
+        "pose_after": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.174,
+          "X": 309.508,
+          "Y": -66.073,
+          "Z": 300.004
+        }
+      }
+    }
+  ],
+  "status": "completed",
+  "before": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 6.300094537436962
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 31.862010620174562,
+        "J2": 41.01530106338069,
+        "J3": 58.36600759640771,
+        "J4": -10.207328971926726
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.174,
+        "X": 309.508,
+        "Y": -66.073,
+        "Z": 70.461
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "supervised_grip_batch",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1792477671.8327215
+  },
+  "checked_joints": {
+    "J1": 31.862010620174562,
+    "J2": 41.01527329749851,
+    "J3": 58.366106395056704,
+    "J4": -10.207400004693538
+  },
+  "after_open": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 28.010744601488113
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 31.86180318105096,
+        "J2": 41.01530106338069,
+        "J3": 58.36600759640771,
+        "J4": -10.207328971926726
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.174,
+        "X": 309.508,
+        "Y": -66.073,
+        "Z": 70.461
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "supervised_grip_batch",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1792477673.2921107
+  },
+  "after": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 28.009485453367233
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 261.40418765970696,
+        "J2": 41.01530106338069,
+        "J3": 58.366106758153364,
+        "J4": -10.207328971926726
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.174,
+        "X": 309.508,
+        "Y": -66.073,
+        "Z": 300.003
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "supervised_grip_batch",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1792477718.269264
+  },
+  "finished_at": 1792477718.2735035
+}

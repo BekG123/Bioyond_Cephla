@@ -1,0 +1,293 @@
+{
+  "at": "2026-10-25T07:39:54.323497+00:00",
+  "objective": "Compare native self-calibration with reduced versus normal Lacry polling, recording all Hamilton HTTP calls through the Lacry adapter.",
+  "scope": "Does not capture Hamilton touchscreen internal calls or unrelated clients.",
+  "arm": {
+    "result": "Returned to saved Home",
+    "pose_mm": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "gripper_preserved": true
+  },
+  "runs": [
+    {
+      "mode": "reduced",
+      "request_id": "30c2afa561e649c495d103357d156654",
+      "folder": "reports\\hamilton_api\\polling_20261025T073150Z_aefa2ce0",
+      "sent_requests": 2117,
+      "sent_paths": {
+        "instruments/connection-info": 427,
+        "instruments/global-run-state": 427,
+        "protocol-run": 427,
+        "errors/check-for-pending-errors": 427,
+        "errors?offset=0&limit=30": 399,
+        "service-software-api/sensor-status": 2,
+        "service-software-api/has-tips": 1,
+        "verification/status": 1,
+        "calibration/self-calibration": 1,
+        "maintenance/errors": 2,
+        "calibration/close-view": 2,
+        "calibration/abort": 1
+      },
+      "writes": [
+        {
+          "at": 1792913510.82257,
+          "id": "9a78f6eaa5aa4a85a7b9c6dd2780c595",
+          "method": "POST",
+          "path": "calibration/self-calibration",
+          "body": null,
+          "thread": "Thread-3845 (_run)"
+        },
+        {
+          "at": 1792913559.5641658,
+          "id": "e9383ceb51e548aeb01ea082017fb55d",
+          "method": "POST",
+          "path": "calibration/close-view",
+          "body": {
+            "viewId": "05d21d6cef654ac0814f24039465a4a3",
+            "viewResult": "Ok",
+            "viewInput": null
+          },
+          "thread": "Thread-4708 (process_request_thread)"
+        },
+        {
+          "at": 1792913742.3745205,
+          "id": "4a49a9320db24e48b99d7b4b2f0885a5",
+          "method": "POST",
+          "path": "calibration/close-view",
+          "body": {
+            "viewId": "8b2d4f6db1614eee9549d93e16d1156b",
+            "viewResult": "Ok",
+            "viewInput": null
+          },
+          "thread": "Thread-7736 (process_request_thread)"
+        },
+        {
+          "at": 1792913782.8898022,
+          "id": "a54d2f6329ea4decba3164147feb35a6",
+          "method": "POST",
+          "path": "calibration/abort",
+          "body": null,
+          "thread": "Thread-3845 (_run)"
+        }
+      ],
+      "normal_polling_restored": true
+    },
+    {
+      "mode": "normal",
+      "request_id": "86518898919b45cbb444623a5017f835",
+      "folder": "reports\\hamilton_api\\polling_20261025T073806Z_e29de613",
+      "sent_requests": 55,
+      "sent_paths": {
+        "instruments/connection-info": 8,
+        "instruments/global-run-state": 9,
+        "protocol-run": 8,
+        "errors/check-for-pending-errors": 8,
+        "protocols": 8,
+        "service-software-api/is-parked": 8,
+        "errors?offset=0&limit=30": 2,
+        "service-software-api/sensor-status": 1,
+        "service-software-api/has-tips": 1,
+        "verification/status": 1,
+        "calibration/self-calibration": 1
+      },
+      "writes": [
+        {
+          "at": 1792913887.5809052,
+          "id": "9fb2e09706f04f76b3e095137fbc7cda",
+          "method": "POST",
+          "path": "calibration/self-calibration",
+          "body": null,
+          "thread": "Thread-340 (_run)"
+        }
+      ],
+      "normal_polling_restored": true
+    }
+  ],
+  "reduced_result": {
+    "native": "Completed",
+    "selfcalibrate_start_controller": "2026-10-25T06:42:30.1111812Z",
+    "selfcalibrate_end_controller": "2026-10-25T06:44:48.87083Z",
+    "duration_s": 138.759649,
+    "native_dialog": "Calibration is complete.",
+    "native_idle_finished_event": true,
+    "pending_errors": false,
+    "host": "Missed native completion wording; stale monitor stopped after native completion. Original failed_or_uncertain record preserved; completion reconciled separately.",
+    "reconciliation": "reports\\hamilton_api\\polling_20261025T073150Z_aefa2ce0\\completion_reconciliation.json"
+  },
+  "normal_result": {
+    "native": "Aborted during scheduling before any calibration prompt or SelfCalibrate command",
+    "host": "Aborted and verified Idle",
+    "valid_polling_comparison": false
+  },
+  "confirmed_bug": {
+    "file": "hamilton_prep.py",
+    "function": "consume",
+    "before": "Only success/successful/successfully was recognized; actual Calibration is complete. was missed.",
+    "after": "Recognizes the exact native completion message only with a non-spinner Finish dialog and an ID. Existing no-fault, observed-activity, acknowledged-prompt, initialized and Idle gates still apply.",
+    "validation": "45 offline tests passed, including observed native wording, incomplete/failure rejection, background suppression and preserved native fault abort. Live normal trial ended before exercising completion fix."
+  },
+  "interpretation": "Reduced-polling native calibration completed; after one scheduling-aborted comparator, an explicitly authorized normal-polling retry reached SelfCalibrate and reproduced tool-not-detected and Z travel-limit errors before Lacry aborted. This supports a polling-related interaction but does not identify a specific query or eliminate controller-state/order effects. No further run started.",
+  "final_state": {
+    "connected": true,
+    "global_state": "Idle",
+    "initialized": true,
+    "parked": true,
+    "pending_errors": [],
+    "active_ownership_marker": false
+  },
+  "automatic_retries": 0,
+  "production_default_polling": "Normal; experiment is opt-in per self-calibration plan.",
+  "authorized_normal_retry": {
+    "at": "2026-10-25T07:42:42.030071+00:00",
+    "mode": "normal",
+    "request_id": "17db27320823460d832d322d61b51725",
+    "folder": "reports\\hamilton_api\\polling_20261025T074026Z_22cd1f64",
+    "result": "Native self-calibration fault reproduced: calibration tool not detected and Z travel limit exceeded.",
+    "sent_requests": 831,
+    "sent_paths": {
+      "instruments/connection-info": 119,
+      "instruments/global-run-state": 119,
+      "protocol-run": 119,
+      "errors/check-for-pending-errors": 119,
+      "protocols": 119,
+      "service-software-api/is-parked": 119,
+      "errors?offset=0&limit=30": 100,
+      "service-software-api/sensor-status": 2,
+      "service-software-api/has-tips": 1,
+      "verification/status": 1,
+      "calibration/self-calibration": 1,
+      "maintenance/errors": 1,
+      "errors?offset=0&limit=20": 3,
+      "maintenance": 3,
+      "calibration/channel-results": 3,
+      "calibration/close-view": 1,
+      "calibration/abort": 1
+    },
+    "writes": [
+      {
+        "at": 1792914027.4419081,
+        "id": "be146b4ea8814377a68e8ed9d6eaaf3e",
+        "method": "POST",
+        "path": "calibration/self-calibration",
+        "body": null,
+        "thread": "Thread-2625 (_run)"
+      },
+      {
+        "at": 1792914054.112705,
+        "id": "1c2618ea2f4b4468951c0237cb827190",
+        "method": "POST",
+        "path": "calibration/close-view",
+        "body": {
+          "viewId": "c355900d00c94cb28732b27e1452a18e",
+          "viewResult": "Ok",
+          "viewInput": null
+        },
+        "thread": "Thread-3069 (process_request_thread)"
+      },
+      {
+        "at": 1792914112.7395024,
+        "id": "c10cc6ca86ab4fb7acf8db0f8b747d1d",
+        "method": "POST",
+        "path": "calibration/abort",
+        "body": null,
+        "thread": "Thread-2625 (_run)"
+      }
+    ],
+    "native_errors_preceded_abort": true,
+    "outcome": {
+      "request_id": "17db27320823460d832d322d61b51725",
+      "action": "self_calibration",
+      "session_id": "d1f1c6042f2e43dca5101759f35eaed7",
+      "status": "aborted",
+      "calibration_setup": null,
+      "completed_steps": [],
+      "observed_activity": true,
+      "step": "self_calibration",
+      "write_attempted": true,
+      "calibration_display": {
+        "id": "calibration",
+        "textSections": [
+          [
+            "Please wait while calibration completes. Please do not power off your device.",
+            null,
+            null
+          ],
+          [
+            "",
+            null,
+            null
+          ],
+          [
+            "",
+            null,
+            null
+          ]
+        ],
+        "imageName": "",
+        "buttonText": "Finish",
+        "selectionCaptions": null,
+        "selectionImages": null,
+        "spinnerShown": true,
+        "inputType": null,
+        "labwarePosition": 0
+      },
+      "reported_errors": [
+        {
+          "id": "1251f10f47df4133ad289775ae224520",
+          "message": "One or more errors occurred in XSL Command Calibrate. Select a recovery action for each error.",
+          "date": "2026-10-25T06:51:38.5725236Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "f4cb55017e744665bc6030478df35f63",
+          "message": "Firmware Reported Error: \r\n The provided Z position would exceed the travel limits",
+          "date": "2026-10-25T06:51:38.5585238Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "42fd3ca40087449cb92dd9a0c4a4cd15",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy",
+          "date": "2026-10-25T06:51:38.5545246Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "32fbf8cb24214217aa9caf1faf32bdad",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: 3844 - The calibration tool was not detected.",
+          "date": "2026-10-25T06:51:38.5505374Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "53e1114f26ba420cb6892f4ea1977303",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy",
+          "date": "2026-10-25T06:51:38.5465611Z",
+          "severity": 1,
+          "handled": false
+        }
+      ],
+      "abort_sent": true,
+      "error": "Hamilton: Firmware Reported Error: \r\n The provided Z position would exceed the travel limits | Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: 3844 - The calibration tool was not detected."
+    },
+    "final_state": {
+      "connected": true,
+      "global_state": "Idle",
+      "initialized": true,
+      "parked": true,
+      "pending_errors": []
+    },
+    "ownership_marker_present": false,
+    "normal_polling_restored": true,
+    "ordering_evidence": {
+      "native_errors_journal_index": 39,
+      "abort_request_journal_index": 40,
+      "note": "Both journal timestamps share Windows clock resolution; append order and controller fault trace establish ordering."
+    }
+  }
+}

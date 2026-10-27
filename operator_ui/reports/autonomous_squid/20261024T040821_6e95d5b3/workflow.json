@@ -1,0 +1,3057 @@
+{
+  "status": "completed",
+  "plan_id": "2026-10-24T11:08:15.623306+00:00:1792840095623",
+  "plan": {
+    "actions": [
+      "calibrate_image_retrieve"
+    ],
+    "labels": [
+      "Calibrate, image and retrieve"
+    ],
+    "dispatch": "autonomous_squid",
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Return Home"
+      },
+      {
+        "kind": "classic",
+        "label": "Calibrate the two-disk plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Align with the plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Descent"
+      },
+      {
+        "kind": "classic",
+        "label": "Grip the plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Lift the plate 5 mm"
+      },
+      {
+        "kind": "classic",
+        "label": "Return Home"
+      },
+      {
+        "kind": "stage",
+        "label": "Prepare Squid loading position"
+      },
+      {
+        "kind": "autonomous",
+        "label": "Move to the microscope using the tested approach"
+      },
+      {
+        "kind": "autonomous",
+        "label": "Leave the plate at Squid"
+      },
+      {
+        "kind": "autonomous",
+        "label": "Lift the empty jaws clear"
+      },
+      {
+        "kind": "autonomous",
+        "label": "Leave the microscope and return Home"
+      },
+      {
+        "kind": "imaging",
+        "label": "Move Squid into imaging area"
+      },
+      {
+        "kind": "imaging",
+        "label": "Start Squid imaging"
+      },
+      {
+        "kind": "imaging",
+        "label": "Wait for this imaging run and stage cleanup to finish"
+      },
+      {
+        "kind": "imaging",
+        "label": "Verify Squid returned to loading position"
+      },
+      {
+        "kind": "autonomous",
+        "label": "Move to the microscope using the tested approach"
+      },
+      {
+        "kind": "autonomous",
+        "label": "Grip the plate at Squid"
+      },
+      {
+        "kind": "autonomous",
+        "label": "Lift the plate slowly"
+      },
+      {
+        "kind": "autonomous",
+        "label": "Leave the microscope and return Home"
+      }
+    ],
+    "requirements": [
+      "The arm is already at saved Home; its position will be checked again before calibration.",
+      "Both disks must be visible from Home after the initial return.",
+      "The calibration plate is in its taught location and orientation.",
+      "The gripper is empty, the area is clear, and you are supervising the emergency stop.",
+      "Each step runs exactly as its button does in the classic view, including the controller preparation it does for itself.",
+      "The plate and holder match the accepted pickup setup.",
+      "Confirm the upward path, wrist sweep, crossing and lowering to Home are clear.",
+      "After gripping, the arm lifts 5 mm slowly and immediately returns Home with the claw unchanged.",
+      "One Yes authorizes this entire experiment, including automatic retrieval after its imaging job succeeds.",
+      "With the arm at Home, Squid will return to its saved loading position before delivery. The stage path and all pickup/return paths are clear, and the plate will be supported on release.",
+      "Imaging protocol: Live Squid XYZ stage with selected imaging settings (simulated camera).",
+      "Squid is in simulation mode: images are MOCK. Robot movement is REAL when you confirm.",
+      "Stay able to supervise the E-stop. Stop ends the workflow; a fault or uncertain result stops progression without a retry.",
+      "The Squid stage moves PHYSICALLY; only camera images are simulated. This verifies integration, not optical imaging.",
+      "Use the saved imaging setup from stage X100.284, Y45.669, Z1.200 mm. Squid is at loading and its current imaging-site selection is empty. This Yes approves the saved setup for a new run; it does not resume the previous attempt.",
+      "Selected imaging: BF LED matrix full; 1 fields, 1 Z planes, 1 time points (1 images). Review the saved setup before confirming."
+    ],
+    "summary": "Calibrate and pick up the plate, leave it at Squid, return Home, run MOCK imaging, wait for confirmed completion, then retrieve the plate to Home. Using the saved imaging setup because the current site selection is empty.",
+    "id": "2026-10-24T11:08:15.623306+00:00:1792840095623",
+    "at": 1792840095.623306,
+    "source": "automatic",
+    "home_prefix": {
+      "dispatch": "already_home",
+      "home": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+      "requirements": [
+        "The arm is already at saved Home; its position will be checked again before calibration."
+      ],
+      "id": "2026-10-24T11:08:15.623306+00:00:1792840095623:initial-home"
+    },
+    "imaging": {
+      "profile": {
+        "label": "Live Squid XYZ stage with selected imaging settings (simulated camera)",
+        "simulation": true,
+        "camera_simulated": true,
+        "simulation_scope": "camera_only",
+        "command": "run_acquisition_from_yaml",
+        "params": {
+          "settings_sha256": "6f7da6a2c74faa7d56ade9d0952a3005594bbdbc40d12604bfe3dc4618af80d1"
+        },
+        "timeout_s": 86400,
+        "stage_simulated": false,
+        "stage_controller_serial": "12769210",
+        "loading_acceptance": "Operator accepted the successful physical-stage return and corrected loading position on 2026-10-23.",
+        "loading_command": "return_to_recorded_dropoff",
+        "loading_position": {
+          "x_mm": 0.05,
+          "y_mm": 0.0508,
+          "z_mm": 1.05
+        },
+        "return_waypoints": [],
+        "id": "current",
+        "loading_reference_hash": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+        "captured_yaml": "acquisition:\n  experiment_id: current_Squid_settings\n  skip_saving: false\n  start_time: 0\n  widget_type: wellplate\n  xy_mode: Current Position\nautofocus:\n  contrast_af: false\n  laser_af: false\nchannels:\n- camera: null\n  camera_settings:\n    exposure_time_ms: 20.0\n    gain_mode: 10.0\n    pixel_format: null\n  confocal_hardware_settings: null\n  confocal_override: null\n  display_color: '#FFFFFF'\n  enabled: true\n  filter_position: 1\n  filter_wheel: null\n  illumination_settings:\n    illumination_channel: BF LED matrix full\n    intensity: 5.0\n  name: BF LED matrix full\n  z_offset_um: 0.0\nmosaic_view:\n  resolution_um: 2.0\n  save_overview: true\n  save_well_images: false\nobjective:\n  camera_binning:\n  - 2\n  - 2\n  name: 20x\nplate:\n  num_cols: 12\n  num_rows: 8\nsample:\n  wellplate_format: 96 well plate\ntime_series:\n  delta_t_s: 0.0\n  nt: 1\nwellplate_scan:\n  overlap_percent: 10.0\n  regions:\n  - center_mm:\n    - 100.2839625\n    - 45.669200000000004\n    - 1.2\n    fovs:\n    - - 100.2839625\n      - 45.669200000000004\n    name: current\n    shape: Square\n  scan_size_mm: 0.1\nz_stack:\n  config: FROM BOTTOM\n  delta_z_mm: 0.0015\n  nz: 1\n  use_piezo: false\n  z_range_mm:\n  - 1.2\n  - 1.2\n",
+        "selected_settings": {
+          "channels": [
+            "BF LED matrix full"
+          ],
+          "fovs": 1,
+          "nz": 1,
+          "nt": 1,
+          "total_images": 1,
+          "objective": "20x",
+          "widget_type": "wellplate"
+        },
+        "settings_capture_position": {
+          "x_mm": 100.2839625,
+          "y_mm": 45.669200000000004,
+          "z_mm": 1.2
+        },
+        "selection_source": {
+          "kind": "saved",
+          "captured_at": 1792837829.7730768,
+          "reason": "Squid is at loading and its current imaging-site selection is empty."
+        },
+        "scan_entry": {
+          "x_mm": 100.2839625,
+          "y_mm": 45.669200000000004,
+          "z_mm": 1.2
+        },
+        "imaging_lifecycle_version": 1
+      },
+      "profile_hash": "15f216c7a112f54b18c5f1a35258fdbf35e437d9c044775ce2f1cf0bc0c64afa",
+      "configured_hash": "f646263260fddf2209959196e062b1afb6156308d83f962762a038d74a65c0bc",
+      "session": {
+        "pid": 24028,
+        "created_at": 1792837476.1969287
+      },
+      "loading_position": {
+        "x_mm": 0.05,
+        "y_mm": 0.0508,
+        "z_mm": 1.05
+      },
+      "simulation": true,
+      "stage_simulated": false
+    },
+    "pickup_from_calibration": true,
+    "retrieve_after_imaging": true,
+    "delivery": {
+      "dispatch": "squid_handling",
+      "executable": true,
+      "prepare": false,
+      "actions": [
+        "squid_dropoff"
+      ],
+      "steps": [
+        {
+          "kind": "travel",
+          "label": "Move to the microscope using the tested approach",
+          "start": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          },
+          "joints": {
+            "J1": 209.41890610313115,
+            "J2": 84.87681898036978,
+            "J3": 52.05594907317273,
+            "J4": -140.8128286807219
+          },
+          "points": [
+            {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 286.24,
+              "Rz": -3.88
+            },
+            {
+              "X": 354.0,
+              "Y": 270.0,
+              "Z": 286.24,
+              "Rz": 49.02
+            },
+            {
+              "X": 226.28,
+              "Y": 373.6,
+              "Z": 286.24,
+              "Rz": 89.11
+            },
+            {
+              "X": 226.3,
+              "Y": 373.59,
+              "Z": 266.19,
+              "Rz": 89.11
+            }
+          ],
+          "profile": {
+            "scope_compact": true
+          },
+          "sources": {
+            "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+            "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+            "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+            "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+            "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+            "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+            "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+            "scope_speed_policy": "54cb163c2ede1601f141451bf50a7bbb5c6d5da4b2e7191d85ce39fb7cf5e250",
+            "hamilton_true_home": "a4c6917048a2261401afd09aab141b9b69ca1ca3cd85c1a8c718c443550eec0f"
+          },
+          "expected_e1": 3.7
+        },
+        {
+          "kind": "squid_jaw",
+          "label": "Leave the plate at Squid",
+          "start": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 266.19,
+            "Rz": 89.11
+          },
+          "joints": {
+            "J1": 227.58890610313114,
+            "J2": 89.72101820978666,
+            "J3": 150.50163253317248,
+            "J4": -151.11271137013858
+          },
+          "expected_e1": 3.7,
+          "target_e1": 5.0,
+          "speed": 5
+        },
+        {
+          "kind": "squid_lift",
+          "label": "Lift the empty jaws clear",
+          "start": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 266.19,
+            "Rz": 89.11
+          },
+          "joints": {
+            "J1": 227.58890610313114,
+            "J2": 89.72101820978666,
+            "J3": 150.50163253317248,
+            "J4": -151.11271137013858
+          },
+          "expected_e1": 5.0,
+          "points": [
+            {
+              "X": 226.3,
+              "Y": 373.59,
+              "Z": 271.19,
+              "Rz": 89.11
+            }
+          ],
+          "speed": 5
+        },
+        {
+          "kind": "travel",
+          "label": "Leave the microscope and return Home",
+          "start": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 271.19,
+            "Rz": 89.11
+          },
+          "joints": {
+            "J1": 232.58890610313114,
+            "J2": 89.72101820978666,
+            "J3": 150.50163253317248,
+            "J4": -151.11271137013858
+          },
+          "points": [
+            {
+              "X": 226.28,
+              "Y": 373.6,
+              "Z": 286.24,
+              "Rz": 89.11
+            },
+            {
+              "X": 354.0,
+              "Y": 270.0,
+              "Z": 286.24,
+              "Rz": 49.02
+            },
+            {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 286.24,
+              "Rz": -3.88
+            },
+            {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 248.02,
+              "Rz": -3.88
+            }
+          ],
+          "profile": {
+            "scope_compact": true
+          },
+          "sources": {
+            "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+            "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+            "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+            "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+            "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+            "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+            "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+            "scope_speed_policy": "54cb163c2ede1601f141451bf50a7bbb5c6d5da4b2e7191d85ce39fb7cf5e250",
+            "hamilton_true_home": "a4c6917048a2261401afd09aab141b9b69ca1ca3cd85c1a8c718c443550eec0f"
+          },
+          "expected_e1": 5.0
+        }
+      ],
+      "start": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      "joints": {
+        "J1": 209.41890610313115,
+        "J2": 84.87681898036978,
+        "J3": 52.05594907317273,
+        "J4": -140.8128286807219
+      },
+      "e1": 3.7,
+      "cfg": {
+        "reach_hard_mm": 460.0,
+        "j4_pref_abs_deg": 220.0,
+        "j4_hard_abs_deg": 220.0,
+        "inner_reach_mm": 280.0,
+        "claw_gap_min_mm": 60.0,
+        "claw_gap_max_mm": 88.0,
+        "base_x_mm": 126.0,
+        "base_y_mm": 0.0,
+        "link1_mm": 200.0,
+        "link2_mm": 200.0,
+        "j2_offset_deg": 0.0,
+        "j3_offset_deg": 180.0,
+        "j2_min_deg": -95.0,
+        "j2_margin_deg": 2.0,
+        "extension_margin_mm": 8.0
+      },
+      "envelope": {
+        "X": [
+          200.0,
+          450.0
+        ],
+        "Y": [
+          -250.0,
+          380.0
+        ],
+        "Z": [
+          70.0,
+          400.0
+        ]
+      },
+      "handling_evidence": {
+        "home_squid_dropoff_home_20261020.json": "f727b534edfad2b708b48e1824df5b5b124a7189d45f042f43258721cd416908",
+        "squid_post_imaging_retrieval_20261020.json": "3d699ac726e03e2986eeb4ab297ff19a4aeaa073eabf0a496df2b08000075708"
+      },
+      "camera_required": false,
+      "start_station": "Home",
+      "seated_start": false,
+      "summary": "Leave the plate at Squid, then return Home empty.",
+      "supervised_trial": false,
+      "requirements": [
+        "The plate is securely held; the Squid holder is empty and ready to support it.",
+        "The Squid holder remains in its taught loading position; jaw clearance, 5 mm lift headroom and loaded return are clear.",
+        "Hands are clear, the arm is released, and the emergency stop is supervised.",
+        "The instrument is not started by this routine.",
+        "Use the accepted Squid loading pose."
+      ]
+    },
+    "retrieval": {
+      "dispatch": "squid_handling",
+      "executable": true,
+      "prepare": false,
+      "actions": [
+        "squid_retrieve"
+      ],
+      "steps": [
+        {
+          "kind": "travel",
+          "label": "Move to the microscope using the tested approach",
+          "start": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          },
+          "joints": {
+            "J1": 209.41890610313115,
+            "J2": 84.87681898036978,
+            "J3": 52.05594907317273,
+            "J4": -140.8128286807219
+          },
+          "points": [
+            {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 286.24,
+              "Rz": -3.88
+            },
+            {
+              "X": 354.0,
+              "Y": 270.0,
+              "Z": 286.24,
+              "Rz": 49.02
+            },
+            {
+              "X": 226.28,
+              "Y": 373.6,
+              "Z": 286.24,
+              "Rz": 89.11
+            },
+            {
+              "X": 226.3,
+              "Y": 373.59,
+              "Z": 266.19,
+              "Rz": 89.11
+            }
+          ],
+          "profile": {
+            "scope_compact": true
+          },
+          "sources": {
+            "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+            "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+            "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+            "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+            "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+            "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+            "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+            "scope_speed_policy": "54cb163c2ede1601f141451bf50a7bbb5c6d5da4b2e7191d85ce39fb7cf5e250",
+            "hamilton_true_home": "a4c6917048a2261401afd09aab141b9b69ca1ca3cd85c1a8c718c443550eec0f"
+          },
+          "expected_e1": 5.0
+        },
+        {
+          "kind": "squid_jaw",
+          "label": "Grip the plate at Squid",
+          "start": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 266.19,
+            "Rz": 89.11
+          },
+          "joints": {
+            "J1": 227.58890610313114,
+            "J2": 89.72101820978666,
+            "J3": 150.50163253317248,
+            "J4": -151.11271137013858
+          },
+          "expected_e1": 5.0,
+          "target_e1": 3.7,
+          "speed": 5
+        },
+        {
+          "kind": "squid_lift",
+          "label": "Lift the plate slowly",
+          "start": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 266.19,
+            "Rz": 89.11
+          },
+          "joints": {
+            "J1": 227.58890610313114,
+            "J2": 89.72101820978666,
+            "J3": 150.50163253317248,
+            "J4": -151.11271137013858
+          },
+          "expected_e1": 3.7,
+          "points": [
+            {
+              "X": 226.3,
+              "Y": 373.59,
+              "Z": 271.19,
+              "Rz": 89.11
+            }
+          ],
+          "speed": 5
+        },
+        {
+          "kind": "travel",
+          "label": "Leave the microscope and return Home",
+          "start": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 271.19,
+            "Rz": 89.11
+          },
+          "joints": {
+            "J1": 232.58890610313114,
+            "J2": 89.72101820978666,
+            "J3": 150.50163253317248,
+            "J4": -151.11271137013858
+          },
+          "points": [
+            {
+              "X": 226.28,
+              "Y": 373.6,
+              "Z": 286.24,
+              "Rz": 89.11
+            },
+            {
+              "X": 354.0,
+              "Y": 270.0,
+              "Z": 286.24,
+              "Rz": 49.02
+            },
+            {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 286.24,
+              "Rz": -3.88
+            },
+            {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 248.02,
+              "Rz": -3.88
+            }
+          ],
+          "profile": {
+            "scope_compact": true
+          },
+          "sources": {
+            "candidate": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+            "forward": "5fb5ebe42a601137174fc5e37809dd91e511d6bff2d44dc2f0190c7c6eb553ec",
+            "reverse": "6ccbc3495f55ddcc6c7d057fc13b7e71dbbd018bfa969b6df44d8cbdf25c0081",
+            "speed137": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+            "hamilton": "1d2e1e14109c097d14ceac6f85157c94744f6122b62b04f028447b83316fa008",
+            "hamilton_source": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+            "home": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+            "scope_speed_policy": "54cb163c2ede1601f141451bf50a7bbb5c6d5da4b2e7191d85ce39fb7cf5e250",
+            "hamilton_true_home": "a4c6917048a2261401afd09aab141b9b69ca1ca3cd85c1a8c718c443550eec0f"
+          },
+          "expected_e1": 3.7
+        }
+      ],
+      "start": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      "joints": {
+        "J1": 209.41890610313115,
+        "J2": 84.87681898036978,
+        "J3": 52.05594907317273,
+        "J4": -140.8128286807219
+      },
+      "e1": 5.0,
+      "cfg": {
+        "reach_hard_mm": 460.0,
+        "j4_pref_abs_deg": 220.0,
+        "j4_hard_abs_deg": 220.0,
+        "inner_reach_mm": 280.0,
+        "claw_gap_min_mm": 60.0,
+        "claw_gap_max_mm": 88.0,
+        "base_x_mm": 126.0,
+        "base_y_mm": 0.0,
+        "link1_mm": 200.0,
+        "link2_mm": 200.0,
+        "j2_offset_deg": 0.0,
+        "j3_offset_deg": 180.0,
+        "j2_min_deg": -95.0,
+        "j2_margin_deg": 2.0,
+        "extension_margin_mm": 8.0
+      },
+      "envelope": {
+        "X": [
+          200.0,
+          450.0
+        ],
+        "Y": [
+          -250.0,
+          380.0
+        ],
+        "Z": [
+          70.0,
+          400.0
+        ]
+      },
+      "handling_evidence": {
+        "home_squid_dropoff_home_20261020.json": "f727b534edfad2b708b48e1824df5b5b124a7189d45f042f43258721cd416908",
+        "squid_post_imaging_retrieval_20261020.json": "3d699ac726e03e2986eeb4ab297ff19a4aeaa073eabf0a496df2b08000075708"
+      },
+      "camera_required": false,
+      "start_station": "Home",
+      "seated_start": false,
+      "summary": "Retrieve the plate from Squid and bring it Home.",
+      "supervised_trial": false,
+      "requirements": [
+        "The gripper is empty; the plate is flat in the taught Squid holder, and you authorize retrieval now.",
+        "The Squid holder remains in its taught loading position; jaw clearance, 5 mm lift headroom and loaded return are clear.",
+        "Hands are clear, the arm is released, and the emergency stop is supervised.",
+        "Instrument completion is not connected. Confirm only after it is finished, or for an explicit simulated-completion test.",
+        "Use the accepted Squid loading pose."
+      ]
+    },
+    "pickup_step_count": 7,
+    "auto_workflow": true,
+    "confirmation_source": "researcher_button"
+  },
+  "confirmed_at": 1792840101.8451645,
+  "events": [
+    {
+      "at": 1792840290.863879,
+      "step": "Prepare Squid loading position",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840291.2725852,
+      "step": "Prepare Squid loading position",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "loading_position": {
+          "x_mm": 0.05,
+          "y_mm": 0.0508,
+          "z_mm": 1.05
+        }
+      }
+    },
+    {
+      "at": 1792840291.8516543,
+      "step": "Move to the microscope using the tested approach",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840303.5241349,
+      "step": "Move to the microscope using the tested approach",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "executor": "lua_queue",
+        "points": 4,
+        "endpoint": {
+          "X": 226.3,
+          "Y": 373.59,
+          "Z": 266.19,
+          "Rz": 89.11
+        },
+        "speed_policy": {
+          "version": 1,
+          "transit_mm_s": 137,
+          "final_descent_mm_s": 10,
+          "return_mm_s": 137,
+          "stop_before_final_descent": true
+        },
+        "phases": [
+          {
+            "phase": "transit",
+            "speed_mm_s": 137,
+            "result": {
+              "ok": true,
+              "executor": "lua_queue",
+              "points": 3,
+              "zone": -1,
+              "endpoint": {
+                "X": 226.28,
+                "Y": 373.6,
+                "Z": 286.24,
+                "Rz": 89.11
+              },
+              "grouping": null
+            }
+          },
+          {
+            "phase": "descent",
+            "speed_mm_s": 10,
+            "result": {
+              "ok": true,
+              "executor": "lua_queue",
+              "points": 1,
+              "zone": -1,
+              "endpoint": {
+                "X": 226.3,
+                "Y": 373.59,
+                "Z": 266.19,
+                "Rz": 89.11
+              },
+              "grouping": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "at": 1792840303.683787,
+      "step": "Leave the plate at Squid",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840306.2949963,
+      "step": "Leave the plate at Squid",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "gripper": {
+          "ok": true,
+          "completion_reply": {
+            "index": 1,
+            "value": 1
+          },
+          "commanded": {
+            "e1": 5.0,
+            "speed": 5
+          },
+          "gripper": {
+            "e1_position": 5.002,
+            "e1_torque": 117.601,
+            "e1_torque_normalized": 0.442,
+            "joints": {
+              "J1": 420,
+              "J2": -34,
+              "J3": 42,
+              "J4": -110
+            },
+            "telemetry_live": true,
+            "position_error": 0.002,
+            "grip_detected": false
+          }
+        },
+        "settled_report": {
+          "ok": true,
+          "e1_position": 5.001,
+          "e1_torque": 110.935,
+          "joints": {
+            "J1": 418,
+            "J2": -47,
+            "J3": 31,
+            "J4": -115
+          },
+          "telemetry_live": true
+        },
+        "grasp_verified": false
+      }
+    },
+    {
+      "at": 1792840306.4925616,
+      "step": "Lift the empty jaws clear",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840310.201494,
+      "step": "Lift the empty jaws clear",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "result": {
+          "ok": true,
+          "executor": "lua_queue",
+          "points": 1,
+          "zone": -1,
+          "endpoint": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 271.19,
+            "Rz": 89.11
+          },
+          "grouping": null
+        },
+        "pose_mm": {
+          "X": 226.3,
+          "Y": 373.59,
+          "Z": 271.191,
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.11
+        }
+      }
+    },
+    {
+      "at": 1792840310.2921774,
+      "step": "Leave the microscope and return Home",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840317.8359067,
+      "step": "Leave the microscope and return Home",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "executor": "lua_queue",
+        "points": 4,
+        "zone": -1,
+        "endpoint": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "grouping": null
+      }
+    },
+    {
+      "at": 1792840318.0762486,
+      "step": "Move Squid into imaging area",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840322.4529507,
+      "step": "Move Squid into imaging area",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "position": {
+          "x_mm": 100.2839625,
+          "y_mm": 45.669200000000004,
+          "z_mm": 1.2
+        }
+      }
+    },
+    {
+      "at": 1792840322.59719,
+      "step": "Start Squid imaging",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840322.9058542,
+      "step": "Start Squid imaging",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "request_id": "Lacry_52f7685d7cf04eeca225e89ec797b593",
+        "simulation": true
+      }
+    },
+    {
+      "at": 1792840323.1034524,
+      "step": "Wait for this imaging run and stage cleanup to finish",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840323.5657408,
+      "step": "Wait for this imaging run and stage cleanup to finish",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "run_id": "fabc9f7b916c49219c94dc16fbe9e9e8",
+        "simulation": true
+      }
+    },
+    {
+      "at": 1792840323.6090446,
+      "step": "Verify Squid returned to loading position",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840328.6014836,
+      "step": "Verify Squid returned to loading position",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "loading_position": {
+          "x_mm": 0.05,
+          "y_mm": 0.0508,
+          "z_mm": 1.05
+        }
+      }
+    },
+    {
+      "at": 1792840329.1487987,
+      "step": "Move to the microscope using the tested approach",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840340.7337203,
+      "step": "Move to the microscope using the tested approach",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "executor": "lua_queue",
+        "points": 4,
+        "endpoint": {
+          "X": 226.3,
+          "Y": 373.59,
+          "Z": 266.19,
+          "Rz": 89.11
+        },
+        "speed_policy": {
+          "version": 1,
+          "transit_mm_s": 137,
+          "final_descent_mm_s": 10,
+          "return_mm_s": 137,
+          "stop_before_final_descent": true
+        },
+        "phases": [
+          {
+            "phase": "transit",
+            "speed_mm_s": 137,
+            "result": {
+              "ok": true,
+              "executor": "lua_queue",
+              "points": 3,
+              "zone": -1,
+              "endpoint": {
+                "X": 226.28,
+                "Y": 373.6,
+                "Z": 286.24,
+                "Rz": 89.11
+              },
+              "grouping": null
+            }
+          },
+          {
+            "phase": "descent",
+            "speed_mm_s": 10,
+            "result": {
+              "ok": true,
+              "executor": "lua_queue",
+              "points": 1,
+              "zone": -1,
+              "endpoint": {
+                "X": 226.3,
+                "Y": 373.59,
+                "Z": 266.19,
+                "Rz": 89.11
+              },
+              "grouping": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "at": 1792840341.0325952,
+      "step": "Grip the plate at Squid",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840343.4943,
+      "step": "Grip the plate at Squid",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "gripper": {
+          "ok": true,
+          "completion_reply": {
+            "index": 1,
+            "value": 1
+          },
+          "commanded": {
+            "e1": 3.7,
+            "speed": 5
+          },
+          "gripper": {
+            "e1_position": 3.772,
+            "e1_torque": 41.067,
+            "e1_torque_normalized": 0.154,
+            "joints": {
+              "J1": 411,
+              "J2": -44,
+              "J3": 35,
+              "J4": -123
+            },
+            "telemetry_live": true,
+            "position_error": 0.072,
+            "grip_detected": false
+          }
+        },
+        "settled_report": {
+          "ok": true,
+          "e1_position": 3.699,
+          "e1_torque": 18.134,
+          "joints": {
+            "J1": 416,
+            "J2": -37,
+            "J3": 30,
+            "J4": -110
+          },
+          "telemetry_live": true
+        },
+        "grasp_verified": false
+      }
+    },
+    {
+      "at": 1792840343.6579692,
+      "step": "Lift the plate slowly",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840347.377352,
+      "step": "Lift the plate slowly",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "result": {
+          "ok": true,
+          "executor": "lua_queue",
+          "points": 1,
+          "zone": -1,
+          "endpoint": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 271.19,
+            "Rz": 89.11
+          },
+          "grouping": null
+        },
+        "pose_mm": {
+          "X": 226.3,
+          "Y": 373.59,
+          "Z": 271.192,
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.11
+        }
+      }
+    },
+    {
+      "at": 1792840347.512102,
+      "step": "Leave the microscope and return Home",
+      "status": "dispatch_requested",
+      "result": null
+    },
+    {
+      "at": 1792840355.0189197,
+      "step": "Leave the microscope and return Home",
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "executor": "lua_queue",
+        "points": 4,
+        "zone": -1,
+        "endpoint": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "grouping": null
+      }
+    }
+  ],
+  "ticket": {
+    "request_id": "Lacry_52f7685d7cf04eeca225e89ec797b593",
+    "requested_at": 1792840322.712752,
+    "session": {
+      "pid": 24028,
+      "created_at": 1792837476.1969287
+    },
+    "simulation": true,
+    "status": "completed",
+    "experiment_id": "Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682",
+    "response": {
+      "started": true,
+      "yaml_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\autonomous_squid\\20261024T040821_6e95d5b3\\confirmed_acquisition.yaml",
+      "widget_type": "wellplate",
+      "region_count": 1,
+      "channels": [
+        "BF LED matrix full"
+      ],
+      "nz": 1,
+      "nt": 1,
+      "total_fovs": 1,
+      "total_images": 1,
+      "experiment_id": "Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682",
+      "save_dir": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\autonomous_squid\\20261024T040821_6e95d5b3\\images\\Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682"
+    },
+    "run_id": "fabc9f7b916c49219c94dc16fbe9e9e8",
+    "last_observation": {
+      "available": true,
+      "connected": true,
+      "status": "completed",
+      "message": "Squid real-stage test with simulated camera: imaging complete.",
+      "simulation": true,
+      "job": {
+        "run_id": "fabc9f7b916c49219c94dc16fbe9e9e8",
+        "experiment_id": "Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682",
+        "started_at": 1792840322.855179,
+        "ended_at": 1792840323.2994916,
+        "progress": {},
+        "expected": {
+          "timepoints": 1,
+          "regions": 1,
+          "fovs": 1,
+          "channels": 1,
+          "z": 1
+        },
+        "stats": {
+          "total_images": 1,
+          "total_timepoints": 1,
+          "total_duration_seconds": 0.4543898105621338,
+          "errors_encountered": 0
+        },
+        "reason": "completed",
+        "output_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\autonomous_squid\\20261024T040821_6e95d5b3\\images\\Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682",
+        "heartbeat_at": 1792840322.855179
+      },
+      "completion_confirmed": true,
+      "real_imaging_complete": false,
+      "checked_at": 1792840347.4271579,
+      "session": {
+        "pid": 24028,
+        "created_at": 1792837476.1969287
+      },
+      "monitoring_only": true,
+      "retrieval_authorized": false,
+      "cleanup": {
+        "version": 1,
+        "status": "completed",
+        "experiment_id": "Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682",
+        "error": "",
+        "return_position": {
+          "x_mm": 100.2839625,
+          "y_mm": 45.669200000000004,
+          "z_mm": 1.2
+        },
+        "position": {
+          "x_mm": 100.2839625,
+          "y_mm": 45.669200000000004,
+          "z_mm": 1.2
+        }
+      },
+      "stage_simulated": false,
+      "camera_simulated": true,
+      "controller_serial": "12769210"
+    },
+    "completion": {
+      "available": true,
+      "connected": true,
+      "status": "completed",
+      "message": "Squid real-stage test with simulated camera: imaging complete.",
+      "simulation": true,
+      "job": {
+        "run_id": "fabc9f7b916c49219c94dc16fbe9e9e8",
+        "experiment_id": "Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682",
+        "started_at": 1792840322.855179,
+        "ended_at": 1792840323.2994916,
+        "progress": {},
+        "expected": {
+          "timepoints": 1,
+          "regions": 1,
+          "fovs": 1,
+          "channels": 1,
+          "z": 1
+        },
+        "stats": {
+          "total_images": 1,
+          "total_timepoints": 1,
+          "total_duration_seconds": 0.4543898105621338,
+          "errors_encountered": 0
+        },
+        "reason": "completed",
+        "output_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\autonomous_squid\\20261024T040821_6e95d5b3\\images\\Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682",
+        "heartbeat_at": 1792840322.855179
+      },
+      "completion_confirmed": true,
+      "real_imaging_complete": false,
+      "checked_at": 1792840323.503423,
+      "session": {
+        "pid": 24028,
+        "created_at": 1792837476.1969287
+      },
+      "monitoring_only": true,
+      "retrieval_authorized": false,
+      "cleanup": {
+        "version": 1,
+        "status": "completed",
+        "experiment_id": "Lacry_52f7685d7cf04eeca225e89ec797b593_2026-10-24_04-12-02.785682",
+        "error": "",
+        "return_position": {
+          "x_mm": 100.2839625,
+          "y_mm": 45.669200000000004,
+          "z_mm": 1.2
+        },
+        "position": {
+          "x_mm": 100.2839625,
+          "y_mm": 45.669200000000004,
+          "z_mm": 1.2
+        }
+      },
+      "stage_simulated": false,
+      "camera_simulated": true,
+      "controller_serial": "12769210"
+    }
+  },
+  "finished_at": 1792840355.046047,
+  "result": {
+    "active": false,
+    "step": null,
+    "done": [
+      "Return Home",
+      "Calibrate the two-disk plate",
+      "Align with the plate",
+      "Descent",
+      "Grip the plate",
+      "Lift the plate 5 mm",
+      "Return Home",
+      "Prepare Squid loading position",
+      "Move to the microscope using the tested approach",
+      "Leave the plate at Squid",
+      "Lift the empty jaws clear",
+      "Leave the microscope and return Home",
+      "Move Squid into imaging area",
+      "Start Squid imaging",
+      "Wait for this imaging run and stage cleanup to finish",
+      "Verify Squid returned to loading position",
+      "Move to the microscope using the tested approach",
+      "Grip the plate at Squid",
+      "Lift the plate slowly",
+      "Leave the microscope and return Home"
+    ],
+    "ok": true,
+    "error": "",
+    "results": [
+      {
+        "step": "Return Home",
+        "motion_started": false,
+        "response": {
+          "ok": true
+        }
+      },
+      {
+        "step": "Calibrate the two-disk plate",
+        "sequence": "researcher_calibrate",
+        "run_id": "e51d712eea134c54953e2ee5f8981570",
+        "state": "done",
+        "result": {
+          "ok": true
+        },
+        "target": {
+          "x": 308.90999999999997,
+          "y": -69.887,
+          "z": 61.186499999999995,
+          "rz": 89.62419999999997,
+          "z_calibrated": 70.1865,
+          "config": "Wide",
+          "big_r": 190.85,
+          "found_at": "04:09:06",
+          "calibrated_at": 1792840146.7127643,
+          "source": "fast_disk",
+          "converged": true,
+          "alignment_requires_preflight": true,
+          "z_detail": {
+            "samples": [
+              61.186,
+              61.187
+            ],
+            "spread": 0.0009999999999976694,
+            "vision_z": 61.186499999999995,
+            "touch_offset": 9.0
+          }
+        },
+        "log": [
+          {
+            "t": 0.5,
+            "level": "info",
+            "msg": "Fast disk v4: vendor selftest ALL PASS; continue until confirmed convergence, operator stop or fault; no observation/time/travel caps"
+          },
+          {
+            "t": 1.2,
+            "level": "info",
+            "msg": "View 1: Wide, XY 39.057 mm, yaw 11.730 deg, Z 34.294 mm; 0 moves, 1.0 s, 0.0 mm travel"
+          },
+          {
+            "t": 1.2,
+            "level": "info",
+            "msg": "Stationary yaw review 1/3: +11.730 deg"
+          },
+          {
+            "t": 1.9,
+            "level": "info",
+            "msg": "View 2: Wide, XY 39.057 mm, yaw 11.730 deg, Z 34.406 mm; 0 moves, 1.7 s, 0.0 mm travel"
+          },
+          {
+            "t": 1.9,
+            "level": "info",
+            "msg": "Stationary yaw review 2/3: +11.730 deg"
+          },
+          {
+            "t": 2.6,
+            "level": "info",
+            "msg": "View 3: Wide, XY 39.057 mm, yaw 11.730 deg, Z 33.506 mm; 0 moves, 2.4 s, 0.0 mm travel"
+          },
+          {
+            "t": 2.6,
+            "level": "info",
+            "msg": "Stationary yaw review 3/3: +11.730 deg"
+          },
+          {
+            "t": 2.6,
+            "level": "info",
+            "msg": "Safe-height orientation phase; each segment checked, then re-detect"
+          },
+          {
+            "t": 3.0,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 252.75 Rz -3.88 @ 10"
+          },
+          {
+            "t": 4.2,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.27 s"
+          },
+          {
+            "t": 4.3,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 257.47 Rz -3.88 @ 10"
+          },
+          {
+            "t": 5.7,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.38 s"
+          },
+          {
+            "t": 5.7,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 262.20 Rz -3.88 @ 10"
+          },
+          {
+            "t": 7.1,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.38 s"
+          },
+          {
+            "t": 7.2,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 266.92 Rz -3.88 @ 10"
+          },
+          {
+            "t": 8.6,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.33 s"
+          },
+          {
+            "t": 8.7,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 271.65 Rz -3.88 @ 10"
+          },
+          {
+            "t": 10.0,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.33 s"
+          },
+          {
+            "t": 10.1,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 276.37 Rz -3.88 @ 10"
+          },
+          {
+            "t": 11.4,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.33 s"
+          },
+          {
+            "t": 11.5,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 281.10 Rz -3.88 @ 10"
+          },
+          {
+            "t": 12.9,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.38 s"
+          },
+          {
+            "t": 13.0,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 285.82 Rz -3.88 @ 10"
+          },
+          {
+            "t": 14.3,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.36 s"
+          },
+          {
+            "t": 14.4,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 290.55 Rz -3.88 @ 10"
+          },
+          {
+            "t": 15.8,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.39 s"
+          },
+          {
+            "t": 15.9,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 295.27 Rz -3.88 @ 10"
+          },
+          {
+            "t": 17.5,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.52 s"
+          },
+          {
+            "t": 17.6,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 300.00 Rz -3.88 @ 10"
+          },
+          {
+            "t": 19.0,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.44 s"
+          },
+          {
+            "t": 19.2,
+            "level": "info",
+            "msg": "Wrist-only MoveJ: Rz 1.98 @ 10; XYZ fixed"
+          },
+          {
+            "t": 20.3,
+            "level": "info",
+            "msg": "rotation segment arrived in 1.11 s"
+          },
+          {
+            "t": 20.3,
+            "level": "info",
+            "msg": "Wrist-only MoveJ: Rz 7.85 @ 10; XYZ fixed"
+          },
+          {
+            "t": 21.5,
+            "level": "info",
+            "msg": "rotation segment arrived in 1.16 s"
+          },
+          {
+            "t": 21.5,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 295.41 Rz 7.85 @ 10"
+          },
+          {
+            "t": 22.9,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.36 s"
+          },
+          {
+            "t": 22.9,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 290.82 Rz 7.85 @ 10"
+          },
+          {
+            "t": 24.3,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.38 s"
+          },
+          {
+            "t": 24.4,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 286.23 Rz 7.85 @ 10"
+          },
+          {
+            "t": 25.7,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.33 s"
+          },
+          {
+            "t": 25.8,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.97 Y 62.63 Z 281.63 Rz 7.85 @ 10"
+          },
+          {
+            "t": 27.2,
+            "level": "info",
+            "msg": "orientation segment arrived in 1.38 s"
+          },
+          {
+            "t": 27.7,
+            "level": "info",
+            "msg": "View 4: Wide, XY 38.267 mm, yaw 0.057 deg, Z 3.336 mm; 17 moves, 27.5 s, 70.3 mm travel"
+          },
+          {
+            "t": 27.7,
+            "level": "info",
+            "msg": "Center XY/height first; hold wrist despite small yaw residual"
+          },
+          {
+            "t": 27.8,
+            "level": "info",
+            "msg": "Camera MoveL: X 289.65 Y 53.06 Z 282.46 Rz 7.85 @ 10"
+          },
+          {
+            "t": 29.9,
+            "level": "info",
+            "msg": "feedback segment arrived in 2.06 s"
+          },
+          {
+            "t": 30.4,
+            "level": "info",
+            "msg": "View 5: Wide, XY 29.704 mm, yaw 0.366 deg, Z 3.493 mm; 18 moves, 30.2 s, 79.9 mm travel"
+          },
+          {
+            "t": 30.4,
+            "level": "info",
+            "msg": "Center XY/height first; hold wrist despite small yaw residual"
+          },
+          {
+            "t": 30.5,
+            "level": "info",
+            "msg": "Camera MoveL: X 290.04 Y 43.09 Z 283.63 Rz 7.85 @ 10"
+          },
+          {
+            "t": 32.5,
+            "level": "info",
+            "msg": "feedback segment arrived in 2.06 s"
+          },
+          {
+            "t": 33.1,
+            "level": "info",
+            "msg": "View 6: Wide, XY 21.067 mm, yaw 0.267 deg, Z 2.236 mm; 19 moves, 32.8 s, 90.0 mm travel"
+          },
+          {
+            "t": 33.1,
+            "level": "info",
+            "msg": "Center XY/height first; hold wrist despite small yaw residual"
+          },
+          {
+            "t": 33.1,
+            "level": "info",
+            "msg": "Camera MoveL: X 291.09 Y 36.08 Z 284.38 Rz 7.85 @ 10"
+          },
+          {
+            "t": 34.8,
+            "level": "info",
+            "msg": "feedback segment arrived in 1.69 s"
+          },
+          {
+            "t": 35.5,
+            "level": "info",
+            "msg": "View 7: Wide, XY 15.216 mm, yaw 0.011 deg, Z 0.323 mm; 20 moves, 35.3 s, 97.1 mm travel"
+          },
+          {
+            "t": 35.5,
+            "level": "info",
+            "msg": "Center XY/height first; hold wrist despite small yaw residual"
+          },
+          {
+            "t": 35.6,
+            "level": "info",
+            "msg": "Camera MoveL: X 293.03 Y 28.72 Z 284.54 Rz 7.85 @ 10"
+          },
+          {
+            "t": 37.3,
+            "level": "info",
+            "msg": "feedback segment arrived in 1.70 s"
+          },
+          {
+            "t": 37.9,
+            "level": "info",
+            "msg": "View 8: Wide, XY 8.612 mm, yaw 0.130 deg, Z 0.323 mm; 21 moves, 37.7 s, 104.7 mm travel"
+          },
+          {
+            "t": 37.9,
+            "level": "info",
+            "msg": "Center XY/height first; hold wrist despite small yaw residual"
+          },
+          {
+            "t": 38.0,
+            "level": "info",
+            "msg": "Camera MoveL: X 296.88 Y 20.85 Z 284.87 Rz 7.85 @ 10"
+          },
+          {
+            "t": 39.9,
+            "level": "info",
+            "msg": "feedback segment arrived in 1.86 s"
+          },
+          {
+            "t": 40.5,
+            "level": "info",
+            "msg": "View 9: Wide, XY 2.183 mm, yaw 0.185 deg, Z 0.081 mm; 22 moves, 40.3 s, 113.5 mm travel"
+          },
+          {
+            "t": 40.5,
+            "level": "info",
+            "msg": "Center XY/height first; hold wrist despite small yaw residual"
+          },
+          {
+            "t": 40.7,
+            "level": "info",
+            "msg": "Camera MoveL: X 299.34 Y 20.69 Z 284.79 Rz 7.85 @ 10"
+          },
+          {
+            "t": 41.7,
+            "level": "info",
+            "msg": "feedback segment arrived in 1.02 s"
+          },
+          {
+            "t": 42.2,
+            "level": "info",
+            "msg": "View 10: Wide, XY 0.593 mm, yaw 0.167 deg, Z 0.242 mm; 23 moves, 42.0 s, 115.9 mm travel"
+          },
+          {
+            "t": 42.3,
+            "level": "info",
+            "msg": "Camera MoveL: X 299.41 Y 21.28 Z 284.54 Rz 7.85 @ 10"
+          },
+          {
+            "t": 43.1,
+            "level": "info",
+            "msg": "feedback segment arrived in 0.83 s"
+          },
+          {
+            "t": 43.8,
+            "level": "info",
+            "msg": "View 11: Wide, XY 0.294 mm, yaw 0.167 deg, Z 0.242 mm; 24 moves, 43.6 s, 116.6 mm travel"
+          },
+          {
+            "t": 43.8,
+            "level": "info",
+            "msg": "Converged; confirming with a second fresh stationary image"
+          },
+          {
+            "t": 44.3,
+            "level": "info",
+            "msg": "View 12: Wide, XY 0.178 mm, yaw 0.011 deg, Z 0.242 mm; 24 moves, 44.1 s, 116.6 mm travel"
+          },
+          {
+            "t": 44.4,
+            "level": "good",
+            "msg": "CALIBRATED: 12 views, 24 moves, 44.2 s. Review target, then Align separately. No descent or grip."
+          }
+        ]
+      },
+      {
+        "step": "Align with the plate",
+        "sequence": "researcher_align",
+        "run_id": "247d075caa2d4750b4cc5b6eafe2bb97",
+        "state": "done",
+        "result": {
+          "ok": true
+        },
+        "target": {
+          "x": 308.90999999999997,
+          "y": -69.887,
+          "z": 61.186499999999995,
+          "rz": 89.62419999999997,
+          "z_calibrated": 70.1865,
+          "config": "Wide",
+          "big_r": 190.85,
+          "found_at": "04:09:06",
+          "calibrated_at": 1792840146.7127643,
+          "source": "fast_disk",
+          "converged": true,
+          "alignment_requires_preflight": true,
+          "z_detail": {
+            "samples": [
+              61.186,
+              61.187
+            ],
+            "spread": 0.0009999999999976694,
+            "vision_z": 61.186499999999995,
+            "touch_offset": 9.0
+          }
+        },
+        "log": [
+          {
+            "t": 0.2,
+            "level": "info",
+            "msg": "alignment MoveL to X 299.413 Y 21.281 Z 292.270"
+          },
+          {
+            "t": 3.1,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 299.413, 'Y': 21.281, 'Z': 292.27, 'Rz': 7.85}"
+          },
+          {
+            "t": 3.1,
+            "level": "info",
+            "msg": "alignment MoveL to X 299.413 Y 21.281 Z 300.000"
+          },
+          {
+            "t": 6.0,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 299.413, 'Y': 21.281, 'Z': 300.0, 'Rz': 7.85}"
+          },
+          {
+            "t": 6.0,
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 35.108 at Z 300.000"
+          },
+          {
+            "t": 7.4,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 299.413, 'Y': 21.281, 'Z': 300.0, 'Rz': 35.10806666666665}"
+          },
+          {
+            "t": 7.4,
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 62.366 at Z 300.000"
+          },
+          {
+            "t": 8.9,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 299.413, 'Y': 21.281, 'Z': 300.0, 'Rz': 62.3661333333333}"
+          },
+          {
+            "t": 8.9,
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 89.624 at Z 300.000"
+          },
+          {
+            "t": 10.4,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 299.413, 'Y': 21.281, 'Z': 300.0, 'Rz': 89.62419999999995}"
+          },
+          {
+            "t": 10.4,
+            "level": "info",
+            "msg": "alignment MoveL to X 300.363 Y 12.164 Z 300.000"
+          },
+          {
+            "t": 13.5,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 300.3627, 'Y': 12.164199999999997, 'Z': 300.0, 'Rz': 89.62419999999995}"
+          },
+          {
+            "t": 13.5,
+            "level": "info",
+            "msg": "alignment MoveL to X 301.312 Y 3.047 Z 300.000"
+          },
+          {
+            "t": 16.7,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 301.3124, 'Y': 3.047399999999996, 'Z': 300.0, 'Rz': 89.62419999999995}"
+          },
+          {
+            "t": 16.7,
+            "level": "info",
+            "msg": "alignment MoveL to X 302.262 Y -6.069 Z 300.000"
+          },
+          {
+            "t": 19.9,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 302.2621, 'Y': -6.069400000000002, 'Z': 300.0, 'Rz': 89.62419999999996}"
+          },
+          {
+            "t": 19.9,
+            "level": "info",
+            "msg": "alignment MoveL to X 303.212 Y -15.186 Z 300.000"
+          },
+          {
+            "t": 23.2,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 303.2118, 'Y': -15.186200000000007, 'Z': 300.0, 'Rz': 89.62419999999996}"
+          },
+          {
+            "t": 23.2,
+            "level": "info",
+            "msg": "alignment MoveL to X 304.161 Y -24.303 Z 300.000"
+          },
+          {
+            "t": 26.4,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 304.1615, 'Y': -24.303000000000004, 'Z': 300.0, 'Rz': 89.62419999999996}"
+          },
+          {
+            "t": 26.4,
+            "level": "info",
+            "msg": "alignment MoveL to X 305.111 Y -33.420 Z 300.000"
+          },
+          {
+            "t": 29.6,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 305.1112, 'Y': -33.4198, 'Z': 300.0, 'Rz': 89.62419999999996}"
+          },
+          {
+            "t": 29.6,
+            "level": "info",
+            "msg": "alignment MoveL to X 306.061 Y -42.537 Z 300.000"
+          },
+          {
+            "t": 32.7,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 306.0609, 'Y': -42.53660000000001, 'Z': 300.0, 'Rz': 89.62419999999996}"
+          },
+          {
+            "t": 32.7,
+            "level": "info",
+            "msg": "alignment MoveL to X 307.011 Y -51.653 Z 300.000"
+          },
+          {
+            "t": 35.9,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 307.01059999999995, 'Y': -51.65340000000001, 'Z': 300.0, 'Rz': 89.62419999999997}"
+          },
+          {
+            "t": 35.9,
+            "level": "info",
+            "msg": "alignment MoveL to X 307.960 Y -60.770 Z 300.000"
+          },
+          {
+            "t": 39.1,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 307.96029999999996, 'Y': -60.77020000000001, 'Z': 300.0, 'Rz': 89.62419999999997}"
+          },
+          {
+            "t": 39.1,
+            "level": "info",
+            "msg": "alignment MoveL to X 308.910 Y -69.887 Z 300.000"
+          },
+          {
+            "t": 42.3,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 308.90999999999997, 'Y': -69.887, 'Z': 300.0, 'Rz': 89.62419999999997}"
+          }
+        ]
+      },
+      {
+        "step": "Descent",
+        "sequence": "researcher_descend",
+        "run_id": "1aa3ff55771e46e88290956ce9e7f92a",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "breach": false,
+          "at_z": 73.718,
+          "executor": "lua_descent",
+          "approach_speed": 137,
+          "probe_speed": 5,
+          "descent_correction": {
+            "profile_id": "accepted_grip_endpoint_20261020",
+            "profile_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+            "start": {
+              "X": 308.91,
+              "Y": -69.887,
+              "Z": 300.0,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 89.624
+            },
+            "original_target": {
+              "x": 308.90999999999997,
+              "y": -69.887,
+              "z": 61.186499999999995,
+              "rz": 89.62419999999997,
+              "z_calibrated": 70.1865,
+              "config": "Wide",
+              "big_r": 190.85,
+              "found_at": "04:09:06",
+              "calibrated_at": 1792840146.7127643,
+              "source": "fast_disk",
+              "converged": true,
+              "alignment_requires_preflight": true,
+              "z_detail": {
+                "samples": [
+                  61.186,
+                  61.187
+                ],
+                "spread": 0.0009999999999976694,
+                "vision_z": 61.186499999999995,
+                "touch_offset": 9.0
+              }
+            },
+            "target": {
+              "x": 312.575,
+              "y": -66.2,
+              "z": 73.718,
+              "rz": 89.865,
+              "z_calibrated": 73.718,
+              "config": "Wide",
+              "big_r": 190.85,
+              "found_at": "04:09:06",
+              "calibrated_at": 1792840146.7127643,
+              "source": "fast_disk",
+              "converged": true,
+              "alignment_requires_preflight": true,
+              "z_detail": {
+                "samples": [
+                  61.186,
+                  61.187
+                ],
+                "spread": 0.0009999999999976694,
+                "vision_z": 61.186499999999995,
+                "touch_offset": 9.0
+              },
+              "descent_correction_id": "accepted_grip_endpoint_20261020"
+            },
+            "legs": [
+              {
+                "X": 308.91,
+                "Y": -69.887,
+                "Z": 300.0,
+                "Rz": 89.86499999999998
+              },
+              {
+                "X": 312.575,
+                "Y": -66.2,
+                "Z": 300.0,
+                "Rz": 89.86499999999998
+              }
+            ],
+            "hover": {
+              "X": 312.575,
+              "Y": -66.2,
+              "Z": 300.0,
+              "Rz": 89.86499999999998
+            },
+            "endpoint": {
+              "X": 312.575,
+              "Y": -66.2,
+              "Z": 73.718,
+              "Rz": 89.865
+            },
+            "scope": "Current two-disk plate placement, orientation and support surface only."
+          }
+        },
+        "target": {
+          "x": 312.575,
+          "y": -66.2,
+          "z": 73.718,
+          "rz": 89.865,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "big_r": 190.85,
+          "found_at": "04:09:06",
+          "calibrated_at": 1792840146.7127643,
+          "source": "fast_disk",
+          "converged": true,
+          "alignment_requires_preflight": true,
+          "z_detail": {
+            "samples": [
+              61.186,
+              61.187
+            ],
+            "spread": 0.0009999999999976694,
+            "vision_z": 61.186499999999995,
+            "touch_offset": 9.0
+          },
+          "descent_correction_id": "accepted_grip_endpoint_20261020"
+        },
+        "log": [
+          {
+            "t": 0.2,
+            "level": "info",
+            "msg": "Adjusting claw angle above the plate."
+          },
+          {
+            "t": 1.3,
+            "level": "info",
+            "msg": "Centering claws above the plate."
+          },
+          {
+            "t": 5.2,
+            "level": "info",
+            "msg": "Lua descent: approach at 137 to Z 93.72; last 20 mm at 5, torque checked after each 1/0.5 mm step."
+          },
+          {
+            "t": 5.4,
+            "level": "info",
+            "msg": "Lua descent: prepared"
+          },
+          {
+            "t": 5.6,
+            "level": "info",
+            "msg": "Lua descent: fast approach"
+          },
+          {
+            "t": 8.0,
+            "level": "info",
+            "msg": "Lua descent: torque baseline"
+          },
+          {
+            "t": 8.9,
+            "level": "info",
+            "msg": "Lua descent: slow probing"
+          },
+          {
+            "t": 31.4,
+            "level": "good",
+            "msg": "Lua descent complete; claw remains open. No grip performed."
+          }
+        ]
+      },
+      {
+        "step": "Grip the plate",
+        "sequence": "position_grip",
+        "run_id": "27cc3c5c4f494794b3736b13edb56378",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "executor": "staged_reference_position",
+          "e1_position": 3.698591375723481,
+          "target_e1_mm": 3.7,
+          "gripped": false,
+          "grasp_verified": false,
+          "awaiting_inspection": true,
+          "record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\demonstrations\\reference_grip\\fac10fed2e37406f8ee5a41d4ed59554.json"
+        },
+        "target": {
+          "x": 312.575,
+          "y": -66.2,
+          "z": 73.718,
+          "rz": 89.865,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "big_r": 190.85,
+          "found_at": "04:09:06",
+          "calibrated_at": 1792840146.7127643,
+          "source": "fast_disk",
+          "converged": true,
+          "alignment_requires_preflight": true,
+          "z_detail": {
+            "samples": [
+              61.186,
+              61.187
+            ],
+            "spread": 0.0009999999999976694,
+            "vision_z": 61.186499999999995,
+            "touch_offset": 9.0
+          },
+          "descent_correction_id": "accepted_grip_endpoint_20261020"
+        },
+        "log": [
+          {
+            "t": 1.6,
+            "level": "info",
+            "msg": "Grip 1/31: E1 26.994 mm."
+          },
+          {
+            "t": 3.1,
+            "level": "info",
+            "msg": "Grip 2/31: E1 25.994 mm."
+          },
+          {
+            "t": 4.6,
+            "level": "info",
+            "msg": "Grip 3/31: E1 24.995 mm."
+          },
+          {
+            "t": 6.1,
+            "level": "info",
+            "msg": "Grip 4/31: E1 23.994 mm."
+          },
+          {
+            "t": 7.5,
+            "level": "info",
+            "msg": "Grip 5/31: E1 22.994 mm."
+          },
+          {
+            "t": 9.0,
+            "level": "info",
+            "msg": "Grip 6/31: E1 21.996 mm."
+          },
+          {
+            "t": 10.6,
+            "level": "info",
+            "msg": "Grip 7/31: E1 20.994 mm."
+          },
+          {
+            "t": 12.2,
+            "level": "info",
+            "msg": "Grip 8/31: E1 19.997 mm."
+          },
+          {
+            "t": 14.0,
+            "level": "info",
+            "msg": "Grip 9/31: E1 18.996 mm."
+          },
+          {
+            "t": 15.6,
+            "level": "info",
+            "msg": "Grip 10/31: E1 17.996 mm."
+          },
+          {
+            "t": 17.2,
+            "level": "info",
+            "msg": "Grip 11/31: E1 16.997 mm."
+          },
+          {
+            "t": 19.0,
+            "level": "info",
+            "msg": "Grip 12/31: E1 15.996 mm."
+          },
+          {
+            "t": 20.5,
+            "level": "info",
+            "msg": "Grip 13/31: E1 14.991 mm."
+          },
+          {
+            "t": 22.1,
+            "level": "info",
+            "msg": "Grip 14/31: E1 13.995 mm."
+          },
+          {
+            "t": 23.8,
+            "level": "info",
+            "msg": "Grip 15/31: E1 12.995 mm."
+          },
+          {
+            "t": 25.4,
+            "level": "info",
+            "msg": "Grip 16/31: E1 11.994 mm."
+          },
+          {
+            "t": 27.0,
+            "level": "info",
+            "msg": "Grip 17/31: E1 10.996 mm."
+          },
+          {
+            "t": 28.5,
+            "level": "info",
+            "msg": "Grip 18/31: E1 9.990 mm."
+          },
+          {
+            "t": 30.1,
+            "level": "info",
+            "msg": "Grip 19/31: E1 8.996 mm."
+          },
+          {
+            "t": 31.7,
+            "level": "info",
+            "msg": "Grip 20/31: E1 7.996 mm."
+          },
+          {
+            "t": 33.3,
+            "level": "info",
+            "msg": "Grip 21/31: E1 6.992 mm."
+          },
+          {
+            "t": 34.9,
+            "level": "info",
+            "msg": "Grip 22/31: E1 5.996 mm."
+          },
+          {
+            "t": 36.6,
+            "level": "info",
+            "msg": "Grip 23/31: E1 4.994 mm."
+          },
+          {
+            "t": 38.2,
+            "level": "info",
+            "msg": "Grip 24/31: E1 4.795 mm."
+          },
+          {
+            "t": 39.7,
+            "level": "info",
+            "msg": "Grip 25/31: E1 4.596 mm."
+          },
+          {
+            "t": 41.3,
+            "level": "info",
+            "msg": "Grip 26/31: E1 4.396 mm."
+          },
+          {
+            "t": 42.9,
+            "level": "info",
+            "msg": "Grip 27/31: E1 4.196 mm."
+          },
+          {
+            "t": 44.6,
+            "level": "info",
+            "msg": "Grip 28/31: E1 3.999 mm."
+          },
+          {
+            "t": 46.2,
+            "level": "info",
+            "msg": "Grip 29/31: E1 3.904 mm."
+          },
+          {
+            "t": 47.8,
+            "level": "info",
+            "msg": "Grip 30/31: E1 3.804 mm."
+          },
+          {
+            "t": 49.6,
+            "level": "info",
+            "msg": "Grip 31/31: E1 3.704 mm."
+          }
+        ]
+      },
+      {
+        "step": "Lift the plate 5 mm",
+        "sequence": "pickup_slow_lift",
+        "run_id": "0bdcb61ca1ef4e5baa21c91e3fa92d00",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\demonstrations\\pickup_home\\941f58e3c14d42a0a5415742307d7290.json",
+          "target": {
+            "X": 312.58,
+            "Y": -66.2,
+            "Z": 78.72,
+            "Rz": 89.87
+          },
+          "grasp_verified": false
+        },
+        "target": {
+          "x": 312.575,
+          "y": -66.2,
+          "z": 73.718,
+          "rz": 89.865,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "big_r": 190.85,
+          "found_at": "04:09:06",
+          "calibrated_at": 1792840146.7127643,
+          "source": "fast_disk",
+          "converged": true,
+          "alignment_requires_preflight": true,
+          "z_detail": {
+            "samples": [
+              61.186,
+              61.187
+            ],
+            "spread": 0.0009999999999976694,
+            "vision_z": 61.186499999999995,
+            "touch_offset": 9.0
+          },
+          "descent_correction_id": "accepted_grip_endpoint_20261020"
+        },
+        "log": [
+          {
+            "t": 0.0,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 0.8,
+            "level": "info",
+            "msg": "Lift 5 mm: upload 1/1."
+          },
+          {
+            "t": 1.3,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 0/100."
+          },
+          {
+            "t": 1.5,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 0/100."
+          },
+          {
+            "t": 1.6,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 8/100."
+          },
+          {
+            "t": 1.7,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 20/100."
+          },
+          {
+            "t": 1.9,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 32/100."
+          },
+          {
+            "t": 2.1,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 46/100."
+          },
+          {
+            "t": 2.3,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 61/100."
+          },
+          {
+            "t": 2.5,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 72/100."
+          },
+          {
+            "t": 2.6,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 87/100."
+          },
+          {
+            "t": 2.8,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 97/100."
+          },
+          {
+            "t": 2.9,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 99/100."
+          },
+          {
+            "t": 3.1,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 100/100."
+          }
+        ]
+      },
+      {
+        "step": "Return Home",
+        "sequence": "researcher_home",
+        "run_id": "b3b93cda5b07401597324bdeeef59f2f",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "home": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        },
+        "target": {
+          "x": 312.575,
+          "y": -66.2,
+          "z": 73.718,
+          "rz": 89.865,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "big_r": 190.85,
+          "found_at": "04:09:06",
+          "calibrated_at": 1792840146.7127643,
+          "source": "fast_disk",
+          "converged": true,
+          "alignment_requires_preflight": true,
+          "z_detail": {
+            "samples": [
+              61.186,
+              61.187
+            ],
+            "spread": 0.0009999999999976694,
+            "vision_z": 61.186499999999995,
+            "touch_offset": 9.0
+          },
+          "descent_correction_id": "accepted_grip_endpoint_20261020"
+        },
+        "log": [
+          {
+            "t": 0.2,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 1.0,
+            "level": "info",
+            "msg": "Home: upload 1/1"
+          },
+          {
+            "t": 1.4,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 1.6,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 1.7,
+            "level": "info",
+            "msg": "Home: motion 4/100"
+          },
+          {
+            "t": 1.9,
+            "level": "info",
+            "msg": "Home: motion 10/100"
+          },
+          {
+            "t": 2.0,
+            "level": "info",
+            "msg": "Home: motion 16/100"
+          },
+          {
+            "t": 2.1,
+            "level": "info",
+            "msg": "Home: motion 22/100"
+          },
+          {
+            "t": 2.3,
+            "level": "info",
+            "msg": "Home: motion 29/100"
+          },
+          {
+            "t": 2.4,
+            "level": "info",
+            "msg": "Home: motion 35/100"
+          },
+          {
+            "t": 2.6,
+            "level": "info",
+            "msg": "Home: motion 43/100"
+          },
+          {
+            "t": 2.7,
+            "level": "info",
+            "msg": "Home: motion 49/100"
+          },
+          {
+            "t": 2.9,
+            "level": "info",
+            "msg": "Home: motion 57/100"
+          },
+          {
+            "t": 3.0,
+            "level": "info",
+            "msg": "Home: motion 64/100"
+          },
+          {
+            "t": 3.2,
+            "level": "info",
+            "msg": "Home: motion 70/100"
+          },
+          {
+            "t": 3.3,
+            "level": "info",
+            "msg": "Home: motion 78/100"
+          },
+          {
+            "t": 3.4,
+            "level": "info",
+            "msg": "Home: motion 83/100"
+          },
+          {
+            "t": 3.6,
+            "level": "info",
+            "msg": "Home: motion 90/100"
+          },
+          {
+            "t": 3.7,
+            "level": "info",
+            "msg": "Home: motion 95/100"
+          },
+          {
+            "t": 3.8,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 4.0,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 4.1,
+            "level": "info",
+            "msg": "Home: motion 100/100"
+          },
+          {
+            "t": 9.7,
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 10.4,
+            "level": "info",
+            "msg": "Home: upload 2/2"
+          },
+          {
+            "t": 10.9,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 11.1,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 11.3,
+            "level": "info",
+            "msg": "Home: motion 1/100"
+          },
+          {
+            "t": 11.4,
+            "level": "info",
+            "msg": "Home: motion 9/100"
+          },
+          {
+            "t": 11.6,
+            "level": "info",
+            "msg": "Home: motion 16/100"
+          },
+          {
+            "t": 11.7,
+            "level": "info",
+            "msg": "Home: motion 27/100"
+          },
+          {
+            "t": 11.9,
+            "level": "info",
+            "msg": "Home: motion 35/100"
+          },
+          {
+            "t": 12.0,
+            "level": "info",
+            "msg": "Home: motion 42/100"
+          },
+          {
+            "t": 12.2,
+            "level": "info",
+            "msg": "Home: motion 52/100"
+          },
+          {
+            "t": 12.4,
+            "level": "info",
+            "msg": "Home: motion 62/100"
+          },
+          {
+            "t": 12.5,
+            "level": "info",
+            "msg": "Home: motion 70/100"
+          },
+          {
+            "t": 12.7,
+            "level": "info",
+            "msg": "Home: motion 72/100"
+          },
+          {
+            "t": 12.9,
+            "level": "info",
+            "msg": "Home: motion 72/100"
+          },
+          {
+            "t": 13.0,
+            "level": "info",
+            "msg": "Home: motion 78/100"
+          },
+          {
+            "t": 13.2,
+            "level": "info",
+            "msg": "Home: motion 85/100"
+          },
+          {
+            "t": 13.3,
+            "level": "info",
+            "msg": "Home: motion 97/100"
+          },
+          {
+            "t": 13.5,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 13.6,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 13.7,
+            "level": "info",
+            "msg": "Home: motion 100/100"
+          }
+        ]
+      },
+      {
+        "step": "Prepare Squid loading position",
+        "sequence": "autonomous_squid_step",
+        "run_id": "0313c809d5dc4196adefdc86f31aab08",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "loading_position": {
+            "x_mm": 0.05,
+            "y_mm": 0.0508,
+            "z_mm": 1.05
+          }
+        },
+        "log": []
+      },
+      {
+        "step": "Move to the microscope using the tested approach",
+        "sequence": "autonomous_squid_step",
+        "run_id": "07f5cc4fbbc042619954df56dd125cfe",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "executor": "lua_queue",
+          "points": 4,
+          "endpoint": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 266.19,
+            "Rz": 89.11
+          },
+          "speed_policy": {
+            "version": 1,
+            "transit_mm_s": 137,
+            "final_descent_mm_s": 10,
+            "return_mm_s": 137,
+            "stop_before_final_descent": true
+          },
+          "phases": [
+            {
+              "phase": "transit",
+              "speed_mm_s": 137,
+              "result": {
+                "ok": true,
+                "executor": "lua_queue",
+                "points": 3,
+                "zone": -1,
+                "endpoint": {
+                  "X": 226.28,
+                  "Y": 373.6,
+                  "Z": 286.24,
+                  "Rz": 89.11
+                },
+                "grouping": null
+              }
+            },
+            {
+              "phase": "descent",
+              "speed_mm_s": 10,
+              "result": {
+                "ok": true,
+                "executor": "lua_queue",
+                "points": 1,
+                "zone": -1,
+                "endpoint": {
+                  "X": 226.3,
+                  "Y": 373.59,
+                  "Z": 266.19,
+                  "Rz": 89.11
+                },
+                "grouping": null
+              }
+            }
+          ]
+        },
+        "log": [
+          {
+            "t": 0.3,
+            "level": "info",
+            "msg": "Squid transit at 137 mm/s."
+          },
+          {
+            "t": 0.3,
+            "level": "info",
+            "msg": "Executing 3 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 7.0,
+            "level": "info",
+            "msg": "Squid descent at 10 mm/s."
+          },
+          {
+            "t": 7.0,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          }
+        ]
+      },
+      {
+        "step": "Leave the plate at Squid",
+        "sequence": "autonomous_squid_step",
+        "run_id": "03c6a338b88c4bb0a9d640573d9b2476",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "gripper": {
+            "ok": true,
+            "completion_reply": {
+              "index": 1,
+              "value": 1
+            },
+            "commanded": {
+              "e1": 5.0,
+              "speed": 5
+            },
+            "gripper": {
+              "e1_position": 5.002,
+              "e1_torque": 117.601,
+              "e1_torque_normalized": 0.442,
+              "joints": {
+                "J1": 420,
+                "J2": -34,
+                "J3": 42,
+                "J4": -110
+              },
+              "telemetry_live": true,
+              "position_error": 0.002,
+              "grip_detected": false
+            }
+          },
+          "settled_report": {
+            "ok": true,
+            "e1_position": 5.001,
+            "e1_torque": 110.935,
+            "joints": {
+              "J1": 418,
+              "J2": -47,
+              "J3": 31,
+              "J4": -115
+            },
+            "telemetry_live": true
+          },
+          "grasp_verified": false
+        },
+        "log": []
+      },
+      {
+        "step": "Lift the empty jaws clear",
+        "sequence": "autonomous_squid_step",
+        "run_id": "8033a086ed7f4375a27fd757b0084f37",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "executor": "lua_queue",
+            "points": 1,
+            "zone": -1,
+            "endpoint": {
+              "X": 226.3,
+              "Y": 373.59,
+              "Z": 271.19,
+              "Rz": 89.11
+            },
+            "grouping": null
+          },
+          "pose_mm": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 271.191,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.11
+          }
+        },
+        "log": [
+          {
+            "t": 0.3,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          }
+        ]
+      },
+      {
+        "step": "Leave the microscope and return Home",
+        "sequence": "autonomous_squid_step",
+        "run_id": "c6c0358d02e2432081acc4795e8960ca",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "executor": "lua_queue",
+          "points": 4,
+          "zone": -1,
+          "endpoint": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          },
+          "grouping": null
+        },
+        "log": [
+          {
+            "t": 0.2,
+            "level": "info",
+            "msg": "Executing 4 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          }
+        ]
+      },
+      {
+        "step": "Move Squid into imaging area",
+        "sequence": "autonomous_squid_step",
+        "run_id": "5c2e28801fc343b79212bbfbc3f1649f",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "position": {
+            "x_mm": 100.2839625,
+            "y_mm": 45.669200000000004,
+            "z_mm": 1.2
+          }
+        },
+        "log": []
+      },
+      {
+        "step": "Start Squid imaging",
+        "sequence": "autonomous_squid_step",
+        "run_id": "28dde80e053c432c8185ee854c4011ee",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "request_id": "Lacry_52f7685d7cf04eeca225e89ec797b593",
+          "simulation": true
+        },
+        "log": []
+      },
+      {
+        "step": "Wait for this imaging run and stage cleanup to finish",
+        "sequence": "autonomous_squid_step",
+        "run_id": "9ae967a2ca0a48ec8fa54c6dd5443520",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "run_id": "fabc9f7b916c49219c94dc16fbe9e9e8",
+          "simulation": true
+        },
+        "log": []
+      },
+      {
+        "step": "Verify Squid returned to loading position",
+        "sequence": "autonomous_squid_step",
+        "run_id": "ab8a9562a5284de0b0a02303884b76ae",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "loading_position": {
+            "x_mm": 0.05,
+            "y_mm": 0.0508,
+            "z_mm": 1.05
+          }
+        },
+        "log": []
+      },
+      {
+        "step": "Move to the microscope using the tested approach",
+        "sequence": "autonomous_squid_step",
+        "run_id": "e095eb3a976b4452b4a9cdf91be74dab",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "executor": "lua_queue",
+          "points": 4,
+          "endpoint": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 266.19,
+            "Rz": 89.11
+          },
+          "speed_policy": {
+            "version": 1,
+            "transit_mm_s": 137,
+            "final_descent_mm_s": 10,
+            "return_mm_s": 137,
+            "stop_before_final_descent": true
+          },
+          "phases": [
+            {
+              "phase": "transit",
+              "speed_mm_s": 137,
+              "result": {
+                "ok": true,
+                "executor": "lua_queue",
+                "points": 3,
+                "zone": -1,
+                "endpoint": {
+                  "X": 226.28,
+                  "Y": 373.6,
+                  "Z": 286.24,
+                  "Rz": 89.11
+                },
+                "grouping": null
+              }
+            },
+            {
+              "phase": "descent",
+              "speed_mm_s": 10,
+              "result": {
+                "ok": true,
+                "executor": "lua_queue",
+                "points": 1,
+                "zone": -1,
+                "endpoint": {
+                  "X": 226.3,
+                  "Y": 373.59,
+                  "Z": 266.19,
+                  "Rz": 89.11
+                },
+                "grouping": null
+              }
+            }
+          ]
+        },
+        "log": [
+          {
+            "t": 0.3,
+            "level": "info",
+            "msg": "Squid transit at 137 mm/s."
+          },
+          {
+            "t": 0.3,
+            "level": "info",
+            "msg": "Executing 3 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 7.1,
+            "level": "info",
+            "msg": "Squid descent at 10 mm/s."
+          },
+          {
+            "t": 7.1,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          }
+        ]
+      },
+      {
+        "step": "Grip the plate at Squid",
+        "sequence": "autonomous_squid_step",
+        "run_id": "6710ff1c250243309df6949d3808d5ed",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "gripper": {
+            "ok": true,
+            "completion_reply": {
+              "index": 1,
+              "value": 1
+            },
+            "commanded": {
+              "e1": 3.7,
+              "speed": 5
+            },
+            "gripper": {
+              "e1_position": 3.772,
+              "e1_torque": 41.067,
+              "e1_torque_normalized": 0.154,
+              "joints": {
+                "J1": 411,
+                "J2": -44,
+                "J3": 35,
+                "J4": -123
+              },
+              "telemetry_live": true,
+              "position_error": 0.072,
+              "grip_detected": false
+            }
+          },
+          "settled_report": {
+            "ok": true,
+            "e1_position": 3.699,
+            "e1_torque": 18.134,
+            "joints": {
+              "J1": 416,
+              "J2": -37,
+              "J3": 30,
+              "J4": -110
+            },
+            "telemetry_live": true
+          },
+          "grasp_verified": false
+        },
+        "log": []
+      },
+      {
+        "step": "Lift the plate slowly",
+        "sequence": "autonomous_squid_step",
+        "run_id": "fa35fa17d9fe4b2487619f7169022804",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "result": {
+            "ok": true,
+            "executor": "lua_queue",
+            "points": 1,
+            "zone": -1,
+            "endpoint": {
+              "X": 226.3,
+              "Y": 373.59,
+              "Z": 271.19,
+              "Rz": 89.11
+            },
+            "grouping": null
+          },
+          "pose_mm": {
+            "X": 226.3,
+            "Y": 373.59,
+            "Z": 271.192,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.11
+          }
+        },
+        "log": [
+          {
+            "t": 0.3,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          }
+        ]
+      },
+      {
+        "step": "Leave the microscope and return Home",
+        "sequence": "autonomous_squid_step",
+        "run_id": "e252b19fd25a48d6a48d872248541763",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "executor": "lua_queue",
+          "points": 4,
+          "zone": -1,
+          "endpoint": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          },
+          "grouping": null
+        },
+        "log": [
+          {
+            "t": 0.2,
+            "level": "info",
+            "msg": "Executing 4 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          }
+        ]
+      }
+    ],
+    "started_at": 1792840101.8758686,
+    "message": "Experiment complete: plate returned Home after mock imaging."
+  }
+}

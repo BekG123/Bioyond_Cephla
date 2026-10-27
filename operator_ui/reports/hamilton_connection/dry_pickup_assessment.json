@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-24T16:14:28.507515+00:00",
+  "requested_test": "one dry tip pickup",
+  "reported_part": "M02009FC",
+  "identified_vendor_part": "M-0200-9FC / 63300044",
+  "tip_capacity_uL": 200,
+  "camera_observation": "Tip rack at API site 3, well plate at API site 4; box lid open across adjacent site, loose bag farther back. Camera orientation is rotated relative to operator view.",
+  "catalog_biotix_matches": [],
+  "site3_top_match": {
+    "id": 269,
+    "name": "235830",
+    "displayName": "300 uL Framed Clear Filtered",
+    "score": 0.8491844512195121
+  },
+  "diagnostic_endpoint": "PUT /diagnostics/instrument/tip-pickup",
+  "diagnostic_fields": [
+    "channelSelection",
+    "tipLabwareId",
+    "deckPosition",
+    "ejectToWaste"
+  ],
+  "motion_sent": false,
+  "reason": "Actual Biotix rack/tip geometry is not established by the visually similar Hamilton catalog match. Pickup depth and seating compatibility are unverified.",
+  "evidence": [
+    "dry_pickup_preflight.json",
+    "dry_pickup_scan.json",
+    "dry_pickup_deck.png"
+  ]
+}

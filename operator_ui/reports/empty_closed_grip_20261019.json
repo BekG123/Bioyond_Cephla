@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "observation": "Read-only empty closed-gripper check before proposed empirical contact trial",
+  "operator_confirmed_empty": true,
+  "source": "GET /state; native_motion_status E1 feedback",
+  "samples": [
+    {"timestamp_unix": 1792454055.1667259, "e1_mm": -0.03702453614096157},
+    {"timestamp_unix": 1792454068.8333714, "e1_mm": -0.036665012885350734},
+    {"timestamp_unix": 1792454068.9149837, "e1_mm": -0.036665012885350734},
+    {"timestamp_unix": 1792454069.0141246, "e1_mm": -0.036665012885350734}
+  ],
+  "robot": {
+    "connected": true,
+    "enabled": false,
+    "mode": "auto",
+    "program": "stopped",
+    "errors": [],
+    "pose_mm": {"X": 324.166, "Y": -65.214, "Z": 194.59, "Rz": 69.725}
+  },
+  "fresh_torque": null,
+  "interpretation": "E1 is near the closed zero position. This disabled state is not an energized holding-force baseline; the small negative position is not evidence of negative gripping force.",
+  "motion_commands_sent": [],
+  "live_contact_controller_installed": false
+}

@@ -1,45 +1,47 @@
 {
- "points": {
-  "tray": {
-   "x": 429.21,
-   "y": -127.97,
-   "rz": -89.88,
-   "z_grip": 68.84,
-   "saved_at": "18:36:25"
-  },
-  "desk": {
-   "x": 318.14,
-   "y": -318.09,
-   "rz": 88.79,
-   "z_grip": 58.51,
-   "saved_at": "18:44:47"
-  },
-  "h": {
-   "x": 392.447,
-   "y": -126.588,
-   "rz": -91.033,
-   "z_grip": 353.016,
-   "saved_at": "22:00:55"
-  },
-  "Home": {
-   "x": 147.245,
-   "y": 0.553,
-   "rz": 6.794,
-   "z_grip": 291.895,
-   "saved_at": "21:25:29",
-   "joint_reference": {
-    "J1": 253.296,
-    "J2": 88.4441,
-    "J3": 6.0913,
-    "J4": -87.7412
-   },
-   "note": "Operator-defined Home; joint reference records elbow branch. Not controller homing or authorization for an unchecked return move."
-  }
- },
- "roles": {
-  "start": "tray",
-  "end": "desk",
-  "home": "Home"
- },
- "motion_order": "z,rz,xy"
+    "points":  {
+                   "tray":  {
+                                "x":  429.21,
+                                "y":  -127.97,
+                                "rz":  -89.88,
+                                "z_grip":  68.84,
+                                "saved_at":  "18:36:25"
+                            },
+                   "desk":  {
+                                "x":  318.14,
+                                "y":  -318.09,
+                                "rz":  88.79,
+                                "z_grip":  58.51,
+                                "saved_at":  "18:44:47"
+                            },
+                   "h":  {
+                             "x":  392.447,
+                             "y":  -126.588,
+                             "rz":  -91.033,
+                             "z_grip":  353.016,
+                             "saved_at":  "22:00:55"
+                         },
+                   "Home":  {
+                                "x":  289.97,
+                                "y":  62.63,
+                                "rz":  -3.88,
+                                "z_grip":  248.02,
+                                "saved_at":  "09:12:18",
+                                "joint_reference":  {
+                                                        "J2":  84.88,
+                                                        "J4":  -140.81,
+                                                        "J1":  209.42,
+                                                        "J3":  52.06
+                                                    },
+                                "source":  "operator_provided_screenshot",
+                                "reference_file":  "demonstrations/home_20261016_091024.json",
+                                "note":  "User-designated Home from screenshot; frame not shown and not live-verified. No return movement or route approval."
+                            }
+               },
+    "roles":  {
+                  "start":  "tray",
+                  "end":  "desk",
+                  "home":  "Home"
+              },
+    "motion_order":  "z,rz,xy"
 }

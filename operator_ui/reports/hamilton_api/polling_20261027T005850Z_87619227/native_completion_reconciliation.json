@@ -1,0 +1,696 @@
+{
+  "at": 1793063669.6173255,
+  "request_id": "e35f44182a614ff3abeba79c4c3574cc",
+  "source": "native_lifecycle",
+  "procedure_completed": true,
+  "numerical_result_verified": false,
+  "original_outcome": {
+    "request_id": "e35f44182a614ff3abeba79c4c3574cc",
+    "action": "full_calibration",
+    "session_id": "402a604d39dd4adda6ef463ad219e50e",
+    "status": "finished_unverified",
+    "calibration_setup": {
+      "tip_site": 7,
+      "tip_labware_id": 273,
+      "reference_id": "235903",
+      "label": "300 \u00b5L Framed Conductive Filtered",
+      "labware_hash": "6354ecc26aad8c8d1b9ce12798d23ac57d824f4a729d159678bb1f41fe1ff5fa"
+    },
+    "completed_steps": [
+      "self_calibration"
+    ],
+    "observed_activity": true,
+    "step": "channel_calibration",
+    "write_attempted": true,
+    "calibration_display": {
+      "id": "calibration",
+      "textSections": [
+        [
+          "Please wait while calibration completes. Please do not power off your device.",
+          null,
+          null
+        ],
+        [
+          "",
+          null,
+          null
+        ],
+        [
+          "",
+          null,
+          null
+        ]
+      ],
+      "imageName": "",
+      "buttonText": "Finish",
+      "selectionCaptions": null,
+      "selectionImages": null,
+      "spinnerShown": true,
+      "inputType": null,
+      "labwarePosition": 0
+    },
+    "rack_confirmed": true,
+    "calibration_loading": {
+      "id": "459436d863d742b39e86d9c1b4fa7656",
+      "phase": "complete"
+    },
+    "calibration_cleanup": {
+      "id": "c0fd2b68bdf14ce8bac5d933919e41f8",
+      "phase": "complete"
+    },
+    "native_finished": true,
+    "error": "Hamilton finished and is Idle, but did not publish the required new calibration result. Completion remains unverified; inspect the native results before another run."
+  },
+  "event_evidence": [
+    {
+      "at": 1793062953.2856035,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"1\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062953.9034276,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"8\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062955.2336597,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityStarted\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"13\\\",\\\"ActivityViewName\\\":\\\"Prepare for Initialization\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062955.2336597,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"13\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062955.2346513,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityStarted\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"14\\\",\\\"ActivityViewName\\\":\\\"Default Arm Initialization\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062955.2346513,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"14\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062955.2346513,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityStarted\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"15\\\",\\\"ActivityViewName\\\":\\\"Traffic Control Initialization\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062955.2356503,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"15\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062955.2356503,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityStarted\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"31\\\",\\\"ActivityViewName\\\":\\\"Load - 1\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062959.1248696,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"31\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062959.1279783,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"22\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793062961.1408842,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityStarted\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"28\\\",\\\"ActivityViewName\\\":\\\"Calibrate\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793063256.4754298,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"28\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793063256.4760642,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"23\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793063256.4760642,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityStarted\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"75\\\",\\\"ActivityViewName\\\":\\\"Unload - 1\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793063272.8843882,
+      "kind": "cleanup_completed",
+      "data": {
+        "id": "c0fd2b68bdf14ce8bac5d933919e41f8",
+        "event": "CleanupFinished"
+      }
+    },
+    {
+      "at": 1793063272.8843882,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"75\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793063272.885382,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityStarted\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"16\\\",\\\"ActivityViewName\\\":\\\"Termination\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793063272.885382,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"16\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793063272.8866124,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "generic",
+          "description": "generic instinct event",
+          "data": "{\"Name\":\"ActivityEnded\",\"ClientState\":\"NL_Startup\",\"Payload\":\"{\\\"ActivityID\\\":\\\"9\\\"}\",\"Source\":\"Xsl\"}"
+        }
+      }
+    },
+    {
+      "at": 1793063272.8866124,
+      "kind": "event",
+      "data": {
+        "channel": "instinctevents",
+        "event": {
+          "code": "finished",
+          "description": "The system is idle",
+          "data": ""
+        }
+      }
+    }
+  ],
+  "current": {
+    "available": true,
+    "connected": true,
+    "simulation": false,
+    "serial": "PRPGD2427",
+    "initialized": true,
+    "global_state": "Idle",
+    "state": "idle",
+    "run": {
+      "protocolId": 0,
+      "runDatalId": null,
+      "isRunInProgress": false,
+      "isSimulation": false,
+      "protocolRunState": 0,
+      "startTime": "0001-01-01T00:00:00",
+      "estimatedEndTime": "0001-01-01T00:00:00",
+      "endPauseTime": "0001-01-01T00:00:00",
+      "protocolName": "MlPrepHeightAndSqueezeCalibration",
+      "currentStep": 0,
+      "preLoadThermalDeviceUsed": "None",
+      "preLoadHepaFiltration": false
+    },
+    "pending_errors": [],
+    "protocol_catalog": [
+      {
+        "id": 1002,
+        "name": "Protocol",
+        "favorite": true,
+        "dateModified": "2026-08-31T14:42:56.2712041",
+        "dateRun": "0001-01-01T00:00:00"
+      }
+    ],
+    "protocols": [
+      "Protocol"
+    ],
+    "recipes": [],
+    "session_id": "8075f00aabac4fc69fdf5859aca40ed6",
+    "parked": false,
+    "door_automation_ready": true,
+    "ready_for_robot": false,
+    "message": "Hamilton Idle; initialized.",
+    "operation": {
+      "request_id": "e35f44182a614ff3abeba79c4c3574cc",
+      "action": "full_calibration",
+      "session_id": "402a604d39dd4adda6ef463ad219e50e",
+      "status": "finished_unverified",
+      "calibration_setup": {
+        "tip_site": 7,
+        "tip_labware_id": 273,
+        "reference_id": "235903",
+        "label": "300 \u00b5L Framed Conductive Filtered",
+        "labware_hash": "6354ecc26aad8c8d1b9ce12798d23ac57d824f4a729d159678bb1f41fe1ff5fa"
+      },
+      "completed_steps": [
+        "self_calibration"
+      ],
+      "observed_activity": true,
+      "step": "channel_calibration",
+      "write_attempted": true,
+      "calibration_display": {
+        "id": "calibration",
+        "textSections": [
+          [
+            "Please wait while calibration completes. Please do not power off your device.",
+            null,
+            null
+          ],
+          [
+            "",
+            null,
+            null
+          ],
+          [
+            "",
+            null,
+            null
+          ]
+        ],
+        "imageName": "",
+        "buttonText": "Finish",
+        "selectionCaptions": null,
+        "selectionImages": null,
+        "spinnerShown": true,
+        "inputType": null,
+        "labwarePosition": 0
+      },
+      "rack_confirmed": true,
+      "calibration_loading": {
+        "id": "459436d863d742b39e86d9c1b4fa7656",
+        "phase": "complete"
+      },
+      "calibration_cleanup": {
+        "id": "c0fd2b68bdf14ce8bac5d933919e41f8",
+        "phase": "complete"
+      },
+      "native_finished": true,
+      "error": "Hamilton finished and is Idle, but did not publish the required new calibration result. Completion remains unverified; inspect the native results before another run."
+    },
+    "prompt": null,
+    "polling": {
+      "mode": "normal",
+      "purpose": null,
+      "calibration_default": "reduced",
+      "camera_paused": false
+    }
+  },
+  "history": [
+    {
+      "id": 3009,
+      "calibrationDate": "2026-10-24T23:23:18.9212113",
+      "status": "Pass",
+      "message": null,
+      "hasError": false,
+      "channelSkew": {
+        "mphSkewX": 0.0,
+        "mphSkewZ": 0.0,
+        "independentSkewX": -0.06899643,
+        "independentSkewZ": 0.2038269
+      },
+      "channelOffset": {
+        "mphOffsetX": 0.0,
+        "independentOffsetX": -0.7285061,
+        "yzAxisOffsets": [
+          {
+            "index": 1,
+            "offsetY": 102.671005,
+            "offsetZ": 171.1443,
+            "offsetZValid": true
+          },
+          {
+            "index": 0,
+            "offsetY": 113.702454,
+            "offsetZ": 170.940475,
+            "offsetZValid": true
+          }
+        ]
+      },
+      "channelWarnings": []
+    },
+    {
+      "id": 2010,
+      "calibrationDate": "2026-10-24T23:03:06.8288403",
+      "status": "Fail",
+      "message": "Failed to start Channel Self Calibration: Unable to get default instrument PRPGD2427 as it is not present.",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 2009,
+      "calibrationDate": "2026-10-24T23:00:51.1914596",
+      "status": "Fail",
+      "message": "Failed to start Channel Self Calibration: Unable to get default instrument PRPGD2427 as it is not present.",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 1011,
+      "calibrationDate": "2026-10-24T22:28:44.0679331",
+      "status": "Fail",
+      "message": "Firmware Reported Error: \r\n The provided Z position would exceed the travel limits",
+      "hasError": true,
+      "channelSkew": {
+        "mphSkewX": 0.0,
+        "mphSkewZ": 0.0,
+        "independentSkewX": -0.04349518,
+        "independentSkewZ": 0.210983276
+      },
+      "channelOffset": {
+        "mphOffsetX": 0.0,
+        "independentOffsetX": -0.720264435,
+        "yzAxisOffsets": [
+          {
+            "index": 1,
+            "offsetY": 102.728867,
+            "offsetZ": 171.1586,
+            "offsetZValid": true
+          },
+          {
+            "index": 0,
+            "offsetY": 113.841354,
+            "offsetZ": 170.947617,
+            "offsetZValid": true
+          }
+        ]
+      },
+      "channelWarnings": []
+    },
+    {
+      "id": 1010,
+      "calibrationDate": "2026-10-24T22:28:43.0744579",
+      "status": "Fail",
+      "message": "Firmware Reported Error: \r\n The provided Z position would exceed the travel limits",
+      "hasError": true,
+      "channelSkew": {
+        "mphSkewX": 0.0,
+        "mphSkewZ": 0.0,
+        "independentSkewX": -0.04349518,
+        "independentSkewZ": 0.210983276
+      },
+      "channelOffset": {
+        "mphOffsetX": 0.0,
+        "independentOffsetX": -0.720264435,
+        "yzAxisOffsets": [
+          {
+            "index": 1,
+            "offsetY": 102.728867,
+            "offsetZ": 171.1586,
+            "offsetZValid": true
+          },
+          {
+            "index": 0,
+            "offsetY": 113.841354,
+            "offsetZ": 170.947617,
+            "offsetZValid": true
+          }
+        ]
+      },
+      "channelWarnings": []
+    },
+    {
+      "id": 1009,
+      "calibrationDate": "2026-10-24T21:28:46.0322809",
+      "status": "Pass",
+      "message": null,
+      "hasError": false,
+      "channelSkew": {
+        "mphSkewX": 0.0,
+        "mphSkewZ": 0.0,
+        "independentSkewX": -0.213001251,
+        "independentSkewZ": 0.214553833
+      },
+      "channelOffset": {
+        "mphOffsetX": 0.0,
+        "independentOffsetX": -0.860506058,
+        "yzAxisOffsets": [
+          {
+            "index": 1,
+            "offsetY": 102.682571,
+            "offsetZ": 171.2015,
+            "offsetZValid": true
+          },
+          {
+            "index": 0,
+            "offsetY": 113.748764,
+            "offsetZ": 170.986954,
+            "offsetZValid": true
+          }
+        ]
+      },
+      "channelWarnings": []
+    },
+    {
+      "id": 1008,
+      "calibrationDate": "2026-10-24T19:38:17.4323269",
+      "status": "Pass",
+      "message": null,
+      "hasError": false,
+      "channelSkew": {
+        "mphSkewX": 0.0,
+        "mphSkewZ": 0.0,
+        "independentSkewX": -0.256500244,
+        "independentSkewZ": 0.232437134
+      },
+      "channelOffset": {
+        "mphOffsetX": 0.0,
+        "independentOffsetX": -0.840263367,
+        "yzAxisOffsets": [
+          {
+            "index": 1,
+            "offsetY": 102.682571,
+            "offsetZ": 171.208664,
+            "offsetZValid": true
+          },
+          {
+            "index": 0,
+            "offsetY": 113.795059,
+            "offsetZ": 170.976227,
+            "offsetZValid": true
+          }
+        ]
+      },
+      "channelWarnings": []
+    },
+    {
+      "id": 1007,
+      "calibrationDate": "2026-10-24T19:13:15.5299898",
+      "status": "Fail",
+      "message": "Calibration was aborted.",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 1006,
+      "calibrationDate": "2026-10-24T19:12:54.1123222",
+      "status": "Fail",
+      "message": "Calibration was aborted.",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 1005,
+      "calibrationDate": "2026-10-24T19:12:53.1178098",
+      "status": "Fail",
+      "message": "Calibration was aborted.",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 1004,
+      "calibrationDate": "2026-10-24T19:09:37.0158115",
+      "status": "Fail",
+      "message": "Calibration was aborted.",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 1003,
+      "calibrationDate": "2026-08-31T14:52:59.7989953",
+      "status": "Fail",
+      "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 1002,
+      "calibrationDate": "2026-08-31T14:52:58.813912",
+      "status": "Fail",
+      "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 3,
+      "calibrationDate": "2026-07-17T17:07:46.264014",
+      "status": "Fail",
+      "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 2,
+      "calibrationDate": "2026-07-17T17:07:45.2742482",
+      "status": "Fail",
+      "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    },
+    {
+      "id": 1,
+      "calibrationDate": "2026-07-17T17:04:39.1692295",
+      "status": "Fail",
+      "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+      "hasError": true,
+      "channelSkew": null,
+      "channelOffset": null,
+      "channelWarnings": []
+    }
+  ],
+  "controller_writes": 0,
+  "parked": false,
+  "robot_access_authorized": false,
+  "decision": "Reviewed native completion; archive stale ownership. No procedure replay or robot-access authorization."
+}

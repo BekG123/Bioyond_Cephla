@@ -1,0 +1,58 @@
+{
+  "request": {
+    "id": "341016b151e7429ea435ca94636e38b8",
+    "title": "Device Error",
+    "message": "One or more errors occurred in XSL Command Pick Up Tips. Select a recovery action for each error.",
+    "errorResponses": [
+      {
+        "id": "85c35c35-804a-40b4-aa46-af4ccd3e3818",
+        "response": "Continue"
+      },
+      {
+        "id": "2fa90f2b-b61a-40d9-a005-aaa0f8b3785c",
+        "response": "Abort"
+      }
+    ],
+    "selectedResponse": "Abort",
+    "timeStamp": "2026-10-24T15:46:07.2427447-07:00",
+    "severity": "Error",
+    "groupId": "341016b151e7429ea435ca94636e38b8",
+    "errorData": [
+      {
+        "id": "e79b867e712d4e43817cb5a04f115e13",
+        "groupId": "341016b151e7429ea435ca94636e38b8",
+        "message": "Firmware Reported Error: \r\n Front Channel did not detect the expected tip type in the rack",
+        "selectedResponse": "Abort",
+        "errorResponses": [
+          {
+            "id": "f5d5b304-6efc-46ea-8172-7dcdb1d4df65",
+            "response": "Abort"
+          },
+          {
+            "id": "f2211e22-2058-4ebd-bc89-786a7582a970",
+            "response": "Retry"
+          }
+        ]
+      },
+      {
+        "id": "c147251a5d9c4694ae14021d1110826c",
+        "groupId": "341016b151e7429ea435ca94636e38b8",
+        "message": "Firmware Reported Error: \r\n Rear Channel did not detect the expected tip type in the rack",
+        "selectedResponse": "Abort",
+        "errorResponses": [
+          {
+            "id": "d92aeb09-19c2-4de7-8ebe-e6cb24893c2f",
+            "response": "Abort"
+          },
+          {
+            "id": "3c5ccbf5-8e9f-4788-83a2-5a5718949dc5",
+            "response": "Retry"
+          }
+        ]
+      }
+    ],
+    "handled": false
+  },
+  "status": 200,
+  "response": ""
+}

@@ -43,7 +43,7 @@ class FakeService:
         end = dict(X=x,Y=y,Z=z,Rz=rz)
         if self.motion_failure == "stale":
             return {"ok": True}
-        self.q = check_path(self.pose, end, self.q, PARAMS, self.envelope)
+        self.q = check_path(self.pose, end, self.q, PARAMS, self.envelope if self.envelope_enabled else None)
         self.pose = end
         return {"ok": True, **({"recovered": "drop"} if self.motion_failure == "recovered" else {})}
     def move_gripper(self, target):
@@ -229,7 +229,7 @@ class TransferTests(unittest.TestCase):
             self.assertFalse(aruco_world.solve("fake",326,0,300,0,marker_id=3)["detected"])
     def test_routes_validate_before_runner(self):
         import app as console
-        with patch.object(console.runner,"start") as start:
+        with patch.object(console.runner,"start") as start, patch.object(console.draggo, 'latched', False):
             client=console.app.test_client()
             self.assertEqual(client.post('/seq/transfer',json={}).status_code,400)
             start.assert_not_called()

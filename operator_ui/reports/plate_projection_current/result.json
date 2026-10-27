@@ -1,0 +1,35 @@
+﻿{
+    "status":  "rejected_before_motion",
+    "input":  "current_plate.png",
+    "camera_serial":  "457108625727",
+    "image_size_px":  [
+                          3072,
+                          2048
+                      ],
+    "capture_age_s_at_check":  0.4,
+    "robot_pose_mm":  {
+                          "Y":  62.63,
+                          "Rz":  -3.88,
+                          "Z":  248.02,
+                          "X":  289.97
+                      },
+    "diagnostic":  "Existing feature detector on raw saved image only; no assumed intrinsics or metric pose",
+    "model_id":  "falcon_96_provisional_synthetic",
+    "model_validated":  false,
+    "expected_grid":  {
+                          "rows":  8,
+                          "columns":  12
+                      },
+    "visual_observation":  "Appears to be 6 rows by 8 columns (48 wells); model unconfirmed",
+    "rim_candidates":  0,
+    "detector_reason":  "No unique rim, 96-well grid and orientation match; ambiguous or insufficient evidence.",
+    "remaining_requirements":  [
+                                   "Confirmed plate geometry and orientation cue",
+                                   "Validated camera projection model",
+                                   "Measured circle-reference to grasp-frame registration",
+                                   "Validated alignment/descent/grip integration for this plate"
+                               ],
+    "motion_started":  false,
+    "virtual_circle_overlay_generated":  false,
+    "metric_pose_estimated":  false
+}

@@ -1,0 +1,164 @@
+{
+  "schema": "cephla.alignment-home-review.v1",
+  "created_at": "2026-10-17T19:29:35.853907+00:00",
+  "start": {
+    "X": 315.936,
+    "Y": -66.974,
+    "Z": 253.72,
+    "Rz": 7.899
+  },
+  "start_joints": {
+    "J1": 215.12099273119986,
+    "J2": 40.345014559424214,
+    "J3": 60.46298103184866,
+    "J4": -92.9087997000171
+  },
+  "observed_e1": 0.017982369172386825,
+  "home": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+  "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+  "stages": [
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 315.94,
+          "Y": -66.97,
+          "Z": 300.0,
+          "Rz": 7.9
+        }
+      ]
+    },
+    {
+      "kind": "rotate",
+      "rz": -3.8799999999999963
+    },
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        }
+      ]
+    }
+  ],
+  "checked_waypoints": [
+    {
+      "kind": "queue",
+      "pose": {
+        "X": 315.94,
+        "Y": -66.97,
+        "Z": 300.0,
+        "Rz": 7.9
+      },
+      "joints": {
+        "J1": 261.40099273119984,
+        "J2": 40.34619077289631,
+        "J3": 60.46384390870477,
+        "J4": -92.9098387903453
+      }
+    },
+    {
+      "kind": "rotate",
+      "pose": {
+        "X": 315.94,
+        "Y": -66.97,
+        "Z": 300.0,
+        "Rz": -3.8799999999999963
+      },
+      "joints": {
+        "J1": 261.40099273119984,
+        "J2": 40.34619077289631,
+        "J3": 60.46384390870477,
+        "J4": -104.6898387903453
+      }
+    },
+    {
+      "kind": "queue",
+      "pose": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 300.0,
+        "Rz": -3.88
+      },
+      "joints": {
+        "J1": 261.40099273119984,
+        "J2": 84.87688206683333,
+        "J3": 52.05596109242011,
+        "J4": -140.81264726799768
+      }
+    },
+    {
+      "kind": "queue",
+      "pose": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      "joints": {
+        "J1": 209.42099273119985,
+        "J2": 84.87688206683333,
+        "J3": 52.05596109242011,
+        "J4": -140.81264726799768
+      }
+    }
+  ],
+  "config": {
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "claw_gap_max_mm": 88.0,
+    "claw_gap_min_mm": 60.0,
+    "extension_margin_mm": 8.0,
+    "inner_reach_mm": 280.0,
+    "j2_margin_deg": 2.0,
+    "j2_min_deg": -95.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j4_hard_abs_deg": 220.0,
+    "j4_pref_abs_deg": 220.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "reach_hard_mm": 460.0
+  },
+  "envelope": {
+    "X": [
+      200.0,
+      450.0
+    ],
+    "Y": [
+      -250.0,
+      380.0
+    ],
+    "Z": [
+      70.0,
+      400.0
+    ]
+  },
+  "translation_speed": 137,
+  "wrist_speed": 30,
+  "ik_and_limits_passed": true,
+  "execution_authorized": false,
+  "physical_clearance_verified": false,
+  "requires": [
+    "Empty gripper confirmed",
+    "Wrist sweep at Z300 and across-to-Home corridor clear",
+    "Final lowering to saved Home clear",
+    "Arm released, hands clear, E-stop supervised"
+  ],
+  "policy": "One reviewed connection only; does not enable arbitrary Home fallbacks."
+}

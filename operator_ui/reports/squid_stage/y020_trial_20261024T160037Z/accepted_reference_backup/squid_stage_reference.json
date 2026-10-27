@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "controller_serial": "12769210",
+  "stage_simulated": false,
+  "dropoff": {"x_mm": 0.05, "y_mm": 0.0508, "z_mm": 1.05},
+  "original_operator_taught_dropoff": {"x_mm": -0.05000625, "y_mm": 0.0508, "z_mm": 1.05},
+  "operator_confirmed": true,
+  "previous_motion_hold": "Live return on 2026-10-23 failed at the final MOVETO_X to -0.05000625 mm with CMD_EXECUTION_ERROR. Stage stopped at X34.9996125/Y0.05318125/Z0.10003125 mm. Reviewed as a homed-range rejection; operator explicitly approved the positive-X retry.",
+  "revision_authorization": "2026-10-23 operator: Run the +0.050 mm X retry. Changes X inward by 0.10000625 mm, preserves Y and Z. No robot delivery or retrieval included.",
+  "live_trial_report": "reports/squid_stage/901f1e98a64c409d99692fff6a5d244f.json",
+  "successful_retry_report": "reports/squid_stage/616899e68f814c679f5c80c6ac2429ff.json",
+  "measured_retry_endpoint": {"x_mm": 0.05000625, "y_mm": 0.05476875, "z_mm": 1.05},
+  "stage_return_verified": true,
+  "accepted_for_robot_loading": true,
+  "operator_acceptance": "2026-10-23: Yes, it worked. A successful attempt. Integrate the new updates into our code, not simulation because Lacry should know Squid's positions.",
+  "source": "Original XYZ measured twice after operator manual placement. Revised X +0.050 mm explicitly approved for the stage-only retry after the original negative X failed following homing.",
+  "units": "millimeters in Squid stage coordinates, not robot TCP coordinates",
+  "home": "Native Squid XYZ homing; not the saved drop-off position",
+  "return_policy": "Squid native loading path with saved loading XY: retract objective, Y15, X35, loading Y, loading X, restore scanning limits, taught Z. Robot stays Home. Return after scan requires exact successful acquisition completion.",
+  "validation": "Positive-X native loading return succeeded 2026-10-23. Endpoint verified twice within 0.02 mm on each axis. Operator accepted the corrected placement and requested integration for physical-stage operation. Robot remained at Home during the trial. Original negative-X trial preserved."
+}

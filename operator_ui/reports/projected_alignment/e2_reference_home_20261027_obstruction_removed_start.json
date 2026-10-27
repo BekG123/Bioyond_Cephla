@@ -1,0 +1,366 @@
+{
+  "at": 1793107866.962992,
+  "phase": "home",
+  "authorization": "Continue same successful full calibration, then the previously authorized nearby Squid endpoint; stop before release.",
+  "dispatch": {
+    "activity": [
+      {
+        "at": "2026-10-27T13:31:07.178858+00:00",
+        "line": "Displayed plan and requirements confirmed by researcher in chat."
+      },
+      {
+        "at": "2026-10-27T13:31:07.178858+00:00",
+        "line": "Confirmed and started: reviewed Home connection."
+      },
+      {
+        "at": "2026-10-27T13:30:53.976151+00:00",
+        "line": "Plan proposed: Return Home."
+      }
+    ],
+    "busy": false,
+    "capabilities": {
+      "automatic_squid": true
+    },
+    "configured": true,
+    "experiment": {
+      "name": "Return Home",
+      "total_steps": null
+    },
+    "links": {
+      "arm": {
+        "available": true,
+        "connected": true,
+        "message": "Arm connected."
+      },
+      "hamilton": {
+        "available": true,
+        "connected": true,
+        "door_automation_ready": true,
+        "global_state": "Idle",
+        "initialized": true,
+        "message": "Hamilton Idle; initialized.",
+        "operation": null,
+        "parked": false,
+        "pending_errors": [],
+        "polling": {
+          "calibration_default": "reduced",
+          "camera_paused": false,
+          "mode": "normal",
+          "purpose": null
+        },
+        "prompt": null,
+        "protocol_catalog": [
+          {
+            "dateModified": "2026-08-31T14:42:56.2712041",
+            "dateRun": "0001-01-01T00:00:00",
+            "favorite": true,
+            "id": 1002,
+            "name": "Protocol"
+          }
+        ],
+        "protocols": [
+          "Protocol"
+        ],
+        "ready_for_robot": false,
+        "recipes": [],
+        "run": {
+          "currentStep": 0,
+          "endPauseTime": "0001-01-01T00:00:00",
+          "estimatedEndTime": "0001-01-01T00:00:00",
+          "isRunInProgress": false,
+          "isSimulation": false,
+          "preLoadHepaFiltration": false,
+          "preLoadThermalDeviceUsed": "None",
+          "protocolId": 0,
+          "protocolName": "MlPrepHeightAndSqueezeCalibration",
+          "protocolRunState": 0,
+          "runDatalId": null,
+          "startTime": "0001-01-01T00:00:00"
+        },
+        "serial": "PRPGD2427",
+        "session_id": "6efdc7e0ecd84036b3692a2e46d5943c",
+        "simulation": false,
+        "state": "idle"
+      },
+      "squid": {
+        "available": true,
+        "completion_confirmed": false,
+        "connected": false,
+        "job": null,
+        "message": "Connect to Squid to follow imaging progress.",
+        "simulation": null,
+        "status": "disconnected"
+      }
+    },
+    "ok": true,
+    "pending": null,
+    "question": null,
+    "review": null,
+    "running": {
+      "active": true,
+      "done": [],
+      "error": "",
+      "message": "Returning Home along the reviewed connection.",
+      "ok": null,
+      "step": "Return Home"
+    },
+    "transcript": [
+      {
+        "at": "2026-10-27T13:30:53.976151+00:00",
+        "role": "lacry",
+        "text": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.\nConfirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop. The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws.\nReply \u201cYes\u201d to confirm these requirements and start, or tell me what to change."
+      },
+      {
+        "at": "2026-10-27T13:31:06.980087+00:00",
+        "role": "researcher",
+        "text": "Yes"
+      },
+      {
+        "at": "2026-10-27T13:31:07.178858+00:00",
+        "role": "lacry",
+        "text": "Returning Home. Keep hands clear."
+      }
+    ]
+  },
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Preparing Auto motion for Home. Keep hands clear.",
+        "t": 0.0
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 1.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: upload 1/1",
+        "t": 2.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 2.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 2.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 7/100",
+        "t": 2.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 35/100",
+        "t": 2.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 74/100",
+        "t": 3.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 98/100",
+        "t": 3.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 3.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 100/100",
+        "t": 3.4
+      },
+      {
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 5.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: upload 2/2",
+        "t": 6.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 6.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 7.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 4/100",
+        "t": 7.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 17/100",
+        "t": 7.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 27/100",
+        "t": 7.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 38/100",
+        "t": 7.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 47/100",
+        "t": 7.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 58/100",
+        "t": 7.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 64/100",
+        "t": 8.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 64/100",
+        "t": 8.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 68/100",
+        "t": 8.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 77/100",
+        "t": 8.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 87/100",
+        "t": 8.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 96/100",
+        "t": 8.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 8.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 8.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 100/100",
+        "t": 9.0
+      }
+    ],
+    "name": "researcher_home",
+    "result": {
+      "home": {
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "ok": true
+    },
+    "state": "done",
+    "target": null
+  },
+  "final_state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.010612162441248074
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42015073787246,
+        "J2": 84.87691252721098,
+        "J3": 52.05594907317273,
+        "J4": -140.81265436318145
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.019
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1793107876.3951669
+  },
+  "status": "motion_complete_inspection_pending"
+}

@@ -70,6 +70,109 @@ class Vision:
 
 
 class FastDiskTests(unittest.TestCase):
+    def inject_height_errors(self, values):
+        detect = self.vision.evaluate_ways
+        def measured(*args):
+            ev = detect(*args)
+            p = self.svc.pose
+            error = values[min(self.vision.calls-1,len(values)-1)]
+            sol = ev['ways'][0]['solve']
+            sol.update(move_xyrz=[p['X'],p['Y'],p['Z'],p['Rz']],
+                move_center=[p['X'],p['Y'],p['Z'],p['Rz']],
+                move_z=[p['X'],p['Y'],p['Z']+error,p['Rz']],
+                xy_err_mm=0, center_err_mm=0, rz_err_deg=0, z_err_mm=error)
+            return ev
+        self.vision.evaluate_ways = measured
+
+    def test_good_images_break_noisy_error_history(self):
+        # Reproduces the live failure: good views 22 and 25 were omitted from
+        # the trend, joining view 23=.242, 24=1.443 and 26=2.286 instead.
+        self.inject_height_errors([.6,.1,1.2,.1,1.8,.1,.1])
+        result = self.execute()
+        self.assertTrue(result['ok'],result)
+        self.assertEqual(result['observations'],7)
+        self.assertEqual(result['moves'],3)
+
+    def test_suspected_increase_rechecks_without_moving_then_recovers(self):
+        self.inject_height_errors([1,2,3,.1,.1])
+        result = self.execute()
+        self.assertTrue(result['ok'],result)
+        self.assertEqual(result['moves'],2)
+        self.assertEqual(result['observations'],5)
+
+    def test_true_increase_is_confirmed_stationary_before_stopping(self):
+        self.inject_height_errors([1,2,3,3.1,3.2])
+        result = self.execute()
+        self.assertFalse(result['ok'])
+        self.assertIn('three stationary images',result['error'])
+        self.assertEqual(result['moves'],2)
+        self.assertEqual(result['observations'],5)
+        self.assertIsNone(self.run.target)
+
+    def test_movement_during_divergence_review_rejects_stale_measurements(self):
+        self.inject_height_errors([1,2,3,3.1])
+        annotate = self.vision.annotate
+        def shifted(*args):
+            if self.vision.calls == 3:
+                self.svc.pose['X'] += 1
+            return annotate(*args)
+        self.vision.annotate = shifted
+        result = self.execute()
+        self.assertFalse(result['ok'])
+        self.assertIn('moved during stationary divergence review',result['error'])
+        self.assertEqual(result['moves'],2)
+
+    def test_explicit_wide_does_not_choose_shorter_long_route(self):
+        detect = self.vision.evaluate_ways
+        def ways(*args):
+            from copy import deepcopy
+            ev = detect(*args)
+            other = deepcopy(ev['ways'][0])
+            other['cfg'] = 'Long'
+            p = self.svc.pose
+            other['solve'].update(move_xyrz=[p['X'],p['Y'],p['Z'],p['Rz']],
+                move_z=[p['X'],p['Y'],p['Z'],p['Rz']],xy_err_mm=0,z_err_mm=0,rz_err_deg=0)
+            ev['ways'].insert(0,other)
+            return ev
+        self.vision.evaluate_ways = ways
+        updates = []
+        result = run_fast_disk(self.run,self.svc,CAM,self.vision,PARAMS,config='Wide',publish=updates.append)
+        self.assertTrue(result['ok'],result)
+        self.assertEqual(result['target']['config'],'Wide')
+        self.assertGreater(result['moves'],0)
+        self.assertEqual(updates[-1]['confirmation'],2)
+        self.assertEqual(updates[-1]['moves'],result['moves'])
+        self.assertEqual(updates[1]['initial_metrics']['xy_mm'],20)
+
+    def test_missing_wide_fails_without_falling_back_or_moving(self):
+        detect = self.vision.evaluate_ways
+        def ways(*args):
+            ev = detect(*args)
+            ev['ways'][0]['cfg'] = 'Long'
+            return ev
+        self.vision.evaluate_ways = ways
+        result = run_fast_disk(self.run,self.svc,CAM,self.vision,PARAMS,config='Wide')
+        self.assertFalse(result['ok'])
+        self.assertIn('no fallback',result['error'])
+        self.assertEqual(self.svc.moves+self.svc.rotations,[])
+
+    def test_calibration_journal_has_images_measurements_and_arrivals(self):
+        import json
+        import tempfile
+        from fast_disk import CalibrationTrace
+        with tempfile.TemporaryDirectory() as folder:
+            trace = CalibrationTrace(folder,'automatic','Wide')
+            result = run_fast_disk(self.run,self.svc,CAM,self.vision,PARAMS,config='Wide',trace=trace)
+            self.assertTrue(result['ok'],result)
+            rows = [json.loads(line) for line in trace.path.read_text().splitlines()]
+            observations = [r for r in rows if r['event']=='observation']
+            self.assertEqual(len(observations),result['observations'])
+            self.assertIn('image',observations[0])
+            self.assertIn('solve',observations[0])
+            self.assertEqual(len([r for r in rows if r['event']=='movement_arrived']),result['moves'])
+            second = CalibrationTrace(folder,'automatic','Wide')
+            self.assertNotEqual(trace.path,second.path)
+
     def setUp(self):
         self.svc, self.run = DiskService(), Runner()
         self.vision = Vision(self.svc)
@@ -148,18 +251,29 @@ class FastDiskTests(unittest.TestCase):
         self.assertFalse(self.execute()['ok'])
         self.assertIsNone(self.run.target)
 
-    def test_missing_joint_or_disabled_envelope_clears_old_target(self):
-        for fault in ('joints', 'envelope'):
-            with self.subTest(fault=fault):
-                self.setUp()
-                self.run.target = {'old':True}
-                if fault == 'joints':
-                    self.svc.q = {}
-                else:
-                    self.svc.envelope_enabled = False
-                self.assertFalse(self.execute()['ok'])
-                self.assertIsNone(self.run.target)
-                self.assertEqual(self.svc.moves, [])
+    def test_missing_joint_clears_old_target(self):
+        self.run.target = {'old':True}
+        self.svc.q = {}
+        self.assertFalse(self.execute()['ok'])
+        self.assertIsNone(self.run.target)
+        self.assertEqual(self.svc.moves, [])
+
+    def test_disabled_envelope_respected_for_calibration_only(self):
+        self.svc.envelope_enabled = False
+        self.svc.envelope['Z'] = (0, 1)  # saved box intentionally not in use
+        result = self.execute()
+        self.assertTrue(result['ok'], result)
+        self.assertFalse(self.svc.envelope_enabled)
+        self.assertEqual(result['warnings'], [])
+        from fast_disk import GuardedService
+        with self.assertRaisesRegex(TransferError, 'workspace envelope'):
+            GuardedService(self.svc, self.run, PARAMS)._preflight()
+
+    def test_disabled_box_keeps_joint_checks(self):
+        self.svc.envelope_enabled = False
+        self.svc.q['J2'] = 179
+        self.assertFalse(self.execute()['ok'])
+        self.assertEqual(self.svc.moves, [])
 
     def test_stop_during_motion_prevents_next_step(self):
         move = self.svc.move_cartesian
@@ -274,7 +388,10 @@ class FastDiskTests(unittest.TestCase):
 
     def test_j4_limit_is_not_overridden(self):
         self.vision.goal = {**self.svc.pose, 'Rz':-40}
-        result = self.execute()
+        # Fixture limit, independent of the commissioned hardware's settings.
+        with patch.dict(PARAMS,j4_pref_abs_deg=150,j4_hard_abs_deg=150), \
+                patch('sequences._RP',PARAMS):
+            result = self.execute()
         self.assertFalse(result['ok'])
         self.assertIn('J4',result['error'])
         self.assertEqual(self.svc.moves, [])
@@ -448,7 +565,8 @@ class FastDiskTests(unittest.TestCase):
 
     def test_flask_routes_require_confirmation_and_use_fast_sequence(self):
         import app as console
-        with patch.object(console.runner, 'start', return_value=dict(ok=True)) as start:
+        with patch.object(console.runner, 'start', return_value=dict(ok=True)) as start, \
+                patch.object(console.draggo, 'latched', False):
             client = console.app.test_client()
             for path in ('/seq/find_disk_fast',):
                 self.assertEqual(client.post(path,json={}).status_code,400)

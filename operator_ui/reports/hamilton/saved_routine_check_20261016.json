@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "routine_id": "820cc19904d449cca2a8994990cc197a",
+  "revision": 7,
+  "checks_passed": false,
+  "execution_ready": false,
+  "hardware_commands_sent": 0,
+  "issues": [
+    {
+      "code": "workspace",
+      "message": "Hamilton: X 175.629 outside 200 to 450, Y -386.510 outside -250 to 100, Z 36.231 outside 70 to 400 mm. Review the physical workspace; limits were not changed."
+    },
+    {
+      "code": "reach",
+      "message": "Hamilton extension is 389.683 mm from the arm base; the automatic planner allows 383.000 mm. Teach a closer position or commission the reach limit; it was not relaxed."
+    },
+    {
+      "code": "pickup_depth",
+      "message": "Descend was captured at Z278.459, but Grip at Z72.139: 206.320 mm of descent is missing between stages. Record Descend at the final pickup depth before closing the jaws."
+    },
+    {
+      "code": "pickup_alignment",
+      "message": "The pickup captures include lateral or wrist changes. Record a vertical descent after Align, followed by a stationary grip."
+    },
+    {
+      "code": "grip_direction",
+      "message": "Taught E1 goes from 0.000 to 3.579 mm. Record Descend with the jaws open, then Grip after closing; an opening is not a pickup command."
+    },
+    {
+      "code": "route",
+      "message": "Home to Hamilton: path outside Y envelope. No motion was sent."
+    },
+    {
+      "code": "route",
+      "message": "Grip to Hamilton: path outside Y envelope. No motion was sent."
+    }
+  ],
+  "hamilton": {
+    "X": 175.629,
+    "Y": -386.51,
+    "Z": 36.231,
+    "Rz": -5.316
+  },
+  "routes": [
+    {
+      "name": "Home to Hamilton",
+      "valid": false,
+      "reason": "path outside Y envelope"
+    },
+    {
+      "name": "Grip to Hamilton",
+      "valid": false,
+      "reason": "path outside Y envelope"
+    }
+  ],
+  "method": "Home planner: raise to at least Z300, rotate, translate, then lower; checked IK branch and wrist limits.",
+  "next_step": "Correct the listed teaching/workspace issues, then check again.",
+  "limitations": [
+    "Station captures do not record the path between them.",
+    "IK checks reach and joint continuity, not obstacles or plate clearance.",
+    "Saved calibration results are historical; a transfer must calibrate and align again.",
+    "A measured E1 endpoint alone does not verify a secure grasp."
+  ]
+}

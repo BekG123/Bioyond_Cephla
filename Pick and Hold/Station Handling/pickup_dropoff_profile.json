@@ -1,0 +1,21 @@
+{
+  "name": "Hamilton and Squid pickup / drop-off",
+  "status": "pending_station_validation",
+  "stations": ["Hamilton", "Squid"],
+  "opening_e1_mm": 5.0,
+  "pickup_e1_mm": 3.7,
+  "jaw_speed": 5,
+  "lift_mm": 5,
+  "lift_speed": 5,
+  "departure_translation_speed": 137,
+  "departure_wrist_speed": 30,
+  "camera_calibration_at_station": false,
+  "executable": false,
+  "validated_location": "Calibration plate holder only",
+  "reference": "operator_ui/demonstrations/reference_grip/e1_3p7_20261020_open7_acceptance.json",
+  "pickup_order": ["Taught local approach with jaws open to 5 mm", "Close to 3.7 mm", "Lift 5 mm at speed 5", "Existing station-to-Home route at speed 137"],
+  "dropoff_order": ["Place plate on taught station support", "Open jaws to 5 mm", "Lift empty jaws 5 mm at speed 5 after checking clearance", "Existing station-to-Home route at speed 137"],
+  "test_order": ["New Full Calibration -> 5 mm slow lift -> Home", "Hamilton and Squid local pickup/drop-off tests"],
+  "requires_station_review": ["Support and gripping height", "Headroom for 5 mm lift", "5 mm jaw setting clearance", "Connection to taught departure route"],
+  "note": "Static experiment template only. Active routines use squid_handling.py: Squid accepted, Hamilton supervised trial with inspections. Operator requested Hamilton match Squid's open5/close3.7/lift5 settings on2026-10-20. E1 is an axis coordinate, not physical jaw gap. Historical7mm calibration-holder reference retained."
+}

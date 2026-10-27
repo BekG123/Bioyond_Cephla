@@ -1,0 +1,181 @@
+{
+  "plan": {
+    "id": "96464e7c34e64dc5b4f9a855357ef6c6",
+    "at": 1792854549.0164196,
+    "source": "chat",
+    "dispatch": "squid_stage",
+    "actions": [
+      "squid_stage_dropoff"
+    ],
+    "labels": [
+      "Return Squid stage to drop-off"
+    ],
+    "steps": [
+      {
+        "kind": "squid_stage",
+        "label": "Return Squid stage to drop-off"
+      }
+    ],
+    "destination": "dropoff",
+    "job": {
+      "run_id": "d3f5a0061d314bd2b8efd7fa64a4e7ad",
+      "experiment_id": "_2026-10-24_08-08-35.988296",
+      "started_at": 1792854516.155906,
+      "ended_at": 1792854524.5403416,
+      "progress": {
+        "timepoint": 3,
+        "fov": 1,
+        "images": 3
+      },
+      "expected": {
+        "timepoints": 5,
+        "regions": 1,
+        "fovs": 1,
+        "channels": 1,
+        "z": 1
+      },
+      "stats": {
+        "total_images": 5,
+        "total_timepoints": 5,
+        "total_duration_seconds": 8.403515100479126,
+        "errors_encountered": 0
+      },
+      "reason": "completed",
+      "output_path": "C:\\Users\\Cephla\\Downloads\\_2026-10-24_08-08-35.988296",
+      "heartbeat_at": 1792854521.2467744
+    },
+    "session": {
+      "pid": 24124,
+      "created_at": 1792843295.9006052
+    },
+    "reference_hash": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+    "start": {
+      "x_mm": 100.2839625,
+      "y_mm": 45.669200000000004,
+      "z_mm": 1.05
+    },
+    "summary": "Return Squid stage to drop-off.",
+    "requirements": [
+      "The robot remains at Home, the microscope stage path is clear, and the E-stop is supervised.",
+      "This moves only the microscope stage. It does not fetch the plate.",
+      "Stop cancels remaining steps after the current native stage move finishes. It does not abort an independently started scan."
+    ]
+  },
+  "status": "completed",
+  "events": [
+    {
+      "at": 1792854556.425381,
+      "event": "started",
+      "plan": {
+        "id": "96464e7c34e64dc5b4f9a855357ef6c6",
+        "at": 1792854549.0164196,
+        "source": "chat",
+        "dispatch": "squid_stage",
+        "actions": [
+          "squid_stage_dropoff"
+        ],
+        "labels": [
+          "Return Squid stage to drop-off"
+        ],
+        "steps": [
+          {
+            "kind": "squid_stage",
+            "label": "Return Squid stage to drop-off"
+          }
+        ],
+        "destination": "dropoff",
+        "job": {
+          "run_id": "d3f5a0061d314bd2b8efd7fa64a4e7ad",
+          "experiment_id": "_2026-10-24_08-08-35.988296",
+          "started_at": 1792854516.155906,
+          "ended_at": 1792854524.5403416,
+          "progress": {
+            "timepoint": 3,
+            "fov": 1,
+            "images": 3
+          },
+          "expected": {
+            "timepoints": 5,
+            "regions": 1,
+            "fovs": 1,
+            "channels": 1,
+            "z": 1
+          },
+          "stats": {
+            "total_images": 5,
+            "total_timepoints": 5,
+            "total_duration_seconds": 8.403515100479126,
+            "errors_encountered": 0
+          },
+          "reason": "completed",
+          "output_path": "C:\\Users\\Cephla\\Downloads\\_2026-10-24_08-08-35.988296",
+          "heartbeat_at": 1792854521.2467744
+        },
+        "session": {
+          "pid": 24124,
+          "created_at": 1792843295.9006052
+        },
+        "reference_hash": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+        "start": {
+          "x_mm": 100.2839625,
+          "y_mm": 45.669200000000004,
+          "z_mm": 1.05
+        },
+        "summary": "Return Squid stage to drop-off.",
+        "requirements": [
+          "The robot remains at Home, the microscope stage path is clear, and the E-stop is supervised.",
+          "This moves only the microscope stage. It does not fetch the plate.",
+          "Stop cancels remaining steps after the current native stage move finishes. It does not abort an independently started scan."
+        ]
+      }
+    },
+    {
+      "at": 1792854556.6178803,
+      "event": "scan_completed",
+      "squid_run_id": "d3f5a0061d314bd2b8efd7fa64a4e7ad",
+      "squid_experiment_id": "_2026-10-24_08-08-35.988296"
+    },
+    {
+      "at": 1792854556.8602426,
+      "event": "locations_preserved",
+      "result": {
+        "saved": true,
+        "settings": {
+          "channels": [
+            "BF LED matrix full"
+          ],
+          "fovs": 1,
+          "nz": 1,
+          "nt": 5,
+          "total_images": 5,
+          "objective": "20x",
+          "widget_type": "flexible"
+        }
+      }
+    },
+    {
+      "at": 1792854557.1266956,
+      "event": "command_requested",
+      "command": "return_to_recorded_dropoff",
+      "target": {
+        "x_mm": 0.05,
+        "y_mm": 0.0508,
+        "z_mm": 1.05
+      }
+    },
+    {
+      "at": 1792854562.2329426,
+      "event": "verified",
+      "position": {
+        "x_mm": 0.05000625,
+        "y_mm": 0.0555625,
+        "z_mm": 1.05
+      }
+    }
+  ],
+  "final_position": {
+    "x_mm": 0.05000625,
+    "y_mm": 0.0555625,
+    "z_mm": 1.05
+  }
+}

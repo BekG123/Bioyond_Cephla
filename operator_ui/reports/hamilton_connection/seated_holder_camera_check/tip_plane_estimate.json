@@ -1,0 +1,56 @@
+{
+  "purpose": "Exploratory estimate in exported calibration coordinates, not an executable motion target",
+  "assumptions": [
+    "Nominal 9 mm pitch",
+    "Detected outer-rim centers approximate the opening plane",
+    "Export rotation/translation map deck coordinates to camera coordinates",
+    "Calibration matrix applies to full-resolution raw camera image",
+    "Physical rack unchanged during captures"
+  ],
+  "crop_match_count": 506,
+  "crop_registration_inliers": 413,
+  "crop_registration_rms_pixels": 0.2901465594768524,
+  "crop_corners_in_undistorted_full_image": [
+    [
+      58.91347850555001,
+      70.48653483761792
+    ],
+    [
+      69.09260639935998,
+      882.355211134456
+    ],
+    [
+      609.99514782253,
+      880.4817230998135
+    ],
+    [
+      603.0441885117448,
+      69.404760107605
+    ]
+  ],
+  "tip_rims_used": 68,
+  "pose_reprojection_rms_pixels": 1.5907725310055287,
+  "estimated_grid_center_in_exported_deck_frame": [
+    60.3638923304839,
+    43.80672753759735,
+    65.92549094934111
+  ],
+  "overlay_center_intersected_with_exported_z75_plane": [
+    61.94821363715417,
+    44.474254586002814,
+    75.0
+  ],
+  "estimated_xy_difference_from_overlay_reference_mm": [
+    -1.5843213066702688,
+    -0.6675270484054678
+  ],
+  "estimated_plane_normal_in_exported_deck_frame": [
+    0.004928580236680941,
+    0.0014973007770132732,
+    0.9999867335056168
+  ],
+  "estimated_tilt_degrees": 0.29513193083427514,
+  "operator_height_above_metal_deck_mm": 75,
+  "deck_frame_origin_relative_to_metal_surface_verified": false,
+  "motion_authorized_by_this_estimate": false
+}

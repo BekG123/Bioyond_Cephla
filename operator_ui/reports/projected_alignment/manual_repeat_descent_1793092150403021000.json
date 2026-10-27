@@ -1,0 +1,323 @@
+{
+  "profile_sha256": "cc8114594945f0a0a94753a62f704fee402a8d30beb6d5331152438736c5c695",
+  "events": [
+    {
+      "at": 1793092150.403021,
+      "event": "start",
+      "state": {
+        "camera": {
+          "age_s": 0.1,
+          "device": {
+            "ip": "192.168.201.89",
+            "model": "JHEM600GM-HM",
+            "serial": "457108625727"
+          },
+          "enabled": true,
+          "error": "",
+          "open": true
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.03703704715007916
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4008686337301,
+            "J2": 41.55513649727438,
+            "J3": 58.03143586655582,
+            "J4": -10.147363738002937
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.439,
+            "X": 308.971,
+            "Y": -64.539,
+            "Z": 300.0
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "projected_alignment",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1793092150.396499
+      }
+    },
+    {
+      "at": 1793092150.403021,
+      "event": "sequence_requested",
+      "endpoint": "/seq/projected_descent_trial",
+      "body": {
+        "ready": true,
+        "empty_gripper": true,
+        "cell_clear": true,
+        "plate_unchanged": true,
+        "expected_profile_sha256": "cc8114594945f0a0a94753a62f704fee402a8d30beb6d5331152438736c5c695"
+      }
+    },
+    {
+      "at": 1793092150.4492998,
+      "event": "sequence_started",
+      "response": {
+        "ok": true,
+        "started": "researcher_descend"
+      }
+    },
+    {
+      "at": 1793092179.6249225,
+      "event": "sequence_finished",
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Centering claws above the plate.",
+            "t": 0.1
+          },
+          {
+            "level": "info",
+            "msg": "Lua descent: approach at 137 to Z 93.72; last 20 mm at 5, torque checked after each 1/0.5 mm step.",
+            "t": 2.8
+          },
+          {
+            "level": "info",
+            "msg": "Lua descent: prepared",
+            "t": 2.9
+          },
+          {
+            "level": "info",
+            "msg": "Lua descent: fast approach",
+            "t": 3.2
+          },
+          {
+            "level": "info",
+            "msg": "Lua descent: torque baseline",
+            "t": 5.6
+          },
+          {
+            "level": "info",
+            "msg": "Lua descent: slow probing",
+            "t": 6.5
+          },
+          {
+            "level": "info",
+            "msg": "Lua descent: target reached",
+            "t": 28.6
+          },
+          {
+            "level": "good",
+            "msg": "Lua descent complete; claw remains open. No grip performed.",
+            "t": 28.7
+          }
+        ],
+        "name": "researcher_descend",
+        "result": {
+          "approach_speed": 137,
+          "at_z": 73.718,
+          "breach": false,
+          "descent_correction": {
+            "endpoint": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 89.439,
+              "X": 308.971,
+              "Y": -64.539,
+              "Z": 73.718
+            },
+            "hover": {
+              "Rz": 89.439,
+              "X": 308.971,
+              "Y": -64.539,
+              "Z": 300.0
+            },
+            "legs": [
+              {
+                "Rz": 89.439,
+                "X": 308.971,
+                "Y": -64.539,
+                "Z": 300.0
+              }
+            ],
+            "open_claw_trial": true,
+            "original_target": {
+              "config": "Wide",
+              "open_claw_trial": true,
+              "plate_profile_id": "48_well_projected_20261026",
+              "plate_profile_sha256": "cc8114594945f0a0a94753a62f704fee402a8d30beb6d5331152438736c5c695",
+              "rz": 89.439,
+              "x": 308.971,
+              "y": -64.539,
+              "z_calibrated": 73.718
+            },
+            "profile_id": "48_well_projected_20261026",
+            "profile_sha256": "cc8114594945f0a0a94753a62f704fee402a8d30beb6d5331152438736c5c695",
+            "scope": "Current accepted 48-well placement only.",
+            "start": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 89.439,
+              "X": 308.97,
+              "Y": -64.539,
+              "Z": 300.0
+            },
+            "target": {
+              "config": "Wide",
+              "open_claw_trial": true,
+              "plate_profile_id": "48_well_projected_20261026",
+              "plate_profile_sha256": "cc8114594945f0a0a94753a62f704fee402a8d30beb6d5331152438736c5c695",
+              "rz": 89.439,
+              "x": 308.971,
+              "y": -64.539,
+              "z_calibrated": 73.718
+            }
+          },
+          "executor": "lua_descent",
+          "gripping_height_acceptance_pending": true,
+          "ok": true,
+          "open_claw_trial": true,
+          "plate_profile_id": "48_well_projected_20261026",
+          "probe_speed": 5
+        },
+        "state": "done",
+        "target": {
+          "config": "Wide",
+          "open_claw_trial": true,
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "cc8114594945f0a0a94753a62f704fee402a8d30beb6d5331152438736c5c695",
+          "rz": 89.439,
+          "x": 308.971,
+          "y": -64.539,
+          "z_calibrated": 73.718
+        }
+      }
+    },
+    {
+      "at": 1793092179.6736572,
+      "event": "completed",
+      "state": {
+        "camera": {
+          "age_s": 1.8,
+          "device": {
+            "ip": "192.168.201.89",
+            "model": "JHEM600GM-HM",
+            "serial": "457108625727"
+          },
+          "enabled": true,
+          "error": "",
+          "open": true
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 28.003733605146408
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 35.11859742074387,
+            "J2": 41.55513649727438,
+            "J3": 58.03133670481016,
+            "J4": -10.147189420462462
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.439,
+            "X": 308.971,
+            "Y": -64.539,
+            "Z": 73.718
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "researcher_descend",
+          "state": "done"
+        },
+        "target": {
+          "config": "Wide",
+          "open_claw_trial": true,
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "cc8114594945f0a0a94753a62f704fee402a8d30beb6d5331152438736c5c695",
+          "rz": 89.439,
+          "x": 308.971,
+          "y": -64.539,
+          "z_calibrated": 73.718
+        },
+        "ts": 1793092179.6716495
+      }
+    }
+  ]
+}

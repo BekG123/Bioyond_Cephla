@@ -1,0 +1,31 @@
+{
+  "status": "offline_validated_not_physically_tested",
+  "date": "2026-10-20",
+  "feedback": "Slow only the Squid descent because of reported edge contact; keep remaining travel at 137.",
+  "source": "../compact4_20261017T131133Z_ace8e9/candidate.json",
+  "source_sha256": "99a2c08922bf7bd7295a0fea76a4e73f3a6cc1672e5b79bdc4a7310593575134",
+  "baseline": "../compact4_20261017T131133Z_ace8e9/compact4_roundtrip_speed137_trial.json",
+  "baseline_sha256": "57763e227f0c5e4c56b08cb6cb22bbb640579dfd983a66c637f5074ff51d959c",
+  "frame": "Existing taught TCP coordinates, millimeters and degrees",
+  "forward": [
+    {"X": 289.97, "Y": 62.63, "Z": 248.02, "Rz": -3.88},
+    {"X": 289.97, "Y": 62.63, "Z": 286.24, "Rz": -3.88},
+    {"X": 354.0, "Y": 270.0, "Z": 286.24, "Rz": 49.02},
+    {"X": 226.28, "Y": 373.6, "Z": 286.24, "Rz": 89.11},
+    {"X": 226.3, "Y": 373.59, "Z": 266.19, "Rz": 89.11}
+  ],
+  "forward_segment_speeds_mm_s": [137, 137, 137, 40],
+  "reverse_segment_speeds_mm_s": [137, 137, 137, 137],
+  "executor": "Existing Lua queue: three transit targets, completion barrier, one descent target",
+  "zone": -1,
+  "stop_before_descent": true,
+  "lua_republish_required": false,
+  "geometry_changed": false,
+  "descent_drop_mm": 20.05,
+  "descent_xy_travel_mm": 0.02236,
+  "gripper_commands_changed": false,
+  "offline_validation": "Real Lua/fake hardware: exact targets and speeds, reverse137, separate completion barrier; uncertain transit, Stop and changed grip block descent; overspeed and changed geometry rejected. Station and compound workflows pass.",
+  "physical_trial": null,
+  "operator_acceptance": null,
+  "limitations": "Reported edge contact has not been physically diagnosed. Slower speed does not establish clearance or correct alignment. No hardware movement run for this change."
+}

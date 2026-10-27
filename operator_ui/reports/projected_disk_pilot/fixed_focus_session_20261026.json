@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-26",
+  "task": "48-well projected-disk XY commissioning with fixed camera focus",
+  "calibration_complete": false,
+  "xy_centered": false,
+  "grasp_target_created": false,
+  "verified_moves": 6,
+  "additional_move_with_failed_post_move_verification": 1,
+  "later_pre_motion_rejections": 3,
+  "step_mm": 2.0,
+  "speed": 5,
+  "start_pose": {"X": 283.678, "Y": 50.136, "Z": 268.02, "Rz": -3.88},
+  "last_verified_pose": {"X": 279.421, "Y": 36.838, "Z": 268.02, "Rz": -3.88},
+  "initial_estimated_error_xy_mm": [-8.256387703774692, -19.08723642478468],
+  "last_verified_estimated_error_xy_mm": [-0.8211755731960011, -7.538338841262021],
+  "last_successful_attempt": "20261026_215221_8a57fa32.jsonl",
+  "last_attempt": "20261026_215818_11f82415.jsonl",
+  "last_attempt_motion_requested": false,
+  "last_attempt_failure": "No three consecutive verified plate observations within 20 seconds; arm remains stopped.",
+  "image_regression_tests_passed": 7,
+  "pilot_regression_tests_passed": 13,
+  "attempts": [
+    "20261026_213449_48fb44d6.jsonl",
+    "20261026_213526_08fc365d.jsonl",
+    "20261026_213601_4ef9d771.jsonl",
+    "20261026_214242_cceafb20.jsonl",
+    "20261026_214310_a5f8f3ec.jsonl",
+    "20261026_214319_5df88a64.jsonl",
+    "20261026_214357_7ba5b251.jsonl",
+    "20261026_215221_8a57fa32.jsonl",
+    "20261026_215246_0dac2643.jsonl",
+    "20261026_215818_11f82415.jsonl"
+  ],
+  "notes": [
+    "Reported XY error uses the existing vendor Wide image-to-robot mapping; this is not independent absolute accuracy measurement.",
+    "Whole-grid pattern correlation is not the earlier rim feature inlier percentage.",
+    "The same-height image anchor stays frozen and registered directly to the original reference; no incremental reference updates.",
+    "No further height, wrist, alignment, descent or gripper movements were performed.",
+    "Focus cannot be adjusted per operator. Diffuse lighting is proposed as the next physical image-quality test.",
+    "Saved frame validation reports precede the final texture-seed and burst adaptations; do not present them as validation of every later revision."
+  ]
+}

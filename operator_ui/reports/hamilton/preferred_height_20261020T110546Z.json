@@ -1,0 +1,158 @@
+{
+  "schema": "cephla.hamilton-preferred-height.v1",
+  "at": "2026-10-20T11:05:46.946853+00:00",
+  "operator_feedback": "This z is ideal",
+  "status": "preferred_height_saved_not_enabled_joint_limit_review_required",
+  "live_robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "manual",
+      "value": 0
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 3.5026518162339926
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": -1.6738427272262875,
+      "J2": -55.63883879428576,
+      "J3": 133.05998916067904,
+      "J4": -79.30924246223134
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": -1.888,
+      "X": 195.325,
+      "Y": -360.299,
+      "Z": 36.925
+    },
+    "program_state": {
+      "state": "paused",
+      "value": 2
+    },
+    "system_state": {
+      "state": "paused",
+      "value": 4
+    }
+  },
+  "state_timestamp": 1792494346.9407938,
+  "previous_endpoint": {
+    "X": 195.34,
+    "Y": -360.31,
+    "Z": 48.61,
+    "Rz": -1.9
+  },
+  "proposed_endpoint": {
+    "X": 195.34,
+    "Y": -360.31,
+    "Z": 36.925,
+    "Rz": -1.9
+  },
+  "lower_by_mm": 11.685000000000002,
+  "candidate": {
+    "parent_sha256": "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+    "reverse": [
+      {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 36.925,
+        "Rz": -1.9
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    ],
+    "forward": [
+      {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      {
+        "X": 215.74,
+        "Y": -249.0,
+        "Z": 212.0,
+        "Rz": -0.94
+      },
+      {
+        "X": 195.88,
+        "Y": -357.36,
+        "Z": 212.0,
+        "Rz": -1.9
+      },
+      {
+        "X": 195.34,
+        "Y": -360.31,
+        "Z": 36.925,
+        "Rz": -1.9
+      }
+    ],
+    "old_home_area": {
+      "X": 276.03,
+      "Y": 79.94,
+      "Z": 166.41,
+      "Rz": 1.98
+    },
+    "physical_clearance_verified": false,
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    }
+  },
+  "validation": {
+    "forward": {
+      "passed": false,
+      "reason": "Hamilton joint travel limit exceeded."
+    },
+    "reverse": {
+      "passed": false,
+      "reason": "Starting J1 is outside configured 0..400 mm range"
+    }
+  },
+  "operator_followup": "Lets use that height. It is safe to use that z, I checked",
+  "manufacturer_limit_review": {
+    "source": "Bioyond_S4_Agent_Context_Pack/04_Manuals/S4 Hardware Manual.pdf",
+    "page": 15,
+    "specified_axis_1_range_mm": [0, 400],
+    "finding": "The configured lower bound matches the supplied hardware manual. The preferred height reports negative J1. Clearance acceptance alone does not resolve this travel-limit conflict.",
+    "disposition": "Retain preferred height as pending; do not activate or widen limits without verifying controller zero/reference and permitted travel."
+  },
+  "hardware_execution": false,
+  "active_route_changed": false,
+  "note": "Operator accepted height only. Physical positioning below software J1 minimum does not establish manufacturer-approved automatic travel limits. Preserve existing route and limits."
+}

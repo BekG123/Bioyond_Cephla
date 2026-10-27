@@ -1,0 +1,69 @@
+{
+  "proposal": {
+    "evidence_id": "e09415adda3a100304c13c633de5d284201c7c7296fbe73d9db56df9cb32c8b5",
+    "summary": "Demonstration shows exploratory descent with lateral drift and wrist rotation (samples 8782\u20138791), followed by gripper opening rather than closing (E1: 0\u21923.579 mm). No secure grasp achieved. Proposed plan extracts three stages from measured samples, but prerequisites require: (1) vertical-only descent after alignment, (2) gripper closure verification (E1 should decrease), (3) workspace/reach corrections before execution.",
+    "stages": [
+      {
+        "action": "Descend",
+        "from_sample": 8763,
+        "to_sample": 8791,
+        "explanation": "Capture final approach before grip attempt. Sample 8763 (Z=278.459, E1\u22480) marks the end of aligned descent. Samples 8782\u20138791 show continued descent to Z\u224898 mm with lateral drift and wrist changes (Rz: 84.21\u219284.05\u00b0). This stage includes undesired motion; a corrected descent should be purely vertical with no lateral or rotational changes after alignment."
+      },
+      {
+        "action": "Grip",
+        "from_sample": 8804,
+        "to_sample": 10043,
+        "explanation": "Capture gripper state change. Sample 8804 (Z\u224895.3 mm, E1\u22480.0054 mm) begins the grip phase. Sample 10043 (Z=72.139, E1=3.579 mm) is the named Grip capture. However, E1 increases (opens) rather than decreases (closes), indicating no object was grasped. A corrected grip should show E1 decreasing to a stable closed value, confirming jaw closure around the object."
+      },
+      {
+        "action": "Pickup",
+        "from_sample": 10480,
+        "to_sample": 10520,
+        "explanation": "Capture first lift after closure. Samples 10480\u201310520 show the robot holding position at Z\u224836.23 mm with stable E1\u22483.558 mm. This represents the final state before travel to Hamilton. However, without confirmed gripper closure (E1 should decrease, not increase), this stage does not verify a secure grasp. A corrected pickup requires prior confirmation that the jaws closed and held the object."
+      }
+    ],
+    "review_needed": [
+      "Gripper direction: E1 increased from 0 to 3.579 mm during Grip stage, indicating jaw opening. Verify gripper polarity and teach a descent with jaws closing (E1 should decrease) to confirm object contact.",
+      "Descent continuity: 206 mm gap between Descend capture (Z=278.459) and Grip capture (Z=72.139). Record Descend at the final pickup depth (e.g., Z\u224872 mm) with jaws open and stationary, before initiating grip.",
+      "Lateral stability: Samples 8782\u20138791 show wrist rotation (Rz: 84.21\u219284.05\u00b0) and lateral drift during descent. Teach a purely vertical descent after Align with no wrist or XY changes.",
+      "Workspace and reach: Hamilton position (X=175.629, Y=-386.51) is outside the allowed envelope and exceeds reach limits. Teach a closer, workspace-compliant position or commission the reach limit.",
+      "Route validation: Paths to/from Hamilton violate Y-axis constraints (allowed: -250 to 100 mm). Verify the Hamilton location is reachable via the Home planner method (raise, rotate, translate, lower).",
+      "Grasp verification: E1 alone does not confirm a secure grasp. After grip closure, apply a small upward force or motion to verify the object is held before proceeding to Pickup."
+    ]
+  },
+  "execution_ready": false,
+  "hardware_commands_sent": 0,
+  "host_blockers": [
+    {
+      "code": "workspace",
+      "message": "Hamilton: X 175.629 outside 200 to 450, Y -386.510 outside -250 to 100, Z 36.231 outside 70 to 400 mm. Review the physical workspace; limits were not changed."
+    },
+    {
+      "code": "reach",
+      "message": "Hamilton extension is 389.683 mm from the arm base; the automatic planner allows 383.000 mm. Teach a closer position or commission the reach limit; it was not relaxed."
+    },
+    {
+      "code": "pickup_depth",
+      "message": "Descend was captured at Z278.459, but Grip at Z72.139: 206.320 mm of descent is missing between stages. Record Descend at the final pickup depth before closing the jaws."
+    },
+    {
+      "code": "pickup_alignment",
+      "message": "The pickup captures include lateral or wrist changes. Record a vertical descent after Align, followed by a stationary grip."
+    },
+    {
+      "code": "grip_direction",
+      "message": "Taught E1 goes from 0.000 to 3.579 mm. Record Descend with the jaws open, then Grip after closing; an opening is not a pickup command."
+    },
+    {
+      "code": "route",
+      "message": "Home to Hamilton: path outside Y envelope. No motion was sent."
+    },
+    {
+      "code": "route",
+      "message": "Grip to Hamilton: path outside Y envelope. No motion was sent."
+    }
+  ],
+  "evidence_id": "e09415adda3a100304c13c633de5d284201c7c7296fbe73d9db56df9cb32c8b5",
+  "notice": "Proposal only. No reference approval, movement, grip or lift was issued.",
+  "created_at": "2026-10-16T19:41:56.102807+00:00"
+}

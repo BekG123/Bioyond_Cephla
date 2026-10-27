@@ -1,0 +1,116 @@
+{
+  "instruments/connection-info": [
+    "Serial Number: PRPGD2427",
+    "Instrument Name: PRPGD2427",
+    "Connected: True",
+    "Controlling PC Name: DESKTOP-9DPRVQ3",
+    "Initialization Status: Initialized",
+    "Enclosure Status: Present",
+    "Individual Channels: Present",
+    "MPH8: Not Present",
+    "HHS: Not Present",
+    "HHC: Not Present",
+    "HEPAUV: Not Present"
+  ],
+  "instruments/global-run-state": "Idle",
+  "protocol-run": {
+    "protocolId": 0,
+    "runDatalId": null,
+    "isRunInProgress": false,
+    "isSimulation": false,
+    "protocolRunState": 0,
+    "startTime": "0001-01-01T00:00:00",
+    "estimatedEndTime": "0001-01-01T00:00:00",
+    "endPauseTime": "0001-01-01T00:00:00",
+    "protocolName": "MlPrepSelfCalibration",
+    "currentStep": 0,
+    "preLoadThermalDeviceUsed": "None",
+    "preLoadHepaFiltration": false
+  },
+  "errors/check-for-pending-errors": [],
+  "service-software-api/sensor-status": {
+    "isEnclosurePresent": true,
+    "isDoorClosed": true,
+    "isXHome": true,
+    "fan1Rpm": 4302,
+    "fan2Rpm": 0,
+    "mphSensorState": {
+      "present": false,
+      "sleeveSensors": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "yHome": false,
+      "zHome": false,
+      "squeezeHome": false,
+      "dispenserHome": false
+    },
+    "independentChannelsSensorState": {
+      "present": true,
+      "frontChannel": {
+        "sleeveSensor": false,
+        "yHome": true,
+        "zHome": true,
+        "squeezeHome": true,
+        "dispenserHome": false
+      },
+      "rearChannel": {
+        "sleeveSensor": false,
+        "yHome": true,
+        "zHome": true,
+        "squeezeHome": true,
+        "dispenserHome": false
+      }
+    }
+  },
+  "service-software-api/has-tips": false,
+  "service-software-api/is-parked": true,
+  "errors?offset=0&limit=5": {
+    "totalItemCount": 52,
+    "currentOffset": 0,
+    "items": [
+      {
+        "id": "7dc9ed038908436ca84638ee26d6ff5c",
+        "message": "The assay 'TipPickupDiagnosticAssay - Assay 1' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+        "date": "2026-10-24T16:50:24.6514181Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "cd0ed2355c7f453bb1b08c1d84ee7a39",
+        "message": "The assay 'Preparation - Assay' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+        "date": "2026-10-24T16:50:24.6414325Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "48a0b37c97984f9db58a177f57da9318",
+        "message": "One or more errors occurred in XSL Command Pick Up Tips. Select a recovery action for each error.",
+        "date": "2026-10-24T16:50:09.5912139Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "8f031aab32464cba81d2168c550a6916",
+        "message": "One or more errors occurred. See InnerExceptions for details",
+        "date": "2026-10-24T16:50:09.5792332Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "9fba18ad05994b3385140b6309fc2f43",
+        "message": "Firmware Reported Error: \r\n Rear Channel aborted requested action",
+        "date": "2026-10-24T16:50:09.5712464Z",
+        "severity": 1,
+        "handled": true
+      }
+    ]
+  },
+  "checked_at": "2026-10-24T22:16:15.840223+00:00"
+}

@@ -1,0 +1,331 @@
+﻿{
+    "arm_and_plate_supported_confirmation":  false,
+    "sequence":  {
+                     "active":  false,
+                     "detection_ts":  0.0,
+                     "log":  [
+                                 {
+                                     "level":  "info",
+                                     "msg":  "Travel from true Home to the taught Hamilton entrance",
+                                     "t":  0.0
+                                 },
+                                 {
+                                     "level":  "info",
+                                     "msg":  "Executing 3 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+                                     "t":  0.3
+                                 }
+                             ],
+                     "name":  "lacry_plan",
+                     "result":  {
+                                    "done":  [
+                                                 "Travel from true Home to the taught Hamilton entrance"
+                                             ],
+                                    "ok":  true
+                                },
+                     "state":  "done",
+                     "target":  null
+                 },
+    "researcher":  {
+                       "busy":  false,
+                       "camera":  "Camera image unavailable",
+                       "camera_note":  "Camera images are not needed for station capture. Depth tools are in Developer view.",
+                       "capabilities":  {
+                                            "capture":  true,
+                                            "connect":  false,
+                                            "pause":  false,
+                                            "record":  false,
+                                            "run":  false,
+                                            "stop":  false
+                                        },
+                       "checked_at":  1792496012.709707,
+                       "connected":  true,
+                       "descent":  {
+                                       "active":  false,
+                                       "blocker":  "Run Align before Descend.",
+                                       "can_start":  false,
+                                       "message":  "Descend adjusts the claws above the plate, opens them, then lowers to the taught position."
+                                   },
+                       "draft":  {
+                                     "capture_kind":  "positions_and_observed_actions",
+                                     "complete":  false,
+                                     "created_at":  "2026-10-17T00:38:28.681194+00:00",
+                                     "executable":  false,
+                                     "id":  "f4e29ac5d3e1453ebfe2a9c86b145cd7",
+                                     "name":  "Home to Hamilton",
+                                     "next_station":  "Descend",
+                                     "reviewed":  false,
+                                     "revision":  73,
+                                     "saved_at":  null,
+                                     "waypoints":  [
+                                                       {
+                                                           "captured_at":  "2026-10-17T00:38:31.068256+00:00",
+                                                           "kind":  "position",
+                                                           "label":  "Home",
+                                                           "station":  "Home"
+                                                       },
+                                                       {
+                                                           "captured_at":  "2026-10-20T09:18:36.280876+00:00",
+                                                           "kind":  "executed_algorithm",
+                                                           "label":  "Calibrate",
+                                                           "station":  "Calibrate"
+                                                       },
+                                                       {
+                                                           "captured_at":  "2026-10-20T09:20:56.161431+00:00",
+                                                           "kind":  "executed_algorithm",
+                                                           "label":  "Align",
+                                                           "station":  "Align"
+                                                       }
+                                                   ],
+                                     "workflow":  [
+                                                      "Home",
+                                                      "Calibrate",
+                                                      "Align",
+                                                      "Descend",
+                                                      "Grip",
+                                                      "Hamilton"
+                                                  ]
+                                 },
+                       "grip":  {
+                                    "active":  false,
+                                    "blocker":  "Complete Descent before Grip.",
+                                    "can_start":  false,
+                                    "descent_id":  null,
+                                    "force_control":  false,
+                                    "grasp_verified":  false,
+                                    "increment_phases_mm":  [
+                                                                1,
+                                                                0.2,
+                                                                0.1
+                                                            ],
+                                    "message":  "After Descent, close to the configured setting and inspect before lifting.",
+                                    "method":  "staged_reference_position",
+                                    "speed":  5,
+                                    "supervised_validation":  true,
+                                    "target_e1_mm":  3.7
+                                },
+                       "hand_claw":  {
+                                         "active":  false,
+                                         "blocker":  "",
+                                         "can_open":  true,
+                                         "message":  "Uses the same gripper command as Developer Open.",
+                                         "needs_prepare":  false
+                                     },
+                       "hand_guiding":  {
+                                            "active":  false,
+                                            "blocked":  false,
+                                            "can_end":  false,
+                                            "can_start":  true,
+                                            "message":  "Ready. Start will stop the idle controller program, then enable hand-guiding. Keep the arm supported.",
+                                            "state":  "off"
+                                        },
+                       "home":  {
+                                    "active":  false,
+                                    "area_target_id":  null,
+                                    "at_home":  false,
+                                    "blocker":  "",
+                                    "can_go_to_area":  false,
+                                    "can_start":  true,
+                                    "message":  "New direct Hamilton/Home connector: X215.74/Y-249.00/Z212.00 to true Home X289.97/Y62.63/Z248.02, including wrist rotation. Confirm the full arm, claw and any plate sweep is clear before this first revised-route test. Hamilton arrival is now Z38.61 mm, near J1 zero; the revised height has not yet had an automatic trial. IK checks do not verify physical clearance.",
+                                    "target_id":  "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+                                    "translation_speed":  137
+                                },
+                       "imitation":  {
+                                         "active":  false,
+                                         "blocker":  "A reviewed Descend/Grip reference is needed. Complete manual teaching, then review it in Developer view.",
+                                         "can_descend":  false,
+                                         "can_grip":  false,
+                                         "configured":  true,
+                                         "grip_unavailable":  true,
+                                         "message":  "Ready to check the saved reference.",
+                                         "reference_id":  null,
+                                         "stage":  "idle"
+                                     },
+                       "issues":  [
+                                      "Full routine playback is not available yet. Separate taught Descend and Grip actions are in Run."
+                                  ],
+                       "latest_hamilton":  {
+                                               "active":  false,
+                                               "blocker":  "Move to the recorded Home-area or Hamilton endpoint first. No connecting move is added.",
+                                               "can_start":  false,
+                                               "direction":  null,
+                                               "message":  "Latest tested route: Home-area ↔ Hamilton.",
+                                               "path_id":  "6d532ee8f22607688bee8943e05449415c7a0ad15c59a895f91cd3d251d3c420",
+                                               "progress":  0,
+                                               "speed":  137
+                                           },
+                       "ok":  true,
+                       "pickup_plan":  {
+                                           "active":  false,
+                                           "configured":  true,
+                                           "message":  "Ask Haiku to interpret the recorded pickup.",
+                                           "stage":  "idle"
+                                       },
+                       "plate_workflow":  {
+                                              "active":  false,
+                                              "can_align":  false,
+                                              "can_calibrate":  true,
+                                              "can_stop":  false,
+                                              "guidance":  null,
+                                              "message":  "Run calibration and alignment separately. Record Descend and Grip after performing them manually.",
+                                              "setup_message":  "Calibrate is available again. Run it to create a fresh target for Align.",
+                                              "step":  null
+                                          },
+                       "recorded_return":  {
+                                               "active":  false,
+                                               "blocker":  "The selected path must start at X276.03, Y79.94, Z166.41, Rz1.98. Position and joint configuration must match; no approach movement is added.",
+                                               "can_start":  false,
+                                               "direction":  "to_hamilton",
+                                               "executor":  "stepwise",
+                                               "message":  "Replay the taught Hamilton return to its demonstrated endpoint.",
+                                               "path_id":  "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+                                               "progress":  0,
+                                               "queue":  {
+                                                             "available":  true,
+                                                             "max_speed_mm_s":  137,
+                                                             "message":  "Controller queue available. Groups nearby taught points into longer movements.",
+                                                             "state":  4,
+                                                             "submitted":  3,
+                                                             "version":  220108
+                                                         }
+                                           },
+                       "robot":  "Robot connected",
+                       "routines":  [
+                                        {
+                                            "capture_kind":  "positions_and_observed_actions",
+                                            "complete":  true,
+                                            "created_at":  "2026-10-16T17:39:01.042814+00:00",
+                                            "executable":  false,
+                                            "id":  "820cc19904d449cca2a8994990cc197a",
+                                            "name":  "Home to Hamilton",
+                                            "next_station":  null,
+                                            "reviewed":  true,
+                                            "revision":  7,
+                                            "saved_at":  "2026-10-16T17:48:50.848550+00:00",
+                                            "waypoints":  [
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:40:28.046236+00:00",
+                                                                  "kind":  "position",
+                                                                  "label":  "Home",
+                                                                  "station":  "Home"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:41:25.392613+00:00",
+                                                                  "kind":  "executed_algorithm",
+                                                                  "label":  "Calibrate",
+                                                                  "station":  "Calibrate"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:42:31.519559+00:00",
+                                                                  "kind":  "executed_algorithm",
+                                                                  "label":  "Align",
+                                                                  "station":  "Align"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:42:56.888387+00:00",
+                                                                  "kind":  "manual_action",
+                                                                  "label":  "Descend",
+                                                                  "station":  "Descend"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:47:15.739275+00:00",
+                                                                  "kind":  "manual_action",
+                                                                  "label":  "Grip",
+                                                                  "station":  "Grip"
+                                                              },
+                                                              {
+                                                                  "captured_at":  "2026-10-16T17:48:46.659428+00:00",
+                                                                  "kind":  "position",
+                                                                  "label":  "Hamilton",
+                                                                  "station":  "Hamilton"
+                                                              }
+                                                          ],
+                                            "workflow":  [
+                                                             "Home",
+                                                             "Calibrate",
+                                                             "Align",
+                                                             "Descend",
+                                                             "Grip",
+                                                             "Hamilton"
+                                                         ]
+                                        }
+                                    ]
+                   },
+    "state":  {
+                  "camera":  {
+                                 "age_s":  135.7,
+                                 "device":  {
+                                                "ip":  "192.168.201.89",
+                                                "model":  "JHEM600GM-HM",
+                                                "serial":  "457108625727"
+                                            },
+                                 "enabled":  true,
+                                 "error":  "",
+                                 "open":  true
+                             },
+                  "envelope":  {
+                                   "X":  {
+                                             "max":  450.0,
+                                             "min":  200.0
+                                         },
+                                   "Y":  {
+                                             "max":  380.0,
+                                             "min":  -250.0
+                                         },
+                                   "Z":  {
+                                             "max":  400.0,
+                                             "min":  70.0
+                                         },
+                                   "enabled":  true
+                               },
+                  "robot":  {
+                                "connected":  true,
+                                "control_mode":  {
+                                                     "mode":  "auto",
+                                                     "value":  1
+                                                 },
+                                "enabled":  true,
+                                "endpoint":  "192.168.201.220:56788",
+                                "errors":  [
+
+                                           ],
+                                "external_axes":  {
+                                                      "E1":  -0.014734156138729304
+                                                  },
+                                "external_axes_source":  "native_motion_status",
+                                "external_axes_units":  {
+                                                            "E1":  "mm"
+                                                        },
+                                "joints":  {
+                                               "J1":  0.011392712472176074,
+                                               "J2":  -55.64185567991468,
+                                               "J3":  133.06980617349925,
+                                               "J4":  -79.32806875660276
+                                           },
+                                "lua_app_initialized":  true,
+                                "ok":  true,
+                                "pose_mm":  {
+                                                "Rx":  0.0,
+                                                "Ry":  0.0,
+                                                "Rz":  -1.899,
+                                                "X":  195.341,
+                                                "Y":  -360.31,
+                                                "Z":  38.61
+                                            },
+                                "program_state":  {
+                                                      "state":  "running",
+                                                      "value":  1
+                                                  },
+                                "system_state":  {
+                                                     "state":  "running",
+                                                     "value":  2
+                                                 }
+                            },
+                  "sequence":  {
+                                   "active":  false,
+                                   "name":  "lacry_plan",
+                                   "state":  "done"
+                               },
+                  "target":  null,
+                  "ts":  1792496012.647397
+              }
+}

@@ -1,0 +1,48 @@
+﻿{
+    "schema":  "cephla.supervised-48well-squid-trial.v1",
+    "status":  "prepared_pending_loading_position_and_clearance_confirmation",
+    "created_at":  "2026-10-27T10:44:22.6216501Z",
+    "plate_profile_id":  "48_well_projected_20261026",
+    "accepted_grip_e1_mm":  3.9,
+    "source_batch":  "operator_ui/reports/projected_alignment/three_repeat_batch_20261027.json",
+    "travel_plan":  {
+                        "blockers":  [
+
+                                     ],
+                        "counts":  null,
+                        "executable":  true,
+                        "id":  "2026-10-27T10:43:36.874599+00:00:1793097816874",
+                        "labels":  [
+                                       "Move to Squid"
+                                   ],
+                        "pickup_step_count":  0,
+                        "repetitions":  1,
+                        "requirements":  [
+                                             "Keep the route clear, release the arm, and supervise the emergency stop.",
+                                             "Any held plate is secure. This run leaves the gripper unchanged."
+                                         ],
+                        "steps":  [
+                                      {
+                                          "kind":  "travel",
+                                          "label":  "Move to the microscope using the tested approach"
+                                      }
+                                  ],
+                        "summary":  "Home → Squid using the taught routes."
+                    },
+    "requested_sequence":  "Reuse taught Home-to-Squid travel, inspect first 48-well seating before release, then supervised drop-off and pickup",
+    "proposed_release_e1_mm":  5,
+    "proposed_pickup_e1_mm":  3.9,
+    "proposed_lift_mm":  5,
+    "proposed_lift_speed":  5,
+    "handling_status":  "48-well Squid handling not yet validated; existing two-disk routine closes to 3.7 and must not be called unchanged",
+    "squid_connection":  {
+                             "available":  true,
+                             "completion_confirmed":  false,
+                             "connected":  false,
+                             "job":  null,
+                             "message":  "Connect to Squid to follow imaging progress.",
+                             "simulation":  null,
+                             "status":  "disconnected"
+                         },
+    "hardware_motion_started":  false
+}

@@ -1,0 +1,410 @@
+{"time": "2026-10-25T02:28:25.662472+00:00", "kind": "preflight", "data": {"instruments/connection-info": ["Serial Number: PRPGD2427", "Instrument Name: PRPGD2427", "Connected: True", "Controlling PC Name: DESKTOP-9DPRVQ3", "Initialization Status: Initialized", "Enclosure Status: Present", "Individual Channels: Present", "MPH8: Not Present", "HHS: Not Present", "HHC: Not Present", "HEPAUV: Not Present"], "instruments/global-run-state": "Idle", "service-software-api/sensor-status": {"isEnclosurePresent": true, "isDoorClosed": true, "isXHome": true, "fan1Rpm": 4271, "fan2Rpm": 0, "mphSensorState": {"present": false, "sleeveSensors": [false, false, false, false, false, false, false, false], "yHome": false, "zHome": false, "squeezeHome": false, "dispenserHome": false}, "independentChannelsSensorState": {"present": true, "frontChannel": {"sleeveSensor": false, "yHome": true, "zHome": true, "squeezeHome": true, "dispenserHome": false}, "rearChannel": {"sleeveSensor": false, "yHome": true, "zHome": true, "squeezeHome": true, "dispenserHome": false}}}, "service-software-api/has-tips": false, "errors/check-for-pending-errors": [], "protocol-run": {"protocolId": 0, "runDatalId": null, "isRunInProgress": false, "isSimulation": false, "protocolRunState": 0, "startTime": "0001-01-01T00:00:00", "estimatedEndTime": "0001-01-01T00:00:00", "endPauseTime": "0001-01-01T00:00:00", "protocolName": null, "currentStep": 0, "preLoadThermalDeviceUsed": "None", "preLoadHepaFiltration": false}, "verification/status": {"isWorkflowInProgress": false, "isRunInProgress": false, "isServiceRoutineInProgress": false, "startTime": "2026-10-24T16:43:37.7816612-07:00", "currentIndex": 0, "runs": [], "serviceRoutine": null}}}
+{"time": "2026-10-25T02:28:26.875514+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:26.876856+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:26.878116+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:26.879125+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:26.879125+00:00", "kind": "direct_interlock_preflight", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:26.879125+00:00", "kind": "command", "data": {"name": "PrepGetIsInitialized", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:26.890034+00:00", "kind": "response", "data": {"name": "PrepGetIsInitialized", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:26.890034+00:00", "kind": "command", "data": {"name": "PrepGetPositions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:26.925266+00:00", "kind": "response", "data": {"name": "PrepGetPositions", "result": {"positions": [{"default_values": false, "channel": 1, "position_x": 289.3044738769531, "position_y": 344.9891357421875, "position_z": 165.4965057373047}, {"default_values": false, "channel": 2, "position_x": 289.3044738769531, "position_y": 365.0147705078125, "position_z": 165.49647521972656}]}}}
+{"time": "2026-10-25T02:28:26.926265+00:00", "kind": "command", "data": {"name": "PrepGetTipAndNeedleDefinitions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:26.929266+00:00", "kind": "response", "data": {"name": "PrepGetTipAndNeedleDefinitions", "result": {"definitions": [{"default_values": true, "id": 0, "volume": 0.0, "length": 0.0, "tip_type": 0, "has_filter": false, "is_needle": false, "is_tool": false, "label": "No Tip"}, {"default_values": true, "id": 1, "volume": 400.0, "length": 51.900001525878906, "tip_type": 2, "has_filter": false, "is_needle": false, "is_tool": false, "label": "300uL StdVol"}, {"default_values": true, "id": 2, "volume": 360.0, "length": 51.900001525878906, "tip_type": 2, "has_filter": true, "is_needle": false, "is_tool": false, "label": "300uL StdVolFilter"}, {"default_values": true, "id": 3, "volume": 15.0, "length": 21.899999618530273, "tip_type": 1, "has_filter": false, "is_needle": false, "is_tool": false, "label": "10uL LowVol"}, {"default_values": true, "id": 4, "volume": 10.0, "length": 21.899999618530273, "tip_type": 1, "has_filter": true, "is_needle": false, "is_tool": false, "label": "5uL LowVolFilter"}, {"default_values": true, "id": 5, "volume": 1250.0, "length": 87.0999984741211, "tip_type": 3, "has_filter": false, "is_needle": false, "is_tool": false, "label": "1000uL HiVol"}, {"default_values": true, "id": 6, "volume": 1065.0, "length": 87.0999984741211, "tip_type": 3, "has_filter": true, "is_needle": false, "is_tool": false, "label": "1000uL HiVolFilter"}, {"default_values": true, "id": 7, "volume": 700.0, "length": 51.900001525878906, "tip_type": 2, "has_filter": false, "is_needle": true, "is_tool": false, "label": "600uL StdVolNeedle"}, {"default_values": true, "id": 8, "volume": 350.0, "length": 51.900001525878906, "tip_type": 2, "has_filter": false, "is_needle": true, "is_tool": false, "label": "300uL StdVolNeedle"}, {"default_values": true, "id": 9, "volume": 1250.0, "length": 87.0999984741211, "tip_type": 3, "has_filter": false, "is_needle": true, "is_tool": false, "label": "1000uL HiVolNeedle"}, {"default_values": true, "id": 10, "volume": 400.0, "length": 51.900001525878906, "tip_type": 0, "has_filter": false, "is_needle": false, "is_tool": false, "label": "300uL NoType"}, {"default_values": true, "id": 11, "volume": 1.0, "length": 22.899999618530273, "tip_type": 0, "has_filter": false, "is_needle": false, "is_tool": true, "label": "CO-RE Gripper"}, {"default_values": true, "id": 12, "volume": 15.0, "length": 49.0, "tip_type": 2, "has_filter": false, "is_needle": true, "is_tool": false, "label": "10uL StdVolNeedle"}, {"default_values": true, "id": 13, "volume": 350.0, "length": 49.0, "tip_type": 2, "has_filter": false, "is_needle": true, "is_tool": false, "label": "300uL StdVolNeedleShort"}, {"default_values": true, "id": 14, "volume": 1250.0, "length": 82.0, "tip_type": 3, "has_filter": false, "is_needle": true, "is_tool": false, "label": "1000uL HiVolNeedleShort"}, {"default_values": true, "id": 15, "volume": 1.0, "length": 22.0, "tip_type": 0, "has_filter": false, "is_needle": false, "is_tool": true, "label": "Suction Gripper"}]}}}
+{"time": "2026-10-25T02:28:26.929266+00:00", "kind": "command", "data": {"name": "PrepGetXSpeedScale", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:26.931266+00:00", "kind": "response", "data": {"name": "PrepGetXSpeedScale", "result": {"value": 2}}}
+{"time": "2026-10-25T02:28:26.931266+00:00", "kind": "command", "data": {"name": "PrepGetZSpeedScale", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:26.932483+00:00", "kind": "response", "data": {"name": "PrepGetZSpeedScale", "result": {"value": 2}}}
+{"time": "2026-10-25T02:28:26.932483+00:00", "kind": "command", "data": {"name": "PrepMethodBegin", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "automatic_pause": true}}}
+{"time": "2026-10-25T02:28:26.933484+00:00", "kind": "response", "data": {"name": "PrepMethodBegin", "result": null}}
+{"time": "2026-10-25T02:28:26.934478+00:00", "kind": "command", "data": {"name": "PrepSetXSpeedScale", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "value": 2}}}
+{"time": "2026-10-25T02:28:26.935612+00:00", "kind": "response", "data": {"name": "PrepSetXSpeedScale", "result": null}}
+{"time": "2026-10-25T02:28:26.935612+00:00", "kind": "command", "data": {"name": "PrepSetZSpeedScale", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "value": 2}}}
+{"time": "2026-10-25T02:28:26.936617+00:00", "kind": "response", "data": {"name": "PrepSetZSpeedScale", "result": null}}
+{"time": "2026-10-25T02:28:26.936617+00:00", "kind": "command", "data": {"name": "PrepSetXSpeedScale", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "value": 2}}}
+{"time": "2026-10-25T02:28:26.937616+00:00", "kind": "response", "data": {"name": "PrepSetXSpeedScale", "result": null}}
+{"time": "2026-10-25T02:28:26.938625+00:00", "kind": "command", "data": {"name": "PrepGetChannelBounds", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.020004+00:00", "kind": "response", "data": {"name": "PrepGetChannelBounds", "result": {"bounds": [{"channel": 1, "x_min": 0.7825088500976562, "x_max": 299.7825012207031, "y_min": -9.0, "y_max": 376.0, "z_min": 18.200000762939453, "z_max": 165.60000610351562}, {"channel": 2, "x_min": 0.7825088500976562, "x_max": 299.7825012207031, "y_min": 0.0, "y_max": 385.0, "z_min": 18.200000762939453, "z_max": 165.60000610351562}]}}}
+{"time": "2026-10-25T02:28:27.021004+00:00", "kind": "command", "data": {"name": "PrepGetPositions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.041533+00:00", "kind": "response", "data": {"name": "PrepGetPositions", "result": {"positions": [{"default_values": false, "channel": 1, "position_x": 289.3044738769531, "position_y": 344.9891357421875, "position_z": 165.4965057373047}, {"default_values": false, "channel": 2, "position_x": 289.3044738769531, "position_y": 365.0147705078125, "position_z": 165.49647521972656}]}}}
+{"time": "2026-10-25T02:28:27.143831+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.145342+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:27.145342+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.146347+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:27.147347+00:00", "kind": "monitor_preflight", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:27.147347+00:00", "kind": "command", "data": {"name": "PrepMoveToPosition", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "move_parameters": {"default_values": false, "gantry_x_position": 289.3044738769531, "axis_parameters": [{"default_values": false, "channel": 1, "y_position": 344.9891357421875, "z_position": 165.50000610351563}, {"default_values": false, "channel": 2, "y_position": 365.0147705078125, "z_position": 165.50000610351563}]}}}}
+{"time": "2026-10-25T02:28:27.340608+00:00", "kind": "response", "data": {"name": "PrepMoveToPosition", "result": null}}
+{"time": "2026-10-25T02:28:27.341609+00:00", "kind": "command", "data": {"name": "PrepGetPositions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.362319+00:00", "kind": "response", "data": {"name": "PrepGetPositions", "result": {"positions": [{"default_values": false, "channel": 1, "position_x": 289.3044738769531, "position_y": 344.9891357421875, "position_z": 165.4965057373047}, {"default_values": false, "channel": 2, "position_x": 289.3044738769531, "position_y": 365.0147705078125, "position_z": 165.49647521972656}]}}}
+{"time": "2026-10-25T02:28:27.563321+00:00", "kind": "command", "data": {"name": "PrepGetPositions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.584094+00:00", "kind": "response", "data": {"name": "PrepGetPositions", "result": {"positions": [{"default_values": false, "channel": 1, "position_x": 289.3044738769531, "position_y": 344.9891357421875, "position_z": 165.4965057373047}, {"default_values": false, "channel": 2, "position_x": 289.3044738769531, "position_y": 365.0147705078125, "position_z": 165.49647521972656}]}}}
+{"time": "2026-10-25T02:28:27.584094+00:00", "kind": "position_readback", "data": {"1": [289.3044738769531, 344.9891357421875, 165.4965057373047], "2": [289.3044738769531, 365.0147705078125, 165.49647521972656]}}
+{"time": "2026-10-25T02:28:27.585094+00:00", "kind": "command", "data": {"name": "PrepSetXSpeedScale", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "value": 10}}}
+{"time": "2026-10-25T02:28:27.586095+00:00", "kind": "response", "data": {"name": "PrepSetXSpeedScale", "result": null}}
+{"time": "2026-10-25T02:28:27.586095+00:00", "kind": "command", "data": {"name": "PrepGetChannelBounds", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.612687+00:00", "kind": "response", "data": {"name": "PrepGetChannelBounds", "result": {"bounds": [{"channel": 1, "x_min": 0.7825088500976562, "x_max": 299.7825012207031, "y_min": -9.0, "y_max": 376.0, "z_min": 18.200000762939453, "z_max": 165.60000610351562}, {"channel": 2, "x_min": 0.7825088500976562, "x_max": 299.7825012207031, "y_min": 0.0, "y_max": 385.0, "z_min": 18.200000762939453, "z_max": 165.60000610351562}]}}}
+{"time": "2026-10-25T02:28:27.612687+00:00", "kind": "command", "data": {"name": "PrepGetPositions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.634475+00:00", "kind": "response", "data": {"name": "PrepGetPositions", "result": {"positions": [{"default_values": false, "channel": 1, "position_x": 289.3044738769531, "position_y": 344.9891357421875, "position_z": 165.4965057373047}, {"default_values": false, "channel": 2, "position_x": 289.3044738769531, "position_y": 365.0147705078125, "position_z": 165.49647521972656}]}}}
+{"time": "2026-10-25T02:28:27.737205+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.739721+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:27.739721+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.740721+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:27.741722+00:00", "kind": "monitor_preflight", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:27.741722+00:00", "kind": "command", "data": {"name": "PrepMoveToPosition", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "move_parameters": {"default_values": false, "gantry_x_position": 47.10327608790838, "axis_parameters": [{"default_values": false, "channel": 1, "y_position": 39.63014293508387, "z_position": 165.5}, {"default_values": false, "channel": 2, "y_position": 66.62910321329929, "z_position": 165.5}]}}}}
+{"time": "2026-10-25T02:28:27.992079+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.993296+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:27.993296+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:27.995301+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:27.995301+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:28.246025+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:28.247020+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:28.248018+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:28.248522+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:28.249527+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:28.500071+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:28.501068+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:28.501068+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:28.502527+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:28.502527+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:28.754848+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:28.755860+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:28.756858+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:28.757860+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:28.757860+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:29.007863+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:29.008864+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:29.009862+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:29.009862+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:29.011366+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:29.263276+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:29.264962+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:29.264962+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:29.266486+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:29.266486+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:29.516928+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:29.518464+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:29.518464+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:29.519510+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:29.519510+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:29.770980+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:29.772492+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:29.772492+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:29.774486+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:29.774486+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:30.025909+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:30.026913+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:30.027911+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:30.028921+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:30.028921+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:30.279325+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:30.280318+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:30.281325+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:30.282326+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:30.282326+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:30.533242+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:30.534261+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:30.535270+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:30.536836+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:30.536836+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:30.787537+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:30.789062+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:30.789574+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:30.790614+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:30.790614+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:31.042471+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:31.043388+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:31.044465+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:31.045463+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:31.046075+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:31.298494+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:31.300208+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:31.300208+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:31.301100+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:31.302188+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:31.553091+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:31.554188+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:31.554188+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:31.556204+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:31.556204+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:31.807876+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:31.808802+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:31.809848+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:31.810802+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:31.810802+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:32.063306+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.064315+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:32.064315+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.066324+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:32.066324+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:32.139495+00:00", "kind": "response", "data": {"name": "PrepMoveToPosition", "result": null}}
+{"time": "2026-10-25T02:28:32.139495+00:00", "kind": "command", "data": {"name": "PrepGetPositions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.160892+00:00", "kind": "response", "data": {"name": "PrepGetPositions", "result": {"positions": [{"default_values": false, "channel": 1, "position_x": 46.94350814819336, "position_y": 39.62689208984375, "position_z": 165.4965057373047}, {"default_values": false, "channel": 2, "position_x": 46.94350814819336, "position_y": 66.6441650390625, "position_z": 165.49647521972656}]}}}
+{"time": "2026-10-25T02:28:32.362945+00:00", "kind": "command", "data": {"name": "PrepGetPositions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.384019+00:00", "kind": "response", "data": {"name": "PrepGetPositions", "result": {"positions": [{"default_values": false, "channel": 1, "position_x": 47.105506896972656, "position_y": 39.62689208984375, "position_z": 165.4965057373047}, {"default_values": false, "channel": 2, "position_x": 47.105506896972656, "position_y": 66.6441650390625, "position_z": 165.49647521972656}]}}}
+{"time": "2026-10-25T02:28:32.585375+00:00", "kind": "command", "data": {"name": "PrepGetPositions", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.606205+00:00", "kind": "response", "data": {"name": "PrepGetPositions", "result": {"positions": [{"default_values": false, "channel": 1, "position_x": 47.105506896972656, "position_y": 39.62689208984375, "position_z": 165.4965057373047}, {"default_values": false, "channel": 2, "position_x": 47.105506896972656, "position_y": 66.6441650390625, "position_z": 165.49647521972656}]}}}
+{"time": "2026-10-25T02:28:32.607124+00:00", "kind": "position_readback", "data": {"1": [47.105506896972656, 39.62689208984375, 165.4965057373047], "2": [47.105506896972656, 66.6441650390625, 165.49647521972656]}}
+{"time": "2026-10-25T02:28:32.607124+00:00", "kind": "command", "data": {"name": "PrepSetXSpeedScale", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "value": 2}}}
+{"time": "2026-10-25T02:28:32.608215+00:00", "kind": "response", "data": {"name": "PrepSetXSpeedScale", "result": null}}
+{"time": "2026-10-25T02:28:32.608215+00:00", "kind": "command", "data": {"name": "PrepSetZSpeedScale", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "value": 1}}}
+{"time": "2026-10-25T02:28:32.610208+00:00", "kind": "response", "data": {"name": "PrepSetZSpeedScale", "result": null}}
+{"time": "2026-10-25T02:28:32.610208+00:00", "kind": "command", "data": {"name": "PrepGetChannelBounds", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.636026+00:00", "kind": "response", "data": {"name": "PrepGetChannelBounds", "result": {"bounds": [{"channel": 1, "x_min": 0.7825088500976562, "x_max": 299.7825012207031, "y_min": -9.0, "y_max": 376.0, "z_min": 18.200000762939453, "z_max": 165.60000610351562}, {"channel": 2, "x_min": 0.7825088500976562, "x_max": 299.7825012207031, "y_min": 0.0, "y_max": 385.0, "z_min": 18.200000762939453, "z_max": 165.60000610351562}]}}}
+{"time": "2026-10-25T02:28:32.637032+00:00", "kind": "pickup_intent", "data": {"channel": 1, "opening": {"column": 4, "row": 3, "observed": true, "crop_pixel": [321.38515496303535, 258.1182548410586], "exported_frame_xyz_mm": [47.10327608790838, 39.63014293508387, 66.34785889123359]}, "seat_and_seek": {"default_values": false, "channel": 1, "x_position": 47.1033, "y_position": 39.6301, "z_position": 58.3479, "z_seek": 71.34790000000001}, "seek_speed_mm_s": 3.0, "pickup_z_scale": 1, "retry": false}}
+{"time": "2026-10-25T02:28:32.738464+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.740346+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:32.740346+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.741426+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:32.741426+00:00", "kind": "monitor_preflight", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:32.742459+00:00", "kind": "command", "data": {"name": "PrepPickUpTipsById", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}, "tip_positions": [{"default_values": false, "channel": 1, "x_position": 47.1033, "y_position": 39.6301, "z_position": 58.3479, "z_seek": 71.34790000000001}], "final_z": 165.5, "seek_speed": 3.0, "tip_definition_id": 2, "enable_tadm": false, "dispenser_volume": 0, "dispenser_speed": 250}}}
+{"time": "2026-10-25T02:28:32.994179+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.995136+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:32.995136+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:32.997180+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:32.997180+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:33.249515+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:33.250435+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:33.251526+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:33.252528+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:33.252528+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:33.503313+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:33.504303+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:33.505302+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:33.506316+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:33.506839+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:33.757871+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:33.759574+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:33.759574+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:33.759574+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:33.759574+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:34.012475+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:34.013977+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:34.013977+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:34.015493+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:34.015493+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:34.267447+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:34.268446+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:34.269445+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:34.270460+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:34.270460+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:34.520879+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:34.521880+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:34.522881+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:34.522881+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:34.524385+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:34.774932+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:34.775932+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:34.776932+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:34.777952+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:34.777952+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:35.028596+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:35.029573+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:35.030574+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:35.031631+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:35.031631+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:35.282762+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:35.283771+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:35.283771+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:35.285171+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:35.286170+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:35.536431+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:35.537434+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:35.538436+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:35.539450+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:35.539450+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:35.792346+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:35.793251+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:35.793251+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:35.795718+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:35.795718+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:36.048122+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:36.049669+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:36.049669+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:36.051673+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:36.051673+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:36.303299+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:36.304298+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:36.305296+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:36.306314+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:36.306314+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:36.558071+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:36.559069+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:36.559069+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:36.560572+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:36.561575+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:36.812917+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:36.814191+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:36.814191+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:36.815196+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:36.816211+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:37.066794+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:37.068916+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:37.068916+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:37.069804+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:37.070883+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:37.323029+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:37.324032+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:37.325039+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:37.326033+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:37.326033+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:37.577848+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:37.578837+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:37.579842+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:37.581444+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:37.581444+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:37.833653+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:37.834717+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:37.835722+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:37.836777+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:37.836777+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:38.087743+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:38.088863+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:38.088863+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:38.091425+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:38.091425+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:38.342408+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:38.343409+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:38.344408+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:38.345409+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:38.345409+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:38.595868+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:38.596975+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:38.597979+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:38.600007+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:38.600007+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:38.850366+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:38.851365+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:38.851365+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:38.853210+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:38.853210+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:39.103644+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:39.105678+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:39.105678+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:39.106702+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:39.106702+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:39.358046+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:39.358960+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:39.360035+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:39.360960+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:39.360960+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:39.612475+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:39.613487+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:39.614479+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:39.615779+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:39.615779+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:39.866688+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:39.869195+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:39.869195+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:39.870350+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:39.870350+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:40.121638+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:40.122873+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:40.123879+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:40.124878+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:40.124878+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:40.376548+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:40.377548+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:40.377548+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:40.378549+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:40.378549+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:40.630014+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:40.631557+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:40.631557+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:40.633064+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:40.633064+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:40.885616+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:40.887120+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:40.887120+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:40.888597+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:40.888597+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:41.139678+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:41.140679+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:41.141679+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:41.142679+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:41.142679+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:41.392832+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:41.394431+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:41.394431+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:41.395346+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:41.396345+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:41.648158+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:41.649662+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:41.649662+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:41.651173+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:41.651173+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:41.902403+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:41.903452+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:41.904462+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:41.905936+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:41.905936+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:42.156327+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:42.158327+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:42.158327+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:42.159327+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:42.160399+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:42.410534+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:42.412534+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:42.412534+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:42.413532+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:42.414532+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:42.664833+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:42.665837+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:42.666935+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:42.667936+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:42.667936+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:42.918125+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:42.919132+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:42.920133+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:42.921683+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:42.921683+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:43.173583+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:43.174578+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:43.174578+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:43.176587+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:43.176587+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:43.428215+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:43.430230+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:43.430230+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:43.431236+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:43.431236+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:43.683882+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:43.684388+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:43.684388+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:43.686898+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:43.686898+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:43.938018+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:43.939550+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:43.939550+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:43.940642+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:43.940642+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:44.192666+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:44.193622+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:44.193622+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:44.195693+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:44.195693+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:44.447642+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:44.448639+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:44.449651+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:44.450653+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:44.451651+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:44.701787+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:44.703300+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:44.703300+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:44.705304+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:44.705304+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:44.957683+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:44.959263+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:44.959263+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:44.960355+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:44.961353+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:45.212092+00:00", "kind": "command", "data": {"name": "PrepGetIsDoorClosed", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:45.213096+00:00", "kind": "response", "data": {"name": "PrepGetIsDoorClosed", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:45.214132+00:00", "kind": "command", "data": {"name": "PrepGetIsEnclosurePresent", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:45.215048+00:00", "kind": "response", "data": {"name": "PrepGetIsEnclosurePresent", "result": {"value": true}}}
+{"time": "2026-10-25T02:28:45.215048+00:00", "kind": "monitor", "data": {"isDoorClosed": true, "isEnclosurePresent": true, "source": "direct_controller_status"}}
+{"time": "2026-10-25T02:28:45.431094+00:00", "kind": "command", "data": {"name": "PrepMethodAbort", "parameters": {"dest": {"module": -1, "node": -1, "object": -1}}}}
+{"time": "2026-10-25T02:28:45.687863+00:00", "kind": "response", "data": {"name": "PrepMethodAbort", "result": null}}
+{"time": "2026-10-25T02:28:45.687863+00:00", "kind": "trial_stopped", "data": {"error": "ChannelizedError(errors={1: HoiEntryError('HC_RESULT=0x0F0A (HcResult=0x0F0A) at (1, 238, 256) iface=1 action=1')}, raw_response=b'!\\x00\\x02\\x00\\n\\x0f\\x0f\\x00(\\x000x0001.0x00EE.0x0100:0x01,0x0001,0x0F0A\\x00', hoi_entries=[HcResultEntry(module_id=1, node_id=238, object_id=256, interface_id=1, action_id=1, result=3850)], hoi_exceptions={0: HoiEntryError('HC_RESULT=0x0F0A (HcResult=0x0F0A) at (1, 238, 256) iface=1 action=1')})", "exception_type": "ChannelizedError", "confirmed_channels": [], "no_retry": true}}
+{"time": "2026-10-25T02:28:45.688637+00:00", "kind": "speed_scales_not_restored_after_fault", "data": {"previous": [2, 2], "travel_x_scale": 10, "pickup_x_z_scales": [2, 1]}}
+{"time": "2026-10-25T02:28:45.769901+00:00", "kind": "http_final", "data": {"service-software-api/sensor-status": {"isEnclosurePresent": true, "isDoorClosed": true, "isXHome": false, "fan1Rpm": 4290, "fan2Rpm": 0, "mphSensorState": {"present": false, "sleeveSensors": [false, false, false, false, false, false, false, false], "yHome": false, "zHome": false, "squeezeHome": false, "dispenserHome": false}, "independentChannelsSensorState": {"present": true, "frontChannel": {"sleeveSensor": false, "yHome": false, "zHome": false, "squeezeHome": true, "dispenserHome": false}, "rearChannel": {"sleeveSensor": false, "yHome": false, "zHome": true, "squeezeHome": true, "dispenserHome": false}}}}}
+{"time": "2026-10-25T02:28:45.784517+00:00", "kind": "http_final", "data": {"service-software-api/has-tips": false}}
+{"time": "2026-10-25T02:28:45.800666+00:00", "kind": "http_final", "data": {"errors/check-for-pending-errors": []}}

@@ -1,0 +1,14 @@
+{
+  "status": "prepared_not_executed",
+  "controller_serial": "12769210",
+  "original_operator_taught_dropoff": {"x_mm": -0.05000625, "y_mm": 0.0508, "z_mm": 1.05},
+  "proposed_dropoff": {"x_mm": 0.05, "y_mm": 0.0508, "z_mm": 1.05},
+  "change_mm": {"x_mm": 0.10000625, "y_mm": 0, "z_mm": 0},
+  "diagnosis": "Final absolute X move rejected before travel from X35. The local firmware's moveTo rejects targets outside xmin/xmax established by homing. SET_LIM adjusts virtual scanning limits independently of that homing range. Positive X35 worked immediately before the negative target was rejected, making driver initialization failure unlikely. Actual MCU xmin is not exposed by the native API; no exact boundary was measured.",
+  "retry_route": "Existing native loading approach: objective retract, Y15, X35, saved Y, proposed positive X, restore scanning limits, saved Z.",
+  "hardware_limits_changed": false,
+  "firmware_changed": false,
+  "robot_movement": false,
+  "plate_delivery_authorized": false,
+  "required_review": "Confirm the 0.10000625 mm inward X change before promoting the revised stage reference. A successful stage move does not validate robot plate delivery at the changed location."
+}

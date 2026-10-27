@@ -1,0 +1,255 @@
+{
+  "at": 1793088459.28629,
+  "status": "open_claw_descent_completed_visual_inspection_pending",
+  "calibration_log": "operator_ui/reports/projected_disk_pilot/20261027_010100_f3d591dc.jsonl",
+  "initial_no_xy_motion_rejection": "operator_ui/reports/projected_disk_pilot/20261027_005906_546568da.jsonl",
+  "calibration_recovery": "Returned to previously verified camera observation XY at Z289.129, then checked fresh images: 48 wells, residual about 0.74 mm.",
+  "corrected_alignment": "operator_ui/reports/projected_alignment/alignment_outward_trial_20261027.json",
+  "correction": "2 mm away from robot base, applied once to fresh alignment; replaces previous inward correction.",
+  "profile": {
+    "schema": "cephla.projected-pickup-profile.v1",
+    "id": "48_well_projected_20261026",
+    "acceptance": "operator_ui/reports/projected_alignment/corrected_alignment_accepted_1793088379644104100.json",
+    "acceptance_sha256": "2f2fe630a9f8f93e8915285dc002514cfdf9a782edb4c96b25e141b03788abf3",
+    "alignment_log": "operator_ui/reports/projected_alignment/20261027_010310_88ba99b3.jsonl",
+    "alignment_log_sha256": "6a561c8b6d754a861cb44a9ae8c29a1e8f8c2b9430d73107889221278387746f",
+    "alignment_pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.757,
+      "X": 307.201,
+      "Y": -74.316,
+      "Z": 300.0
+    },
+    "descent_status": "pending_supervised_open_claw_trial",
+    "gripping_edge_height": "unknown; operator requested supervised verification",
+    "candidate_endpoint": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.757,
+      "X": 307.201,
+      "Y": -74.316,
+      "Z": 78.718
+    },
+    "candidate_z_basis": "Reuse previous supervised 48-well trial height Z78.718 at the corrected alignment for an open-claw trial; no automatic grip.",
+    "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+    "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+    "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+    "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5 to E1=3.7",
+    "automatic_lift_enabled": false,
+    "full_pickup_verified": false,
+    "inward_correction_already_applied": false,
+    "previous_profile": "operator_ui/reports/projected_alignment/pickup_profile_before_corrected_alignment_1793088379644104100.json",
+    "previous_profile_sha256": "483fbac857d2b649b054f55f609758ea30017c34e0856b3ab72b7873739bdcdc",
+    "outward_correction_already_applied": true
+  },
+  "profile_sha256": "e62d9dd25cad8624aae7180353743ebfece0137f958df4b174e267a49359e5d2",
+  "state": {
+    "camera": {
+      "age_s": 52.4,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 27.99977920949459
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 40.119332372099066,
+        "J2": 38.38420260760039,
+        "J3": 58.631265266044274,
+        "J4": -7.258573457232512
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.757,
+        "X": 307.201,
+        "Y": -74.316,
+        "Z": 78.718
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_descend",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "e62d9dd25cad8624aae7180353743ebfece0137f958df4b174e267a49359e5d2",
+      "rz": 89.757,
+      "x": 307.201,
+      "y": -74.316,
+      "z_calibrated": 78.718
+    },
+    "ts": 1793088459.267662
+  },
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Centering claws above the plate.",
+        "t": 0.1
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: approach at 137 to Z 98.72; last 20 mm at 5, torque checked after each 1/0.5 mm step.",
+        "t": 2.2
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: prepared",
+        "t": 2.4
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: fast approach",
+        "t": 2.6
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: torque baseline",
+        "t": 5.0
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: slow probing",
+        "t": 5.9
+      },
+      {
+        "level": "good",
+        "msg": "Lua descent complete; claw remains open. No grip performed.",
+        "t": 28.2
+      }
+    ],
+    "name": "researcher_descend",
+    "result": {
+      "approach_speed": 137,
+      "at_z": 78.718,
+      "breach": false,
+      "descent_correction": {
+        "endpoint": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.757,
+          "X": 307.201,
+          "Y": -74.316,
+          "Z": 78.718
+        },
+        "hover": {
+          "Rz": 89.757,
+          "X": 307.201,
+          "Y": -74.316,
+          "Z": 300.0
+        },
+        "legs": [
+          {
+            "Rz": 89.757,
+            "X": 307.201,
+            "Y": -74.316,
+            "Z": 300.0
+          }
+        ],
+        "open_claw_trial": true,
+        "original_target": {
+          "config": "Wide",
+          "open_claw_trial": true,
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "e62d9dd25cad8624aae7180353743ebfece0137f958df4b174e267a49359e5d2",
+          "rz": 89.757,
+          "x": 307.201,
+          "y": -74.316,
+          "z_calibrated": 78.718
+        },
+        "profile_id": "48_well_projected_20261026",
+        "profile_sha256": "e62d9dd25cad8624aae7180353743ebfece0137f958df4b174e267a49359e5d2",
+        "scope": "Current accepted 48-well placement only.",
+        "start": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.757,
+          "X": 307.202,
+          "Y": -74.316,
+          "Z": 300.0
+        },
+        "target": {
+          "config": "Wide",
+          "open_claw_trial": true,
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "e62d9dd25cad8624aae7180353743ebfece0137f958df4b174e267a49359e5d2",
+          "rz": 89.757,
+          "x": 307.201,
+          "y": -74.316,
+          "z_calibrated": 78.718
+        }
+      },
+      "executor": "lua_descent",
+      "gripping_height_acceptance_pending": true,
+      "ok": true,
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "probe_speed": 5
+    },
+    "state": "done",
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "e62d9dd25cad8624aae7180353743ebfece0137f958df4b174e267a49359e5d2",
+      "rz": 89.757,
+      "x": 307.201,
+      "y": -74.316,
+      "z_calibrated": 78.718
+    }
+  },
+  "grip_executed": false,
+  "lift_executed": false,
+  "operator_visual_acceptance": false
+}

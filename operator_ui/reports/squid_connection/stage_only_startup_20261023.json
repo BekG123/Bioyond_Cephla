@@ -1,0 +1,21 @@
+{
+  "status": "physical_xyz_startup_and_lacry_connection_verified",
+  "controller": {"port": "COM4", "serial": "12769210", "operator_identified": true},
+  "operator_confirmed": "XYZ only; no filter wheel; microscope stopped and safe to move",
+  "session_pid": 13260,
+  "stage_simulated": false,
+  "camera_simulated": true,
+  "python_exec_enabled": false,
+  "shipped_squid_source_changed": false,
+  "stage_pose_mm": {"x_mm": 100.2839625, "y_mm": 45.669200000000004, "z_mm": 1.2},
+  "selected_imaging": {"channel": "BF LED matrix full", "objective": "20x", "fields": 1, "z_planes": 1, "timepoints": 1, "xy_mode": "Current Position"},
+  "log": "stage_only.stderr.log",
+  "startup_observation": "XYZ homing and cached-position restoration completed; one transient stale serial-reader warning during startup. Server ready and native position/status queries responded.",
+  "robot_motion_started": false,
+  "acquisition_started": false,
+  "loading_position_reviewed": false,
+  "operator_followup": "Current stage position is NOT the taught drop-off location. Operator requests return to the physical pre-homing position; robot and calibration must remain idle.",
+  "pre_homing_physical_pose_recorded": false,
+  "cache_provenance": "pre_physical_stage_settings.json and the copied last_coords cache were read from the simulator. Their X100.2839625/Y45.6692/Z1.2 values must not be used as a reviewed physical loading reference. Other desktop caches date from May 2026 and are unreviewed.",
+  "remaining": "Recover the loading position from operator-provided physical coordinates or supervised GUI positioning, then record and explicitly review it. Do not guess a return target or run robot drop-off."
+}

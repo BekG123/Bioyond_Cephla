@@ -1,0 +1,166 @@
+{
+  "checked_at": "2026-10-24T14:54:35.675495+00:00",
+  "read_only": true,
+  "responses": {
+    "instruments/global-run-state": {
+      "status": 200,
+      "data": "Idle"
+    },
+    "protocol-run": {
+      "status": 200,
+      "data": {
+        "protocolId": 0,
+        "runDatalId": null,
+        "isRunInProgress": false,
+        "isSimulation": false,
+        "protocolRunState": 0,
+        "startTime": "0001-01-01T00:00:00",
+        "estimatedEndTime": "0001-01-01T00:00:00",
+        "endPauseTime": "0001-01-01T00:00:00",
+        "protocolName": null,
+        "currentStep": 0,
+        "preLoadThermalDeviceUsed": "None",
+        "preLoadHepaFiltration": false
+      }
+    },
+    "verification/status": {
+      "status": 200,
+      "data": {
+        "isWorkflowInProgress": false,
+        "isRunInProgress": false,
+        "isServiceRoutineInProgress": false,
+        "startTime": "2026-10-24T07:01:54.7899022-07:00",
+        "currentIndex": 0,
+        "runs": [],
+        "serviceRoutine": null
+      }
+    },
+    "errors/check-for-pending-errors": {
+      "status": 200,
+      "data": []
+    },
+    "maintenance/errors": {
+      "status": 200,
+      "data": []
+    },
+    "errors?offset=0&limit=4": {
+      "status": 200,
+      "data": {
+        "totalItemCount": 36,
+        "currentOffset": 0,
+        "items": [
+          {
+            "id": "1ef48ada52754a3a95bbde2674c17f65",
+            "message": "Failed to load Active System: 'TiprackTestSystem, Ver. 1'.  Attempting to load Empty System.",
+            "date": "2026-10-24T14:00:48.5882835Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "65d6dfd264cf43d9be49ff1982b1c486",
+            "message": "Could not load system configuration 'TiprackTestSystem'.",
+            "date": "2026-10-24T14:00:48.5610914Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "dc1d4108104a41038286fcc91bf30784",
+            "message": "The message with identifier 'ModuleNPartNotConnected' could not be resolved.The message should be injected with following Arguments: Argument 0: da5436a6-b464-48c9-807b-388d57d195c7",
+            "date": "2026-10-24T14:00:48.5301125Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "35acfa1c456549f3928773c6301e39e5",
+            "message": "It is not possible to start a Maintenance and Verification Workflow if a Common Workflow is pending.",
+            "date": "2026-10-24T12:27:11.6731227Z",
+            "severity": 1,
+            "handled": true
+          }
+        ]
+      }
+    },
+    "backups": {
+      "status": 200,
+      "data": [
+        {
+          "name": "Backup_2026-08-31 14-11-14Z",
+          "createdDateTime": "2026-08-31T14:11:14.8858187-07:00",
+          "size": 237831102
+        },
+        {
+          "name": "Backup_2026-08-31 14-12-06Z",
+          "createdDateTime": "2026-08-31T14:12:06.9423338-07:00",
+          "size": 237861843
+        },
+        {
+          "name": "Backup_2026-09-22 14-46-36Z",
+          "createdDateTime": "2026-09-22T14:46:36.7220874-07:00",
+          "size": 238477645
+        },
+        {
+          "name": "Backup_2026-09-22 14-47-19Z",
+          "createdDateTime": "2026-09-22T14:47:19.74626-07:00",
+          "size": 238497138
+        }
+      ]
+    },
+    "traces?offset=0&limit=6&sources=SDE,RTE": {
+      "status": 200,
+      "data": {
+        "totalItemCount": 157,
+        "currentOffset": 0,
+        "items": [
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling completed : Duration = 00:00:00.0026200",
+            "type": "Processing",
+            "date": "2026-10-24T12:17:53.345965Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling started",
+            "type": "Processing",
+            "date": "2026-10-24T12:17:53.334788Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning completed : Duration = 00:02:27.9068004",
+            "type": "Processing",
+            "date": "2026-10-24T12:17:53.3343792Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Warning",
+            "message": "",
+            "type": "Processing",
+            "date": "2026-10-24T12:17:53.3339848Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Close Door' closed with handling action 'OK'",
+            "type": "High",
+            "date": "2026-10-24T12:17:53.1283292Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Close Door', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-24T12:15:26.1441346Z",
+            "source": "RTE"
+          }
+        ]
+      }
+    }
+  }
+}

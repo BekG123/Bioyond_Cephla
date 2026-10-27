@@ -1,0 +1,116 @@
+<div id="plate-scene-3d">
+  <div class="viz-controls">
+    <label class="form-label">View <select id="plate-view" class="form-select"><option value="plate">Plate close-up</option><option value="scene">Camera setup</option></select></label>
+    <label class="form-label">Test pose <select id="plate-pose" class="form-select"><option value="0">Oblique</option><option value="1">Rotated</option><option value="2">Tilted</option></select></label>
+  </div>
+  <canvas id="plate-canvas" role="img" aria-label="Rotatable 3D synthetic 96-well plate with detected well centers, two virtual circles and the test camera">3D synthetic plate scene</canvas>
+  <div class="viz-row text-small" id="plate-legend"><span><i style="background:var(--viz-series-1)"></i>Well centers</span><span><i style="background:var(--viz-series-2)"></i>Large virtual circle</span><span><i style="background:var(--viz-series-3)"></i>Small virtual circle</span></div>
+  <div class="viz-controls">
+    <label class="form-label">Orbit <input id="plate-orbit" class="form-range" type="range" min="-180" max="180" value="-35" aria-label="Orbit angle"></label>
+    <label class="form-label">Elevation <input id="plate-elevation" class="form-range" type="range" min="12" max="88" value="52" aria-label="View elevation"></label>
+  </div>
+  <div id="plate-detail" class="text-small" aria-live="polite">Synthetic scene · 96 wells · illustrative thickness and recesses</div>
+  <style>
+    #plate-scene-3d{color:var(--foreground)}
+    #plate-scene-3d canvas{width:100%;height:460px;display:block;touch-action:none;cursor:grab}
+    #plate-scene-3d canvas:active{cursor:grabbing}
+    #plate-scene-3d #plate-legend{gap:18px;display:flex;flex-wrap:wrap}
+    #plate-scene-3d #plate-legend span{display:inline-flex;gap:7px;align-items:center}
+    #plate-scene-3d #plate-legend i{width:9px;height:9px;display:inline-block;border-radius:50%}
+    @media(max-width:440px){#plate-scene-3d canvas{height:360px}}
+  </style>
+  <script>
+  (()=>{
+    const root=document.getElementById('plate-scene-3d'),canvas=root.querySelector('#plate-canvas'),ctx=canvas.getContext('2d');
+    const orbit=root.querySelector('#plate-orbit'),elevation=root.querySelector('#plate-elevation'),view=root.querySelector('#plate-view'),poseSelect=root.querySelector('#plate-pose'),detail=root.querySelector('#plate-detail');
+    const W=127.76,H=85.48;
+    const tests=[
+      {name:'Oblique',R:[[.941800899656,-.209069502632,-.263250847058],[.132361484561,.950448575480,-.281296894354],[.309016994375,.230081395245,.922806073208]],t:[-51.2266109275,-49.0774237498,270.4263155666],rms:.0578},
+      {name:'Rotated',R:[[-.886502787416,-.460940870266,-.040574893976],[.413383038748,-.828324060523,.378145096535],[-.207911690818,.318453709158,.924856726172]],t:[76.3304108553,8.9956618315,309.6706872800],rms:.0593},
+      {name:'Tilted',R:[[.858451925299,.260073463147,.442065702941],[-.382207422102,.899136917973,.213237635580],[-.342020143326,-.352015051531,.871267826248]],t:[-65.9534488030,-14.0137017503,356.8933700581],rms:.0593}
+    ];
+    const outline=[[8,0],[W,0],[W,H],[0,H],[0,8]];
+    let width=700,height=460,theme={},queue=[],labels=[];
+    function color(name){
+      const probe=document.createElement('span');probe.style.color=`var(${name})`;root.appendChild(probe);
+      const value=getComputedStyle(probe).color;probe.remove();return value;
+    }
+    function palette(){theme={fg:color('--foreground'),muted:color('--muted-foreground'),top:color('--card'),side:color('--muted'),rim:color('--border'),hole:color('--secondary'),a:color('--viz-series-1'),b:color('--viz-series-2'),c:color('--viz-series-3')};}
+    function scenePoint(p){return [p[0]-W/2,H/2-p[1],-p[2]];}
+    function project(p){
+      const a=+orbit.value*Math.PI/180,e=+elevation.value*Math.PI/180;
+      const z=p[2]-(view.value==='scene'?120:0),x=p[0]*Math.cos(a)-p[1]*Math.sin(a),y=p[0]*Math.sin(a)+p[1]*Math.cos(a);
+      const scale=view.value==='scene'?Math.min(width/380,height/380):Math.min(width/180,height/125);
+      return [width/2+x*scale,height/2-(y*Math.sin(e)+z*Math.cos(e))*scale,-y*Math.cos(e)+z*Math.sin(e)];
+    }
+    function line(points,stroke,lw=1,alpha=1){queue.push({points,stroke,lw,alpha,depth:points.reduce((s,p)=>s+project(p)[2],0)/points.length});}
+    function face(points,fill,stroke=theme.rim){queue.push({points,fill,stroke,lw:.7,alpha:1,depth:points.reduce((s,p)=>s+project(p)[2],0)/points.length});}
+    function circle(x,y,z,r,n=64){return Array.from({length:n+1},(_,i)=>scenePoint([x+r*Math.cos(i*2*Math.PI/n),y+r*Math.sin(i*2*Math.PI/n),z]));}
+    function draw(){
+      palette();queue=[];labels=[];ctx.clearRect(0,0,width,height);
+      const test=tests[+poseSelect.value];
+      // Display frame flips plate Y and Z together: right handed, camera above plate.
+      const top=outline.map(([x,y])=>scenePoint([x,y,0]));
+      const bottom=outline.map(([x,y])=>scenePoint([x,y,14]));
+      for(let i=0;i<5;i++)face([top[i],top[(i+1)%5],bottom[(i+1)%5],bottom[i]],theme.side);
+      // Clip well interiors to their openings, so hidden walls cannot show through the deck.
+      const interiors=[];
+      for(let row=0;row<8;row++)for(let col=0;col<12;col++){
+        const x=14.38+col*9,y=11.24+row*9;
+        const ring=circle(x,y,0,3.2,32),base=circle(x,y,10,2.8,32);interiors.push({ring,base});
+      }
+      queue.push({points:top,fill:theme.top,stroke:theme.rim,lw:1,alpha:1,depth:project([0,0,0])[2]});
+      // Semantic overlay lines drawn after solid geometry to remain visible.
+      const overlays=[];
+      for(let row=0;row<8;row++)for(let col=0;col<12;col++)overlays.push({p:scenePoint([14.38+col*9,11.24+row*9,-.2]),dot:true});
+      overlays.push({points:circle(43,42.74,-.25,10),stroke:theme.b},{points:circle(84,42.74,-.25,5),stroke:theme.c});
+      const cameraInPlate=(q)=>[0,1,2].map(j=>test.R[0][j]*(q[0]-test.t[0])+test.R[1][j]*(q[1]-test.t[1])+test.R[2][j]*(q[2]-test.t[2]));
+      const camera=scenePoint(cameraInPlate([0,0,0]));
+      if(view.value==='scene'){
+        const camPoint=p=>scenePoint(cameraInPlate(p));
+        const window=[[-12,-9,0],[12,-9,0],[12,9,0],[-12,9,0]].map(camPoint);
+        const back=[[-12,-9,-18],[12,-9,-18],[12,9,-18],[-12,9,-18]].map(camPoint);
+        face(back,theme.side);
+        for(let i=0;i<4;i++)face([window[i],window[(i+1)%4],back[(i+1)%4],back[i]],theme.side);
+        face(window,theme.hole);
+        // Full calibrated field of view at 180 mm from camera, K=(1800,1800), 1200x900.
+        const frustum=[[-60,-45,180],[60,-45,180],[60,45,180],[-60,45,180]].map(camPoint);
+        for(const corner of frustum)line([camera,corner],theme.muted,1,.35);
+        line([...frustum,frustum[0]],theme.muted,1,.4);
+        for(const p of top)line([camera,p],theme.a,1,.22);
+        labels.push({p:camera,text:'Synthetic camera',dy:-20});
+      }
+      queue.sort((a,b)=>a.depth-b.depth);
+      function path(points,close){points.forEach((p,i)=>{const q=project(p);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);});if(close)ctx.closePath();}
+      for(const item of queue){ctx.globalAlpha=item.alpha;ctx.beginPath();path(item.points,!!item.fill);if(item.holes)for(const h of item.holes)path(h,true);if(item.fill){ctx.fillStyle=item.fill;ctx.fill('evenodd');}if(item.stroke){ctx.strokeStyle=item.stroke;ctx.lineWidth=item.lw;ctx.stroke();}}
+      ctx.globalAlpha=1;
+      for(const well of interiors){
+        ctx.save();ctx.beginPath();path(well.ring,true);ctx.clip();
+        ctx.fillStyle=theme.hole;ctx.fill();ctx.fillStyle=theme.fg;ctx.globalAlpha=.16;ctx.fill();ctx.globalAlpha=1;
+        for(let j=0;j<32;j++){ctx.beginPath();path([well.ring[j],well.ring[j+1],well.base[j+1],well.base[j]],true);ctx.fillStyle=j<16?theme.side:theme.top;ctx.fill();}
+        ctx.beginPath();path(well.base,true);ctx.fillStyle=theme.hole;ctx.fill();ctx.restore();
+        ctx.beginPath();path(well.ring,true);ctx.strokeStyle=theme.rim;ctx.lineWidth=1;ctx.stroke();
+      }
+      for(const item of overlays){if(item.dot){const p=project(item.p);ctx.fillStyle=theme.a;ctx.beginPath();ctx.arc(p[0],p[1],view.value==='scene'?1:1.8,0,Math.PI*2);ctx.fill();}else{ctx.beginPath();path(item.points,false);ctx.strokeStyle=item.stroke;ctx.lineWidth=2.5;ctx.stroke();}}
+      ctx.fillStyle=theme.fg;ctx.font=getComputedStyle(root).font;ctx.textAlign='center';
+      if(view.value==='plate'){
+        for(let col=0;col<12;col++){const p=project(scenePoint([14.38+col*9,4,-.5]));ctx.fillText(String(col+1),p[0],p[1]);}
+        for(let row=0;row<8;row++){const p=project(scenePoint([5,11.24+row*9,-.5]));ctx.fillText(String.fromCharCode(65+row),p[0],p[1]);}
+      }
+      for(const label of labels){const p=project(label.p);ctx.fillText(label.text,Math.max(80,Math.min(width-80,p[0])),Math.max(22,p[1]+label.dy));}
+      detail.textContent=`${test.name} synthetic test · 96/96 wells · ${test.rms.toFixed(3)} px reprojection RMS · illustrative well depth`;
+      canvas.dataset.rendered='true';canvas.dataset.view=view.value;
+    }
+    function resize(){const b=canvas.getBoundingClientRect();width=b.width;height=b.height;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw();}
+    for(const control of [orbit,elevation,poseSelect])control.addEventListener('input',draw);
+    view.addEventListener('change',()=>{orbit.value=view.value==='scene'?'25':'-35';elevation.value=view.value==='scene'?'62':'52';draw();});
+    let drag=null;
+    canvas.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY,+orbit.value,+elevation.value];canvas.setPointerCapture(e.pointerId);});
+    canvas.addEventListener('pointermove',e=>{if(!drag)return;orbit.value=((drag[2]+(e.clientX-drag[0])*.5+540)%360)-180;elevation.value=Math.max(12,Math.min(88,drag[3]-(e.clientY-drag[1])*.3));draw();});
+    canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);
+    new ResizeObserver(resize).observe(canvas);
+    matchMedia('(prefers-color-scheme:dark)').addEventListener('change',draw);
+    resize();
+  })();
+  </script>
+</div>

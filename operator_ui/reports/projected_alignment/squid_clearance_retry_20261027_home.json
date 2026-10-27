@@ -1,0 +1,410 @@
+{
+  "at": 1793106729.2062392,
+  "status": "home_motion_completed_awaiting_final_plate_inspection",
+  "evidence": [
+    {
+      "path": "operator_ui/reports/projected_alignment/squid_clearance_retry_20261027_grip.json",
+      "sha256": "796d2c8b0b673e7b69f309f8113808bd66346787ae1dcc468668faed0bc627bf"
+    },
+    {
+      "path": "operator_ui/reports/projected_alignment/squid_clearance_retry_20261027_lift.json",
+      "sha256": "ef94203f117f556db8b36054145d01b7cf4bc17f28eace0b9967b4b10b4f0ca3"
+    }
+  ],
+  "profile": {
+    "schema": "cephla.projected-pickup-profile.v1",
+    "id": "48_well_projected_20261026",
+    "acceptance": "operator_ui/reports/projected_alignment/reseated_repeat1_trial_authorization_20261027.json",
+    "acceptance_sha256": "c66a165500284b059742fc899349fba4140037b0d9c58033bd56e5ddd5f8b2f4",
+    "alignment_log": "operator_ui/reports/projected_alignment/20261027_030752_f2c8d20e.jsonl",
+    "alignment_log_sha256": "ecb040a6b38262a585b8313fd6164d18bdf95b59375bd0902d163eb466982ec5",
+    "alignment_pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.87662180784821,
+      "X": 312.5035022963445,
+      "Y": -76.1016698296062,
+      "Z": 300.0
+    },
+    "descent_status": "operator_accepted_open_claw_descent",
+    "gripping_edge_height": "unknown; operator requested supervised verification",
+    "candidate_endpoint": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.87662180784821,
+      "X": 312.5035022963445,
+      "Y": -76.1016698296062,
+      "Z": 73.718
+    },
+    "candidate_z_basis": "Unchanged taught Z73.718; inspect open-claw placement before any grip.",
+    "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+    "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+    "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+    "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5, stop at accepted 48-well E1=3.9",
+    "accepted_grip_reference": "operator_ui/reports/projected_alignment/reseated_repeat1_grip_binding_20261027.json",
+    "accepted_grip_reference_sha256": "b6c0e4a36c682a20c9440239df22f81a24b76ce359eacc6b6c6fba72f6bc8b35",
+    "automatic_lift_enabled": false,
+    "full_pickup_verified": false,
+    "inward_correction_already_applied": false,
+    "previous_profile": "operator_ui/reports/projected_alignment/profile_before_reseated_repeat1_trial_20261027.json",
+    "previous_profile_sha256": "b417c0a99452b4cfa721475d9d6d7792f8fbad73dee86f29fce0ea2111a72d8e",
+    "outward_correction_already_applied": true,
+    "additional_outward_correction": "operator_ui/reports/projected_alignment/additional_outward_5mm_1793088900811628000.json",
+    "additional_outward_correction_sha256": "ff5ad09ae3f3075bd3060d861bae94e51e697cbaed86df92f086570b8fd104f0",
+    "jaw_sequence": "Open to E1=28 mm at Z300 before lowering; verify opening before descent.",
+    "total_outward_correction_mm": 7,
+    "correction_feedback": "operator_ui/reports/projected_alignment/restore_even_spacing_request_20261027.json",
+    "correction_feedback_sha256": "01b9a39a9ac2c885f2dbb0e1965d4d0d7ade60ffcd08a29f881d229543fa8144",
+    "forward_along_plate_long_edge_mm": 0.0,
+    "forward_adjustment_pending_mm": 0.0,
+    "additional_down_mm": 5.0,
+    "physical_grip_validated_for_plate": true,
+    "alignment_source": "Approved rigid plate-relative transform from fresh reseated-plate measurement",
+    "descent_acceptance": "operator_ui/reports/projected_alignment/reseated_repeat1_visual_acceptance_20261027.json",
+    "descent_acceptance_sha256": "5b5125f5fe34911e4fa991d1374bee1ecf83c6beb333ae6e8b8a58c877d99d80",
+    "current_placement_grip_tested": false
+  },
+  "profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+  "final_state": {
+    "camera": {
+      "age_s": 189.7,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.898845287039876
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.4211879334902,
+        "J2": 84.87686575379037,
+        "J3": 52.05594907317273,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": false,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+      "rz": 89.87662180784821,
+      "x": 312.5035022963445,
+      "y": -76.1016698296062,
+      "z_calibrated": 73.718
+    },
+    "ts": 1793106729.1786706
+  },
+  "home_sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 0.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: upload 1/1",
+        "t": 0.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 1.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 1.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 1/100",
+        "t": 1.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 8/100",
+        "t": 1.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 15/100",
+        "t": 1.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 24/100",
+        "t": 1.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 31/100",
+        "t": 2.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 37/100",
+        "t": 2.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 44/100",
+        "t": 2.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 50/100",
+        "t": 2.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 57/100",
+        "t": 2.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 64/100",
+        "t": 2.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 70/100",
+        "t": 2.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 77/100",
+        "t": 3.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 85/100",
+        "t": 3.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 91/100",
+        "t": 3.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 98/100",
+        "t": 3.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 3.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 100/100",
+        "t": 3.6
+      },
+      {
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 8.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: upload 2/2",
+        "t": 9.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 9.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 9.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 2/100",
+        "t": 9.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 8/100",
+        "t": 9.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 15/100",
+        "t": 10.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 23/100",
+        "t": 10.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 31/100",
+        "t": 10.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 39/100",
+        "t": 10.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 47/100",
+        "t": 10.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 55/100",
+        "t": 10.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 63/100",
+        "t": 10.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 70/100",
+        "t": 11.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 73/100",
+        "t": 11.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 73/100",
+        "t": 11.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 75/100",
+        "t": 11.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 81/100",
+        "t": 11.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 89/100",
+        "t": 11.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 96/100",
+        "t": 11.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 11.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 12.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 100/100",
+        "t": 12.1
+      }
+    ],
+    "name": "researcher_home",
+    "result": {
+      "home": {
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "ok": true
+    },
+    "state": "done",
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": false,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+      "rz": 89.87662180784821,
+      "x": 312.5035022963445,
+      "y": -76.1016698296062,
+      "z_calibrated": 73.718
+    }
+  },
+  "proof_lift_operator_confirmed": false,
+  "proof_lift_feedback": null,
+  "user_requested_home": true,
+  "home_translation_speed": 137,
+  "wrist_speed": 30,
+  "grip_setting_mm": 3.9,
+  "home_plate_retention_operator_confirmed": false,
+  "uninterrupted_full_pipeline": true,
+  "note": "Authorized retry used exact successful repeat-1 reference. Alignment, descent, grip, slow lift and Home completed without interruption; current plate retention awaits operator observation.",
+  "trial": "squid_clearance_retry_20261027"
+}

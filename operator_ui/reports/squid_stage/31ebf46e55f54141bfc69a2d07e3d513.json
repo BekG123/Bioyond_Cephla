@@ -1,0 +1,136 @@
+{
+  "plan": {
+    "id": "31ebf46e55f54141bfc69a2d07e3d513",
+    "at": 1792831383.4389815,
+    "source": "chat",
+    "dispatch": "squid_stage",
+    "actions": [
+      "squid_stage_dropoff"
+    ],
+    "labels": [
+      "Return Squid stage to drop-off"
+    ],
+    "steps": [
+      {
+        "kind": "squid_stage",
+        "label": "Return Squid stage to drop-off"
+      }
+    ],
+    "destination": "dropoff",
+    "job": {
+      "run_id": "3703e17e4a634450b434a785e8323abe",
+      "experiment_id": "_2026-10-24_01-30-59.451893",
+      "started_at": 1792830659.6761477,
+      "ended_at": 1792830660.174515,
+      "progress": {},
+      "expected": {
+        "timepoints": 1,
+        "regions": 1,
+        "fovs": 1,
+        "channels": 1,
+        "z": 1
+      },
+      "stats": {
+        "total_images": 1,
+        "total_timepoints": 1,
+        "total_duration_seconds": 0.5179703235626221,
+        "errors_encountered": 0
+      },
+      "reason": "completed",
+      "output_path": "C:\\Users\\Cephla\\Downloads\\_2026-10-24_01-30-59.451893",
+      "heartbeat_at": 1792830659.6761477
+    },
+    "session": {
+      "pid": 12872,
+      "created_at": 1792823263.9637225
+    },
+    "reference_hash": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+    "start": {
+      "x_mm": 56.831706249999996,
+      "y_mm": 28.46784375,
+      "z_mm": 1.05
+    },
+    "summary": "Return Squid stage to drop-off.",
+    "requirements": [
+      "The robot remains at Home, the microscope stage path is clear, and the E-stop is supervised.",
+      "This moves only the microscope stage. It does not fetch the plate.",
+      "Stop cancels remaining steps after the current native stage move finishes. It does not abort an independently started scan."
+    ]
+  },
+  "status": "failed",
+  "events": [
+    {
+      "at": 1792831428.7543175,
+      "event": "started",
+      "plan": {
+        "id": "31ebf46e55f54141bfc69a2d07e3d513",
+        "at": 1792831383.4389815,
+        "source": "chat",
+        "dispatch": "squid_stage",
+        "actions": [
+          "squid_stage_dropoff"
+        ],
+        "labels": [
+          "Return Squid stage to drop-off"
+        ],
+        "steps": [
+          {
+            "kind": "squid_stage",
+            "label": "Return Squid stage to drop-off"
+          }
+        ],
+        "destination": "dropoff",
+        "job": {
+          "run_id": "3703e17e4a634450b434a785e8323abe",
+          "experiment_id": "_2026-10-24_01-30-59.451893",
+          "started_at": 1792830659.6761477,
+          "ended_at": 1792830660.174515,
+          "progress": {},
+          "expected": {
+            "timepoints": 1,
+            "regions": 1,
+            "fovs": 1,
+            "channels": 1,
+            "z": 1
+          },
+          "stats": {
+            "total_images": 1,
+            "total_timepoints": 1,
+            "total_duration_seconds": 0.5179703235626221,
+            "errors_encountered": 0
+          },
+          "reason": "completed",
+          "output_path": "C:\\Users\\Cephla\\Downloads\\_2026-10-24_01-30-59.451893",
+          "heartbeat_at": 1792830659.6761477
+        },
+        "session": {
+          "pid": 12872,
+          "created_at": 1792823263.9637225
+        },
+        "reference_hash": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+        "start": {
+          "x_mm": 56.831706249999996,
+          "y_mm": 28.46784375,
+          "z_mm": 1.05
+        },
+        "summary": "Return Squid stage to drop-off.",
+        "requirements": [
+          "The robot remains at Home, the microscope stage path is clear, and the E-stop is supervised.",
+          "This moves only the microscope stage. It does not fetch the plate.",
+          "Stop cancels remaining steps after the current native stage move finishes. It does not abort an independently started scan."
+        ]
+      }
+    },
+    {
+      "at": 1792831428.8320794,
+      "event": "scan_completed",
+      "run_id": "3703e17e4a634450b434a785e8323abe"
+    },
+    {
+      "at": 1792831428.8335936,
+      "event": "failed",
+      "error": "__main__.audit_and_remember() got multiple values for keyword argument 'run_id'"
+    }
+  ],
+  "error": "__main__.audit_and_remember() got multiple values for keyword argument 'run_id'"
+}

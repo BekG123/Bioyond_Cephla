@@ -25,6 +25,7 @@ import statistics
 import subprocess
 import sys
 import time
+import uuid
 
 import cv2
 import numpy as np
@@ -52,6 +53,22 @@ YAW_SAMPLES = 3
 YAW_SPREAD_DEG = 0.2
 
 
+class CalibrationTrace:
+    """Append-only, separate file per attempt; survives console restarts."""
+    def __init__(self, directory, mode, config):
+        self.session = time.strftime('%Y%m%d_%H%M%S') + '_' + uuid.uuid4().hex[:8]
+        self.path = Path(directory) / (self.session + '.jsonl')
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.record('start', mode=mode, config=config)
+
+    def record(self, event, **fields):
+        entry = dict(timestamp=time.time(), event=event, **fields)
+        with self.path.open('a', encoding='utf-8') as stream:
+            stream.write(json.dumps(entry, allow_nan=False) + '\n')
+            stream.flush()
+            os.fsync(stream.fileno())
+
+
 # ===========================================================================
 # 1. MAIN FLOW - begin reading here
 # ===========================================================================
@@ -68,22 +85,37 @@ def start_calibration(run, svc, cam, params, vision=None):
     return run_fast_disk(run, svc, cam, vision, params)
 
 
-def run_fast_disk(run, svc, cam, teach, params):
+def run_fast_disk(run, svc, cam, teach, params, *, config=None, trace=None, publish=None):
     """Same Flask Runner/target contract as Find Disk; never calls Align/Descend."""
     started = time.monotonic()
     run.target = None  # no stale target after ANY failure, including preflight
     guard = DiskGuard(svc, run, params)
     observations = moves = 0
     travel = 0.0
-    pinned = None
+    pinned = config
     stable = []
     errors = []
+    error_moves = None
+    divergence_review = None
     yaw_errors = []
     yaw_samples = []
     yaw_pose = None
+    initial_metrics = None
+
+    def progress(state, message, **extra):
+        update = dict(mode='automatic', state=state, message=message, config=pinned,
+                      observations=observations, moves=moves, confirmation=len(stable),
+                      elapsed_s=round(time.monotonic()-started, 1), checked_at=time.time(),
+                      initial_metrics=initial_metrics)
+        update.update(extra)
+        if trace:
+            trace.record('progress', **update)
+        if publish:
+            publish(update)
 
     try:
         guard._preflight()
+        progress('checking', 'Checking the camera and calibration configuration. Keep hands clear.')
         ok, out = teach.selftest()
         if not ok:
             raise TransferError('vendor teach selftest FAILED; no motion')
@@ -91,26 +123,36 @@ def run_fast_disk(run, svc, cam, teach, params):
         while True:
             guard._preflight()
             pose = guard.pose_mm()
+            if divergence_review is not None:
+                review_pose = divergence_review['pose']
+                if (any(abs(pose[k]-review_pose[k]) > .1 for k in ('X','Y','Z'))
+                        or abs(wrap(pose['Rz']-review_pose['Rz'])) > .05):
+                    raise TransferError('robot moved during stationary divergence review; no stale correction')
             if yaw_pose is not None and (
                     any(abs(pose[k]-yaw_pose[k]) > 0.1 for k in ('X','Y','Z'))
                     or abs(wrap(pose['Rz']-yaw_pose['Rz'])) > 0.05):
                 raise TransferError('robot moved during stationary yaw review; no stale correction')
             q = svc.joints() or {}
-            check_path(pose, pose, q, params, svc.envelope)
+            check_path(pose, pose, q, params, guard.path_envelope)
             ev = None
             for attempt in range(3):
                 guard._preflight()
                 frame = cam.snap()  # guaranteed fresh, never cached /frame fallback
-                path = cam.save(frame, prefix='teach_fast')
+                path = cam.save(frame, prefix='teach_fast_' + trace.session if trace else 'teach_fast')
                 actual = guard.pose_mm()
                 if (any(abs(actual[k]-pose[k]) > 0.1 for k in ('X','Y','Z'))
                         or abs(wrap(actual['Rz']-pose['Rz'])) > 0.05):
                     raise TransferError('robot moved during capture; no motion from this image')
                 # One circle detection per capture, shared by both vendor configs.
                 ev = teach.evaluate_ways(path, pose['X'], pose['Y'], pose['Z'], pose['Rz'])
+                actual = guard.pose_mm()
+                if (any(abs(actual[k]-pose[k]) > .1 for k in ('X','Y','Z'))
+                        or abs(wrap(actual['Rz']-pose['Rz'])) > .05):
+                    raise TransferError('robot moved during image processing; no stale correction')
                 if ev.get('detected') and ev.get('ways'):
                     break
                 run.say(f'No circle pair ({attempt+1}/3); recapture without moving', 'warn')
+                progress('no_disks', 'Both disks must be visible. Checking a fresh image before any movement.')
             else:
                 raise TransferError('disk not detected; no search/recovery motion or stale target')
             observations += 1
@@ -121,20 +163,27 @@ def run_fast_disk(run, svc, cam, teach, params):
                 sol = way['solve']
                 validate_solve(sol)
                 try:
-                    legs = camera_plan(pose, sol, q, params, svc.envelope,
+                    legs = camera_plan(pose, sol, q, params, guard.path_envelope,
                                        center_first=center_before_yaw(pose, sol))
                     options.append((route_cost(pose, legs), way, legs))
                 except TransferError as ex:
                     reasons.append(f"{way['cfg']}: CAMERA path blocked: {ex}")
             if not options:
-                raise TransferError('; '.join(reasons) or 'selected camera configuration missing')
+                raise TransferError('; '.join(reasons) or f'{pinned or "Selected"} camera configuration missing; no fallback')
             _, way, legs = min(options, key=lambda item: item[0])
             sol = way['solve']
+            if trace:
+                trace.record('observation', observation=observations, pose=pose,
+                             image=path, config=way['cfg'], solve=sol)
             if pinned is None:
                 pinned = way['cfg']
                 for reason in reasons:
                     run.say(reason, 'warn')
                 run.say(f'Selected {pinned}: shortest checked camera route. Grasp is validated separately.')
+            metrics = dict(xy_mm=sol['xy_err_mm'], z_mm=sol['z_err_mm'], yaw_deg=sol['rz_err_deg'])
+            if initial_metrics is None:
+                initial_metrics = metrics.copy()
+            progress('measuring', 'Measuring the plate error before the next correction.', metrics=metrics)
             try:
                 run.detection_path = teach.annotate(path, sol)
                 run.detection_ts = time.time()
@@ -144,9 +193,15 @@ def run_fast_disk(run, svc, cam, teach, params):
                     f"yaw {sol['rz_err_deg']:.3f} deg, Z {sol['z_err_mm']:.3f} mm; "
                     f"{moves} moves, {time.monotonic()-started:.1f} s, {travel:.1f} mm travel")
             if converged(sol):
+                # A good reading breaks an increasing-error sequence. Previously
+                # these readings were skipped, joining unrelated noisy failures.
+                errors.clear()
+                error_moves = None
+                divergence_review = None
                 if stable and not agree(stable[-1], sol):
                     raise TransferError('converged images disagree on grasp pose; no target published')
                 stable.append(sol)
+                progress('confirming', 'Within tolerance; checking a second stationary image.', metrics=metrics)
                 if len(stable) == 2:
                     break
                 run.say('Converged; confirming with a second fresh stationary image')
@@ -154,13 +209,35 @@ def run_fast_disk(run, svc, cam, teach, params):
             stable.clear()
             centering = center_before_yaw(pose, sol)
             error = max(sol['center_err_mm'], sol['z_err_mm'])
-            errors.append(error)
-            del errors[:-3]
-            if len(errors) >= 3 and errors[-1] > errors[-2]+0.5 and errors[-2] > errors[-3]+0.5:
-                raise TransferError('calibration error increasing; disk moved or vision is inconsistent')
+            if divergence_review is not None:
+                if error > divergence_review['threshold']:
+                    divergence_review['samples'] += 1
+                    if divergence_review['samples'] >= 3:
+                        raise TransferError('calibration error increase confirmed by three stationary images; inspect plate stability and vision before retrying')
+                    progress('divergence_review', 'Checking a possible error increase while holding position (2/3 images).', metrics=metrics)
+                    continue
+                run.say('Stationary recheck did not confirm the error increase; use the fresh reading', 'warn')
+                errors.clear()
+                error_moves = None
+                divergence_review = None
             # Complete only lift/rotate/observation-height before re-observing.
             # Otherwise execute ONE bounded combined XY/Z correction, then capture.
             phase = [(kind, p) for kind, p in legs if kind in ('orientation', 'rotation')]
+            if phase:
+                # Lifting/rotating intentionally changes apparent height/center.
+                # Yaw has its own confirmed-error check below.
+                errors.clear()
+                error_moves = None
+            elif error_moves != moves:
+                # Compare feedback outcomes, not repeated images at one pose.
+                errors.append(error)
+                del errors[:-3]
+                error_moves = moves
+                if len(errors) == 3 and errors[-1] > errors[-2]+.5 and errors[-2] > errors[-3]+.5:
+                    divergence_review = dict(pose=dict(pose), threshold=errors[-2]+.5, samples=1)
+                    run.say('Possible error increase: hold position and check two more fresh images before any correction', 'warn')
+                    progress('divergence_review', 'Checking a possible error increase while holding position (1/3 images).', metrics=metrics)
+                    continue
             if centering:
                 yaw_samples.clear()
                 yaw_pose = None
@@ -173,14 +250,16 @@ def run_fast_disk(run, svc, cam, teach, params):
                 run.say(f'Stationary yaw review {len(yaw_samples)}/{YAW_SAMPLES}: '
                         f'{yaw_samples[-1]:+.3f} deg')
                 if len(yaw_samples) < YAW_SAMPLES:
+                    progress('yaw_review', f'Checking wrist correction: {len(yaw_samples)}/{YAW_SAMPLES} images. The arm stays still.', metrics=metrics)
                     continue
                 delta = confirmed_yaw(yaw_samples)
                 yaw_samples.clear()
                 yaw_pose = None
                 if delta is None:
                     run.say('Yaw samples disagree or straddle tolerance; stay still and recheck', 'warn')
+                    progress('unstable_vision', 'Wrist readings disagree. Holding position and checking fresh images; check lighting if this persists.', metrics=metrics)
                     continue
-                legs = camera_plan(pose, sol, q, params, svc.envelope,
+                legs = camera_plan(pose, sol, q, params, guard.path_envelope,
                                    yaw_target=pose['Rz']+delta)
                 phase = [(kind,p) for kind,p in legs if kind in ('orientation','rotation')]
             if phase:
@@ -206,6 +285,11 @@ def run_fast_disk(run, svc, cam, teach, params):
                     if number(telemetry.get('e1_torque'), 'E1 torque') <= -100:
                         raise TransferError('gripper may be holding an object; calibration requires empty jaws')
                 current = guard.pose_mm()
+                progress('moving', {'orientation':'Moving to rotation clearance height.',
+                         'rotation':'Correcting wrist orientation.', 'feedback':'Correcting plate centering and distance.'}[kind],
+                         metrics=metrics, phase=kind)
+                if trace:
+                    trace.record('movement_requested', phase=kind, start=current, target=point)
                 distance = math.dist([current[k] for k in ('X','Y','Z')],
                                      [point[k] for k in ('X','Y','Z')])
                 move_started = time.monotonic()
@@ -221,39 +305,36 @@ def run_fast_disk(run, svc, cam, teach, params):
                 run.say(f'{kind} segment arrived in {time.monotonic()-move_started:.2f} s')
                 moves += 1
                 travel += distance
+                if trace:
+                    trace.record('movement_arrived', move=moves, phase=kind, pose=guard.pose_mm())
             yaw_samples.clear()
             yaw_pose = None
         guard._preflight()
         # Both solves have individually passed full vendor convergence tolerances.
-        sol = stable[-1]
-        g = [sum(s['grasp_estimate'][i] for s in stable)/2 for i in range(3)]
-        rz = stable[0]['grasp_estimate'][3]
-        rz = wrap(rz + wrap(sol['grasp_estimate'][3]-rz)/2)
-        cal = sol['z_calibration_applied']
-        target = dict(x=g[0], y=g[1], z=g[2], rz=rz, z_calibrated=g[2]+cal,
-                      config=pinned, big_r=sol['big_r'], found_at=time.strftime('%H:%M:%S'),
-                      calibrated_at=time.time(), source='fast_disk', converged=True,
-                      alignment_requires_preflight=True)
+        target = confirmed_target(stable, pinned)
         warnings = []
         for key, value in (('X', target['x']), ('Y', target['y']), ('Z', target['z_calibrated'])):
             lo, hi = svc.envelope[key]
-            if not lo <= value <= hi:
+            if svc.envelope_enabled and not lo <= value <= hi:
                 warnings.append(f'Future grasp {key}={value:.2f} outside current envelope [{lo:g}, {hi:g}]; '
                                 'calibration only, Align/Descend require separate validation')
-        zs = [s['grasp_estimate'][2] for s in stable]
-        target['z_detail'] = dict(samples=zs, spread=max(zs)-min(zs), vision_z=g[2], touch_offset=cal)
         for warning in warnings:
             run.say(warning, 'warn')
         run.target = target
         elapsed = round(time.monotonic()-started, 3)
         run.say(f'CALIBRATED: {observations} views, {moves} moves, {elapsed:.1f} s. '
                 'Review target, then Align separately. No descent or grip.', 'good')
+        progress('converged', 'Wide calibration confirmed. Align is a separate step.' if pinned == 'Wide' else 'Calibration confirmed. Align is a separate step.', metrics=metrics)
         return dict(ok=True, target=target, warnings=warnings, observations=observations,
-                    moves=moves, elapsed_s=elapsed, travel_mm=round(travel, 3))
+                    moves=moves, elapsed_s=elapsed, travel_mm=round(travel, 3), mode='automatic',
+                    calibration_pose=guard.pose_mm(), log_file=str(trace.path) if trace else None)
     except (TransferError, ValueError, KeyError, TypeError, RuntimeError) as ex:
         run.target = None
         run.state = 'stopped' if run.stopped() else 'error'
         run.say(str(ex), 'err')
+        progress('stopped' if run.stopped() else 'error',
+                 'Calibration stopped; no completed target was saved.' if run.stopped() else
+                 'Calibration could not finish. Check disk visibility and controller readiness; the session log contains the cause.')
         return dict(ok=False, error=str(ex), observations=observations, moves=moves)
 
 # ===========================================================================
@@ -372,6 +453,192 @@ def agree(a, b):
     return (math.dist(ga[:2], gb[:2]) <= 1.0 and abs(ga[2]-gb[2]) <= 1.0
             and abs(wrap(ga[3]-gb[3])) <= 0.5)
 
+
+def confirmed_target(stable, config):
+    """Same target math for automatic and hand-guided two-image confirmation."""
+    sol = stable[-1]
+    g = [sum(s['grasp_estimate'][i] for s in stable)/2 for i in range(3)]
+    rz = stable[0]['grasp_estimate'][3]
+    rz = wrap(rz + wrap(sol['grasp_estimate'][3]-rz)/2)
+    cal = sol['z_calibration_applied']
+    zs = [s['grasp_estimate'][2] for s in stable]
+    return dict(x=g[0], y=g[1], z=g[2], rz=rz, z_calibrated=g[2]+cal,
+                config=config, big_r=sol['big_r'], found_at=time.strftime('%H:%M:%S'),
+                calibrated_at=time.time(), source='fast_disk', converged=True,
+                alignment_requires_preflight=True,
+                z_detail=dict(samples=zs, spread=max(zs)-min(zs), vision_z=g[2], touch_offset=cal))
+
+
+def run_hand_guided_disk(run, svc, cam, teach, params, hand_state, publish, poll_seconds=.3,
+                         *, config='Wide', trace=None):
+    """Same vision, correction planner and convergence; the human moves the arm.
+
+    Deliberately no motion/enable/mode/Lua/gripper/torque-job calls. DragGo must
+    already be active. Moving images are discarded; every settled observation
+    replans from its measured pose. Stop ends observation, leaving DragGo active.
+    No observation/time/travel caps, no envelope activation or Auto-mode fallback.
+    """
+    started = time.monotonic()
+    run.target = None
+    observations = 0
+    pinned, last_pose = config, None
+    stable, yaw_samples = [], []
+    progress_pose, progress_time = None, time.monotonic()
+
+    def report(state, message, **extra):
+        update = dict(state=state, message=message, observations=observations, config=pinned,
+                     checked_at=time.time(), elapsed_s=round(time.monotonic()-started, 1),
+                     confirmation=len(stable))
+        update.update(extra)
+        if trace:
+            trace.record('guidance', **update)
+        publish(update)
+
+    def pause():
+        # No long waits; check cancellation every sample.
+        time.sleep(poll_seconds)
+
+    def check():
+        if run.stopped():
+            raise TransferError('Observation stopped; hand-guiding remains active.')
+        state = svc.status()
+        if not state.get('connected') or not state.get('ok') or state.get('errors'):
+            raise TransferError('Robot connection or controller status unavailable.')
+        if state.get('program_state', {}).get('state') != 'stopped' or not hand_state().get('active'):
+            raise TransferError('Hand-guiding is not active. Start hand-guiding before continuing calibration.')
+
+    def pose():
+        p = svc.pose_mm()
+        return {k: number(p.get(k), k) for k in ('X','Y','Z','Rz')}
+
+    def still(a, b):
+        return (all(abs(a[k]-b[k]) <= .1 for k in ('X','Y','Z'))
+                and abs(wrap(a['Rz']-b['Rz'])) <= .05)
+
+    try:
+        check()
+        ok, _out = teach.selftest()
+        if not ok:
+            raise TransferError('Vendor calibration self-test failed.')
+        report('waiting', 'Keep both disks visible and hold the arm still for a reading.')
+        while True:
+            check()
+            first = pose()
+            pause()
+            check()
+            before = pose()
+            if not still(first, before):
+                stable.clear(); yaw_samples.clear(); last_pose = None
+                report('moving', 'Movement detected. Pause briefly to update the guidance.')
+                continue
+            if last_pose is not None and not still(last_pose, before):
+                stable.clear(); yaw_samples.clear()
+            path = cam.save(cam.snap(), prefix='teach_hand_guided_' + trace.session if trace else 'teach_hand_guided')
+            after = pose()
+            check()
+            if not still(before, after):
+                stable.clear(); yaw_samples.clear(); last_pose = None
+                report('moving', 'The arm moved during the image. Hold still for a fresh reading.')
+                continue
+            ev = teach.evaluate_ways(path, before['X'], before['Y'], before['Z'], before['Rz'])
+            check()
+            if not still(after, pose()):
+                stable.clear(); yaw_samples.clear(); last_pose = None
+                report('moving', 'The arm moved while the image was processed. Hold still to update.')
+                continue
+            last_pose = before
+            if progress_pose is None or not still(progress_pose, before):
+                progress_pose, progress_time = before, time.monotonic()
+            observations += 1
+            if not ev.get('detected') or not ev.get('ways'):
+                stable.clear(); yaw_samples.clear()
+                report('no_disks', 'Both disks are not visible. Reposition gently and check the lighting.')
+                continue
+            candidates, reasons = [], []
+            for way in ev['ways']:
+                if pinned is not None and way['cfg'] != pinned:
+                    continue
+                sol = way['solve']
+                validate_solve(sol)
+                # No software box for human-guided observation. Retain the
+                # joint/IK/rotation-clearance checks on suggested adjustments.
+                try:
+                    legs = camera_plan(before, sol, svc.joints() or {}, params, None,
+                                       center_first=center_before_yaw(before, sol))
+                    candidates.append((route_cost(before, legs), way, legs))
+                except TransferError as ex:
+                    reasons.append(str(ex))
+            if not candidates:
+                if not any(w['cfg'] == pinned for w in ev['ways']):
+                    raise TransferError(f'{pinned} calibration is unavailable. No fallback to a different plate configuration.')
+                stable.clear(); yaw_samples.clear()
+                report('reposition', 'No checked adjustment is available here. Reposition near the plate with both disks visible; see Developer view for the limiting joint.')
+                if reasons and (not run.log or run.log[-1].get('msg') != reasons[0]):
+                    run.say(reasons[0], 'warn')
+                continue
+            _, way, legs = min(candidates, key=lambda item: item[0])
+            sol = way['solve']
+            pinned = way['cfg']
+            metrics = dict(xy_mm=sol['xy_err_mm'], z_mm=sol['z_err_mm'], yaw_deg=sol['rz_err_deg'])
+            if trace:
+                trace.record('observation', observation=observations, pose=before,
+                             image=path, config=pinned, solve=sol)
+            try:
+                run.detection_path = teach.annotate(path, sol)
+                run.detection_ts = time.time()
+            except Exception:
+                pass
+            if converged(sol):
+                if stable and not agree(stable[-1], sol):
+                    stable.clear()
+                    report('inconsistent', 'The two readings disagree. Keep the plate fixed and hold still.', metrics=metrics)
+                    continue
+                stable.append(sol)
+                report('confirming', 'Within tolerance. Hold still for the second confirming image.', metrics=metrics)
+                if len(stable) == 2:
+                    check()
+                    if not still(before, pose()):
+                        stable.clear(); yaw_samples.clear(); last_pose = None
+                        continue
+                    run.target = confirmed_target(stable, pinned)
+                    report('converged', 'Calibration confirmed. Hand-guiding remains active.', metrics=metrics)
+                    return dict(ok=True, target=run.target, mode='hand_guided', observations=observations,
+                                calibration_pose=before, moves=0, commands_sent=0,
+                                elapsed_s=round(time.monotonic()-started, 3))
+                continue
+            stable.clear()
+            if not center_before_yaw(before, sol) and any(k == 'rotation' for k, _ in legs):
+                yaw_samples.append(wrap(sol['move_xyrz'][3]-before['Rz']))
+                del yaw_samples[:-YAW_SAMPLES]
+                delta = confirmed_yaw(yaw_samples) if len(yaw_samples) == YAW_SAMPLES else None
+                if delta is None:
+                    report('yaw_review', 'Hold still while the wrist correction is checked across three images.', metrics=metrics)
+                    continue
+                legs = camera_plan(before, sol, svc.joints() or {}, params, None,
+                                   yaw_target=before['Rz']+delta)
+            else:
+                yaw_samples.clear()
+            if not legs:
+                raise TransferError('Vision requests no adjustment but has not converged.')
+            kind, point = legs[0]
+            adjustment = {k: round(point[k]-before[k], 3) for k in ('X','Y','Z')}
+            adjustment['Rz'] = round(wrap(point['Rz']-before['Rz']), 3)
+            waiting = time.monotonic()-progress_time >= 10
+            report('waiting_for_movement' if waiting else 'guide',
+                   'Waiting for you to reposition the arm. Repeated images alone cannot reduce this error.' if waiting else
+                   'Guide the arm by the indicated adjustment, then pause. Guidance updates from a new image.',
+                   metrics=metrics, adjustment=adjustment, phase=kind,
+                   waiting_s=round(time.monotonic()-progress_time, 1))
+    except Exception as ex:
+        run.target = None
+        run.state = 'stopped' if run.stopped() else 'error'
+        run.say(str(ex), 'err')
+        report('stopped' if run.stopped() else 'error',
+               'Observation stopped. DragGo was not changed.' if run.stopped() else str(ex) if isinstance(ex, TransferError)
+               else 'Camera or calibration data unavailable. Check the camera connection and lighting; details are in Developer view.')
+        return dict(ok=False, stopped=run.stopped(), error=str(ex), observations=observations,
+                    mode='hand_guided', commands_sent=0)
+
 # ===========================================================================
 # 3. READINESS, POSE UNITS, PATH CHECKS AND GUARDED MOVEMENT
 # ===========================================================================
@@ -474,7 +741,7 @@ def check_path(start, end, joints, params, envelope):
     for i in range(n+1):
         f = i/n
         p = {k: start[k]+(end[k]-start[k])*f for k in ("X", "Y", "Z")}
-        for axis in p:
+        for axis in p if envelope is not None else ():
             if not envelope[axis][0] <= p[axis] <= envelope[axis][1]:
                 raise TransferError(f"path outside {axis} envelope")
         a, b = ik(p["X"], p["Y"], (q2prev, q3prev), params)
@@ -510,6 +777,10 @@ class GuardedService:
         self.service, self.run, self.params = service, run, params
         self.holding = False
 
+    @property
+    def path_envelope(self):
+        return self.service.envelope
+
     def _preflight(self):
         if self.run.stopped():
             raise TransferError("stopped between steps; use hardware E-stop for immediate stop")
@@ -535,7 +806,7 @@ class GuardedService:
         if interpolation != "linear":
             raise TransferError("automatic transfer only supports checked linear paths")
         target = dict(X=x, Y=y, Z=z, Rz=rz)
-        check_path(self.service.pose_mm(), target, self.service.joints() or {}, self.params, self.service.envelope)
+        check_path(self.service.pose_mm(), target, self.service.joints() or {}, self.params, self.path_envelope)
         result = self.checked(self.service.move_cartesian(x, y, z, rz, min(speed, 15), "linear"))
         self._preflight()
         ensure_arrival(self.service.pose_mm(), target)
@@ -567,6 +838,19 @@ class DiskGuard(GuardedService):
 
     rotation_speed = SPEED
 
+    @property
+    def path_envelope(self):
+        return self.service.envelope if self.service.envelope_enabled else None
+
+    def _preflight(self):
+        # Calibration respects the operator's saved envelope setting; it does
+        # not force the box back on. IK, joint, torque and arrival checks remain.
+        if self.run.stopped():
+            raise TransferError('stopped between steps; use hardware E-stop for immediate stop')
+        refusal = self.service._preflight()
+        if refusal:
+            raise TransferError(refusal)
+
     def rotate_to_rz(self, rz):
         self._preflight()
         start = self.service.pose_mm()
@@ -581,7 +865,7 @@ class DiskGuard(GuardedService):
         # live values. Never pass a translated target to joint interpolation.
         target = {**start, 'Rz': start['Rz'] + delta}
         expected = check_path(start, target, self.service.joints() or {},
-                              self.params, self.service.envelope)
+                              self.params, self.path_envelope)
         result = self.checked(self.service.rotate_to_rz(target['Rz'], self.rotation_speed,
                                                        force_delta=delta))
         self._preflight()

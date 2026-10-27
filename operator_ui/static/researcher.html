@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cephla · Researcher workspace</title>
+  <link rel="stylesheet" href="/static/researcher.css">
+  <script defer src="/static/researcher.js?v=20261017-corrected-descent"></script>
+  <script defer src="/static/latest_route.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to workspace</a>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Cephla researcher home">Cephla <span class="brand-sub">Researcher workspace</span></a>
+    <a class="developer" href="/developer">Developer view <span aria-hidden="true">↗</span></a>
+  </header>
+  <div class="shell">
+    <aside class="sidebar">
+      <p class="eyebrow">YOUR WORKFLOW</p>
+      <nav aria-label="Workflow stages">
+        <button class="stage active" data-stage="prepare" aria-current="step"><span class="stage-number">1</span><span><strong>Prepare</strong><small>Check that everything is ready</small></span></button>
+        <button class="stage" data-stage="teach"><span class="stage-number">2</span><span><strong>Teach</strong><small>Capture Home and Hamilton</small></span></button>
+        <button class="stage" data-stage="run"><span class="stage-number">3</span><span><strong>Run</strong><small>Follow your routine’s progress</small></span></button>
+      </nav>
+      <div class="sidebar-note"><span class="tiny-dot"></span><strong>Start with two stations.</strong><p>Teach Home → Hamilton first. Return Home and Octopi will follow.</p></div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div class="workspace-top"><span class="eyebrow">LAB WORKSPACE / S4</span><span id="mode-badge" class="badge">Physical arm</span></div>
+      <div id="notice" class="notice" role="status" hidden></div>
+      <article class="card" aria-labelledby="home-title">
+        <h2 id="home-title">Return Home</h2>
+        <p id="home-status" role="status">Checking Home readiness...</p>
+        <label class="check-label"><input id="home-ready" type="checkbox"> I have verified the destination and full route for the selected direction. The gripper is empty, I have released the arm, hands and obstacles are clear, and the E-stop is supervised.</label>
+        <div class="button-row"><button id="return-home" class="primary" disabled>Return Home</button><button id="home-to-area" class="secondary" disabled hidden>Retired Home-area route</button><button id="stop-home" class="stop" disabled>Stop Home route</button></div>
+        <p class="help">Stop may let the current movement finish. The route will not resume automatically. Use the E-stop in an emergency.</p>
+      </article>
+
+      <article class="card" id="latest-hamilton"></article>
+      <article class="card" aria-labelledby="recorded-return-title" hidden>
+        <h2 id="recorded-return-title">Taught Hamilton path</h2>
+        <p id="recorded-return-status" role="status">Checking the recorded path...</p>
+        <label for="recorded-return-executor">Replay method</label>
+        <select id="recorded-return-executor"><option value="stepwise">Point by point (tested)</option><option value="lua_queue" disabled>Grouped controller queue</option></select>
+        <p id="recorded-return-queue-status" class="help"></p>
+        <p class="help">Follows the recorded path between Hamilton and the demonstrated endpoint near Home. Saved Home stays unchanged. Each direction requires a new button press. This path has a specific workspace-box exception; joint and reach checks remain active.</p>
+        <label class="check-label"><input id="recorded-return-ready" type="checkbox"> The gripper is empty, the taught route is clear, I have released the arm, and the E-stop is supervised. Auto preparation may close the empty jaws.</label>
+        <div class="button-row"><button id="recorded-return-start" class="primary" disabled>Replay taught path</button><button id="recorded-return-stop" class="stop" disabled>Stop taught path</button></div>
+        <p class="help">Point by point: Stop finishes the current short movement. Controller queue: Stop requests a controller program stop, without automatic resume. Use the physical E-stop in an emergency. A failed run requires review before retrying.</p>
+      </article>
+
+      <section id="prepare" class="panel" aria-labelledby="prepare-title">
+        <div class="page-title"><div><p class="eyebrow">01 / PREPARE</p><h1 id="prepare-title">A quick check before you begin.</h1><p>Check your connections and saved demonstration.</p></div><button id="refresh" class="secondary">Check again</button></div>
+        <div class="status-grid">
+          <article class="status-card"><div class="card-label">ROBOT</div><span id="robot-status" class="status-value">Checking connection…</span><p id="robot-note">Connecting reads status; it does not enable or move the arm.</p><button id="connect" class="secondary" disabled>Connect robot</button></article>
+          <article class="status-card"><div class="card-label">CAMERA</div><span id="camera-status" class="status-value">Checking connection…</span><p id="camera-note">Eye-in-hand camera; depth tools are in Developer view.</p></article>
+          <article class="status-card"><div class="card-label">SAVED ROUTINES</div><span id="saved-status" class="status-value">Checking saved routines…</span><p id="saved-note">Measured station positions are saved on this computer.</p></article>
+        </div>
+        <article class="card readiness" aria-live="polite"><div class="card-heading"><span class="attention-icon" aria-hidden="true">!</span><div><h2 id="readiness-title">Checking readiness</h2><p id="readiness-subtitle">This may take a moment.</p></div></div><ul id="issues"></ul></article>
+        <article class="card routine-card"><div class="card-heading"><div><p class="eyebrow">FIRST ROUTINE</p><h2>Home → Hamilton</h2></div><span class="badge muted">Station teaching</span></div><ol class="route two-stations"><li><span>01</span>Home</li><li><span>02</span>Hamilton</li></ol><p class="muted-text">Capture intermediate approach points if needed. Travel between captures is not recorded.</p></article>
+        <div class="section-footer"><button class="primary" data-go="teach">Continue to Teach <span aria-hidden="true">→</span></button></div>
+      </section>
+
+      <section id="teach" class="panel" aria-labelledby="teach-title" hidden>
+        <div class="page-title"><div><p class="eyebrow">02 / TEACH</p><h1 id="teach-title">Teach the plate pickup, then Hamilton.</h1><p>Home → Calibrate → Align → record manual Descend → record manual Grip → Hamilton.</p></div></div>
+        <article class="card" aria-labelledby="hand-guiding-title">
+          <p class="eyebrow">MOVE THE ARM BY HAND</p><h2 id="hand-guiding-title">Hand-guiding with DragGo</h2>
+          <p id="hand-guiding-status" role="status">Checking hand-guiding status...</p>
+          <label class="check-label"><input id="hand-guiding-ready" type="checkbox"> I am supporting the arm, the gripper is empty, the area is clear, and the E-stop is supervised.</label>
+          <div class="button-row"><button id="hand-guiding-start" class="primary" disabled>Start hand-guiding</button><button id="hand-guiding-end" class="stop" disabled>End hand-guiding</button></div>
+          <h3>Claw controls</h3>
+          <p id="hand-claw-status" role="status">Checking claw readiness...</p>
+          <label class="check-label"><input id="hand-claw-ready" type="checkbox"> I have released the arm, my fingers are clear of the jaws, any held object is supported, and the E-stop is supervised.</label>
+          <label id="hand-claw-empty-label" class="check-label"><input id="hand-claw-empty" type="checkbox"> The gripper is empty. Preparing Auto may close the jaws before opening them.</label>
+          <div class="button-row"><button id="hand-claw-step" class="secondary" disabled>Open a little (+0.2 mm)</button><button id="hand-claw-open" class="primary" disabled>Open claw</button><button id="hand-claw-stop" class="stop" disabled>Stop opening</button></div>
+          <p class="help">Uses the same command as Developer Open. If needed, it ends hand-guiding and prepares Auto, then opens the claw. Auto stays active afterward; choose Start hand-guiding to guide again. Stop takes effect after the current controller command and cannot interrupt a claw movement already sent. Use the physical E-stop for an emergency.</p>
+          <p class="help">Start stops and verifies the idle controller program, then selects Manual and DragGo and enables the servos. Keep the arm supported throughout. Wait for the active confirmation before guiding gently. Hold still to capture Home and Hamilton.</p>
+          <p class="help">End disables the servos before switching DragGo off. Support the arm; it does not return Home or start a program. Closing this page does not end hand-guiding. Use the physical E-stop for an emergency. Never force a resisting joint or release the Z brake to teach.</p>
+        </article>
+        <div class="instruction-grid">
+          <article><span class="instruction-number">1</span><h2>Home and plate setup</h2><p>Capture Home. Run plate calibration, then Align as separate supervised steps.</p></article>
+          <article><span class="instruction-number">2</span><h2>Record your pickup</h2><p>Perform Descend and Grip manually, recording each result while stationary. These record buttons do not move the arm.</p></article>
+          <article><span class="instruction-number">3</span><h2>Hamilton and review</h2><p>Capture intermediate route points and Hamilton, then review and save. Automatic routine playback is still pending.</p></article>
+        </div>
+        <article class="card">
+          <label for="routine-name" class="field-label">Routine name</label><input id="routine-name" maxlength="80" value="Home to Hamilton" autocomplete="off">
+          <div class="record-status"><span id="record-dot" class="record-dot"></span><div><h2 id="record-title">Start your first teaching draft</h2><p id="record-detail">Your draft is kept if you close or refresh this page.</p></div></div>
+          <div class="button-row"><button id="start-teaching" class="primary" disabled>Start teaching</button><button id="capture" class="primary" hidden disabled>Capture Home</button><button id="waypoint" class="secondary" hidden disabled>Capture intermediate point</button><button id="undo" class="secondary" hidden disabled>Undo last capture</button><button id="discard" class="text-button" hidden disabled>Discard draft</button></div>
+          <p id="record-help" class="help">Capture Home, run Calibrate and Align, then record your manually performed Descend and Grip before Hamilton. Manual records include measured positions, not continuous travel or executable commands.</p>
+          <div id="plate-workflow" hidden>
+            <ol id="plate-stages" class="review-list"></ol>
+            <p id="plate-status" role="status"></p>
+            <button id="adopt-workflow" class="secondary" hidden>Use plate workflow with this Home</button>
+            <div id="automatic-controls" hidden>
+              <h2>Plate calibration and alignment</h2>
+              <p id="setup-stages-status" role="status">Calibrate: waiting · Align: waiting</p>
+              <label id="automatic-ready-label" class="check-label"><input id="automatic-ready" type="checkbox"> I have released the arm; hands and the work area are clear, the gripper is empty, and the E-stop is supervised. Calibrate and Align exit hand-guiding and use Auto mode. Starting the controller program may close the empty jaws.</label>
+              <label class="check-label"><input id="teach-descend-ready" type="checkbox"> For Descend: plate in its taught location, claw empty, arm released, path clear, and E-stop supervised.</label>
+              <label class="check-label"><input id="teach-grip-ready" type="checkbox"> For Grip: plate supported and centered, hands clear, and E-stop supervised.</label>
+              <div class="button-row"><button id="run-calibration" class="primary" disabled>Calibrate</button><button id="run-alignment" class="primary" disabled>Align</button><button id="run-descent" class="primary" disabled>Descend</button><button id="run-grip" class="primary" disabled>Grip</button><button id="teach-descent-stop" class="stop" disabled>Stop</button></div>
+              <p id="teach-grip-status" class="help" role="status">After Descent, Grip closes once. Inspect before lifting.</p>
+              <p id="teach-descent-status" class="help" role="status">Descend corrects claw alignment above the plate, opens the claw, then lowers.</p>
+              <p id="setup-repeat-help" class="help"></p>
+              <p id="guided-help" class="help">Wide plate calibration. Place both disks in view, release the arm, confirm above, then click Calibrate. The arm corrects its position automatically and stops after two confirming images. No manual fine adjustments or workspace-envelope activation prompt. Align remains a separate step.</p>
+              <p id="alignment-help" class="help" hidden>Align is a separate automatic action using the confirmed target. No automatic Descend or Grip follows.</p>
+            </div>
+            <div id="calibration-guidance" class="notice" hidden>
+              <strong id="guidance-message" role="status"></strong>
+              <p id="guidance-adjustment"></p>
+              <p id="guidance-errors"></p>
+              <p id="guidance-progress"></p>
+              <p class="help">Keep hands clear while the arm moves. Confirmation needs two fresh stationary images: XY &lt;0.3 mm, Z &lt;0.3 mm, yaw &lt;0.2°. Each attempt saves its measurements and movement history for Developer review.</p>
+            </div>
+            <div id="manual-record-controls" hidden>
+              <label class="check-label"><input id="manual-performed" type="checkbox"> I performed the highlighted action manually and the arm is now still.</label>
+              <button id="record-manual" class="primary" disabled>Record action</button>
+              <p id="manual-record-feedback" class="notice" role="status" hidden></p>
+              <p class="help">Recording only reads arm and gripper positions. It does not descend, close the gripper, verify a secure grasp, or record the path. Use the existing manual controls to perform the action first.</p>
+            </div>
+            <button id="stop-automatic" class="stop" hidden>Stop automatic step</button>
+            <p id="automatic-stop-help" class="help" hidden>Stop takes effect after the current movement finishes. Use the physical E-stop for immediate emergency stopping.</p>
+          </div>
+          <p class="help"><a href="/developer" target="_blank" rel="noopener">Open Developer controls ↗</a> if you need the existing jog controls.</p>
+        </article>
+        <article id="review" class="card" hidden><p class="eyebrow">REVIEW</p><h2 id="review-title">Your captured stations</h2><ol id="review-steps" class="review-list"></ol><p class="help">These are individual measured positions, not a continuous motion recording. Saving does not validate a replay path.</p><label class="check-label"><input id="reviewed" type="checkbox" disabled> I checked the station order and routine name.</label><div class="button-row"><button id="save" class="primary" disabled>Save routine</button></div></article>
+      </section>
+
+      <section id="run" class="panel" aria-labelledby="run-title" hidden>
+        <article class="card" aria-labelledby="imitation-title">
+          <p class="eyebrow">PLATE PICKUP</p><h2 id="imitation-title">Descend, then Grip</h2>
+          <p>Calibrate, Align, then Descend. Descend applies the taught claw adjustment above the plate, opens the claw, then lowers.</p>
+          <label class="check-label"><input id="run-setup-ready" type="checkbox"> For Calibrate / Align: I have released the arm; hands and the work area are clear, the gripper is empty, and the E-stop is supervised. These steps exit hand-guiding and use Auto; starting the controller program may close the empty jaws.</label>
+          <label class="check-label"><input id="descend-ready" type="checkbox"> For Descend: plate in its taught location, claw empty, arm released, path clear, and E-stop supervised.</label>
+          <label class="check-label"><input id="grip-ready" type="checkbox"> For Grip: plate supported and centered, hands clear, and E-stop supervised.</label>
+          <div class="button-row"><button id="run-calibration-again" class="primary" disabled>Calibrate</button><button id="run-alignment-again" class="primary" disabled>Align</button><button id="imitate-descend" class="primary" disabled>Descend</button><button id="run-grip-again" class="primary" disabled>Grip</button><button id="imitate-stop" class="stop" disabled>Stop</button></div>
+          <p id="grip-status" class="help" role="status">After Descent, Grip closes once. Inspect before lifting.</p>
+          <p id="run-setup-status" role="status"></p>
+          <button id="open-plate-setup" class="secondary" data-go="teach">Calibration and alignment in Teach</button>
+          <p id="imitation-status" role="status">Checking taught actions...</p>
+          <p id="imitation-blocker" class="help"></p>
+            <p class="help">Grip closes and waits for inspection; it does not lift. Stop requests a controller stop during Grip. Use the physical E-stop for an emergency.</p>
+          </article>
+        <div class="page-title"><div><p class="eyebrow">03 / RUN</p><h1 id="run-title">Your routine, step by step.</h1><p>Select a reviewed routine and follow its progress.</p></div></div>
+        <article class="card"><label for="routine-select" class="field-label">Saved routine</label><select id="routine-select" disabled><option>No routines saved</option></select><p id="routine-detail" class="help">Capture and review Home → Hamilton in Teach.</p><a id="export" class="text-button" hidden>Download measured positions</a></article>
+        <article class="card">
+          <h2>Check the saved pickup and Hamilton route</h2>
+          <p>Checks the saved pickup measurements and uses the same inverse-kinematics route planner as Return Home. This check does not move the arm.</p>
+          <button id="check-routine" class="secondary" disabled>Check saved routine</button>
+          <button id="plan-pickup" class="primary" disabled>Ask Haiku to plan pickup</button>
+          <p id="pickup-plan-status" role="status">Connect Haiku in Developer view to interpret the recorded descent, grip and first lift.</p>
+          <p class="help">Sends measured pose and gripper log excerpts to Haiku. Its proposal appears in Developer view for review; this button does not move the arm.</p>
+          <p id="routine-check-status" role="status">Select a saved routine, then check it before testing.</p>
+          <ul id="routine-check-issues"></ul>
+          <p class="help">A passing check does not establish obstacle clearance or a secure grasp. Full pipeline playback is still pending.</p>
+        </article>
+        <article class="card execution"><div class="card-heading"><div><p class="eyebrow" id="run-caption">ROUTINE PROGRESS</p><h2 id="run-status" aria-live="polite">Waiting for a saved routine</h2></div><span id="progress-label">0 / 2 steps</span></div><progress id="progress" max="100" value="0" aria-label="Routine progress"></progress><ol id="run-steps" class="run-steps"></ol><p id="run-blocker" class="notice">Full routine playback is not implemented yet. Use the separate Descend and Grip buttons above for a reviewed pickup.</p></article>
+        <div class="controls"><div class="button-row"><button id="start-run" class="primary" disabled>Run routine</button><button id="pause" class="pause" disabled>Ⅱ Pause</button><button id="stop" class="stop" disabled>■ Stop</button></div><p id="control-help"><strong>These full-routine controls are unavailable.</strong> Use the Stop button beside Descend and Grip to stop a taught pickup. These disabled controls cannot stop other tasks. That console’s Stop Sequence finishes the step in progress; it is not an immediate halt. Use the physical E-stop for an emergency.</p></div>
+      </section>
+      <footer>Cephla <span>•</span> Calibration, depth views and diagnostics are in <a href="/developer">Developer view</a>.</footer>
+    </main>
+  </div>
+  <noscript>This workspace needs JavaScript. Enable it and reload. No robot commands have been sent.</noscript>
+</body>
+</html>

@@ -1,0 +1,1070 @@
+{
+  "date": "2026-10-27",
+  "task": "True Home then fresh 48-well calibration",
+  "home_evidence": {
+    "path": "operator_ui/reports/ik_home/1793084950965813700_f518c23f693a4294982fa300c90a921b.json",
+    "sha256": "fccb8f01f183219bee580822f0499042bd3dec1fe6a3edf87b73d574efb0ae8f",
+    "record": {
+      "status": "completed",
+      "at": 1793084950.9658139,
+      "plan_id": "2026-10-27T07:09:06.700303+00:00:1793084946700",
+      "plan": {
+        "actions": [
+          "move_home"
+        ],
+        "labels": [
+          "Return Home"
+        ],
+        "dispatch": "ik_home_return",
+        "start": {
+          "X": 289.775,
+          "Y": -74.929,
+          "Z": 169.645,
+          "Rz": 88.758
+        },
+        "joints": {
+          "J1": 131.04550107922455,
+          "J2": 38.655511833810195,
+          "J3": 53.519873924329616,
+          "J4": -3.4176607703814614
+        },
+        "e1": 0.042969164496753365,
+        "cfg": {
+          "reach_hard_mm": 460.0,
+          "j4_pref_abs_deg": 220.0,
+          "j4_hard_abs_deg": 220.0,
+          "inner_reach_mm": 280.0,
+          "claw_gap_min_mm": 60.0,
+          "claw_gap_max_mm": 88.0,
+          "base_x_mm": 126.0,
+          "base_y_mm": 0.0,
+          "link1_mm": 200.0,
+          "link2_mm": 200.0,
+          "j2_offset_deg": 0.0,
+          "j3_offset_deg": 180.0,
+          "j2_min_deg": -95.0,
+          "j2_margin_deg": 2.0,
+          "extension_margin_mm": 8.0
+        },
+        "envelope": {
+          "X": [
+            200.0,
+            450.0
+          ],
+          "Y": [
+            -250.0,
+            380.0
+          ],
+          "Z": [
+            70.0,
+            400.0
+          ]
+        },
+        "home": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+        "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+        "stages": [
+          {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 289.77,
+                "Y": -74.93,
+                "Z": 300.0,
+                "Rz": 88.76
+              }
+            ]
+          },
+          {
+            "kind": "rotate",
+            "rz": 65.5985
+          },
+          {
+            "kind": "rotate",
+            "rz": 42.439
+          },
+          {
+            "kind": "rotate",
+            "rz": 19.2795
+          },
+          {
+            "kind": "rotate",
+            "rz": -3.8799999999999955
+          },
+          {
+            "kind": "queue",
+            "points": [
+              {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 300.0,
+                "Rz": -3.88
+              },
+              {
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02,
+                "Rz": -3.88
+              }
+            ]
+          }
+        ],
+        "checked": [
+          {
+            "pose": {
+              "X": 289.77,
+              "Y": -74.93,
+              "Z": 300.0,
+              "Rz": 88.76
+            },
+            "joints": {
+              "J1": 261.40050107922457,
+              "J2": 38.65506625249786,
+              "J3": 53.51865493089049,
+              "J4": -3.413996195629993
+            }
+          },
+          {
+            "pose": {
+              "X": 289.77,
+              "Y": -74.93,
+              "Z": 300.0,
+              "Rz": 65.5985
+            },
+            "joints": {
+              "J1": 261.40050107922457,
+              "J2": 38.65506625249786,
+              "J3": 53.51865493089049,
+              "J4": -26.57549619562998
+            }
+          },
+          {
+            "pose": {
+              "X": 289.77,
+              "Y": -74.93,
+              "Z": 300.0,
+              "Rz": 42.439
+            },
+            "joints": {
+              "J1": 261.40050107922457,
+              "J2": 38.65506625249786,
+              "J3": 53.51865493089049,
+              "J4": -49.73499619562999
+            }
+          },
+          {
+            "pose": {
+              "X": 289.77,
+              "Y": -74.93,
+              "Z": 300.0,
+              "Rz": 19.2795
+            },
+            "joints": {
+              "J1": 261.40050107922457,
+              "J2": 38.65506625249786,
+              "J3": 53.51865493089049,
+              "J4": -72.89449619563
+            }
+          },
+          {
+            "pose": {
+              "X": 289.77,
+              "Y": -74.93,
+              "Z": 300.0,
+              "Rz": -3.8799999999999955
+            },
+            "joints": {
+              "J1": 261.40050107922457,
+              "J2": 38.65506625249786,
+              "J3": 53.51865493089049,
+              "J4": -96.05399619562998
+            }
+          },
+          {
+            "pose": {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 300.0,
+              "Rz": -3.88
+            },
+            "joints": {
+              "J1": 261.40050107922457,
+              "J2": 84.87688206683335,
+              "J3": 52.055961092420105,
+              "J4": -140.8131181714951
+            }
+          },
+          {
+            "pose": {
+              "X": 289.97,
+              "Y": 62.63,
+              "Z": 248.02,
+              "Rz": -3.88
+            },
+            "joints": {
+              "J1": 209.42050107922452,
+              "J2": 84.87688206683335,
+              "J3": 52.055961092420105,
+              "J4": -140.8131181714951
+            }
+          }
+        ],
+        "preserve_gripper": false,
+        "steps": [
+          {
+            "kind": "home_return",
+            "label": "Move to X289.77 / Y-74.93 / Z300.00 mm"
+          },
+          {
+            "kind": "home_return",
+            "label": "Turn the wrist to 65.60 degrees at clearance height"
+          },
+          {
+            "kind": "home_return",
+            "label": "Turn the wrist to 42.44 degrees at clearance height"
+          },
+          {
+            "kind": "home_return",
+            "label": "Turn the wrist to 19.28 degrees at clearance height"
+          },
+          {
+            "kind": "home_return",
+            "label": "Turn the wrist to -3.88 degrees at clearance height"
+          },
+          {
+            "kind": "home_return",
+            "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+          },
+          {
+            "kind": "home_return",
+            "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+          }
+        ],
+        "requirements": [
+          "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+          "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+        ],
+        "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+        "id": "2026-10-27T07:09:06.700303+00:00:1793084946700",
+        "at": 1793084946.7003036,
+        "source": "button",
+        "confirmation_source": "researcher_button"
+      },
+      "requirements_confirmed": [
+        "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+        "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+      ],
+      "physical_clearance_confirmed": true,
+      "dispatch_requested": true,
+      "response": {
+        "ok": true,
+        "message": "Returning Home. Keep hands clear."
+      },
+      "finished_at": 1793084964.0499246,
+      "sequence": {
+        "state": "done",
+        "name": "researcher_home",
+        "active": false,
+        "log": [
+          {
+            "t": 0.0,
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear."
+          },
+          {
+            "t": 1.4,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 2.1,
+            "level": "info",
+            "msg": "Home: upload 1/1"
+          },
+          {
+            "t": 2.5,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 2.6,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 2.7,
+            "level": "info",
+            "msg": "Home: motion 1/100"
+          },
+          {
+            "t": 2.9,
+            "level": "info",
+            "msg": "Home: motion 8/100"
+          },
+          {
+            "t": 3.0,
+            "level": "info",
+            "msg": "Home: motion 18/100"
+          },
+          {
+            "t": 3.1,
+            "level": "info",
+            "msg": "Home: motion 28/100"
+          },
+          {
+            "t": 3.2,
+            "level": "info",
+            "msg": "Home: motion 38/100"
+          },
+          {
+            "t": 3.4,
+            "level": "info",
+            "msg": "Home: motion 49/100"
+          },
+          {
+            "t": 3.5,
+            "level": "info",
+            "msg": "Home: motion 59/100"
+          },
+          {
+            "t": 3.6,
+            "level": "info",
+            "msg": "Home: motion 70/100"
+          },
+          {
+            "t": 3.8,
+            "level": "info",
+            "msg": "Home: motion 80/100"
+          },
+          {
+            "t": 3.9,
+            "level": "info",
+            "msg": "Home: motion 90/100"
+          },
+          {
+            "t": 4.0,
+            "level": "info",
+            "msg": "Home: motion 98/100"
+          },
+          {
+            "t": 4.1,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 4.3,
+            "level": "info",
+            "msg": "Home: motion 100/100"
+          },
+          {
+            "t": 9.2,
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 9.9,
+            "level": "info",
+            "msg": "Home: upload 2/2"
+          },
+          {
+            "t": 10.2,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 10.4,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 10.5,
+            "level": "info",
+            "msg": "Home: motion 1/100"
+          },
+          {
+            "t": 10.6,
+            "level": "info",
+            "msg": "Home: motion 6/100"
+          },
+          {
+            "t": 10.7,
+            "level": "info",
+            "msg": "Home: motion 13/100"
+          },
+          {
+            "t": 10.9,
+            "level": "info",
+            "msg": "Home: motion 20/100"
+          },
+          {
+            "t": 11.0,
+            "level": "info",
+            "msg": "Home: motion 27/100"
+          },
+          {
+            "t": 11.1,
+            "level": "info",
+            "msg": "Home: motion 34/100"
+          },
+          {
+            "t": 11.3,
+            "level": "info",
+            "msg": "Home: motion 42/100"
+          },
+          {
+            "t": 11.4,
+            "level": "info",
+            "msg": "Home: motion 49/100"
+          },
+          {
+            "t": 11.5,
+            "level": "info",
+            "msg": "Home: motion 57/100"
+          },
+          {
+            "t": 11.7,
+            "level": "info",
+            "msg": "Home: motion 64/100"
+          },
+          {
+            "t": 11.8,
+            "level": "info",
+            "msg": "Home: motion 70/100"
+          },
+          {
+            "t": 11.9,
+            "level": "info",
+            "msg": "Home: motion 73/100"
+          },
+          {
+            "t": 12.1,
+            "level": "info",
+            "msg": "Home: motion 73/100"
+          },
+          {
+            "t": 12.2,
+            "level": "info",
+            "msg": "Home: motion 74/100"
+          },
+          {
+            "t": 12.3,
+            "level": "info",
+            "msg": "Home: motion 81/100"
+          },
+          {
+            "t": 12.5,
+            "level": "info",
+            "msg": "Home: motion 88/100"
+          },
+          {
+            "t": 12.6,
+            "level": "info",
+            "msg": "Home: motion 95/100"
+          },
+          {
+            "t": 12.7,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 12.9,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 12.9,
+            "level": "info",
+            "msg": "Home: motion 100/100"
+          }
+        ],
+        "result": {
+          "ok": true,
+          "home": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        },
+        "target": {
+          "x": 294.941,
+          "y": -71.704,
+          "rz": 86.389,
+          "z_calibrated": 78.718,
+          "config": "Wide",
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "b7457d2c37b00eefe29245d93ecba7bbfd7e428969273ebf9baf24853c5fa03c",
+          "open_claw_trial": true
+        },
+        "detection_ts": 0.0
+      }
+    }
+  },
+  "observation_lift": {
+    "target_z_mm": 268.02,
+    "speed": 5,
+    "reported_arrival_z_mm": 268.024
+  },
+  "trials": [
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001148_0bd114d9.jsonl",
+      "sha256": "805740f0c5560c47fff4aee4ffb159248c245d49c5667010ead295969fe648f8",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 288.94,
+        "Y": 60.916,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 288.94,
+        "Y": 60.916,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -16.15781689500568,
+        -27.880905709328722
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001230_8e719fc1.jsonl",
+      "sha256": "7c7c2a7d512479fcf7c39c54d51e4899eb1dfb63fccc6be65856fdb768432fb6",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 287.937,
+        "Y": 59.184,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 287.937,
+        "Y": 59.184,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -14.673642327235314,
+        -26.497271490886952
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001255_b799f7cf.jsonl",
+      "sha256": "2ee2f08eb69809b28c62fba248559f855e9274da287628333abe335f18bd5176",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 286.968,
+        "Y": 57.434,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 286.968,
+        "Y": 57.434,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -13.31631634465026,
+        -25.075079249005782
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001308_75d8813c.jsonl",
+      "sha256": "26d5f1987bf62445cccb52fde1a507a168ff14d26bd4b519fa8a3a55711460df",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 286.029,
+        "Y": 55.668,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 286.029,
+        "Y": 55.668,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -11.970671795827002,
+        -23.628525267933945
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001320_4373fc52.jsonl",
+      "sha256": "6bf8f64110742b894fd4501abc294a9d2e92f6a8cb95aa50cf595384305f14c7",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 285.124,
+        "Y": 53.884,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 285.124,
+        "Y": 53.884,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -10.675427271425065,
+        -22.155655037120358
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001332_51aa0ee6.jsonl",
+      "sha256": "cd6e6eb8753c742584552905034b1bcc920a3a4149f588d0c40f5c0c30f67fb7",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 284.256,
+        "Y": 52.082,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 284.256,
+        "Y": 52.082,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -9.351589995220877,
+        -20.674583349638382
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001344_ca67436d.jsonl",
+      "sha256": "224ee48db45b2a5c2753060955fa44ae1930582979702fa1917004246b0ee527",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 283.432,
+        "Y": 50.259,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 283.432,
+        "Y": 50.259,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -8.088742340551335,
+        -19.168676415980848
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001357_c967fe10.jsonl",
+      "sha256": "25efab1534363b5c8e1aa6247858305441137bff8ae360d179983996a705a0ea",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 282.654,
+        "Y": 48.416,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 282.654,
+        "Y": 48.416,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -6.877303248801468,
+        -17.61519850486604
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001409_73615067.jsonl",
+      "sha256": "870fe615e91ca6fc00d18d5c691af666733fdeee6c595f9a84d53985bf0063ad",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 281.928,
+        "Y": 46.553,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 281.928,
+        "Y": 46.553,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -5.704712354346839,
+        -16.01137483724765
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001421_4549aeb3.jsonl",
+      "sha256": "88b4de83faa17866631dee0b705d29fe722acbf6c11610fa760556d3bc104bd9",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 281.256,
+        "Y": 44.669,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 281.256,
+        "Y": 44.669,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -4.585788872891385,
+        -14.385083678744408
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001434_293cfe59.jsonl",
+      "sha256": "877679081412df6b30bf913bb95f0b99993a7c729750a3b01fb2291538bd833c",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 280.648,
+        "Y": 42.763,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 280.648,
+        "Y": 42.763,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -3.514163976054988,
+        -12.743576263639952
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001446_1d261d39.jsonl",
+      "sha256": "3cf553a5745ecc0c0ca28a521913fe8bb36f165cdf7c0bbdbed8c4cb2366e353",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 280.117,
+        "Y": 40.835,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 280.117,
+        "Y": 40.835,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -2.4712346685386137,
+        -11.063424296803376
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001501_393d04be.jsonl",
+      "sha256": "c0b259e9ec91567f95e4eb9c742415f4bf748a03ce8e0fb40945b88b28fe9161",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 279.679,
+        "Y": 38.883,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 279.679,
+        "Y": 38.883,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -1.5502711717869033,
+        -9.3004812549271
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001516_ad82167f.jsonl",
+      "sha256": "353889d50c0aceb7052a7f12d6c6d7181bf410d66976137688fa72de47e6793b",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 279.342,
+        "Y": 36.911,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 279.342,
+        "Y": 36.911,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -0.7882143218847091,
+        -7.479217690581301
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001533_d2f3ec8a.jsonl",
+      "sha256": "70a6f3b9c8fb10be4e9299ac3af54ca303de45a5618a5467c6ee9cad6e608b54",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 279.151,
+        "Y": 34.921,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 279.151,
+        "Y": 34.921,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        -0.05560584339292518,
+        -5.669361408444182
+      ],
+      "last_observed_supported_wells": 48
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001554_e15e04e8.jsonl",
+      "sha256": "d382e33f056747055c088b336d65d1892f919fbcebc8637e7deafb08e8e94dc0",
+      "ok": true,
+      "motion_requested": true,
+      "error": null,
+      "final_pose": {
+        "X": 279.118,
+        "Y": 32.921,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observation_pose": {
+        "X": 279.118,
+        "Y": 32.921,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        0.44216685430222924,
+        -3.693557416158935
+      ],
+      "last_observed_supported_wells": 47
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_001614_5e1fd38b.jsonl",
+      "sha256": "f9964155cef84b8d9a93f34721ad50410b68ab8a8c62493d2d4b32507400d628",
+      "ok": false,
+      "motion_requested": true,
+      "error": "No three consecutive verified plate observations within 20 seconds; arm remains stopped.",
+      "final_pose": null,
+      "last_observation_pose": {
+        "X": 279.363,
+        "Y": 30.936,
+        "Z": 268.02,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88
+      },
+      "last_observed_error_xy_mm": [
+        0.7228559300050961,
+        -1.7956855399435305
+      ],
+      "last_observed_supported_wells": 47
+    }
+  ],
+  "verified_xy_moves": 16,
+  "moves_with_failed_post_verification": 1,
+  "last_single_observation_error_mm": 1.935718795152287,
+  "stopped_state": {
+    "camera": {
+      "age_s": 34.5,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.04278940468793735
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 229.4210161520578,
+        "J2": 78.37961667119801,
+        "J3": 46.04972213863548,
+        "J4": -128.30955445499055
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 279.363,
+        "Y": 30.936,
+        "Z": 268.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "projected_disk_pilot",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1793085561.3506346
+  },
+  "calibration_complete": false,
+  "alignment_run": false,
+  "descent_run": false,
+  "grip_run": false,
+  "diagnosis": "Grid reacquisition failed on most stopped post-move image bursts. One final measurement passed, insufficient for the three-consecutive-observation requirement. No controller fault.",
+  "correction_status": "2 mm base-directed descent candidate retained separately; not activated or trialed.",
+  "last_motion_note": "No further motion requested after the failed image verification."
+}

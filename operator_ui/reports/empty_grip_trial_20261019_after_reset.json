@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "request": "Operator reset in Bioyond GUI and explicitly requested another attempt",
+  "operator_confirmed_empty": true,
+  "before": {"mode": "manual", "enabled": false, "program": "stopped", "errors": [], "E1_mm": 0.01834189060900826, "X": 324.167, "Y": -65.214, "Z": 194.578, "Rz": 69.724},
+  "actions": [
+    {"endpoint": "/mode", "mode": "auto", "reply": "CmdDone"},
+    {"endpoint": "/enable", "reply": "CmdDone"},
+    {"endpoint": "/program", "action": "start", "reply": "CmdDone", "startup_torque_result": "setSysVarI acknowledged but no completion reply within 10 seconds; trigger consumed"},
+    {"endpoint": "/program", "action": "stop", "reply": "CmdDone"},
+    {"endpoint": "/disable", "reply": "CmdDone"}
+  ],
+  "post_stop_observation_unix": 1792454480.8507333,
+  "post_stop_pose": {"E1_mm": 0.01834189060900826, "X": 324.167, "Y": -65.214, "Z": 194.578, "Rz": 69.724},
+  "outcome": "same startup torque-report timeout after operator reset",
+  "position_commands_sent": [],
+  "fresh_torque_samples": [],
+  "force_limits_changed": false,
+  "automatic_retry": false,
+  "final_disable_acknowledged": true,
+  "diagnosis": "Local archive has Device 21 mode 5 torque report and mod_End completion. This does not establish which project the controller is executing. Startup readiness flag already reads true when stopped, so its value alone cannot establish completion of this start's mod_Init. Cause remains unconfirmed."
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "48-well-calibration-alignment-accepted-20261026",
+    "title": "48-well projected calibration and alignment accepted; gripping height pending",
+    "body": "Operator accepted the October26 physical 48-well calibration/alignment round and visually confirmed centered, parallel claws at X294.941 Y-71.704 Z300 Rz86.389. Real 6x8 well-grid registration transfers the original two virtual disks; verified observation height is Z289.129 from the measured 20 versus15mm plate heights on the same support. Frozen height-matched imagery recovered48/48 wells while retaining independent-group uncertainty checks. Virtual radius is not an absolute depth measurement. This was a supervised commissioning round with reviewed tracking failures, not an unattended full pipeline from Home. The plate-specific adapter reuses ResearcherDescent/LuaDescent and ReferenceGrip, preserving current XY/yaw rather than the old two-disk absolute endpoint. Gripping-edge height is unknown: the operator requested an open-claw supervised trial. Z78.718 is only a candidate, not verified depth. Grip remains unavailable until successful descent and explicit visual acceptance; E1=3.7 is inherited algorithm configuration, not proof of grip on this plate. Do not run the two-disk Full Calibration against this 48-well plate or claim its pickup/lift is validated. Consult projected_plate_pickup live status for current commissioning readiness.",
+    "source": "Operator acceptance 2026-10-26; operator_ui/reports/projected_alignment/accepted_round_20261026.json; Pick and Hold/Calibration/plate_48_pickup_profile.json"
+  },
+  {
+    "id": "hamilton-revised-route-accepted-20261026",
+    "title": "Current Hamilton route: accepted raised endpoint, via true Home",
+    "body": "The operator selected the October 26 revised Hamilton route as the default for Lacry. Hamilton is now X144.50 Y-350.68 Z61.22 Rz-3.00; the old X195.34 Y-360.31 Z38.61 endpoint is historical. Preserve the exact accepted three-target route at speed137 in both directions: Home X289.97 Y62.63 Z248.02 Rz-3.88; transit X215.74 Y-249 Z212 Rz-0.94; hover X195.88 Y-357.36 Z212 Rz-1.90; Hamilton. Hamilton to Squid means Hamilton -> true Home -> Squid; reverse means Squid -> true Home -> Hamilton. Both travel trials completed and were operator-accepted (8.050 and8.230 seconds). Production station recognition and handling use the revised pose. Travel evidence does not establish payload or commission pickup/release at the new position: retain existing Hamilton inspection checkpoints, open5/close3.7, lift5mm at speed5. Squid approach/handling are unchanged. Current host evidence and clearance checks remain authoritative; memory never authorizes a new movement.",
+    "source": "Operator acceptance and integration instruction 2026-10-26; reports/trajectory_smoothing/hamilton_reteach_20261026"
+  },
+  {
+    "id": "hamilton-route-handoff-history-20261024",
+    "title": "Hamilton travel and supervised handoffs exist; preserve tip-pair counts",
+    "body": "Supersedes older notes saying the Home-Hamilton route or all loaded handling is missing. The current route is the operator-accepted October26 Home-Hamilton revision; the Oct20 route and handoffs below are historical at the previous station pose, not validation of current pickup/release. Audit session 20261020T121524Z_d37ba039 records completed Hamilton drop-off and pickup/return with both operator inspections accepted. Recovered evidence: reports/hamilton/loaded_handling_history.json; later failed attempts remain in that record. Existing hamilton_dropoff and hamilton_retrieve routines are executable supervised plans starting and finishing Home, available from Hamilton panel buttons and plan_station_handling. Unattended loaded handling remains separately uncommissioned; do not claim those blockers mean no route or no prior successful handoff. For exactly five two-tip pickup/ejection pairs then imaging, preserve ten test tips and one Squid imaging run, with requested calibrations once. Use plan_tip_waste_experiment; native diagnostics consume multiple pairs and have no pair-count parameter. A missing exact-count method blocks execution, not a missing liquid recipe. Calibration consumes additional tips. Do not replace this request with five complete loops, select catalog Protocol, or return the plate to Hamilton after imaging.",
+    "source": "Operator requested recovery from history and clarified exactly five pairs; source audit events and installed Prep OpenAPI, 2026-10-24"
+  },
+  {
+    "id": "hamilton-full-channel-calibration-20261024",
+    "title": "Hamilton full calibration includes channel height and squeeze",
+    "body": "Full Hamilton calibration is initialize, self-calibrate, then channel height/squeeze calibration. Self-calibration alone had succeeded before, but channel result 1008 was the first Pass in the returned history on October 24. After both touchscreen routines passed, a native two-channel pickup and waste-ejection diagnostic succeeded at site 7 with the compatible 300 uL rack and original pedestal. Use plan_hamilton full_calibration for the full chain or channel_calibration for that specific step; GUI and agent share the implementation. One approval covers all stages. Select the actual rack site, load a full compatible rack with lid removed and seat the teaching needle in its dedicated holder. Require a passing channel calibration before liquid handling; do not recalibrate on every experiment cycle. Do not reuse old camera-derived motion plans after calibration changes. This does not commission liquid transfer or the new GUI's physical calibration execution. Supersedes older statements that Hamilton integration is Coming Soon; liquid-handling recipes and loaded handoff still require commissioning.",
+    "source": "Operator request; verified Hamilton logs and native site-7 pickup/ejection 2026-10-24; HAMILTON_INTEGRATION.md"
+  },
+  {
+    "id": "squid-external-acquisition-retrieval-20261024",
+    "title": "Retrieve after a scan started in Squid's GUI",
+    "body": "If a plate is already at Squid and the user requests retrieval after acquisition, use plan_squid_retrieval. This binds the current observed run and experiment IDs, whether still running or already successfully completed, then waits, returns the physical stage to the accepted loading position, and retrieves the plate to robot Home. It does not repeat calibration, drop-off, imaging, or native microscope homing. One Yes authorizes the entire continuation. Completion after a successful standalone drop-off proactively offers this plan but does not move without confirmation. A prior full automatic experiment already includes its authorized retrieval. Never infer that no acquisition exists from an identifier mismatch; get_squid_status without an ID reads the current job. A verified completion receipt can be revalidated after console reload against the same native session/current terminal job, but never authorizes motion itself. Failures, changed jobs, lost connection or stage position mismatch stop progression.",
+    "source": "Observed GUI acquisition completion and missing continuation diagnosed; squid_retrieval.py, 2026-10-24"
+  },
+  {
+    "id": "complete-lab-roundtrip-20261024",
+    "title": "Complete Hamilton and Squid loop with one confirmation",
+    "body": "For the established SAME-plate workflow use plan_lab_roundtrip, not the old plan_experiment preview. Start with a held plate at Home, or add full calibration pickup once at the beginning. Deliver to Hamilton and park Home; start the selected dispensing protocol and wait for that exact job; retrieve via Home, deliver to Squid and park Home; image using current selected settings, wait for that exact acquisition, return the Squid stage to its accepted loading position, retrieve via Home and deliver back to Hamilton. Finish every cycle with the plate at Hamilton and arm Home. Repeat exactly N cycles. One inline Yes or typed Yes authorizes the displayed complete plan; No cancels it. Existing accepted routes and station handling are used, with no model-generated coordinates. Stop on fault or uncertain completion, without automatic retries. Check live capabilities: Hamilton bridge is disabled/Coming Soon and automatic loaded Hamilton handling needs recorded acceptance. Do not claim a physical end-to-end experiment is commissioned merely because offline tests pass. Current Squid XYZ is physical and camera simulated. This supersedes the older repeated-experiment template for this same-plate loop only.",
+    "source": "Operator requested complete agentic loop; lab_roundtrip.py and offline integration tests, 2026-10-24"
+  },
+  {
+    "id": "squid-stage-dropoff-20261023",
+    "title": "Squid microscope stage drop-off and native homing",
+    "body": "Physical Squid controller 12769210: accepted drop-off target X=+0.050, Y=0.0508, Z=1.05 mm. The operator confirmed the successful corrected placement and requested live integration on 2026-10-23; the placement-review hold is cleared. Native return succeeded at X0.05000625/Y0.05476875/Z1.05. Original negative X failed after homing; do not reuse it. Original and successful trials remain in reports/squid_stage. Use get_squid_stage for LIVE physical position and plan_squid_stage for dropoff or native microscope home. after_scan=true waits for the exact active scan to succeed, then returns the physical stage with the robot at Home. Squid home is native stage referencing, distinct from drop-off and robot Home. The current imaging profile uses the accepted physical loading position and native return command. Only the absent camera is simulated; XYZ movement is REAL. An accepted location is not authorization to start a new experiment; use the normal single confirmation for the requested plan.",
+    "source": "Operator acceptance and integration of successful physical-stage return 2026-10-23"
+  },
+  {
+    "id": "calibration-location",
+    "title": "Two-disk calibration belongs only at the beginning",
+    "body": "Run Calibrate → Align → Descend → Grip only at the calibration disk station, at the beginning. Never substitute that camera-based workflow for pickup or release at Hamilton or Squid.",
+    "source": "Operator confirmed 2026-10-17; station_handling.py"
+  },
+  {
+    "id": "home-hub",
+    "title": "Home is the intermediate station",
+    "body": "Use the existing reviewed routes: Hamilton → Home → Squid and Squid → Home → Hamilton. Home → Hamilton and Home → Squid travel are taught at speed 137. Verify current pose, route evidence, controller readiness and payload before each run; memory does not authorize new geometry.",
+    "source": "Operator confirmed 2026-10-17; lacry_backend.py and recorded route files"
+  },
+  {
+    "id": "station-handling",
+    "title": "Station pickup and release still need local teaching",
+    "body": "At Hamilton and Squid, release a supported plate by slowly opening the jaws away from its edges, then use the taught route Home. Pickup approaches slightly from above within headroom, closes to E1=3.8 mm, verifies pickup, then uses the taught route Home. Local opening, release speed and clearance remain untaught; use preview only until reviewed.",
+    "source": "Operator instructions 2026-10-17; station_handling.py"
+  },
+  {
+    "id": "repeat-experiment",
+    "title": "Count complete experiment cycles and wait at Home",
+    "body": "For N dispensing experiments, each cycle waits at Home for Hamilton's job-specific finished signal, picks up the plate, transfers via Home to Squid, verifies delivery and returns Home before the next cycle. No elapsed-time or model inference of completion. Instrument start/finish and local station handling are not commissioned yet; check current capabilities.",
+    "source": "Operator instructions 2026-10-17; experiment_plan.py; hamilton_adapter.py"
+  },
+  {
+    "id": "rehearsal",
+    "title": "Transport-only rehearsal keeps the plate held",
+    "body": "Only when explicitly requested, one rehearsal round is Home → Hamilton → Home → Squid → Home at speed 137, with no gripper, dispensing or imaging commands. Repeat exactly the requested count; do not substitute rehearsal for a real experiment.",
+    "source": "Operator requested five hypothetical rounds 2026-10-17; LacryBackend.transport_rehearsal"
+  },
+  {
+    "id": "chat-confirmation",
+    "title": "Researchers confirm plans in chat",
+    "body": "Present the exact plan and requirements in chat. A fresh explicit Yes or Yes, start confirms that pending plan through the host. No confirmation box or second Start button. No pending plan means no movement; no automatic repeat after completion.",
+    "source": "Operator preference 2026-10-17; LacryAgent.confirm_from_chat"
+  },
+  {
+    "id": "failures",
+    "title": "Failures stop the remaining steps",
+    "body": "If a step fails or completion is uncertain, stop and report the cycle and step. Do not silently retry, clear faults, change limits or promote a successful observation into permission for another run. Human review and live validation remain required.",
+    "source": "Standing operator instructions; host execution checks"
+  },
+  {
+    "id": "coactive",
+    "title": "Developers teach corrections by demonstration",
+    "body": "Coactive trajectory corrections are demonstrated by hand and reviewed by developers. Preserve original recordings and successful endpoints. Researcher requests use approved host routines; do not generate new robot coordinates from memory.",
+    "source": "Operator preferences from taught Hamilton and Squid sessions"
+  }
+]

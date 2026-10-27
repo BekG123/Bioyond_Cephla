@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>S4 Operator Console</title>
+<html><head><meta charset="utf-8"><title>Cephla Developer Console</title>
 <style>
   * { box-sizing: border-box; }
   body { margin:0; font:13px/1.45 system-ui, sans-serif; background:#171717;
@@ -156,10 +156,16 @@
     text-decoration:underline; text-decoration-thickness:2px;
     text-underline-offset:4px; font-weight:700;
   }
-</style></head><body>
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/developer_console.css?v=20261027">
+</head><body>
 
 <div id="hdr">
-  <h1>S4 Operator Console</h1>
+  <h1>Cephla Developer Console</h1>
+  <a href="/researcher" style="color:#d4e8d8;margin-right:12px">Researcher view ↗</a>
+  <a href="/audit/export" style="color:#d4e8d8;margin-right:12px">Download audit JSON</a>
+  <a href="/audit/status" target="_blank" rel="noopener" style="color:#d4e8d8;margin-right:12px">Log status</a>
   <span class="chip" id="c-conn">disconnected</span>
   <span class="chip" id="c-mode">mode ?</span>
   <span class="chip" id="c-en">enable ?</span>
@@ -173,10 +179,52 @@
           aria-pressed="true">Console</button>
   <button class="ghost" id="tabbtn-points" aria-pressed="false" onclick="showTab('points')">Points &amp; Trajectory</button>
   <button class="ghost" id="tabbtn-3d" aria-pressed="false" onclick="showTab('3d')">3D View</button>
+  <button class="ghost" id="tabbtn-dsl" aria-pressed="false" onclick="showTab('dsl')">Bug inspector · DSL</button>
   <button class="ghost" id="tabbtn-transfer" aria-pressed="false" onclick="showTab('transfer')">ArUco transfer</button>
   <button class="ghost" id="tabbtn-depth" aria-pressed="false" onclick="showTab('depth')">D405 Depth</button>
   <span class="lbl">E-stop is the human's job — stay at it during motion.</span>
 </div>
+
+<section id="tab-dsl" style="display:none" aria-label="Developer DSL bug inspector">
+  <div class="dsl-heading">
+    <div><h2>Understand the failure. Write the intended behavior.</h2>
+      <p>Recorded evidence → source explanation → your DSL → Python preview → DSL review.</p></div>
+    <button id="dsl-refresh" class="ghost">Refresh failure</button>
+  </div>
+  <div id="dsl-status" role="status" aria-live="polite">Loading diagnostic tools…</div>
+  <div class="dsl-grid">
+    <article class="card">
+      <h2>Last recorded failure</h2>
+      <p id="dsl-error">No failure loaded.</p>
+      <p id="dsl-location" class="mono"></p>
+      <p id="dsl-provenance" class="lbl"></p>
+      <details><summary>Python source at the failure</summary><pre id="dsl-source"></pre></details>
+      <h3>Source explanation in DSL</h3>
+      <p class="lbl">A readable projection, not verified executable equivalence. REVIEW marks unsupported constructs.</p>
+      <pre id="dsl-explanation"></pre>
+      <button id="dsl-agent" class="ghost" disabled>Explain with agent</button>
+      <p class="lbl">On click, sends the displayed failure and source excerpt to the configured model. No hardware tools are provided.</p>
+      <pre id="dsl-agent-output" hidden></pre>
+    </article>
+    <article class="card">
+      <h2>Your intended behavior</h2>
+      <p class="lbl">DSL v1 · Four spaces · No semicolons · Independent IF blocks in order</p>
+      <div class="row">
+        <button id="dsl-example" class="ghost">Load parking example</button>
+        <button id="dsl-translate">Translate and retranslate</button>
+      </div>
+      <label for="dsl-editor">Edit your DSL</label>
+      <textarea id="dsl-editor" spellcheck="false" rows="23" aria-describedby="dsl-contract"></textarea>
+      <p id="dsl-contract" class="lbl">The first matching decision ends a check. ASK and PAUSE suspend progression. check.logs means a fresh structured observation. A check count is not elapsed time.</p>
+      <p class="lbl">Drafts stay in this browser. Translation is deterministic and does not use API credits, run code, or alter the application.</p>
+    </article>
+  </div>
+  <div class="dsl-grid">
+    <article class="card"><h2>Generated Python · preview only</h2><pre id="dsl-python">Translate a DSL draft to inspect the Python.</pre></article>
+    <article class="card"><h2>Translated back from Python</h2><pre id="dsl-roundtrip">The Python syntax tree is read back into DSL for comparison.</pre></article>
+  </div>
+  <p id="dsl-note" class="lbl">No execution or deployment is attached to this editor. General Python cannot yet round-trip through DSL v1.</p>
+</section>
 
 <div id="tab-depth" style="display:none; padding:12px">
   <h2>RealSense D405 · Depth &amp; 3D view</h2>
@@ -498,6 +546,45 @@
       <div class="row" id="griplog">E1: — | torque: — | J: —</div>
     </div>
 
+    <div class="card" id="latest-hamilton" data-view="developer"></div>
+    <div class="card" id="lacry-memory">
+      <h2>Lacry memory</h2>
+      <p class="lbl">Persistent context across restarts. Approved notes guide planning; run observations remain evidence, not motion permission. Model suggestions need review.</p>
+      <p id="memory-status" role="status">Loading memory…</p>
+      <div class="row"><input id="memory-search" placeholder="Search workflows, stations or past results" aria-label="Search Lacry memory" style="flex:1;min-width:200px"><button id="memory-refresh">Search / refresh</button><a href="/developer/api/lacry-memory/export">Export JSON</a></div>
+      <details><summary>Add or edit an approved note</summary>
+        <form id="memory-form" style="display:grid;gap:10px;margin-top:12px">
+          <label>Title<input id="memory-title" required maxlength="160" style="display:block;width:100%"></label>
+          <label>Context<textarea id="memory-body" required maxlength="4000" rows="4" style="display:block;width:100%;font:inherit"></textarea></label>
+          <div class="row"><button type="submit" id="memory-save">Save approved note</button><button type="button" id="memory-new">Clear editor</button></div>
+        </form>
+      </details>
+      <div id="memory-items" style="max-height:480px;overflow:auto;margin-top:14px"></div>
+    </div>
+    <div class="card" id="haiku-pickup">
+      <h2>Haiku — Pickup planning and references</h2>
+      <p class="lbl">Haiku reviews measured references and diagnostic log summaries. Researcher Descend uses the saved Lua approach; Grip uses a separate position command. This does not train model weights.</p>
+      <div class="row"><input id="imitation-key" type="password" autocomplete="off" aria-label="Haiku imitation API key" placeholder="Anthropic API key"><button id="imitation-key-save">Connect Haiku</button></div>
+      <p class="lbl">Your key is saved securely for this computer account and restored after console reloads (shared with the scene agent). Pickup analysis sends selected measurements and log summaries to Anthropic. Grip execution is unavailable.</p>
+      <p id="imitation-dev-status" role="status">Checking imitation...</p>
+      <details><summary>Review a measured reference</summary>
+        <p class="lbl">Record Align, manual Descend with open jaws, then the stationary Grip result for reference. Reviewing a reference does not authorize automatic closing; use the separate Grip button after successful Descent.</p>
+        <label class="lbl">Source routine ID (blank = current draft)<input id="imitation-source" autocomplete="off"></label>
+        <button id="imitation-load">Load reference for review</button>
+        <pre id="imitation-reference" style="white-space:pre-wrap;max-height:300px;overflow:auto"></pre>
+        <label class="lbl"><input id="imitation-review" type="checkbox"> I verified these measured endpoints, a clear straight vertical descent with open jaws, and the measured E1 closure. No collision segment is approved. Plate, tool and controller frames are unchanged.</label>
+        <button id="imitation-approve" disabled>Save reviewed reference</button>
+      </details>
+      <p id="imitation-dev-notice" role="status"></p>
+      <details open><summary>Haiku pickup proposal from continuous logs</summary>
+        <p class="lbl">Researcher Run → Ask Haiku to plan pickup sends measured motion excerpts for stage selection. A proposal does not approve a reference or execute a motion.</p>
+        <pre id="pickup-plan-result" style="white-space:pre-wrap;max-height:450px;overflow:auto">No pickup proposal yet.</pre>
+      </details>
+      <details open><summary>Haiku requests, responses and tool results</summary><pre id="imitation-transcript" style="white-space:pre-wrap;max-height:450px;overflow:auto"></pre></details>
+      <p class="lbl">Full events are retained in the shared audit log. No automatic ascent or Hamilton transfer follows these actions.</p>
+    </div>
+    <div class="card" id="coactive-pickup"></div>
+
     <div class="card">
       <h2>Scene camera agent <span id="agent-stage">idle</span></h2>
       <p class="lbl">Depth Anything V2 Small + Haiku. Camera observation and dataset capture only.</p>
@@ -515,7 +602,7 @@
       <p class="lbl">Relative depth has no millimeter scale. This pipeline does not move the robot or change camera calibration. Training requires independent measured depth labels.</p>
       <p id="agent-depth-info" class="lbl"></p>
       <details id="agent-settings"><summary>Vision connection</summary>
-        <p class="lbl">Analyze sends the image, depth visualization and coordinates to Anthropic. Local depth and captures stay on this PC and need no API key. The key stays in server memory.</p>
+        <p class="lbl">Analyze sends the image, depth visualization and coordinates to Anthropic. Local depth and captures stay on this PC and need no API key. Your key is saved securely for this computer account and restored after console reloads.</p>
         <div class="row"><input id="agent-key" type="password" autocomplete="off" aria-label="Anthropic API key" placeholder="Anthropic API key" style="flex:1;min-width:140px"><button id="agent-key-save">Connect vision</button></div>
         <span id="agent-model" class="lbl"></span>
       </details>
@@ -629,6 +716,7 @@
         <button class="go" onclick="align()">2&nbsp; Align</button>
         <span class="lbl">hover Z</span><input class="sm" id="hoverz" placeholder="auto">
         <button class="go" onclick="descend()">3&nbsp; Descend</button>
+        <button id="lua-descend" class="go" onclick="descendLua()" disabled title="Reload the updated console backend to enable this candidate.">Lua Descend (137 approach)</button>
         <span class="lbl">torque-guarded</span>
       </div>
       <div class="row">
@@ -646,9 +734,11 @@
           'wrist relation saved')">Save wrist relation (plates aligned now)</button>
       </div>
       <div class="row">
-        <button class="go" onclick="grip()">4&nbsp; Grip</button>
-        <span class="lbl">open</span><input class="sm" id="gripstart" value="18">
-        <span class="lbl">floor</span><input class="sm" id="gripfloor" value="1">
+        <button class="go" onclick="grip()">4 Grip — accepted 3.7 mm</button>
+        <small>Staged position closure after the corrected Descend endpoint; records raw torque. Full Calibration then lifts 5 mm at speed 5 and returns Home at translation 137 / wrist 30.</small>
+        <label><input id="position-grip-ready" type="checkbox"> Plate supported and centered, hands clear, E-stop supervised.</label>
+        <span class="lbl">Closing increments at speed 5. This separate Grip button stops after closure; Full Calibration includes lift and Home.</span>
+        <input id="gripstart" value="28" hidden><input id="gripfloor" value="1" hidden>
         <button class="ghost" onclick="api('/gripper',{action:'move',e1:28},
           'Open the gripper fully (release)?')">Release</button>
       </div>
@@ -662,7 +752,7 @@
 
     <div class="card">
       <h2>5 Verify pickup — supervised handoff</h2>
-      <p>Requires a freshly confirmed Grip, armed envelope, and a visible calibrated rigid plate marker. No transfer starts automatically.</p>
+      <p>Torque-limited contact does not verify a secure grasp. Inspect the hold before a separate supervised lift.</p>
       <div class="row">
         <label>Plate marker ID <input class="sm" id="pickup-marker" type="number" min="0" max="49"></label>
         <label>Marker plane to plate center Z (mm) <input class="sm" id="pickup-dz" type="number" step="0.1"></label>
@@ -755,7 +845,7 @@ async function api(path, body, confirmMsg, okNote){
   if(confirmMsg && !window.confirm(confirmMsg)) return null;
   try{
     const r = await fetch(path, {method:"POST",
-      headers:{"Content-Type":"application/json"},
+      headers:{"Content-Type":"application/json","X-Cephla-View":"developer"},
       body: JSON.stringify(body || {})});
     if(!(r.headers.get("content-type") || "").includes("application/json")){
       throw new Error("HTTP " + r.status + ": backend returned a non-JSON page. If this is a new button, reload the updated Flask backend.");
@@ -1086,11 +1176,28 @@ function descend(){
     "baseline, then 1.0/0.5 mm steps at speed 5 with per-joint torque bands.\n" +
     "First breach stops and retreats. Stay at the E-stop.");
 }
-function grip(){
-  api("/seq/grip", {start: parseFloat(el("gripstart").value) || 28,
-                    floor: parseFloat(el("gripfloor").value) || 1},
-    "GRIP now?\nCloses in small steps until the torque crossing. Only do this " +
-    "at proper engagement depth — closing high on an edge jams the plates.");
+function descendLua(){
+  const t = targetBody();
+  if(!t){ say("no target — run calibration and Align first", "err"); return; }
+  api("/seq/descend_lua", t,
+    "LUA DESCENT to Z " + t.z_calibrated + "?\nClaw must already be open. " +
+    "Approach at 137 mm/s stops 20 mm above the target. Final descent uses " +
+    "speed 5 and local torque checks after each 1/0.5 mm step.\n" +
+    "A torque breach stops without retreat or grip. Keep the E-stop supervised. " +
+    "Requires the published descent Lua candidate.");
+}
+// OPTIONS verifies backend deployment without sending a robot command.
+fetch('/seq/descend_lua',{method:'OPTIONS'}).then(r=>{
+  if(r.ok){ el('lua-descend').disabled=false; el('lua-descend').title='Requires the published descent Lua candidate.'; }
+}).catch(()=>{});
+async function grip(){
+  if(!el('position-grip-ready').checked){ alert('Confirm plate support, centering, hands clear and E-stop supervision.'); return; }
+  el('position-grip-ready').checked=false;
+  try {
+    const response=await fetch('/researcher/api/status'), data=await response.json();
+    if(!data.grip?.can_start){alert(data.grip?.blocker || 'Grip is unavailable.');return;}
+    await api('/seq/grip',{ready:true,descent_id:data.grip.descent_id});
+  } catch { alert('Grip readiness unavailable. No retry was sent.'); }
 }
 function lift(){
   api("/lift", {z: parseFloat(el("liftz").value) || 150},
@@ -1100,11 +1207,13 @@ function lift(){
 let PTS = {points: {}, roles: {}, motion_order: "z,rz,xy"};
 let selName = "";
 function showTab(t){
-  for(const name of ["console", "points", "3d", "transfer", "depth"]){
+  for(const name of ["console", "points", "3d", "transfer", "depth", "dsl"]){
     el("tabbtn-" + name).setAttribute("aria-pressed", String(t === name));
   }
   el("tab-transfer").style.display = t === "transfer" ? "" : "none";
   el("tab-depth").style.display = t === "depth" ? "" : "none";
+  el("tab-dsl").style.display = t === "dsl" ? "" : "none";
+  if(t === "dsl" && window.DeveloperConsole) window.DeveloperConsole.refresh();
   if(t === "depth" && window.RealSenseUI) RealSenseUI.open();
   el("main").style.display = t === "console" ? "" : "none";
   el("tab-points").style.display = t === "points" ? "" : "none";
@@ -1879,5 +1988,10 @@ say("console ready — Connect, check state, set the envelope, then work the pip
 <script src="/static/pickup.js?v=1"></script>
 <script src="/static/ic_alignment.js?v=1"></script>
 <script src="/static/plate_agent.js?v=2"></script>
+<script src="/static/imitation_agent.js?v=1"></script>
+<script src="/static/latest_route.js"></script>
+<script src="/static/coactive_pickup.js"></script>
+<script src="/static/lacry_memory.js"></script>
 <script src="/static/realsense.js?v=1"></script>
+<script src="/static/developer_console.js?v=20261027"></script>
 </body></html>

@@ -1,0 +1,29 @@
+{
+  "schema": "cephla.projected-plate-calibration-attempt.v1",
+  "date": "2026-10-26",
+  "plate": "48-well, projected taught disk centers with rim tracking",
+  "operator_confirmation": "Yes—empty jaws, plate flat, area clear; E-stop supervised",
+  "status": "stopped_before_third_move_tracking_rejected",
+  "calibration_complete": false,
+  "accepted_steps": 2,
+  "travel_mm": 4.0,
+  "speed": 5,
+  "start": {"X":289.97,"Y":62.63,"Z":248.02,"Rz":-3.88},
+  "final_pose": {"X":287.993,"Y":59.153,"Z":248.02,"Rz":-3.88},
+  "initial_error_xy_mm": [-17.217275688791915,-29.710520597981713],
+  "last_valid_error_xy_mm": [-14.15581569445743,-26.682041869765683],
+  "after_step_agreement": [0.7469879518072289,0.6578947368421053],
+  "failure": "Too many inconsistent plate matches.",
+  "third_attempt_motion_requested": false,
+  "controller_errors_at_stop": [],
+  "height_wrist_and_claw_unchanged": true,
+  "grasp_target_created": false,
+  "alignment_descent_grip_run": false,
+  "logs": [
+    "../../projected_disk_pilot/20261026_200157_22a07887.jsonl",
+    "../../projected_disk_pilot/20261026_200235_f5e08859.jsonl",
+    "../../projected_disk_pilot/20261026_200248_966facbb.jsonl"
+  ],
+  "readonly_stopped_observation": "../stopped_20261026/observations.jsonl",
+  "notes": "Image-response checks passed for both movements. Tracking rejected before the third movement and again in a read-only observation; no automatic motion retry or threshold change. XY residual is vision-derived, not independent physical accuracy."
+}

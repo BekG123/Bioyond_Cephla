@@ -1,0 +1,111 @@
+{
+  "schema": "cephla.forward-entry-review.v1",
+  "source_sha256": "b58e72859b2ec763cd952d6540d3e682a69fd3fbaf9aaebb0b8fcd81f0e8469c",
+  "parent_candidate_sha256": "235baf78cda12b681146d61f430774f3c51c53854bd66424242090a3d956832a",
+  "baseline_candidate_sha256": "682151e98b70bb78d47af5c9373858480005bd6b5dbc9ca4c7002768b98dec4e",
+  "routes": {
+    "to_hamilton": {
+      "start": {
+        "X": 276.03,
+        "Y": 79.94,
+        "Z": 166.41,
+        "Rz": 1.98
+      },
+      "points": [
+        {
+          "X": 276.03,
+          "Y": 79.94,
+          "Z": 212.0,
+          "Rz": 1.98
+        },
+        {
+          "X": 195.88,
+          "Y": -357.36,
+          "Z": 212.0,
+          "Rz": -1.9
+        },
+        {
+          "X": 195.34,
+          "Y": -360.31,
+          "Z": 48.61,
+          "Rz": -1.9
+        }
+      ],
+      "segments": [
+        {
+          "kind": "vertical_departure",
+          "start": {
+            "X": 276.03,
+            "Y": 79.94,
+            "Z": 166.41,
+            "Rz": 1.98
+          },
+          "end": {
+            "X": 276.03,
+            "Y": 79.94,
+            "Z": 212.0,
+            "Rz": 1.98
+          },
+          "length_mm": 45.59,
+          "expected_end_joints": {
+            "J2": 92.89949934354587,
+            "J3": 50.300772511052195,
+            "J4": -141.22302878303896
+          }
+        },
+        {
+          "kind": "straight_transfer",
+          "start": {
+            "X": 276.03,
+            "Y": 79.94,
+            "Z": 212.0,
+            "Rz": 1.98
+          },
+          "end": {
+            "X": 195.88,
+            "Y": -357.36,
+            "Z": 212.0,
+            "Rz": -1.9
+          },
+          "length_mm": 444.5844267402987,
+          "expected_end_joints": {
+            "J2": -54.48540369734428,
+            "J3": 131.0993958592238,
+            "J4": -78.51674909032039
+          }
+        },
+        {
+          "kind": "forward_arrival",
+          "start": {
+            "X": 195.88,
+            "Y": -357.36,
+            "Z": 212.0,
+            "Rz": -1.9
+          },
+          "end": {
+            "X": 195.34,
+            "Y": -360.31,
+            "Z": 48.61,
+            "Rz": -1.9
+          },
+          "length_mm": 163.4175210924459,
+          "expected_end_joints": {
+            "J2": -55.64187568761233,
+            "J3": 133.07002182650788,
+            "J4": -79.33090306733644
+          }
+        }
+      ],
+      "length_mm": 653.5919478327446,
+      "ik_passed": true,
+      "execution_authorized": false,
+      "physical_clearance_verified": false,
+      "note": "New transit and vertical columns need physical clearance review; IK is not collision checking.",
+      "forward_entry_mm": 3
+    }
+  },
+  "height_mm": 212,
+  "execution_authorized": false,
+  "operator_feedback": "Slight backward motion upon entrance; advance 3 mm toward Hamilton instead.",
+  "interpretation": "Hover 3 mm short along the approach; advance during descent; preserve taught endpoint."
+}

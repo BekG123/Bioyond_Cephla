@@ -1,0 +1,180 @@
+{
+  "schema": "cephla.projected-calibration-repeat.v1",
+  "at": 1793087030.6640797,
+  "status": "camera_centering_and_saved_observation_height_verified",
+  "final_pose": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": -3.88,
+    "X": 278.946,
+    "Y": 26.917,
+    "Z": 289.129
+  },
+  "final_error_xy_mm": [
+    0.1826789211386881,
+    -0.5690087718362236
+  ],
+  "final_estimated_error_mm": 0.5976140649741792,
+  "stationary_observations": 6,
+  "stationary_error_max_difference_mm": 0.016980580606679247,
+  "supported_wells": [
+    48,
+    48,
+    48,
+    48,
+    48,
+    48
+  ],
+  "independent_absolute_depth_verified": false,
+  "alignment_executed": false,
+  "descent_executed": false,
+  "grip_executed": false,
+  "observed_new_alignment": {
+    "x": 305.2980339990499,
+    "y": -73.39887717080566,
+    "rz": 89.73331387068856
+  },
+  "previous_accepted_alignment": {
+    "X": 294.941,
+    "Y": -71.704,
+    "Z": 300.0,
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 86.389
+  },
+  "alignment_change_mm": 10.494796895680933,
+  "alignment_change_deg": 3.344313870688552,
+  "descent_candidate_status": "Old 2 mm inward candidate retained, not activated; do not apply to the changed alignment estimate.",
+  "method": [
+    "Returned to true Home using the existing Lacry IK route.",
+    "Preserved measured well-grid initialization; added bounded rotation-aware whole-plate fallback only when grid initialization fails.",
+    "Preserved independent well-group, distributed support, geometry, motion-response and controller checks.",
+    "Z268 view approached the frame edge; moved vertically at speed 5 to the already verified observation reference Z289.129.",
+    "Used the pinned height-matched image reference and bounded XY corrections; six stationary final observations passed."
+  ],
+  "limitations": [
+    "This run included reviewed failures and a reference-height change; it was not an uninterrupted unattended full pickup.",
+    "New alignment differs from the accepted pose and has not been physically executed or visually accepted."
+  ],
+  "final_evidence": {
+    "path": "operator_ui/reports/projected_disk_pilot/20261027_004018_c770a647.jsonl",
+    "sha256": "c3b8956cafae2c2872efd3b22ce65583fa1b07ca8e9521730ece83d01070ce33"
+  },
+  "alignment_preview": {
+    "path": "operator_ui/reports/projected_alignment/prepared_route_20261027_repeat.json",
+    "sha256": "1574bf83e94cd4906ca715668098a83072fbbd5996ef4a8daee1eabcbc5f4495"
+  },
+  "previous_acceptance": {
+    "path": "operator_ui/reports/projected_alignment/accepted_round_20261026.json",
+    "sha256": "85a5545057c861e6b0c34a9008df5c09744ecfaf5e1907e1183b14299bd472d4"
+  },
+  "home_evidence": {
+    "path": "operator_ui/reports/ik_home/1793085700017890700_3dda8bf3efb14f9ea9be60448c3dc6b5.json",
+    "sha256": "1f2106e753717cb6ebfcb59608fe91b019d16f5f02bafdf56e92787f42114656"
+  },
+  "trials": [
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_002808_1cb6a8fc.jsonl",
+      "sha256": "74eb6a1c6e4f2cca7de31e29e0234739a8a98cb23b3d5ab5958b6727d22825e4"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003228_899aa734.jsonl",
+      "sha256": "9ac856a6ec9134eda7f066c2dd758673bd9ef00bf9a611573480faf132a3112c"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003254_58222292.jsonl",
+      "sha256": "f394e14c5f273c6d784b4943f9cd9490975683233cc298d67fc133cc19aa7cd2"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003317_170d54ab.jsonl",
+      "sha256": "ce978e994fb15108f6501ef4fac6eee698b0b4089ce56fd2bbf4c5155e2ad468"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003329_371cd56c.jsonl",
+      "sha256": "b2730e8284d1a839aa7d1e396cc6fdc4b99280c9ac7665d21b20cfb184e82891"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003342_3e50b3bf.jsonl",
+      "sha256": "766556cc18aaead77218c6749554b271f4535c67084f34546e05fbacbfcb17db"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003354_ca15f031.jsonl",
+      "sha256": "1c8a4293c159fbbf525308c5d76086894a7ba1bf9ddc22991c28b669d50377fa"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003406_0a341f92.jsonl",
+      "sha256": "3d4c952939454d71580d153aa8445b383753ace6e0cbeb6a260bad292a9cfea6"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003418_100ce10f.jsonl",
+      "sha256": "4b3a3297ba990fd28ba50df1aa45b07822a8b1a1bebdbf65eb71e94a62e63be0"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003431_90a8d111.jsonl",
+      "sha256": "8fe5d2b04b943f8cb2596ff8044307acd427284308891c3567c194874b5d7382"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003443_79fc2136.jsonl",
+      "sha256": "2519f275fcc7da85b74405b2457bcb1af8893e56d1800127bcb14d1770f412c7"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003455_6afc97b6.jsonl",
+      "sha256": "a823d4ef6caddde046fbbdac08d67268a321b9da20c6ea6197dea98ddd4e97e2"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003508_726f5437.jsonl",
+      "sha256": "deff24cea932de22b5b50d9fad1c11179c9277cfb07b68bca2d793c17d8224e7"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003520_c67479e0.jsonl",
+      "sha256": "f82ce152364ad2d53435e0699c17901ac163f0a1cb5d498b44b1aa9229ae3f69"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003533_3c47c623.jsonl",
+      "sha256": "5fa97bb06ce819b2ef39574eef99234623f269b1c97835cde8191aaa3bee6ef7"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003547_14e8b3a9.jsonl",
+      "sha256": "b396693a8e2c5b9710c40e52508637d3617c2e5950389e4e413bc737d8190c53"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003603_800de24a.jsonl",
+      "sha256": "7f3906ea2fb5f8eadaff3e1779b862d45f42548fcf526455f76065b25b854d20"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003619_a54a39da.jsonl",
+      "sha256": "eff47b12f54a663ec85b08f6ffed3878a1d45f5ea93d84aeaaa1aaad98293836"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003636_a15c5c87.jsonl",
+      "sha256": "2cec1320bf1d85b1ff698bbaa3f780c07f91f7137691c85939766065357cb504"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_003948_256b460b.jsonl",
+      "sha256": "e6a2f1a16114f973764167dcf0641ef7af0cd48cb1ab118f56143dc732758b37"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_004003_bf1e722b.jsonl",
+      "sha256": "e6cea930a2d3977041985b5a38c5e0d69938884eaa24e1b6fb4d9fdde58437f0"
+    },
+    {
+      "path": "operator_ui/reports/projected_disk_pilot/20261027_004018_c770a647.jsonl",
+      "sha256": "c3b8956cafae2c2872efd3b22ce65583fa1b07ca8e9521730ece83d01070ce33"
+    }
+  ],
+  "source": [
+    {
+      "path": "Pick and Hold/Align/plate_pose/grid_rotation_seed.py",
+      "sha256": "bac1b0d36537a355453dbf62cda17743a382de53172b8550bd7a1e82b8946404"
+    },
+    {
+      "path": "Pick and Hold/Align/plate_pose/grid_pattern.py",
+      "sha256": "2348f099f48280ec5d4630e183e3cb0ac5bf656869ee79c0162440a1906a5c03"
+    },
+    {
+      "path": "operator_ui/projected_disk_trial.py",
+      "sha256": "d5881549fd9df0bd82b3f1f564145ed40995cd9483a15bb35698ab024d0de63b"
+    }
+  ],
+  "controller_errors": []
+}

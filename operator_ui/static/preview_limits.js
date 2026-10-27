@@ -13,7 +13,7 @@ const S4Preview = (() => {
     if (![q.J2,q.J3,q.z,q.rz,ref.zOffset,ref.wristOffset].every(Number.isFinite)) return 'Incomplete pose';
     const j1=q.z-ref.zOffset, j4=q.rz-q.J2-q.J3-ref.wristOffset;
     const j2max=Math.abs(p.j2_min_deg)-p.j2_margin_deg;
-    const j4max=Math.min(p.j4_pref_abs_deg,p.j4_hard_abs_deg);
+    const j4max=Math.min(p.j4_pref_abs_deg,p.j4_hard_abs_deg-5);
     if(j1 < p.j1_min_mm-1e-8 || j1 > p.j1_max_mm+1e-8) return 'J1 vertical travel limit';
     if(Math.abs(q.J2)>j2max+1e-8) return 'J2 shoulder limit';
     if(Math.abs(q.J3)>p.j3_hard_abs_deg+1e-8) return 'J3 elbow limit';

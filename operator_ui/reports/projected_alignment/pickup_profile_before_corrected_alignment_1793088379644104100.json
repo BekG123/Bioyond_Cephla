@@ -1,0 +1,32 @@
+{
+  "schema": "cephla.projected-pickup-profile.v1",
+  "id": "48_well_projected_20261026",
+  "acceptance": "operator_ui/reports/projected_alignment/corrected_alignment_accepted_1793087494110575300.json",
+  "acceptance_sha256": "377df8a856b2ff6a8af024430d7b57a70e192c7d88a8de7273179c723e5f8f06",
+  "alignment_log": "operator_ui/reports/projected_alignment/20261027_004717_44e8d273.jsonl",
+  "alignment_log_sha256": "e2bfee1cc49d2551c6ac6d1e21ff93d2ad5b53c3b9df827bff59f4df4b54885e",
+  "alignment_pose_mm": {
+    "X": 303.479,
+    "Y": -72.654,
+    "Z": 300.0,
+    "Rz": 89.746
+  },
+  "descent_status": "pending_supervised_open_claw_trial",
+  "gripping_edge_height": "unknown; operator requested supervised verification",
+  "candidate_endpoint": {
+    "X": 303.479,
+    "Y": -72.654,
+    "Z": 78.718,
+    "Rz": 89.746
+  },
+  "candidate_z_basis": "Reuse the previous supervised 48-well trial height Z78.718 at the newly visually accepted alignment; no automatic grip.",
+  "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+  "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+  "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+  "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5 to E1=3.7",
+  "automatic_lift_enabled": false,
+  "full_pickup_verified": false,
+  "inward_correction_already_applied": true,
+  "previous_profile": "operator_ui/reports/projected_alignment/pickup_profile_before_corrected_alignment_1793087494110575300.json",
+  "previous_profile_sha256": "b7457d2c37b00eefe29245d93ecba7bbfd7e428969273ebf9baf24853c5fa03c"
+}

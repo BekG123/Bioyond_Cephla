@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-26",
+  "task": "48-well projected-disk fixed-height XY centering",
+  "xy_centered": true,
+  "calibration_complete": false,
+  "height_calibrated": false,
+  "alignment_verified": false,
+  "grasp_target_created": false,
+  "speed": 5,
+  "max_step_mm": 2,
+  "final_pose": {"X": 280.301, "Y": 29.255, "Z": 268.008, "Rz": -3.889},
+  "initial_estimated_error_mm": 7.6,
+  "final_estimated_error_xy_mm": [0.2812868061917584, -0.056346097259410755],
+  "final_estimated_error_norm_mm": 0.2868747984991481,
+  "xy_tolerance_mm": 0.75,
+  "final_stationary_observations": 6,
+  "frames_per_observation": 5,
+  "final_max_pair_difference_mm": 0.016885018620433286,
+  "final_supported_wells": [46,46,46,46,46,46],
+  "final_log": "20261026_224554_3e30399d.jsonl",
+  "attempts": [
+    {"log": "20261026_223134_3938ef5b.jsonl", "motion": false, "live_result": "vision rejected before movement"},
+    {"log": "20261026_223420_0ef3d44e.jsonl", "motion": true, "live_result": "post-move vision rejected", "later_review": "saved images reacquired after resetting initialization on pose change; image response check passed"},
+    {"log": "20261026_223638_d6a86ea3.jsonl", "motion": false, "live_result": "vision rejected before movement"},
+    {"log": "20261026_223858_8caed02f.jsonl", "motion": true, "live_result": "pilot verified"},
+    {"log": "20261026_223929_dec2f4c3.jsonl", "motion": true, "live_result": "post-move vision rejected", "later_review": "saved-image response check passed; whole-plate initialization subsequently accepted all saved batches"},
+    {"log": "20261026_224205_cce360e9.jsonl", "motion": false, "live_result": "vision rejected before movement"},
+    {"log": "20261026_224458_4431964f.jsonl", "motion": true, "live_result": "pilot verified"},
+    {"log": "20261026_224527_9fe62069.jsonl", "motion": true, "live_result": "pilot verified"},
+    {"log": "20261026_224554_3e30399d.jsonl", "motion": false, "live_result": "six-observation final XY centering verified"}
+  ],
+  "implementation": [
+    "Frozen whole-plate template initializes local registration; never accepted as pose by itself.",
+    "Affine residual on a projective seed reduces local fit variation at fixed camera height; original-to-anchor perspective mapping remains.",
+    "Previous verified initialization is reused only while stationary; robot pose changes force reacquisition.",
+    "Existing independent well-group, composed-reference, distributed support, stationary agreement, workspace, controller and motion-response checks remain.",
+    "No phase-correlation initializer was integrated; its script is offline research only."
+  ],
+  "validation": {"grid_tests_passed": 9, "pilot_tests_passed": 14, "whole_plate_initializer_saved_batches_passed": 31, "whole_plate_initializer_saved_batches_total": 31},
+  "limitations": [
+    "XY error is calculated by the existing vendor Wide image mapping, not independent physical accuracy measurement.",
+    "Short stationary repeatability does not establish long-term reliability or unseen plate/lighting performance.",
+    "Projected disk radii are not used for depth. Height calibration must use verified physical plate/camera geometry before further height changes.",
+    "No alignment, descent, grip or full-calibration target was published."
+  ]
+}

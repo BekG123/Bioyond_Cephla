@@ -1,0 +1,1529 @@
+{
+  "checked_at": "2026-10-25T03:30:12.310759+00:00",
+  "read_only": true,
+  "responses": {
+    "instruments/connection-info": {
+      "status": 200,
+      "body": [
+        "Serial Number: PRPGD2427",
+        "Instrument Name: PRPGD2427",
+        "Connected: True",
+        "Controlling PC Name: DESKTOP-9DPRVQ3",
+        "Initialization Status: Initialized",
+        "Enclosure Status: Present",
+        "Individual Channels: Present",
+        "MPH8: Not Present",
+        "HHS: Not Present",
+        "HHC: Not Present",
+        "HEPAUV: Not Present"
+      ]
+    },
+    "instruments/global-run-state": {
+      "status": 200,
+      "body": "Idle"
+    },
+    "service-software-api/sensor-status": {
+      "status": 200,
+      "body": {
+        "isEnclosurePresent": true,
+        "isDoorClosed": true,
+        "isXHome": true,
+        "fan1Rpm": 4290,
+        "fan2Rpm": 0,
+        "mphSensorState": {
+          "present": false,
+          "sleeveSensors": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "yHome": false,
+          "zHome": false,
+          "squeezeHome": false,
+          "dispenserHome": false
+        },
+        "independentChannelsSensorState": {
+          "present": true,
+          "frontChannel": {
+            "sleeveSensor": false,
+            "yHome": true,
+            "zHome": true,
+            "squeezeHome": true,
+            "dispenserHome": false
+          },
+          "rearChannel": {
+            "sleeveSensor": false,
+            "yHome": true,
+            "zHome": true,
+            "squeezeHome": true,
+            "dispenserHome": false
+          }
+        }
+      }
+    },
+    "service-software-api/has-tips": {
+      "status": 200,
+      "body": false
+    },
+    "service-software-api/is-parked": {
+      "status": 200,
+      "body": true
+    },
+    "errors/check-for-pending-errors": {
+      "status": 200,
+      "body": []
+    },
+    "protocol-run": {
+      "status": 200,
+      "body": {
+        "protocolId": 0,
+        "runDatalId": null,
+        "isRunInProgress": false,
+        "isSimulation": false,
+        "protocolRunState": 0,
+        "startTime": "0001-01-01T00:00:00",
+        "estimatedEndTime": "0001-01-01T00:00:00",
+        "endPauseTime": "0001-01-01T00:00:00",
+        "protocolName": "MlPrepHeightAndSqueezeCalibration",
+        "currentStep": 0,
+        "preLoadThermalDeviceUsed": "None",
+        "preLoadHepaFiltration": false
+      }
+    },
+    "verification/status": {
+      "status": 200,
+      "body": {
+        "isWorkflowInProgress": false,
+        "isRunInProgress": false,
+        "isServiceRoutineInProgress": false,
+        "startTime": "2026-10-24T16:43:37.7816612-07:00",
+        "currentIndex": 0,
+        "runs": [],
+        "serviceRoutine": null
+      }
+    },
+    "calibration/channel-results": {
+      "status": 200,
+      "body": [
+        {
+          "id": 1008,
+          "calibrationDate": "2026-10-24T19:38:17.4323269",
+          "status": "Pass",
+          "message": null,
+          "hasError": false,
+          "channelSkew": {
+            "mphSkewX": 0.0,
+            "mphSkewZ": 0.0,
+            "independentSkewX": -0.256500244,
+            "independentSkewZ": 0.232437134
+          },
+          "channelOffset": {
+            "mphOffsetX": 0.0,
+            "independentOffsetX": -0.840263367,
+            "yzAxisOffsets": [
+              {
+                "index": 1,
+                "offsetY": 102.682571,
+                "offsetZ": 171.208664,
+                "offsetZValid": true
+              },
+              {
+                "index": 0,
+                "offsetY": 113.795059,
+                "offsetZ": 170.976227,
+                "offsetZValid": true
+              }
+            ]
+          },
+          "channelWarnings": []
+        },
+        {
+          "id": 1007,
+          "calibrationDate": "2026-10-24T19:13:15.5299898",
+          "status": "Fail",
+          "message": "Calibration was aborted.",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1006,
+          "calibrationDate": "2026-10-24T19:12:54.1123222",
+          "status": "Fail",
+          "message": "Calibration was aborted.",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1005,
+          "calibrationDate": "2026-10-24T19:12:53.1178098",
+          "status": "Fail",
+          "message": "Calibration was aborted.",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1004,
+          "calibrationDate": "2026-10-24T19:09:37.0158115",
+          "status": "Fail",
+          "message": "Calibration was aborted.",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1003,
+          "calibrationDate": "2026-08-31T14:52:59.7989953",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1002,
+          "calibrationDate": "2026-08-31T14:52:58.813912",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 3,
+          "calibrationDate": "2026-07-17T17:07:46.264014",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 2,
+          "calibrationDate": "2026-07-17T17:07:45.2742482",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1,
+          "calibrationDate": "2026-07-17T17:04:39.1692295",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        }
+      ]
+    },
+    "calibration/status": {
+      "error": "HTTP Error 404: Not Found"
+    },
+    "traces?offset=0&limit=150&sources=RTE,SDE": {
+      "status": 200,
+      "body": {
+        "totalItemCount": 813,
+        "currentOffset": 0,
+        "items": [
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:17.4033961Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:17.4033105Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:17.4029208Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Termination - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:17.21801Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Termination - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:17.1918114Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Unload - 1 - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:17.1909852Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Unload Dialog' closed automatically",
+            "type": "High",
+            "date": "2026-10-25T02:38:17.1889118Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Unload Dialog', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:38:06.26309Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Unload - 1 - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:06.2261336Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:06.2244163Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Height and Squeeze Calibration - Assay 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:06.2243673Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Height and Squeeze Calibration - Assay 1 < Activity : Calibrate - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:38:06.2225561Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Height and Squeeze Calibration - Assay 1 > Activity : Calibrate - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:10.8199328Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Height and Squeeze Calibration - Assay 1 : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:10.8188174Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:10.8187454Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Load - 1 - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:09.5009544Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Load Dialog' closed automatically",
+            "type": "High",
+            "date": "2026-10-25T02:33:09.4798325Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Load Dialog', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:33:07.96831Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Load - 1 - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.9203273Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Traffic Control Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.9190148Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Traffic Control Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.9188683Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Default Arm Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.9186382Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Default Arm Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.8072512Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Prepare for Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.8064711Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Prepare for Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.8034735Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.8033291Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:07.803259Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution started",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:05.7408755Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling completed : Duration = 00:00:00.0619978",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:05.6524113Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling started",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:05.584905Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning completed : Duration = 00:00:10.5652387",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:05.5849049Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Warning",
+            "message": "",
+            "type": "Processing",
+            "date": "2026-10-25T02:33:05.5842671Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Close Door' closed with handling action 'OK'",
+            "type": "High",
+            "date": "2026-10-25T02:33:05.3238781Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Close Door', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:32:56.4738653Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Select Tip Labware' closed with handling action 'OK'",
+            "type": "High",
+            "date": "2026-10-25T02:32:56.1760452Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Select Tip Labware', avaible buttons configuration 'OKCancel'.",
+            "type": "High",
+            "date": "2026-10-25T02:32:55.8761577Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:32:55.019751Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:32:08.7004798Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:32:08.6930213Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:32:08.6929399Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Termination - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:32:08.6747992Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Termination - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:31:59.8485674Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:31:59.8468478Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:31:59.8467913Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 < Activity : Completed - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:31:59.8445666Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Complete' closed with handling action 'OK'",
+            "type": "High",
+            "date": "2026-10-25T02:31:59.7832749Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Complete', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:21:43.4870277Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 > Activity : Completed - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:21:43.4621385Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 < Activity : Calibration - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:21:43.4601181Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 > Activity : Calibration - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:22.2719058Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:22.2717415Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:22.2716734Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Traffic Control Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:21.9832651Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Traffic Control Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:21.9811885Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Default Arm Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:21.9811884Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Default Arm Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:20.273867Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Prepare for Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:20.2735311Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Prepare for Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:20.2703562Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:20.2701825Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:20.2701135Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution started",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:17.8393499Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling completed : Duration = 00:00:00.0018628",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:17.7674442Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling started",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:17.7602944Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning completed : Duration = 00:01:00.2886295",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:17.7597324Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Warning",
+            "message": "",
+            "type": "Processing",
+            "date": "2026-10-25T02:19:17.7592561Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Close Door' closed with handling action 'OK'",
+            "type": "High",
+            "date": "2026-10-25T02:19:17.400228Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Close Door', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:18:18.1239957Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:18:17.4705057Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning aborted",
+            "type": "Processing",
+            "date": "2026-10-25T02:13:15.5279889Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:13:15.4892701Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run started",
+            "type": "Processing",
+            "date": "2026-10-25T02:13:15.4887326Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:13:15.484673Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning aborted",
+            "type": "Processing",
+            "date": "2026-10-25T02:12:53.1006445Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:12:53.0660725Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run started",
+            "type": "Processing",
+            "date": "2026-10-25T02:12:53.0660723Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:12:53.0591197Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:09:36.9805704Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning aborted",
+            "type": "Processing",
+            "date": "2026-10-25T02:09:36.72875Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Close Door' closed automatically",
+            "type": "High",
+            "date": "2026-10-25T02:09:36.7286163Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run started",
+            "type": "Processing",
+            "date": "2026-10-25T02:09:36.2248685Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Close Door', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:07:39.4878571Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:07:38.8690002Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning aborted",
+            "type": "Processing",
+            "date": "2026-10-25T02:05:28.1150746Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:05:28.0877502Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run started",
+            "type": "Processing",
+            "date": "2026-10-25T02:05:28.0875007Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:05:28.0835011Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning aborted",
+            "type": "Processing",
+            "date": "2026-10-25T02:04:47.3196247Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:04:47.2867066Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run started",
+            "type": "Processing",
+            "date": "2026-10-25T02:04:47.2861964Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:04:47.2792461Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:03:13.9768822Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning aborted",
+            "type": "Processing",
+            "date": "2026-10-25T02:03:13.7260308Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Select Tip Labware' closed automatically",
+            "type": "High",
+            "date": "2026-10-25T02:03:13.7256393Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run started",
+            "type": "Processing",
+            "date": "2026-10-25T02:03:13.2221472Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Select Tip Labware', avaible buttons configuration 'OKCancel'.",
+            "type": "High",
+            "date": "2026-10-25T02:02:10.9854269Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:02:10.1888912Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run completed",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:47.7574318Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "TipPickupDiagnosticAssay - Assay 1 < Activity : Tip_Pickup_Test_2_Channel - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:47.5012087Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : canceled 'The assay has been canceled by the system.'",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:46.988811Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "TipPickupDiagnosticAssay - Assay 1 : canceled 'The assay has been canceled by the system.'",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:46.9854654Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : canceled 'The assay has been canceled by the system.'",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:46.9854651Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : canceled 'The assay has been canceled by the system.'",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:46.9702261Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run started",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:46.963703Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "TipPickupDiagnosticAssay - Assay 1 > Activity : Tip_Pickup_Test_2_Channel - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:26.2924902Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "TipPickupDiagnosticAssay - Assay 1 : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:26.2922104Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:26.2921439Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Load - 1 - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:26.0321197Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Message 'Load Dialog' closed automatically",
+            "type": "High",
+            "date": "2026-10-25T02:00:25.9750206Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Load Dialog', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-25T02:00:24.5439429Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Load - 1 - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.4093558Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Traffic Control Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.4042415Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Traffic Control Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.4034353Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Default Arm Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.403274Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Default Arm Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.2930239Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Prepare for Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.2925128Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Prepare for Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.2894209Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.2892439Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : start",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:24.2891579Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution started",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:21.5808756Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling completed : Duration = 00:00:00.1967894",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:21.488426Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling started",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:21.2805626Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning completed : Duration = 00:00:01.4832827",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:21.2805625Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Warning",
+            "message": "",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:21.2776422Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-25T02:00:19.7968746Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution completed",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.3711114Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.369074Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.3689784Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Termination - complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.1760537Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Termination - start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.1413447Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.1400454Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Initialize Instrument - Assay 1 : complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.1395434Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Initialize Instrument - Assay 1 < Activity : Activity - complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.1188272Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Initialize Instrument - Assay 1 > Activity : Activity - start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.1182316Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Initialize Instrument - Assay 1 : start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.1181287Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:39.1180544Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Traffic Control Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:38.5714018Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Traffic Control Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:38.5714014Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Default Arm Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:38.5714013Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Default Arm Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:29.1404005Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Prepare for Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:29.138507Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Prepare for Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:29.1017876Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay : start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:29.096615Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Workflow : start",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:29.096503Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution started",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:26.3074212Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling completed : Duration = 00:00:00.1954103",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:26.2184916Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling started",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:26.0050022Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning completed : Duration = 00:00:01.3227515",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:26.0003768Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Warning",
+            "message": "",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:25.9956806Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning started",
+            "type": "Processing",
+            "date": "2026-10-24T23:46:24.6769949Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Abort run completed",
+            "type": "Processing",
+            "date": "2026-10-24T23:12:14.2749697Z",
+            "source": "SDE"
+          }
+        ]
+      }
+    },
+    "errors?offset=0&limit=10": {
+      "status": 200,
+      "body": {
+        "totalItemCount": 152,
+        "currentOffset": 0,
+        "items": [
+          {
+            "id": "1e50d8f7db19496ca7247d2a163b778b",
+            "message": "The assay 'TipPickupDiagnosticAssay - Assay 1' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+            "date": "2026-10-25T02:00:46.9845435Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "16d6e91dbbdd4b5a86dd42a126a39eba",
+            "message": "The assay 'Preparation - Assay' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+            "date": "2026-10-25T02:00:46.9765432Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "09fdb3cf2a54499697fb473478f22ad3",
+            "message": "One or more errors occurred in XSL Command Pick Up Tips. Select a recovery action for each error.",
+            "date": "2026-10-25T02:00:34.9653203Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "8ea07b368eab4b8ca6162b139ed57088",
+            "message": "One or more errors occurred. See InnerExceptions for details",
+            "date": "2026-10-25T02:00:33.9464985Z",
+            "severity": 1,
+            "handled": false
+          },
+          {
+            "id": "a0ddd818b34d44f185750a060446b416",
+            "message": "Firmware Reported Error: \r\n Front Channel did not detect the expected tip type in the rack",
+            "date": "2026-10-25T02:00:33.9405816Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "15fe5b0e824f4f4a95577ffef43923ac",
+            "message": "Firmware Reported Error: \r\n Rear Channel did not detect the expected tip type in the rack",
+            "date": "2026-10-25T02:00:33.9325288Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "ad42a31de9fa4d7c8a2f92c3be02cb61",
+            "message": "Hole with name 'A1' in labware '235903, Ver. 1' does not have a container.",
+            "date": "2026-10-25T00:21:20.926628Z",
+            "severity": 1,
+            "handled": false
+          },
+          {
+            "id": "1fba8a144319497aa6560c6db09bc4ba",
+            "message": "Hole with name 'A1' in labware '235903, Ver. 1' does not have a container.",
+            "date": "2026-10-25T00:20:56.0271292Z",
+            "severity": 1,
+            "handled": false
+          },
+          {
+            "id": "03377875838743a98a7774da30aa6739",
+            "message": "Failed to load Active System: 'MLPrepTwoChannel_0, Ver. 1'.  Attempting to load Empty System.",
+            "date": "2026-10-24T23:42:13.6798348Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "504a4bde64b74e1b95d390a5672bdfbf",
+            "message": "Could not load system configuration 'MLPrepTwoChannel_0'.",
+            "date": "2026-10-24T23:42:13.6538778Z",
+            "severity": 1,
+            "handled": true
+          }
+        ]
+      }
+    }
+  }
+}

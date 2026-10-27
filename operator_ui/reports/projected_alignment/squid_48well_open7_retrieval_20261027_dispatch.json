@@ -1,0 +1,143 @@
+{
+  "at": 1793109230.0716343,
+  "authorization": "User requested 7 mm opening for retry and confirmed plate flat at Squid, gripper empty at Home; retrieve and return using higher corridor.",
+  "response": {
+    "ok": true,
+    "started": "squid_48well_retrieval"
+  },
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "retrieval transit at speed 137.",
+        "t": 1.4
+      },
+      {
+        "level": "info",
+        "msg": "Executing 3 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 1.4
+      },
+      {
+        "level": "info",
+        "msg": "retrieval descent at speed 5.",
+        "t": 7.7
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 7.7
+      },
+      {
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: Grip did not settle.",
+        "t": 28.0
+      }
+    ],
+    "name": "squid_48well_retrieval",
+    "result": {
+      "error": "Grip did not settle.",
+      "failure_context": {
+        "captured_at_failure": true,
+        "frames": [
+          {
+            "function": "_run",
+            "line": 431,
+            "path": "operator_ui/sequences.py"
+          },
+          {
+            "function": "execute",
+            "line": 88,
+            "path": "operator_ui/squid_48well_retrieval_trial.py"
+          }
+        ],
+        "location": {
+          "function": "execute",
+          "line": 88,
+          "path": "operator_ui/squid_48well_retrieval_trial.py"
+        },
+        "source": "def execute(run,service,cfg,approved):\n    fresh=review(service,cfg)\n    if fresh['phases']!=approved['phases'] or fresh['handling']!=approved['handling'] or abs(fresh['e1']-approved['e1'])>.05:\n        raise TransferError('Reviewed trial changed.')\n    if any(abs(fresh['joints'][k]-approved['joints'][k])>.5 for k in fresh['joints']):\n        raise TransferError('Starting joints changed.')\n    record=dict(status='started',started_at=time.time(),plan=fresh,phases=[],grip_steps=[],\n        authorization='After slip/shift with 5 mm opening, operator requested 7 mm and confirmed plate flat in Squid holder, gripper empty at Home. Retain higher corridor and prior clearance/E-stop supervision; retrieve and return Home.',\n        program_restart=False,plate_retention_operator_confirmed=False)\n    with OUTPUT.open('x',encoding='utf-8') as stream:json.dump(record,stream,indent=2)\n    def save():OUTPUT.write_text(json.dumps(record,indent=2,allow_nan=False),encoding='utf-8')\n    held=fresh['e1']\n    opening=fresh['handling']['approach_opening_e1_mm']\n    grip=fresh['handling']['grip_e1_mm']\n    try:\n        for name,phase,start,points,speed in phases():\n            if run.stopped():raise TransferError('Stopped before '+name)\n            if name=='retrieval_transit':\n                near(service.pose_mm(),start,.05);preflight(HoldingService(service,held,fresh['envelope']))\n                record['open_at_home_requested']=dict(e1=opening,speed=5);save()\n                response=service.move_gripper(opening,5);record['open_at_home_response']=response;save()\n                if not response.get('ok') or response.get('recovered') or response.get('gripper_warning'):\n                    raise TransferError('Opening response uncertain; no retry.')\n                deadline=time.monotonic()+3;stable=0\n                while stable<3:\n                    state=preflight(service);near(state['pose_mm'],start,.05);held=state['external_axes']['E1']\n                    stable=stable+1 if math.isfinite(held) and abs(held-opening)<=.03 else 0\n                    if time.monotonic()>deadline:raise TransferError('Opening at Home did not settle.')\n                    time.sleep(.1)\n                record['open_at_home_settled_mm']=held;save()\n            if name=='loaded_lift':\n                near(service.pose_mm(),start,.05)\n                commands=[s for s in plan_closure(opening)['commands'] if s['target_e1_mm']>=grip]\n                if not commands or commands[-1]['target_e1_mm']!=grip:raise TransferError('Unexpected grip plan.')\n                for command in commands:\n                    if run.stopped():raise TransferError('Stopped before grip increment')\n                    preflight(HoldingService(service,held,fresh['envelope']))\n                    near(service.pose_mm(),start,.05)\n                    step=dict(target=command['target_e1_mm'],speed=5);record['grip_steps'].append(step);save()\n                    response=service.move_gripper(step['target'],5);step['response']=response;save()\n                    if not response.get('ok') or response.get('recovered') or response.get('gripper_warning'):\n                        raise TransferError('Grip increment uncertain; no retry.')\n                    deadline=time.monotonic()+3;stable=0\n                    while stable<3:\n                        state=preflight(service);near(state['pose_mm'],start,.05)\n                        held=state['external_axes']['E1']\n                        stable=stable+1 if math.isfinite(held) and abs(held-step['target'])<=.03 else 0\n                        if time.monotonic()>deadline:raise TransferError('Grip did not settle.')\n                        time.sleep(.1)\n                    step['settled_e1_mm']=held;save()\n            holding=HoldingService(service,held,fresh['envelope'])\n            state=preflight(holding);near(state['pose_mm'],start,.05)\n            item=dict(name=name,speed=speed,samples=[]);record['phases'].append(item);save()\n            run.say(name.replace('_',' ')+f' at speed {speed}.')\n            def progress(stage,done,total):\n                item['samples'].append(dict(at=time.time(),stage=stage,done=done,total=total,robot=service.status()));save()\n            result=LuaTrajectory(holding).execute(run,start,state['joints'],points,cfg,speed,progress,\n                reviewed=True,scope_trial=True,scope_speed137=True,scope_phase=phase)\n            if not result.get('ok'):raise TransferError('Unconfirmed '+name)\n            preflight(holding);near(service.pose_mm(),points[-1],.1)\n            item.update(result=result,status='completed');save()\n        record.update(status='completed_awaiting_retention_confirmation',final_robot=service.status())\n        return dict(ok=True,record=str(OUTPUT),pose=service.pose_mm(),retention_inspection_required=True)\n    except Exception as exc:\n        record.update(status='stopped_or_failed',error=str(exc))\n        record['stop_response']=service.program('stop');raise\n    finally:\n        record['finished_at']=time.time();save()",
+        "source_sha256": "edd341b61c4ac9b26b73bf19d2cb37814fa7cd9649b69cfab0cff2318ce62337",
+        "source_start_line": 41
+      },
+      "ok": false
+    },
+    "state": "error",
+    "target": null
+  },
+  "final_state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.947560675442219
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 231.40081514719344,
+        "J2": 92.10483259975875,
+        "J3": 148.73646953183624,
+        "J4": -155.15149229012647
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 85.69,
+        "X": 216.1,
+        "Y": 374.52,
+        "Z": 270.0
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "enabled",
+        "value": 5
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "squid_48well_retrieval",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1793109258.2879488
+  },
+  "status": "stopped_or_failed",
+  "error": "{'error': 'Grip did not settle.', 'failure_context': {'captured_at_failure': True, 'frames': [{'function': '_run', 'line': 431, 'path': 'operator_ui/sequences.py'}, {'function': 'execute', 'line': 88, 'path': 'operator_ui/squid_48well_retrieval_trial.py'}], 'location': {'function': 'execute', 'line': 88, 'path': 'operator_ui/squid_48well_retrieval_trial.py'}, 'source': \"def execute(run,service,cfg,approved):\\n    fresh=review(service,cfg)\\n    if fresh['phases']!=approved['phases'] or fresh['handling']!=approved['handling'] or abs(fresh['e1']-approved['e1'])>.05:\\n        raise TransferError('Reviewed trial changed.')\\n    if any(abs(fresh['joints'][k]-approved['joints'][k])>.5 for k in fresh['joints']):\\n        raise TransferError('Starting joints changed.')\\n    record=dict(status='started',started_at=time.time(),plan=fresh,phases=[],grip_steps=[],\\n        authorization='After slip/shift with 5 mm opening, operator requested 7 mm and confirmed plate flat in Squid holder, gripper empty at Home. Retain higher corridor and prior clearance/E-stop supervision; retrieve and return Home.',\\n        program_restart=False,plate_retention_operator_confirmed=False)\\n    with OUTPUT.open('x',encoding='utf-8') as stream:json.dump(record,stream,indent=2)\\n    def save():OUTPUT.write_text(json.dumps(record,indent=2,allow_nan=False),encoding='utf-8')\\n    held=fresh['e1']\\n    opening=fresh['handling']['approach_opening_e1_mm']\\n    grip=fresh['handling']['grip_e1_mm']\\n    try:\\n        for name,phase,start,points,speed in phases():\\n            if run.stopped():raise TransferError('Stopped before '+name)\\n            if name=='retrieval_transit':\\n                near(service.pose_mm(),start,.05);preflight(HoldingService(service,held,fresh['envelope']))\\n                record['open_at_home_requested']=dict(e1=opening,speed=5);save()\\n                response=service.move_gripper(opening,5);record['open_at_home_response']=response;save()\\n                if not response.get('ok') or response.get('recovered') or response.get('gripper_warning'):\\n                    raise TransferError('Opening response uncertain; no retry.')\\n                deadline=time.monotonic()+3;stable=0\\n                while stable<3:\\n                    state=preflight(service);near(state['pose_mm'],start,.05);held=state['external_axes']['E1']\\n                    stable=stable+1 if math.isfinite(held) and abs(held-opening)<=.03 else 0\\n                    if time.monotonic()>deadline:raise TransferError('Opening at Home did not settle.')\\n                    time.sleep(.1)\\n                record['open_at_home_settled_mm']=held;save()\\n            if name=='loaded_lift':\\n                near(service.pose_mm(),start,.05)\\n                commands=[s for s in plan_closure(opening)['commands'] if s['target_e1_mm']>=grip]\\n                if not commands or commands[-1]['target_e1_mm']!=grip:raise TransferError('Unexpected grip plan.')\\n                for command in commands:\\n                    if run.stopped():raise TransferError('Stopped before grip increment')\\n                    preflight(HoldingService(service,held,fresh['envelope']))\\n                    near(service.pose_mm(),start,.05)\\n                    step=dict(target=command['target_e1_mm'],speed=5);record['grip_steps'].append(step);save()\\n                    response=service.move_gripper(step['target'],5);step['response']=response;save()\\n                    if not response.get('ok') or response.get('recovered') or response.get('gripper_warning'):\\n                        raise TransferError('Grip increment uncertain; no retry.')\\n                    deadline=time.monotonic()+3;stable=0\\n                    while stable<3:\\n                        state=preflight(service);near(state['pose_mm'],start,.05)\\n                        held=state['external_axes']['E1']\\n                        stable=stable+1 if math.isfinite(held) and abs(held-step['target'])<=.03 else 0\\n                        if time.monotonic()>deadline:raise TransferError('Grip did not settle.')\\n                        time.sleep(.1)\\n                    step['settled_e1_mm']=held;save()\\n            holding=HoldingService(service,held,fresh['envelope'])\\n            state=preflight(holding);near(state['pose_mm'],start,.05)\\n            item=dict(name=name,speed=speed,samples=[]);record['phases'].append(item);save()\\n            run.say(name.replace('_',' ')+f' at speed {speed}.')\\n            def progress(stage,done,total):\\n                item['samples'].append(dict(at=time.time(),stage=stage,done=done,total=total,robot=service.status()));save()\\n            result=LuaTrajectory(holding).execute(run,start,state['joints'],points,cfg,speed,progress,\\n                reviewed=True,scope_trial=True,scope_speed137=True,scope_phase=phase)\\n            if not result.get('ok'):raise TransferError('Unconfirmed '+name)\\n            preflight(holding);near(service.pose_mm(),points[-1],.1)\\n            item.update(result=result,status='completed');save()\\n        record.update(status='completed_awaiting_retention_confirmation',final_robot=service.status())\\n        return dict(ok=True,record=str(OUTPUT),pose=service.pose_mm(),retention_inspection_required=True)\\n    except Exception as exc:\\n        record.update(status='stopped_or_failed',error=str(exc))\\n        record['stop_response']=service.program('stop');raise\\n    finally:\\n        record['finished_at']=time.time();save()\", 'source_sha256': 'edd341b61c4ac9b26b73bf19d2cb37814fa7cd9649b69cfab0cff2318ce62337', 'source_start_line': 41}, 'ok': False}"
+}

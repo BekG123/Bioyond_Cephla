@@ -31,13 +31,34 @@ import teach  # noqa: E402
 from autonomy import TransferError, validate_request, seq_transfer  # noqa: E402
 from camera_service import CameraService  # noqa: E402
 from realsense_service import register_realsense  # noqa: E402
+from researcher import register_researcher  # noqa: E402
+from lacry_backend import LacryBackend  # noqa: E402
+from lacry_agent import LacryAgent  # noqa: E402
+from classic_pickup import ClassicPickup  # noqa: E402
+from researcher_routine_check import check_routine
+from researcher_home import HomeReturn  # noqa: E402
+from hand_claw import HandClaw  # noqa: E402
+from researcher_teaching import StationTeaching  # noqa: E402
+from draggo import DragGo  # noqa: E402
+from researcher_workflow import PlateTeaching  # noqa: E402
+from researcher_descent import ResearcherDescent
+from pick_and_hold.Grip.reference_grip import ReferenceGrip
+from audit_log import AuditLog, install_audit  # noqa: E402
+from imitation_agent import References, ImitationAgent  # noqa: E402
+from pickup_planner import PickupPlanner
+from researcher_teaching import TeachingError  # noqa: E402
 from robot_service import RobotService  # noqa: E402
 from pickup import PickupVerification  # noqa: E402
-from plate_agent import PlateAgent, AgentError, parse_request as parse_agent_request  # noqa: E402
+from plate_agent import PlateAgent, VisionClient, AgentError, parse_request as parse_agent_request  # noqa: E402
+from credential_store import CredentialStore
+from recorded_return import RecordedReturn
+from latest_hamilton import LatestHamilton
+from coactive_pickup import CoactivePickup
 from pick_and_hold.Align.references import ICReferences, ICError  # noqa: E402
 from sequences import (  # noqa: E402
     Runner,
     get_robot_params,
+    band_floor,
     seq_align,
     seq_calibrate_aruco,
     seq_calibrate_camera,
@@ -50,16 +71,99 @@ from sequences import (  # noqa: E402
 )
 
 app = Flask(__name__, static_folder="static")
+from lacry_memory import LacryMemory, register_memory_api
+lacry_memory = LacryMemory(os.path.join(HERE,'logs','lacry_memory','memory.sqlite3'))
+lacry_memory.seed(os.path.join(HERE,'lacry_memory_seed.json'))
+register_memory_api(app,lacry_memory)
+audit = AuditLog(os.environ.get('CEPHLA_AUDIT_DIR', os.path.join(HERE, 'logs', 'audit')))
+install_audit(app, audit)
 realsense = register_realsense(app)
 svc = RobotService()
+svc.audit_sink = audit.event
 cam = CameraService()
-runner = Runner()
+from developer_diagnostics import DeveloperDiagnostics, register_developer_diagnostics
+developer_diagnostics = DeveloperDiagnostics(os.path.join(HERE, 'reports', 'developer_dsl'))
+def audit_and_remember(event,**fields):
+    developer_diagnostics.observe(event, fields)
+    audit.event(event,**fields)
+    lacry_memory.observe_event(event,fields,source=str(audit.path))
+
+runner = Runner(event_sink=audit_and_remember, context_provider=audit.context)
 pickup = PickupVerification()
-plate_agent = PlateAgent()
+plate_agent = PlateAgent(client=VisionClient(store=CredentialStore()))
 ic_references = ICReferences()
+
+researcher_teaching = StationTeaching(os.path.join(HERE, 'demonstrations', 'teaching.json'), lambda: svc)
+draggo = DragGo(lambda: svc, os.path.join(HERE, 'demonstrations', 'draggo-active.json'))
+svc.draggo_guard = draggo
+def researcher_calibration(run, service, camera):
+    from pick_and_hold.Calibration.fast_disk import run_fast_disk
+    return run_fast_disk(run, service, camera, teach, get_robot_params(), config='Wide',
+        trace=run.calibration_trace, publish=plate_teaching.publish_guidance)
+
+
+plate_teaching = PlateTeaching(researcher_teaching, lambda: runner, lambda: cam, lambda: draggo,
+    researcher_calibration,
+    lambda run, service, target: seq_align(run, service, target, 0, validate_descent=False),
+    calibration_logs=os.path.join(HERE, 'reports', 'calibration'))
+imitation = ImitationAgent(
+    References(researcher_teaching, os.path.join(HERE, 'demonstrations', 'imitation_reference.json'), get_robot_params()),
+    plate_agent.client, lambda: svc, lambda: runner, os.path.join(HERE, 'demonstrations'))
+home_return = HomeReturn(os.path.join(HERE, 'points.json'), lambda: svc, lambda: runner,
+    lambda: draggo, get_robot_params, lambda: (plate_teaching.invalidate(), imitation.invalidate(), pickup.invalidate()),
+    prepare=lambda run, service: plate_teaching._prepare(run, service))
+hand_claw = HandClaw(lambda: svc, lambda: runner, lambda: draggo, get_robot_params,
+                     prepare=lambda run, service: plate_teaching._prepare(run, service))
+pickup_planner = PickupPlanner(researcher_teaching, plate_agent.client,
+    os.path.join(HERE,'reports','hamilton','teaching_evidence_20261016.json'),
+    os.path.join(HERE,'reports','pickup_plans'),get_robot_params,
+    lambda:(dict(svc.envelope),svc.envelope_enabled),
+    lambda kind, **values:imitation.record(runner,kind,**values))
+recorded_return = RecordedReturn(os.path.join(HERE,'demonstrations','return_home_20261016_130748'),
+    lambda:svc,lambda:runner,get_robot_params,plate_teaching._prepare,
+    lambda:(plate_teaching.invalidate(),imitation.invalidate(),pickup.invalidate()))
+latest_hamilton = LatestHamilton(os.path.join(HERE,'demonstrations','return_home_20261016_130748'),
+    lambda:svc,lambda:runner,get_robot_params,plate_teaching._prepare,
+    lambda:(plate_teaching.invalidate(),imitation.invalidate(),pickup.invalidate()))
+coactive_pickup = CoactivePickup(imitation.references, os.path.join(HERE,'demonstrations','coactive_pickup.json'),
+    lambda:svc,lambda:runner,imitation.invalidate)
+imitation.coactive = coactive_pickup
+home_return.hamilton_route = latest_hamilton
+position_grip = ReferenceGrip(os.path.join(HERE,'demonstrations','reference_grip'),lambda:svc,lambda:runner)
+researcher_descent = ResearcherDescent(lambda:svc, lambda:runner, get_robot_params,
+    band_floor, plate_teaching._prepare,position_grip.completed_descent)
+from projected_pickup import ProjectedPickup
+projected_pickup = ProjectedPickup(researcher_descent,position_grip,lambda:svc,
+                                 lambda:runner,get_robot_params,band_floor)
+position_grip.plate_configuration = projected_pickup.grip_configuration
+lacry_backend = LacryBackend(svc, runner, cam, draggo, home_return, latest_hamilton,
+    researcher_descent, position_grip, get_robot_params, band_floor, teach, aruco)
+lacry_backend.projected_pickup = projected_pickup
+from ik_home import IKHomeConnection
+from pickup_home import PickupHome
+ik_home_connection = IKHomeConnection(home_return)
+pickup_home = PickupHome(ik_home_connection,os.path.join(HERE,'demonstrations','pickup_home'))
+classic_pickup = ClassicPickup(researcher_teaching, plate_teaching, researcher_descent,
+    position_grip, lambda: svc, lambda: runner, transport=pickup_home)
+lacry = LacryAgent(lacry_backend, plate_agent.client, lambda: runner,
+    memory=lacry_memory,
+    # Same controller bring-up the researcher console ran for every action,
+    # here run once a confirmed plan starts, with the step disclosed on the
+    # confirmation card.
+    prepare=plate_teaching._prepare, home_return=home_return,
+    classic_pickup=classic_pickup, reviewed_home=ik_home_connection)
+register_researcher(app, lambda: dict(
+    robot=svc.status(), camera=cam.info(),
+    sequence=dict(active=runner.active or getattr(runner, 'reserved', False))), researcher_teaching, draggo, plate_teaching, imitation, home_return, hand_claw,
+    routine_check=lambda saved: check_routine(saved, get_robot_params(), svc.envelope, svc.envelope_enabled),
+    pickup_planner=pickup_planner,recorded_return=recorded_return,latest_hamilton=latest_hamilton,descent=researcher_descent,grip=position_grip,
+    lacry=lacry)
 
 CAL_PATH = os.path.join(os.path.dirname(HERE), "grab_skill",
                         "calibration.json")
+
+register_developer_diagnostics(app, developer_diagnostics, lambda: runner,
+                               lambda: lacry.client, lambda: lacry.credentials)
 
 
 class TorqueRecorder:
@@ -132,22 +236,77 @@ _dispatch_lock = threading.RLock()
 def command_ownership():
     if request.method != "POST":
         return None
+    if request.path == '/agent/settings':
+        return None  # API credentials do not move or change the controller, including during DragGo.
+    if request.path.startswith('/developer/api/dsl/'):
+        return None  # Read-only diagnostics and code previews never dispatch hardware.
+    if request.path.startswith('/developer/api/coactive/'):
+        if not _dispatch_lock.acquire(blocking=False):
+            return jsonify(ok=False, message='Another control is busy. Hold still and capture again.'), 409
+        request.environ['bioyond.dispatch_locked'] = True
+        return None  # Read/review only, including DragGo; exclude concurrent jog dispatch during capture.
+    if request.path == '/researcher/api/latest-hamilton/stop':
+        return None  # Queue cancellation must remain available during motion.
+    if request.path in ('/researcher/api/imitation/stop', '/researcher/api/home/stop', '/researcher/api/hand-claw/stop', '/researcher/api/recorded-return/stop'):
+        return None  # Cancellation must not wait behind motion dispatch.
+    if request.path.startswith('/researcher/api/routines/') and request.path.endswith('/pickup-plan'):
+        return None  # Log-only analysis owns no controller and invalidates no motion authorization.
+    if request.path in ('/researcher/api/run', '/researcher/api/pause', '/researcher/api/stop',
+                        '/researcher/api/record', '/researcher/api/save'):
+        return None  # Unimplemented playback never forwards robot commands.
     if request.path.startswith('/realsense/'):
         return None  # Independent USB camera/viewer; no robot or GigE access.
+    if request.path.startswith('/developer/api/lacry-memory'):
+        return None  # Context edits never dispatch motion or change route approvals.
     if request.path == '/pickup/confirm':
         return None  # Token-checked answer only; never commands hardware.
+    if request.path in ('/researcher/api/workflow/stop','/researcher/api/descent/stop','/researcher/api/grip/stop'):
+        return None  # Requests cancellation only; never starts a movement.
+    if request.path in ('/researcher/api/lacry/stop', '/researcher/api/lacry/review',
+                        '/researcher/api/lacry/hamilton/abort', '/researcher/api/lacry/hamilton/respond',
+                        '/researcher/api/lacry/hamilton/observe',
+                        '/researcher/api/lacry/cancel', '/researcher/api/lacry/chat'):
+        return None  # Chat can confirm a pending host plan. The agent applies
+                     # readiness and runner ownership checks before starting it.
     # Stop/disable must never queue behind a long synchronous manual move.
     emergency = request.path in ("/seq/stop", "/disable", "/torque_rec/stop")
     program_stop = request.path == "/program" and _body().get("action") in ("stop", "pause")
     if emergency or program_stop:
+        position_grip.invalidate()
+        imitation.invalidate()
+        if request.path == '/disable' or program_stop:
+            draggo.cancel()
         pickup.invalidate()
         if request.path == "/disable" or program_stop:
             runner.request_stop()
         return None
-    _dispatch_lock.acquire()
+    if request.path.startswith('/researcher/api/'):
+        if not _dispatch_lock.acquire(blocking=False):
+            return jsonify(ok=False, message='The arm controls are busy. Wait for the current action to finish, then capture again.'), 409
+    else:
+        _dispatch_lock.acquire()
     request.environ["bioyond.dispatch_locked"] = True
-    if runner.active:
+    if runner.active or getattr(runner, 'reserved', False):
+        if request.path.startswith('/researcher/api/'):
+            return jsonify(ok=False, message='A lab task is running. Wait for it to finish or press Stop.'), 409
         return jsonify(ok=False, error="A sequence owns the robot/camera/configuration; stop it before changing controls"), 409
+    if (request.path not in ('/seq/grip','/connect','/researcher/api/connect')
+            and not request.path.startswith('/researcher/api/grip/')
+            # A Lacry plan may carry its own descent, or grip a descent the
+            # researcher just ran; confirming it must not drop that receipt.
+            and not request.path.startswith('/researcher/api/lacry/')):
+        position_grip.invalidate()
+    if not request.path.startswith(('/researcher/api/imitation/', '/imitation/')):
+        imitation.invalidate()
+    if request.path.startswith('/researcher/api/'):
+        if request.path.startswith(('/researcher/api/hand-guiding/', '/researcher/api/workflow/', '/researcher/api/hand-claw/')):
+            pickup.invalidate()
+        if request.path == '/researcher/api/hand-guiding/start':
+            plate_teaching.invalidate()
+        return None
+    if draggo.blocks_motion:
+        return jsonify(ok=False, error='End hand-guiding in Researcher view before using Developer controls.'), 409
+    plate_teaching.invalidate()
     if request.path != '/seq/verify_pickup':
         pickup.invalidate()
 
@@ -173,7 +332,21 @@ def _refuse_if_sequencing() -> Response | None:
 # ------------------------------------------------------------------ pages
 
 @app.get("/")
+@app.get("/researcher")
 def index():
+    # The researcher-facing site is the Lacry workspace: chat plus the few
+    # controls researchers actually press. The stage-by-stage console it
+    # replaced is still served below for anyone who needs its detail.
+    return send_from_directory(os.path.join(HERE, "static"), "lacry.html")
+
+
+@app.get("/researcher/classic")
+def researcher_classic():
+    return send_from_directory(os.path.join(HERE, "static"), "researcher.html")
+
+
+@app.get("/developer")
+def developer():
     return send_from_directory(os.path.join(HERE, "static"), "index.html")
 
 
@@ -245,9 +418,68 @@ def agent_state():
 def agent_settings():
     try:
         plate_agent.client.set_key(_body().get('api_key', ''))
-        return jsonify(ok=True, configured=plate_agent.client.ready())
+        return jsonify(ok=True, configured=plate_agent.client.ready(), credential_saved=True)
     except AgentError as ex:
         return jsonify(ok=False, error=str(ex)), 400
+
+
+@app.get('/imitation/state')
+def imitation_state():
+    state = imitation.public(developer=True)
+    state['pickup_plan'] = pickup_planner.public(developer=True)
+    # Full model exchanges already have their own audit events. Polling an
+    # unchanged transcript should not copy it into the log every 1.5 seconds.
+    if request.args.get('since') == str(state['event_revision']):
+        state.update(events=[], unchanged=True)
+    response = jsonify(ok=True, **state)
+    response.headers['Cache-Control'] = 'no-store'
+    return response
+
+
+@app.get('/developer/api/coactive')
+def coactive_state():
+    return jsonify(coactive_pickup.public())
+
+
+@app.post('/developer/api/coactive/<action>')
+def coactive_action(action):
+    try:
+        if action == 'capture':
+            result = coactive_pickup.capture(_body())
+        elif action == 'decide':
+            result = coactive_pickup.decide(_body())
+        else:
+            return jsonify(ok=False, message='Unknown learning action.'), 404
+        audit.event('coactive_' + action, result=result)
+        return jsonify(result)
+    except TeachingError as error:
+        return jsonify(ok=False, message=str(error)), error.status
+    except (OSError, ValueError, KeyError, TypeError):
+        app.logger.exception('Coactive pickup storage or measurement failed')
+        return jsonify(ok=False, message='Correction could not be saved. Check Developer logs.'), 503
+
+
+@app.get('/imitation/reference')
+def imitation_reference():
+    try:
+        return jsonify(ok=True, reference=imitation.references.candidate(request.args.get('source_id')))
+    except TeachingError as error:
+        return jsonify(ok=False, error=str(error)), error.status
+    except (OSError, ValueError, KeyError):
+        return jsonify(ok=False, error='Teaching data needs developer attention.'), 503
+
+
+@app.post('/imitation/reference')
+def approve_imitation_reference():
+    try:
+        reference = imitation.references.approve(_body())
+        imitation.invalidate()
+        audit.event('imitation_reference_reviewed', reference=reference)
+        return jsonify(ok=True, reference=reference)
+    except TeachingError as error:
+        return jsonify(ok=False, error=str(error)), error.status
+    except (OSError, ValueError, KeyError):
+        return jsonify(ok=False, error='Reference could not be saved. Check teaching data and storage.'), 503
 
 
 @app.post('/agent/run')
@@ -330,7 +562,7 @@ def state():
         "envelope": svc.envelope_dict(),
         "camera": cam.info(),
         "sequence": {"state": runner.state, "name": runner.name,
-                     "active": runner.active},
+                     "active": runner.active or getattr(runner, 'reserved', False)},
         "target": runner.target,
         "ts": time.time(),
     })
@@ -338,6 +570,53 @@ def state():
 @app.get("/seq")
 def seq():
     return jsonify(runner.snapshot())
+
+@app.get("/developer/api/lua/diagnostics")
+def lua_diagnostics():
+    # Queries only: never starts/stops a program or triggers a Lua job.
+    if runner.active:
+        return jsonify(ok=False, error='Wait for the active sequence before Lua diagnostics.'), 409
+    return jsonify(svc.lua_diagnostics())
+
+@app.post("/developer/api/grip/empty-baseline")
+def empty_grip_baseline():
+    b=_body()
+    local=set(b)=={'empty','ready','start_mm'} and b['empty'] is True and b['ready'] is True
+    if not local and b not in ({'empty': True, 'ready': True},
+                              {'empty': True, 'ready': True, 'short': True}):
+        return jsonify(ok=False,error='Confirm empty open claw, hands clear and E-stop supervised.'),400
+    from empty_grip_baseline import run_empty_baseline,finite
+    try:
+        start=finite(b['start_mm']) if local else 28.
+        if not 3.8 < start <= 28 or abs(start*10-round(start*10))>1e-6:
+            raise ValueError('Baseline start must be on the 0.1 mm grid above 3.8 mm.')
+    except (ValueError,TypeError) as error:
+        return jsonify(ok=False,error=str(error)),400
+    refusal=svc._preflight()
+    if refusal:return jsonify(ok=False,error=refusal),409
+    return jsonify(runner.start('empty_grip_baseline',run_empty_baseline,svc,
+                               os.path.join(HERE,'demonstrations','empty_grip_baseline'), b.get('short',False),start))
+
+@app.post("/developer/api/grip/supervised-batch")
+def supervised_grip_batch():
+    b=_body()
+    allowed=({'plate_centered','ready','start_mm'},
+             {'plate_centered','ready','start_mm','use_labeled_noncontact'})
+    if (set(b) not in allowed or b['plate_centered'] is not True or b['ready'] is not True
+            or ('use_labeled_noncontact' in b and b['use_labeled_noncontact'] is not True)):
+        return jsonify(ok=False,error='Confirm centered plate, hands clear and supervised E-stop.'),400
+    from supervised_grip_batch import run_batch
+    refusal=svc._preflight()
+    if refusal:return jsonify(ok=False,error=refusal),409
+    try:
+        start=float(b['start_mm'])
+        if not 5 < start <= 28 or abs(start*10-round(start*10))>1e-6:
+            raise ValueError('Start must be on the 0.1 mm grid above 5 mm.')
+    except (TypeError,ValueError,OverflowError) as error:
+        return jsonify(ok=False,error=str(error)),400
+    return jsonify(runner.start('supervised_grip_batch',run_batch,svc,start,band_floor(),
+                               b.get('use_labeled_noncontact',False)))
+
 
 @app.get("/robot_params")
 def robot_params():
@@ -765,14 +1044,7 @@ def transfer_config():
 
 @app.post("/seq/transfer")
 def transfer_start():
-    try:
-        config = validate_request(_body())
-    except TransferError as ex:
-        return jsonify(ok=False, error=str(ex)), 400
-    if recorder._run:
-        return jsonify(ok=False, error="Stop torque recording before automatic transfer"), 409
-    return jsonify(runner.start("aruco_transfer", seq_transfer, svc, cam,
-                                aruco, config, get_robot_params()))
+    return jsonify(ok=False, error='Pickup transfer is unavailable while Grip control is being replaced.'), 410
 
 
 @app.post("/seq/transfer_preview")
@@ -811,6 +1083,65 @@ def seq_find():
 def preview_plate_edges():
     from edge_center import preview
     return jsonify(runner.start('preview_plate_edges',preview,cam))
+
+
+@app.post('/seq/projected_disk_pilot')
+def projected_disk_pilot_route():
+    from projected_disk_trial import pilot, validate_request as validate_pilot
+    try:
+        config=validate_pilot(_body())
+    except TransferError as ex:
+        return jsonify(ok=False,error=str(ex)),400
+    if recorder._run:
+        return jsonify(ok=False,error='Stop torque recording before the projected-disk pilot'),409
+    return jsonify(runner.start('projected_disk_pilot',pilot,svc,cam,get_robot_params(),config))
+
+
+@app.post('/seq/projected_height_pilot')
+def projected_height_pilot_route():
+    from projected_height_trial import pilot, validate_request as validate_height
+    try:
+        config=validate_height(_body())
+    except TransferError as ex:
+        return jsonify(ok=False,error=str(ex)),400
+    if recorder._run:
+        return jsonify(ok=False,error='Stop torque recording before the height pilot'),409
+    return jsonify(runner.start('projected_height_pilot',pilot,svc,cam,get_robot_params(),config))
+
+
+@app.post('/seq/projected_alignment')
+def projected_alignment_route():
+    from projected_alignment import align, validate_request
+    try:
+        config=validate_request(_body())
+    except TransferError as ex:
+        return jsonify(ok=False,error=str(ex)),400
+    if recorder._run:
+        return jsonify(ok=False,error='Stop torque recording before projected alignment'),409
+    return jsonify(runner.start('projected_alignment',align,svc,cam,get_robot_params(),config))
+
+
+@app.get('/researcher/api/projected-pickup')
+def projected_pickup_status():
+    return jsonify(projected_pickup.public())
+
+
+@app.post('/seq/projected_descent_trial')
+def projected_descent_trial_route():
+    from researcher_teaching import TeachingError
+    try:
+        return jsonify(projected_pickup.start_trial(_body()))
+    except (TeachingError,TransferError) as error:
+        return jsonify(ok=False,error=str(error)),400
+
+
+@app.post('/researcher/api/projected-pickup/accept-descent')
+def projected_descent_acceptance_route():
+    from researcher_teaching import TeachingError
+    try:
+        return jsonify(projected_pickup.accept_descent(_body()))
+    except (TeachingError,TransferError) as error:
+        return jsonify(ok=False,error=str(error)),400
 
 
 @app.post("/seq/center_plate_edges")
@@ -958,18 +1289,7 @@ def points_role():
 
 @app.post("/seq/workflow")
 def seq_workflow_route():
-    b = _body()
-    d = _points_load()
-    pts = {}
-    for role in ("start", "end", "home"):
-        n = d["roles"].get(role)
-        pts[role] = d["points"].get(n) if n else None
-    params = {"travel_z": b.get("travel_z", 300.0),
-              "open_e1": b.get("open_e1", 28.0),
-              "motion_order": b.get("motion_order",
-                                    d.get("motion_order", "z,rz,xy"))}
-    return jsonify(runner.start("workflow", seq_workflow, svc, pts,
-                                params))
+    return jsonify(ok=False, error='Pickup workflow is unavailable while Grip control is being replaced.'), 410
 
 @app.post("/seq/align")
 def seq_align_route():
@@ -991,20 +1311,181 @@ def seq_descend_route():
 
 @app.post("/seq/grip")
 def seq_grip_route():
-    return jsonify(runner.start("grip", seq_grip, svc, _body()))
+    from researcher_teaching import TeachingError
+    try:
+        return jsonify(position_grip.start(_body()))
+    except TeachingError as error:
+        return jsonify(ok=False,error=str(error)),error.status
+
+
+@app.post("/seq/descend_lua")
+def seq_descend_lua_route():
+    from pick_and_hold.Descend.lua_executor import seq_descend_lua
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    tgt = _target_from(_body())
+    if tgt is None:
+        return jsonify({"ok": False, "error": "Run calibration and Align before Lua descent."})
+    return jsonify(runner.start("descend_lua", seq_descend_lua, svc, tgt))
 
 @app.post("/seq/stop")
 def seq_stop():
     return jsonify(runner.request_stop())
 
 
+@app.post('/developer/api/scope-compact40/return-home')
+def scope_compact40_return_home():
+    from scope_compact_trial import review, execute
+    if _body() != {'ready':True}:
+        return jsonify(ok=False,error='Confirm new reverse corridor clear, arm released and E-stop supervised.'),400
+    try:
+        cfg=get_robot_params()
+        plan=review(svc,cfg)
+        return jsonify(runner.start('scope_compact40_return_home',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/scope-compact40/to-scope')
+def scope_compact40_to_scope():
+    from scope_compact_trial import review_forward, execute_forward
+    if _body() != {'ready':True}:
+        return jsonify(ok=False,error='Require cleared Home to scope corridor, arm released and E-stop supervised.'),400
+    try:
+        cfg=get_robot_params()
+        plan=review_forward(svc,cfg)
+        return jsonify(runner.start('scope_compact40_to_scope',execute_forward,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/scope-compact137/roundtrip')
+def scope_compact137_roundtrip():
+    from scope_compact137 import review, execute
+    if _body() != {'ready':True}:
+        return jsonify(ok=False,error='Require the cleared scope/Home round trip and supervised speed-137 test.'),400
+    try:
+        cfg=get_robot_params()
+        plan=review(svc,cfg)
+        return jsonify(runner.start('scope_compact137_roundtrip',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/scope-step40/start')
+def scope_step40_start():
+    from scope_step_trial import review, execute
+    body=_body()
+    if body != {'ready':True}:
+        return jsonify(ok=False,error='Confirm the new Home connector and taught route clear, arm released and E-stop supervised.'),400
+    try:
+        cfg=get_robot_params()
+        plan=review(svc,cfg)
+        return jsonify(runner.start('scope_step40',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/loaded-home137/start')
+def loaded_home137_start():
+    from loaded_home_trial import review, execute, OUTPUT
+    if _body().get('ready') is not True:
+        return jsonify(ok=False,error='Confirm the loaded round-trip route and supervised run.'),400
+    try:
+        if set(_body())-{'ready','repeat_of'}:
+            raise ValueError('Only readiness and the completed trial reference are accepted.')
+        cfg=get_robot_params()
+        repeat_of=_body().get('repeat_of')
+        output=OUTPUT.with_name(f'loaded_roundtrip_137_replay_{time.time_ns()}.json') if repeat_of else OUTPUT
+        plan=review(svc,cfg,output,repeat_of)
+        return jsonify(runner.start('loaded_home137',execute,svc,cfg,plan,output,repeat_of))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
 @app.post('/seq/verify_pickup')
 def verify_pickup_route():
-    b=_body()
-    if b.get('operator_confirmed') is not True or b.get('cell_clear') is not True:
-        return jsonify(ok=False,error='Explicit supervised lift approval required'),400
-    previous=dict(runner.result or {}) if runner.name=='grip' else None
-    return jsonify(runner.start('verify_pickup',pickup.run,svc,cam,aruco,b,previous,get_robot_params()))
+    return jsonify(ok=False, error='Pickup verification is unavailable while Grip control is being replaced.'), 410
+
+
+@app.post('/developer/api/staged-lift-3p7/start')
+def staged_lift_3p7_start():
+    from staged_lift_trial import review, execute
+    if _body() != {'ready':True}:
+        return jsonify(ok=False,error='Confirm the supervised two-stage upward lift.'),400
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    try:
+        cfg = get_robot_params()
+        approved = review(svc,cfg)
+        return jsonify(runner.start('staged_lift_3p7',execute,svc,cfg,approved))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/hamilton-reteach/start')
+def hamilton_reteach_start():
+    from hamilton_reteach_trial import SHA,review,execute
+    body=_body();direction=body.get('direction','forward')
+    if (direction not in ('forward','reverse') or body.get('ready') is not True
+            or body.get('candidate_sha256')!=SHA or set(body)-{'ready','candidate_sha256','direction'}):
+        return jsonify(ok=False,error='Confirm the exact revised Hamilton trial and clear supervised route.'),400
+    try:
+        cfg=get_robot_params();plan=review(svc,cfg,reverse=direction=='reverse')
+        return jsonify(runner.start('hamilton_reteach',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/squid-48well-trial/start')
+def squid_48well_endpoint_start():
+    from squid_48well_endpoint_trial import SHA,review,execute
+    body=_body()
+    if body!={'ready':True,'candidate_sha256':SHA}:
+        return jsonify(ok=False,error='Confirm the exact revised Squid trial and supervised clear route.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();plan=review(svc,cfg)
+        return jsonify(runner.start('squid_48well_endpoint_trial',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/squid-48well-retrieval/start')
+def squid_48well_retrieval_start():
+    from squid_48well_retrieval_trial import SHA,review,execute
+    body=_body()
+    if (body.get('ready') is not True or body.get('candidate_sha256')!=SHA
+            or set(body)-{'ready','candidate_sha256','stop_before_release'}
+            or type(body.get('stop_before_release',False)) is not bool):
+        return jsonify(ok=False,error='Confirm exact supervised 48-well retrieval.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();plan=review(svc,cfg,stop_before_release=body.get('stop_before_release',False))
+        return jsonify(runner.start('squid_48well_retrieval',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/regrip-lift-3p7/start')
+def regrip_lift_3p7_start():
+    from regrip_lift_trial import review, execute
+    body = _body()
+    if body.get('ready') is not True or set(body)-{'ready','opening_mm'}:
+        return jsonify(ok=False,error='Require the supervised replace, regrip and lift trial.'),400
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    try:
+        cfg = get_robot_params()
+        approved = review(svc,cfg,body.get('opening_mm',5.0))
+        return jsonify(runner.start('regrip_lift_3p7',execute,svc,cfg,approved))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
 
 
 @app.get('/pickup/state')

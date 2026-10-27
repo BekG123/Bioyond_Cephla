@@ -1,0 +1,414 @@
+{
+  "profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+  "events": [
+    {
+      "at": 1793103168.6175153,
+      "event": "start",
+      "state": {
+        "camera": {
+          "age_s": 1.7,
+          "device": {
+            "ip": "192.168.201.89",
+            "model": "JHEM600GM-HM",
+            "serial": "457108625727"
+          },
+          "enabled": true,
+          "error": "",
+          "open": true
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.007376462235697545
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4008686337301,
+            "J2": 38.70354813676985,
+            "J3": 58.17204722189961,
+            "J4": -7.022896142508785
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.853,
+            "X": 306.021,
+            "Y": -73.503,
+            "Z": 300.0
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "projected_alignment",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1793103168.6140049
+      }
+    },
+    {
+      "at": 1793103168.6233785,
+      "event": "fresh_alignment",
+      "result": {
+        "alignment_pose_reached": true,
+        "descent_executed": false,
+        "full_calibration_complete": false,
+        "grasp_target_created": false,
+        "grip_executed": false,
+        "gripped": false,
+        "log_file": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\projected_alignment\\20261027_051146_8de223bc.jsonl",
+        "ok": true,
+        "pose": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.853,
+          "X": 306.021,
+          "Y": -73.504,
+          "Z": 300.0
+        },
+        "route": {
+          "descent_authorized": false,
+          "grasp_target_created": false,
+          "hover_z": 300.0,
+          "target": {
+            "rz": 89.85266183174934,
+            "x": 306.0211614587224,
+            "y": -73.50347976061289
+          },
+          "translation_speed": 5,
+          "waypoints": [
+            {
+              "Rz": -3.882,
+              "X": 279.334,
+              "Y": 26.384,
+              "Z": 294.56
+            },
+            {
+              "Rz": -3.882,
+              "X": 279.334,
+              "Y": 26.384,
+              "Z": 300.0
+            },
+            {
+              "Rz": 19.551665457937336,
+              "X": 279.334,
+              "Y": 26.384,
+              "Z": 300.0
+            },
+            {
+              "Rz": 42.98533091587468,
+              "X": 279.334,
+              "Y": 26.384,
+              "Z": 300.0
+            },
+            {
+              "Rz": 66.418996373812,
+              "X": 279.334,
+              "Y": 26.384,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 279.334,
+              "Y": 26.384,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 282.0027161458722,
+              "Y": 16.39525202393871,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 284.6714322917445,
+              "Y": 6.406504047877423,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 287.34014843761673,
+              "Y": -3.582243928183864,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 290.00886458348896,
+              "Y": -13.570991904245155,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 292.67758072936124,
+              "Y": -23.559739880306445,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 295.34629687523346,
+              "Y": -33.54848785636773,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 298.0150130211057,
+              "Y": -43.53723583242902,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 300.6837291669779,
+              "Y": -53.52598380849031,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 303.3524453128502,
+              "Y": -63.5147317845516,
+              "Z": 300.0
+            },
+            {
+              "Rz": 89.85266183174934,
+              "X": 306.0211614587224,
+              "Y": -73.50347976061289,
+              "Z": 300.0
+            }
+          ],
+          "wrist_speed": 30
+        },
+        "visual_acceptance_pending": true
+      }
+    },
+    {
+      "at": 1793103168.6627493,
+      "event": "move_requested",
+      "target": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.87662180784821,
+        "X": 312.5035022963445,
+        "Y": -76.1016698296062,
+        "Z": 300.0
+      },
+      "speed": 5
+    },
+    {
+      "at": 1793103171.1331222,
+      "event": "move_arrived",
+      "response": {
+        "commanded": {
+          "interpolation": "linear",
+          "rz": 89.87662180784821,
+          "speed": 5.0,
+          "x": 312.5035022963445,
+          "y": -76.1016698296062,
+          "z": 300.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "ok": true,
+        "pose_after": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.877,
+          "X": 312.503,
+          "Y": -76.102,
+          "Z": 300.0
+        }
+      },
+      "state": {
+        "camera": {
+          "age_s": 4.3,
+          "device": {
+            "ip": "192.168.201.89",
+            "model": "JHEM600GM-HM",
+            "serial": "457108625727"
+          },
+          "enabled": true,
+          "error": "",
+          "open": true
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.007376462235697545
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4008686337301,
+            "J2": 37.565153239414926,
+            "J3": 60.474384632599396,
+            "J4": -8.1627585396822
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.877,
+            "X": 312.504,
+            "Y": -76.102,
+            "Z": 300.0
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "projected_alignment",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1793103171.131509
+      }
+    },
+    {
+      "at": 1793103171.1736925,
+      "event": "completed",
+      "state": {
+        "camera": {
+          "age_s": 4.3,
+          "device": {
+            "ip": "192.168.201.89",
+            "model": "JHEM600GM-HM",
+            "serial": "457108625727"
+          },
+          "enabled": true,
+          "error": "",
+          "open": true
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.007376462235697545
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4012835119773,
+            "J2": 37.565153239414926,
+            "J3": 60.474384632599396,
+            "J4": -8.16310717476315
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.876,
+            "X": 312.503,
+            "Y": -76.102,
+            "Z": 300.0
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "projected_alignment",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1793103171.1716807
+      }
+    }
+  ]
+}

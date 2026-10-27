@@ -162,8 +162,11 @@ class SceneTests(unittest.TestCase):
             reject_leakage([dict(session='same', rgb='a')], [dict(session='same', rgb='b')])
 
     def test_routes_local_mode_and_key_is_private(self):
-        import app as console
-        with patch.object(console, 'plate_agent', self.agent), patch.dict('os.environ', {}, clear=True):
+        with patch.dict('os.environ', {'CEPHLA_AUDIT_DIR': str(self.root / 'audit')}):
+            import app as console
+        with patch.object(console, 'plate_agent', self.agent), \
+                patch.object(console, 'draggo', SimpleNamespace(blocks_motion=False)), \
+                patch.object(console.audit, 'event'), patch.dict('os.environ', {}, clear=True):
             self.agent.client = VisionClient()
             client = console.app.test_client()
             self.assertEqual(client.post('/agent/run', json={'mode':'analyze'}).status_code, 400)

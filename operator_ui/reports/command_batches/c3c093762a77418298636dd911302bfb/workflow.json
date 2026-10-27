@@ -1,0 +1,164 @@
+{
+  "plan": {
+    "id": "c3c093762a77418298636dd911302bfb",
+    "at": 1792904275.7345636,
+    "dispatch": "command_batch",
+    "commands": [
+      "hamilton_full_calibration",
+      "arm_full_calibration"
+    ],
+    "actions": [
+      "command_batch"
+    ],
+    "arm_plan": {
+      "actions": [
+        "classic_pickup"
+      ],
+      "labels": [
+        "Full Calibration"
+      ],
+      "dispatch": "classic_pickup",
+      "steps": [
+        {
+          "kind": "classic",
+          "label": "Calibrate the two-disk plate"
+        },
+        {
+          "kind": "classic",
+          "label": "Align with the plate"
+        },
+        {
+          "kind": "classic",
+          "label": "Descent"
+        },
+        {
+          "kind": "classic",
+          "label": "Grip the plate"
+        },
+        {
+          "kind": "classic",
+          "label": "Lift the plate 5 mm"
+        },
+        {
+          "kind": "classic",
+          "label": "Return Home"
+        }
+      ],
+      "requirements": [
+        "Start in the camera viewing position (normally saved Home), with both disks visible in Camera View.",
+        "The calibration plate is in its taught location and orientation.",
+        "The gripper is empty, the area is clear, and you are supervising the emergency stop.",
+        "Each step runs exactly as its button does in the classic view, including the controller preparation it does for itself.",
+        "The plate and holder match the accepted pickup setup.",
+        "Confirm the upward path, wrist sweep, crossing and lowering to Home are clear.",
+        "After gripping, the arm lifts 5 mm slowly and immediately returns Home with the claw unchanged."
+      ],
+      "summary": "Calibrate, align, descend, grip, lift 5 mm slowly, then return Home.",
+      "id": "2026-10-25T04:57:55.734563+00:00:1792904275734",
+      "at": 1792904275.7345636,
+      "source": "command_batch"
+    },
+    "hamilton_binding": {
+      "session": "e769341015b343a885a8a6b9e398f280",
+      "settings_hash": "7892261eb248694c361bce09a25563d8e83b2c01c1626556128e12bc1c25726c"
+    },
+    "steps": [
+      {
+        "kind": "command_batch",
+        "label": "Hamilton full calibration: initialize, self-calibrate, calibrate channels"
+      },
+      {
+        "kind": "classic",
+        "label": "Calibrate the two-disk plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Align with the plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Descent"
+      },
+      {
+        "kind": "classic",
+        "label": "Grip the plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Lift the plate 5 mm"
+      },
+      {
+        "kind": "classic",
+        "label": "Return Home"
+      }
+    ],
+    "requirements": [
+      "Start in the camera viewing position (normally saved Home), with both disks visible in Camera View.",
+      "The calibration plate is in its taught location and orientation.",
+      "The gripper is empty, the area is clear, and you are supervising the emergency stop.",
+      "Each step runs exactly as its button does in the classic view, including the controller preparation it does for itself.",
+      "The plate and holder match the accepted pickup setup.",
+      "Confirm the upward path, wrist sweep, crossing and lowering to Home are clear.",
+      "After gripping, the arm lifts 5 mm slowly and immediately returns Home with the claw unchanged.",
+      "Hamilton full calibration includes channel height/squeeze calibration; load a full compatible rack at the configured calibration site and seat the teaching needle in its holder.",
+      "Hands clear and compatible holders secure; supervise the emergency stop.",
+      "The arm starts at Home and remains there while Hamilton operates.",
+      "One Yes authorizes every listed command, sequentially in this order. Completion is verified before the next command.",
+      "Faults, Stop or uncertain completion stop the batch without retry. Physical Hamilton prompts still require operator attention."
+    ],
+    "labels": [
+      "Hamilton full calibration: initialize, self-calibrate, calibrate channels",
+      "Arm full calibration and pickup to Home"
+    ],
+    "executable": true,
+    "blockers": [],
+    "summary": "Hamilton full calibration: initialize, self-calibrate, calibrate channels. Then Arm full calibration and pickup to Home.",
+    "confirmation_source": "researcher_button"
+  },
+  "status": "stopped_or_failed",
+  "events": [
+    {
+      "at": 1792904279.2021313,
+      "event": "confirmed"
+    },
+    {
+      "at": 1792904279.3444316,
+      "event": "command_started",
+      "command": "hamilton_full_calibration"
+    },
+    {
+      "at": 1792904362.8845556,
+      "event": "finished"
+    }
+  ],
+  "confirmed_at": 1792904279.2021313,
+  "finished_at": 1792904362.8845556,
+  "result": {
+    "active": false,
+    "step": "Hamilton full calibration: initialize, self-calibrate, calibrate channels",
+    "done": [],
+    "ok": false,
+    "error": "Hamilton full calibration: initialize, self-calibrate, calibrate channels did not complete: Hamilton: Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy.",
+    "results": [
+      {
+        "step": "Hamilton full calibration: initialize, self-calibrate, calibrate channels",
+        "sequence": "lacry_batch_hamilton",
+        "run_id": "653d3c1d745c49f7a2e5b5a7a99533f3",
+        "state": "error",
+        "result": {
+          "ok": false,
+          "error": "Hamilton: Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy"
+        },
+        "log": [
+          {
+            "t": 83.6,
+            "level": "err",
+            "msg": "SEQUENCE ERROR: TeachingError: Hamilton: Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy"
+          }
+        ]
+      }
+    ],
+    "started_at": 1792904279.2354467,
+    "message": "Pickup stopped during Hamilton full calibration: initialize, self-calibrate, calibrate channels: Hamilton full calibration: initialize, self-calibrate, calibrate channels did not complete: Hamilton: Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy."
+  }
+}

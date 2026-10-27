@@ -1,0 +1,40 @@
+{
+  "schema": "cephla.operator-correction-proposal.v1",
+  "status": "offline_route_prepared_hardware_blocked_servo_fault_and_restart_claw_reset",
+  "source_lift_record": "operator_ui/reports/projected_alignment/proof_lift_48well_10mm_20261027.json",
+  "operator_confirmed_slip": true,
+  "physical_pickup_success": false,
+  "operator_hypothesis": "Jaw positioning needs adjustment; retain calibration, alignment, descent and grip methods.",
+  "cause_independently_verified": false,
+  "reference_endpoint_mm": {
+    "X": 311.827048108826,
+    "Y": -76.21328197557138,
+    "Z": 78.718,
+    "Rz": 89.757
+  },
+  "requested_forward_mm": 10,
+  "forward_direction": "Parallel to the plate long side, with sign chosen away from the robot base; explicitly clarified by operator.",
+  "plate_flat_supported_jaws_free_to_reopen_retreat_operator_confirmed": true,
+  "plate_removed_from_between_jaws": false,
+  "direction_source": "Three saved rim observations in prepared_corrected_repeat_alignment_20261027.json; preview corners scaled to native pixels, vendor image-to-tool transform, then observation wrist rotation.",
+  "estimated_forward_unit_xy": [-0.2480205987035, -0.9687547587593],
+  "estimated_delta_xy_mm": [-2.480205987035, -9.687547587593],
+  "candidate_endpoint_mm": {"X": 309.346794012965, "Y": -85.90054758759283, "Z": 73.718, "Rz": 89.757},
+  "direction_basis": "Saved camera geometry, not an assumption that the tool X axis is parallel to the plate. Physical direction review pending.",
+  "requested_delta_z_mm": -5,
+  "proposed_endpoint_z_mm": 73.718,
+  "offset_applies_to": "Previous descent endpoint, not the stopped partial-lift position",
+  "jaw_sequence": "Open above the plate before lowering",
+  "proposed_path": "After contact state is confirmed, reopen and retreat; apply horizontal correction at clearance height, then perform a supervised open-claw descent trial.",
+  "new_height_physically_validated": false,
+  "ik_checked": true,
+  "offline_route": "From measured stopped pose, rise to Z300, shift to corrected XY/yaw, descend to Z93.718 then candidate Z73.718. Recheck current pose and clearance before any dispatch.",
+  "controller_faults": [
+    {"code": 3604, "message": "Servo error found: entered error mode", "controller_timestamp": "2026-10-27 01:27:59"},
+    {"code": 3892, "message": "Motion error: external axis 2 servo error code 0x3230", "controller_timestamp": "2026-10-27 01:27:59"}
+  ],
+  "restart_blocker": "RobotService._safe_start documents E1 re-zeroing at program start; do not restart with plate between jaws. Existing HandClaw preparation requires empty gripper.",
+  "active_profile_changed": false,
+  "motion_started": false,
+  "controller_reset_or_restart_requested": false
+}

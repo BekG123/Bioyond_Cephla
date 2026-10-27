@@ -1,0 +1,14 @@
+{
+  "status": "startup_failed_before_robot_or_acquisition",
+  "controller": {"port": "COM4", "serial": "12769210", "operator_identified": true},
+  "mode": {"stage_simulated": false, "main_camera_simulated": true},
+  "startup_log": "physical_stage.stderr.log",
+  "initial_failure": "Configured filter wheel 1 homing timed out after 15 seconds; controller continued to report operation in progress.",
+  "terminal_failure": "Subsequent SET_WATCHDOG_TIMEOUT initialization command timed out; Squid process exited before the control server became available.",
+  "robot_motion_started": false,
+  "acquisition_started": false,
+  "robot_pose_mm_after": {"X": 289.97, "Y": 62.63, "Z": 248.02, "Rz": -3.88},
+  "automatic_reset_or_retry": false,
+  "physical_microscope_stop_confirmed": false,
+  "next": "Operator to inspect current motion state and confirm whether a motorized filter wheel is actually connected. Review the hardware configuration before a human-authorized recovery."
+}

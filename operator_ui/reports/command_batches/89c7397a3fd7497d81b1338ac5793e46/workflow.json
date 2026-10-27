@@ -1,0 +1,165 @@
+{
+  "plan": {
+    "id": "89c7397a3fd7497d81b1338ac5793e46",
+    "at": 1792906581.0605223,
+    "dispatch": "command_batch",
+    "commands": [
+      "hamilton_full_calibration",
+      "arm_full_calibration"
+    ],
+    "actions": [
+      "command_batch"
+    ],
+    "arm_plan": {
+      "actions": [
+        "classic_pickup"
+      ],
+      "labels": [
+        "Full Calibration"
+      ],
+      "dispatch": "classic_pickup",
+      "steps": [
+        {
+          "kind": "classic",
+          "label": "Calibrate the two-disk plate"
+        },
+        {
+          "kind": "classic",
+          "label": "Align with the plate"
+        },
+        {
+          "kind": "classic",
+          "label": "Descent"
+        },
+        {
+          "kind": "classic",
+          "label": "Grip the plate"
+        },
+        {
+          "kind": "classic",
+          "label": "Lift the plate 5 mm"
+        },
+        {
+          "kind": "classic",
+          "label": "Return Home"
+        }
+      ],
+      "requirements": [
+        "Start in the camera viewing position (normally saved Home), with both disks visible in Camera View.",
+        "The calibration plate is in its taught location and orientation.",
+        "The gripper is empty, the area is clear, and you are supervising the emergency stop.",
+        "Each step runs exactly as its button does in the classic view, including the controller preparation it does for itself.",
+        "The plate and holder match the accepted pickup setup.",
+        "Confirm the upward path, wrist sweep, crossing and lowering to Home are clear.",
+        "After gripping, the arm lifts 5 mm slowly and immediately returns Home with the claw unchanged."
+      ],
+      "summary": "Calibrate, align, descend, grip, lift 5 mm slowly, then return Home.",
+      "id": "2026-10-25T05:36:21.060522+00:00:1792906581060",
+      "at": 1792906581.0605223,
+      "source": "command_batch"
+    },
+    "hamilton_binding": {
+      "session": "f1892b4fb7e24bd280485a5838b2dc96",
+      "settings_hash": "7892261eb248694c361bce09a25563d8e83b2c01c1626556128e12bc1c25726c"
+    },
+    "steps": [
+      {
+        "kind": "command_batch",
+        "label": "Hamilton full calibration: self-calibrate, calibrate channels"
+      },
+      {
+        "kind": "classic",
+        "label": "Calibrate the two-disk plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Align with the plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Descent"
+      },
+      {
+        "kind": "classic",
+        "label": "Grip the plate"
+      },
+      {
+        "kind": "classic",
+        "label": "Lift the plate 5 mm"
+      },
+      {
+        "kind": "classic",
+        "label": "Return Home"
+      }
+    ],
+    "requirements": [
+      "Start in the camera viewing position (normally saved Home), with both disks visible in Camera View.",
+      "The calibration plate is in its taught location and orientation.",
+      "The gripper is empty, the area is clear, and you are supervising the emergency stop.",
+      "Each step runs exactly as its button does in the classic view, including the controller preparation it does for itself.",
+      "The plate and holder match the accepted pickup setup.",
+      "Confirm the upward path, wrist sweep, crossing and lowering to Home are clear.",
+      "After gripping, the arm lifts 5 mm slowly and immediately returns Home with the claw unchanged.",
+      "Hands clear and compatible holders secure; supervise the emergency stop.",
+      "The arm starts at Home and remains there while Hamilton operates.",
+      "One Yes authorizes every listed command, sequentially in this order. Completion is verified before the next command.",
+      "Faults, Stop or uncertain completion stop the batch without retry. Physical Hamilton prompts still require operator attention.",
+      "Follow Hamilton instructions to clear the deck for self-calibration and seat the teaching needle in its holder. Self-calibration does not require a tip rack.",
+      "For channel calibration only, load a full compatible tip rack at the configured site, lid removed. In full calibration, wait until self-calibration finishes and the loading instruction appears."
+    ],
+    "labels": [
+      "Hamilton full calibration: self-calibrate, calibrate channels",
+      "Arm full calibration and pickup to Home"
+    ],
+    "executable": true,
+    "blockers": [],
+    "summary": "Hamilton full calibration: self-calibrate, calibrate channels. Then Arm full calibration and pickup to Home.",
+    "confirmation_source": "researcher_button"
+  },
+  "status": "stopped_or_failed",
+  "events": [
+    {
+      "at": 1792906590.1883888,
+      "event": "confirmed"
+    },
+    {
+      "at": 1792906590.2891648,
+      "event": "command_started",
+      "command": "hamilton_full_calibration"
+    },
+    {
+      "at": 1792906699.2078235,
+      "event": "finished"
+    }
+  ],
+  "confirmed_at": 1792906590.1883888,
+  "finished_at": 1792906699.2078235,
+  "result": {
+    "active": false,
+    "step": "Hamilton full calibration: self-calibrate, calibrate channels",
+    "done": [],
+    "ok": false,
+    "error": "Hamilton full calibration: self-calibrate, calibrate channels was stopped. Nothing further was run.",
+    "results": [
+      {
+        "step": "Hamilton full calibration: self-calibrate, calibrate channels",
+        "sequence": "lacry_batch_hamilton",
+        "run_id": "2efe252471934ba09142d3aefcb9bd12",
+        "state": "error",
+        "result": {
+          "ok": false,
+          "error": "Hamilton operation stopped."
+        },
+        "log": [
+          {
+            "t": 108.9,
+            "level": "err",
+            "msg": "SEQUENCE ERROR: TeachingError: Hamilton operation stopped."
+          }
+        ]
+      }
+    ],
+    "started_at": 1792906590.2327697,
+    "message": "Pickup stopped during Hamilton full calibration: self-calibrate, calibrate channels: Hamilton full calibration: self-calibrate, calibrate channels was stopped. Nothing further was run."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "reviewed": false,
+  "force_limits": null,
+  "force_units": null,
+  "contact_torque_abs": null,
+  "closing_torque_sign": -1,
+  "source": "Historical position/speed evidence only: operator_ui/demonstrations/position_grip/be62b04354da4ac2aeac8606eed5f0f5.json and operator_ui/reports/pickup_home/loaded_roundtrip_137_20261017.json. These do not specify ForceArray limits or units.",
+  "e1_floor_mm": 3.8,
+  "speed": 5,
+  "historical_evidence": {
+    "reviewed_on": "2026-10-19",
+    "commanded_e1_mm": 3.8,
+    "closing_speed": 5,
+    "loaded_transfer_e1_approx_mm": 3.801,
+    "operator_confirmed_secure_after_proof_lift": true,
+    "operator_confirmation_record": "operator_ui/reports/pickup_home/20261017T105903Z_plan_carry_authorization.json",
+    "completed_loaded_transfer_record": "operator_ui/reports/pickup_home/loaded_roundtrip_137_20261017.json",
+    "preceding_closure_snapshot": {
+      "record": "operator_ui/demonstrations/position_grip/be62b04354da4ac2aeac8606eed5f0f5.json",
+      "immediate_e1_mm": 3.957,
+      "reported_e1_torque": 14.4,
+      "reported_e1_normalized_torque": 0.054,
+      "position_check_ok": false,
+      "interpretation": "Immediate completion snapshot before the later settled 3.8 mm and operator-accepted loaded transfer; not a measured holding-force target or configured force limit."
+    },
+    "force_limits_recorded": false,
+    "force_units_established": false,
+    "contact_threshold_validated": false,
+    "closing_torque_sign_validated": false
+  },
+  "note": "Historical evidence supports the 3.8 mm position and speed 5 only. Immediate torque snapshots vary in sign and are not validated contact thresholds or force-limit settings. The existing closing_torque_sign=-1 is unvalidated. Supply the vendor-reviewed six-axis ForceArray, its units, and a validated contact threshold in GetCJointsTrq units; preserve E2-E6 limits. Keep reviewed=false until those settings are established. Position success does not establish force-control safety."
+}

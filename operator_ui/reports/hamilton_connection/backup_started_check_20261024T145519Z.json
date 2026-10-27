@@ -1,0 +1,252 @@
+{
+  "checked_at": "2026-10-24T14:55:19.169100+00:00",
+  "read_only": true,
+  "responses": {
+    "instruments/global-run-state": {
+      "status": 200,
+      "data": "MaintenanceAssayRunning"
+    },
+    "errors?offset=0&limit=3": {
+      "status": 200,
+      "data": {
+        "totalItemCount": 36,
+        "currentOffset": 0,
+        "items": [
+          {
+            "id": "1ef48ada52754a3a95bbde2674c17f65",
+            "message": "Failed to load Active System: 'TiprackTestSystem, Ver. 1'.  Attempting to load Empty System.",
+            "date": "2026-10-24T14:00:48.5882835Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "65d6dfd264cf43d9be49ff1982b1c486",
+            "message": "Could not load system configuration 'TiprackTestSystem'.",
+            "date": "2026-10-24T14:00:48.5610914Z",
+            "severity": 1,
+            "handled": true
+          },
+          {
+            "id": "dc1d4108104a41038286fcc91bf30784",
+            "message": "The message with identifier 'ModuleNPartNotConnected' could not be resolved.The message should be injected with following Arguments: Argument 0: da5436a6-b464-48c9-807b-388d57d195c7",
+            "date": "2026-10-24T14:00:48.5301125Z",
+            "severity": 1,
+            "handled": true
+          }
+        ]
+      }
+    },
+    "maintenance/errors": {
+      "status": 200,
+      "data": []
+    },
+    "errors/check-for-pending-errors": {
+      "status": 200,
+      "data": []
+    },
+    "backups": {
+      "status": 200,
+      "data": [
+        {
+          "name": "Backup_2026-08-31 14-11-14Z",
+          "createdDateTime": "2026-08-31T14:11:14.8858187-07:00",
+          "size": 237831102
+        },
+        {
+          "name": "Backup_2026-08-31 14-12-06Z",
+          "createdDateTime": "2026-08-31T14:12:06.9423338-07:00",
+          "size": 237861843
+        },
+        {
+          "name": "Backup_2026-09-22 14-46-36Z",
+          "createdDateTime": "2026-09-22T14:46:36.7220874-07:00",
+          "size": 238477645
+        },
+        {
+          "name": "Backup_2026-09-22 14-47-19Z",
+          "createdDateTime": "2026-09-22T14:47:19.74626-07:00",
+          "size": 238497138
+        },
+        {
+          "name": "Backup_2026-10-24 07-04-59Z",
+          "createdDateTime": "2026-10-24T07:04:59.8075325-07:00",
+          "size": 94136982
+        }
+      ]
+    },
+    "maintenance": {
+      "status": 200,
+      "data": [
+        {
+          "id": "2B597AB8BC1F4AEDAED1ADC9928FC07F",
+          "status": "Blocking",
+          "name": "Database Backup",
+          "info": "Expired 9/29/2026",
+          "lastExecutionTime": "2026-09-22T14:47:29.47-07:00"
+        },
+        {
+          "id": "7000819eefd34556b6b2416a87565617",
+          "status": "Blocking",
+          "name": "Data Maintenance",
+          "info": "Expired 9/29/2026",
+          "lastExecutionTime": "2026-09-22T21:47:34.289Z"
+        },
+        {
+          "id": "1a6cf9fd5ca14565ad9b885661524a23",
+          "status": "Ok",
+          "name": "Daily Maintenance",
+          "info": "Expired 9/10/2026",
+          "lastExecutionTime": "2026-09-09T19:19:36.319Z"
+        },
+        {
+          "id": "1c383b70f067497999cbda4f84fe02b6",
+          "status": "Ok",
+          "name": "Replace Front Stop Discs and O-Rings",
+          "info": "Tip Ejects: 91 of 20000",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        },
+        {
+          "id": "2a7867c82d4b405c899a716b1fbf34ab",
+          "status": "Ok",
+          "name": "Replace MPH Stop Discs and O-Rings",
+          "info": "Tip Ejects: 0 of 20000",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        },
+        {
+          "id": "30ad56093aae412a887645b527ae1a74",
+          "status": "Ok",
+          "name": "UV Decontamination",
+          "info": "Expires Never",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        },
+        {
+          "id": "7838b2f6f54b49169ea4dc003eafc7c9",
+          "status": "Ok",
+          "name": "Replace HEPA Pre-Filter",
+          "info": "Hours: Not Available",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        },
+        {
+          "id": "7a12a5afb5f345b0961d898b274f413a",
+          "status": "Ok",
+          "name": "Replace Pipetting Head",
+          "info": "Expires 7/16/2033",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        },
+        {
+          "id": "9fa5d36bda554dc696169bf28ce0dd76",
+          "status": "Ok",
+          "name": "Weekly Maintenance",
+          "info": "Expired 7/25/2026",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        },
+        {
+          "id": "d1a9bc3168db4b6fb252718be9a6b8db",
+          "status": "Ok",
+          "name": "Yearly Maintenance",
+          "info": "Expires 7/18/2027",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        },
+        {
+          "id": "d85e613db5614c24adae06801e1739a5",
+          "status": "Ok",
+          "name": "Replace Rear Stop Disc and O-Ring",
+          "info": "Tip Ejects: 43 of 20000",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        },
+        {
+          "id": "f539fd28a0274e7d9285c931a9aa4ac9",
+          "status": "Ok",
+          "name": "Replace Main HEPA Filter",
+          "info": "Not Available",
+          "lastExecutionTime": "2026-07-18T00:03:02.209Z"
+        }
+      ]
+    },
+    "traces?offset=0&limit=8&sources=RTE,SDE": {
+      "status": 200,
+      "data": {
+        "totalItemCount": 166,
+        "currentOffset": 0,
+        "items": [
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Database Backup - Assay 1 > Activity : Backup Database - start",
+            "type": "Processing",
+            "date": "2026-10-24T14:04:58.6316302Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Database Backup - Assay 1 : start",
+            "type": "Processing",
+            "date": "2026-10-24T14:04:58.6271892Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : start",
+            "type": "Processing",
+            "date": "2026-10-24T14:04:58.627068Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Execution started",
+            "type": "Processing",
+            "date": "2026-10-24T14:04:55.9180389Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling completed : Duration = 00:00:00.1305195",
+            "type": "Processing",
+            "date": "2026-10-24T14:04:55.855206Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Scheduling started",
+            "type": "Processing",
+            "date": "2026-10-24T14:04:55.7050042Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Planning completed : Duration = 00:00:02.6841112",
+            "type": "Processing",
+            "date": "2026-10-24T14:04:55.7006789Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Warning",
+            "message": "",
+            "type": "Processing",
+            "date": "2026-10-24T14:04:55.6976095Z",
+            "source": "SDE"
+          }
+        ]
+      }
+    },
+    "verification/status": {
+      "status": 200,
+      "data": {
+        "isWorkflowInProgress": false,
+        "isRunInProgress": false,
+        "isServiceRoutineInProgress": false,
+        "startTime": "2026-10-24T07:01:54.7899022-07:00",
+        "currentIndex": 0,
+        "runs": [],
+        "serviceRoutine": null
+      }
+    }
+  }
+}

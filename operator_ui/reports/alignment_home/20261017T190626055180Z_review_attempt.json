@@ -1,0 +1,2560 @@
+{
+  "status": "completed",
+  "started_at": 1792264081.588795,
+  "review_sha256": "4310c104bb0855ac7b48898432c82fe295ba5b67b738a0c4effff16d2ee9a6c8",
+  "review": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\alignment_home\\20261017T190626055180Z_review.json",
+  "authorization": "Operator confirmed empty gripper, full sweep/path clear, arm released, E-stop supervised; run this Home return.",
+  "before": {
+    "camera": {
+      "age_s": 42.9,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.028408514481270686
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 261.40107607285375,
+        "J2": 39.303580962980064,
+        "J3": 61.71142740968958,
+        "J4": -8.530219915005878
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 92.485,
+        "X": 318.973,
+        "Y": -69.63,
+        "Z": 300.0
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_align",
+      "state": "done"
+    },
+    "target": {
+      "alignment_requires_preflight": true,
+      "big_r": 190.4,
+      "calibrated_at": 1792263229.0695567,
+      "config": "Wide",
+      "converged": true,
+      "found_at": "11:53:49",
+      "rz": 92.48469999999998,
+      "source": "fast_disk",
+      "x": 318.9735,
+      "y": -69.62950000000001,
+      "z": 61.6085,
+      "z_calibrated": 70.60849999999999,
+      "z_detail": {
+        "samples": [
+          61.487,
+          61.73
+        ],
+        "spread": 0.242999999999995,
+        "touch_offset": 9.0,
+        "vision_z": 61.6085
+      }
+    },
+    "ts": 1792264081.5718591
+  },
+  "observations": [
+    {
+      "at": 1792264081.791517,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028408514481270686
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.303580962980064,
+          "J3": 61.71152657143523,
+          "J4": -8.530219915005878
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 92.485,
+          "X": 318.974,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264082.3589003,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028408514481270686
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.4008686337301,
+          "J2": 39.303580962980064,
+          "J3": 61.71152657143523,
+          "J4": -9.400064441981769
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 91.734,
+          "X": 318.974,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264082.9452305,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.30351080284917,
+          "J3": 61.71142740968958,
+          "J4": -25.854245722604634
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 75.385,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264083.603241,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.4012835119773,
+          "J2": 39.30348741613886,
+          "J3": 61.71142740968958,
+          "J4": -32.620904008807045
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 68.394,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264084.1468163,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.303464029428554,
+          "J3": 61.71122908619825,
+          "J4": -36.247231803331985
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 64.987,
+          "X": 318.972,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264084.709078,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.303464029428554,
+          "J3": 61.71122908619825,
+          "J4": -52.19188291314313
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 48.823,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264085.2518985,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028408514481270686
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.30344064271825,
+          "J3": 61.71122908619825,
+          "J4": -56.71228537277013
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 44.302,
+          "X": 318.972,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264085.809866,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.303464029428554,
+          "J3": 61.71132824794392,
+          "J4": -59.47330089637155
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 41.541,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264086.4196827,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.30344064271825,
+          "J3": 61.71132824794392,
+          "J4": -76.28518177005144
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 24.73,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264086.9905207,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.303464029428554,
+          "J3": 61.71132824794392,
+          "J4": -80.80349241919272
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 20.211,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264087.5835495,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.30348741613886,
+          "J3": 61.71132824794392,
+          "J4": -90.48979519082984
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 10.525,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264088.1433222,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.303417256007954,
+          "J3": 61.71132824794392,
+          "J4": -104.70050972552494
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.686,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264088.6978076,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.303464029428554,
+          "J3": 61.71132824794392,
+          "J4": -104.89469946561532
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264089.2982228,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.4008686337301,
+          "J2": 39.30344064271825,
+          "J3": 61.71132824794392,
+          "J4": -104.89469946561532
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 318.973,
+          "Y": -69.63,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: upload 2/2",
+            "t": 7.5
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264089.9078903,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.40107607285375,
+          "J2": 39.31148567106203,
+          "J3": 61.70686596938928,
+          "J4": -104.8985344515058
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 318.97,
+          "Y": -69.617,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: upload 2/2",
+            "t": 7.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 7.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.0
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.2
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264090.5350027,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.4014909511008,
+          "J2": 51.347806928476594,
+          "J3": 56.21489184783719,
+          "J4": -111.44171765081781
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.879,
+          "X": 311.268,
+          "Y": -34.487,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: upload 2/2",
+            "t": 7.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 7.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.0
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 1/100",
+            "t": 8.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 6/100",
+            "t": 8.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 10/100",
+            "t": 8.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 16/100",
+            "t": 8.7
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264091.0811515,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.4012835119773,
+          "J2": 65.22346956440806,
+          "J3": 52.4560667169049,
+          "J4": -121.55893338251192
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.879,
+          "X": 302.844,
+          "Y": 3.922,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: upload 2/2",
+            "t": 7.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 7.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.0
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 1/100",
+            "t": 8.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 6/100",
+            "t": 8.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 10/100",
+            "t": 8.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 16/100",
+            "t": 8.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 21/100",
+            "t": 8.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 26/100",
+            "t": 8.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 30/100",
+            "t": 9.1
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 36/100",
+            "t": 9.2
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264091.643319,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 261.4012835119773,
+          "J2": 78.56266445272928,
+          "J3": 51.46801908316329,
+          "J4": -133.9117715708124
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.881,
+          "X": 294.299,
+          "Y": 42.888,
+          "Z": 300.0
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: upload 2/2",
+            "t": 7.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 7.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.0
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 1/100",
+            "t": 8.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 6/100",
+            "t": 8.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 10/100",
+            "t": 8.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 16/100",
+            "t": 8.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 21/100",
+            "t": 8.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 26/100",
+            "t": 8.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 30/100",
+            "t": 9.1
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 36/100",
+            "t": 9.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 42/100",
+            "t": 9.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 47/100",
+            "t": 9.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 53/100",
+            "t": 9.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 58/100",
+            "t": 9.8
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264092.2487047,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 260.66134815828394,
+          "J2": 84.87686575379037,
+          "J3": 52.05614739666404,
+          "J4": -140.81265436318145
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 299.26
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: upload 2/2",
+            "t": 7.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 7.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.0
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 1/100",
+            "t": 8.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 6/100",
+            "t": 8.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 10/100",
+            "t": 8.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 16/100",
+            "t": 8.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 21/100",
+            "t": 8.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 26/100",
+            "t": 8.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 30/100",
+            "t": 9.1
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 36/100",
+            "t": 9.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 42/100",
+            "t": 9.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 47/100",
+            "t": 9.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 53/100",
+            "t": 9.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 58/100",
+            "t": 9.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 64/100",
+            "t": 9.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 68/100",
+            "t": 10.1
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 71/100",
+            "t": 10.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 72/100",
+            "t": 10.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 72/100",
+            "t": 10.4
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264092.8360097,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028048991225659847
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 220.87348706629055,
+          "J2": 84.87688914050068,
+          "J3": 52.05565158793575,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.969,
+          "Y": 62.629,
+          "Z": 259.472
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": true,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: upload 2/2",
+            "t": 7.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 7.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.0
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 1/100",
+            "t": 8.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 6/100",
+            "t": 8.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 10/100",
+            "t": 8.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 16/100",
+            "t": 8.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 21/100",
+            "t": 8.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 26/100",
+            "t": 8.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 30/100",
+            "t": 9.1
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 36/100",
+            "t": 9.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 42/100",
+            "t": 9.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 47/100",
+            "t": 9.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 53/100",
+            "t": 9.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 58/100",
+            "t": 9.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 64/100",
+            "t": 9.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 68/100",
+            "t": 10.1
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 71/100",
+            "t": 10.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 72/100",
+            "t": 10.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 72/100",
+            "t": 10.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 74/100",
+            "t": 10.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 77/100",
+            "t": 10.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 82/100",
+            "t": 10.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 87/100",
+            "t": 10.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 92/100",
+            "t": 11.0
+          }
+        ],
+        "name": "researcher_home",
+        "result": null,
+        "state": "running",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    },
+    {
+      "at": 1792264093.433515,
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.028228752853465267
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.41828378576054,
+          "J2": 84.87684236708007,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.017
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": false,
+        "detection_ts": 1792263229.0538535,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Preparing Auto motion for Home. Keep hands clear.",
+            "t": 0.0
+          },
+          {
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 6.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: upload 2/2",
+            "t": 7.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 7.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.0
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 0/100",
+            "t": 8.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 1/100",
+            "t": 8.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 6/100",
+            "t": 8.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 10/100",
+            "t": 8.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 16/100",
+            "t": 8.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 21/100",
+            "t": 8.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 26/100",
+            "t": 8.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 30/100",
+            "t": 9.1
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 36/100",
+            "t": 9.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 42/100",
+            "t": 9.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 47/100",
+            "t": 9.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 53/100",
+            "t": 9.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 58/100",
+            "t": 9.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 64/100",
+            "t": 9.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 68/100",
+            "t": 10.1
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 71/100",
+            "t": 10.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 72/100",
+            "t": 10.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 72/100",
+            "t": 10.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 74/100",
+            "t": 10.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 77/100",
+            "t": 10.7
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 82/100",
+            "t": 10.8
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 87/100",
+            "t": 10.9
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 92/100",
+            "t": 11.0
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 96/100",
+            "t": 11.2
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 99/100",
+            "t": 11.3
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 99/100",
+            "t": 11.4
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 99/100",
+            "t": 11.5
+          },
+          {
+            "level": "info",
+            "msg": "Home: motion 100/100",
+            "t": 11.6
+          }
+        ],
+        "name": "researcher_home",
+        "result": {
+          "home": {
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          },
+          "ok": true
+        },
+        "state": "done",
+        "target": {
+          "alignment_requires_preflight": true,
+          "big_r": 190.4,
+          "calibrated_at": 1792263229.0695567,
+          "config": "Wide",
+          "converged": true,
+          "found_at": "11:53:49",
+          "rz": 92.48469999999998,
+          "source": "fast_disk",
+          "x": 318.9735,
+          "y": -69.62950000000001,
+          "z": 61.6085,
+          "z_calibrated": 70.60849999999999,
+          "z_detail": {
+            "samples": [
+              61.487,
+              61.73
+            ],
+            "spread": 0.242999999999995,
+            "touch_offset": 9.0,
+            "vision_z": 61.6085
+          }
+        }
+      }
+    }
+  ],
+  "gripper_commands": false,
+  "start_response": {
+    "message": "Returning Home. Keep hands clear.",
+    "ok": true
+  },
+  "finished_at": 1792264093.5219214,
+  "final": {
+    "camera": {
+      "age_s": 54.8,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.028048991225659847
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.41890610313115,
+        "J2": 84.87688914050068,
+        "J3": 52.05594907317273,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.018
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "alignment_requires_preflight": true,
+      "big_r": 190.4,
+      "calibrated_at": 1792263229.0695567,
+      "config": "Wide",
+      "converged": true,
+      "found_at": "11:53:49",
+      "rz": 92.48469999999998,
+      "source": "fast_disk",
+      "x": 318.9735,
+      "y": -69.62950000000001,
+      "z": 61.6085,
+      "z_calibrated": 70.60849999999999,
+      "z_detail": {
+        "samples": [
+          61.487,
+          61.73
+        ],
+        "spread": 0.242999999999995,
+        "touch_offset": 9.0,
+        "vision_z": 61.6085
+      }
+    },
+    "ts": 1792264093.5194097
+  }
+}

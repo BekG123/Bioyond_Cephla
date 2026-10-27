@@ -1,0 +1,266 @@
+{
+  "status": "failed_or_stopped",
+  "at": 1793090492.4937866,
+  "plan_id": "2026-10-27T08:41:18.981238+00:00:1793090478981",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 306.413,
+      "Y": -76.874,
+      "Z": 183.396,
+      "Rz": 10.394
+    },
+    "joints": {
+      "J1": 144.79747033567054,
+      "J2": 37.562837955095056,
+      "J3": 58.71664352905627,
+      "J4": -85.8857203117743
+    },
+    "e1": 0.039194183045765385,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 306.41,
+            "Y": -76.87,
+            "Z": 300.0,
+            "Rz": 10.39
+          }
+        ]
+      },
+      {
+        "kind": "rotate",
+        "rz": -3.880000000000001
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 300.0,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 306.41,
+          "Y": -76.87,
+          "Z": 300.0,
+          "Rz": 10.39
+        },
+        "joints": {
+          "J1": 261.4014703356705,
+          "J2": 37.56420582311636,
+          "J3": 58.71533252477671,
+          "J4": -85.88977717551603
+        }
+      },
+      {
+        "pose": {
+          "X": 306.41,
+          "Y": -76.87,
+          "Z": 300.0,
+          "Rz": -3.880000000000001
+        },
+        "joints": {
+          "J1": 261.4014703356705,
+          "J2": 37.56420582311636,
+          "J3": 58.71533252477671,
+          "J4": -100.15977717551604
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 261.4014703356705,
+          "J2": 84.87688206683333,
+          "J3": 52.05596109242008,
+          "J4": -140.8130819868764
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.4214703356706,
+          "J2": 84.87688206683333,
+          "J3": 52.05596109242008,
+          "J4": -140.8130819868764
+        }
+      }
+    ],
+    "preserve_gripper": false,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Move to X306.41 / Y-76.87 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+    "id": "2026-10-27T08:41:18.981238+00:00:1793090478981",
+    "at": 1793090478.9812388,
+    "source": "button",
+    "confirmation_source": "researcher_button"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1793090492.9040987,
+  "sequence": {
+    "state": "error",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 0.0,
+        "level": "info",
+        "msg": "Preparing Auto motion for Home. Keep hands clear."
+      },
+      {
+        "t": 0.3,
+        "level": "err",
+        "msg": "SEQUENCE ERROR: HomeTravelNotStarted: Home travel did not start. The last gripper measurement suggested a held plate, so program startup was refused because it can close the jaws. Have the operator check the plate and gripper state in Developer view before requesting a fresh Home plan. A controller reset does not resolve this record."
+      }
+    ],
+    "result": {
+      "ok": false,
+      "error": "Home travel did not start. The last gripper measurement suggested a held plate, so program startup was refused because it can close the jaws. Have the operator check the plate and gripper state in Developer view before requesting a fresh Home plan. A controller reset does not resolve this record.",
+      "failure_context": {
+        "frames": [
+          {
+            "path": "operator_ui/sequences.py",
+            "line": 431,
+            "function": "_run"
+          },
+          {
+            "path": "operator_ui/researcher_home.py",
+            "line": 386,
+            "function": "execute"
+          }
+        ],
+        "location": {
+          "path": "operator_ui/researcher_home.py",
+          "line": 386,
+          "function": "execute"
+        },
+        "source": "            return dict(ok=True, home=target)\n        except Exception as error:\n            if attempt:\n                attempt['status'] = 'stopped_or_failed'\n            from home_attempts import ProgramStartRefused, HomeTravelNotStarted\n            if preparing and not travel_dispatched and isinstance(error, ProgramStartRefused):\n                refusal = HomeTravelNotStarted(error)\n                if attempt is not None:\n                    attempt['home_startup_refusal'] = refusal.evidence\n                self.message = str(refusal)\n                raise refusal from error\n            self.message = 'Home return stopped. Check the arm and Developer details before retrying.'\n            raise\n        finally:\n            self.queued_phase = False\n            if attempt_path:\n                attempt_path.write_text(json.dumps(attempt,indent=2),encoding='utf-8')\n\n    def stop(self):",
+        "source_start_line": 376,
+        "source_sha256": "0cae5fa05a51b66dbe3113bf6d5b0956e01075689fe694d3bdf34203d6a65756",
+        "captured_at_failure": true
+      },
+      "home_startup_refusal": {
+        "schema": 1,
+        "reason": "gripper_held_start_refused",
+        "program_start_sent": false,
+        "home_travel_dispatched": false,
+        "diagnostic": "refusing to start: last gripper reading (E1 3.699, torque -156.269) says an object is HELD, and program start re-zeroes E1 (slams the plates to 0). Release it first (Open 28), or resend with force=true if the reading is stale."
+      }
+    },
+    "target": {
+      "x": 311.827048108826,
+      "y": -76.21328197557138,
+      "rz": 89.757,
+      "z_calibrated": 78.718,
+      "config": "Wide",
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "24a49a6e27919aece2e0b47e8843afd1e843ca0026e28445f3e38cca9342d09e",
+      "open_claw_trial": true
+    },
+    "detection_ts": 0.0
+  },
+  "home_startup_refusal": {
+    "schema": 1,
+    "reason": "gripper_held_start_refused",
+    "program_start_sent": false,
+    "home_travel_dispatched": false,
+    "diagnostic": "refusing to start: last gripper reading (E1 3.699, torque -156.269) says an object is HELD, and program start re-zeroes E1 (slams the plates to 0). Release it first (Open 28), or resend with force=true if the reading is stale."
+  }
+}

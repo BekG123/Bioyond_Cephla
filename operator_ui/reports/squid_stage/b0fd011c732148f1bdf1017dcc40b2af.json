@@ -1,0 +1,107 @@
+{
+  "plan": {
+    "id": "b0fd011c732148f1bdf1017dcc40b2af",
+    "at": 1792845006.9489462,
+    "source": "chat",
+    "dispatch": "squid_stage",
+    "actions": [
+      "squid_stage_dropoff"
+    ],
+    "labels": [
+      "Return Squid stage to drop-off"
+    ],
+    "steps": [
+      {
+        "kind": "squid_stage",
+        "label": "Return Squid stage to drop-off"
+      }
+    ],
+    "destination": "dropoff",
+    "job": null,
+    "session": {
+      "pid": 24124,
+      "created_at": 1792843295.9006052
+    },
+    "reference_hash": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+    "start": {
+      "x_mm": 110.87258750000001,
+      "y_mm": 75.26655,
+      "z_mm": 1.05
+    },
+    "summary": "Return Squid stage to drop-off.",
+    "requirements": [
+      "The robot remains at Home, the microscope stage path is clear, and the E-stop is supervised.",
+      "This moves only the microscope stage. It does not fetch the plate.",
+      "Stop cancels remaining steps after the current native stage move finishes. It does not abort an independently started scan."
+    ],
+    "confirmation_source": "researcher_button"
+  },
+  "status": "completed",
+  "events": [
+    {
+      "at": 1792845009.5184865,
+      "event": "started",
+      "plan": {
+        "id": "b0fd011c732148f1bdf1017dcc40b2af",
+        "at": 1792845006.9489462,
+        "source": "chat",
+        "dispatch": "squid_stage",
+        "actions": [
+          "squid_stage_dropoff"
+        ],
+        "labels": [
+          "Return Squid stage to drop-off"
+        ],
+        "steps": [
+          {
+            "kind": "squid_stage",
+            "label": "Return Squid stage to drop-off"
+          }
+        ],
+        "destination": "dropoff",
+        "job": null,
+        "session": {
+          "pid": 24124,
+          "created_at": 1792843295.9006052
+        },
+        "reference_hash": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a",
+        "start": {
+          "x_mm": 110.87258750000001,
+          "y_mm": 75.26655,
+          "z_mm": 1.05
+        },
+        "summary": "Return Squid stage to drop-off.",
+        "requirements": [
+          "The robot remains at Home, the microscope stage path is clear, and the E-stop is supervised.",
+          "This moves only the microscope stage. It does not fetch the plate.",
+          "Stop cancels remaining steps after the current native stage move finishes. It does not abort an independently started scan."
+        ],
+        "confirmation_source": "researcher_button"
+      }
+    },
+    {
+      "at": 1792845009.9740844,
+      "event": "command_requested",
+      "command": "return_to_recorded_dropoff",
+      "target": {
+        "x_mm": 0.05,
+        "y_mm": 0.0508,
+        "z_mm": 1.05
+      }
+    },
+    {
+      "at": 1792845015.9853675,
+      "event": "verified",
+      "position": {
+        "x_mm": 0.05000625,
+        "y_mm": 0.05715,
+        "z_mm": 1.05
+      }
+    }
+  ],
+  "final_position": {
+    "x_mm": 0.05000625,
+    "y_mm": 0.05715,
+    "z_mm": 1.05
+  }
+}

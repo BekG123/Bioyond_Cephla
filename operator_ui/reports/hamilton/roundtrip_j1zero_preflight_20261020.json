@@ -1,0 +1,21 @@
+{
+  "status": "not_started_controller_preparation_blocked_by_held_plate",
+  "requested_trial": "Current Hamilton position -> true Home -> Hamilton Z38.61",
+  "observed_start": {"X": 195.325, "Y": -360.299, "Z": 39.14, "Rz": -1.888},
+  "observed_j1_mm": 0.5413996731355478,
+  "observed_e1_mm": 3.5026518162339926,
+  "controller_mode": "manual",
+  "controller_program": "paused",
+  "operator_confirmed": {
+    "route_clear": true,
+    "arm_released": true,
+    "hands_clear": true,
+    "estop_supervised": true,
+    "plate_between_jaws": true
+  },
+  "blocker": "RobotService._safe_start documents E1 reset at program startup and refuses blind resume of an interrupted statement. Do not restart with plate between jaws.",
+  "departure_update": "Offline support for a start up to1 mm above Hamilton endpoint, XY/yaw within0.05, preserves exact exit targets and joint limits. New code reload pending.",
+  "offline_checks": "16 Hamilton and9 Lacry travel tests passed; real Lua exercised with fake hardware.",
+  "hardware_commands_sent": false,
+  "physical_trial_completed": false
+}

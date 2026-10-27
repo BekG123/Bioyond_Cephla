@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-23",
+  "saved_dropoff_mm": {"x_mm": -0.05000625, "y_mm": 0.0508, "z_mm": 1.05},
+  "source": "Two stable native readings after operator manually placed the stage at the robot drop-off location",
+  "controller_serial": "12769210",
+  "stage_simulated": false,
+  "camera_simulated": true,
+  "features": ["live Squid stage position and saved drop-off exposed to Lacry", "named drop-off and native stage homing plans", "deferred return bound to exact current scan successful completion", "single confirmation and researcher experiment progress", "robot stays at Home", "persistent reference, memory and motion logs"],
+  "offline_tests": {"stage_planning": 14, "stage_bridge": 4, "autonomous_imaging": 20, "adapter": 10, "settings_bridge": 10, "result": "passed"},
+  "live_trial": {
+    "plan_id": "901f1e98a64c409d99692fff6a5d244f",
+    "researcher_chat_selected_correct_stage_tool": true,
+    "robot_motion_commands": 0,
+    "status": "failed",
+    "command": "return_to_recorded_dropoff",
+    "failed_native_step": "MOVETO_X to -0.05000625 mm after objective retract, Y15, X35 and loading Y",
+    "error": "firmware reported CMD_EXECUTION_ERROR",
+    "final_position_mm": {"x_mm": 34.9996125, "y_mm": 0.05318125, "z_mm": 0.10003125},
+    "native_scanning_limits_restored": true,
+    "retry_or_fault_reset_sent": false,
+    "dropoff_return_validated": false
+  },
+  "final_checks": {
+    "lacry_reported_live_position_and_motion_hold_in_chat": true,
+    "robot_remained_at_saved_home": true,
+    "automatic_stage_and_imaging_profile_hold_saved": true,
+    "real_scan_deferred_return_tested": false
+  },
+  "next_step": "Operator/developer review of the negative X reference and physical stage state before any further stage motion. Do not infer exact physical failure cause from generic firmware error alone."
+}

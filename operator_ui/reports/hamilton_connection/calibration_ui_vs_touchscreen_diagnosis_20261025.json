@@ -1,0 +1,625 @@
+{
+  "checked_at": "2026-10-25T07:19:03.982736+00:00",
+  "read_only": true,
+  "conclusion": "Failure localized to native self-calibration X-axis Seek; root cause of UI-versus-touchscreen difference not established.",
+  "preparation_comparison": {
+    "identical": true,
+    "command_count": 20,
+    "lacry": [
+      [
+        "MethodBegin",
+        {
+          "automaticPause": false
+        },
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "SetDeckLight",
+        {
+          "W": 255,
+          "R": 0,
+          "G": 0,
+          "B": 0
+        },
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "SetXSpeedScale",
+        {
+          "scaleFactor": 100
+        },
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "CancelCalibration",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "GetPresentChannels",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "TipDefinitionHeld",
+        {
+          "Properties": {
+            "Timeout": "00:01:00"
+          }
+        }
+      ],
+      [
+        "IsInitialized",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "XHomeSensor",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "GetPresentChannels",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "GetChannelHomeSensors",
+        "FrontChannel",
+        {
+          "Properties": {
+            "Timeout": "00:01:00"
+          }
+        }
+      ],
+      [
+        "GetChannelHomeSensors",
+        "RearChannel",
+        {
+          "Properties": {
+            "Timeout": "00:01:00"
+          }
+        }
+      ],
+      [
+        "IsParked",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "XYTravelConfiguration",
+        "Path",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "IsInitialized",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "GetPresentChannels",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "CancelCalibration",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "BeginCalibration",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "IsEnclosurePresent",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "IsDoorClosed",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "SelfCalibrate",
+        {
+          "channels": [
+            "FrontChannel",
+            "RearChannel"
+          ],
+          "axis": true,
+          "pressure": true,
+          "touchOff": true
+        },
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ]
+    ],
+    "touchscreen": [
+      [
+        "MethodBegin",
+        {
+          "automaticPause": false
+        },
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "SetDeckLight",
+        {
+          "W": 255,
+          "R": 0,
+          "G": 0,
+          "B": 0
+        },
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "SetXSpeedScale",
+        {
+          "scaleFactor": 100
+        },
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "CancelCalibration",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "GetPresentChannels",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "TipDefinitionHeld",
+        {
+          "Properties": {
+            "Timeout": "00:01:00"
+          }
+        }
+      ],
+      [
+        "IsInitialized",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "XHomeSensor",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "GetPresentChannels",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "GetChannelHomeSensors",
+        "FrontChannel",
+        {
+          "Properties": {
+            "Timeout": "00:01:00"
+          }
+        }
+      ],
+      [
+        "GetChannelHomeSensors",
+        "RearChannel",
+        {
+          "Properties": {
+            "Timeout": "00:01:00"
+          }
+        }
+      ],
+      [
+        "IsParked",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "XYTravelConfiguration",
+        "Path",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "IsInitialized",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "GetPresentChannels",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "CancelCalibration",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "BeginCalibration",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "IsEnclosurePresent",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "IsDoorClosed",
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ],
+      [
+        "SelfCalibrate",
+        {
+          "channels": [
+            "FrontChannel",
+            "RearChannel"
+          ],
+          "axis": true,
+          "pressure": true,
+          "touchOff": true
+        },
+        {
+          "Properties": {
+            "Timeout": "00:01:00",
+            "TerrainFollowMode": "TerrainFollow"
+          }
+        }
+      ]
+    ]
+  },
+  "firmware_parameter_comparison": {
+    "lacry": [
+      {
+        "date": "2026-10-25T04:17:28.5559906Z",
+        "parameters": "06000400000000002300080001000000020000001701020001001701020001001701020001001E00620017010200010028000400000000002800040000000000280004000000000028000400000000001E0030001701020001002800040000000000280004000000000020000400000000001701020000001701020000001701020000000600040001000000"
+      },
+      {
+        "date": "2026-10-25T04:08:09.0818856Z",
+        "parameters": "06000400000000002300080001000000020000001701020001001701020001001701020001001E00620017010200010028000400000000002800040000000000280004000000000028000400000000001E0030001701020001002800040000000000280004000000000020000400000000001701020000001701020000001701020000000600040001000000"
+      }
+    ],
+    "touchscreen": [
+      {
+        "date": "2026-10-25T04:20:32.1345775Z",
+        "parameters": "06000400000000002300080001000000020000001701020001001701020001001701020001001E00620017010200010028000400000000002800040000000000280004000000000028000400000000001E0030001701020001002800040000000000280004000000000020000400000000001701020000001701020000001701020000000600040001000000"
+      },
+      {
+        "date": "2026-10-25T04:17:28.5559906Z",
+        "parameters": "06000400000000002300080001000000020000001701020001001701020001001701020001001E00620017010200010028000400000000002800040000000000280004000000000028000400000000001E0030001701020001002800040000000000280004000000000020000400000000001701020000001701020000001701020000000600040001000000"
+      }
+    ],
+    "same_parameters": true
+  },
+  "latest_ui_attempts": [
+    {
+      "path": "reports/hamilton_api/279a62595a184b36aa8376d50a9f0afa.jsonl",
+      "status": "aborted",
+      "completed_steps": [],
+      "requests": [
+        {
+          "at": 1792910153.6032457,
+          "method": "POST",
+          "path": "calibration/self-calibration",
+          "body": null
+        },
+        {
+          "at": 1792910212.4354753,
+          "method": "POST",
+          "path": "calibration/close-view",
+          "body": {
+            "viewId": "3eda9c7219764cdba83058449413c22c",
+            "viewResult": "Ok",
+            "viewInput": null
+          }
+        },
+        {
+          "at": 1792910263.9003336,
+          "method": "POST",
+          "path": "calibration/abort",
+          "body": null
+        }
+      ],
+      "error": "Hamilton: Firmware Reported Error: \r\n The provided Z position would exceed the travel limits | Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: 3844 - The calibration tool was not detected.",
+      "reported_errors": [
+        {
+          "id": "4f4ce3d4e5374d7fa75de705e5208321",
+          "message": "One or more errors occurred in XSL Command Calibrate. Select a recovery action for each error.",
+          "date": "2026-10-25T05:47:28.6468178Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "c90fbf9eecd54c858a8589c6b2d823cf",
+          "message": "One or more errors occurred. See InnerExceptions for details",
+          "date": "2026-10-25T05:47:28.6408176Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "fccbd77201f940d488a7b63e697283b1",
+          "message": "Firmware Reported Error: \r\n The provided Z position would exceed the travel limits",
+          "date": "2026-10-25T05:47:28.638817Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "1c048d21cbe74f15b734b2ddf0f9c24c",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy",
+          "date": "2026-10-25T05:47:28.6368169Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "937130f7a1d4420ebf75ee6f2989ec49",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: 3844 - The calibration tool was not detected.",
+          "date": "2026-10-25T05:47:28.6348176Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "2cd1233f47ac499da9cfcc5b21caa722",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy",
+          "date": "2026-10-25T05:47:28.6328178Z",
+          "severity": 1,
+          "handled": false
+        }
+      ]
+    },
+    {
+      "path": "reports/hamilton_api/124e94c1d64e48e5a4b79a3a53673a6b.jsonl",
+      "status": "aborted",
+      "completed_steps": [],
+      "requests": [
+        {
+          "at": 1792909708.1916537,
+          "method": "POST",
+          "path": "calibration/self-calibration",
+          "body": null
+        },
+        {
+          "at": 1792909727.134699,
+          "method": "POST",
+          "path": "calibration/close-view",
+          "body": {
+            "viewId": "83235d42629b410eb83332ef8f7770c5",
+            "viewResult": "Ok",
+            "viewInput": null
+          }
+        },
+        {
+          "at": 1792909779.6085722,
+          "method": "POST",
+          "path": "calibration/abort",
+          "body": null
+        }
+      ],
+      "error": "Hamilton: Firmware Reported Error: \r\n The provided Z position would exceed the travel limits | Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: 3844 - The calibration tool was not detected.",
+      "reported_errors": [
+        {
+          "id": "961e2afe3547452da424f20932a7508f",
+          "message": "One or more errors occurred in XSL Command Calibrate. Select a recovery action for each error.",
+          "date": "2026-10-25T05:39:24.7915511Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "06337374379a41fc94dcb6c66fe5571e",
+          "message": "One or more errors occurred. See InnerExceptions for details",
+          "date": "2026-10-25T05:39:24.7875508Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "0a8ddbda66ff4e5688d3aae19216833e",
+          "message": "Firmware Reported Error: \r\n The provided Z position would exceed the travel limits",
+          "date": "2026-10-25T05:39:24.7855595Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "597e36df7f6844bcb2d9af295abd18bd",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy",
+          "date": "2026-10-25T05:39:24.7835516Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "2dbabfc8d8b9491c8211bd9673bcfbb0",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: 3844 - The calibration tool was not detected.",
+          "date": "2026-10-25T05:39:24.7815512Z",
+          "severity": 1,
+          "handled": false
+        },
+        {
+          "id": "35ab9ddaad0f4a1d9450845f21c36227",
+          "message": "Firmware Reported Error: \r\n Unknown error from 0x0001.0x0001.0x1302: GenericBusy - GenericBusy",
+          "date": "2026-10-25T05:39:24.7775514Z",
+          "severity": 1,
+          "handled": false
+        }
+      ]
+    },
+    {
+      "path": "reports/hamilton_api/b813e7ed84904b6b8240aec9d0c1d8eb.jsonl",
+      "status": "not_started",
+      "completed_steps": [],
+      "requests": [],
+      "error": "Hamilton needs initialization before this operation.",
+      "reported_errors": null
+    }
+  ],
+  "findings": [
+    "Current FULL_CALIBRATION_STEPS is self_calibration, channel_calibration. No separately injected initialization in latest attempts.",
+    "Latest failed starts are followed by one native prompt acknowledgment, then native faults, then Lacry abort.",
+    "No latest failed attempt reached channel-height-squeeze, so rack site and channel-selection handling do not explain these self-calibration faults.",
+    "Concrete native fault is XAxisCalibration.Seek tool-not-detected (0x0F04), with ChannelCoordinator.MoveAbsolute front Z out of bounds (0x0F06) in compared failed trace.",
+    "Both compared preparatory traces reported initialized, parked, home sensors true, door closed and enclosure present.",
+    "Background status polling and physical/tool starting state have not been experimentally isolated.",
+    "Calibration begin/end-load and begin/end-cleanup endpoints are not used by the current adapter; this is a lifecycle parity question, not a proven cause of the earlier Seek failure.",
+    "No hardware write, calibration retry, fault clear, configuration change or interlock modification was performed during this diagnosis."
+  ],
+  "next_evidence_needed": "Compare unchanged-setup successful touchscreen and authorized API runs with matched initial state, full request/firmware traces, and diagnostic polling isolated; stop at first fault.",
+  "operator_followup": {
+    "physical_setup_unchanged_between_failed_lacry_and_successful_touchscreen": true,
+    "touchscreen_sequence": [
+      "Settings > Instrument > System Calibration > Self-Calibration",
+      "Settings > Instrument > System Calibration > Channels"
+    ],
+    "source": "Operator confirmation in conversation"
+  },
+  "polling_audit": {
+    "run_loop": "Every iteration reads errors and full status, then sleeps 0.5 seconds. Full status includes is-parked, connection info, global state, protocol run, pending errors, and protocol catalog.",
+    "hamilton_panel": "static/hamilton.js refreshes status every 2500 ms from DOMContentLoaded; it does not check whether the panel is open. Each detail request forces fresh status and reads errors, maintenance and channel results.",
+    "main_ui": "static/lacry.js polls state every 2000 ms; backend instrument.status has a 2-second cache.",
+    "concurrency": "Status cache lock protects cache access only, not the intervening HTTP requests. Independent callers can overlap.",
+    "historical_request_coverage": "Owned-run journals record writes and received events/errors, not all GET requests. Therefore exact concurrent request overlap cannot be reconstructed from these journals.",
+    "causality": "Unproven. GET polling is not evidence of movement or proof of interference. Native trace comparison contains no documented extra MNE motion command during the failing SelfCalibrate call.",
+    "next_discriminating_test": "Paired native self-calibration runs with identical setup and initial state, instrumenting every HTTP request and varying nonessential Lacry polling only; preserve native interlocks, fault monitoring and operator prompts. No test started."
+  },
+  "followup_result": "Operator confirmation removes a known setup change as an explanation; it does not establish the controller internal state or prove API concurrency caused the native tool-detection fault. Production calibration behavior unchanged."
+}

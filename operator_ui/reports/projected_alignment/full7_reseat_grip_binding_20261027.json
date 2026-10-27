@@ -1,0 +1,130 @@
+{
+  "schema": "cephla.accepted-plate-grip.v1",
+  "at": 1793094886.8085067,
+  "plate_profile_id": "48_well_projected_20261026",
+  "status": "operator_accepted_supervised_closure_and_loaded_home_transfer",
+  "operator_feedback": "Awesome job. This worked excellently. Lets save the current grip as the one thats good for the 48 plate.",
+  "plate_retained_during_lift_and_home_operator_confirmed": true,
+  "settings": {
+    "target_e1_mm": 3.9,
+    "closing_speed": 5,
+    "proof_lift_mm": 5,
+    "proof_lift_speed": 5,
+    "home_translation_speed": 137,
+    "wrist_speed": 30
+  },
+  "taught_endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.7652192188176,
+    "X": 312.0124178577057,
+    "Y": -75.87790542678249,
+    "Z": 73.718
+  },
+  "source_profile_sha256": "18558a63de7944673ec0d7f219c31fef04de9362dbde1cd783d60907ea7dea11",
+  "measured_grip_pose": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.662,
+    "X": 311.782,
+    "Y": -76.212,
+    "Z": 73.712
+  },
+  "home_e1_mm": 3.8997442461550236,
+  "stationary_grip_feedback": {
+    "command": {
+      "from_e1_mm": 4.0,
+      "target_e1_mm": 3.9,
+      "delta_mm": 0.1,
+      "speed": 5
+    },
+    "at": 1793094184.5970125,
+    "response": {
+      "commanded": {
+        "e1": 3.9,
+        "speed": 5.0
+      },
+      "completion_reply": {
+        "index": 1,
+        "value": 1
+      },
+      "gripper": {
+        "e1_position": 3.945,
+        "e1_torque": -143.468,
+        "e1_torque_normalized": -0.541,
+        "grip_detected": false,
+        "joints": {
+          "J1": 489,
+          "J2": -6,
+          "J3": 5,
+          "J4": 75
+        },
+        "position_error": 0.045,
+        "telemetry_live": true
+      },
+      "ok": true
+    },
+    "settled_e1_mm": 3.9058560505509377,
+    "stationary_report": {
+      "e1_position": 3.901,
+      "e1_torque": -156.802,
+      "joints": {
+        "J1": 489,
+        "J2": -1,
+        "J3": 1,
+        "J4": 81
+      },
+      "ok": true,
+      "telemetry_live": true
+    }
+  },
+  "force_control": false,
+  "force_limits_changed": false,
+  "uninterrupted_full_pipeline": false,
+  "note": "Accepted position-based grip, not calibrated grip force. Prior stopped attempt and empty restart remain in history.",
+  "evidence": [
+    {
+      "path": "operator_ui/reports/projected_alignment/regrip_3p9_reseated_20261027.json",
+      "sha256": "838364c860dbc9d02478d4aa726697286a50370094fba02303d32fbc79bce12b"
+    },
+    {
+      "path": "operator_ui/reports/projected_alignment/proof_lift_3p9_5mm_20261027.json",
+      "sha256": "659faf5ed5250627ef8da2dfc07c38a5fc46454b357711d9a12f10bf46400761"
+    },
+    {
+      "path": "operator_ui/reports/projected_alignment/reseated_48well_home_completion_20261027.json",
+      "sha256": "22a8ddadbac72f47d2454a0ee17c4f49d5f8b87f317cd1544150d97a951d9d29"
+    },
+    {
+      "path": "Pick and Hold/Grip/accepted_48well_grip_reference.json",
+      "sha256": "a159cdef0d396385ad9693883e7da6eff449b3fba47ab5dc917f0d0fd93006b7"
+    },
+    {
+      "path": "operator_ui/reports/projected_alignment/reseated_repeat1_visual_acceptance_20261027.json",
+      "sha256": "5b5125f5fe34911e4fa991d1374bee1ecf83c6beb333ae6e8b8a58c877d99d80"
+    },
+    {
+      "path": "operator_ui/reports/projected_alignment/reseated_repeat1_grip_binding_20261027.json",
+      "sha256": "b6c0e4a36c682a20c9440239df22f81a24b76ce359eacc6b6c6fba72f6bc8b35"
+    },
+    {
+      "path": "operator_ui/reports/projected_alignment/full7_reseat_visual_acceptance_20261027.json",
+      "sha256": "2daea3696ceaa42c415efb475dc79e714fe1e69f865f2118fe6846ad629cc003"
+    }
+  ],
+  "original_taught_endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.87662180784821,
+    "X": 312.5035022963445,
+    "Y": -76.1016698296062,
+    "Z": 73.718
+  },
+  "source_grip_reference": "operator_ui/reports/projected_alignment/reseated_repeat1_grip_binding_20261027.json",
+  "source_grip_reference_sha256": "b6c0e4a36c682a20c9440239df22f81a24b76ce359eacc6b6c6fba72f6bc8b35",
+  "placement_acceptance": "operator_ui/reports/projected_alignment/full7_reseat_visual_acceptance_20261027.json",
+  "placement_acceptance_sha256": "2daea3696ceaa42c415efb475dc79e714fe1e69f865f2118fe6846ad629cc003",
+  "current_placement_grip_tested": false,
+  "current_placement_lift_tested": false,
+  "validation_scope": "Original 3.9 mm grip and loaded Home success retained as historical evidence. Current adjusted jaw placement visually accepted; its new grip/lift is not yet tested."
+}

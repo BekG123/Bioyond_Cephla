@@ -1,0 +1,28 @@
+{
+  "read_only": true,
+  "compared_firmware_commands": {
+    "lacry_controller_timestamp": "2026-10-25T04:17:28.5559906Z",
+    "touchscreen_controller_timestamp": "2026-10-25T04:20:32.1345775Z",
+    "self_calibrate_parameter_bytes_identical": true,
+    "channels": ["FrontChannel", "RearChannel"],
+    "axis": true,
+    "pressure": true,
+    "touchOff": true,
+    "preceding_x_speed_scale_both": 100,
+    "preceding_xy_travel_configuration_both": "Path",
+    "preceding_vendor_sequence_both": ["CancelCalibration", "BeginCalibration", "SelfCalibrate"]
+  },
+  "lacry_wrapper": ["instruments/initialize", "calibration/self-calibration", "calibration/channel-height-squeeze"],
+  "lacry_custom_xyz_waypoints": false,
+  "outcomes": {
+    "lacry": "X-axis calibration Seek reported GenericBusy and calibration tool not detected; Front Channel Z Out of Bounds also reported. Stopped before channel calibration.",
+    "touchscreen_self_calibration": "Calibrate finished; assay complete. Subsequently began channel height/squeeze calibration."
+  },
+  "limitations": [
+    "Matching command parameters do not prove identical internal firmware trajectories or identical initial physical state.",
+    "No complete measured XYZ trajectory exists for either self-calibration in these logs.",
+    "No confirmed cause for the different outcomes; tool absence is not established.",
+    "Controller timestamps differ from workstation timestamps. Compare within controller logs.",
+    "Historical trace API returned extra older records; comparison uses the two explicit timestamps above."
+  ]
+}

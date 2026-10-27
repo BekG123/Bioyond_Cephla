@@ -1,0 +1,55 @@
+{
+  "id": "ba160de99a134f76bf43f5c9cf6cc9bd",
+  "at": "2026-10-27T14:17:51.416591+00:00",
+  "sequence": "squid_48well_retrieval",
+  "run_id": "77e8f9928e6a483b93882cc70d9311b2",
+  "error": "robot has active errors, refusing to move: [{'errCode': 3873, 'errMsg': '2026-10-27 07:17:51 Motion error: axis 4 collision detected'}, {'errCode': 3873, 'errMsg': '2026-10-27 07:17:51 Motion error: axis 4 collision detected'}, {'errCode': 3960, 'errMsg': '2026-10-27 07:17:51 Motion error: failed to enable axis 2 servo'}, {'errCode': 3960, 'errMsg': '2026-10-27 07:17:51 Motion error: failed to enable axis 3 servo'}, {'errCode': 3960, 'errMsg': '2026-10-27 07:17:51 Motion error: failed to enable axis 4 servo'}, {'errCode': 3929, 'errMsg': '2026-10-27 07:17:51 Motion error: external axis 1 servo enable failed'}, {'errCode': 3929, 'errMsg': '2026-10-27 07:17:51 Motion error: external axis 2 servo enable failed'}] \u2014 resolve the cause, then Clear errors (operator-confirmed)",
+  "evidence": {
+    "frames": [
+      {
+        "path": "operator_ui/sequences.py",
+        "line": 431,
+        "function": "_run"
+      },
+      {
+        "path": "operator_ui/squid_48well_retrieval_trial.py",
+        "line": 125,
+        "function": "execute"
+      },
+      {
+        "path": "operator_ui/trajectory_queue.py",
+        "line": 328,
+        "function": "execute"
+      },
+      {
+        "path": "operator_ui/robot_service.py",
+        "line": 497,
+        "function": "_locked"
+      },
+      {
+        "path": "operator_ui/trajectory_queue.py",
+        "line": 302,
+        "function": "locked"
+      },
+      {
+        "path": "operator_ui/trajectory_queue.py",
+        "line": 254,
+        "function": "healthy"
+      }
+    ],
+    "location": {
+      "path": "operator_ui/trajectory_queue.py",
+      "line": 254,
+      "function": "healthy"
+    },
+    "source": "            def healthy():\n                if run.stopped(): raise TransferError('Queued replay stopped by operator.')\n                refusal = self.service._preflight()\n                if refusal: raise TransferError(refusal)\n                q = self.service.joints() or {}\n                values = [q.get(k) for k in ('J1','J2','J3','J4')]\n                if any(type(v) not in (int,float) or not math.isfinite(v) for v in values):\n                    raise TransferError('Joint feedback is unavailable.')\n                if abs(q['J2'])>abs(cfg['j2_min_deg'])-cfg['j2_margin_deg'] or abs(q['J4'])>min(cfg['j4_pref_abs_deg'],cfg['j4_hard_abs_deg']-5):\n                    raise TransferError('Measured joints exceed automatic limits.')",
+    "source_start_line": 251,
+    "source_sha256": "fb1c407381993f26c67363347ffa8a2f3f98e5ffa8f156e365e2b759737a0a94",
+    "captured_at_failure": true
+  },
+  "origin": {
+    "request_id": "ae4b3acf29cb49d4a272ce00f12530aa",
+    "view": "developer"
+  },
+  "dsl": "# Source explanation only \u2014 not an executable fix\n# Python expressions retained where DSL v1 has no defined equivalent\nFUNCTION healthy:\n    IF run.stopped():\n        RAISE TransferError('Queued replay stopped by operator.')\n    refusal = self.service._preflight()\n    IF refusal:\n        RAISE TransferError(refusal)\n    q = self.service.joints() or {}\n    values = [q.get(k) for k in ('J1', 'J2', 'J3', 'J4')]\n    IF any((type(v) not in (int, float) or not math.isfinite(v) for v in values)):\n        RAISE TransferError('Joint feedback is unavailable.')\n    IF abs(q['J2']) > abs(cfg['j2_min_deg']) - cfg['j2_margin_deg'] or abs(q['J4']) > min(cfg['j4_pref_abs_deg'], cfg['j4_hard_abs_deg'] - 5):\n        RAISE TransferError('Measured joints exceed automatic limits.')"
+}

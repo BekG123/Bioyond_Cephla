@@ -1,0 +1,39 @@
+﻿{
+    "trial":  "compact4_roundtrip_speed137_trial.json",
+    "status":  "completed",
+    "operator_feedback_before_trial":  "Nice. Now, do this back to the home position with speed 137, same with back to scope with speed 137.",
+    "operator_acceptance_of_speed137":  "Accepted after completed round trip: Very nice. We have completed a VERY big milestone here. Nicejob",
+    "directions":  [
+                       {
+                           "name":  "Scope to Home",
+                           "speed40_individual_seconds":  25.103,
+                           "speed137_queue_seconds":  9.676669836044312
+                       },
+                       {
+                           "name":  "Home to scope",
+                           "speed40_individual_seconds":  24.897,
+                           "speed137_queue_seconds":  9.774019002914429
+                       }
+                   ],
+    "roundtrip_elapsed_seconds":  19.955499410629272,
+    "points_per_direction":  4,
+    "controller_errors":  [
+
+                          ],
+    "gripper_commands":  false,
+    "observed_e1_mm":  [
+                           3.7034449633210897,
+                           3.704163944348693
+                       ],
+    "observed_j4_deg":  [
+                            -152.86287730121535,
+                            -140.81248004564097
+                        ],
+    "waypoint_method":  "Preserve accepted final insertion; grid-search intermediate XY in 2 mm steps for shortest sampled passing path with |J2| \u003c=91 degrees; interpolate yaw by distance; validate both directions using continuous-branch IK and workspace checks.",
+    "limitations":  [
+                        "Speed and executor both changed: individual MoveL at 40 versus Lua queue at 137. This does not isolate the speed effect.",
+                        "Timings include per-leg upload and validation overhead, not only motion.",
+                        "Sampled joint ranges are not continuous-time extrema. No measured jerk or energy claim.",
+                        "Physical corridor clearance came from operator confirmation and the successful speed-40 trials; IK alone does not establish clearance."
+                    ]
+}

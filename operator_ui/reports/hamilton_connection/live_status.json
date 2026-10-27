@@ -1,0 +1,114 @@
+{
+  "checked_at": "2026-10-25T00:32:22.207013+00:00",
+  "model": "Hamilton Microlab Prep 2 Channel",
+  "reference": "6600200-02",
+  "internal_pc": "192.168.100.101",
+  "controller_board": "192.168.100.102",
+  "base_url": "http://192.168.100.101/NimbusLite/api/v1",
+  "read_only": true,
+  "responses": {
+    "software-versions": {
+      "status": 200,
+      "data": [
+        {
+          "name": "Microlab Prep Core Installer",
+          "version": "3.4.0.00084 / f6c21d74"
+        },
+        {
+          "name": "Microlab Prep Server",
+          "version": "3.4.0.00125 / c4ebd185"
+        },
+        {
+          "name": "Microlab Prep Client",
+          "version": "3.4.0.00127 / 71268056"
+        },
+        {
+          "name": "Microlab Prep Device Controller",
+          "version": "3.4.0.00052 / 70465fbe"
+        },
+        {
+          "name": "Microlab Prep Service Software",
+          "version": "3.4.0.00018 / 846ba2a1"
+        },
+        {
+          "name": "Microlab Prep Repair Utility",
+          "version": "3.4.0.00018 / cbe99310"
+        }
+      ]
+    },
+    "instruments/connection-status": {
+      "error": "timed out"
+    },
+    "instruments/connection-info": {
+      "error": "timed out"
+    },
+    "instruments/get-active-system": {
+      "status": 400,
+      "error": "Bad Request"
+    },
+    "instruments/global-run-state": {
+      "status": 200,
+      "data": "Idle"
+    },
+    "system-ready": {
+      "status": 200,
+      "data": {
+        "isFirmwareUnsupported": false,
+        "firmwareUnsupportedMessage": null,
+        "isServerReady": false,
+        "isServiceFailure": false,
+        "isAuthorizationTokenReady": false,
+        "requiredServices": [
+          {
+            "isRunning": false,
+            "isServiceFailure": false,
+            "serviceName": "HamiltonXRP",
+            "serviceViewName": "Base Software Service"
+          },
+          {
+            "isRunning": false,
+            "isServiceFailure": false,
+            "serviceName": "HamRestApi",
+            "serviceViewName": "Base Application Interface"
+          },
+          {
+            "isRunning": true,
+            "isServiceFailure": false,
+            "serviceName": "MicroLabPrepService",
+            "serviceViewName": "Instrument Configuration Service"
+          }
+        ]
+      }
+    },
+    "protocols/names": {
+      "status": 200,
+      "data": [
+        {
+          "protocolId": 1,
+          "name": "High Volume Verification for 8 MPH",
+          "isVisible": true
+        },
+        {
+          "protocolId": 2,
+          "name": "High Volume Verification for Independent Channels",
+          "isVisible": true
+        },
+        {
+          "protocolId": 3,
+          "name": "Low Volume Verification for 8 MPH",
+          "isVisible": true
+        },
+        {
+          "protocolId": 4,
+          "name": "Low Volume Verification for Independent Channels",
+          "isVisible": true
+        },
+        {
+          "protocolId": 1002,
+          "name": "Protocol",
+          "isVisible": false
+        }
+      ]
+    }
+  }
+}

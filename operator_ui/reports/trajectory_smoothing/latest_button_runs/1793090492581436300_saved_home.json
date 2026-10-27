@@ -1,0 +1,59 @@
+{
+  "status": "stopped_or_failed",
+  "path_id": null,
+  "target": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "prefix": null,
+  "connector": null,
+  "stages": [
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 306.41,
+          "Y": -76.87,
+          "Z": 300.0,
+          "Rz": 10.39
+        }
+      ]
+    },
+    {
+      "kind": "rotate",
+      "rz": -3.880000000000001
+    },
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        }
+      ]
+    }
+  ],
+  "attempt_available": false,
+  "allow_explicit_repeats": false,
+  "authorization": "Return Home button with full-route readiness confirmation",
+  "workspace_box_exception": false,
+  "speed": 137,
+  "connector_speed": 137,
+  "home_startup_refusal": {
+    "schema": 1,
+    "reason": "gripper_held_start_refused",
+    "program_start_sent": false,
+    "home_travel_dispatched": false,
+    "diagnostic": "refusing to start: last gripper reading (E1 3.699, torque -156.269) says an object is HELD, and program start re-zeroes E1 (slams the plates to 0). Release it first (Open 28), or resend with force=true if the reading is stale."
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "checked_at": "2026-10-24T15:27:17.680672+00:00",
+  "operator_report": "Calibration worked successfully",
+  "read_only": true,
+  "responses": {
+    "instruments/global-run-state": {
+      "status": 200,
+      "data": "CalibrationAssayRunning"
+    },
+    "instruments/connection-info": {
+      "status": 200,
+      "data": [
+        "Serial Number: PRPGD2427",
+        "Instrument Name: PRPGD2427",
+        "Connected: True",
+        "Controlling PC Name: DESKTOP-9DPRVQ3",
+        "Initialization Status: Not Initialized",
+        "Enclosure Status: Present",
+        "Individual Channels: Present",
+        "MPH8: Not Present",
+        "HHS: Not Present",
+        "HHC: Not Present",
+        "HEPAUV: Not Present"
+      ]
+    },
+    "calibration/channel-results": {
+      "status": 200,
+      "data": [
+        {
+          "id": 1003,
+          "calibrationDate": "2026-08-31T14:52:59.7989953",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1002,
+          "calibrationDate": "2026-08-31T14:52:58.813912",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 3,
+          "calibrationDate": "2026-07-17T17:07:46.264014",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 2,
+          "calibrationDate": "2026-07-17T17:07:45.2742482",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        },
+        {
+          "id": 1,
+          "calibrationDate": "2026-07-17T17:04:39.1692295",
+          "status": "Fail",
+          "message": "Firmware Reported Error: \r\n Front Channel channel motor stalled",
+          "hasError": true,
+          "channelSkew": null,
+          "channelOffset": null,
+          "channelWarnings": []
+        }
+      ]
+    },
+    "errors/check-for-pending-errors": {
+      "status": 200,
+      "data": []
+    },
+    "traces?offset=0&limit=8&sources=SDE,RTE": {
+      "status": 200,
+      "data": {
+        "totalItemCount": 104,
+        "currentOffset": 0,
+        "items": [
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Showing message 'Complete', avaible buttons configuration 'OK'.",
+            "type": "High",
+            "date": "2026-10-24T14:35:27.0205757Z",
+            "source": "RTE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 > Activity : Completed - start",
+            "type": "Processing",
+            "date": "2026-10-24T14:35:26.9620418Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 < Activity : Calibration - complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:35:26.9600241Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 > Activity : Calibration - start",
+            "type": "Processing",
+            "date": "2026-10-24T14:33:03.493121Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "MlPrep Self Calibration - Assay 1 : start",
+            "type": "Processing",
+            "date": "2026-10-24T14:33:03.4929374Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Workflow 1 : start",
+            "type": "Processing",
+            "date": "2026-10-24T14:33:03.4928527Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay < Activity : Traffic Control Initialization - complete",
+            "type": "Processing",
+            "date": "2026-10-24T14:33:02.6087705Z",
+            "source": "SDE"
+          },
+          {
+            "affectedUser": "Server",
+            "level": "Information",
+            "message": "Preparation - Assay > Activity : Traffic Control Initialization - start",
+            "type": "Processing",
+            "date": "2026-10-24T14:33:02.6072405Z",
+            "source": "SDE"
+          }
+        ]
+      }
+    }
+  }
+}

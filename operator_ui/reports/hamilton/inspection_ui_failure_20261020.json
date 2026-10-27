@@ -1,0 +1,18 @@
+{
+  "status": "stopped_at_arrival_inspection_before_jaw_motion",
+  "observed_at_local": "2026-10-20 05:11",
+  "pose_mm": {"X": 195.343, "Y": -360.311, "Z": 38.61, "Rz": -1.899},
+  "e1_mm": 3.6976926494389772,
+  "controller_faults": [],
+  "completed_steps": ["Travel from true Home to the taught Hamilton entrance"],
+  "waiting_step": "Check the plate at Hamilton",
+  "root_causes": [
+    "LacryAgent.public deep-copied a threading.Event containing a non-pickleable lock, so status returned503.",
+    "Researcher approval used review.at instead of the exact review.id token."
+  ],
+  "intervention": "Codex requested Stop through Lacry while waiting for inspection; no jaw/lift/return commands were sent.",
+  "runner_result": "You rejected the result. Nothing was saved.",
+  "runner_result_note": "The generic rejection text was caused by the Stop request, not a visual rejection by the operator. Existing JSONL audit retained the run.",
+  "physical_handling_accepted": false,
+  "fix": "Expose only JSON-safe review id/label/at, and send id for approval. Add real-thread inspection regression and browser approval-token regression."
+}

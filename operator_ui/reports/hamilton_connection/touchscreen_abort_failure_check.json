@@ -1,0 +1,160 @@
+{
+  "instruments/global-run-state": "Idle",
+  "protocol-run": {
+    "protocolId": 0,
+    "runDatalId": null,
+    "isRunInProgress": false,
+    "isSimulation": false,
+    "protocolRunState": 0,
+    "startTime": "0001-01-01T00:00:00",
+    "estimatedEndTime": "0001-01-01T00:00:00",
+    "endPauseTime": "0001-01-01T00:00:00",
+    "protocolName": "TipPickupDiagnosticAssay",
+    "currentStep": 0,
+    "preLoadThermalDeviceUsed": "None",
+    "preLoadHepaFiltration": false
+  },
+  "verification/status": {
+    "isWorkflowInProgress": false,
+    "isRunInProgress": false,
+    "isServiceRoutineInProgress": false,
+    "startTime": "2026-10-24T07:01:54.7899022-07:00",
+    "currentIndex": 0,
+    "runs": [],
+    "serviceRoutine": null
+  },
+  "errors/check-for-pending-errors": [],
+  "errors?offset=0&limit=8": {
+    "totalItemCount": 98,
+    "currentOffset": 0,
+    "items": [
+      {
+        "id": "b6ce2a294c0340c9bc6040bcca317251",
+        "message": "The assay 'TipPickupDiagnosticAssay - Assay 1' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+        "date": "2026-10-24T21:57:17.0856662Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "263dfd18750a458cb50c819595720908",
+        "message": "The assay 'Preparation - Assay' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+        "date": "2026-10-24T21:57:17.0796846Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "f9e2731a8d594a5bade0cfa1ad490727",
+        "message": "One or more errors occurred in XSL Command Pick Up Tips. Select a recovery action for each error.",
+        "date": "2026-10-24T21:57:05.0478617Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "f155b61eb3ba494e89baeb92c59d8d83",
+        "message": "One or more errors occurred. See InnerExceptions for details",
+        "date": "2026-10-24T21:57:04.0542361Z",
+        "severity": 1,
+        "handled": false
+      },
+      {
+        "id": "e671b792c14d43d3b7a3103ea70cfc6b",
+        "message": "Firmware Reported Error: \r\n Front Channel did not detect the expected tip type in the rack",
+        "date": "2026-10-24T21:57:04.05224Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "ca1bc67125ec4c69a12552144997a231",
+        "message": "Firmware Reported Error: \r\n Rear Channel did not detect the expected tip type in the rack",
+        "date": "2026-10-24T21:57:04.0502815Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "45c93d628711401394ab460e9472acfc",
+        "message": "The assay 'TipPickupDiagnosticAssay - Assay 1' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+        "date": "2026-10-24T21:54:56.711561Z",
+        "severity": 1,
+        "handled": true
+      },
+      {
+        "id": "9c0a2267b83a4801a8d01b12c5be5c8c",
+        "message": "The assay 'Preparation - Assay' has been canceled due to the following reason:\r\nThe assay has been canceled by the system.",
+        "date": "2026-10-24T21:54:56.7039419Z",
+        "severity": 1,
+        "handled": true
+      }
+    ]
+  },
+  "traces?offset=0&limit=8&sources=RTE,SDE": {
+    "totalItemCount": 443,
+    "currentOffset": 0,
+    "items": [
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Abort run completed",
+        "type": "Processing",
+        "date": "2026-10-24T21:57:17.844917Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "TipPickupDiagnosticAssay - Assay 1 < Activity : Tip_Pickup_Test_2_Channel - complete",
+        "type": "Processing",
+        "date": "2026-10-24T21:57:17.5934144Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Workflow 1 : canceled 'The assay has been canceled by the system.'",
+        "type": "Processing",
+        "date": "2026-10-24T21:57:17.0899354Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "TipPickupDiagnosticAssay - Assay 1 : canceled 'The assay has been canceled by the system.'",
+        "type": "Processing",
+        "date": "2026-10-24T21:57:17.0857804Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Preparation - Workflow : canceled 'The assay has been canceled by the system.'",
+        "type": "Processing",
+        "date": "2026-10-24T21:57:17.0857295Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Preparation - Assay : canceled 'The assay has been canceled by the system.'",
+        "type": "Processing",
+        "date": "2026-10-24T21:57:17.0801787Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "Abort run started",
+        "type": "Processing",
+        "date": "2026-10-24T21:57:17.0798935Z",
+        "source": "SDE"
+      },
+      {
+        "affectedUser": "Server",
+        "level": "Information",
+        "message": "TipPickupDiagnosticAssay - Assay 1 > Activity : Tip_Pickup_Test_2_Channel - start",
+        "type": "Processing",
+        "date": "2026-10-24T21:56:57.8591174Z",
+        "source": "SDE"
+      }
+    ]
+  },
+  "checked_at": "2026-10-24T22:50:19.706413+00:00"
+}

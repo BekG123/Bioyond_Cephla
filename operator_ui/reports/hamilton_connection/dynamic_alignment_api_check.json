@@ -1,0 +1,169 @@
+{
+  "pickup_endpoint": {
+    "tags": [
+      "Diagnostics"
+    ],
+    "summary": "Starts the tip pickup test protocol",
+    "description": "",
+    "operationId": "StartTipPickupTest",
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/TipPickupDiagnosticPutDto"
+          },
+          "example": {
+            "channelSelection": "OneChannel",
+            "tipLabwareId": 1,
+            "deckPosition": 2,
+            "ejectToWaste": true
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Started tip pickup test"
+      },
+      "400": {
+        "description": "Start tip pickup test was unsuccessful (see error message for details)",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "pickup_schema": {
+    "type": "object",
+    "properties": {
+      "ChannelSelection": {
+        "type": "string",
+        "description": "The channels used to perform the pressure diagnostic. Possible values are OneChannel, TwoChannel, EightChannel, or Unknown",
+        "nullable": true
+      },
+      "TipLabwareId": {
+        "type": "integer",
+        "description": "The labware id of the tips to use",
+        "format": "int32"
+      },
+      "DeckPosition": {
+        "type": "integer",
+        "description": "The position id where the tip rack is located",
+        "format": "int32"
+      },
+      "EjectToWaste": {
+        "type": "boolean",
+        "description": "Option to eject tips to waste or return them back to the tip rack"
+      }
+    },
+    "additionalProperties": false,
+    "description": "The tip pick up diagnostic test"
+  },
+  "geometry_related_schemas": {
+    "AspirateSettingsDto": {
+      "Offset": {
+        "$ref": "#/components/schemas/OffsetDto"
+      },
+      "UseOffset": {
+        "type": "boolean",
+        "description": "Option to enable aspirate offset"
+      }
+    },
+    "CalibrationChannelResultDto": {
+      "ChannelOffset": {
+        "$ref": "#/components/schemas/ChannelOffsetDto"
+      }
+    },
+    "CalibrationChannelResultGetDto": {
+      "ChannelOffset": {
+        "$ref": "#/components/schemas/ChannelOffsetDto"
+      }
+    },
+    "ChannelOffsetDto": {
+      "MphOffsetX": {
+        "type": "number",
+        "format": "double"
+      },
+      "IndependentOffsetX": {
+        "type": "number",
+        "format": "double"
+      },
+      "YzAxisOffsets": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ChannelYZOffsetDto"
+        },
+        "nullable": true
+      }
+    },
+    "ChannelYZOffsetDto": {
+      "OffsetY": {
+        "type": "number",
+        "format": "double"
+      },
+      "OffsetZ": {
+        "type": "number",
+        "format": "double"
+      },
+      "OffsetZValid": {
+        "type": "boolean"
+      }
+    },
+    "DispenseSettingsDto": {
+      "Offset": {
+        "$ref": "#/components/schemas/OffsetDto"
+      },
+      "UseOffset": {
+        "type": "boolean",
+        "description": "Option to enable dispense offset"
+      }
+    },
+    "InstinctErrors": {
+      "CurrentOffset": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "InstinctTraces": {
+      "CurrentOffset": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "MlPrepSystemTimeZone": {
+      "UtcOffsetHours": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "UtcOffsetMinutes": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "PVKReport": {
+      "ChannelAxisOffsets": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ChannelAxisOffset"
+        },
+        "nullable": true
+      }
+    },
+    "SystemTimeZoneDto": {
+      "UtcOffsetHours": {
+        "type": "integer",
+        "description": "The UTC offset hours",
+        "format": "int32"
+      },
+      "UtcOffsetMinutes": {
+        "type": "integer",
+        "description": "The UTC Offset minutes",
+        "format": "int32"
+      }
+    }
+  }
+}
