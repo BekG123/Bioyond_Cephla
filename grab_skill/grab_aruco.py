@@ -198,7 +198,7 @@ def main() -> int:
         return _fail(f"torque report: {tr.get('error')}")
     if not tr.get("telemetry_live"):
         return _fail("J1-J4 torque slots read zero — publish "
-                     "main_hostpoint_trq.bin; the descent guard is blind "
+                     "controller/main_hostpoint_trq.bin; the descent guard is blind "
                      "without it")
     if not svc.envelope_enabled:
         return _fail("envelope is disarmed — arm it (with the task-area "

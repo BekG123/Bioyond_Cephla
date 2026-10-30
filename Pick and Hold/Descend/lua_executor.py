@@ -73,7 +73,7 @@ class LuaDescent:
             # A live handshake is required; cached registers cannot grant capability.
             answer = robot.set_sys_var_i({0:23,1:1,2:0,3:0,4:6,5:0,6:0}, reply_timeout=10)
             if answer != {'index':1, 'value':VERSION}:
-                raise TransferError('Publish main_hostpoint_descent_137.bin before Lua descent; no motion sent.')
+                raise TransferError('Publish controller/main_hostpoint_descent_137.bin before Lua descent; no motion sent.')
             token = secrets.randbelow(1073741823)+1
             robot.set_sys_para_f(dict(enumerate(plan['header'])))
             answer = robot.set_sys_var_i({0:23,1:1,2:token,3:0,4:1,5:0,6:0}, reply_timeout=10)

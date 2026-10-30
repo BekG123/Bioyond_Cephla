@@ -63,7 +63,7 @@ class LuaTorqueGrip:
             robot=svc.robot
             reply=robot.set_sys_var_i({0:24,1:1,2:0,3:0,4:6,5:0,6:0},reply_timeout=10)
             if reply!={'index':1,'value':VERSION}:
-                raise TeachingError('Publish main_hostpoint_descent_grip_137.bin before Torque Grip; no closing command sent.')
+                raise TeachingError('Publish controller/main_hostpoint_descent_grip_137.bin before Torque Grip; no closing command sent.')
             # Lua snapshots and preserves all six external positions in native
             # units. The host's passive feedback independently checks E1.
             initial_e1=PositionGrip._number(svc.external_axes().get('E1'))

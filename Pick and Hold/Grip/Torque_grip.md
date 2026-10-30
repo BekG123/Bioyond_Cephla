@@ -50,7 +50,7 @@ available for comparison; the application instantiates `TorqueGrip`.
 
 Bioyond Works Software Manual, printed pages 60–61, A.10.3–A.10.7, documents
 `MoveExtJWithForce(NumArray, V, ForceArray)` and external-joint torque limits.
-The actual `main/__lif.lua` in `main_hostpoint_descent_137.bin` implements this by
+The actual `main/__lif.lua` in `controller/main_hostpoint_descent_137.bin` implements this by
 setting `SetExtJTrqLimit(force)` and then moving the external joints.
 
 The old HostPoint mode 6 passed a `JointTarget` and scalar to that function,
@@ -94,7 +94,7 @@ opening and travel before commissioning this profile.
 
 1. Configure and review the profile above.
 2. Build with `.venv-realsense/Scripts/python.exe -B operator_ui/build_grip_program.py`.
-3. Import and publish `main_hostpoint_descent_grip_137.bin` in Bioyond Works.
+3. Import and publish `controller/main_hostpoint_descent_grip_137.bin` in Bioyond Works.
 4. Reload the backend when idle. Run the existing Descend; it creates a fresh,
    single-use receipt bound to the force-profile hash. Grip checks protocol 240101
    before sending a closing command. An old program never falls back to closing.

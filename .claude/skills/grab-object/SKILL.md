@@ -64,7 +64,7 @@ Helper scripts live in `grab_skill/` at the workspace root:
    values used for the balance/nest area: X 180-470, Y -400..-100, Z 35-420.
 3. Verify the torque report: trigger `gripper_status`, then
    `read_system_values(var_i_indexes=[13,14,15,16])` — nonzero J1 confirms
-   the extended program (main_hostpoint_trq.bin) is live. If 13-16 read zero,
+   the extended program (controller/main_hostpoint_trq.bin) is live. If 13-16 read zero,
    the extended program is not published — torque-guarded descent is
    unavailable; stop and tell the user.
 
@@ -243,7 +243,7 @@ tips clear of the surface — no bottoming, no scratching.
 
 ## Publishing note
 
-Torque slots 13-16 exist only in `main_hostpoint_trq.bin` (workspace root).
+Torque slots 13-16 exist only in `controller/main_hostpoint_trq.bin` (repo controller package).
 If the controller program is ever re-published from another bin, torque
 probing dies (13-16 read 0) — re-publish the trq bin via Bioyond Works
 (Import into Offline Project → Publish → back to auto+enabled).

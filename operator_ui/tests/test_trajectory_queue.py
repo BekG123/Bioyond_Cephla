@@ -14,7 +14,7 @@ from unittest.mock import Mock
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from lupa.lua51 import LuaRuntime
 from trajectory_queue import LuaTrajectory, VERSION, checksum, prepare_points, locate
-from build_trajectory_program import build, ROOT, HERE
+from build_trajectory_program import build, ROOT, CONTROLLER_DIR, HERE
 from autonomy import check_path, TransferError
 from test_transfer import PARAMS, FakeService
 from test_researcher_workflow import FakeRunner
@@ -44,7 +44,7 @@ class Controller:
         g.T0,g.U0 = 'T0','U0'
         if legacy:
             filename=f'main_hostpoint_trajectory_{legacy}.bin' if legacy in (47,55,70,80,100,130) else 'main_hostpoint_trajectory.bin'
-            with zipfile.ZipFile(ROOT/filename) as archive:
+            with zipfile.ZipFile(CONTROLLER_DIR/filename) as archive:
                 source=archive.read('main/mod_Trajectory.lua').decode()
         else:source=(HERE/'lua/mod_Trajectory.lua').read_text()
         self.lua.execute(source)
@@ -218,7 +218,7 @@ class QueueTests(unittest.TestCase):
 
     def test_vendor_move_l_backpressure_preserves_point_order(self):
         import re
-        with zipfile.ZipFile(ROOT/'main_hostpoint_trq.bin') as z:
+        with zipfile.ZipFile(CONTROLLER_DIR/'main_hostpoint_trq.bin') as z:
             vendor=z.read('main/__lif.lua').decode().replace('\r','')
         wrapper=re.search(r'function MoveL\(.*?\nend',vendor,re.S).group()
         attempts=[]
@@ -349,11 +349,11 @@ class QueueTests(unittest.TestCase):
             manifest=build(output=path)
             self.assertEqual(manifest['protocol'],220108)
             self.assertEqual(manifest['max_speed_mm_s'],137)
-            with zipfile.ZipFile(path) as new, zipfile.ZipFile(ROOT/'main_hostpoint_trajectory_130.bin') as deployed:
+            with zipfile.ZipFile(path) as new, zipfile.ZipFile(CONTROLLER_DIR/'main_hostpoint_trajectory_130.bin') as deployed:
                 changed=[n for n in deployed.namelist() if deployed.read(n)!=new.read(n)]
                 self.assertEqual(changed,['main/mod_Trajectory.lua'])
             self.assertEqual(set(manifest['changed']),{'main/mod_Trajectory.lua','main/mod_Socket.lua','main/mod_Init.lua','main/__loader.lua'})
-            with zipfile.ZipFile(path) as new, zipfile.ZipFile(ROOT/'main_hostpoint_trq.bin') as old:
+            with zipfile.ZipFile(path) as new, zipfile.ZipFile(CONTROLLER_DIR/'main_hostpoint_trq.bin') as old:
                 for name in old.namelist():
                     if name not in manifest['changed']:self.assertEqual(old.read(name),new.read(name))
                 compile_lua=self.s.robot.lua.eval('function(s) local f,e=loadstring(s); assert(f,e); return true end')
@@ -379,7 +379,7 @@ class QueueTests(unittest.TestCase):
                 self.assertEqual(payload[local_offset:local_offset+4],b'PK\x03\x04')
                 cursor+=46+name_len+extra_len+comment_len
             self.assertEqual(cursor,eocd)
-            with zipfile.ZipFile(io.BytesIO(payload)) as z, zipfile.ZipFile(ROOT/'main_hostpoint_trq.bin') as old:
+            with zipfile.ZipFile(io.BytesIO(payload)) as z, zipfile.ZipFile(CONTROLLER_DIR/'main_hostpoint_trq.bin') as old:
                 self.assertIsNone(z.testzip())
                 for n in old.namelist():
                     before,after=old.getinfo(n),z.getinfo(n)

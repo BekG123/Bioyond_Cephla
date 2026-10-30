@@ -3,12 +3,12 @@
 Transport: stdio (registered in the project's .mcp.json).
 Protocol to the robot: BRCAPI (Rob INTF v1.1) TCP/JSON on port 56788.
 
-Controller-side contract (the deployed main.bin project, mod_Socket loop):
+Controller-side contract (the deployed controller/main.bin project, mod_Socket loop):
 - SysVarI: 0=DeviceID 1=PosX 2=PosY 3=PosZ 4=MoveType 5=ObjType 6=ClampMode
 - Taught jobs: device 3=home, 11/12/13/14/15/9998/9999=stations, 1=stack, 2=scan
 - Completion: Lua sends SysOutVar reply {index:1, value:1} on success,
   {index:1, value:-1} for an invalid/unmatched job (mod_EndInvalid)
-- Host-point extension (main_hostpoint.bin, device ID 21):
+- Host-point extension (controller/main_hostpoint.bin, device ID 21):
   SysParaF 0=X 1=Y 2=Z 3=Rz(deg) 4=speed 5=blend 6=E1;
   MoveType 1=MoveL 2=MoveJ 3=gripper(E1) 4=MoveAbsJ. Units: mm / degrees.
   (The controller's own pose *query* getFrameWithU0T0 reports meters.)
@@ -96,7 +96,7 @@ mcp = FastMCP(
         "Controls a Bioyond LabGenius S4 4-axis lab robot (J1-J4, E1 gripper, "
         "E2 rotator) over the BRCAPI TCP protocol. Call connect first, then "
         "get_status. Motion needs auto mode + enabled + Lua program running, "
-        "and host Cartesian moves need the main_hostpoint.bin program "
+        "and host Cartesian moves need the controller/main_hostpoint.bin program "
         "published on the controller. This is physical machinery: keep speeds "
         "low, never retry a timed-out motion without re-checking state, and "
         "leave error clearing / enabling to operator-confirmed calls."
@@ -207,7 +207,7 @@ def _run_job(sys_vars: dict[int, int], wait_timeout: float) -> dict:
         if dev == HOSTPOINT_DEVICE:
             msg += (
                 " — the loaded program has no host-point support; publish "
-                "main_hostpoint.bin via Bioyond Works to enable Cartesian moves"
+                "controller/main_hostpoint.bin via Bioyond Works to enable Cartesian moves"
             )
         return _fail(msg)
     try:
@@ -243,7 +243,7 @@ def _hostpoint_move(
                     return _fail(
                         "the running Lua program never consumed the host-point "
                         "job (trigger cleared; no motion occurred). Publish "
-                        "main_hostpoint.bin via Bioyond Works, restart the "
+                        "controller/main_hostpoint.bin via Bioyond Works, restart the "
                         "program, and retry."
                     )
                 note = " Trigger was consumed — the robot may be moving."
@@ -523,7 +523,7 @@ def set_workspace_envelope(
 
 
 # ------------------------------------------------------------------- motion
-# (host-point interface — needs main_hostpoint.bin on the controller)
+# (host-point interface — needs controller/main_hostpoint.bin on the controller)
 
 
 @mcp.tool()
@@ -538,7 +538,7 @@ def move_to_cartesian(
     wait_timeout: float = MOTION_TIMEOUT,
 ) -> dict:
     """Move the tool to a Cartesian target and wait for completion.
-    Requires main_hostpoint.bin published on the controller (a stock program
+    Requires controller/main_hostpoint.bin published on the controller (a stock program
     rejects the job with no motion).
 
     Args:
@@ -587,7 +587,7 @@ def move_joints(
     wait_timeout: float = MOTION_TIMEOUT,
 ) -> dict:
     """Move to absolute joint targets J1-J4 (MoveAbsJ). Requires
-    main_hostpoint.bin on the controller.
+    controller/main_hostpoint.bin on the controller.
 
     Args:
         j1: target J1.
@@ -639,7 +639,7 @@ def move_gripper(
     """Move the E1 gripper axis while the arm stays still (MoveExtJ), then
     report the E1 position and torque measured AFTER the move — use the
     torque signal to detect contact/grip (rises sharply when the fingers
-    close on an object). Requires main_hostpoint.bin on the controller.
+    close on an object). Requires controller/main_hostpoint.bin on the controller.
 
     Args:
         e1_position: target E1 position (28 = fully open on this gripper;

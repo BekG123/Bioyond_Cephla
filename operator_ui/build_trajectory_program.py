@@ -8,9 +8,11 @@ import zipfile
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
+CONTROLLER_DIR = ROOT/'controller'
 
 
-def build(source=ROOT/'main_hostpoint_trq.bin', output=ROOT/'main_hostpoint_trajectory_137.bin'):
+def build(source=CONTROLLER_DIR/'main_hostpoint_trq.bin',
+          output=CONTROLLER_DIR/'main_hostpoint_trajectory_137.bin'):
     source, output = Path(source), Path(output)
     if source.resolve() == output.resolve():
         raise ValueError('Never overwrite the baseline program.')

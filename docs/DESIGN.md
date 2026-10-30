@@ -4,8 +4,8 @@ Audience: developers (human or agent) joining or continuing this project.
 This document explains **how the system is put together and why**; it does
 not duplicate the day-to-day operating instructions. For those, see:
 
-- [`README.md`](README.md) — install/run instructions, progress tracker.
-- [`CLAUDE.md`](CLAUDE.md) — the operational contract for an agent driving
+- [`README.md`](../README.md) — install/run instructions, progress tracker.
+- [`CLAUDE.md`](../CLAUDE.md) — the operational contract for an agent driving
   the robot (tool list, session bring-up, safety rules).
 - [`HANDOVER_MCP_SKILLS.md`](HANDOVER_MCP_SKILLS.md) /
   [`HANDOVER_OPERATOR_UI.md`](HANDOVER_OPERATOR_UI.md) — exhaustive,
@@ -391,7 +391,7 @@ guarantees as every other motion path in this project — it does not get
 a lighter safety bar just because it is "simple" from a researcher's
 point of view.
 
-See `CLAUDE.md` for the full enforced tool-level contract and
+See `../CLAUDE.md` for the full enforced tool-level contract and
 `HANDOVER_MCP_SKILLS.md` §3/§11 for the complete, dated list of rules and
 the live incidents that produced each one.
 
@@ -504,13 +504,9 @@ test suite that does not require the physical robot.
 ```
 .mcp.json                   MCP server registration (IP, speed caps, envelope env vars)
 CLAUDE.md                   Agent operational contract — read first for any live robot work
-README.md                   Install/run instructions + progress tracker
-DESIGN.md                   This document
-HANDOVER_MCP_SKILLS.md      Robot layer, kinematics, calibration architecture, hard-won lessons
-HANDOVER_OPERATOR_UI.md     Flask console architecture, sequences, recipes, test suite
-main.bin                    Customer's original controller program (never delete)
-main_hostpoint.bin          Published: original + host-point Cartesian extension
-main_hostpoint_trq.bin      Published: + per-joint torque telemetry (needed for torque guarding)
+README.md                   Project overview + setup instructions
+docs/                       Design, handover, calibration notes, reports, images
+controller/                 Bioyond controller packages (.bin) and build manifests
 
 bioyond-s4-mcp/             MCP server (agent front end)
 operator_ui/                Flask console (human front end) + depth/RealSense tooling
@@ -538,10 +534,10 @@ yet — it will be added here once its code lands.)
 | Question | Read |
 | --- | --- |
 | "What's the kinesthetic demonstration/replay workflow and what's its status?" | §2–§3 of this document |
-| "How do I bring the robot up for a session?" | `CLAUDE.md` §Quick start |
-| "What exactly can go wrong, and what did it cost to learn?" | `HANDOVER_MCP_SKILLS.md` §11, `aruco-grab/SKILL.md` "Known traps" |
-| "What's the exact math for a grab candidate?" | `grab_skill/aruco_world.py`, `aruco-grab/SKILL.md` §"The model" |
-| "How do I calibrate a new object / new camera / new arm?" | `aruco-grab/SKILL.md` §"Per-ID disk calibration" / "Porting to a new arm" |
+| "How do I bring the robot up for a session?" | `../CLAUDE.md` §Quick start |
+| "What exactly can go wrong, and what did it cost to learn?" | `HANDOVER_MCP_SKILLS.md` §11, `../.claude/skills/aruco-grab/SKILL.md` "Known traps" |
+| "What's the exact math for a grab candidate?" | `../grab_skill/aruco_world.py`, `../.claude/skills/aruco-grab/SKILL.md` §"The model" |
+| "How do I calibrate a new object / new camera / new arm?" | `../.claude/skills/aruco-grab/SKILL.md` §"Per-ID disk calibration" / "Porting to a new arm" |
 | "What does the console's UI actually do button-by-button?" | `HANDOVER_OPERATOR_UI.md` §4-5 |
-| "What's the BRCAPI wire protocol?" | `Bioyond_S4_Agent_Context_Pack/02_Protocol/` |
-| "What's actually done vs. in progress?" | `README.md` §Progress so far |
+| "What's the BRCAPI wire protocol?" | `../Bioyond_S4_Agent_Context_Pack/02_Protocol/` |
+| "What's actually done vs. in progress?" | `../README.md` |

@@ -1589,7 +1589,7 @@ def seq_descend(run: Runner, svc, target: dict) -> dict:
         return {"ok": False}
     if not r["telemetry_live"]:
         return _abort(run, "J1-J4 torque slots read ZERO — "
-                           "main_hostpoint_trq.bin is not the running "
+                           "controller/main_hostpoint_trq.bin is not the running "
                            "program; torque-guarded descent unavailable")
 
     approach_z = grip_z + APPROACH_OFFSET

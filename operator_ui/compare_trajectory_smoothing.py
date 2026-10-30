@@ -51,7 +51,7 @@ def compare(output):
         angular=abs(wrap(b['pose_mm']['Rz']-a['pose_mm']['Rz']))/dt
         if speed<.5 and angular<.5:near_stationary_s+=dt
         samples.append(dict(t_s=time(b)-time(rows[first_motion]),speed_mm_s=speed,yaw_deg_s=angular))
-    with zipfile.ZipFile(HERE.parent/'main_hostpoint_trq.bin') as z:
+    with zipfile.ZipFile(HERE.parent/'controller/main_hostpoint_trq.bin') as z:
         home=z.read('main/mod_Home.lua').decode().replace('\r','')
     result=dict(recording_sha256=hashlib.sha256(raw).hexdigest(),
         homing=dict(source='main_hostpoint_trq.bin:main/mod_Home.lua',motion='one MoveAbsJ per branch',

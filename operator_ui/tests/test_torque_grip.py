@@ -16,7 +16,7 @@ from test_trajectory_queue import Controller
 from sequences import Runner
 from researcher_teaching import TeachingError
 from pick_and_hold.Grip.torque import TorqueGrip,LuaTorqueGrip,read_profile
-from build_grip_program import build,ROOT
+from build_grip_program import build,ROOT,CONTROLLER_DIR
 
 # Synthetic numbers for software tests only; not exported to the live profile.
 PROFILE=dict(schema=1,reviewed=True,force_limits=[10,20,30,40,50,60],
@@ -41,7 +41,7 @@ class GripController(Controller):
         g.SetExtJTrqLimit=lambda a:self.force_calls.append([a['_a'+str(i)] for i in range(1,7)])
         g.MoveExtJ=self.move_ext
         g.MOVFINISH=lambda:None
-        with zipfile.ZipFile(ROOT/'main_hostpoint_descent_137.bin') as z:
+        with zipfile.ZipFile(CONTROLLER_DIR/'main_hostpoint_descent_137.bin') as z:
             source=z.read('main/__lif.lua').decode().replace('\r','')
         primitive=re.search(r'function MoveExtJWithForce\(.*?\nend',source,re.S).group()
         self.lua.execute(primitive)
@@ -213,7 +213,7 @@ class TorqueGripTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             output=Path(td)/'grip.bin';manifest=build(output=output)
             self.assertTrue(manifest['descent_unchanged']);self.assertTrue(manifest['trajectory_unchanged'])
-            with zipfile.ZipFile(output) as z,zipfile.ZipFile(ROOT/'main_hostpoint_descent_137.bin') as old:
+            with zipfile.ZipFile(output) as z,zipfile.ZipFile(CONTROLLER_DIR/'main_hostpoint_descent_137.bin') as old:
                 for name in old.namelist():
                     if name not in manifest['changed']:self.assertEqual(z.read(name),old.read(name))
                 for name in manifest['changed']:

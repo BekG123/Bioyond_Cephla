@@ -92,8 +92,9 @@ the GigE eye-in-hand camera is the precision sensor (~13 px/mm).
 
 ## Controller-side contract (what the Lua actually runs)
 
-The controller runs the project from `main_hostpoint.bin` — the customer's
-`main.bin` (station jobs) plus our `mod_HostPoint` extension. Jobs are
+The controller runs the project from `controller/main_hostpoint.bin` — the
+customer's `controller/main.bin` (station jobs) plus our `mod_HostPoint`
+extension. Jobs are
 triggered by writing integer system variables in ONE frame:
 `0=DeviceID, 1–3=pos selectors, 4=MoveType, 5=ObjType, 6=ClampMode`.
 The Lua loop polls every 100 ms, runs the matching module, resets vars,
@@ -126,7 +127,7 @@ The validated grab pipeline (cam1/cam2 rough find → eye-cam calibrated X/Y/Z
 helper scripts in `grab_skill/` (SDK-exact vision teach port `mcp_teach.py`
 — run `py mcp_teach.py test` first, must print ALL PASS — plus pose math,
 detectors, and the torque-probe baseline tool). Per-joint torque telemetry
-(J1-J4 → SysVarI 13-16) requires `main_hostpoint_trq.bin` published on the
+(J1-J4 → SysVarI 13-16) requires `controller/main_hostpoint_trq.bin` published on the
 controller. Read the skill before any grab task.
 
 For ArUco-marker-tagged objects at ARBITRARY positions (no taught poses),
@@ -140,10 +141,10 @@ blind placements.
 
 ## Handover documentation
 
-- **`HANDOVER_MCP_SKILLS.md`** — robot layer, measured kinematics, safety
+- **`docs/HANDOVER_MCP_SKILLS.md`** — robot layer, measured kinematics, safety
   doctrine, calibration architecture (stamps/anchors/self-heal), skills &
   scripts, the standalone grabber, hard-won lessons, physical state.
-- **`HANDOVER_OPERATOR_UI.md`** — the Flask console: architecture,
+- **`docs/HANDOVER_OPERATOR_UI.md`** — the Flask console: architecture,
   sequences, UI tour, workflow engine, config files, operating recipes,
   test suite. Read both before continuing the project.
 
@@ -153,8 +154,9 @@ blind placements.
   (`robot.py`), offline test suite (`tests/`, run `py tests/test_offline.py`
   — simulates the controller locally, no robot needed).
 - `.mcp.json` — server registration + env config (IP, speed caps, envelope).
-- `main.bin` — customer's original controller program (do not delete).
-- `main_hostpoint.bin` — currently published program (original + host-point).
+- `controller/main.bin` — customer's original controller program (do not delete).
+- `controller/main_hostpoint.bin` — published program (original + host-point).
+- `controller/` — archived controller packages and build manifests.
 - `Bioyond_S4_Agent_Context_Pack/` — protocol spec, manuals, original Lua
   sources, background. Read `01_Project_Context/AGENT_CONTEXT.md` for the
   project's goals and safety doctrine.

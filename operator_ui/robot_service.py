@@ -38,7 +38,7 @@ from robot import (  # noqa: E402
 DEFAULT_IP = os.environ.get("BIOYOND_IP", "192.168.201.220")
 MOTION_TIMEOUT = float(os.environ.get("BIOYOND_MOTION_TIMEOUT", "120"))
 
-# SysParaF slots used by mod_HostPoint (device 21) in main_hostpoint_trq.bin
+# SysParaF slots used by mod_HostPoint (device 21) in controller/main_hostpoint_trq.bin
 PF_X, PF_Y, PF_Z, PF_RZ, PF_SPEED, PF_BLEND, PF_E1 = 0, 1, 2, 3, 4, 5, 6
 HOSTPOINT_DEVICE = 21
 MOVETYPE_LINEAR = 1
@@ -48,7 +48,7 @@ MOVETYPE_ABSJ = 4
 MOVETYPE_GRIP_REPORT = 5   # no motion; refreshes SysVarI 10-16
 
 # E1 status block (x1000) written by the Lua after gripper moves/reports;
-# 13-16 are the per-joint normalized torques (main_hostpoint_trq.bin only)
+# 13-16 are the per-joint normalized torques (controller/main_hostpoint_trq.bin only)
 VAR_E1_POS, VAR_E1_TRQ, VAR_E1_NORMTRQ = 10, 11, 12
 VAR_TRQ_J1, VAR_TRQ_J4 = 13, 16
 
@@ -458,7 +458,7 @@ class RobotService:
         if isinstance(reply, dict) and reply.get("value") == -1:
             return _fail(
                 "controller program rejected the job (SysOutVar=-1) — is "
-                "main_hostpoint_trq.bin published and the program restarted?")
+                "controller/main_hostpoint_trq.bin published and the program restarted?")
         return {"ok": True, "completion_reply": reply}
 
     def _hostpoint(self, para_f: dict[int, float], move_type: int,
@@ -801,7 +801,7 @@ class RobotService:
     def torque_report(self, wait_timeout: float = 30.0) -> dict:
         """Trigger the report job and read E1 (10-12) + J1-J4 (13-16).
 
-        J1-J4 slots exist only in main_hostpoint_trq.bin; all-zero joints
+        J1-J4 slots exist only in controller/main_hostpoint_trq.bin; all-zero joints
         mean the extended program is not published (torque guard unusable).
         """
         def run():

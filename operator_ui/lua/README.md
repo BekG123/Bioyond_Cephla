@@ -2,7 +2,7 @@
 
 ## Speed-137 experiment (version 220108)
 
-Prepared package: `main_hostpoint_trajectory_137.bin`. Only the trajectory module
+Prepared package: `controller/main_hostpoint_trajectory_137.bin`. Only the trajectory module
 differs from speed 130: version 220108 and a 137 mm/s ceiling. Host permits 137
 only for the two `entry_speed137_*` reviewed variants with separate one-run
 permissions. Same geometry, acceleration, blending and collision settings.
@@ -11,7 +11,7 @@ Observations.md; the 10-second objective is not a measured result or guarantee.
 
 ## Speed-130 research update (version 220107)
 
-Prepared package: `main_hostpoint_trajectory_130.bin`. Only the trajectory module
+Prepared package: `controller/main_hostpoint_trajectory_130.bin`. Only the trajectory module
 differs from the retained speed-100 package: version 220107 and a 130 mm/s ceiling.
 Host permits 130 only for the two `entry_speed130_*` reviewed variants, each with
 a separate one-run permission. Geometry, acceleration, blending and hardware
@@ -21,7 +21,7 @@ preparing and testing the package offline does not constitute a hardware run.
 
 ## Final speed-100 experiment (version 220106)
 
-Prepared package: `main_hostpoint_trajectory_100.bin`. Relative to speed 80,
+Prepared package: `controller/main_hostpoint_trajectory_100.bin`. Relative to speed 80,
 only the trajectory Lua module changes: version 220106 and a 100 mm/s ceiling.
 Host permits 100 only for `entry_speed100_toward_home` and
 `entry_speed100_to_hamilton`, preserving geometry and one-run permissions.
@@ -32,7 +32,7 @@ speed/time experiment, not an authorization for higher speeds or automatic repea
 
 ## Speed-80 research update (version 220105)
 
-Prepared package: `main_hostpoint_trajectory_80.bin`. Only the trajectory Lua
+Prepared package: `controller/main_hostpoint_trajectory_80.bin`. Only the trajectory Lua
 module differs from the retained speed-70 package: version 220105 and an 80 mm/s
 queue ceiling. Host permits 80 only for `entry_speed80_toward_home` and
 `entry_speed80_to_hamilton`; geometry and separate one-run authorization are
@@ -43,7 +43,7 @@ hardware status; offline execution tests do not establish hardware performance.
 
 ## Speed-70 research update (version 220104)
 
-Prepared package: `main_hostpoint_trajectory_70.bin`. Only the trajectory Lua
+Prepared package: `controller/main_hostpoint_trajectory_70.bin`. Only the trajectory Lua
 module differs from the retained speed-55 package: version 220104 and a 70 mm/s
 queue ceiling. Host permits 70 only for `entry_speed70_toward_home` and
 `entry_speed70_to_hamilton`, with unchanged refined geometry and separate one-run
@@ -55,7 +55,7 @@ the successful offline tests.
 
 ## Speed-55 research update (version 220103)
 
-Prepared package: `main_hostpoint_trajectory_55.bin`. Relative to the retained
+Prepared package: `controller/main_hostpoint_trajectory_55.bin`. Relative to the retained
 speed-47 package, only `main/mod_Trajectory.lua` changes: version 220103 and a
 55 mm/s queue ceiling. Host speed 55 is restricted to the separately approved
 `entry_speed55_toward_home` / `entry_speed55_to_hamilton` trials. The general
@@ -69,7 +69,7 @@ Offline testing is complete; check Observations.md for hardware execution status
 
 ## Speed-47 research update (version 220102)
 
-Prepared package: `main_hostpoint_trajectory_47.bin` in the repository root.
+Prepared package: `controller/main_hostpoint_trajectory_47.bin`.
 It changes only `main/mod_Trajectory.lua` relative to the prior trajectory package:
 the queue speed ceiling is 47 mm/s and handshake/version is 220102. Other station
 modules, zone -1, Stop behavior and gripper behavior are unchanged. This is an
@@ -85,7 +85,7 @@ Import the package into Offline Project, then use **Publish Offline Project to
 Controller** (import alone is insufficient). Disconnect Flask while Works owns
 the controller. After publishing, release Works, reconnect Flask, and start the
 program fresh. Verify version 220102 before the first trial. The existing deployed
-`main_hostpoint_trajectory.bin` is retained as the rollback artifact.
+`controller/main_hostpoint_trajectory.bin` is retained as the rollback artifact.
 
 Hardware results belong in `../reports/trajectory_smoothing/Observations.md`;
 preparation and offline tests are not a hardware run.
@@ -148,7 +148,7 @@ are held at their starting values. The original station and gripper modules rema
 ## Publish and test
 
 1. Disconnect the robot in Developer view so Bioyond Works can own the connection.
-2. In Bioyond Works, import `main_hostpoint_trajectory.bin` from the repository root
+2. In Bioyond Works, import `controller/main_hostpoint_trajectory.bin`
    into Offline Project, then **Publish Offline Project to Controller**.
    Use **Export and publish** to preserve the current controller project.
 3. Release the Bioyond Works connection and reconnect the console. Stop/start
@@ -218,8 +218,8 @@ checks and the existing path-specific workspace exception remain in effect.
   count (not physical arrival). Upload uses float registers 0–11 only.
 - Checksums use integer metadata, avoiding float-register precision loss.
 - Each transaction can execute once. Errors consume the path permission; no retries.
-- Rebuild: `python operator_ui/build_trajectory_program.py`. The root manifest
-  records baseline/output SHA256 and every preserved/changed archive member.
-- Rollback: publish the untouched `main_hostpoint_trq.bin`, then stop/start fresh.
+- Rebuild: `python operator_ui/build_trajectory_program.py`. The manifest in
+  `controller/` records baseline/output SHA256 and every preserved/changed archive member.
+- Rollback: publish the untouched `controller/main_hostpoint_trq.bin`, then stop/start fresh.
 - Offline tests need `lupa==2.8` in addition to the console test dependencies:
   `python -m unittest discover -s operator_ui/tests -p test_trajectory_queue.py -v`.

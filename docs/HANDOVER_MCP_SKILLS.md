@@ -3,7 +3,7 @@
 Audience: the next engineer/agent continuing this project. Companion doc:
 `HANDOVER_OPERATOR_UI.md` (the human-in-the-loop console). Everything
 below was measured/validated on the live robot; dates given so you can
-judge staleness. Read `CLAUDE.md` first — it is the operational contract.
+judge staleness. Read `../CLAUDE.md` first — it is the operational contract.
 
 ---
 
@@ -37,7 +37,7 @@ session ended mid-grab (see §13 Physical state).
   Free torque +150..+195; **gripping = torque < −100 AND position stall
   > 0.15** (saturation ≈ −187). `grip_by_torque` is the preferred close.
 - Per-joint torque telemetry: SysVarI 13-16 = J1-J4 normalized torque
-  ×1000 — ONLY when **`main_hostpoint_trq.bin`** is the published
+  ×1000 — ONLY when **`controller/main_hostpoint_trq.bin`** is the published
   program. If 13-16 read 0, torque guarding is blind: stop and republish.
 
 ## 3. Safety doctrine (non-negotiable, learned live)
@@ -66,9 +66,9 @@ session ended mid-grab (see §13 Physical state).
 
 ## 4. Controller-side contract
 
-- Published program: **`main_hostpoint_trq.bin`** = customer `main.bin`
-  (station jobs) + `mod_HostPoint` + torque telemetry. Never delete
-  `main.bin` (root).
+- Published program: **`controller/main_hostpoint_trq.bin`** = customer
+  `controller/main.bin` (station jobs) + `mod_HostPoint` + torque telemetry.
+  Never delete `controller/main.bin`.
 - Jobs trigger by writing SysVarI in ONE frame: `0=DeviceID, 1-3=pos
   selectors, 4=MoveType, 5=ObjType, 6=ClampMode`. Lua polls at 100 ms,
   runs the job, replies via SysOutVar (`{index:1, value:1}` = done,
@@ -91,7 +91,7 @@ session ended mid-grab (see §13 Physical state).
 `server.py` (tools) + `robot.py` (hardened client) + `hikcam.py` (GigE)
 + `tests/test_offline.py` (fake controller — run `py tests/test_offline.py`).
 Registered via `.mcp.json` (IP, speed caps, envelope env vars).
-Tool list + one-line semantics: see the table in `CLAUDE.md`. Notes:
+Tool list + one-line semantics: see the table in `../CLAUDE.md`. Notes:
 
 - `move_to_cartesian` is envelope-checked server-side (default envelope
   is a PLACEHOLDER — set a real task box first).

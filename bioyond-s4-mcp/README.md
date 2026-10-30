@@ -8,7 +8,7 @@ Registered for this project in `../.mcp.json` (stdio transport). Restart the
 Claude Code session after changing that file, then approve the `bioyond-s4`
 server when prompted.
 
-## Controller-side contract (deployed main.bin)
+## Controller-side contract (deployed controller/main.bin)
 
 The controller runs a job loop (`mod_Socket`) keyed on integer system
 variables: `0=DeviceID 1-3=PosSelectors 4=MoveType 5=ObjType 6=ClampMode`.
@@ -16,9 +16,8 @@ Completion is signalled by SysOutVar `{index:1, value:1}` (success) or
 `{index:1, value:-1}` (invalid job). Taught jobs: device 3 = homing,
 11/12/13/14/15/9998/9999 = station pick/place, 1 = stack, 2 = scan.
 
-**Host Cartesian control requires `main_hostpoint.bin`** (built from the
-deployed project by `tests/../..`'s build script; file lives at
-`C:\Users\raman\Desktop\test1\main_hostpoint.bin`). It adds device ID 21:
+**Host Cartesian control requires `controller/main_hostpoint.bin`** (the
+checked-in controller package built from the deployed project). It adds device ID 21:
 float params 40=X 41=Y 42=Z 43=Rz(deg) 44=speed 45=blend 46=E1, with
 MoveType 1=MoveL 2=MoveJ 3=gripper 4=MoveAbsJ. Publish it via Bioyond Works.
 On a stock program, device-21 jobs are rejected with -1 and no motion — the
@@ -60,7 +59,7 @@ Session/control: `connect`/`disconnect`, `switch_mode`, `start_program`/
 `clear_errors`*, `move_backwards`*/`stop_move_backwards`,
 `set_workspace_envelope`*.
 
-Motion (host-point, needs main_hostpoint.bin): `move_to_cartesian`
+Motion (host-point, needs `controller/main_hostpoint.bin`): `move_to_cartesian`
 (envelope-checked), `move_joints`*, `move_gripper`.
 
 Taught jobs: `go_home`*, `run_station_job`* (pick/place at stations),

@@ -15,7 +15,7 @@ from test_trajectory_queue import Controller
 from sequences import Runner
 from pick_and_hold.Descend.lua_executor import LuaDescent, make_plan, VERSION
 from autonomy import TransferError
-from build_descent_program import build, ROOT
+from build_descent_program import build, ROOT, CONTROLLER_DIR
 
 
 class DescentController(Controller):
@@ -231,7 +231,7 @@ class DescentTests(unittest.TestCase):
             output=Path(temp)/'candidate.bin'
             manifest=build(output=output)
             self.assertFalse(manifest['hardware_tested'])
-            with zipfile.ZipFile(output) as z, zipfile.ZipFile(ROOT/'main_hostpoint_trajectory_137.bin') as old:
+            with zipfile.ZipFile(output) as z, zipfile.ZipFile(CONTROLLER_DIR/'main_hostpoint_trajectory_137.bin') as old:
                 for name in ('main/mod_Trajectory.lua','main/mod_HostPoint.lua','main/__lif.lua'):
                     self.assertEqual(z.read(name),old.read(name))
                 self.assertEqual(z.read('main/mod_Descent.lua'),(ROOT/'operator_ui/lua/mod_Descent.lua').read_bytes())
