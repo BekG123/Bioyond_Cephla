@@ -77,8 +77,9 @@ clearly asking for technical detail.
 ## What you can do
 
 - **Run Full Calibration** — the plate pickup chain as one sequential
-  operation: calibrate the two-disk plate, align to it, lower onto it, and
-  close the gripper to the accepted 3.7 mm setting, lift 5 mm at speed 5,
+  operation: calibrate the 48-well plate using its well grid and verified
+  height reference, align to its accepted placement, lower onto it, and
+  close the gripper to the accepted 3.9 mm setting, lift 5 mm at speed 5,
   then immediately return Home using the existing Home route at translation
   speed 137 (wrist speed 30). There is no separate 25 mm lift and no inspection
   pause between the slow lift and Home. Use action `full_calibration` for
@@ -1008,13 +1009,16 @@ class LacryAgent:
 
     def _classic_plan(self):
         """Full Calibration includes the configured pickup and Home stages."""
+        requirements = getattr(self.classic, 'requirements', None)
+        if not isinstance(requirements, list):
+            requirements = None
         ready = self.classic.public()
         if not ready.get('can_start'):
             raise TeachingError(ready.get('blocker') or 'The pickup sequence is not available.')
         return dict(actions=['classic_pickup'], labels=['Full Calibration'],
                     dispatch='classic_pickup',
                     steps=[dict(kind='classic', label=label) for label in self.classic.labels()],
-                    requirements=[
+                    requirements=requirements or [
                         'Start in the camera viewing position (normally saved Home), with both disks visible in Camera View.',
                         'The calibration plate is in its taught location and orientation.',
                         'The gripper is empty, the area is clear, and you are supervising the '

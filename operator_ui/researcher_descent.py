@@ -24,7 +24,11 @@ class ResearcherDescent:
     def _target(self, run):
         if run.name=='projected_alignment':
             from projected_pickup import target
-            return target()
+            value = target()
+            digest = (run.result or {}).get('profile_sha256')
+            if digest and digest != value['plate_profile_sha256']:
+                raise TransferError('48-well profile changed after alignment. Recalibrate before descent.')
+            return value
         return deepcopy(run.target or {})
 
     def preview_after_alignment(self, target):

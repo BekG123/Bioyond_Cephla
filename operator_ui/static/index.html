@@ -158,7 +158,7 @@
   }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/static/developer_console.css?v=20261027">
+<link rel="stylesheet" href="/static/developer_console.css?v=20261029-minimal">
 </head><body>
 
 <div id="hdr">
@@ -179,51 +179,64 @@
           aria-pressed="true">Console</button>
   <button class="ghost" id="tabbtn-points" aria-pressed="false" onclick="showTab('points')">Points &amp; Trajectory</button>
   <button class="ghost" id="tabbtn-3d" aria-pressed="false" onclick="showTab('3d')">3D View</button>
-  <button class="ghost" id="tabbtn-dsl" aria-pressed="false" onclick="showTab('dsl')">Bug inspector · DSL</button>
+  <button class="ghost" id="tabbtn-dsl" aria-pressed="false" onclick="showTab('dsl')">Debugger</button>
   <button class="ghost" id="tabbtn-transfer" aria-pressed="false" onclick="showTab('transfer')">ArUco transfer</button>
   <button class="ghost" id="tabbtn-depth" aria-pressed="false" onclick="showTab('depth')">D405 Depth</button>
-  <span class="lbl">E-stop is the human's job — stay at it during motion.</span>
+  <span class="lbl">Motion: keep physical E-stop accessible.</span>
 </div>
 
 <section id="tab-dsl" style="display:none" aria-label="Developer DSL bug inspector">
   <div class="dsl-heading">
-    <div><h2>Understand the failure. Write the intended behavior.</h2>
-      <p>Recorded evidence → source explanation → your DSL → Python preview → DSL review.</p></div>
-    <button id="dsl-refresh" class="ghost">Refresh failure</button>
+    <h2>Debugger <span class="dev-badge">DSL v1</span></h2>
+    <button id="dsl-refresh" class="ghost">Refresh</button>
   </div>
-  <div id="dsl-status" role="status" aria-live="polite">Loading diagnostic tools…</div>
+  <div id="dsl-status" role="status" aria-live="polite">Loading…</div>
   <div class="dsl-grid">
     <article class="card">
-      <h2>Last recorded failure</h2>
+      <h2>Failure</h2>
       <p id="dsl-error">No failure loaded.</p>
       <p id="dsl-location" class="mono"></p>
       <p id="dsl-provenance" class="lbl"></p>
-      <details><summary>Python source at the failure</summary><pre id="dsl-source"></pre></details>
-      <h3>Source explanation in DSL</h3>
-      <p class="lbl">A readable projection, not verified executable equivalence. REVIEW marks unsupported constructs.</p>
+      <details><summary>Source</summary><pre id="dsl-source"></pre></details>
+      <h3>DSL <span class="dev-badge">Explanation</span></h3>
       <pre id="dsl-explanation"></pre>
-      <button id="dsl-agent" class="ghost" disabled>Explain with agent</button>
-      <p class="lbl">On click, sends the displayed failure and source excerpt to the configured model. No hardware tools are provided.</p>
+      <button id="dsl-agent" class="ghost" disabled title="Send failure and source excerpt to the configured model">Explain</button>
       <pre id="dsl-agent-output" hidden></pre>
     </article>
     <article class="card">
-      <h2>Your intended behavior</h2>
-      <p class="lbl">DSL v1 · Four spaces · No semicolons · Independent IF blocks in order</p>
+      <h2>DSL editor</h2>
       <div class="row">
-        <button id="dsl-example" class="ghost">Load parking example</button>
-        <button id="dsl-translate">Translate and retranslate</button>
+        <button id="dsl-example" class="ghost">Example</button>
+        <button id="dsl-translate">Compile</button>
       </div>
-      <label for="dsl-editor">Edit your DSL</label>
-      <textarea id="dsl-editor" spellcheck="false" rows="23" aria-describedby="dsl-contract"></textarea>
-      <p id="dsl-contract" class="lbl">The first matching decision ends a check. ASK and PAUSE suspend progression. check.logs means a fresh structured observation. A check count is not elapsed time.</p>
-      <p class="lbl">Drafts stay in this browser. Translation is deterministic and does not use API credits, run code, or alter the application.</p>
+      <textarea id="dsl-editor" aria-label="DSL source" spellcheck="false" rows="16" aria-describedby="dsl-contract" placeholder="Enter DSL…"></textarea>
+      <details class="dev-reference"><summary>Language reference</summary>
+        <p class="lbl">Four-space indentation. No semicolons. Independent IF blocks, evaluated in order.</p>
+        <p id="dsl-contract" class="lbl">First matching decision ends the check. ASK and PAUSE suspend progression. check.logs requires a fresh structured observation. Count is a check budget, not elapsed time.</p>
+        <p class="lbl">Draft saved locally. Compilation is deterministic. Generated code is not executed. Source explanations are not executable equivalents; REVIEW marks unsupported constructs.</p>
+        <p id="dsl-note" class="lbl">General Python cannot round-trip through DSL v1.</p>
+      </details>
     </article>
   </div>
   <div class="dsl-grid">
-    <article class="card"><h2>Generated Python · preview only</h2><pre id="dsl-python">Translate a DSL draft to inspect the Python.</pre></article>
-    <article class="card"><h2>Translated back from Python</h2><pre id="dsl-roundtrip">The Python syntax tree is read back into DSL for comparison.</pre></article>
+    <details class="card" id="dsl-python-panel"><summary>Python <span class="dev-badge">Preview</span></summary><pre id="dsl-python">Not compiled.</pre></details>
+    <details class="card" id="dsl-roundtrip-panel"><summary>DSL round-trip</summary><pre id="dsl-roundtrip">Not compiled.</pre></details>
   </div>
-  <p id="dsl-note" class="lbl">No execution or deployment is attached to this editor. General Python cannot yet round-trip through DSL v1.</p>
+  <article class="card">
+    <div class="dev-section-bar">
+      <h2 class="devin-brand"><img src="/static/cognition-logo.svg" alt="Cognition" width="24" height="24">Devin <span class="dev-badge">CLI</span></h2>
+      <div class="row"><button id="dsl-devin" class="ghost" disabled>Review</button><button id="dsl-devin-repair" disabled>Repair &amp; push</button><button id="dsl-devin-refresh" class="ghost">Refresh</button></div>
+    </div>
+    <div class="row"><label><input type="checkbox" id="dsl-devin-auto"> Auto-repair new failures</label><span class="lbl">Cloud branch · DSL optional · No live deployment</span></div>
+    <p class="lbl dev-disclosure">Sends failure context · Uses Devin quota · Offline tests before commit/push</p>
+    <p id="dsl-devin-status" role="status" aria-live="polite">Checking Devin CLI…</p>
+    <a id="dsl-devin-branch" target="_blank" rel="noopener" hidden>Repair branch</a>
+    <details><summary>Settings</summary>
+      <p id="dsl-devin-setup" class="lbl"></p>
+      <p class="lbl">Review returns text. Repair runs in Devin Cloud and may commit/push its dedicated branch after offline tests. Local file access, edits, shell commands and MCP tools are denied. No merge, deployment or hardware retry. Test results are Devin-reported; the pushed commit is checked independently on GitHub.</p>
+    </details>
+    <pre id="dsl-devin-output">No proposal.</pre>
+  </article>
 </section>
 
 <div id="tab-depth" style="display:none; padding:12px">
@@ -615,9 +628,10 @@
     <div class="card">
       <h2>Grab pipeline — you decide every step</h2>
       <div class="row">
-        <button class="go" onclick="findDiskOriginal()">1&nbsp; Calibrate two-circle plate (original)</button>
-        <span class="lbl">unchanged Git 99ebe5d calibration script; original steps, speeds and Z refinement</span>
+        <button class="go" id="calibrate-two-disk" onclick="findDiskOriginal()">Calibrate two-disk plate</button>
+        <button class="go" id="calibrate-48well" onclick="calibrate48Well()">Calibrate 48-well plate</button>
       </div>
+      <p class="lbl">Two-disk: original calibration. 48-well: reviewed observation route and well-grid measurement; stops before alignment or gripping.</p>
       <details><summary>Alternative calibration / edge-centering tools</summary>
       <div class="row">
         <button class="go" onclick="api('/seq/preview_plate_edges',{})">Preview plate edges (no motion)</button>
@@ -1198,6 +1212,12 @@ async function grip(){
     if(!data.grip?.can_start){alert(data.grip?.blocker || 'Grip is unavailable.');return;}
     await api('/seq/grip',{ready:true,descent_id:data.grip.descent_id});
   } catch { alert('Grip readiness unavailable. No retry was sent.'); }
+}
+function calibrate48Well(){
+  api('/seq/calibrate_48well', {confirm:true,cell_clear:true,empty_gripper:true,plate_unchanged:true},
+    'CALIBRATE 48-WELL PLATE?\nStart at saved Home with empty jaws. Keep the plate flat in its accepted holder, with the same support and camera settings. ' +
+    'Moves to the reviewed observation position at speed 5, then measures the well grid using the verified height reference. ' +
+    'Changed plate placement stops for review. No alignment, descent, grip or automatic retry. Confirm the full path is clear and supervise the emergency stop.');
 }
 function lift(){
   api("/lift", {z: parseFloat(el("liftz").value) || 150},
@@ -1993,5 +2013,5 @@ say("console ready — Connect, check state, set the envelope, then work the pip
 <script src="/static/coactive_pickup.js"></script>
 <script src="/static/lacry_memory.js"></script>
 <script src="/static/realsense.js?v=1"></script>
-<script src="/static/developer_console.js?v=20261027"></script>
+<script src="/static/developer_console.js?v=20261030-plate48"></script>
 </body></html>

@@ -83,6 +83,7 @@ svc.audit_sink = audit.event
 cam = CameraService()
 from developer_diagnostics import DeveloperDiagnostics, register_developer_diagnostics
 developer_diagnostics = DeveloperDiagnostics(os.path.join(HERE, 'reports', 'developer_dsl'))
+app.extensions['developer_diagnostics'] = developer_diagnostics
 def audit_and_remember(event,**fields):
     developer_diagnostics.observe(event, fields)
     audit.event(event,**fields)
@@ -142,8 +143,11 @@ lacry_backend.projected_pickup = projected_pickup
 from ik_home import IKHomeConnection
 from pickup_home import PickupHome
 ik_home_connection = IKHomeConnection(home_return)
-pickup_home = PickupHome(ik_home_connection,os.path.join(HERE,'demonstrations','pickup_home'))
-classic_pickup = ClassicPickup(researcher_teaching, plate_teaching, researcher_descent,
+from plate48_workflow import Plate48Teaching, Plate48Pickup
+plate48_teaching = Plate48Teaching(lambda:svc,lambda:runner,lambda:cam,get_robot_params,
+    plate_teaching._prepare,home_return,lambda:(plate_teaching.invalidate(),position_grip.invalidate()),band_floor)
+pickup_home = PickupHome(ik_home_connection,os.path.join(HERE,'demonstrations','pickup_home'),plate_profile=True)
+classic_pickup = Plate48Pickup(researcher_teaching, plate48_teaching, researcher_descent,
     position_grip, lambda: svc, lambda: runner, transport=pickup_home)
 lacry = LacryAgent(lacry_backend, plate_agent.client, lambda: runner,
     memory=lacry_memory,
@@ -164,6 +168,16 @@ CAL_PATH = os.path.join(os.path.dirname(HERE), "grab_skill",
 
 register_developer_diagnostics(app, developer_diagnostics, lambda: runner,
                                lambda: lacry.client, lambda: lacry.credentials)
+
+
+@app.post('/developer/api/dsl/devin/home-check')
+def developer_home_check():
+    # Observation only: use the same Home preflight as the researcher button.
+    from devin_review import capture_home_preflight, local_developer_request
+    if not local_developer_request():
+        return jsonify(ok=False, error='Use the local developer console.'), 403
+    return jsonify(capture_home_preflight(developer_diagnostics, svc, home_return,
+                                          draggo, get_robot_params))
 
 
 class TorqueRecorder:
@@ -1119,6 +1133,22 @@ def projected_alignment_route():
     if recorder._run:
         return jsonify(ok=False,error='Stop torque recording before projected alignment'),409
     return jsonify(runner.start('projected_alignment',align,svc,cam,get_robot_params(),config))
+
+
+@app.post('/seq/calibrate_48well')
+def calibrate_48well_route():
+    refusal = _refuse_if_sequencing()
+    if refusal is not None:
+        return refusal
+    body = _body()
+    if any(body.get(k) is not True for k in ('confirm','cell_clear','empty_gripper','plate_unchanged')):
+        return jsonify(ok=False,error='Confirm the empty gripper, unchanged 48-well setup and clear observation route.'),400
+    if recorder._run:
+        return jsonify(ok=False,error='Stop torque recording before 48-well calibration.'),409
+    try:
+        return jsonify(plate48_teaching.start('Calibrate',dict(ready=True)))
+    except (TeachingError, TransferError) as error:
+        return jsonify(ok=False,error=str(error)),409
 
 
 @app.get('/researcher/api/projected-pickup')

@@ -147,6 +147,15 @@ def register_researcher(app, read_state, teaching=None, draggo=None, workflow=No
 
     @api.errorhandler(TeachingError)
     def teaching_error(error):
+        # Capture Home pre-dispatch failures as well as background Runner errors.
+        diagnostics = app.extensions.get('developer_diagnostics')
+        if diagnostics is not None and request.path == '/researcher/api/home/start':
+            try:
+                from developer_diagnostics import capture_failure
+                diagnostics.observe('request_failed', dict(sequence='researcher_home_preflight',
+                    result=dict(ok=False, error=str(error), failure_context=capture_failure(error))))
+            except Exception:
+                app.logger.exception('Home diagnostic capture failed')
         return jsonify(ok=False, message=str(error)), error.status
 
     @api.after_request
