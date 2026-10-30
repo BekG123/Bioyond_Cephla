@@ -7,10 +7,10 @@
   <img alt="Mode" src="https://img.shields.io/badge/mode-human--in--the--loop-orange">
 </p>
 
-**Bioyond_Cephla** is the software and experiment repository for Cephla's
-Bioyond LabGenius S4 workcell. It combines a Flask operator console, MCP robot
-tools, calibrated vision, torque-guarded motion, offline simulation, and
-versioned Bioyond controller packages.
+**Bioyond_Cephla** is Cephla's research-and-production software platform for
+automating laboratory experiments on the Bioyond LabGenius S4. It combines a
+Flask operator console, MCP robot tools, calibrated vision, torque-guarded
+motion, offline simulation, and versioned Bioyond controller packages.
 
 The project is designed for real lab conditions: imperfect object placement,
 changing calibration, hardware faults, and human review before motion.
