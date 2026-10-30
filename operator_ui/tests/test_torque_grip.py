@@ -188,9 +188,10 @@ class TorqueGripTests(unittest.TestCase):
             self.assertEqual(saved['force_profile'],PROFILE)
             with self.assertRaises(TeachingError):g.start(body)
 
-    def test_both_api_routes_use_new_integration_and_block_missing_profile(self):
+    def test_current_api_routes_use_reference_grip_and_reject_stale_receipt(self):
         from test_researcher import console
-        self.assertIsInstance(console.position_grip,TorqueGrip)
+        from pick_and_hold.Grip.reference_grip import ReferenceGrip
+        self.assertIsInstance(console.position_grip,ReferenceGrip)
         before=console.position_grip.receipt
         client=console.app.test_client()
         with patch.object(console.runner,'start') as start:

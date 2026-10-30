@@ -11,6 +11,12 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def worker_python(root=None, platform=None):
+    root = ROOT if root is None else Path(root)
+    platform = os.name if platform is None else platform
+    return root / '.venv-realsense' / ('Scripts/python.exe' if platform == 'nt' else 'bin/python')
+
+
 class RealSenseService:
     def __init__(self, port=5056, viser_port=8086):
         self.port, self.viser_port = port, viser_port
@@ -35,16 +41,16 @@ class RealSenseService:
             return result
         except Exception as ex:
             return dict(ok=False, service='bioyond-realsense', state='offline',
-                error=str(ex), installed=(ROOT/'.venv-realsense/Scripts/python.exe').exists())
+                error=str(ex), installed=worker_python().exists())
 
     def launch(self):
         with self.lock:
             current = self.status()
             if current.get('ok'):
                 return current
-            python = ROOT/'.venv-realsense/Scripts/python.exe'
+            python = worker_python()
             if not python.exists():
-                raise RuntimeError('Run operator_ui/setup_realsense.ps1 first')
+                raise RuntimeError('Create .venv-realsense using the Windows or Linux setup in operator_ui/REALSENSE.md first')
             if self.process is None or self.process.poll() is not None:
                 log = ROOT/'operator_ui/realsense_worker.log'
                 with log.open('ab') as output:

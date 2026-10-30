@@ -70,7 +70,7 @@ Install Git and 64-bit Python 3.10, then:
 git clone https://github.com/BekG123/Bioyond_Cephla.git
 cd Bioyond_Cephla
 py -3.10 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install flask numpy opencv-python PyYAML
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe operator_ui/app.py
 ```
 
@@ -84,7 +84,7 @@ sudo apt install git python3.10-venv libgl1 libglib2.0-0 libglfw3
 git clone https://github.com/BekG123/Bioyond_Cephla.git
 cd Bioyond_Cephla
 python3.10 -m venv .venv
-.venv/bin/python -m pip install flask numpy opencv-python PyYAML
+.venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python operator_ui/app.py
 ```
 
@@ -95,7 +95,7 @@ Open [http://127.0.0.1:5002](http://127.0.0.1:5002).
 For a token-efficient agent setup, open the repository root and paste:
 
 ```text
-Set up this repo for local/offline use. Read README.md, CLAUDE.md, and docs/DESIGN.md section 12 only. From the repo root, create .venv with Python 3.10 and install flask numpy opencv-python PyYAML. Do not connect to the robot, cameras, Bioyond Works, or run motion/enabling commands. Run tests/test_offline.py from operator_ui/ with the venv Python. Report commands run, failures, and the exact command to launch http://127.0.0.1:5002. Ask before any hardware access.
+Set up this repo for local/offline use. Read README.md, CLAUDE.md, and docs/DESIGN.md section 12 only. From the repo root, create .venv with Python 3.10 and install requirements-dev.txt. Do not connect to the robot, cameras, Bioyond Works, or run motion/enabling commands. Run operator_ui/tests/test_offline.py with the venv Python. Report commands run, failures, and the exact command to launch http://127.0.0.1:5002. Ask before any hardware access.
 ```
 
 ## Optional components
@@ -104,7 +104,10 @@ Set up this repo for local/offline use. Read README.md, CLAUDE.md, and docs/DESI
   `bioyond-s4-mcp/requirements.txt`, then run `python camera_gui/app.py` for
   `http://127.0.0.1:5001`.
 - **MCP server:** install `bioyond-s4-mcp/requirements.txt`; `.mcp.json` already
-  registers `bioyond-s4-mcp/server.py`.
+  registers `bioyond-s4-mcp/server.py` relative to the repository root. Start
+  your MCP client from this root with `.venv` activated, so `python` resolves to
+  that environment. Alternatively configure your client's Python executable
+  and working directory explicitly. No machine-specific desktop path is needed.
 - **MuJoCo:** install `mujoco_sim/requirements.txt` in `mujoco_sim/.venv`, then
   run `mujoco_sim/open_project.py`.
 - **D405 depth:** follow `operator_ui/REALSENSE.md`, then install
@@ -137,10 +140,36 @@ Set up this repo for local/offline use. Read README.md, CLAUDE.md, and docs/DESI
 Run the main offline suite before changing robot-facing behavior:
 
 ```bash
-cd operator_ui
-../.venv/bin/python tests/test_offline.py      # Linux
-..\.venv\Scripts\python.exe tests\test_offline.py  # Windows
+# From the repository root, Linux:
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python operator_ui/tests/test_offline.py
+
+# From the repository root, Windows PowerShell:
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe operator_ui/tests/test_offline.py
 ```
+
+This runs maintained calibration, grip, Home/Hamilton/Squid, TCP and Lua tests
+against fake hardware. It also verifies the bundled controller and recording
+hashes. It blocks non-test network connections and external processes except
+the calibration module's offline math self-test.
+
+## Copying to another computer
+
+Clone this private repository using an account with collaborator access.
+The core UI works without robot hardware. The recorded Hamilton, grip and descent
+references needed by the planners and tests are included; other recordings, raw images, credentials,
+camera SDKs and optional environments remain local. `.gitattributes` preserves
+the exact bytes of checksum-verified evidence on Windows and Linux. Do not
+run line-ending normalization on those files.
+
+The supplied station positions, plate profiles, workspace and controller serial
+describe the original lab cell. Historical acceptance records are evidence, not
+clearance approval for another installation. Commission and inspect that cell
+before connecting or running a recorded movement. Opening the Developer camera
+view can request camera frames; keep hardware disconnected for offline setup.
+Install the OS-specific camera SDK separately. Start with the offline suite;
+passing it does not validate physical clearance or grip strength.
 
 Controller-package builds are handled by the scripts in `operator_ui/` such as
 `build_trajectory_program.py`, `build_descent_program.py`, and

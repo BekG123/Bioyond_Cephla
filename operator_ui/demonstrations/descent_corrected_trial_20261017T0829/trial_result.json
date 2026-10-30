@@ -1,0 +1,144 @@
+{
+  "saved_at": "2026-10-17T08:29:18.645024+00:00",
+  "candidate": "operator_ui\\demonstrations\\descent_correction_20261017_01\\descent_path_v2.json",
+  "candidate_sha256": "e214340e94e57363c44e4300fb37a07d9958da7500ebda071450ced74e8b85c1",
+  "sequence": {
+    "active": false,
+    "detection_ts": 1792225492.8387322,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Lua descent: approach at 137 to Z 90.47; last 20 mm at 5, torque checked after each 1/0.5 mm step.",
+        "t": 2.2
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: prepared",
+        "t": 2.3
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: fast approach",
+        "t": 2.4
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: torque baseline",
+        "t": 5.9
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: slow probing",
+        "t": 6.7
+      },
+      {
+        "level": "info",
+        "msg": "Lua descent: target reached",
+        "t": 31.0
+      },
+      {
+        "level": "good",
+        "msg": "Lua descent complete; claw remains open. No grip performed.",
+        "t": 31.1
+      }
+    ],
+    "name": "researcher_descend",
+    "result": {
+      "approach_speed": 137,
+      "at_z": 70.467,
+      "breach": false,
+      "executor": "lua_descent",
+      "ok": true,
+      "probe_speed": 5
+    },
+    "state": "done",
+    "target": {
+      "alignment_requires_preflight": true,
+      "big_r": 190.4,
+      "calibrated_at": 1792225492.894333,
+      "config": "Wide",
+      "converged": true,
+      "found_at": "01:24:52",
+      "rz": 85.751,
+      "source": "fast_disk",
+      "x": 300.086,
+      "y": -67.933,
+      "z": 70.467,
+      "z_calibrated": 70.467,
+      "z_detail": {
+        "samples": [
+          62.139,
+          62.058
+        ],
+        "spread": 0.08100000000000307,
+        "touch_offset": 9.0,
+        "vision_z": 62.0985
+      }
+    }
+  },
+  "final_robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 28.0015766620636
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 31.867818915633844,
+      "J2": 40.83164522738159,
+      "J3": 55.702622269765214,
+      "J4": -10.783099808119387
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 85.751,
+      "X": 300.086,
+      "Y": -67.933,
+      "Z": 70.467
+    },
+    "program_state": {
+      "state": "running",
+      "value": 1
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "audit": {
+    "error": null,
+    "events": 38851,
+    "file": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\logs\\audit\\20261017T081408Z_28f3f3ab\\events_0002.jsonl",
+    "last_event_at": "2026-10-17T08:29:18.640513+00:00",
+    "ok": true,
+    "retention": "All parts retained; no automatic deletion",
+    "rotation_bytes": 26214400,
+    "session": "20261017T081408Z_28f3f3ab"
+  },
+  "operator_visual_acceptance": "Centered; both sides look correct",
+  "accepted_scope": "Open-claw descent to the exact taught endpoint with the plate unchanged; grip not tested and no global correction established.",
+  "execution": "Exact taught XY/yaw set at Z300 using existing Align, then open-claw Lua vertical descent; no grip.",
+  "elapsed_s": 31.1,
+  "automatic_default_changed": false,
+  "run_id": "33a2e82ea93f46c8b6f809dc2cb913df",
+  "audit_rows": 221,
+  "recording_status": {
+    "recording": false,
+    "samples": 591,
+    "failures": 0,
+    "ended_at": "2026-10-17T08:29:18.793373+00:00"
+  },
+  "samples_sha256": "44879961878018919ca6fbb3a0282ceac536a204b5e496fa50d0a63927af728b"
+}

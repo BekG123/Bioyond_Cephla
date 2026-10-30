@@ -47,6 +47,28 @@ The setup script clones the recorded mjviser revision if missing. Existing
 checkouts are preserved; compare their commit before reproducing this install.
 The portable Viewer can be downloaded from the linked official release.
 
+### Linux setup
+
+From the repository root, install the optional worker separately from the core
+console. The launcher selects `.venv-realsense/bin/python` on Linux and
+`.venv-realsense/Scripts/python.exe` on Windows.
+
+```bash
+python3.10 -m venv .venv-realsense
+git clone https://github.com/mujocolab/mjviser.git third_party/mjviser
+git -C third_party/mjviser checkout ae0b219a2049a95e1321214e4efd1d395ee4bf39
+.venv-realsense/bin/python -m pip install -r operator_ui/requirements-realsense.txt
+.venv-realsense/bin/python -m pip check
+```
+
+If `third_party/mjviser` already exists, inspect its revision instead of cloning
+over it. Install the RealSense SDK USB/udev rules appropriate for your Linux
+distribution so the camera is accessible without running the console as root.
+Use **Sample view** first. The core Windows setup and both launcher path branches
+are covered by offline checks; a physical Linux D405 session still needs local
+hardware validation. The Windows portable Viewer is optional and not required
+by this Python worker.
+
 ## Data and coordinate conventions
 
 Point coordinates come from the RealSense SDK's calibrated `pointcloud` function,

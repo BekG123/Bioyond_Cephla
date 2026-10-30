@@ -1,5 +1,5 @@
 mcp[cli]>=1.0
 opencv-python>=4.10
 numpy
-pygrabber
-comtypes
+pygrabber; sys_platform == "win32"
+comtypes; sys_platform == "win32"
