@@ -20,7 +20,7 @@ The user's name for this workflow is **learning via deblur of the initial human 
 
 ## Retained evidence
 
-For this project, briefly announce proposed code changes before editing. After each hardware experiment completes or stops, commit and push its relevant code and finalized evidence to the configured project remote. Review staged content, exclude credentials and unrelated work, retain failure records, and report the commit and push result. Never force-push to resolve a rejected push.
+For this project, briefly announce proposed code changes before editing. Commit and push only when an experiment yields a fully observed result worth adding to the observations document. Record that observation first, then commit its relevant code and evidence. Keep plans, routine edits and intermediate steps local. Review staged content, exclude credentials and unrelated work, retain observed failure records, and report the commit and push result. Never force-push to resolve a rejected push.
 
 For each iteration retain source and parent hashes; candidate coordinates; task frame/direction; explicit feedback and its interpretation; intended change; speed/executor/blending settings; validation results; execution authorization; timestamps and telemetry; completion/errors; operator acceptance (unknown until supplied); and baseline comparison limitations. Use existing project trial JSON and append-only observations rather than starting a competing log.
 

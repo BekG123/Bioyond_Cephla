@@ -230,3 +230,11 @@
 - 116 backend checks passed, including real Lua/fake-hardware Hamilton → Home → Squid → Home → Hamilton, route integrity/limits, plate-handling plans and experiment sequencing. Console loaded; live read-only plan uses the new endpoint and current travel status is verified. No physical movement during integration; arm remains Home.
 - Persistent Lacry memory now includes the accepted revision; stale current-coordinate notes were revised or archived with history retained in [memory integration](hamilton_reteach_20261026/memory_integration.json). Hamilton panel recognizes accepted travel evidence; UI cache version updated.
 - Browser fixture checks passed with zero hardware calls, including enabled Hamilton handling controls using accepted-travel evidence, chat confirmations, Stop, progress and desktop/mobile layout; no JavaScript errors.
+
+## Squid loaded return with one continuous lift — 3 November 2026
+
+- Operator confirmed the completed return retained the plate securely and level: "Yes, it is."
+- Start feedback: X226.352/Y375.681/Z266.787/Rz87.871. One continuous vertical move reached Z291.242 at commanded speed 5; remaining legs ran at 137 through X354/Y270 and above Home, ending X289.970/Y62.630/Z248.019/Rz-3.880.
+- No controller faults, claw commands, regrip or program restart during the return. Current claw feedback was preserved rather than commanding a new grip target.
+- [Trial evidence](../squid_48well_approach/loaded_return_continuous_trial_20261103.json) and [checked plan](../squid_48well_approach/loaded_return_continuous_lift_z266p81_20261103.json). This accepts the observed loaded return at the current fixture setup; it does not establish drop-off/release success or repeatability.
+- Follow-up requested: closed-claw Home → Squid Z266.81 → Home round trip. Its outcome will be recorded separately after observation.
