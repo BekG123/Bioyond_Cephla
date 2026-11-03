@@ -238,3 +238,10 @@
 - No controller faults, claw commands, regrip or program restart during the return. Current claw feedback was preserved rather than commanding a new grip target.
 - [Trial evidence](../squid_48well_approach/loaded_return_continuous_trial_20261103.json) and [checked plan](../squid_48well_approach/loaded_return_continuous_lift_z266p81_20261103.json). This accepts the observed loaded return at the current fixture setup; it does not establish drop-off/release success or repeatability.
 - Follow-up requested: closed-claw Home → Squid Z266.81 → Home round trip. Its outcome will be recorded separately after observation.
+
+## Squid closed-claw round trip accepted — 3 November 2026
+
+- Operator reported the Home → Squid → Home trial worked successfully and requested seven repeats.
+- All eight commanded legs completed without controller faults. Squid arrival was Z266.808 mm; final Home was X289.970/Y62.630/Z248.019/Rz-3.880. Transit speed 137, Squid descent and continuous lift speed 5.
+- No gripper commands, release, startup or retries. This demonstrates loaded travel with the plate retained, not a drop-off/pickup cycle.
+- [Trial](../squid_48well_approach/closed_claw_roundtrip_trial_20261103.json) and [plan](../squid_48well_approach/closed_claw_roundtrip_plan_20261103.json). Seven-cycle repeatability results will be recorded separately after observation.
