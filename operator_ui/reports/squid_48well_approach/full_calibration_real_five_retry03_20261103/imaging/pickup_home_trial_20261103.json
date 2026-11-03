@@ -1,0 +1,2485 @@
+{
+  "status": "pickup_and_home_completed_pending_operator_assessment",
+  "at": 1793741202.721247,
+  "source_state": {
+    "camera": {
+      "age_s": 1.3,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 7.00242118909955
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42139537261372,
+        "J2": 84.87686575379037,
+        "J3": 52.05594907317273,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -65.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1793741202.6642609
+  },
+  "operator_confirmation": "Operator explicitly requested a retry after repeat02 stopped on stationary vision disagreement. Plate remains in pickup holder, claws empty; existing clearance and supervision retained. Full calibration, drop-off, five real images, pickup/Home with unchanged checks and no automatic retry.",
+  "source_sha256": "4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81",
+  "steps": [
+    {
+      "target_e1": 6,
+      "speed": 5,
+      "status": "completed",
+      "samples": [
+        {
+          "camera": {
+            "age_s": 20.1,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 5.99683728069067
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60073163512702,
+              "J3": 152.89848632061612,
+              "J4": -153.67624294507698
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.316,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741221.3730314
+        },
+        {
+          "camera": {
+            "age_s": 20.4,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 5.997736472636461
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60073163512702,
+              "J3": 152.89848632061612,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741221.679809
+        },
+        {
+          "camera": {
+            "age_s": 20.7,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 5.998994689434767
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60073163512702,
+              "J3": 152.89868464410742,
+              "J4": -153.67624294507698
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741221.982898
+        }
+      ],
+      "response": {
+        "commanded": {
+          "e1": 6.0,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 6.0,
+          "e1_torque": 102.135,
+          "e1_torque_normalized": 0.383,
+          "grip_detected": false,
+          "joints": {
+            "J1": 407,
+            "J2": -28,
+            "J3": 65,
+            "J4": -88
+          },
+          "position_error": 0.0,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    },
+    {
+      "target_e1": 5,
+      "speed": 5,
+      "status": "completed",
+      "samples": [
+        {
+          "camera": {
+            "age_s": 21.9,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.994668997824192
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60075502183732,
+              "J3": 152.8985854823618,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741223.1772912
+        },
+        {
+          "camera": {
+            "age_s": 22.2,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.998084623366594
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60070824841671,
+              "J3": 152.8987838058531,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741223.479268
+        },
+        {
+          "camera": {
+            "age_s": 22.5,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.999522585421801
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2112311835298,
+              "J2": 88.60070824841671,
+              "J3": 152.8987838058531,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741223.8129215
+        }
+      ],
+      "response": {
+        "commanded": {
+          "e1": 5.0,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 4.991,
+          "e1_torque": 93.601,
+          "e1_torque_normalized": 0.357,
+          "grip_detected": false,
+          "joints": {
+            "J1": 404,
+            "J2": -27,
+            "J3": 82,
+            "J4": -101
+          },
+          "position_error": -0.009,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    },
+    {
+      "target_e1": 4.8,
+      "speed": 5,
+      "status": "completed",
+      "samples": [
+        {
+          "camera": {
+            "age_s": 23.7,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.800347611308098
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60070824841671,
+              "J3": 152.8985854823618,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741224.9715183
+        },
+        {
+          "camera": {
+            "age_s": 24.0,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.799448419362307
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60075502183732,
+              "J3": 152.8987838058531,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741225.2738795
+        },
+        {
+          "camera": {
+            "age_s": 24.3,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.799448419362307
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60073163512702,
+              "J3": 152.8985854823618,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741225.578904
+        }
+      ],
+      "response": {
+        "commanded": {
+          "e1": 4.8,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 4.813,
+          "e1_torque": 80.001,
+          "e1_torque_normalized": 0.3,
+          "grip_detected": false,
+          "joints": {
+            "J1": 407,
+            "J2": -28,
+            "J3": 36,
+            "J4": -95
+          },
+          "position_error": 0.013,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    },
+    {
+      "target_e1": 4.6,
+      "speed": 5,
+      "status": "completed",
+      "samples": [
+        {
+          "camera": {
+            "age_s": 25.5,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.60386835038662
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2112311835298,
+              "J2": 88.6006848617064,
+              "J3": 152.8985854823618,
+              "J4": -153.67624294507698
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741226.771343
+        },
+        {
+          "camera": {
+            "age_s": 25.7,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.600093699991703
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60073163512702,
+              "J3": 152.89868464410742,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741227.061839
+        },
+        {
+          "camera": {
+            "age_s": 26.0,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.599194508045912
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60073163512702,
+              "J3": 152.8985854823618,
+              "J4": -153.67624294507698
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741227.347114
+        }
+      ],
+      "response": {
+        "commanded": {
+          "e1": 4.6,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 4.625,
+          "e1_torque": 48.534,
+          "e1_torque_normalized": 0.182,
+          "grip_detected": false,
+          "joints": {
+            "J1": 406,
+            "J2": -31,
+            "J3": 68,
+            "J4": -95
+          },
+          "position_error": 0.025,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    },
+    {
+      "target_e1": 4.4,
+      "speed": 5,
+      "status": "completed",
+      "samples": [
+        {
+          "camera": {
+            "age_s": 27.2,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.410086199641228
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60075502183732,
+              "J3": 152.8987838058531,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741228.5475993
+        },
+        {
+          "camera": {
+            "age_s": 27.5,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.4021764770150185
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60070824841671,
+              "J3": 152.8985854823618,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741228.8556774
+        },
+        {
+          "camera": {
+            "age_s": 27.8,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.40019927918911
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60073163512702,
+              "J3": 152.8987838058531,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741229.1385648
+        }
+      ],
+      "response": {
+        "commanded": {
+          "e1": 4.4,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 4.441,
+          "e1_torque": -3.733,
+          "e1_torque_normalized": -0.014,
+          "grip_detected": false,
+          "joints": {
+            "J1": 410,
+            "J2": -31,
+            "J3": 52,
+            "J4": -94
+          },
+          "position_error": 0.041,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    },
+    {
+      "target_e1": 4.2,
+      "speed": 5,
+      "status": "completed",
+      "samples": [
+        {
+          "camera": {
+            "age_s": 29.0,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.211989231407642
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60073163512702,
+              "J3": 152.8987838058531,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741230.3559194
+        },
+        {
+          "camera": {
+            "age_s": 29.3,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.203001037240028
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60075502183732,
+              "J3": 152.89868464410742,
+              "J4": -153.67624294507698
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741230.6612363
+        },
+        {
+          "camera": {
+            "age_s": 29.6,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 4.199585877358913
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.21081630528275,
+              "J2": 88.60073163512702,
+              "J3": 152.89848632061612,
+              "J4": -153.67659158015795
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741230.9557621
+        }
+      ],
+      "response": {
+        "commanded": {
+          "e1": 4.2,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 4.252,
+          "e1_torque": -73.334,
+          "e1_torque_normalized": -0.278,
+          "grip_detected": false,
+          "joints": {
+            "J1": 413,
+            "J2": -31,
+            "J3": 46,
+            "J4": -88
+          },
+          "position_error": 0.052,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    },
+    {
+      "target_e1": 4.0,
+      "speed": 5,
+      "status": "completed",
+      "samples": [
+        {
+          "camera": {
+            "age_s": 30.9,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 3.9986129850149155
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2112311835298,
+              "J2": 88.60073163512702,
+              "J3": 152.89848632061612,
+              "J4": -153.67624294507698
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741232.1772964
+        },
+        {
+          "camera": {
+            "age_s": 31.1,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 3.9973543025553226
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60070824841671,
+              "J3": 152.8987838058531,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.318,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741232.4605198
+        },
+        {
+          "camera": {
+            "age_s": 31.4,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 3.997174557298422
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60073163512702,
+              "J3": 152.89848632061612,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741232.7653532
+        }
+      ],
+      "response": {
+        "commanded": {
+          "e1": 4.0,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 4.014,
+          "e1_torque": -126.135,
+          "e1_torque_normalized": -0.473,
+          "grip_detected": false,
+          "joints": {
+            "J1": 408,
+            "J2": -41,
+            "J3": 55,
+            "J4": -94
+          },
+          "position_error": 0.014,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    },
+    {
+      "target_e1": 3.9,
+      "speed": 5,
+      "status": "completed",
+      "samples": [
+        {
+          "camera": {
+            "age_s": 32.6,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 3.895789384841919
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2110237444063,
+              "J2": 88.60075502183732,
+              "J3": 152.89868464410742,
+              "J4": -153.67641726261743
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741233.9564662
+        },
+        {
+          "camera": {
+            "age_s": 32.9,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 3.8959691300988197
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2112311835298,
+              "J2": 88.60075502183732,
+              "J3": 152.8987838058531,
+              "J4": -153.67624294507698
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741234.241079
+        },
+        {
+          "camera": {
+            "age_s": 33.2,
+            "device": {
+              "ip": "192.168.201.89",
+              "model": "JHEM600GM-HM",
+              "serial": "457108625727"
+            },
+            "enabled": true,
+            "error": "",
+            "open": true
+          },
+          "envelope": {
+            "X": {
+              "max": 450.0,
+              "min": 200.0
+            },
+            "Y": {
+              "max": 380.0,
+              "min": -250.0
+            },
+            "Z": {
+              "max": 400.0,
+              "min": 70.0
+            },
+            "enabled": true
+          },
+          "robot": {
+            "connected": true,
+            "control_mode": {
+              "mode": "auto",
+              "value": 1
+            },
+            "enabled": true,
+            "endpoint": "192.168.201.220:56788",
+            "errors": [],
+            "external_axes": {
+              "E1": 3.896508365869522
+            },
+            "external_axes_source": "native_motion_status",
+            "external_axes_units": {
+              "E1": "mm"
+            },
+            "joints": {
+              "J1": 228.2112311835298,
+              "J2": 88.60073163512702,
+              "J3": 152.8987838058531,
+              "J4": -153.67624294507698
+            },
+            "lua_app_initialized": true,
+            "ok": true,
+            "pose_mm": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 87.823,
+              "X": 226.317,
+              "Y": 375.703,
+              "Z": 266.81
+            },
+            "program_state": {
+              "state": "running",
+              "value": 1
+            },
+            "system_state": {
+              "state": "running",
+              "value": 2
+            }
+          },
+          "sequence": {
+            "active": false,
+            "name": "researcher_home",
+            "state": "done"
+          },
+          "target": {
+            "config": "Wide",
+            "open_claw_trial": true,
+            "plate_profile_id": "48_well_projected_20261026",
+            "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+            "rz": 89.7652192188176,
+            "x": 312.0124178577057,
+            "y": -65.47790542678248,
+            "z_calibrated": 73.718
+          },
+          "ts": 1793741234.5468113
+        }
+      ],
+      "response": {
+        "commanded": {
+          "e1": 3.9,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 3.903,
+          "e1_torque": -137.868,
+          "e1_torque_normalized": -0.517,
+          "grip_detected": false,
+          "joints": {
+            "J1": 408,
+            "J2": -34,
+            "J3": 55,
+            "J4": -129
+          },
+          "position_error": 0.003,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    }
+  ],
+  "phases": [
+    {
+      "receipt": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\full_calibration_real_five_retry03_20261103\\imaging\\pickup_approach_trial_20261103.json",
+      "sha256": "52ff6e98a81df2ccb563177b784ff0b856c05440c7460577d7fc2f5ee73db772"
+    },
+    {
+      "receipt": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\full_calibration_real_five_retry03_20261103\\imaging\\pickup_loaded_return_trial_20261103.json",
+      "sha256": "86a867aec29e63cbe5be968c51002304606abc646c0da6d46b0917bdf7a5cea5"
+    }
+  ],
+  "final_state": {
+    "camera": {
+      "age_s": 50.5,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.8974073249846697
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.41994329874888,
+        "J2": 84.87686575379037,
+        "J3": 52.05594907317273,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.019
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -65.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1793741251.8143644
+  },
+  "finished_at": 1793741251.8198953
+}

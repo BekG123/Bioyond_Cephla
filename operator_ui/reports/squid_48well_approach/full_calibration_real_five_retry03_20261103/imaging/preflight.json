@@ -1,0 +1,172 @@
+{
+  "authorization": "Operator explicitly requested a retry after repeat02 stopped on stationary vision disagreement. Plate remains in pickup holder, claws empty; existing clearance and supervision retained. Full calibration, drop-off, five real images, pickup/Home with unchanged checks and no automatic retry.",
+  "robot": {
+    "camera": {
+      "age_s": 0.4,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": -0.002510399781385786
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42098049436663,
+        "J2": 84.87686575379037,
+        "J3": 52.05604823491838,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1793740942.7064252
+  },
+  "squid": {
+    "available": true,
+    "connected": true,
+    "status": "completed",
+    "message": "Squid imaging complete.",
+    "simulation": false,
+    "job": {
+      "run_id": "b8b0b48dbdc34224bd08b0afe316e8ae",
+      "experiment_id": "Lacry_aef99d3c47af438fa328fdc520fd37a7_2026-11-03_13-11-06.045002",
+      "started_at": 1793740266.1018877,
+      "ended_at": 1793740274.478713,
+      "progress": {
+        "timepoint": 3,
+        "fov": 1,
+        "images": 3
+      },
+      "expected": {
+        "timepoints": 5,
+        "regions": 1,
+        "fovs": 1,
+        "channels": 1,
+        "z": 1
+      },
+      "stats": {
+        "total_images": 5,
+        "total_timepoints": 5,
+        "total_duration_seconds": 8.37923288345337,
+        "errors_encountered": 0
+      },
+      "reason": "completed",
+      "output_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\full_calibration_real_five_20261103\\imaging\\images\\Lacry_aef99d3c47af438fa328fdc520fd37a7_2026-11-03_13-11-06.045002",
+      "heartbeat_at": 1793740271.1446717
+    },
+    "completion_confirmed": true,
+    "real_imaging_complete": true,
+    "checked_at": 1793740942.6197326,
+    "session": {
+      "pid": 39824,
+      "created_at": 1793739553.3891573
+    },
+    "monitoring_only": true,
+    "retrieval_authorized": false,
+    "cleanup": {
+      "version": 1,
+      "status": "completed",
+      "experiment_id": "Lacry_aef99d3c47af438fa328fdc520fd37a7_2026-11-03_13-11-06.045002",
+      "error": "",
+      "return_position": {
+        "x_mm": 24.549893750000003,
+        "y_mm": 23.01001875,
+        "z_mm": 0.063984375
+      },
+      "position": {
+        "x_mm": 24.549893750000003,
+        "y_mm": 23.01001875,
+        "z_mm": 0.063984375
+      }
+    },
+    "stage_simulated": false,
+    "camera_simulated": false,
+    "controller_serial": "12769210"
+  },
+  "bridge": {
+    "controller_serial": "12769210",
+    "stage_simulated": false,
+    "reference_hash": "bb24c0d30d64391045a97f6b107835033e4e7d1767ffac31eecbe8e93e8d35c1",
+    "dropoff": {
+      "x_mm": 0.5000625,
+      "y_mm": 0.5000625,
+      "z_mm": 0.063984375
+    },
+    "loading_route": "Squid native loading path: retract objective, Y15, X35, loading Y, loading X, restore scanning limits, taught Z",
+    "scan_limits": {
+      "x_mm": [
+        10.0,
+        112.5
+      ],
+      "y_mm": [
+        6.0,
+        76.0
+      ],
+      "z_mm": [
+        0.05,
+        7.0
+      ]
+    },
+    "imaging_lifecycle_version": 1,
+    "state_io_version": 1,
+    "software_directory": "C:\\Users\\Cephla\\Desktop\\squid-latest\\software",
+    "lacry_bridge_directory": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\squid_bridge"
+  },
+  "plan_sha256": "69483a454ef5ad7061757fd0600178ddff595a2225f0467924efd248a25a7cdb",
+  "hardware_motion_started": false
+}
