@@ -295,3 +295,16 @@
 - Following the operator's instruction to continue, one continuous lift from Squid to Z291.24 at speed 5 and the tested transit/Home route at 137 completed without faults or jaw commands. Final Home feedback was X289.970/Y62.630/Z248.017/Rz-3.880, preserving grip near 3.899 mm.
 - Operator confirmed: "Yes, secure and level." This accepts the completed calibration -> Squid -> Home closed-claw sequence. The subsequent requested full drop-off/pickup run is separate.
 - [Return trial](../squid_48well_approach/full_calibration_closed_transfer_20261103/return_trial.json) and [return plan](../squid_48well_approach/full_calibration_closed_transfer_20261103/return_plan.json), bound to the forward receipt.
+
+## Full calibration through Squid drop-off and pickup accepted - 3 November 2026
+
+- One sequential run completed full calibration, +Y10.4 taught alignment/descent, grip, proof lift, loaded Home, Squid delivery/release, empty Home, Squid pickup, and final loaded Home. No controller faults, retries or intermediate operator intervention. Total elapsed 314.7 seconds.
+- Final Home feedback X289.970/Y62.630/Z248.019/Rz-3.880; grip approximately 3.8985 mm. Operator confirmed the full calibration-to-drop-off/pickup skill was successfully tested, then returned the plate to the arm holder for a separate closed-claw test.
+- [Run and phase evidence](../squid_48well_approach/full_calibration_handling_20261103/run.json), [fresh calibration/descent](../projected_alignment/accepted_y104_repeat_486cd0240efe490ca23670bb51053a96/attempt.json). Human acceptance is recorded here; original telemetry is preserved. Existing local Flask, pickup-profile and camera/controller dependencies remain outside this experiment's code scope.
+
+## Full calibration through complete closed-claw round trip accepted - 3 November 2026
+
+- Fresh full calibration, taught +Y10.4 mm alignment/descent, staged grip, proof lift and loaded Home completed, followed by all eight Home -> Squid -> Home travel legs with no release or regrip at Squid. No controller faults or automatic retries; total elapsed 278.7 seconds.
+- Squid arrival Z266.808; final Home X289.970/Y62.630/Z248.019/Rz-3.880, grip approximately 3.8954 mm. Transit speed 137; Squid descent and continuous lift at speed 5.
+- Asked whether the plate remained secure and level, the operator confirmed "Yes, great job". This accepts the complete sequence, including the return Home, at the tested fixture setup.
+- [Run](../squid_48well_approach/full_calibration_closed_roundtrip_20261103/run.json), [eight-leg transfer](../squid_48well_approach/full_calibration_closed_roundtrip_20261103/closed_roundtrip_trial.json), and [fresh calibration/descent](../projected_alignment/accepted_y104_repeat_6eeb03b0a20641439f332bdee8b7528a/attempt.json). Original telemetry retains its pending-assessment status; this entry records subsequent physical acceptance. Existing local Flask, active pickup profile and camera/controller configuration remain runtime dependencies.
