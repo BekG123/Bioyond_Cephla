@@ -27,7 +27,7 @@ def invoke(module, flags, *positional):
         sys.argv = prior
 
 
-def main(closed_claw=False):
+def main(closed_claw=False, calibration_only=False):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
     args = parser.parse_args()
@@ -111,6 +111,10 @@ def main(closed_claw=False):
         near(r['pose_mm'], home['home'], .05)
         write(OUT / 'calibrated_home.json', dict(state=state, sequence=seq, calibration_folder=str(folder)))
         phase('calibrated_loaded_home_completed')
+        if calibration_only:
+            record['final_state'] = state
+            record['status'] = 'full_calibration_loaded_home_completed_pending_operator_assessment'
+            return
         if closed_claw:
             import execute_continuous_squid_return_20261103 as travel
             from copy import deepcopy
