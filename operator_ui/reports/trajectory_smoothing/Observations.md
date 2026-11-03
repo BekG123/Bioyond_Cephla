@@ -245,3 +245,11 @@
 - All eight commanded legs completed without controller faults. Squid arrival was Z266.808 mm; final Home was X289.970/Y62.630/Z248.019/Rz-3.880. Transit speed 137, Squid descent and continuous lift speed 5.
 - No gripper commands, release, startup or retries. This demonstrates loaded travel with the plate retained, not a drop-off/pickup cycle.
 - [Trial](../squid_48well_approach/closed_claw_roundtrip_trial_20261103.json) and [plan](../squid_48well_approach/closed_claw_roundtrip_plan_20261103.json). Seven-cycle repeatability results will be recorded separately after observation.
+
+## Seven closed-claw Squid round trips accepted - 3 November 2026
+
+- Seven sequential Home to Squid to Home cycles completed between 11:32:29 and 11:36:31 PST. All seven individual receipts contain eight completed legs; their SHA-256 hashes match the batch record. Each cycle took 33.79 to 34.89 seconds.
+- Transit speed 137; descent to Z266.81 and continuous lift to Z291.24 at speed 5. No release, gripper command, controller fault or automatic retry. Final Home feedback was approximately X289.970/Y62.630/Z248.019/Rz-3.880.
+- Asked whether the plate remained secure and level throughout, the operator replied "Yes, nice job." The operator also queried the cycle count because the last progress message mentioned cycle 4; saved records independently confirm seven completed cycles (56 legs). The progress message lagged execution.
+- [Batch and seven individual receipts](../squid_48well_approach/closed_claw_seven_20261103/batch.json). Original telemetry retains its pending-assessment status; this entry records subsequent human acceptance.
+- Result: 7/7 completed loaded, closed-claw round trips at the current fixture setup. This is repeatability evidence for this tested route, not a release/pickup test or a general reliability guarantee.
