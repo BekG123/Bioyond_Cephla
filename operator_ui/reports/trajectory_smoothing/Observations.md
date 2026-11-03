@@ -288,3 +288,10 @@
 - The pinned forward Squid route completed at transit speed 137 and final descent speed 5, ending X226.317/Y375.703/Z266.808/Rz87.823 with claws closed near 3.9 mm. No release or return from Squid was requested or executed.
 - Asked whether the plate was level and correctly positioned in the Squid holder, the operator confirmed "Yes". This accepts the combined calibration-to-Squid closed-claw trial; it is not a release/pickup result for this run.
 - [Calibration/descent](../projected_alignment/accepted_y104_repeat_81470b98b2f845208e3a628354e3afc4/attempt.json), [calibration completion and evidence hashes](../squid_48well_approach/full_calibration_closed_transfer_20261103/calibration_completion.json), and [transfer receipt](../squid_48well_approach/full_calibration_closed_transfer_20261103/trial.json). Original telemetry remains unchanged; human acceptance is recorded here. Existing local Flask modifications, active pickup profile and camera/controller configuration remain runtime dependencies outside this narrowly scoped experiment commit.
+
+## Calibrated closed-claw round trip completed and accepted - 3 November 2026
+
+- Scope correction: the operator intended the closed-claw sequence to include the return Home. The earlier forward-only stop was the assistant's interpretation, not the intended end of the sequence.
+- Following the operator's instruction to continue, one continuous lift from Squid to Z291.24 at speed 5 and the tested transit/Home route at 137 completed without faults or jaw commands. Final Home feedback was X289.970/Y62.630/Z248.017/Rz-3.880, preserving grip near 3.899 mm.
+- Operator confirmed: "Yes, secure and level." This accepts the completed calibration -> Squid -> Home closed-claw sequence. The subsequent requested full drop-off/pickup run is separate.
+- [Return trial](../squid_48well_approach/full_calibration_closed_transfer_20261103/return_trial.json) and [return plan](../squid_48well_approach/full_calibration_closed_transfer_20261103/return_plan.json), bound to the forward receipt.
