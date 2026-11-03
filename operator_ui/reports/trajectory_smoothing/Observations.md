@@ -272,3 +272,11 @@
 - Following the accepted pickup, the same loaded approach, release to 7 mm and continuous-lift empty return completed without controller faults. Final Home feedback was X289.970/Y62.630/Z248.019/Rz-3.880.
 - Asked whether the plate was flat and seated in Squid, the operator confirmed "Yes, nicely done" and requested seven handling cycles.
 - [Repeat drop-off evidence](../squid_48well_approach/dropoff_repeat_02_20261103/trial.json). This records the completed individual drop-off; the seven-cycle batch is a separate experiment pending completion and operator assessment.
+
+## Seven complete Squid handling cycles accepted - 3 November 2026
+
+- Operator confirmed all pickups stayed secure and all drop-offs left the plate flat: "Yes, everything went smoothly nice job."
+- All seven sequential cycles completed: empty Home to Squid, gradual pickup, loaded Home, loaded delivery to Squid, release, and empty Home. No controller faults or automatic retries. Transit speed 137; local descent/lift and jaw commands at speed 5. Grip target 3.9 mm and release target 7 mm.
+- Total elapsed time 601.9 seconds. Individual cycles: 85.3, 86.2, 85.8, 86.0, 85.9, 85.6 and 86.9 seconds. Each cycle's pickup and drop-off receipt hashes were verified against the batch record.
+- Final feedback: Home X289.970/Y62.630/Z248.019/Rz-3.880, claws approximately 7.003 mm; plate left in Squid. This is 7/7 observed handling success at the current fixture setup, distinct from the earlier seven closed-claw travel cycles.
+- [Batch and per-cycle evidence](../squid_48well_approach/handling_seven_20261103/batch.json). Original telemetry retains its pending-assessment status; this entry records subsequent human acceptance. No claim of general reliability across other plates or fixture arrangements.

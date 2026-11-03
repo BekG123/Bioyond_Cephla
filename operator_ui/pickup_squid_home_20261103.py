@@ -10,11 +10,12 @@ from prepare_squid_destination import validate
 from proof_lift_plate import api, near, write
 
 
-def main():
+def main(output_dir=None, authorization=None):
+    output_dir = FOLDER if output_dir is None else output_dir
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
     args = parser.parse_args()
-    output = FOLDER / 'pickup_home_trial_20261103.json'
+    output = output_dir / 'pickup_home_trial_20261103.json'
     if output.exists():
         raise RuntimeError('Already attempted; no retry')
     source = FOLDER / 'closed_claw_roundtrip_plan_20261103.json'
@@ -31,13 +32,13 @@ def main():
         plan.update(routes={'from_capture': points}, leg_speeds=speeds,
                     completion_status=phase + '_completed_pending_operator_assessment',
                     operator_intent='Operator confirmed successful drop-off and requested pickup and Home using the tested route.')
-        path = FOLDER / (phase + '_plan_20261103.json')
+        path = output_dir / (phase + '_plan_20261103.json')
         if path.exists():
             if json.loads(path.read_bytes()) != plan:
                 raise RuntimeError('Trial plan changed')
         else:
             save(path, plan)
-        plans.append((path, sha(path), FOLDER / (phase + '_trial_20261103.json'), speeds))
+        plans.append((path, sha(path), output_dir / (phase + '_trial_20261103.json'), speeds))
     if not api('state')['robot'].get('connected'):
         api('connect', {'ip': '192.168.201.220'})
 
@@ -64,7 +65,7 @@ def main():
     if not args.execute:
         return
     record = dict(status='started', at=time.time(), source_state=initial,
-                  operator_confirmation='yes, now attempt to pick it up and take it home',
+                  operator_confirmation=authorization or 'yes, now attempt to pick it up and take it home',
                   source_sha256=source_hash, steps=[], phases=[])
     write(output, record)
 
