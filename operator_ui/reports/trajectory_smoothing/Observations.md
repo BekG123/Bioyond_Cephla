@@ -260,3 +260,9 @@
 - Claws opened to 7 mm at speed 5, with three stable feedback checks (approximately 7.002 mm). One continuous lift reached Z291.243 at speed 5; the remaining route ran at 137, ending Home at X289.970/Y62.629/Z248.018/Rz-3.880 without controller faults.
 - Asked whether the plate remained flat and seated in the holder, the operator confirmed "yes" and requested a separate pickup test.
 - [Release evidence](../squid_48well_approach/release_empty_home_20261103.json), [empty return](../squid_48well_approach/empty_return_trial_20261103.json), and [approach](../squid_48well_approach/dropoff_approach_trial_20261103.json). Acceptance applies to this drop-off and empty return at the current fixture setup; pickup is a subsequent experiment.
+
+## Squid pickup and loaded Home accepted - 3 November 2026
+
+- Empty approach to Z266.81 completed on the same tested route. The previous gradual closing sequence (6, 5, 4.8, 4.6, 4.4, 4.2, 4.0, 3.9 mm at speed 5) reached measured 3.8978 mm, with three stable checks per command.
+- Continuous lift to Z291.24 at speed 5 and transit at 137 completed at Home without controller faults or retries. Operator confirmed: "Yes, secure and level."
+- [Pickup and Home evidence](../squid_48well_approach/pickup_home_trial_20261103.json). This accepts one pickup and loaded return at the current fixture setup; the requested subsequent drop-off is a separate trial.
