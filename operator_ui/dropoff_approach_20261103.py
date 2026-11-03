@@ -6,7 +6,8 @@ from capture_squid_approach_20261103 import FOLDER, sha, save
 from proof_lift_plate import api
 
 
-def main():
+def main(output_dir=None):
+    output_dir = FOLDER if output_dir is None else output_dir
     source = FOLDER / 'closed_claw_roundtrip_plan_20261103.json'
     if sha(source) != '4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81':
         raise RuntimeError('Accepted route changed')
@@ -15,8 +16,8 @@ def main():
     plan['leg_speeds'] = [137, 137, 137, 5]
     plan['completion_status'] = 'at_squid_awaiting_supported_plate_confirmation'
     plan['operator_intent'] = 'Operator requested drop-off using tested travel; stop at seat before release for support confirmation.'
-    runner.PLAN = FOLDER / 'dropoff_approach_plan_20261103.json'
-    runner.OUTPUT = FOLDER / 'dropoff_approach_trial_20261103.json'
+    runner.PLAN = output_dir / 'dropoff_approach_plan_20261103.json'
+    runner.OUTPUT = output_dir / 'dropoff_approach_trial_20261103.json'
     if runner.PLAN.exists():
         if json.loads(runner.PLAN.read_bytes()) != plan:
             raise RuntimeError('Trial plan changed')

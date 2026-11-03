@@ -9,17 +9,18 @@ from capture_squid_approach_20261103 import FOLDER, sha, save
 from proof_lift_plate import api, near, write
 
 
-def main():
+def main(output_dir=None, authorization=None):
+    output_dir = FOLDER if output_dir is None else output_dir
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
     args = parser.parse_args()
-    output = FOLDER / 'release_empty_home_20261103.json'
+    output = output_dir / 'release_empty_home_20261103.json'
     if output.exists():
         raise RuntimeError('Already attempted; no automatic retry')
     source = FOLDER / 'closed_claw_roundtrip_plan_20261103.json'
     if sha(source) != '4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81':
         raise RuntimeError('Reviewed route changed')
-    approach = FOLDER / 'dropoff_approach_trial_20261103.json'
+    approach = output_dir / 'dropoff_approach_trial_20261103.json'
     receipt = json.loads(approach.read_bytes())
     if receipt['status'] != 'at_squid_awaiting_supported_plate_confirmation':
         raise RuntimeError('Completed approach required')
@@ -27,9 +28,9 @@ def main():
     plan['routes']['from_capture'] = plan['routes']['from_capture'][4:]
     plan['leg_speeds'] = [5, 137, 137, 137]
     plan['completion_status'] = 'empty_home_completed_pending_operator_assessment'
-    plan['operator_intent'] = 'Operator confirmed plate supported and claws clear; release to 7 mm then continuous lift and empty Home.'
-    runner.PLAN = FOLDER / 'empty_return_plan_20261103.json'
-    runner.OUTPUT = FOLDER / 'empty_return_trial_20261103.json'
+    plan['operator_intent'] = authorization or 'Operator confirmed plate supported and claws clear; release to 7 mm then continuous lift and empty Home.'
+    runner.PLAN = output_dir / 'empty_return_plan_20261103.json'
+    runner.OUTPUT = output_dir / 'empty_return_trial_20261103.json'
     if runner.PLAN.exists():
         if json.loads(runner.PLAN.read_bytes()) != plan:
             raise RuntimeError('Plan changed')
@@ -64,7 +65,7 @@ def main():
         print('Validated release to 7 mm at speed 5, then empty Home; no movement.')
         return
     record = dict(status='release_requested', at=time.time(), source_state=initial,
-                  operator_confirmation='yes, drop-off', approach_sha256=sha(approach),
+                  operator_confirmation=authorization or 'yes, drop-off', approach_sha256=sha(approach),
                   command=dict(action='move', e1=7, speed=5), release_samples=[])
     write(output, record)
     try:

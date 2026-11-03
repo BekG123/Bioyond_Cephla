@@ -266,3 +266,9 @@
 - Empty approach to Z266.81 completed on the same tested route. The previous gradual closing sequence (6, 5, 4.8, 4.6, 4.4, 4.2, 4.0, 3.9 mm at speed 5) reached measured 3.8978 mm, with three stable checks per command.
 - Continuous lift to Z291.24 at speed 5 and transit at 137 completed at Home without controller faults or retries. Operator confirmed: "Yes, secure and level."
 - [Pickup and Home evidence](../squid_48well_approach/pickup_home_trial_20261103.json). This accepts one pickup and loaded return at the current fixture setup; the requested subsequent drop-off is a separate trial.
+
+## Repeated Squid drop-off accepted - 3 November 2026
+
+- Following the accepted pickup, the same loaded approach, release to 7 mm and continuous-lift empty return completed without controller faults. Final Home feedback was X289.970/Y62.630/Z248.019/Rz-3.880.
+- Asked whether the plate was flat and seated in Squid, the operator confirmed "Yes, nicely done" and requested seven handling cycles.
+- [Repeat drop-off evidence](../squid_48well_approach/dropoff_repeat_02_20261103/trial.json). This records the completed individual drop-off; the seven-cycle batch is a separate experiment pending completion and operator assessment.
