@@ -253,3 +253,10 @@
 - Asked whether the plate remained secure and level throughout, the operator replied "Yes, nice job." The operator also queried the cycle count because the last progress message mentioned cycle 4; saved records independently confirm seven completed cycles (56 legs). The progress message lagged execution.
 - [Batch and seven individual receipts](../squid_48well_approach/closed_claw_seven_20261103/batch.json). Original telemetry retains its pending-assessment status; this entry records subsequent human acceptance.
 - Result: 7/7 completed loaded, closed-claw round trips at the current fixture setup. This is repeatability evidence for this tested route, not a release/pickup test or a general reliability guarantee.
+
+## Squid drop-off and empty return accepted - 3 November 2026
+
+- Tested forward route reached Z266.81. Operator confirmed the plate was flat, supported and claws clear before release.
+- Claws opened to 7 mm at speed 5, with three stable feedback checks (approximately 7.002 mm). One continuous lift reached Z291.243 at speed 5; the remaining route ran at 137, ending Home at X289.970/Y62.629/Z248.018/Rz-3.880 without controller faults.
+- Asked whether the plate remained flat and seated in the holder, the operator confirmed "yes" and requested a separate pickup test.
+- [Release evidence](../squid_48well_approach/release_empty_home_20261103.json), [empty return](../squid_48well_approach/empty_return_trial_20261103.json), and [approach](../squid_48well_approach/dropoff_approach_trial_20261103.json). Acceptance applies to this drop-off and empty return at the current fixture setup; pickup is a subsequent experiment.
