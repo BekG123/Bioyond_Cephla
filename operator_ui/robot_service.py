@@ -267,6 +267,49 @@ class RobotService:
             raise ValueError('Linear E1 gripper feedback is unavailable')
         return {'E1': info['external_axes']['E1']}
 
+    def position_calibration_e2(self) -> dict:
+        """Single E2 correction using the versioned controller extension. No retry."""
+        from calibration_e2 import accepted
+        def run():
+            from draggo import DragGoRPC
+            import secrets
+            refusal = self._preflight()
+            if refusal:
+                return _fail(refusal)
+            rpc = DragGoRPC(self._endpoint_addr()[0])
+            before = rpc.info()
+            if (any(before.get(k, True) for k in ('error', 'emergency', 'moving', 'drag', 'manual'))
+                    or not before.get('enabled')
+                    or before.get('external_units', {}).get('E2') != 'degrees'):
+                return _fail('E2 correction requires healthy stationary automatic mode.')
+            e2 = before['external_axes']['E2']
+            if not math.isfinite(e2) or abs(e2 - 1.77) > 2:
+                return _fail('E2 correction exceeds the 2-degree commissioning bound; inspect manually.')
+            pose = self.pose_mm()
+            token = secrets.randbelow(1000000) + 1
+            # Non-motion capability probe. Older programs cannot echo this nonce.
+            result = self._hostpoint({7: float(token)}, 7, 5)
+            if not result.get('ok'):
+                return result
+            reply = self.robot.get_sys_var_i([7, 8])
+            if reply.get(7) != token or reply.get(8) != 250101:
+                return _fail('Publish the E2 controller extension first; no E2 motion sent.')
+            result = self._hostpoint({7: float(token)}, 8, 10)
+            if not result.get('ok'):
+                return result  # Unknown completion is never retried.
+            after = rpc.info()
+            if (any(after.get(k, True) for k in ('error', 'emergency', 'moving', 'drag'))
+                    or after.get('external_units', {}).get('E2') != 'degrees'
+                    or not accepted(after['external_axes']['E2'])):
+                return _fail('E2 correction did not verify within the accepted 1.769–1.82 degree range; no retry.')
+            if any(abs(self.pose_mm()[k] - pose[k]) > .1 for k in ('X', 'Y', 'Z', 'Rz')):
+                return _fail('Arm pose changed during E2 correction; inspect before continuing.')
+            if any(abs(after['external_axes'][k] - v) > .05
+                   for k, v in before['external_axes'].items() if k != 'E2'):
+                return _fail('Another external axis changed during E2 correction.')
+            return dict(ok=True, e2_degrees=after['external_axes']['E2'])
+        return self._locked(run)
+
     # ---------------------------------------------------------------- guards
 
     def _preflight(self) -> Optional[str]:
