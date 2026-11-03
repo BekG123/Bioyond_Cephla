@@ -5,10 +5,20 @@ python launch.py --software path/to/squid/software --simulation --start-server
 All arguments after --software's value are passed to Squid unchanged.
 """
 import argparse
+import json
 import os
 from pathlib import Path
 import runpy
 import sys
+
+
+def software_directory(value=None):
+    """One explicit installation; never fall back to an old temporary copy."""
+    selected = value or os.environ.get('SQUID_SOFTWARE_DIR') or Path.home()/'Desktop/squid-latest/software'
+    software = Path(selected).expanduser().resolve()
+    if not (software/'main_hcs.py').is_file():
+        raise SystemExit(f'Squid entry point missing in {software}. Set --software or SQUID_SOFTWARE_DIR.')
+    return software
 
 
 def configure_stage_only(config):
@@ -27,7 +37,10 @@ def configure_stage_only(config):
 
 def main():
     parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('--software', required=True)
+    parser.add_argument('--software', help='Squid software directory; defaults to SQUID_SOFTWARE_DIR or Desktop/squid-latest/software.')
+    parser.add_argument('--check', action='store_true', help='Print launch paths only; do not import Squid or start hardware.')
+    parser.add_argument('--require-real-camera', action='store_true',
+                        help='Refuse simulated camera or stage configuration before starting hardware.')
     parser.add_argument('--simulate-camera', action='store_true',
                         help='Use synthetic camera frames with the physical stage for integration tests.')
     parser.add_argument('--controller-serial',
@@ -35,10 +48,17 @@ def main():
     parser.add_argument('--stage-only', action='store_true',
                         help='Physical XYZ stage test with synthetic images and no optical peripherals.')
     options, arguments = parser.parse_known_args()
-    software = Path(options.software).resolve()
+    if options.require_real_camera and (options.stage_only or options.simulate_camera or '--simulation' in arguments):
+        raise SystemExit('Real-camera mode cannot use simulation flags.')
+    software = software_directory(options.software)
     main_file = software/'main_hcs.py'
-    if not main_file.is_file():
-        raise SystemExit('Choose the Squid software folder containing main_hcs.py.')
+    if options.check:
+        print(json.dumps(dict(software=str(software), entry_point=str(main_file),
+            bridge=str(Path(__file__).resolve()), stage_only=options.stage_only,
+            camera_simulated=options.stage_only or options.simulate_camera or '--simulation' in arguments,
+            stage_simulated='--simulation' in arguments, controller_serial=options.controller_serial,
+            arguments=arguments, started=False), indent=2))
+        return
     os.chdir(software)
     os.environ['QT_API'] = 'pyqt5'  # Match shipped main_hcs.py before importing Qt.
     sys.path.insert(0, str(software))
@@ -46,6 +66,8 @@ def main():
     install_state_io()
     # Apply flags before modules such as squid.config cache device configuration.
     import control._def as config
+    if options.require_real_camera and (config.SIMULATE_CAMERA or config.SIMULATE_MICROCONTROLLER):
+        raise SystemExit('Real-camera mode requires physical camera and stage configuration. No hardware started.')
     if options.stage_only:
         if '--simulation' in arguments:
             raise SystemExit('Stage-only testing cannot use full simulation.')
@@ -76,7 +98,8 @@ def main():
         install_lifecycle(self)
         # Read-only capability evidence for deployment checks.
         reference = self._commands['get_stage_reference']
-        self._commands['get_stage_reference'] = lambda: dict(reference(), state_io_version=1)
+        self._commands['get_stage_reference'] = lambda: dict(reference(), state_io_version=1,
+            software_directory=str(software), lacry_bridge_directory=str(Path(__file__).resolve().parent))
     MicroscopeControlServer.__init__ = initialize
     sys.argv = [str(main_file), *arguments]
     runpy.run_path(str(main_file), run_name='__main__')

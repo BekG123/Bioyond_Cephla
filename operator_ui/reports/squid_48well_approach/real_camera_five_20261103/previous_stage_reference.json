@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "controller_serial": "12769210",
+  "stage_simulated": false,
+  "dropoff": {
+    "x_mm": 0.05,
+    "y_mm": 0.2,
+    "z_mm": 1.05
+  },
+  "original_operator_taught_dropoff": {
+    "x_mm": -0.05000625,
+    "y_mm": 0.0508,
+    "z_mm": 1.05
+  },
+  "operator_confirmed": true,
+  "previous_motion_hold": "Live return on 2026-10-23 failed at the final MOVETO_X to -0.05000625 mm with CMD_EXECUTION_ERROR. Stage stopped at X34.9996125/Y0.05318125/Z0.10003125 mm. Reviewed as a homed-range rejection; operator explicitly approved the positive-X retry.",
+  "revision_authorization": "Approve Y0.200 mm trial\u2014stage clear, E-stop supervised",
+  "live_trial_report": "reports/squid_stage/901f1e98a64c409d99692fff6a5d244f.json",
+  "successful_retry_report": "reports\\squid_stage\\y020_trial_20261024T160037Z\\trial.json",
+  "measured_retry_endpoint": {
+    "x_mm": 0.05000625,
+    "y_mm": 0.200025,
+    "z_mm": 1.05
+  },
+  "stage_return_verified": true,
+  "accepted_for_robot_loading": true,
+  "operator_acceptance": "2026-10-24: operator confirmed the holder remains correctly positioned for taught robot drop-off and pickup after the Y0.200 stage-only trial.",
+  "source": "Operator-accepted inward Y revision after repeated near-home short stops.",
+  "units": "millimeters in Squid stage coordinates, not robot TCP coordinates",
+  "home": "Native Squid XYZ homing; not the saved drop-off position",
+  "return_policy": "Squid native loading path with saved loading XY: retract objective, Y15, X35, loading Y, loading X, restore scanning limits, taught Z. Robot stays Home. Return after scan requires exact successful acquisition completion.",
+  "validation": "Three matching physical-stage readbacks within unchanged 0.020 mm per-axis tolerance. Robot remained at Home; holder placement accepted by operator.",
+  "previous_reference_sha256": "8ce112acb6cc50df53319fb9c3354ffe09768db8b99969a72b345a04ce07666a"
+}
