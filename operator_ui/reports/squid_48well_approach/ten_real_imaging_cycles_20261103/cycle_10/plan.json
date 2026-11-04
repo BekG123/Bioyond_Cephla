@@ -1,0 +1,53 @@
+{
+  "profile": {
+    "label": "Five real-camera frames at one explicit site",
+    "simulation": false,
+    "stage_simulated": false,
+    "camera_simulated": false,
+    "stage_controller_serial": "12769210",
+    "command": "run_acquisition_from_yaml",
+    "params": {
+      "settings_sha256": "e042721cdf8a51e289b7848c66f18c9f7a2190ab5928324dda26a8d67b6f1ad0"
+    },
+    "timeout_s": 180,
+    "loading_command": "return_to_recorded_dropoff",
+    "loading_position": {
+      "x_mm": 0.5000625,
+      "y_mm": 0.5000625,
+      "z_mm": 0.063984375
+    },
+    "return_waypoints": [],
+    "yaml_sha256": "8f0ada23822f46b9e3cf223137c1bf745abcee6edc6b91dada977389796b0bce",
+    "id": "real_five",
+    "captured_yaml": "acquisition:\n  experiment_id: current_Squid_settings\n  skip_saving: false\n  start_time: 0\n  widget_type: flexible\n  xy_mode: Manual\nautofocus:\n  contrast_af: false\n  laser_af: false\nchannels:\n- camera: null\n  camera_settings:\n    exposure_time_ms: 20.0\n    gain_mode: 10.0\n    pixel_format: MONO8\n  confocal_hardware_settings: null\n  confocal_override: null\n  display_color: '#FFFFFF'\n  enabled: true\n  filter_position: 1\n  filter_wheel: null\n  illumination_settings:\n    illumination_channel: BF LED matrix full\n    intensity: 5.0\n  name: BF LED matrix full\n  z_offset_um: 0.0\nflexible_scan:\n  delta_x_mm: 0.9\n  delta_y_mm: 0.9\n  nx: 1\n  ny: 1\n  overlap_percent: 10.0\n  positions:\n  - center_mm:\n    - 24.55\n    - 23.01\n    fovs:\n    - - 24.55\n      - 23.01\n      - 0.063984375\n    name: single_test_site\nmosaic_view:\n  resolution_um: 2.0\n  save_overview: true\n  save_well_images: false\nobjective:\n  camera_binning:\n  - 1\n  - 1\n  name: 10x\nplate:\n  num_cols: 6\n  num_rows: 4\nsample:\n  wellplate_format: 24 well plate\ntime_series:\n  delta_t_s: 2.0\n  nt: 5\nz_stack:\n  config: FROM BOTTOM\n  delta_z_mm: 0.0015\n  nz: 1\n  use_piezo: false\n  z_range_mm:\n  - 0.063984375\n  - 0.063984375\n",
+    "loading_reference_hash": "40b3fb55a54423a39b33209a2d118cd5db236abee787e175e73d450f6acb7c26",
+    "imaging_lifecycle_version": 1,
+    "scan_entry": {
+      "x_mm": 24.55,
+      "y_mm": 23.01,
+      "z_mm": 0.063984375
+    },
+    "selected_settings": {
+      "fovs": 1,
+      "nz": 1,
+      "nt": 5,
+      "total_images": 5,
+      "channels": [
+        "BF LED matrix full"
+      ]
+    }
+  },
+  "profile_hash": "51a21ef21606d8e6c9ecb95af710cf8d48a6bdb4cec981b7a4d44890f6113010",
+  "configured_hash": "18b7754c47b8090a954d13cba30a1fa0e0a0bf83c0603749b6df6b156cd3a05f",
+  "session": {
+    "pid": 39824,
+    "created_at": 1793739553.3891573
+  },
+  "loading_position": {
+    "x_mm": 0.5000625,
+    "y_mm": 0.5000625,
+    "z_mm": 0.063984375
+  },
+  "simulation": false,
+  "stage_simulated": false
+}

@@ -1,0 +1,24 @@
+{
+  "default": "real_five",
+  "profiles": {
+    "real_five": {
+      "label": "Five real-camera frames at one explicit site",
+      "simulation": false,
+      "stage_simulated": false,
+      "camera_simulated": false,
+      "stage_controller_serial": "12769210",
+      "command": "run_acquisition_from_yaml",
+      "params": {
+        "yaml_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\ten_real_imaging_cycles_20261103\\cycle_03\\requested_acquisition.yaml"
+      },
+      "timeout_s": 180,
+      "loading_command": "return_to_recorded_dropoff",
+      "loading_position": {
+        "x_mm": 0.5000625,
+        "y_mm": 0.5000625,
+        "z_mm": 0.063984375
+      },
+      "return_waypoints": []
+    }
+  }
+}

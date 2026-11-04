@@ -1,0 +1,992 @@
+{
+  "status": "ten_real_imaging_cycles_completed_pending_operator_assessment",
+  "started_at": 1793743004.0435672,
+  "authorization": "Operator confirmed ten full drop-off, five real-camera passes, verified stage return, pickup and loaded Home cycles (50 images total). Start from existing loaded Home after accepted calibration/handling batch; unchanged plate, fixture, clearance and supervision. No recalibration, autofocus, silent retries or controller restart.",
+  "requested_cycles": 10,
+  "completed_cycles": 10,
+  "verified_images": 50,
+  "initial_robot": {
+    "camera": {
+      "age_s": 1142.6,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.897227579727769
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42098049436663,
+        "J2": 84.87686575379037,
+        "J3": 52.05604823491838,
+        "J4": -140.81300299826242
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -65.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1793743003.9649365
+  },
+  "initial_squid": {
+    "state": {
+      "available": true,
+      "connected": true,
+      "status": "completed",
+      "message": "Squid imaging complete.",
+      "simulation": false,
+      "job": {
+        "run_id": "afde5ffd66bb47c5b49744f73470353e",
+        "experiment_id": "Lacry_eb9b7822af96408c9ed4caf50867fc5e_2026-11-03_13-26-29.832757",
+        "started_at": 1793741189.89264,
+        "ended_at": 1793741198.363734,
+        "progress": {
+          "timepoint": 3,
+          "fov": 1,
+          "images": 3
+        },
+        "expected": {
+          "timepoints": 5,
+          "regions": 1,
+          "fovs": 1,
+          "channels": 1,
+          "z": 1
+        },
+        "stats": {
+          "total_images": 5,
+          "total_timepoints": 5,
+          "total_duration_seconds": 8.47337532043457,
+          "errors_encountered": 0
+        },
+        "reason": "completed",
+        "output_path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\full_calibration_real_five_retry03_20261103\\imaging\\images\\Lacry_eb9b7822af96408c9ed4caf50867fc5e_2026-11-03_13-26-29.832757",
+        "heartbeat_at": 1793741194.9819105
+      },
+      "completion_confirmed": true,
+      "real_imaging_complete": true,
+      "checked_at": 1793743004.0170956,
+      "session": {
+        "pid": 39824,
+        "created_at": 1793739553.3891573
+      },
+      "monitoring_only": true,
+      "retrieval_authorized": false,
+      "cleanup": {
+        "version": 1,
+        "status": "completed",
+        "experiment_id": "Lacry_eb9b7822af96408c9ed4caf50867fc5e_2026-11-03_13-26-29.832757",
+        "error": "",
+        "return_position": {
+          "x_mm": 24.549893750000003,
+          "y_mm": 23.01001875,
+          "z_mm": 0.063984375
+        },
+        "position": {
+          "x_mm": 24.549893750000003,
+          "y_mm": 23.01001875,
+          "z_mm": 0.063984375
+        }
+      },
+      "stage_simulated": false,
+      "camera_simulated": false,
+      "controller_serial": "12769210"
+    },
+    "position": {
+      "x_mm": 0.5000625,
+      "y_mm": 0.5000625,
+      "z_mm": 0.063984375
+    }
+  },
+  "cycles": [
+    {
+      "number": 1,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743004.1655204,
+      "finished_at": 1793743107.026009,
+      "imaging": {
+        "run_id": "e64e4bf7d22f42c09f7a2eaef2669f42",
+        "ticket_sha256": "4d9c89a00ce31abb258887528f5acb55cb9f9147e2d49def4a7c23b0255fad68",
+        "frames": [
+          {
+            "path": "cycle_01\\images\\Lacry_d0d1b1b557c049bfa95eda46ee5f9e89_2026-11-03_13-57-25.374375\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "fb666d96d75572956b1b44c9f09a3f3bd43383ef885f2860ba97332a38c6bf95"
+          },
+          {
+            "path": "cycle_01\\images\\Lacry_d0d1b1b557c049bfa95eda46ee5f9e89_2026-11-03_13-57-25.374375\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "a5d0170b0e09990239f8ceeb6883eb8f10250d48557ac9b05b542695b3e854cd"
+          },
+          {
+            "path": "cycle_01\\images\\Lacry_d0d1b1b557c049bfa95eda46ee5f9e89_2026-11-03_13-57-25.374375\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "440bdaa9d0d697be78306418676fcafcf808a0b866ec73974846602e333014bb"
+          },
+          {
+            "path": "cycle_01\\images\\Lacry_d0d1b1b557c049bfa95eda46ee5f9e89_2026-11-03_13-57-25.374375\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "5ec45db46efdf191b23949770aee98e743377a16693c5c4a935fd875c401b91d"
+          },
+          {
+            "path": "cycle_01\\images\\Lacry_d0d1b1b557c049bfa95eda46ee5f9e89_2026-11-03_13-57-25.374375\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "4006ec85991227f8fd0fc2833652f96c224fb1e5465268b9767c19c9f97b605d"
+          }
+        ]
+      },
+      "run_sha256": "139b365332d540b2236a2730f8d02ef6ebd8ff461fada03aa61bdc20b77bf157",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.897227579727769
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.420358176996,
+          "J2": 84.87684236708007,
+          "J3": 52.05584991142706,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.019
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 2,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743107.1997156,
+      "finished_at": 1793743210.1222124,
+      "imaging": {
+        "run_id": "d7a9739bdb9041489ddada0435b7066d",
+        "ticket_sha256": "6eba490182ba20eae3300f7fee28aed48205655b0d847ef54e8a5c222dc6acc4",
+        "frames": [
+          {
+            "path": "cycle_02\\images\\Lacry_246f3159ed4f434e957f9c083522826d_2026-11-03_13-59-07.724141\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "50a27b4a1a0cabb07d364b5ad245ebb03ef5dbf7d6df5b3c16e37551da07c551"
+          },
+          {
+            "path": "cycle_02\\images\\Lacry_246f3159ed4f434e957f9c083522826d_2026-11-03_13-59-07.724141\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "a03e9d6da8237afad58b69ce9a17d24cb281f46148b4a2c51103753548bc00dd"
+          },
+          {
+            "path": "cycle_02\\images\\Lacry_246f3159ed4f434e957f9c083522826d_2026-11-03_13-59-07.724141\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "27c7e912bad919a872d33a4bd2280e7028457df118b36a01165df9bdfab3e555"
+          },
+          {
+            "path": "cycle_02\\images\\Lacry_246f3159ed4f434e957f9c083522826d_2026-11-03_13-59-07.724141\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "f9b629a1e9aa4f581dc8211b2c9adf386dedd7bbb3332ad56244287fc80ace5d"
+          },
+          {
+            "path": "cycle_02\\images\\Lacry_246f3159ed4f434e957f9c083522826d_2026-11-03_13-59-07.724141\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "adc5f3755238b416714fe2ce5cab494c8d9a9e399775272b46fcc32e509dfc16"
+          }
+        ]
+      },
+      "run_sha256": "21aab892157b81cd56075ade32be0059572a9cb8c13e3b49622597bcc26fc744",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.896508365869522
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.42015073787246,
+          "J2": 84.87686575379037,
+          "J3": 52.05584991142706,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.019
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 3,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743210.2752354,
+      "finished_at": 1793743313.4347963,
+      "imaging": {
+        "run_id": "d9818e0280754ccc9d0735d07aff657f",
+        "ticket_sha256": "5d0bd9e3ad80c28276426ce433efdc1709762d173682f8cba77dc2dead6c5fdd",
+        "frames": [
+          {
+            "path": "cycle_03\\images\\Lacry_3cc0d08a9c45412ea2bceec32c8a4a68_2026-11-03_14-00-50.659187\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "c3d368eb850fb5c2bcdb41040489aca6c5728598a29590565d8efb915bbfcb0a"
+          },
+          {
+            "path": "cycle_03\\images\\Lacry_3cc0d08a9c45412ea2bceec32c8a4a68_2026-11-03_14-00-50.659187\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "d7cd8dbaa6fcbcc9a44d1d9887368e3114c945b3dc0035fc0a1acf1e472f30ba"
+          },
+          {
+            "path": "cycle_03\\images\\Lacry_3cc0d08a9c45412ea2bceec32c8a4a68_2026-11-03_14-00-50.659187\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "660a6bf5105f18bd7d88dee41f546997c77b4f6d0e2dd17a49541dedd1ef00f1"
+          },
+          {
+            "path": "cycle_03\\images\\Lacry_3cc0d08a9c45412ea2bceec32c8a4a68_2026-11-03_14-00-50.659187\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "d3bd166e19cf0c9e7c58b0a3094a99cab247753417c97825c921e0c27a201e54"
+          },
+          {
+            "path": "cycle_03\\images\\Lacry_3cc0d08a9c45412ea2bceec32c8a4a68_2026-11-03_14-00-50.659187\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "51ad267cf8c9ea761eb0e7c549f14476bde5de460175482e51d277a684d67ed2"
+          }
+        ]
+      },
+      "run_sha256": "239770968268d133d5b1d5fbbbd851c7cd89650c9bd9e415e65d1f0aa62e093e",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.897227579727769
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.42015073787246,
+          "J2": 84.87688914050068,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.019
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 4,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743313.6016188,
+      "finished_at": 1793743417.4308555,
+      "imaging": {
+        "run_id": "a8d9ebe10c834735a965739853ec0a30",
+        "ticket_sha256": "ecd1b5286e381915c0b735b96ffd31209780499bdc3374c6228adfd7db6057a6",
+        "frames": [
+          {
+            "path": "cycle_04\\images\\Lacry_98f27bb1ef0d4848a74ff498865673b8_2026-11-03_14-02-34.732145\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "f504c44003ffd12e77ce1c03c7dc0fc2a2be2456297c7a28abcce0fb8b54a55b"
+          },
+          {
+            "path": "cycle_04\\images\\Lacry_98f27bb1ef0d4848a74ff498865673b8_2026-11-03_14-02-34.732145\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "c701b12e8c827cc51cc71a8817480272f1c74b60548f6225152b2cd6433b4670"
+          },
+          {
+            "path": "cycle_04\\images\\Lacry_98f27bb1ef0d4848a74ff498865673b8_2026-11-03_14-02-34.732145\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "a4702b346ae239b241850e18dd331b7437059ff470616d5539173c3fddce4f53"
+          },
+          {
+            "path": "cycle_04\\images\\Lacry_98f27bb1ef0d4848a74ff498865673b8_2026-11-03_14-02-34.732145\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "4578bf1054bacb619417e92a4228572de801df5225eee25e71694b79dee4d549"
+          },
+          {
+            "path": "cycle_04\\images\\Lacry_98f27bb1ef0d4848a74ff498865673b8_2026-11-03_14-02-34.732145\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "61d606ad9c775acace272c810a3e5932c2cb54f219a871fe16aa16b4d717be7d"
+          }
+        ]
+      },
+      "run_sha256": "5d81e520ef87e643f61379d279577e7f5c684aeabb5d727008b6871cdeb997ad",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8975870702415705
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.42056561611957,
+          "J2": 84.87684236708007,
+          "J3": 52.05594907317273,
+          "J4": -140.81265436318145
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 5,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743417.56158,
+      "finished_at": 1793743520.2452183,
+      "imaging": {
+        "run_id": "d4b9dc62e61f4829adebb9f7fb6fcc73",
+        "ticket_sha256": "4eaa6143792844c25f53b63f021371db39ef6825986f1f8684e3c9b258edd712",
+        "frames": [
+          {
+            "path": "cycle_05\\images\\Lacry_8be16164b03047df814effe5d289058b_2026-11-03_14-04-18.236910\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "d5687f1958ad34e92286fa829026cfa9bb02cecd13c9f1f61c2844ac92b6d5df"
+          },
+          {
+            "path": "cycle_05\\images\\Lacry_8be16164b03047df814effe5d289058b_2026-11-03_14-04-18.236910\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "442c23c4dd96c8bf0efa6b8d2c3e0b2eea2d715daeb662c82a428f3643864d12"
+          },
+          {
+            "path": "cycle_05\\images\\Lacry_8be16164b03047df814effe5d289058b_2026-11-03_14-04-18.236910\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "08bd2f88e5570eff9e93028cf21da02e884cf8c8ac386314421e337ca302ef33"
+          },
+          {
+            "path": "cycle_05\\images\\Lacry_8be16164b03047df814effe5d289058b_2026-11-03_14-04-18.236910\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "89fb8dbc98dc47740717ec6d64a07d049f614c097a23ebb4e433e1cd8f161069"
+          },
+          {
+            "path": "cycle_05\\images\\Lacry_8be16164b03047df814effe5d289058b_2026-11-03_14-04-18.236910\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "68416983513fa721826a3f3dff9ec93753763971897c92c8b0a707b5f186953a"
+          }
+        ]
+      },
+      "run_sha256": "b69d5747a639231d86431506a6023f808760baf07f5e0745a88e93e1daae3e1a",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.897227579727769
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.42077305524313,
+          "J2": 84.87686575379037,
+          "J3": 52.05584991142706,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 6,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743520.4018729,
+      "finished_at": 1793743623.7191508,
+      "imaging": {
+        "run_id": "835fd6f7f64948dfa2d8cb4a0f2238cb",
+        "ticket_sha256": "4311ac2699cbaa108776c3c9a95cd2505be23ab6b4da8351a9201e13537a4e46",
+        "frames": [
+          {
+            "path": "cycle_06\\images\\Lacry_7b826d52f2da4ce68028d89331ca2f8e_2026-11-03_14-06-01.121729\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "256d8807d7f191eaad98c7893daad90fbab99dfef16e335a11c017cb85a04d61"
+          },
+          {
+            "path": "cycle_06\\images\\Lacry_7b826d52f2da4ce68028d89331ca2f8e_2026-11-03_14-06-01.121729\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "551fb11adc3256c19a4524e2899b49751b8d51cd0e4f3b5e88b1debfce2c3554"
+          },
+          {
+            "path": "cycle_06\\images\\Lacry_7b826d52f2da4ce68028d89331ca2f8e_2026-11-03_14-06-01.121729\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "d8328c807f0333ad98e287a50a6524ea50060492cd1650111f23904a349412c9"
+          },
+          {
+            "path": "cycle_06\\images\\Lacry_7b826d52f2da4ce68028d89331ca2f8e_2026-11-03_14-06-01.121729\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "bb0fa6f160caaee90cee8aa38fd4cb0908b3948064f8b1c7368592abbb8f0b68"
+          },
+          {
+            "path": "cycle_06\\images\\Lacry_7b826d52f2da4ce68028d89331ca2f8e_2026-11-03_14-06-01.121729\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "f293956f891737e419c04384ee5a5f2e0975c1cc0e1a85a2108d312dc892e220"
+          }
+        ]
+      },
+      "run_sha256": "74240695554d93463293664e2de5e22a2fc628f388b9fadc7fcd850bcdb936e9",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8975870702415705
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.42056561611957,
+          "J2": 84.87688914050068,
+          "J3": 52.05604823491838,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 7,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743623.8840885,
+      "finished_at": 1793743726.410952,
+      "imaging": {
+        "run_id": "3421c96e6ba845fc8b1ba289deca37c4",
+        "ticket_sha256": "2cd35120310dce940b0af03a06659bc1267acde4b6ae9a81847e6a2b2bbea65f",
+        "frames": [
+          {
+            "path": "cycle_07\\images\\Lacry_c984011c7a754654a181334c45474b27_2026-11-03_14-07-44.545314\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "64fed1951513b669f0f106a8c5cb7518e1b432107ada81ae2c8792cee046ae6b"
+          },
+          {
+            "path": "cycle_07\\images\\Lacry_c984011c7a754654a181334c45474b27_2026-11-03_14-07-44.545314\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "b42a1baf927a1e72cebc94270a2d10ea22832243ac1dc5a8269d8a78f151525c"
+          },
+          {
+            "path": "cycle_07\\images\\Lacry_c984011c7a754654a181334c45474b27_2026-11-03_14-07-44.545314\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "e23b4e844fea529b064c1acb4c80999ff2ac47d76e2a2c09927fe01633076ab6"
+          },
+          {
+            "path": "cycle_07\\images\\Lacry_c984011c7a754654a181334c45474b27_2026-11-03_14-07-44.545314\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "57e3310a67eaddfc76a140669f214e65acb3e36fb1db1c2f28e286f68ebe6581"
+          },
+          {
+            "path": "cycle_07\\images\\Lacry_c984011c7a754654a181334c45474b27_2026-11-03_14-07-44.545314\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "98350c2eb254279e1ccef5179cfe98b75056e6534ba643121cb215f4c9a63ca8"
+          }
+        ]
+      },
+      "run_sha256": "91de6748af18c65c3339231487cf22738d31f691c17c4b371cec6868aea159d2",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8974073249846697
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.42056561611957,
+          "J2": 84.87688914050068,
+          "J3": 52.05575074968141,
+          "J4": -140.81265436318145
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.969,
+          "Y": 62.629,
+          "Z": 248.02
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 8,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743726.549882,
+      "finished_at": 1793743828.7569025,
+      "imaging": {
+        "run_id": "2231f6e8fc6e4eb5ab486d837085b9af",
+        "ticket_sha256": "b34f1cc2a63dc6c396f0d90c7cffead7369e7c42ec467e8abc78e648d2f60b7f",
+        "frames": [
+          {
+            "path": "cycle_08\\images\\Lacry_43e52a2b5c294aacbacd303b3b000b16_2026-11-03_14-09-26.983602\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "42f4ab31451b8ddceea23dcb018fffd80eeedcf32f5662d4745047acf46e15e4"
+          },
+          {
+            "path": "cycle_08\\images\\Lacry_43e52a2b5c294aacbacd303b3b000b16_2026-11-03_14-09-26.983602\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "bcd51920e53a2e326d352e666f6bf37319a82603357d150a769ac26e972a2829"
+          },
+          {
+            "path": "cycle_08\\images\\Lacry_43e52a2b5c294aacbacd303b3b000b16_2026-11-03_14-09-26.983602\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "f4530ef6f612ad86fea64c26a690a10a499b8a137aa9a92e2132524feee34c34"
+          },
+          {
+            "path": "cycle_08\\images\\Lacry_43e52a2b5c294aacbacd303b3b000b16_2026-11-03_14-09-26.983602\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "d2f4e6210730dada0f766532532edf27d48a1c85fc8cb95185eadad28f785cf0"
+          },
+          {
+            "path": "cycle_08\\images\\Lacry_43e52a2b5c294aacbacd303b3b000b16_2026-11-03_14-09-26.983602\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "b37b18ddb7c93017f41409527970b190ee0b293792e0a7ff42eaedcb6c8a10a5"
+          }
+        ]
+      },
+      "run_sha256": "57495ba757be28de1e1dd6977a2eadb61e11cdb5b9fb18d449158244ed6c328e",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8968678563833237
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.42056561611957,
+          "J2": 84.87686575379037,
+          "J3": 52.05594907317273,
+          "J4": -140.81265436318145
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 9,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743828.9085982,
+      "finished_at": 1793743931.9598668,
+      "imaging": {
+        "run_id": "48709aa73536431ebdb69284299caf28",
+        "ticket_sha256": "11397167aa77f0b82e3b4b3fbfcc1bfb1610d78fa3d57629ce72a05214799169",
+        "frames": [
+          {
+            "path": "cycle_09\\images\\Lacry_d0b242446106475dbfa971b129c17689_2026-11-03_14-11-09.686473\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "1d429128b95a2cf7750cb8b5a45c98a4808cb2679bc71f417ee3fc9df40befb2"
+          },
+          {
+            "path": "cycle_09\\images\\Lacry_d0b242446106475dbfa971b129c17689_2026-11-03_14-11-09.686473\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "626ac76a0a3f0c2370f3b0760f5f5c8daa1029f0858d162de0f5fccc2fcdf361"
+          },
+          {
+            "path": "cycle_09\\images\\Lacry_d0b242446106475dbfa971b129c17689_2026-11-03_14-11-09.686473\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "585e11116f69837e0608fc12db5dfe31b3d7d45f702f0c41825d1a8e30e9186e"
+          },
+          {
+            "path": "cycle_09\\images\\Lacry_d0b242446106475dbfa971b129c17689_2026-11-03_14-11-09.686473\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "9839ffe0e3bf0db5f440cedeb8d83031b31adc02407dd27a1759914cd0cf2c76"
+          },
+          {
+            "path": "cycle_09\\images\\Lacry_d0b242446106475dbfa971b129c17689_2026-11-03_14-11-09.686473\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "bd25806588895719a97ab2973865f1a3b97902f2aaa62eeab3a4dbaaa6342697"
+          }
+        ]
+      },
+      "run_sha256": "c7c5fd18a38bdc6c0196dfd9dfb1381da1847d713fcf14e6317a9abd60bfdd0f",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8974073249846697
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.41994329874888,
+          "J2": 84.87686575379037,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.019
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 10,
+      "status": "completed_pending_operator_assessment",
+      "started_at": 1793743932.10214,
+      "finished_at": 1793744035.2397041,
+      "imaging": {
+        "run_id": "c521f73b382845e6ba98261813730bf0",
+        "ticket_sha256": "f9def0cc7249fdbf370744f4116e5cf089c1339a7e31ffda0079a162cf02f5f9",
+        "frames": [
+          {
+            "path": "cycle_10\\images\\Lacry_b5f9187f8dfd4be792cd48df0b609467_2026-11-03_14-12-52.844367\\0\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "cd2e49b51ef5241b3a335506fe728aaae33f2cd4d17e6789a97e9f72acf54bb3"
+          },
+          {
+            "path": "cycle_10\\images\\Lacry_b5f9187f8dfd4be792cd48df0b609467_2026-11-03_14-12-52.844367\\1\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "e5f01e859c4705b5e16124e709499a3b7f9bdbd074b22f33a1168914b8dea53d"
+          },
+          {
+            "path": "cycle_10\\images\\Lacry_b5f9187f8dfd4be792cd48df0b609467_2026-11-03_14-12-52.844367\\2\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "c124e16c0e720b4f5a0cf61c00a9aaf8d13ea6b6ded89fdf57a1d312fe5cff87"
+          },
+          {
+            "path": "cycle_10\\images\\Lacry_b5f9187f8dfd4be792cd48df0b609467_2026-11-03_14-12-52.844367\\3\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "4aa1ef3eeba1966456e97d865d4b26de1455deafcf5800b62f4c8a7f8f7c0750"
+          },
+          {
+            "path": "cycle_10\\images\\Lacry_b5f9187f8dfd4be792cd48df0b609467_2026-11-03_14-12-52.844367\\4\\single_test_site_0_0_BF_LED_matrix_full.bmp",
+            "sha256": "6e9c3303685247be7435917a3afcb4c28fce3ca0e1fde33a4da1e03697226666"
+          }
+        ]
+      },
+      "run_sha256": "19e01845272aa5a6267177135fe8d252090555b4fe78ec2dae0604aa0a1690b2",
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8974073249846697
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.42056561611957,
+          "J2": 84.87684236708007,
+          "J3": 52.05584991142706,
+          "J4": -140.81300299826242
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    }
+  ],
+  "automatic_retries": false,
+  "current_cycle": 10,
+  "final_robot": {
+    "camera": {
+      "age_s": 2173.9,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.8974073249846697
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42077305524313,
+        "J2": 84.87684236708007,
+        "J3": 52.05594907317273,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -65.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1793744035.2713768
+  },
+  "finished_at": 1793744035.2789059
+}
