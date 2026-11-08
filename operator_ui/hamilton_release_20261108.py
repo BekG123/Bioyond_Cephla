@@ -9,8 +9,10 @@ from autonomy import TransferError, check_path
 import hamilton_reteach_trial as taught
 from scope_step_trial import near, preflight
 
-OUTPUT = taught.PLAN.with_name('release_empty_home_trial.json')
-SPEEDS = (5, 5, 137, 137)
+# Fresh evidence for the operator-requested faster hover ascent; preserve the
+# accepted [5, 5, 137, 137] trial unchanged.
+OUTPUT = taught.PLAN.with_name('release_empty_home_speed137_repeat01_20261108.json')
+SPEEDS = (5, 137, 137, 137)
 
 
 def reference():

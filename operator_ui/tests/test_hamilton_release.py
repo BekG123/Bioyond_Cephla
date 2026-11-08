@@ -28,7 +28,7 @@ class ReleaseTests(unittest.TestCase):
         result = self.run.finish()
         self.assertTrue(result['ok'],result)
         self.assertEqual(self.s.grips,[7])
-        self.assertEqual([x[1] for x in self.s.robot.calls],[5,5,137,137])
+        self.assertEqual([x[1] for x in self.s.robot.calls],[5,137,137,137])
         release.near(self.s.pose,plan['route'][-1],.01)
         self.assertEqual(len(json.loads(self.output.read_text())['steps']),4)
         with self.assertRaisesRegex(Exception,'already attempted'):release.review(self.s,self.cfg)

@@ -1,0 +1,40 @@
+﻿{
+    "status":  "operator_accepted",
+    "recorded_at_utc":  "2026-11-08T11:05:23.1506363Z",
+    "operator_statement":  "This worked succesfully. Log it",
+    "scope":  "Full 48-well calibration, pickup, loaded Home, Hamilton transfer, release and empty return Home",
+    "successful_runs":  1,
+    "candidate_sha256":  "d747003b6883dc1c2e4999cf241833756e03e379a9c753711650c293cbaafd9c",
+    "pickup_y_offset_mm":  10.4,
+    "empty_return_speeds":  [
+                                5,
+                                137,
+                                137,
+                                137
+                            ],
+    "final_home_mm":  {
+                          "Y":  62.63,
+                          "Rz":  -3.88,
+                          "Z":  248.023,
+                          "X":  289.97
+                      },
+    "final_e1_mm":  7.00242118909955,
+    "controller_errors":  [
+
+                          ],
+    "evidence":  [
+                     {
+                         "sha256":  "f038451692c3ce83651dabe6bfe22ffebd39bf1672b16b1e16a2a058f6b5b8e0",
+                         "path":  "operator_ui/reports/squid_48well_approach/calibration_hamilton_dropoff_repeat01_20261108/run.json"
+                     },
+                     {
+                         "sha256":  "014234d11d75d8c771937b9d436c118c1ea33118d8c17e0ecbfd9bfb1b61a301",
+                         "path":  "operator_ui/reports/trajectory_smoothing/hamilton_reteach_20261108/forward_repeat01_20261108.json"
+                     },
+                     {
+                         "sha256":  "03b89f1f0ebc78ffcf328e682208f92ef8af8a0dc676a4d9fae275908a1027fa",
+                         "path":  "operator_ui/reports/trajectory_smoothing/hamilton_reteach_20261108/release_empty_home_speed137_repeat01_20261108.json"
+                     }
+                 ],
+    "notes":  "Original telemetry is preserved unchanged; this record adds subsequent operator acceptance. No Hamilton internal liquid-handling or internal plate-transfer result is claimed."
+}

@@ -10,7 +10,7 @@ from scope_step_trial import near, preflight
 
 PLAN=ROOT/'reports/trajectory_smoothing/hamilton_reteach_20261108/candidate.json'
 SHA='d747003b6883dc1c2e4999cf241833756e03e379a9c753711650c293cbaafd9c'
-OUTPUT=PLAN.with_name('forward_speed137_trial.json')
+OUTPUT=PLAN.with_name('forward_repeat01_20261108.json')
 
 
 def output_path(reverse=False):
