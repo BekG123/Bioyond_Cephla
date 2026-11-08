@@ -41,14 +41,18 @@ def checksum(points):
     return value
 
 
-def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, home_transit=False, scope_compact=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False):
+def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, home_transit=False, scope_compact=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False):
     """Quantize to 0.01 mm/degree, then recheck the exact transmitted path."""
     if not 1 <= len(points) <= 1024:
         raise TransferError('Lua queue requires 1–1024 points.')
-    if sum(bool(v) for v in (vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,home_transit,scope_compact,hamilton_home,hamilton_trial,scope_trial))>1:
+    if sum(bool(v) for v in (vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,home_transit,scope_compact,hamilton_home,hamilton_trial,scope_trial,hamilton_release))>1:
         raise TransferError('Choose one reviewed route profile.')
     if scope_phase is not None and not (scope_compact or scope_trial):
         raise TransferError('Scope phases require the reviewed microscope route.')
+    if hamilton_release:
+        if not reviewed:raise TransferError('Hamilton release requires explicit review.')
+        from hamilton_release_20261108 import validate_route as validate_hamilton_release
+        validate_hamilton_release(start,points)
     if scope_trial:
         if not reviewed:raise TransferError('Squid endpoint trial requires explicit review.')
         from squid_48well_endpoint_trial import validate_route as validate_scope_trial
@@ -96,7 +100,7 @@ def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=
         long_vertical=(reviewed and vertical_runs and distance<=200.02
                        and math.dist([previous[k] for k in ('X','Y')],[point[k] for k in ('X','Y')])<=.25
                        and abs(wrap(point['Rz']-previous['Rz']))<=.1)
-        if not (straight_transfer or level_return or forward_entry or reverse_entry or home_transit or scope_compact or hamilton_home or hamilton_trial or scope_trial) and ((distance > (50.02 if reviewed else 5.02) and not long_vertical) or abs(wrap(point['Rz']-previous['Rz'])) > (10.02 if reviewed else 1.02)):
+        if not (straight_transfer or level_return or forward_entry or reverse_entry or home_transit or scope_compact or hamilton_home or hamilton_trial or scope_trial or hamilton_release) and ((distance > (50.02 if reviewed else 5.02) and not long_vertical) or abs(wrap(point['Rz']-previous['Rz'])) > (10.02 if reviewed else 1.02)):
             raise TransferError('Queued path segment exceeds the reviewed step size.')
         q = check_path(previous,point,q,cfg,None)
         out.append(point)
@@ -107,6 +111,8 @@ def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=
         validate_hamilton_home(start,out)
     if hamilton_trial:
         validate_hamilton_trial(start,out)
+    if hamilton_release:
+        validate_hamilton_release(start,out)
     if scope_trial:
         validate_scope_trial(start,out,scope_phase)
     if home_transit:
@@ -193,11 +199,11 @@ class LuaTrajectory:
         self.service.trajectory_fault = True
         raise TransferError('Controller has not reported stopped. Use the E-stop; inspect Developer view.')
 
-    def execute(self, run, start, joints, points, cfg, speed, progress, *, grouped=False, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, research_speed47=False, research_speed55=False, research_speed70=False, research_speed80=False, research_speed100=False, research_speed130=False, research_speed137=False, home_transit=False, home_speed137=False, scope_compact=False, scope_speed137=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False):
+    def execute(self, run, start, joints, points, cfg, speed, progress, *, grouped=False, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, research_speed47=False, research_speed55=False, research_speed70=False, research_speed80=False, research_speed100=False, research_speed130=False, research_speed137=False, home_transit=False, home_speed137=False, scope_compact=False, scope_speed137=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False):
         if sum(bool(v) for v in (research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_speed137,scope_speed137))>1:raise TransferError('Choose one research speed profile.')
         speed_limit=(137 if research_speed137 else 130 if research_speed130 else 100 if research_speed100 else 80 if research_speed80 else 70 if research_speed70 else 55 if research_speed55 else 47) if (research_speed47 or research_speed55 or research_speed70 or research_speed80 or research_speed100 or research_speed130 or research_speed137) and reviewed and (forward_entry or reverse_entry) else 40
         if home_speed137:
-            if not reviewed or not (home_transit or straight_transfer or hamilton_home or hamilton_trial):
+            if not reviewed or not (home_transit or straight_transfer or hamilton_home or hamilton_trial or hamilton_release):
                 raise TransferError('Home speed requires the checked Home transit profile.')
             if straight_transfer and (len(points)!=3 or min(points[0]['Z'],points[1]['Z'])<299.99):
                 raise TransferError('Home transfer must use at least Z300 clearance height.')
@@ -212,13 +218,19 @@ class LuaTrajectory:
             speed_limit=min(speed_limit,5)
         if scope_trial and scope_phase == 'raised_descent':
             speed_limit=min(speed_limit,5)
+        if hamilton_release:
+            from hamilton_release_20261108 import validate_route, SPEEDS
+            speed_limit=min(speed_limit,SPEEDS[validate_route(start,points)])
         if type(speed) not in (int,float) or not math.isfinite(speed) or not 0<speed<=speed_limit:
             raise TransferError(f'Queued replay speed must be greater than zero and at most {speed_limit} mm/s for this route.')
         if reviewed and grouped:
             raise TransferError('An explicitly reviewed route must execute its exact points without regrouping.')
         if vertical_runs and not reviewed:
             raise TransferError('Long vertical segments require a separately reviewed route.')
-        points, expected = prepare_points(start,joints,points,cfg,reviewed=reviewed,vertical_runs=vertical_runs,straight_transfer=straight_transfer,level_return=level_return,forward_entry=forward_entry,reverse_entry=reverse_entry,home_transit=home_transit,scope_compact=scope_compact,hamilton_home=hamilton_home,scope_phase=scope_phase,hamilton_trial=hamilton_trial,scope_trial=scope_trial)
+        points, expected = prepare_points(start,joints,points,cfg,reviewed=reviewed,vertical_runs=vertical_runs,straight_transfer=straight_transfer,level_return=level_return,forward_entry=forward_entry,reverse_entry=reverse_entry,home_transit=home_transit,scope_compact=scope_compact,hamilton_home=hamilton_home,scope_phase=scope_phase,hamilton_trial=hamilton_trial,scope_trial=scope_trial,hamilton_release=hamilton_release)
+        if hamilton_release:
+            from hamilton_release_20261108 import check_route
+            check_route(start,points,joints,cfg,self.service.envelope)
         if hamilton_home:
             from hamilton_true_home import check_route
             check_route(start,points,joints,cfg,self.service.envelope)

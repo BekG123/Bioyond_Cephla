@@ -1425,6 +1425,23 @@ def staged_lift_3p7_start():
         return jsonify(ok=False,error=str(error)),409
 
 
+@app.post('/developer/api/hamilton-release/preview')
+@app.post('/developer/api/hamilton-release/start')
+def hamilton_release_start():
+    from hamilton_release_20261108 import review,execute
+    from hamilton_reteach_trial import SHA
+    if _body() != dict(ready=True,supported_and_clear=True,candidate_sha256=SHA):
+        return jsonify(ok=False,error='Confirm supported plate, clear claws and this exact Hamilton endpoint.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();plan=review(svc,cfg)
+        if request.path.endswith('/preview'):return jsonify(ok=True,plan=plan)
+        return jsonify(runner.start('hamilton_release_empty_home',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
 @app.post('/developer/api/hamilton-reteach/start')
 def hamilton_reteach_start():
     from hamilton_reteach_trial import SHA,review,execute

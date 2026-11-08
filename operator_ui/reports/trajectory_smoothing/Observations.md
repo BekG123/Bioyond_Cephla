@@ -347,6 +347,21 @@
 - Used the accepted continuous vertical lift to Z291.24 at requested speed 5, followed by the saved transit/Home legs at requested speed 137. Together with the separately accepted forward repeat, this completes one observed closed-claw Home/Squid/Home round trip; the intervening inspection pause is not included in travel time.
 - [Return trial](../squid_48well_approach/return_repeat_20261108T045548851568Z/trial.json) and [plan](../squid_48well_approach/return_repeat_20261108T045548851568Z/plan.json). Original pending-assessment telemetry is preserved. Existing local controller/executor and inspected Desktop Squid configuration dependencies apply; no unrelated local changes are included in this evidence commit.
 
+## Retaught Hamilton release and empty return accepted - 8 November 2026
+
+- At the accepted new Hamilton seat, the operator confirmed full plate support and clear claws. Opened to 7 mm at speed 5, verified three samples within 0.15 mm, lifted vertically 5 mm to Z50.20 at speed 5, ascended diagonally to the saved hover at Z212 at speed 5, then returned through the saved approach to Home at speed 137.
+- All four legs completed without controller errors or retry. Final X289.970/Y62.630/Z248.022/Rz-3.880; E1 7.00044 mm. Operator confirmed "Yes—drop-off and return successful" in response to whether the plate stayed flat and the claws cleared cleanly.
+- [Trial](hamilton_reteach_20261108/release_empty_home_trial.json), [physical acceptance](hamilton_reteach_20261108/release_operator_acceptance.json). Eight offline tests passed across release and existing Hamilton travel, including blocking movement on failed or unsettled release, exact route checks and slow-lift speed enforcement. One observed handling run; no Hamilton pickup or repeatability claim.
+- Operator subsequently requested speed 137 for hover ascent. That speed change is a separate, untested configuration; this acceptance applies to return speeds `[5,5,137,137]`. Production Hamilton endpoint and unrelated local changes remain untouched.
+
+## Retaught Hamilton loaded approach accepted - 8 November 2026
+
+- Full 48-well calibration, pickup, proof lift and loaded Home completed, followed by the newly taught Hamilton approach. The operator confirmed "Yes, it worked" and requested a separate release/empty return.
+- Final measured X186.417/Y-366.269/Z45.199/Rz-1.101; E1 3.8911 mm. Three queued travel targets at speed 137 completed without controller errors. No jaw command or controller restart occurred during the Hamilton transfer.
+- Retained Home and both approach points; replaced only the final destination. The last approach was diagonal from X195.88/Y-357.36/Z212/Rz-1.9 to X186.42/Y-366.27/Z45.20/Rz-1.1. This acceptance does not validate release, pickup, empty return or repeated handling.
+- [Candidate and teaching](hamilton_reteach_20261108/candidate.json), [forward telemetry](hamilton_reteach_20261108/forward_speed137_trial.json), [operator acceptance](hamilton_reteach_20261108/operator_acceptance.json), [calibration receipt](../squid_48well_approach/calibration_for_new_hamilton_retry02_20261108/run.json). Candidate SHA-256 `d747003b6883dc1c2e4999cf241833756e03e379a9c753711650c293cbaafd9c`.
+- Prior collisions and failed calibration attempts remain separate evidence. Original telemetry is preserved. This narrow experiment commit depends on the existing local calibration profile, Home corrections, Flask/controller and camera configuration; it does not package unrelated local changes or certify deployment from a clean checkout. The production Hamilton route remains unchanged.
+
 ## Home-to-Squid repeat accepted - 7 November 2026
 
 - Operator confirmed "yes" when asked whether the plate was seated flat and evenly in Squid's holder. The forward-only transfer completed in 16.85 seconds without controller errors; no release, regrip, return or imaging was commanded.

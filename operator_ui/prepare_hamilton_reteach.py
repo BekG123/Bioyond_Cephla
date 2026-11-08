@@ -20,6 +20,7 @@ KEYS=('X','Y','Z','Rz')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('snapshot',type=Path)
+    parser.add_argument('--operator-feedback', default='Hamilton was moved up. Save the current arm coordinate and keep the same path with this final destination.')
     args=parser.parse_args()
     raw=args.snapshot.read_bytes()
     state=json.loads(raw.decode('utf-8-sig'));robot=state['robot']
@@ -68,7 +69,7 @@ def main():
         created_at=datetime.now(timezone.utc).isoformat(),
         status='offline_proposal_not_active',snapshot=str(args.snapshot),
         snapshot_sha256=hashlib.sha256(raw).hexdigest(),snapshot_ts=state['ts'],
-        operator_feedback='Hamilton was moved up. Save the current arm coordinate and keep the same path with this final destination.',
+        operator_feedback=args.operator_feedback,
         measured_pose=measured,measured_joints=robot['joints'],measured_e1_mm=robot['external_axes']['E1'],
         payload='unknown; E1 feedback does not establish plate presence',
         endpoint=endpoint,endpoint_delta={k:measured[k]-old[k] for k in KEYS},

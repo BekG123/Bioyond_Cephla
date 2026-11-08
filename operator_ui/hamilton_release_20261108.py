@@ -1,0 +1,156 @@
+"""One supervised release and empty return from the November 8 Hamilton seat."""
+import hashlib
+import json
+import math
+import time
+from copy import deepcopy
+
+from autonomy import TransferError, check_path
+import hamilton_reteach_trial as taught
+from scope_step_trial import near, preflight
+
+OUTPUT = taught.PLAN.with_name('release_empty_home_trial.json')
+SPEEDS = (5, 5, 137, 137)
+
+
+def reference():
+    plan = taught.reference()
+    raw = taught.OUTPUT.read_bytes()
+    receipt = json.loads(raw)
+    if (receipt.get('status') != 'completed'
+            or receipt.get('plan', {}).get('candidate_sha256') != taught.SHA
+            or receipt.get('result', {}).get('ok') is not True):
+        raise TransferError('Completed matching Hamilton approach required.')
+    reverse = deepcopy(plan['routes']['reverse'])
+    route = [reverse[0], {**reverse[0], 'Z': round(reverse[0]['Z'] + 5, 2)}] + reverse[1:]
+    return plan, receipt, hashlib.sha256(raw).hexdigest(), route
+
+
+def validate_route(start, points):
+    _, _, _, route = reference()
+    for index in range(4):
+        if points == [route[index + 1]]:
+            near(start, route[index], .05)
+            return index
+    raise TransferError('Only the exact Hamilton release-return leg is allowed.')
+
+
+def check_route(start, points, joints, cfg, envelope):
+    index = validate_route(start, points)
+    plan, _, _, route = reference()
+    if any(value != plan['cfg'].get(key) for key,value in cfg.items()) or {k:list(v) for k,v in envelope.items()} != plan['parent']['envelope']:
+        raise TransferError('Hamilton release settings changed.')
+    # This exact local lift/exit is a station-specific route, not a workspace change.
+    # Derive every starting joint configuration from the measured taught seat.
+    q = deepcopy(plan['measured_joints'])
+    offset = q['J1'] - plan['measured_pose']['Z']
+    expected = [deepcopy(q)]
+    for a, b in zip(route, route[1:]):
+        q = check_path(a, b, q, cfg, None)
+        q['J1'] = b['Z'] + offset
+        if not 0 <= q['J1'] <= 400 or abs(q['J3']) > 180:
+            raise TransferError('Hamilton release exceeds joint travel.')
+        expected.append(deepcopy(q))
+    if any(abs(joints[k] - expected[index][k]) > .5 for k in ('J1','J2','J3','J4')):
+        raise TransferError('Hamilton release starting joint configuration changed.')
+    result = check_path(start, points[0], joints, cfg, None)
+    result['J1'] = joints['J1'] + points[0]['Z'] - start['Z']
+    if not 0 <= result['J1'] <= 400 or abs(result['J3']) > 180:
+        raise TransferError('Hamilton release exceeds live joint travel.')
+    return result
+
+
+def e1(state):
+    value = state.get('external_axes', {}).get('E1')
+    if type(value) not in (int, float) or not math.isfinite(value):
+        raise TransferError('Fresh claw position unavailable.')
+    return value
+
+
+def review(service, cfg):
+    if OUTPUT.exists():
+        raise TransferError('Hamilton release already attempted; inspect before any retry.')
+    plan, receipt, digest, route = reference()
+    state = preflight(service)
+    near(state['pose_mm'], route[0], .05)
+    if abs(e1(state) - e1(receipt['final_robot'])) > .1:
+        raise TransferError('Grip changed since Hamilton arrival.')
+    q = state['joints']
+    for a, b in zip(route, route[1:]):
+        q = check_route(a, [b], q, cfg, service.envelope)
+    from trajectory_queue import LuaTrajectory, travel_program_blocker
+    refusal = travel_program_blocker(LuaTrajectory(service).capability(), 137)
+    if refusal:
+        raise TransferError(refusal)
+    return dict(candidate_sha256=taught.SHA, forward_sha256=digest,
+                route=route, speeds=list(SPEEDS), cfg=cfg, e1=e1(state))
+
+
+def execute(run, service, cfg, approved):
+    fresh = review(service, cfg)
+    if any(fresh[k] != approved[k] for k in fresh if k != 'e1') or abs(fresh['e1'] - approved['e1']) > .05:
+        raise TransferError('Hamilton release plan changed before dispatch.')
+    record = dict(status='started', plan=fresh, started_at=time.time(),
+                  authorization='Operator confirmed plate fully supported at Hamilton and claws clear to open to 7 mm and lift; requested empty Home.',
+                  before=service.status(), samples=[], steps=[], operator_acceptance=None)
+    with OUTPUT.open('x', encoding='utf-8') as stream:
+        json.dump(record, stream, indent=2)
+
+    def save():
+        OUTPUT.write_text(json.dumps(record, indent=2, allow_nan=False), encoding='utf-8')
+
+    def healthy(expected=None):
+        if run.stopped():
+            raise TransferError('Hamilton release stopped; no next action.')
+        state = preflight(service)
+        _, _, digest, _ = reference()
+        if digest != fresh['forward_sha256']:
+            raise TransferError('Hamilton approach receipt changed.')
+        if expected is not None and abs(e1(state) - expected) > .1:
+            raise TransferError('Claw feedback changed during empty return.')
+        return state
+
+    try:
+        state = healthy(fresh['e1'])
+        near(state['pose_mm'], fresh['route'][0], .05)
+        run.say('Hamilton: releasing plate to 7 mm at speed 5.')
+        response = service.move_gripper(7, speed=5)
+        record['release_response'] = response
+        save()
+        if not response.get('ok') or response.get('recovered') or response.get('gripper_warning'):
+            raise TransferError('Release uncertain; no lift or retry.')
+        for _ in range(3):
+            time.sleep(.25)
+            state = healthy()
+            near(state['pose_mm'], fresh['route'][0], .05)
+            record['samples'].append(dict(phase='release', robot=state))
+            if abs(e1(state) - 7) > .15:
+                raise TransferError('Release did not settle; no lift.')
+        baseline = e1(state)
+        record['release_verified'] = True
+        save()
+        from trajectory_queue import LuaTrajectory
+        for index, (start, target, speed) in enumerate(zip(fresh['route'], fresh['route'][1:], SPEEDS)):
+            state = healthy(baseline)
+            near(state['pose_mm'], start, .05)
+            def progress(stage, done, total):
+                current = healthy(baseline)
+                record['samples'].append(dict(leg=index+1, stage=stage, robot=current))
+                run.say(f'Hamilton empty return: leg {index+1}/4, {stage} {done:.1f}/{total}')
+            result = LuaTrajectory(service).execute(run, start, state['joints'], [target], cfg, speed,
+                progress, reviewed=True, home_speed137=True, hamilton_release=True)
+            if result.get('ok') is not True:
+                raise TransferError('Hamilton return movement uncertain.')
+            state = healthy(baseline)
+            near(state['pose_mm'], target, .1)
+            record['steps'].append(dict(target=target, speed=speed, result=result, after=state))
+            save()
+        record['status'] = 'release_and_empty_home_completed_pending_operator_assessment'
+        return dict(ok=True, empty_home=True, release_e1_mm=baseline)
+    except Exception as error:
+        record.update(status='failed_or_uncertain', error=str(error))
+        record['stop_response'] = service.program('stop')
+        raise
+    finally:
+        record.update(finished_at=time.time(), final_robot=service.status())
+        save()

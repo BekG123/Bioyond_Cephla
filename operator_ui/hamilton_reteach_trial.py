@@ -1,4 +1,4 @@
-"""One supervised trial per direction of the immutable 26 October proposal."""
+"""One supervised trial per direction of the immutable November 8 proposal."""
 from copy import deepcopy
 import hashlib
 import json
@@ -8,8 +8,8 @@ from autonomy import check_path, TransferError
 from hamilton_true_home import ROOT, configured, segment_envelope
 from scope_step_trial import near, preflight
 
-PLAN=ROOT/'reports/trajectory_smoothing/hamilton_reteach_20261026/candidate.json'
-SHA='4883914f3c350a34eb4f899d8bff20bf9606bd4905c553d7403e22a14f9393bf'
+PLAN=ROOT/'reports/trajectory_smoothing/hamilton_reteach_20261108/candidate.json'
+SHA='d747003b6883dc1c2e4999cf241833756e03e379a9c753711650c293cbaafd9c'
 OUTPUT=PLAN.with_name('forward_speed137_trial.json')
 
 
