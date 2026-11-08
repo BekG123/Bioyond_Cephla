@@ -1,0 +1,524 @@
+{
+  "status": "loaded_above_squid_awaiting_operator_teaching",
+  "at": 1794112619.447403,
+  "candidate_sha256": "ac004fd846bf2333a29f29374b7091b7c042cb6cf31d53ca09c45432412a84b8",
+  "source_state": {
+    "camera": {
+      "age_s": 0.7,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.897946560755372
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42098049436663,
+        "J2": 84.87686575379037,
+        "J3": 52.05604823491838,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -65.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1794112619.4291596
+  },
+  "authorization": "Operator requested loaded transfer to above Squid only, stopping before descent and release for teaching.",
+  "home_return": [
+    {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    }
+  ],
+  "forward": [
+    {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 291.24,
+      "Rz": -3.88
+    },
+    {
+      "X": 354.0,
+      "Y": 270.0,
+      "Z": 291.24,
+      "Rz": 49.02
+    },
+    {
+      "X": 226.317,
+      "Y": 375.703,
+      "Z": 291.24,
+      "Rz": 87.823
+    }
+  ],
+  "steps": [
+    {
+      "phase": "new_squid_route",
+      "target": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 291.24,
+        "Rz": -3.88
+      },
+      "speed": 137,
+      "before": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8977668154984713
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.4211879334902,
+          "J2": 84.87686575379037,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "status": "arrived",
+      "response": {
+        "commanded": {
+          "interpolation": "linear",
+          "rz": -3.88,
+          "speed": 50.0,
+          "x": 289.97,
+          "y": 62.63,
+          "z": 291.24
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "ok": true,
+        "pose_after": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.629,
+          "Z": 291.244
+        }
+      },
+      "after": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.897946560755372
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 252.6452781070449,
+          "J2": 84.87686575379037,
+          "J3": 52.05594907317273,
+          "J4": -140.81300299826242
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 291.244
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "phase": "new_squid_route",
+      "target": {
+        "X": 354.0,
+        "Y": 270.0,
+        "Z": 291.24,
+        "Rz": 49.02
+      },
+      "speed": 137,
+      "before": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8977668154984713
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 252.6450706679214,
+          "J2": 84.87686575379037,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 291.244
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "status": "arrived",
+      "response": {
+        "commanded": {
+          "interpolation": "linear",
+          "rz": 49.02,
+          "speed": 50.0,
+          "x": 354.0,
+          "y": 270.0,
+          "z": 291.24
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "ok": true,
+        "pose_after": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 49.02,
+          "X": 354.0,
+          "Y": 270.0,
+          "Z": 291.24
+        }
+      },
+      "after": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.897946560755372
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 252.641129324574,
+          "J2": 77.75652454863032,
+          "J3": 124.12839156746946,
+          "J4": -152.86496911170107
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 49.02,
+          "X": 354.0,
+          "Y": 270.0,
+          "Z": 291.24
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "phase": "new_squid_route",
+      "target": {
+        "X": 226.317,
+        "Y": 375.703,
+        "Z": 291.24,
+        "Rz": 87.823
+      },
+      "speed": 137,
+      "before": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.897946560755372
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 252.641129324574,
+          "J2": 77.75654793534062,
+          "J3": 124.12839156746946,
+          "J4": -152.86514342924156
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 49.02,
+          "X": 354.0,
+          "Y": 270.0,
+          "Z": 291.24
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "status": "arrived",
+      "response": {
+        "commanded": {
+          "interpolation": "linear",
+          "rz": 87.823,
+          "speed": 50.0,
+          "x": 226.317,
+          "y": 375.703,
+          "z": 291.24
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "ok": true,
+        "pose_after": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 87.823,
+          "X": 226.317,
+          "Y": 375.703,
+          "Z": 291.24
+        }
+      },
+      "after": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.898126306012273
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 252.641129324574,
+          "J2": 88.60070824841671,
+          "J3": 152.8987838058531,
+          "J4": -153.67624294507698
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 87.823,
+          "X": 226.317,
+          "Y": 375.703,
+          "Z": 291.24
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    }
+  ],
+  "preparation": [],
+  "release_executed": false,
+  "pickup_executed": false,
+  "transit_speed": 137,
+  "empty_gripper_startup_override_authorized": false,
+  "approach_only": true,
+  "holder_descent_authorized": false,
+  "final_robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 3.897946560755372
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 252.641129324574,
+      "J2": 88.60070824841671,
+      "J3": 152.8987838058531,
+      "J4": -153.67624294507698
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 87.823,
+      "X": 226.317,
+      "Y": 375.703,
+      "Z": 291.24
+    },
+    "program_state": {
+      "state": "running",
+      "value": 1
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "finished_at": 1794112630.5832567
+}
