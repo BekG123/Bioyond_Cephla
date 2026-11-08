@@ -341,6 +341,12 @@
 - Transit speed 137; final Squid descent and continuous lift speed 5. Existing 3.9 mm grip target, 0.15 mm settling tolerance and 0.1 mm travel grip-drift check were retained. Final Home X289.970/Y62.630/Z248.019/Rz-3.880, grip 3.8972 mm; plate retained in the claws.
 - [Batch and per-cycle records](../squid_48well_approach/full_calibration_ten_handling_20261103/batch.json), [calibration receipt](../squid_48well_approach/full_calibration_ten_handling_20261103/calibration/run.json), and [fresh pickup evidence](../projected_alignment/accepted_y104_repeat_10bbf6b580dd4680ba8681c2bd2ebb80/attempt.json). The batch wrapper refuses replay of its used output directory. Original telemetry retains pending-assessment labels; this entry records subsequent physical acceptance. Results apply to the tested plate and fixture setup. Existing local Flask, active pickup profile, camera/controller configuration and native Squid bridge remain runtime dependencies outside this narrowly scoped experiment commit.
 
+## Home-to-Squid repeat accepted - 7 November 2026
+
+- Operator confirmed "yes" when asked whether the plate was seated flat and evenly in Squid's holder. The forward-only transfer completed in 16.85 seconds without controller errors; no release, regrip, return or imaging was commanded.
+- Reused the accepted November 3 route with transit requests 137 and final descent 5. Final X226.317/Y375.703/Z266.808/Rz87.823, E1=3.89813 mm; claws remained closed. The preceding handling cycle remains a separate success.
+- [Trial](../squid_48well_approach/forward_repeat_20261108T044948812885Z/trial.json) and [plan](../squid_48well_approach/forward_repeat_20261108T044948812885Z/plan.json). Original pending-assessment telemetry is preserved; this entry records subsequent physical acceptance. Uses the previous commit's focus-aware loading check and existing local controller/executor dependencies.
+
 ## Squid handling continuation accepted - 7 November 2026
 
 - From Squid overhead: descend to Z266.81, release to E1=7, continuous lift and empty Home, return to Squid, staged close to E1=3.9, continuous lift and loaded Home. Completed in 74.8 seconds without controller errors or physical retries. Final Home X289.970/Y62.630/Z248.019/Rz-3.880, E1=3.89777 mm.
