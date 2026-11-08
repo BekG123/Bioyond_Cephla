@@ -18,19 +18,19 @@ HASH = '4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81'
 LOADING = dict(x_mm=.5000625, y_mm=.5000625, z_mm=.063984375)
 
 
-def home(opening=None):
+def home(opening=None, *, route_source=SOURCE, route_sha=HASH):
     state = api('state')
     r = state['robot']
     if (not r.get('connected') or not r.get('ok') or r.get('errors')
             or not r.get('enabled') or r['control_mode']['mode'] != 'auto'
             or r['program_state']['state'] != 'running' or state['sequence']['active']):
         raise RuntimeError('Healthy idle running Auto required; no recovery.')
-    plan = json.loads(SOURCE.read_bytes())
+    plan = json.loads(route_source.read_bytes())
     near(r['pose_mm'], plan['routes']['from_capture'][0], .1)
     if opening is not None and abs(r['external_axes']['E1'] - opening) > .15:
         raise RuntimeError('Unexpected Home grip feedback')
     env = {k: [state['envelope'][k]['min'], state['envelope'][k]['max']] for k in ('X','Y','Z')}
-    if sha(SOURCE) != HASH or not state['envelope']['enabled'] or env != plan['envelope'] or api('robot_params') != plan['cfg']:
+    if sha(route_source) != route_sha or not state['envelope']['enabled'] or env != plan['envelope'] or api('robot_params') != plan['cfg']:
         raise RuntimeError('Reviewed route or settings changed')
     return state
 

@@ -7,13 +7,13 @@ import real_camera_five_20261103 as imaging
 from full_calibration_ten_handling_20261103 import home, stage_ready
 from capture_squid_approach_20261103 import FOLDER, sha
 from proof_lift_plate import api, write
+from squid_handling_route import CURRENT_SOURCE, CURRENT_SHA, load_route
 
-OUT = FOLDER/'ten_real_imaging_cycles_20261103'
-AUTH = ('Operator confirmed ten full drop-off, five real-camera passes, verified '
-        'stage return, pickup and loaded Home cycles (50 images total). Start '
-        'from existing loaded Home after accepted calibration/handling batch; '
-        'unchanged plate, fixture, clearance and supervision. No recalibration, '
-        'autofocus, silent retries or controller restart.')
+OUT = FOLDER/'ten_real_imaging_cycles_20261108'
+AUTH = ('Ten drop-off/five-real-frame/verified-stage-return/pickup/Home cycles '
+        'using the November 8 taught robot route. Execution requires current '
+        'operator authorization and loading-position readiness. No autofocus, '
+        'silent retries or controller restart.')
 
 
 def verify_images(folder):
@@ -41,14 +41,16 @@ def verify_images(folder):
     return dict(run_id=ticket['run_id'], ticket_sha256=sha(ticket_path), frames=frames)
 
 
-def main():
+def main(*, route_source=CURRENT_SOURCE, route_sha=CURRENT_SHA):
+    route = dict(route_source=route_source, route_sha=route_sha)
+    load_route(route_source, route_sha)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
     args = parser.parse_args()
     if OUT.exists():
         raise RuntimeError('Batch already attempted; no replay')
     imaging.arm_home()
-    initial = home(3.9)
+    initial = home(3.9, **route)
     squid = stage_ready()
     if squid['state'].get('simulation') or squid['state'].get('camera_simulated') is not False:
         raise RuntimeError('Actual microscope camera required')
@@ -60,12 +62,13 @@ def main():
     output = OUT/'batch.json'
     record = dict(status='running', started_at=time.time(), authorization=AUTH,
                   requested_cycles=10, completed_cycles=0, verified_images=0,
-                  initial_robot=initial, initial_squid=squid, cycles=[], automatic_retries=False)
+                  initial_robot=initial, initial_squid=squid, cycles=[], automatic_retries=False,
+                  route_source=str(route_source), route_source_sha256=route_sha)
     write(output, record)
     try:
         for number in range(1,11):
             imaging.arm_home()
-            home(3.9)
+            home(3.9, **route)
             stage_ready()
             imaging.OUT = OUT/f'cycle_{number:02d}'
             imaging.AUTH = AUTH
@@ -77,14 +80,14 @@ def main():
             cycle['status'] = 'running'
             write(output, record)
             print(json.dumps(dict(cycle=number, phase='full_imaging_cycle_started')), flush=True)
-            imaging.execute()
+            imaging.execute(**route)
             receipt = imaging.OUT/'run.json'
             if json.loads(receipt.read_bytes())['status'] != 'completed_pending_operator_assessment':
                 raise RuntimeError('Cycle completion unverified')
             evidence = verify_images(imaging.OUT)
             if any(c.get('imaging',{}).get('run_id') == evidence['run_id'] for c in record['cycles']):
                 raise RuntimeError('Imaging run ID reused')
-            final = home(3.9)
+            final = home(3.9, **route)
             stage_ready()
             cycle.update(status='completed_pending_operator_assessment', finished_at=time.time(),
                          imaging=evidence, run_sha256=sha(receipt), final_robot=final['robot'])
@@ -92,7 +95,7 @@ def main():
             write(output, record)
             print(json.dumps(dict(completed_cycles=number, verified_images=number*5)), flush=True)
         record.update(status='ten_real_imaging_cycles_completed_pending_operator_assessment',
-                      final_robot=home(3.9))
+                      final_robot=home(3.9, **route))
     except Exception as error:
         record.update(status='stopped_or_failed', error=str(error))
         # Existing phase controllers own any active acquisition and safe stop.

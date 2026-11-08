@@ -8,9 +8,10 @@ import execute_continuous_squid_return_20261103 as runner
 from capture_squid_approach_20261103 import FOLDER, sha, save
 from prepare_squid_destination import validate
 from proof_lift_plate import api, near, write
+from squid_handling_route import load_route, LEGACY_SOURCE, LEGACY_SHA
 
 
-def main(output_dir=None, authorization=None):
+def main(output_dir=None, authorization=None, *, route_source=LEGACY_SOURCE, route_sha=LEGACY_SHA):
     output_dir = FOLDER if output_dir is None else output_dir
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
@@ -18,11 +19,8 @@ def main(output_dir=None, authorization=None):
     output = output_dir / 'pickup_home_trial_20261103.json'
     if output.exists():
         raise RuntimeError('Already attempted; no retry')
-    source = FOLDER / 'closed_claw_roundtrip_plan_20261103.json'
-    source_hash = '4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81'
-    if sha(source) != source_hash:
-        raise RuntimeError('Accepted route changed')
-    accepted = json.loads(source.read_bytes())
+    source, source_hash = route_source, route_sha
+    accepted = load_route(source, source_hash)
     plans = []
     for phase, points, speeds in (
         ('pickup_approach', accepted['routes']['from_capture'][:5], [137, 137, 137, 5]),

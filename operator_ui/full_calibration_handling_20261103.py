@@ -13,6 +13,7 @@ from capture_squid_approach_20261103 import FOLDER, sha
 from proof_lift_plate import api, near, write
 from plate48_workflow import reference
 from prepare_squid_destination import validate
+from squid_handling_route import load_route, LEGACY_SOURCE, LEGACY_SHA
 
 OUT = FOLDER / 'full_calibration_handling_20261103'
 AUTH = 'Operator confirmed one full calibration and pickup, loaded Home, Squid drop-off, empty Home, Squid pickup and loaded Home. Plate returned to arm holder; unchanged accepted setup.'
@@ -27,7 +28,7 @@ def invoke(module, flags, *positional):
         sys.argv = prior
 
 
-def main(closed_claw=False, calibration_only=False):
+def main(closed_claw=False, calibration_only=False, *, route_source=LEGACY_SOURCE, route_sha=LEGACY_SHA):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
     args = parser.parse_args()
@@ -36,10 +37,10 @@ def main(closed_claw=False, calibration_only=False):
     profile, digest, _ = reference(require_grip=False)
     if digest != calibration.SHA or profile['pickup_correction']['distance_mm'] != 10.4:
         raise RuntimeError('Accepted pickup changed')
-    source = FOLDER / 'closed_claw_roundtrip_plan_20261103.json'
-    if sha(source) != '4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81':
-        raise RuntimeError('Squid route changed')
-    plan = json.loads(source.read_bytes())
+    if route_source != LEGACY_SOURCE and not calibration_only:
+        raise RuntimeError('Use the route-aware imaging workflow for handling')
+    source = route_source
+    plan = load_route(source, route_sha)
     if not api('state')['robot'].get('connected'):
         api('connect', {'ip': '192.168.201.220'})
     state = api('state')

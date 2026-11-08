@@ -19,6 +19,7 @@ from squid_bridge.imaging_lifecycle import imaging_target
 import dropoff_approach_20261103 as approach
 import release_empty_home_20261103 as release
 import pickup_squid_home_20261103 as pickup
+from squid_handling_route import LEGACY_SOURCE, LEGACY_SHA
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT/'reports/squid_48well_approach/real_camera_five_20261103'
@@ -105,7 +106,8 @@ def prepare():
     print(json.dumps(dict(prepared=True,plan=str(OUT/'plan.json'),site=profile['scan_entry'])),flush=True)
 
 
-def execute():
+def execute(*, route_source=LEGACY_SOURCE, route_sha=LEGACY_SHA):
+    route = dict(route_source=route_source, route_sha=route_sha)
     record_path = OUT/'run.json'
     if record_path.exists():
         raise RuntimeError('Already attempted; no automatic replay.')
@@ -140,12 +142,12 @@ def execute():
         record['loading_verified']=native_command('get_position')
         phase('validate_robot_route')
         sys.argv=[__file__]
-        approach.main(OUT)
+        approach.main(OUT, **route)
         phase('dropoff')
         execution.verify(plan,check_selection=False)
         sys.argv=[__file__,'--execute']
-        approach.main(OUT)
-        release.main(OUT,authorization=AUTH)
+        approach.main(OUT, **route)
+        release.main(OUT,authorization=AUTH, **route)
         phase('scan_entry')
         execution.prepare_imaging(plan,stopped,arm_home)
         phase('five_real_images')
@@ -161,7 +163,7 @@ def execute():
             time.sleep(.25)
         phase('pickup_and_home')
         execution.verify(plan,check_selection=False)
-        pickup.main(OUT,authorization=AUTH)
+        pickup.main(OUT,authorization=AUTH, **route)
         record.update(status='completed_pending_operator_assessment',final_robot=arm_home(),
             final_squid=native_command('get_position'),imaging_run_id=ticket['run_id'])
     except Exception as error:

@@ -7,9 +7,10 @@ from copy import deepcopy
 import execute_continuous_squid_return_20261103 as runner
 from capture_squid_approach_20261103 import FOLDER, sha, save
 from proof_lift_plate import api, near, write
+from squid_handling_route import load_route, LEGACY_SOURCE, LEGACY_SHA
 
 
-def main(output_dir=None, authorization=None):
+def main(output_dir=None, authorization=None, *, route_source=LEGACY_SOURCE, route_sha=LEGACY_SHA):
     output_dir = FOLDER if output_dir is None else output_dir
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
@@ -17,14 +18,17 @@ def main(output_dir=None, authorization=None):
     output = output_dir / 'release_empty_home_20261103.json'
     if output.exists():
         raise RuntimeError('Already attempted; no automatic retry')
-    source = FOLDER / 'closed_claw_roundtrip_plan_20261103.json'
-    if sha(source) != '4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81':
-        raise RuntimeError('Reviewed route changed')
+    plan = load_route(route_source, route_sha)
     approach = output_dir / 'dropoff_approach_trial_20261103.json'
     receipt = json.loads(approach.read_bytes())
     if receipt['status'] != 'at_squid_awaiting_supported_plate_confirmation':
         raise RuntimeError('Completed approach required')
-    plan = deepcopy(json.loads(source.read_bytes()))
+    approach_plan = output_dir / 'dropoff_approach_plan_20261103.json'
+    approach_data = json.loads(approach_plan.read_bytes())
+    if (receipt.get('plan_sha256') != sha(approach_plan)
+            or approach_data['routes']['from_capture'] != plan['routes']['from_capture'][:5]
+            or approach_data.get('route_source_sha256', LEGACY_SHA) != route_sha):
+        raise RuntimeError('Approach receipt does not match selected route')
     plan['routes']['from_capture'] = plan['routes']['from_capture'][4:]
     plan['leg_speeds'] = [5, 137, 137, 137]
     plan['completion_status'] = 'empty_home_completed_pending_operator_assessment'

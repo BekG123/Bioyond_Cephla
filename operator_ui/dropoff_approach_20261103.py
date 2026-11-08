@@ -4,14 +4,12 @@ from copy import deepcopy
 import execute_continuous_squid_return_20261103 as runner
 from capture_squid_approach_20261103 import FOLDER, sha, save
 from proof_lift_plate import api
+from squid_handling_route import load_route, LEGACY_SOURCE, LEGACY_SHA
 
 
-def main(output_dir=None):
+def main(output_dir=None, *, route_source=LEGACY_SOURCE, route_sha=LEGACY_SHA):
     output_dir = FOLDER if output_dir is None else output_dir
-    source = FOLDER / 'closed_claw_roundtrip_plan_20261103.json'
-    if sha(source) != '4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81':
-        raise RuntimeError('Accepted route changed')
-    plan = deepcopy(json.loads(source.read_bytes()))
+    plan = load_route(route_source, route_sha)
     plan['routes']['from_capture'] = plan['routes']['from_capture'][:5]
     plan['leg_speeds'] = [137, 137, 137, 5]
     plan['completion_status'] = 'at_squid_awaiting_supported_plate_confirmation'
