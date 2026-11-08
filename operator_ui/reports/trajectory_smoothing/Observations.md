@@ -341,6 +341,12 @@
 - Transit speed 137; final Squid descent and continuous lift speed 5. Existing 3.9 mm grip target, 0.15 mm settling tolerance and 0.1 mm travel grip-drift check were retained. Final Home X289.970/Y62.630/Z248.019/Rz-3.880, grip 3.8972 mm; plate retained in the claws.
 - [Batch and per-cycle records](../squid_48well_approach/full_calibration_ten_handling_20261103/batch.json), [calibration receipt](../squid_48well_approach/full_calibration_ten_handling_20261103/calibration/run.json), and [fresh pickup evidence](../projected_alignment/accepted_y104_repeat_10bbf6b580dd4680ba8681c2bd2ebb80/attempt.json). The batch wrapper refuses replay of its used output directory. Original telemetry retains pending-assessment labels; this entry records subsequent physical acceptance. Results apply to the tested plate and fixture setup. Existing local Flask, active pickup profile, camera/controller configuration and native Squid bridge remain runtime dependencies outside this narrowly scoped experiment commit.
 
+## Squid-to-Home return accepted - 7 November 2026
+
+- Operator confirmed "yes" when asked whether the plate remained level and secure during the return. The reverse transfer completed in 16.88 seconds without controller errors, release or regrip. Final Home X289.970/Y62.630/Z248.019/Rz-3.880, E1=3.89813 mm.
+- Used the accepted continuous vertical lift to Z291.24 at requested speed 5, followed by the saved transit/Home legs at requested speed 137. Together with the separately accepted forward repeat, this completes one observed closed-claw Home/Squid/Home round trip; the intervening inspection pause is not included in travel time.
+- [Return trial](../squid_48well_approach/return_repeat_20261108T045548851568Z/trial.json) and [plan](../squid_48well_approach/return_repeat_20261108T045548851568Z/plan.json). Original pending-assessment telemetry is preserved. Existing local controller/executor and inspected Desktop Squid configuration dependencies apply; no unrelated local changes are included in this evidence commit.
+
 ## Home-to-Squid repeat accepted - 7 November 2026
 
 - Operator confirmed "yes" when asked whether the plate was seated flat and evenly in Squid's holder. The forward-only transfer completed in 16.85 seconds without controller errors; no release, regrip, return or imaging was commanded.
