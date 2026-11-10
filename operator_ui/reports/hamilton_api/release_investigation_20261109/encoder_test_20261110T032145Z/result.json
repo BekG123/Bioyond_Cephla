@@ -1,0 +1,2155 @@
+{
+  "status": "stopped_on_first_anomalous_step",
+  "steps_planned": 111,
+  "steps_run": 31,
+  "anomalous_step": 30,
+  "velocity_mm_s": 1.0,
+  "counter_shift_on_method_begin_mm": {
+    "1": 0.0,
+    "2": 0.00099945068359375
+  },
+  "start": {
+    "1": {
+      "default_values": false,
+      "channel": 1,
+      "position_x": 54.041507720947266,
+      "position_y": 90.22623443603516,
+      "position_z": 17.18988609313965
+    },
+    "2": {
+      "default_values": false,
+      "channel": 2,
+      "position_x": 54.041507720947266,
+      "position_y": 54.108741760253906,
+      "position_z": 17.19011878967285
+    }
+  },
+  "final_positions": {
+    "1": {
+      "default_values": false,
+      "channel": 1,
+      "position_x": 54.041507720947266,
+      "position_y": 90.22623443603516,
+      "position_z": 17.18988609313965
+    },
+    "2": {
+      "default_values": false,
+      "channel": 2,
+      "position_x": 54.041507720947266,
+      "position_y": 38.61074447631836,
+      "position_z": 17.19011878967285
+    }
+  },
+  "final_drive_status": {
+    "1": {
+      "position_mm": 91.13400268554688,
+      "encoder_position_mm": 91.13200378417969,
+      "position_minus_encoder_mm": 0.0019989013671875
+    },
+    "2": {
+      "position_mm": 37.45900344848633,
+      "encoder_position_mm": 39.02900314331055,
+      "position_minus_encoder_mm": -1.5699996948242188
+    }
+  },
+  "steps": [
+    {
+      "step": 0,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": 0.0260009765625,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.02460174560546875,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": -0.0,
+          "end_gap_mm": 0.02460174560546875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 52.958306157311725,
+            "most_inward_mm": 0.0006972911746032651,
+            "most_outward_mm": 0.49930270882539673,
+            "final_outward_mm": 0.49930270882539673,
+            "samples_during_move": 83
+          },
+          "encoder": {
+            "baseline_mm": 52.958306157311725,
+            "most_inward_mm": 0.0006972911746032651,
+            "most_outward_mm": 0.4963043567746155,
+            "final_outward_mm": 0.4945038196652405,
+            "samples_during_move": 83
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.003002166748046875,
+          "coordinator_final_outward_mm": 0.4979972839355469,
+          "start_gap_mm": -0.0,
+          "end_gap_mm": -0.00479888916015625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 1,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 83
+          },
+          "encoder": {
+            "baseline_mm": 91.10853987473708,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.011462871844955203,
+            "final_outward_mm": 0.010663311298080203,
+            "samples_during_move": 83
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.024601745605465908,
+          "end_gap_mm": 0.01479949951171875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 52.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 52.47454085716834,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.5185395754300615,
+            "final_outward_mm": 0.5183396852933427,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": -0.00479888916015625,
+          "end_gap_mm": 0.002802276611328125,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 2,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 88
+          },
+          "encoder": {
+            "baseline_mm": 91.11723503699669,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.007772592397842004,
+            "final_outward_mm": 0.003167489858779504,
+            "samples_during_move": 88
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.014799499511724434,
+          "end_gap_mm": 0.01360015869140625,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 51.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 51.95915024368851,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.5051478633174185,
+            "final_outward_mm": 0.5049479731806997,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.002802276611326704,
+          "end_gap_mm": 0.004801177978515625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 3,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 91.12010983058384,
+            "most_inward_mm": 0.00010708400181158595,
+            "most_outward_mm": 0.006896700177875914,
+            "final_outward_mm": 0.006097139631000914,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.013600158691403408,
+          "end_gap_mm": 0.00779571533203125,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 51.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 51.45673282329853,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.5137320298414991,
+            "final_outward_mm": 0.5137320298414991,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.004801177978514204,
+          "end_gap_mm": 0.016002655029296875,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 4,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 91.12559989646628,
+            "most_inward_mm": 0.000592267071752417,
+            "most_outward_mm": 0.005404437029810083,
+            "final_outward_mm": 0.005404437029810083,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.007795715332036934,
+          "end_gap_mm": 0.00299835205078125,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 50.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 81
+          },
+          "encoder": {
+            "baseline_mm": 50.94344612404152,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.49844261452003735,
+            "final_outward_mm": 0.49844261452003735,
+            "samples_during_move": 81
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.016002655029296875,
+          "end_gap_mm": 0.01399993896484375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 5,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 91.1310043334961,
+            "most_inward_mm": 0.00099945068359375,
+            "most_outward_mm": 0.00299835205078125,
+            "final_outward_mm": 0.00299835205078125,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00299835205078125,
+          "end_gap_mm": 0.0,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 50.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 50.445311032808746,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.5073074927696837,
+            "final_outward_mm": 0.5073074927696837,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.01399993896484375,
+          "end_gap_mm": 0.020999908447265625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 6,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 88
+          },
+          "encoder": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 88
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": -0.0,
+          "end_gap_mm": 0.0,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 49.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 49.93815730168269,
+            "most_inward_mm": 0.0128467266376191,
+            "most_outward_mm": 0.5051548297588653,
+            "final_outward_mm": 0.504555159348709,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.020999908447265625,
+          "end_gap_mm": 0.02540130615234375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 7,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.00099945068359375,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": -0.0,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 49.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 49.433298605459704,
+            "most_inward_mm": 0.0017027678313112915,
+            "most_outward_mm": 0.5002961335358762,
+            "final_outward_mm": 0.5002961335358762,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.025401306152346592,
+          "end_gap_mm": 0.0260009765625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 8,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.00099945068359375,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 48.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 48.93311779315655,
+            "most_inward_mm": 0.004885746882514752,
+            "most_outward_mm": 0.49511425311748525,
+            "final_outward_mm": 0.4943146925706102,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.0260009765625,
+          "end_gap_mm": 0.020200347900390624,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 9,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.00099945068359375,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 48.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 83
+          },
+          "encoder": {
+            "baseline_mm": 48.438313714389146,
+            "most_inward_mm": 0.002688177700697736,
+            "most_outward_mm": 0.49731182229930226,
+            "final_outward_mm": 0.49731182229930226,
+            "samples_during_move": 83
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.020200347900392046,
+          "end_gap_mm": 0.018001556396484375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 10,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 47.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 47.94107877291166,
+            "most_inward_mm": 0.0019220205453720496,
+            "most_outward_mm": 0.4940763620229873,
+            "final_outward_mm": 0.4940763620229873,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.018001556396484375,
+          "end_gap_mm": 0.01200103759765625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 11,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.00099945068359375,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.00099945068359375,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 47.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 47.44719461294321,
+            "most_inward_mm": 0.0008072486290586767,
+            "most_outward_mm": 0.5031905541053163,
+            "final_outward_mm": 0.5031905541053163,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.01200103759765625,
+          "end_gap_mm": 0.0149993896484375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 12,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.00099945068359375,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 46.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 83
+          },
+          "encoder": {
+            "baseline_mm": 46.944042499248795,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.4980395390437167,
+            "final_outward_mm": 0.4980395390437167,
+            "samples_during_move": 83
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.0149993896484375,
+          "end_gap_mm": 0.01300048828125,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 13,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.003997802734375,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 46.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 46.44632278442383,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.5073197937011713,
+            "final_outward_mm": 0.5073197937011713,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.01300048828125,
+          "end_gap_mm": 0.020000457763671875,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 14,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 89
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.00099945068359375,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 89
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 45.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 45.93907702410662,
+            "most_inward_mm": 0.0029243186668139742,
+            "most_outward_mm": 0.5020767494484204,
+            "final_outward_mm": 0.5020767494484204,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.020000457763671875,
+          "end_gap_mm": 0.022003173828125,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 15,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 45.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 45.4372602392126,
+            "most_inward_mm": 0.0037416528772453717,
+            "most_outward_mm": 0.4972577978063484,
+            "final_outward_mm": 0.4972577978063484,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.022003173828125,
+          "end_gap_mm": 0.019001007080078125,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 16,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.003997802734375,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.00099945068359375,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 44.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 44.940040881817154,
+            "most_inward_mm": 0.0009610102726895775,
+            "most_outward_mm": 0.4990389897273104,
+            "final_outward_mm": 0.4988390995905917,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.019001007080078125,
+          "end_gap_mm": 0.017801666259765626,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 17,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 93
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.00099945068359375,
+            "samples_during_move": 93
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 44.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 92
+          },
+          "encoder": {
+            "baseline_mm": 44.441309415377106,
+            "most_inward_mm": 0.0006919273963319483,
+            "most_outward_mm": 0.5073074927696837,
+            "final_outward_mm": 0.5073074927696837,
+            "samples_during_move": 92
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.017801666259764204,
+          "end_gap_mm": 0.02500152587890625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 18,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.00099945068359375,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.0,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 43.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 43.93419412466196,
+            "most_inward_mm": 0.0028061499962461767,
+            "most_outward_mm": 0.4931922325721132,
+            "final_outward_mm": 0.4931922325721132,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.02500152587890625,
+          "end_gap_mm": 0.018001556396484375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 19,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.00099945068359375,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": -0.0,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 43.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 43.44140907570168,
+            "most_inward_mm": 0.0005922670717595224,
+            "most_outward_mm": 0.5034055356626155,
+            "final_outward_mm": 0.5034055356626155,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.018001556396484375,
+          "end_gap_mm": 0.020999908447265625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 20,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.00099945068359375,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 42.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 83
+          },
+          "encoder": {
+            "baseline_mm": 42.9381957420936,
+            "most_inward_mm": 0.0008072486290586767,
+            "most_outward_mm": 0.5001922020545351,
+            "final_outward_mm": 0.5001922020545351,
+            "samples_during_move": 83
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.020999908447265625,
+          "end_gap_mm": 0.020999908447265625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 21,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 42.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5010032653808594,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 83
+          },
+          "encoder": {
+            "baseline_mm": 42.43804198044997,
+            "most_inward_mm": 0.0029599116398770775,
+            "most_outward_mm": 0.5060389592097323,
+            "final_outward_mm": 0.5058390690730136,
+            "samples_during_move": 83
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.020999908447265625,
+          "end_gap_mm": 0.026800537109375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 22,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": 0.0019989013671875,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 41.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 41.932082977294925,
+            "most_inward_mm": 0.006920013427730964,
+            "most_outward_mm": 0.49908050537109716,
+            "final_outward_mm": 0.4980810546875034,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.02680053710937358,
+          "end_gap_mm": 0.02500152587890625,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 23,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0019989013671875,
+            "final_outward_mm": 0.00099945068359375,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 41.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 41.433386876032905,
+            "most_inward_mm": 0.004616664006157123,
+            "most_outward_mm": 0.49638660137470225,
+            "final_outward_mm": 0.49638660137470225,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.02500152587890625,
+          "end_gap_mm": 0.022003173828125,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 24,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.003997802734375,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.00099945068359375,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 40.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 85
+          },
+          "encoder": {
+            "baseline_mm": 40.93703743263527,
+            "most_inward_mm": 0.0019655580873845224,
+            "most_outward_mm": 0.496035540545428,
+            "final_outward_mm": 0.496035540545428,
+            "samples_during_move": 85
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.022003173828125,
+          "end_gap_mm": 0.018001556396484375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 25,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 89
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.00099945068359375,
+            "samples_during_move": 89
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 40.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 64
+          },
+          "encoder": {
+            "baseline_mm": 40.441001892089844,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5009994506835938,
+            "final_outward_mm": 0.500799560546875,
+            "samples_during_move": 64
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.018001556396484375,
+          "end_gap_mm": 0.018801116943359376,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 26,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 91.13300323486328,
+            "most_inward_mm": 0.003997802734375,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": -0.00099945068359375,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 39.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 39.94028799874442,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.4952844892229322,
+            "final_outward_mm": 0.4952844892229322,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.019001007080078125,
+          "end_gap_mm": 0.01399993896484375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 27,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": 0.00099945068359375,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 39.45900344848633,
+            "most_inward_mm": 0.006999969482421875,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 39.44546479445238,
+            "most_inward_mm": 0.020538623516372922,
+            "most_outward_mm": 0.5054623530461271,
+            "final_outward_mm": 0.5054623530461271,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.01399993896484375,
+          "end_gap_mm": 0.019001007080078125,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 28,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 88
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.00099945068359375,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 88
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.0019989013671875,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 38.95900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 38.94040976630317,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.49440680609809107,
+            "final_outward_mm": 0.49440680609809107,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.019001007080078125,
+          "end_gap_mm": 0.01300048828125,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 29,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 86
+          },
+          "encoder": {
+            "baseline_mm": 91.13200378417969,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.0019989013671875,
+            "final_outward_mm": 0.00099945068359375,
+            "samples_during_move": 86
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.0019989013671875,
+          "end_gap_mm": 0.00099945068359375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 38.45900344848633,
+            "most_inward_mm": 0.0,
+            "most_outward_mm": 0.5150032043457031,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 38.44674329404478,
+            "most_inward_mm": 0,
+            "most_outward_mm": 0.5287402117693887,
+            "final_outward_mm": 0.5277407610857949,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 0.0,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.01300048828125,
+          "end_gap_mm": 0.04000091552734375,
+          "resync_step": false
+        }
+      }
+    },
+    {
+      "step": 30,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 87
+          },
+          "encoder": {
+            "baseline_mm": 91.13307726824725,
+            "most_inward_mm": 0.004071836118342276,
+            "most_outward_mm": 0.06992566144025147,
+            "final_outward_mm": -0.002672605161311026,
+            "samples_during_move": 87
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": 0.00099945068359375,
+          "end_gap_mm": 0.0035980224609375,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 37.95900344848633,
+            "most_inward_mm": 1.0349998474121094,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 37.92000286395733,
+            "most_inward_mm": 1.0819998521071241,
+            "most_outward_mm": 0,
+            "final_outward_mm": -1.0812002915602492,
+            "samples_during_move": 84
+          },
+          "verdict": "both_inward_actual_reversal",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 1.0349998474121094,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": 0.04000091552734375,
+          "end_gap_mm": -1.54219970703125,
+          "resync_step": false
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "event": "method_begin_request",
+      "at": 1794280912.1260521
+    },
+    {
+      "event": "method_begin_reply",
+      "at": 1794280912.128708
+    },
+    {
+      "event": "move_request",
+      "at": 1794280912.607096,
+      "step": 0,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280913.2765863,
+      "step": 0
+    },
+    {
+      "event": "move_request",
+      "at": 1794280913.5691478,
+      "step": 1,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280914.2322087,
+      "step": 1
+    },
+    {
+      "event": "move_request",
+      "at": 1794280914.5223103,
+      "step": 2,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280915.1951063,
+      "step": 2
+    },
+    {
+      "event": "move_request",
+      "at": 1794280915.4976182,
+      "step": 3,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280916.1778395,
+      "step": 3
+    },
+    {
+      "event": "move_request",
+      "at": 1794280916.473004,
+      "step": 4,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280917.135099,
+      "step": 4
+    },
+    {
+      "event": "move_request",
+      "at": 1794280917.4297423,
+      "step": 5,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280918.1129878,
+      "step": 5
+    },
+    {
+      "event": "move_request",
+      "at": 1794280918.4009778,
+      "step": 6,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280919.0867338,
+      "step": 6
+    },
+    {
+      "event": "move_request",
+      "at": 1794280919.389024,
+      "step": 7,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280920.0587485,
+      "step": 7
+    },
+    {
+      "event": "move_request",
+      "at": 1794280920.3479972,
+      "step": 8,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280921.0202472,
+      "step": 8
+    },
+    {
+      "event": "move_request",
+      "at": 1794280921.343431,
+      "step": 9,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280922.015671,
+      "step": 9
+    },
+    {
+      "event": "move_request",
+      "at": 1794280922.3027086,
+      "step": 10,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280922.980314,
+      "step": 10
+    },
+    {
+      "event": "move_request",
+      "at": 1794280923.2707636,
+      "step": 11,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280923.9433286,
+      "step": 11
+    },
+    {
+      "event": "move_request",
+      "at": 1794280924.2394474,
+      "step": 12,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280924.9092011,
+      "step": 12
+    },
+    {
+      "event": "move_request",
+      "at": 1794280925.1943917,
+      "step": 13,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280925.8648787,
+      "step": 13
+    },
+    {
+      "event": "move_request",
+      "at": 1794280926.1674936,
+      "step": 14,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280926.8492134,
+      "step": 14
+    },
+    {
+      "event": "move_request",
+      "at": 1794280927.144871,
+      "step": 15,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280927.8270144,
+      "step": 15
+    },
+    {
+      "event": "move_request",
+      "at": 1794280928.1159298,
+      "step": 16,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280928.7910595,
+      "step": 16
+    },
+    {
+      "event": "move_request",
+      "at": 1794280929.0847802,
+      "step": 17,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280929.7673435,
+      "step": 17
+    },
+    {
+      "event": "move_request",
+      "at": 1794280930.0512238,
+      "step": 18,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280930.735919,
+      "step": 18
+    },
+    {
+      "event": "move_request",
+      "at": 1794280931.0291502,
+      "step": 19,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280931.7014942,
+      "step": 19
+    },
+    {
+      "event": "move_request",
+      "at": 1794280931.9897199,
+      "step": 20,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280932.664286,
+      "step": 20
+    },
+    {
+      "event": "move_request",
+      "at": 1794280932.9594264,
+      "step": 21,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280933.6278865,
+      "step": 21
+    },
+    {
+      "event": "move_request",
+      "at": 1794280933.911653,
+      "step": 22,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280934.5925066,
+      "step": 22
+    },
+    {
+      "event": "move_request",
+      "at": 1794280934.8799121,
+      "step": 23,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280935.553426,
+      "step": 23
+    },
+    {
+      "event": "move_request",
+      "at": 1794280935.8561368,
+      "step": 24,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280936.5243955,
+      "step": 24
+    },
+    {
+      "event": "move_request",
+      "at": 1794280936.8229504,
+      "step": 25,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280937.485238,
+      "step": 25
+    },
+    {
+      "event": "move_request",
+      "at": 1794280937.779101,
+      "step": 26,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280938.4521494,
+      "step": 26
+    },
+    {
+      "event": "move_request",
+      "at": 1794280938.743835,
+      "step": 27,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280939.4147985,
+      "step": 27
+    },
+    {
+      "event": "move_request",
+      "at": 1794280939.709553,
+      "step": 28,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280940.392728,
+      "step": 28
+    },
+    {
+      "event": "move_request",
+      "at": 1794280940.7009313,
+      "step": 29,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280941.369697,
+      "step": 29
+    },
+    {
+      "event": "move_request",
+      "at": 1794280941.6631181,
+      "step": 30,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280942.3423042,
+      "step": 30
+    },
+    {
+      "event": "method_end_request",
+      "at": 1794280942.6304023
+    },
+    {
+      "event": "method_end_reply",
+      "at": 1794280944.539442
+    }
+  ],
+  "loaded_release_validated": false,
+  "retreat": false,
+  "caveat": "EncoderPosition independence from Position is assumed from the firmware field names, not proven."
+}

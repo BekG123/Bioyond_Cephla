@@ -1,0 +1,64 @@
+{
+  "motion_sent": false,
+  "packet": {
+    "reconstructed_payload_hex": "1f0034001e0016001701020000002000040001000000280004000000003f1e001600170102000000200004000200000028000400000000bf280004000000803f",
+    "channels": [
+      {
+        "default_values": false,
+        "channel": 1,
+        "distance_mm": 0.5
+      },
+      {
+        "default_values": false,
+        "channel": 2,
+        "distance_mm": -0.5
+      }
+    ],
+    "velocity_mm_s": 1.0,
+    "limitation": "Reconstructed from the tested source; not a packet capture of the original run."
+  },
+  "timing": {
+    "request_at": 1794145628.4978452,
+    "abort_request_after_s": 0.13398480415344238,
+    "move_reply_after_s": 0.6290767192840576,
+    "abort_reply_latency_s": 2.1021506786346436,
+    "reversal_precedes_abort": true
+  },
+  "reported_inward_mm": {
+    "1": 1.2600021362304688,
+    "2": 2.1870001554489136
+  },
+  "front_counter_jump_repeat": {
+    "first": 1.2947410345077515,
+    "second": 1.2917410135269165,
+    "difference_mm": -0.003000020980834961
+  },
+  "current_drive_status": {
+    "ydrive_addrs/1026:1:515": {
+      "initialized": true,
+      "position_mm": 2.1660001277923584,
+      "encoder_position_mm": 2.1660001277923584,
+      "position_minus_encoder_mm": 0.0,
+      "in_home_sensor": false
+    },
+    "ydrive_addrs/1025:1:515": {
+      "initialized": true,
+      "position_mm": 90.63400268554688,
+      "encoder_position_mm": 89.66900634765625,
+      "position_minus_encoder_mm": 0.964996337890625,
+      "in_home_sensor": false
+    }
+  },
+  "current_status_caveat": "Operator confirmed jaws were moved since the failed test; current offsets do not establish the historical cause.",
+  "encoder_during_failed_motion_recorded": false,
+  "stationary_encoder_discrepancy_samples": 10,
+  "native_client_log": {
+    "first": "2026-11-09T10:07:24.9328877Z",
+    "last": "2026-11-08T10:33:41.5093152Z",
+    "sends_after_1245": 0,
+    "limitation": "Only the native application connection is covered; not a network-wide packet capture."
+  },
+  "direct_y_failure_speed_mm_s": 1,
+  "native_release_observed_per_jaw_mm": 4,
+  "exact_firmware_mechanical_root_cause_proven": false
+}

@@ -589,3 +589,107 @@ The operator reported a loose tip holder and planned to replace it. No repeat pi
 Read-only checks through the reloaded UI confirmed PRPGD2427 connected, Idle, Not Initialized and not parked. No commissioned liquid-handling recipe is configured, and the automatic loaded handoff still requires its existing acceptance evidence. See [integration details](../../HAMILTON_INTEGRATION.md) and [live UI check](lacry_hamilton_live_check.json).
 
 The operator explicitly requires automatic door opening for arm access and confirmed that the current door is opened by hand, with no actuator installed. The installed API documents only door-state GET and event-subscription POST on `service-software-api/doorstate`; no door open/close actuator command was found. The GET returned an empty body, and the newer `is-door-closed` endpoint returned 404. No interlock or enclosure setting was modified. A supported motorized opener and verified open/closed feedback, or another Hamilton-approved robot access arrangement, remain prerequisites for unattended round trips. [Read-only capability check](door_capability_check.json).
+
+
+## 2026-11-01: maintenance blocked API calibration starts
+
+Database Backup and Data Maintenance both reported **Blocking**, expired October 31. API attempts stayed Scheduled without starting. After the operator completed both tasks (now OK through November 8), the same API path initialized successfully and completed self-calibration in about 145 seconds. This supports overdue maintenance as the start blocker; the two maintenance tasks were not isolated from each other. Check their status before future starts.
+
+Channel height/squeeze calibration then ran with 300 uL Framed Conductive Filtered rack 235903 (catalog 273), site 7, but failed about 295 seconds into Calibrate: rear-channel CalibrateDispenser/CalibrateBacklash reported a Z travel-limit error. Native abort completed; instrument returned Idle/Initialized. Full calibration did not pass. Limits and calibration settings were not altered.
+
+Evidence: [run journal](../hamilton_api/ad2d3346df7e499ea764eb95ff81f12e.jsonl), [late abort verification](../hamilton_api/diagnosis_20261101/channel_failure_recovery.json). The supervised retry requested by the operator will repeat only the failed channel stage.
+
+### Fresh-rack channel retry
+- Full 300 uL rack 235903 at site 7 was confirmed and the native channel routine ran. The host then reported an API timeout and requested abort; no calibration pass was recorded.
+- Native traces show rear squeeze completion and front squeeze in progress before cancellation, rather than the previous rear dispenser Z-limit failure. The exact timed-out read endpoint was not logged.
+- Native `Abort run completed` was verified afterward; current state is Idle, no protocol running, and no pending error prompt. The short host abort wait expired before native cleanup finished. No automatic retry or fault reset was performed.
+- Evidence: `../hamilton_api/diagnosis_20261101/channel_retry_timeout_recovery.json` and request `c717194b7d714babbff2fd83a56da325.jsonl`.
+
+### Channel retry completed after unloading
+- Retry dfeb61b5a70747f380727c7a00ff46b9: initialization succeeded, native channel calibration finished, and the operator removed the rack before Finish unloading. Final state: Idle, initialized, no pending errors; ownership marker cleared normally.
+- Completion is verified from native activity end, cleanup, and finished events. The API did not publish a fresh numerical channel result, so numerical calibration values are not independently verified. Self-calibration succeeded in the earlier maintenance-cleared run.
+- Correction to the preceding timeout note: the polling journal identifies the timed-out read as GET errors?offset=0&limit=30 (5.016 seconds). The retry retained the existing timeout and motion settings.
+- Evidence: ../hamilton_api/dfeb61b5a70747f380727c7a00ff46b9.jsonl.
+
+### 2026-11-01: native reagent-transfer simulation completed
+- Protocol 1003: site 2 A1 to site 3 Falcon 24-well A1-A6, 10 uL each, six fresh 300 uL tips from site 7; 60 uL total. Native run a27736b6-41ff-424e-827f-079c767d0c8c reports Completed, Simulation, no errors, 114.4 seconds. No physical pipetting requested.
+- Source model: camera-detected Cellvis 24-well; aqueous liquid and 1000 uL starting source volume were simulation assumptions. Physical liquid heights and dispensing accuracy remain untested.
+- API findings: TwoChannel selects the installed pipetting tool; OneChannel hit a vendor worklist compiler exception. LiquidType uses Aqueous rather than its catalog ID. Actual protocol states: Loading=20, Running=25. Completion resets active protocol ID to zero; verify using the captured run ID.
+- Helper initially treated the final ID reset as failure and sent abort after native completion. Native report confirms all six transfers completed; abort cleanup ended Idle with ownership cleared. Completion handling corrected and report verification tested offline. The real-instrument API connection reports disconnected after simulation; no initialization or motion was requested to restore it.
+- Evidence: ../hamilton_api/simulation_3d6712d222124c73ba4f0a04ad03d531/result.json and pipetting.csv.
+
+### 2026-11-01: physical air-only reagent-row dry run completed
+- Reconnected PRPGD2427. Protocol 1004 ran six 10 uL air strokes from empty site 2 A1 to empty site 3 A1-A6, fresh 300 uL tips from site 7 A1-A6. Operator confirmed plate models, empty wells and clearance. No liquid was transferred.
+- Native run 039776de-3e6a-4753-be92-5df037ffcddf: Completed, physical serial PRPGD2427, six recorded steps, no errors, 201.7 seconds. Final Idle, connected, initialized, no tips attached.
+- Host completion race: active protocol ID resets before global Idle. Helper initially issued abort during final cleanup; native report verifies completed transfer sequence. Both one-shot helpers now wait through this state transition. No live rerun performed.
+- Live schematic viewer follows native pipetting events; movement between event locations is illustrative. Standalone 30-second replay: work/hamilton-dry-run-replay.html. Evidence: ../hamilton_api/dry_run_60910d1cfa244d2ab20f38ce4b07636a/result.json, pipetting.csv and animation_events.json.
+
+### 2026-11-01: operator accepted the physical mock run
+- Operator confirmed the six-well air-only run was successful (native job 039776de-3e6a-4753-be92-5df037ffcddf). This confirms the physical mock sequence; no liquid transfer or dispensing accuracy was tested.
+- Replay fix: reset the animation clock on restart/resume, animate the visible head directly, and embed recorded events in the standalone file so replay does not require the local server. No hardware rerun was requested or performed for this UI fix.
+
+### 2026-11-08: Hamilton DCG coordinated empty-jaw retry passed
+- Earlier independent-axis opening reversed the front jaw without a plate, before lifting. Wider opening alone is not a solution; its underlying firmware/mechanical cause remains unproven.
+- Replaced that diagnostic path with coordinated XYZ targets and live coordinate checks. Open, close, reopen 10 mm per jaw, then lift Z150 to Z160 passed. All 21 lift samples retained 101.11849 mm jaw-center spacing. No fault reset or limit changes.
+- Tool returned to dock and Hamilton verified parked. Plate-loaded release and the five round trips remain unvalidated; the old independent-axis release stays blocked.
+- Evidence: ../hamilton_api/dcg_coordinated_retry_12292fbcf5ce4edea5ce5e9737b37b24/result.json and its adjacent JSONL journal. Five focused offline checks also passed.
+
+### 2026-11-08: five-round loaded retry stopped on first release
+- Operator confirmed plate at site 3, site 4 empty and full clearance. Pickup and transfer to site 4 completed; coordinated opening requested unchanged Z17.190 but started raising the still-closed jaws. Live checks aborted at Z18.152/18.395; stopped feedback Z19.174/19.509, Y unchanged.
+- Zero completed round trips. This disproves applying the Z150 empty-jaw result directly to a seated loaded release. Both problematic release modes are blocked pending diagnosis; no limits relaxed, fault reset or automatic retry.
+- Hamilton is not parked and the firmware still records a held plate; physical support requires operator inspection. Evidence: ../hamilton_api/dcg48_repeat_683af88d0e764de8b7a8617903ffd172/result.json and adjacent JSONL journal.
+
+### 2026-11-08: supported native release completed without lifting
+- After the operator confirmed the recovered plate flat and supported, one native `ReleasePlate` command opened each jaw outward 4.000 mm. X remained 54.0415 and Z17.190; the firmware holding flag cleared. No retreat or batch continuation was sent.
+- Unlike the generic coordinated move at seated height, this release showed no preliminary lift. Physical jaw clearance still needs operator inspection before retreat; this is not a completed round trip.
+- Evidence: ../hamilton_api/dcg48_repeat_683af88d0e764de8b7a8617903ffd172/native_supported_release_result.json. Three focused offline guard checks passed.
+
+### 2026-11-08: 15 mm empty opening stopped after first step
+- Plate removed by operator; wider opening and E-stop confirmed. Native relative-Y diagnostic requested another 0.5 mm outward per jaw, starting from 4 mm total opening. Front-jaw feedback instead briefly reported Y+1.29474 from -0.39226 (1.687 mm inward), triggering abort.
+- The command returned before abort completed; final feedback reached Y89.22623/-0.89226, or 4.5 mm total opening per jaw. X/Z unchanged. This final arrival does not validate the transient path; 15 mm was not reached. Physical versus feedback origin is not established.
+- Empty DCG remains attached and stopped, not parked. No automatic retry, reset, retreat, or cycle continuation. Evidence: ../hamilton_api/dcg48_repeat_683af88d0e764de8b7a8617903ffd172/wider_empty_15_result.json and the batch JSONL journal.
+
+### 2026-11-08: operator-requested retry confirms inward readings on raw Y drives
+- Empty diagnostic requested 4.5 to 5.0 mm total outward opening per jaw, with no lift. Runtime discovery found raw Y drives under `Ngc`, with `GetPosition` at method 18 rather than the library's 9; status reads now resolve that method from device metadata.
+- Both raw drives and coordinator feedback reported inward movement during the outward step: rear 1.260 mm, front about 2.187 mm. Abort was sent immediately on that sample. This corroborates the anomaly beyond the coordinator view; its firmware/mechanical root cause remains unresolved.
+- Fresh stopped feedback: rear Y89.726234 / front Y-1.392259, X54.041508, Z17.189886/17.190119. Thus both settled at 5.0 mm total outward opening; no 15 mm success or loaded release claimed. Empty DCG attached, initialized, unparked. No fault reset, limit changes, lift, or further cycles.
+- Evidence: ../hamilton_api/dcg48_repeat_683af88d0e764de8b7a8617903ffd172/dual_feedback_retry_result.json and adjacent JSONL journal. Two raw-feedback guard tests passed before the live retry.
+
+### 2026-11-09: read-only investigation corrects interpretation of jaw feedback
+- The earlier raw-read test used `GetPosition`, not the separate `GetStatus.EncoderPosition`; it did not independently prove physical reversal. Both position-counter reports jumped inward. Actual encoder motion during those runs was not recorded.
+- Reconstructed bytes have correct outward signs (+0.5/-0.5) at 1 mm/s. The two front-jaw jump values repeat within 0.003 mm, consistent with—but not proof of—position-state resynchronization. Exact firmware/mechanical cause remains unresolved.
+- Abort replied after 2.102 s, while the move replied after 0.629 s. Reported arrival and this abort mechanism alone cannot validate a release.
+- Live hardware is MLPrep 4.5.14.740 with NGC 2.2.6.260. Raw-drive discovery/getter IDs differ from legacy helpers. Today's rear Position/EncoderPosition differ by 0.965 mm; the user confirmed intervening manual jaw movement, so this is not attributed to yesterday's trial.
+- No motion/settings changes. Saved detailed findings and a discriminating encoder-based test plan at ../hamilton_api/release_investigation_20261109/Findings.md. Three independent decoder/feedback tests passed.
+
+### 2026-11-09: encoder-logged empty opening; front encoder ran inward after a completed step
+- New `encoder_opening_test.py` samples each Y drive's `GetStatus.Position` and `GetStatus.EncoderPosition` about every 12 ms, plus coordinator positions. Start pose differed from the last record: front coordinator Y54.371 (spacing 35.4 mm); operator reported the jaws closed when the plate was taken out. Site confirmed clear, operator at E-stop.
+- Symmetric 0.5 mm/jaw `MoveYRelative` at 1 mm/s from that pose: both drives followed; counter and encoder agreed within 0.005 mm; no inward reading. Evidence: ../hamilton_api/release_investigation_20261109/encoder_test_20261110T022838Z/result.json.
+- Front-only walk toward Y-1.392 in 0.5 mm steps: 42 steps followed (front coordinator Y53.871 to 33.108). On the next step the move itself tracked (counter and encoder identical, 31.956 to 31.456) and replied normally. About 30 ms after the trajectory ended the front encoder ran inward, 31.44 to 36.34 mm within 0.2 s, while the counter stayed at 31.456 and the coordinator at 32.608. Hard guard (4 mm) tripped; abort sent 0.88 s after the move request, replied 2.1 s later. The inward run began before the abort.
+- Fresh read-only state afterwards: front counter 31.456, encoder 39.298 (7.84 mm inward of the counter), stable; rear 91.134 on both; Idle, initialized, no pending errors, DCG attached, no plate held, not parked. No fault reset, retreat or further motion.
+- Interpretation, not proven: the front jaw is not held at its commanded position after some moves, and the counter does not register it until a later move starts. That would explain the earlier inward counter jumps at move start. Encoder independence is assumed from the field name; operator visual confirmation of the jaw movement is pending. Evidence: ../hamilton_api/release_investigation_20261109/encoder_test_20261110T023119Z/ (result.json, samples.json). Four offline tests passed.
+
+### 2026-11-09: repeat front-only walk reproduces the inward run near the same jaw spacing
+- Operator photo shows two thin metal bands linking the DCG paddles; the upper band is visibly buckled. Their function and normal shape are not confirmed. Before this run the front jaw was back at coordinator Y54.544 with counter equal to encoder (no command from us in between).
+- Repeat walk for operator observation: 39 steps followed (front coordinator Y54.544 to 35.108). On the next step the drive tracked outward for 0.40 s (33.956 to 33.646), then counter and encoder together reversed and ran inward to 37.97 within 0.15 s, during the move. Hard guard tripped; abort sent 0.55 s after the move request, replied 2.1 s later.
+- First run failed at front drive 31.46 (just after the move ended); this run at 33.65 (mid-move). Encoder-based jaw spacing at onset: about 59.7 mm and 57.5 mm. The rear encoder shifted about +0.09 mm at each onset; the rear counter did not move.
+- Fresh read-only state: front counter 33.456, encoder 41.853 (8.40 mm inward), stable; rear 91.134 on both; Idle, initialized, no pending errors, DCG attached, no plate held, not parked. No fault reset or further motion.
+- A failure that repeats within about 2 mm of the same spacing points to something mechanical at that spacing rather than a random drive event; the buckled band is a candidate, not a confirmed cause. Evidence: ../hamilton_api/release_investigation_20261109/encoder_test_20261110T031632Z/ (result.json, samples.json).
+
+### 2026-11-09: step from the displaced pose shows the front jaw not moving while the move reports success
+- Third run started from the stopped state (front counter 33.456, encoder 41.854). One front-only 0.5 mm step: at move start the counter jumped to the encoder value (41.859), stayed there for the 0.5 s move while the encoder did not change, then at move end the counter was set to the commanded target (32.956). Encoder stayed at 41.858 throughout; coordinator reported the target reached. The script stopped after this step; no abort was needed.
+- This reproduces the 2026-11-08 signature (inward counter jump at move start, then reported arrival) with the encoder recorded: the counter mirrors the encoder during a move and is overwritten with the target afterwards. Reported arrival is therefore not evidence of travel. In this state the front Y drive accepted and acknowledged a move without moving the jaw. No fault was reported.
+- State left: front counter 32.956, encoder 41.858; rear 91.134 on both; Idle, initialized, DCG attached, no plate held, not parked. Evidence: ../hamilton_api/release_investigation_20261109/encoder_test_20261110T031959Z/ (result.json, samples.json).
+
+### 2026-11-09: fourth walk after operator pushed the jaw closed by hand; earlier and smaller slip
+- Operator pushed the front jaw closed by hand (so the drive does not resist hand force when stopped). Start: front coordinator Y54.109, counter equal to encoder.
+- 30 steps followed (to coordinator Y39.111). On the next step the encoder began moving inward at the move request, before the counter changed: 37.918 to 38.99 within 0.25 s, then a slow inward creep to 39.03. The jaw did not travel outward. Counter mirrored the encoder during the move and was set to the target (37.459) at move end; coordinator reported arrival. Rear encoder shifted up to +0.07 mm. Script stopped itself; no abort.
+- Onset positions over three walks: front drive 31.46, 33.65, 37.96 (encoder-based spacing about 59.7, 57.5, 53.2 mm). This corrects the earlier note: onset is not within 2 mm, and it came earlier on each successive walk. Three runs do not establish a trend.
+- State left: front counter 37.459, encoder 39.029; rear 91.134/91.132; Idle, initialized, DCG attached, no plate held, not parked. Evidence: ../hamilton_api/release_investigation_20261109/encoder_test_20261110T032145Z/.
+
+### 2026-11-09: DCG returned to dock; same front-only walk with bare channels shows no anomaly
+- Operator pushed the front jaw closed by hand; encoder spacing 37.85 mm, counters equal to encoders. `return_dcg_tool_guarded.py` sent MoveZUpToSafe, DropTool, MoveZUpToSafe at speed scale 5 with an encoder-spacing abort guard (35.5-39.7 mm). Spacing stayed 36.52-37.83 mm; firmware reports no tool. Channels left at X289.41, Z200, not parked. Evidence: ../hamilton_api/release_investigation_20261109/tool_return_20261110T033021Z/.
+- Same `MoveYRelative` front-only walk, no tool, from 35.0 mm spacing at Z200: 101 steps (50.1 mm, to 85.0 mm spacing) all followed; largest inward encoder excursion 0.009 mm; counter minus encoder at step end at most 0.21 mm. With the DCG attached the three walks failed at about 53-60 mm spacing.
+- The walk ended 12 steps early on a script error, not an instrument event: a 0.25 s status-read stall left no front-drive samples in the last-ten window and the averaging raised; the handler then sent MethodAbort. Fixed (filter by channel before slicing). The remaining 6 mm to 91 mm spacing was not run.
+- Conclusion: the Y drives follow this command across the range where the DCG runs failed; the inward force comes from the tool. The buckled upper band is the visible candidate; which part of the tool is responsible is not established. State: bare channels at Y295.80/210.80, X289.41, Z200; Idle, initialized, no pending errors. Evidence: ../hamilton_api/release_investigation_20261109/encoder_test_20261110T033130Z/.
+- Afterwards `park_bare_channels.py` sent native Park at speed scale 5: verified parked (Y414.50/394.50, Z200), no tool, Idle, no pending errors. The unresolved-batch marker `active.json` was left in place: zero round trips completed and the DCG is not fit for plate handling until inspected.

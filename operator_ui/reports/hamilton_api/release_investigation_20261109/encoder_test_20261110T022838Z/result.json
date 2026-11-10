@@ -1,0 +1,92 @@
+{
+  "status": "single_step_recorded",
+  "step_mm_per_jaw": 0.5,
+  "velocity_mm_s": 1.0,
+  "analysis": {
+    "1": {
+      "counter": {
+        "baseline_mm": 90.63400268554688,
+        "most_inward_mm": 0.00099945068359375,
+        "most_outward_mm": 0.5,
+        "final_outward_mm": 0.5,
+        "samples_during_move": 324
+      },
+      "encoder": {
+        "baseline_mm": 90.63400268554688,
+        "most_inward_mm": 0.00099945068359375,
+        "most_outward_mm": 0.5050048828125,
+        "final_outward_mm": 0.5016490936279296,
+        "samples_during_move": 324
+      },
+      "verdict": "no_anomaly_both_followed",
+      "coordinator_most_inward_mm": -0.0,
+      "coordinator_final_outward_mm": 0.5,
+      "counter_shift_on_method_begin_mm": 0.0
+    },
+    "2": {
+      "counter": {
+        "baseline_mm": 53.21900177001953,
+        "most_inward_mm": 0.0,
+        "most_outward_mm": 0.5,
+        "final_outward_mm": 0.5,
+        "samples_during_move": 313
+      },
+      "encoder": {
+        "baseline_mm": 53.21900177001953,
+        "most_inward_mm": 0.0,
+        "most_outward_mm": 0.5050010681152344,
+        "final_outward_mm": 0.5028817494710286,
+        "samples_during_move": 313
+      },
+      "verdict": "no_anomaly_both_followed",
+      "coordinator_most_inward_mm": 0.0,
+      "coordinator_final_outward_mm": 0.5,
+      "counter_shift_on_method_begin_mm": 0.0
+    }
+  },
+  "final_positions": {
+    "1": {
+      "default_values": false,
+      "channel": 1,
+      "position_x": 54.041507720947266,
+      "position_y": 90.22623443603516,
+      "position_z": 17.18988609313965
+    },
+    "2": {
+      "default_values": false,
+      "channel": 2,
+      "position_x": 54.041507720947266,
+      "position_y": 53.87074279785156,
+      "position_z": 17.19011878967285
+    }
+  },
+  "events": [
+    {
+      "event": "method_begin_request",
+      "at": 1794277724.9404073
+    },
+    {
+      "event": "method_begin_reply",
+      "at": 1794277724.9429088
+    },
+    {
+      "event": "move_request",
+      "at": 1794277725.4276772
+    },
+    {
+      "event": "move_reply",
+      "at": 1794277726.1107292
+    },
+    {
+      "event": "method_end_request",
+      "at": 1794277727.0999284
+    },
+    {
+      "event": "method_end_reply",
+      "at": 1794277729.008575
+    }
+  ],
+  "loaded_release_validated": false,
+  "retreat": false,
+  "caveat": "EncoderPosition independence from Position is assumed from the firmware field names, not proven."
+}

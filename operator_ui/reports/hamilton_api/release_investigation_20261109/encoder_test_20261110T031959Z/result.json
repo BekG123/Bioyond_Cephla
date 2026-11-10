@@ -1,0 +1,145 @@
+{
+  "status": "stopped_on_first_anomalous_step",
+  "steps_planned": 72,
+  "steps_run": 1,
+  "anomalous_step": 0,
+  "velocity_mm_s": 1.0,
+  "counter_shift_on_method_begin_mm": {
+    "1": 0.0,
+    "2": 0.0
+  },
+  "start": {
+    "1": {
+      "default_values": false,
+      "channel": 1,
+      "position_x": 54.041507720947266,
+      "position_y": 90.22623443603516,
+      "position_z": 17.18988609313965
+    },
+    "2": {
+      "default_values": false,
+      "channel": 2,
+      "position_x": 54.041507720947266,
+      "position_y": 34.60774230957031,
+      "position_z": 17.19011878967285
+    }
+  },
+  "final_positions": {
+    "1": {
+      "default_values": false,
+      "channel": 1,
+      "position_x": 54.041507720947266,
+      "position_y": 90.22623443603516,
+      "position_z": 17.18988609313965
+    },
+    "2": {
+      "default_values": false,
+      "channel": 2,
+      "position_x": 54.041507720947266,
+      "position_y": 34.10774230957031,
+      "position_z": 17.19011878967285
+    }
+  },
+  "final_drive_status": {
+    "1": {
+      "position_mm": 91.13400268554688,
+      "encoder_position_mm": 91.13400268554688,
+      "position_minus_encoder_mm": 0.0
+    },
+    "2": {
+      "position_mm": 32.95600128173828,
+      "encoder_position_mm": 41.858001708984375,
+      "position_minus_encoder_mm": -8.902000427246094
+    }
+  },
+  "steps": [
+    {
+      "step": 0,
+      "outward_mm": {
+        "2": 0.5
+      },
+      "channels": {
+        "1": {
+          "counter": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": -0.0,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 84
+          },
+          "encoder": {
+            "baseline_mm": 91.13400268554688,
+            "most_inward_mm": 0.00099945068359375,
+            "most_outward_mm": 0.0,
+            "final_outward_mm": 0.0,
+            "samples_during_move": 84
+          },
+          "verdict": "no_anomaly_both_followed",
+          "expected_mm": 0,
+          "coordinator_most_inward_mm": -0.0,
+          "coordinator_final_outward_mm": 0.0,
+          "start_gap_mm": -0.0,
+          "end_gap_mm": 0.0,
+          "resync_step": false
+        },
+        "2": {
+          "counter": {
+            "baseline_mm": 33.45600128173828,
+            "most_inward_mm": 8.403999328613281,
+            "most_outward_mm": 0.5,
+            "final_outward_mm": 0.5,
+            "samples_during_move": 82
+          },
+          "encoder": {
+            "baseline_mm": 41.854000091552734,
+            "most_inward_mm": 0.005001068115234375,
+            "most_outward_mm": -0.0,
+            "final_outward_mm": -0.004001617431640625,
+            "samples_during_move": 82
+          },
+          "verdict": "counter_jump_only_reporting_or_resync",
+          "expected_mm": 0.5,
+          "coordinator_most_inward_mm": 8.402000427246094,
+          "coordinator_final_outward_mm": 0.5,
+          "start_gap_mm": -8.397998809814453,
+          "end_gap_mm": -8.902000427246094,
+          "resync_step": false
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "event": "method_begin_request",
+      "at": 1794280804.0393703
+    },
+    {
+      "event": "method_begin_reply",
+      "at": 1794280804.0423717
+    },
+    {
+      "event": "move_request",
+      "at": 1794280804.5413818,
+      "step": 0,
+      "outward_mm": {
+        "2": 0.5
+      }
+    },
+    {
+      "event": "move_reply",
+      "at": 1794280805.2235413,
+      "step": 0
+    },
+    {
+      "event": "method_end_request",
+      "at": 1794280805.526471
+    },
+    {
+      "event": "method_end_reply",
+      "at": 1794280807.4348893
+    }
+  ],
+  "loaded_release_validated": false,
+  "retreat": false,
+  "caveat": "EncoderPosition independence from Position is assumed from the firmware field names, not proven."
+}

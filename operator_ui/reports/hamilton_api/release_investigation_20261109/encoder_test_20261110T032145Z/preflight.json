@@ -1,0 +1,86 @@
+{
+  "motion_sent": false,
+  "state": {
+    "door_closed": true,
+    "enclosure": true,
+    "initialized": true,
+    "plate_held": false,
+    "parked": false,
+    "tool": {
+      "default_values": false,
+      "id": 253,
+      "volume": 0.0,
+      "length": 22.899999618530273,
+      "tip_type": 0,
+      "has_filter": false,
+      "is_needle": false,
+      "is_tool": true,
+      "label": "DCG"
+    }
+  },
+  "start": {
+    "1": {
+      "default_values": false,
+      "channel": 1,
+      "position_x": 54.041507720947266,
+      "position_y": 90.22623443603516,
+      "position_z": 17.18988609313965
+    },
+    "2": {
+      "default_values": false,
+      "channel": 2,
+      "position_x": 54.041507720947266,
+      "position_y": 54.108741760253906,
+      "position_z": 17.19011878967285
+    }
+  },
+  "goal_y": {
+    "1": 90.22623443603516,
+    "2": -1.3912582397460938
+  },
+  "steps_planned": 111,
+  "first_step": {
+    "2": 0.5
+  },
+  "bounds": {
+    "1": {
+      "channel": 1,
+      "x_min": -1.8034896850585938,
+      "x_max": 297.1965026855469,
+      "y_min": -11.0,
+      "y_max": 397.5,
+      "z_min": -22.600000381469727,
+      "z_max": 177.10000610351562
+    },
+    "2": {
+      "channel": 2,
+      "x_min": -1.8034896850585938,
+      "x_max": 297.1965026855469,
+      "y_min": -20.0,
+      "y_max": 388.5,
+      "z_min": -22.600000381469727,
+      "z_max": 177.10000610351562
+    }
+  },
+  "mapping": {
+    "2": "1026:1:515",
+    "1": "1025:1:515"
+  },
+  "baseline": {
+    "1": {
+      "position_mm": 91.13400268554688,
+      "encoder_position_mm": 91.13400268554688,
+      "position_minus_encoder_mm": 0.0
+    },
+    "2": {
+      "position_mm": 52.958003997802734,
+      "encoder_position_mm": 52.958003997802734,
+      "position_minus_encoder_mm": 0.0
+    }
+  },
+  "baseline_samples_per_drive": 95,
+  "jaw_spacing_mm": 36.11749267578125,
+  "rest_ready": true,
+  "rest_global_state": "Idle",
+  "blockers": []
+}
