@@ -1,0 +1,70 @@
+{
+  "status": "operator_accepted_short_side_pickup_and_5mm_lift",
+  "at": 1794304887.9139502,
+  "operator_feedback": "Yes, it worked. Lets use this from now on.",
+  "physical_pickup_success": true,
+  "plate_level_and_secure_operator_confirmed": true,
+  "settings": {
+    "profile_id": "48well_short_side_corrected02_e1_25",
+    "alignment": {
+      "X": 306.197,
+      "Y": -62.885,
+      "Z": 104.368,
+      "Rz": 87.879
+    },
+    "descent_endpoint": {
+      "X": 306.2,
+      "Y": -62.88,
+      "Z": 74.37,
+      "Rz": 87.88
+    },
+    "holder_e2_degrees": 90.71661229181757,
+    "approach_speed": 137,
+    "descent_drop_mm": 30,
+    "descent_speed": 137,
+    "open_e1_mm": 28,
+    "target_e1_mm": 25,
+    "closing_speed": 5,
+    "closing_targets_mm": [
+      27,
+      26,
+      25.8,
+      25.6,
+      25.4,
+      25.2,
+      25
+    ],
+    "proof_lift_mm": 5,
+    "proof_lift_speed": 5,
+    "proof_lift_endpoint": {
+      "X": 306.2,
+      "Y": -62.88,
+      "Z": 79.37,
+      "Rz": 87.88
+    }
+  },
+  "evidence": [
+    {
+      "path": "operator_ui/reports/holder_short_side/alignment/retry_grip25_and_proof_lift.json",
+      "sha256": "9ca0d597899de7a8f8acc24a1d017a306f165528003794fb4726f9232ac3a4f6"
+    },
+    {
+      "path": "operator_ui/reports/holder_short_side/alignment/trial_corrected02.json",
+      "sha256": "86db2348914b524393e32f4bab7e7ccaa21b66ccbda3d4bf82fd1e82fc6405b6"
+    },
+    {
+      "path": "operator_ui/reports/holder_short_side/alignment/grip_corrected02_28_to_26_trial.json",
+      "sha256": "392fa7eb04e6c59563636c662c8b739c16d27baf5821276271d131ec2fbd8651"
+    },
+    {
+      "path": "operator_ui/reports/holder_short_side/alignment/proof_lift_corrected02_e1_26_operator_assessment.json",
+      "sha256": "22ccfb73c743be2b71f1d92ee3de1ec9ea00d5b4409ebb3127dc08ba4ba40776"
+    }
+  ],
+  "force_control": false,
+  "force_limits_changed": false,
+  "hamilton_transfer_validated": false,
+  "scope": "This corrected 48-well short-side setup; long-side 3.9 mm reference remains separate.",
+  "acceptance_path": "operator_ui/reports/holder_short_side/alignment/accepted_short_side25.json",
+  "acceptance_sha256": "f69e2907786a5de420c497e6a3d61a5254b4bc3e117fbf53a367f6d9496688f1"
+}

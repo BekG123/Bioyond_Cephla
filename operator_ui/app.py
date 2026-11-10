@@ -142,6 +142,8 @@ lacry_backend.projected_pickup = projected_pickup
 from ik_home import IKHomeConnection
 from pickup_home import PickupHome
 ik_home_connection = IKHomeConnection(home_return)
+from guarded_home_recovery import GuardedHomeRecovery
+guarded_home_recovery = GuardedHomeRecovery(ik_home_connection)
 pickup_home = PickupHome(ik_home_connection,os.path.join(HERE,'demonstrations','pickup_home'))
 classic_pickup = ClassicPickup(researcher_teaching, plate_teaching, researcher_descent,
     position_grip, lambda: svc, lambda: runner, transport=pickup_home)
@@ -1144,6 +1146,35 @@ def projected_descent_acceptance_route():
         return jsonify(ok=False,error=str(error)),400
 
 
+@app.route('/developer/api/home/manual-recovery', methods=['GET', 'POST'])
+def manual_home_recovery_route():
+    from home_recovery import acknowledge
+    from researcher_teaching import TeachingError
+    if request.remote_addr not in ('127.0.0.1', '::1'):
+        return jsonify(ok=False, error='Manual recovery review is local-only.'), 403
+    try:
+        if request.method == 'GET':
+            return jsonify(ok=True, attempts=ik_home_connection.unresolved_attempts())
+        return jsonify(acknowledge(ik_home_connection, _body()))
+    except TeachingError as error:
+        return jsonify(ok=False, error=str(error)), 400
+
+
+@app.post('/developer/api/home/recovery/<action>')
+def guarded_home_recovery_route(action):
+    from researcher_teaching import TeachingError
+    if request.remote_addr not in ('127.0.0.1', '::1'):
+        return jsonify(ok=False, error='Recovery review is local-only.'), 403
+    try:
+        if action == 'preview':
+            return jsonify(guarded_home_recovery.preview())
+        if action == 'confirm':
+            return jsonify(guarded_home_recovery.confirm(_body()))
+        return jsonify(ok=False, error='Unknown recovery action.'), 404
+    except (TeachingError, TransferError) as error:
+        return jsonify(ok=False, error=str(error)), 400
+
+
 @app.post("/seq/center_plate_edges")
 def center_plate_edges():
     from edge_center import center, validate_request as validate_edges
@@ -1423,6 +1454,159 @@ def staged_lift_3p7_start():
         return jsonify(runner.start('staged_lift_3p7',execute,svc,cfg,approved))
     except Exception as error:
         return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/hamilton-short-side-trial')
+def hamilton_short_side_trial():
+    from hamilton_short_side_trial import review, execute
+    body=_body();direction=body.get('direction')
+    if direction not in ('forward','reverse') or body!={'direction':direction,'ready':True,'empty_gripper':True,'path_clear':True}:
+        return jsonify(ok=False,error='Confirm the empty-gripper Hamilton trial and clear path.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();approved=review(svc,cfg,direction)
+        return jsonify(runner.start('hamilton_short_side_trial',execute,svc,cfg,approved))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/short-side-full-trial01')
+def short_side_full_trial01():
+    from short_side_full_trial import review,execute
+    body=_body();phase=body.get('phase')
+    if phase not in ('approach','hamilton') or body!={'phase':phase,'ready':True,'setup_confirmed':True,'path_clear':True}:
+        return jsonify(ok=False,error='Confirm the short-side pickup/transfer setup and path.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();approved=review(svc,cfg,phase)
+        return jsonify(runner.start('short_side_full_trial01',execute,svc,cfg,approved))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/short-side-full-trial02')
+def short_side_full_trial02():
+    from short_side_full_trial import review,execute
+    body=_body();phase=body.get('phase')
+    if phase not in ('approach','hamilton') or body!={'phase':phase,'ready':True,'setup_confirmed':True,'path_clear':True}:
+        return jsonify(ok=False,error='Confirm pickup and direct Hamilton trial via the new turning pose.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();approved=review(svc,cfg,phase,'02')
+        return jsonify(runner.start('short_side_full_trial02',execute,svc,cfg,approved))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/short-side-full-trial04')
+@app.post('/developer/api/short-side-full-trial03')
+def short_side_full_trial03():
+    from short_side_full_trial import review,execute
+    body=_body();phase=body.get('phase')
+    attempt=body.get('attempt','')
+    revision='04' if request.path.endswith('trial04') else '03'
+    expected={'phase':phase,'ready':True,'setup_confirmed':True,'path_clear':True}
+    if attempt:expected['attempt']=attempt
+    if phase not in ('approach','hamilton','departure') or (phase=='departure' and revision!='04') or attempt not in ('','retry01','retry02','retry03') or (revision=='04' and attempt) or body!=expected:
+        return jsonify(ok=False,error='Confirm the new raised turn, overhead crossing and two-speed vertical descent.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();approved=review(svc,cfg,phase,revision,attempt)
+        return jsonify(runner.start('short_side_full_trial'+revision,execute,svc,cfg,approved))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/short-side-full-trial04/restore-holder')
+@app.post('/developer/api/short-side-full-trial03/retry03/restore-holder')
+@app.post('/developer/api/short-side-full-trial02/restore-holder')
+def short_side_full_trial02_holder():
+    from short_side_holder_restore import review,execute
+    if _body()!={'ready':True,'empty_gripper':True,'holder_clear':True}:
+        return jsonify(ok=False,error='Confirm empty jaws and clear small holder correction.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        profile='full_sequence03_retry03' if request.path.endswith('/retry03/restore-holder') else 'full_sequence02'
+        if request.path.endswith('trial04/restore-holder'):profile='full_sequence04'
+        approved=review(svc,profile)
+        return jsonify(runner.start('short_side_full_trial02_holder',execute,svc,approved))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/holder/alignment-trial')
+def short_side_alignment_trial():
+    from short_side_alignment_trial import review, execute
+    body=_body()
+    candidate=body.get('candidate')
+    if candidate not in ('direct','clearance','smooth_direct','smooth_repeat01','corrected02') or body!={'candidate':candidate,'ready':True,'empty_gripper':True,'path_clear':True}:
+        return jsonify(ok=False,error='Confirm the supervised open-jaw route and empty gripper.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();approved=review(svc,cfg,candidate)
+        return jsonify(runner.start('short_side_alignment_trial',execute,svc,cfg,approved))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/holder/restore-taught-angle')
+def restore_taught_holder_angle():
+    from short_side_holder_restore import review,execute
+    if _body()!={'ready':True,'empty_gripper':True,'holder_clear':True}:
+        return jsonify(ok=False,error='Confirm empty jaws and clear holder adjustment.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        approved=review(svc)
+        return jsonify(runner.start('restore_taught_holder_angle',execute,svc,approved))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/holder/direction-probe')
+@app.post('/developer/api/holder/complete-quarter-turn')
+@app.post('/developer/api/holder/return-original')
+@app.post('/developer/api/holder/fast-quarter-turn')
+@app.post('/developer/api/holder/restore-test-start')
+def holder_direction_probe():
+    from holder_rotation_trial import direction_probe, snapshot, quarter_turn_target, verified_return, ROOT
+    quarter = request.path.endswith('/complete-quarter-turn')
+    returning = request.path.endswith('/return-original')
+    fast = request.path.endswith('/fast-quarter-turn')
+    restore_test = request.path.endswith('/restore-test-start')
+    required = {'ready': True, 'empty_gripper': True, 'holder_clear': True}
+    if quarter or returning or fast or restore_test:
+        required['positive_e2_confirmed_ccw'] = True
+    if fast:
+        required['plate_retained'] = True
+    if _body() != required:
+        return jsonify(ok=False, error='Confirm empty jaws and the supervised clear holder sweep.'), 400
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    try:
+        expected = None
+        if quarter or returning or fast or restore_test:
+            expected, _ = quarter_turn_target(json.loads((ROOT/'direction_probe.json').read_text()), True)
+        if returning or fast:
+            prior = verified_return()[1] if fast else json.loads((ROOT/'quarter_turn.json').read_text())
+            allowed = ('original_restored','original_restored_by_readback','fast_start_restored') if fast else ('quarter_turn_completed',)
+            if prior.get('status') not in allowed:
+                raise ValueError('Previous holder motion has no verified completion')
+            expected = prior['after']['native']['external_axes']['E2']
+        if restore_test:
+            expected=json.loads((ROOT/'fast137_startup.json').read_text())['after_native']['external_axes']['E2']
+        snapshot(svc, expected)
+        if quarter or returning or fast or restore_test:
+            name = 'holder_restore_test_start' if restore_test else 'holder_return_original' if returning else 'holder_fast_quarter_turn' if fast else 'holder_quarter_turn'
+            return jsonify(runner.start(name, lambda run: direction_probe(run, svc, quarter=quarter, confirmed_ccw=True, return_original=returning, fast=fast, restore_test=restore_test)))
+        return jsonify(runner.start('holder_direction_probe', direction_probe, svc))
+    except Exception as error:
+        return jsonify(ok=False, error=str(error)), 409
 
 
 @app.post('/developer/api/hamilton-release/preview')

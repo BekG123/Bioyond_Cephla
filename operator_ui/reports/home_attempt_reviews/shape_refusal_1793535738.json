@@ -1,0 +1,16 @@
+{
+  "conclusion": "No Home travel dispatched; fresh plan required",
+  "ik_record": "reports/ik_home/1793535738333767400_04f2fa8b85554cc5b0a35fe432cc163e.json",
+  "ik_canonical_sha256": "b7be3d64972500de8fa8500f1b3f08d05a2244df841f57637f6991859293e67a",
+  "route_record": "reports/trajectory_smoothing/latest_button_runs/1793535738429268400_saved_home.json",
+  "route_canonical_sha256": "0fcbc1f571054ffbd3b760395f157156d676c48eae4afdb83cddfff29b4c60eb",
+  "basis": [
+    "Sequence log contains preparation and shape refusal only, no Executing points or upload/progress messages.",
+    "Captured stack terminates in validate_home_transit through prepare_points at trajectory_queue.execute line 221, before the dispatch closure.",
+    "First stage is a single vertical lift; no rotation, prefix or connector precedes it. Paired route target/stages match.",
+    "Post-failure measured X279.331 Y26.380 Z289.122 Rz-3.884 differs from planned X279.302 Y26.357 Z289.129 Rz-3.880 after startup; it did not reach the first Z300 waypoint."
+  ],
+  "original_records_preserved": true,
+  "tolerances_changed": false,
+  "scope": "Only the two exact canonical record hashes; no general exception for failed motion"
+}

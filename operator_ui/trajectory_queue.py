@@ -11,8 +11,9 @@ import time
 from autonomy import TransferError, check_path, ensure_arrival, wrap
 
 VERSION = 220108
+SEGMENT_SPEED_VERSION = 220109
 LEGACY_VERSION = 220101
-PROTOCOL_SPEED_LIMITS = {LEGACY_VERSION:40,220102:47,220103:55,220104:70,220105:80,220106:100,220107:130,VERSION:137}
+PROTOCOL_SPEED_LIMITS = {LEGACY_VERSION:40,220102:47,220103:55,220104:70,220105:80,220106:100,220107:130,VERSION:137,SEGMENT_SPEED_VERSION:137}
 KEYS = ('X','Y','Z','Rz')
 MOD = 2147483629
 
@@ -33,20 +34,36 @@ def travel_program_blocker(capability, speed=137, *, allow_initialization=False)
     return ''
 
 
-def checksum(points):
+def checksum(points, segment_speeds=None):
     value = 0
-    for point in points:
+    for index, point in enumerate(points):
         for key in KEYS:
             value = (value*31 + math.floor(point[key]*100+.5)) % MOD
+        if segment_speeds is not None:
+            value = (value*31 + math.floor(segment_speeds[index]*100+.5)) % MOD
     return value
 
 
-def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, home_transit=False, scope_compact=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False):
+def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, home_transit=False, scope_compact=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False, squid_queue=False, short_side_alignment=None, hamilton_short_side=None):
     """Quantize to 0.01 mm/degree, then recheck the exact transmitted path."""
     if not 1 <= len(points) <= 1024:
         raise TransferError('Lua queue requires 1–1024 points.')
-    if sum(bool(v) for v in (vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,home_transit,scope_compact,hamilton_home,hamilton_trial,scope_trial,hamilton_release))>1:
+    if sum(bool(v) for v in (vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,home_transit,scope_compact,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue))>1:
         raise TransferError('Choose one reviewed route profile.')
+    if hamilton_short_side is not None:
+        if not reviewed or short_side_alignment is not None or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,home_transit,scope_compact,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue)):
+            raise TransferError('Hamilton short-side requires its own pinned route profile.')
+        from hamilton_short_side_trial import validate_shape as validate_hamilton_short_shape
+        validate_hamilton_short_shape(start,points,hamilton_short_side)
+    if short_side_alignment is not None:
+        if not reviewed or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,home_transit,scope_compact,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue)):
+            raise TransferError('Short-side approach requires its own reviewed route profile.')
+        from short_side_alignment_trial import validate_shape as validate_short_shape
+        validate_short_shape(start,points,short_side_alignment)
+    if squid_queue:
+        if not reviewed:raise TransferError('Squid queue requires explicit route review.')
+        from squid_single_queue import validate_route as validate_squid_queue
+        validate_squid_queue(start,points)
     if scope_phase is not None and not (scope_compact or scope_trial):
         raise TransferError('Scope phases require the reviewed microscope route.')
     if hamilton_release:
@@ -100,11 +117,17 @@ def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=
         long_vertical=(reviewed and vertical_runs and distance<=200.02
                        and math.dist([previous[k] for k in ('X','Y')],[point[k] for k in ('X','Y')])<=.25
                        and abs(wrap(point['Rz']-previous['Rz']))<=.1)
-        if not (straight_transfer or level_return or forward_entry or reverse_entry or home_transit or scope_compact or hamilton_home or hamilton_trial or scope_trial or hamilton_release) and ((distance > (50.02 if reviewed else 5.02) and not long_vertical) or abs(wrap(point['Rz']-previous['Rz'])) > (10.02 if reviewed else 1.02)):
+        if not (straight_transfer or level_return or forward_entry or reverse_entry or home_transit or scope_compact or hamilton_home or hamilton_trial or scope_trial or hamilton_release or squid_queue or short_side_alignment is not None or hamilton_short_side is not None) and ((distance > (50.02 if reviewed else 5.02) and not long_vertical) or abs(wrap(point['Rz']-previous['Rz'])) > (10.02 if reviewed else 1.02)):
             raise TransferError('Queued path segment exceeds the reviewed step size.')
         q = check_path(previous,point,q,cfg,None)
         out.append(point)
         previous = point
+    if hamilton_short_side is not None:
+        validate_hamilton_short_shape(start,out,hamilton_short_side)
+    if short_side_alignment is not None:
+        validate_short_shape(start,out,short_side_alignment)
+    if squid_queue:
+        validate_squid_queue(start,out)
     if scope_compact:
         validate_route(start,out,scope_phase)
     if hamilton_home:
@@ -173,7 +196,7 @@ class LuaTrajectory:
             values = self.service.robot.get_sys_var_i([17,18,19])
             if values.get(17) not in PROTOCOL_SPEED_LIMITS:
                 return dict(available=False,message='Queued replay needs the new Lua program published to the controller.')
-            return dict(available=True,version=values[17],max_speed_mm_s=PROTOCOL_SPEED_LIMITS[values[17]],state=values.get(18),submitted=values.get(19),
+            return dict(available=True,version=values[17],max_speed_mm_s=PROTOCOL_SPEED_LIMITS[values[17]],segment_speeds=values[17]==SEGMENT_SPEED_VERSION,state=values.get(18),submitted=values.get(19),
                         message='Controller queue available. Groups nearby taught points into longer movements.')
         except Exception:
             return dict(available=False,message='Could not verify the controller trajectory executor.')
@@ -199,9 +222,34 @@ class LuaTrajectory:
         self.service.trajectory_fault = True
         raise TransferError('Controller has not reported stopped. Use the E-stop; inspect Developer view.')
 
-    def execute(self, run, start, joints, points, cfg, speed, progress, *, grouped=False, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, research_speed47=False, research_speed55=False, research_speed70=False, research_speed80=False, research_speed100=False, research_speed130=False, research_speed137=False, home_transit=False, home_speed137=False, scope_compact=False, scope_speed137=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False):
+    def execute(self, run, start, joints, points, cfg, speed, progress, *, grouped=False, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, research_speed47=False, research_speed55=False, research_speed70=False, research_speed80=False, research_speed100=False, research_speed130=False, research_speed137=False, home_transit=False, home_speed137=False, scope_compact=False, scope_speed137=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False, squid_queue=False, segment_speeds=None, short_side_alignment=None, hamilton_short_side=None):
+        hamilton_hover=hamilton_short_side in ('pickup_hover03_forward','pickup_hover03_reverse','pickup_hover04_forward','pickup_hover04_reverse','pickup_hover04_departure')
+        if hamilton_short_side is not None:
+            if speed!=137 or not reviewed or grouped or short_side_alignment is not None or (segment_speeds is not None and not hamilton_hover) or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_transit,home_speed137,scope_compact,scope_speed137,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue)):
+                raise TransferError('Hamilton short-side requires its exact speed-137 profile.')
+            from hamilton_short_side_trial import validate_route as validate_hamilton_short
+            validate_hamilton_short(start,points,joints,cfg,self.service.envelope,hamilton_short_side)
+            if hamilton_hover:
+                from short_side_hover_transfer import validate_speeds
+                validate_speeds(start,points,hamilton_short_side,segment_speeds)
+        if short_side_alignment is not None:
+            if not reviewed or grouped or segment_speeds is not None or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_transit,home_speed137,scope_compact,scope_speed137,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue)):
+                raise TransferError('Short-side alignment requires its own pinned route profile.')
+            from short_side_alignment_trial import validate_route as validate_short_side
+            validate_short_side(start,points,joints,cfg,self.service.envelope,short_side_alignment)
+        if segment_speeds is not None and not (squid_queue or hamilton_hover):
+            raise TransferError('Segment speeds require an exact reviewed mixed-speed route.')
+        if squid_queue:
+            if not reviewed or grouped or segment_speeds is None or any((research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_speed137,scope_speed137)):
+                raise TransferError('Squid queue requires its reviewed segment-speed profile.')
+            from squid_single_queue import validate_route, check_route
+            expected_speeds=validate_route(start,points)[1]
+            if (list(segment_speeds)!=expected_speeds or any(type(v) not in (int,float) or not math.isfinite(v) for v in segment_speeds) or speed!=137):
+                raise TransferError('Squid queue speeds must preserve transit 137 and vertical seating/lift 5.')
         if sum(bool(v) for v in (research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_speed137,scope_speed137))>1:raise TransferError('Choose one research speed profile.')
         speed_limit=(137 if research_speed137 else 130 if research_speed130 else 100 if research_speed100 else 80 if research_speed80 else 70 if research_speed70 else 55 if research_speed55 else 47) if (research_speed47 or research_speed55 or research_speed70 or research_speed80 or research_speed100 or research_speed130 or research_speed137) and reviewed and (forward_entry or reverse_entry) else 40
+        if squid_queue:speed_limit=137
+        if short_side_alignment is not None or hamilton_short_side is not None:speed_limit=137
         if home_speed137:
             if not reviewed or not (home_transit or straight_transfer or hamilton_home or hamilton_trial or hamilton_release):
                 raise TransferError('Home speed requires the checked Home transit profile.')
@@ -227,7 +275,13 @@ class LuaTrajectory:
             raise TransferError('An explicitly reviewed route must execute its exact points without regrouping.')
         if vertical_runs and not reviewed:
             raise TransferError('Long vertical segments require a separately reviewed route.')
-        points, expected = prepare_points(start,joints,points,cfg,reviewed=reviewed,vertical_runs=vertical_runs,straight_transfer=straight_transfer,level_return=level_return,forward_entry=forward_entry,reverse_entry=reverse_entry,home_transit=home_transit,scope_compact=scope_compact,hamilton_home=hamilton_home,scope_phase=scope_phase,hamilton_trial=hamilton_trial,scope_trial=scope_trial,hamilton_release=hamilton_release)
+        points, expected = prepare_points(start,joints,points,cfg,reviewed=reviewed,vertical_runs=vertical_runs,straight_transfer=straight_transfer,level_return=level_return,forward_entry=forward_entry,reverse_entry=reverse_entry,home_transit=home_transit,scope_compact=scope_compact,hamilton_home=hamilton_home,scope_phase=scope_phase,hamilton_trial=hamilton_trial,scope_trial=scope_trial,hamilton_release=hamilton_release,squid_queue=squid_queue,short_side_alignment=short_side_alignment,hamilton_short_side=hamilton_short_side)
+        if hamilton_short_side is not None:
+            expected=validate_hamilton_short(start,points,joints,cfg,self.service.envelope,hamilton_short_side)
+        if short_side_alignment is not None:
+            expected=validate_short_side(start,points,joints,cfg,self.service.envelope,short_side_alignment)
+        if squid_queue:
+            expected=check_route(start,points,joints,cfg,self.service.envelope)
         if hamilton_release:
             from hamilton_release_20261108 import check_route
             check_route(start,points,joints,cfg,self.service.envelope)
@@ -256,6 +310,8 @@ class LuaTrajectory:
             if blocker:
                 raise TransferError(blocker)
             protocol=capability['version']
+            if segment_speeds is not None and protocol!=SEGMENT_SPEED_VERSION:
+                raise TransferError('Publish Lua queue 220109 for travel with per-segment speeds; no motion sent.')
             if speed>capability['max_speed_mm_s']:
                 required=220108 if speed>130 else 220107 if speed>100 else 220106 if speed>80 else 220105 if speed>70 else 220104 if speed>55 else 220103 if speed>47 else 220102
                 raise TransferError(f'Publish Lua queue version {required} before running speed {speed}; no motion sent.')
@@ -284,13 +340,14 @@ class LuaTrajectory:
                 if reply != {'index':1,'value':protocol}:
                     raise TransferError('Lua queue handshake failed; no trajectory uploaded or executed.')
                 header = [len(points),speed,-1]+[start[k] for k in KEYS]+[joints[k] for k in ('J1','J2','J3','J4')]
-                self._job(1,token,dict(enumerate(header)))
+                self._job(8 if segment_speeds is not None else 1,token,dict(enumerate(header)))
                 for offset in range(0,len(points),3):
                     healthy()
                     batch = points[offset:offset+3]
-                    self._job(2,token,dict(enumerate(v for p in batch for v in (p[k] for k in KEYS))),offset,len(batch))
+                    values=[v for i,p in enumerate(batch) for v in ([p[k] for k in KEYS]+([] if segment_speeds is None else [segment_speeds[offset+i]]))]
+                    self._job(9 if segment_speeds is not None else 2,token,dict(enumerate(values)),offset,len(batch))
                     progress('upload',offset+len(batch),len(points))
-                self._job(3,token,offset=checksum(points))
+                self._job(3,token,offset=checksum(points,segment_speeds))
                 values = self.service.robot.get_sys_var_i([7,17,18,19])
                 if values != {7:token,17:protocol,18:2,19:len(points)}:
                     raise TransferError('Controller did not confirm the complete committed trajectory.')
@@ -299,7 +356,8 @@ class LuaTrajectory:
                 done, outcome = threading.Event(), {}
                 path = [start]+reference_points
                 length = sum(math.dist([a[k] for k in KEYS[:3]],[b[k] for k in KEYS[:3]]) for a,b in zip(path,path[1:]))
-                timeout = 300+2*len(points)+4*length/speed
+                travel_time=(length/speed if segment_speeds is None else sum(math.dist([a[k] for k in KEYS[:3]],[b[k] for k in KEYS[:3]])/v for a,b,v in zip(path,path[1:],segment_speeds)))
+                timeout = 300+2*len(points)+4*travel_time
                 def execute_job():
                     try: self._job(4,token,timeout=timeout)
                     except Exception as error: outcome['error'] = error
@@ -313,6 +371,9 @@ class LuaTrajectory:
                 while not done.wait(.1):
                     healthy()
                     measured = self.service.pose_mm()
+                    if squid_queue:
+                        from squid_single_queue import check_vertical_feedback
+                        check_vertical_feedback(measured,path)
                     d,yaw,percent = locate(measured,path)
                     if d>2 or yaw>2:
                         raise TransferError(f'Measured arm pose left the taught trajectory corridor: position error {d:.4f} mm, yaw error {yaw:.4f} deg, pose {measured}.')
@@ -329,7 +390,8 @@ class LuaTrajectory:
                 if any(abs(q[k]-expected[k])>.5 for k in ('J2','J3','J4')):
                     raise TransferError('Final queued trajectory joint configuration mismatch.')
                 progress('motion',100,100)
-                return dict(ok=True,executor='lua_queue',points=len(points),zone=-1,endpoint=points[-1],grouping=grouping)
+                return dict(ok=True,executor='lua_queue',points=len(points),zone=-1,endpoint=points[-1],grouping=grouping,
+                            **({'segment_speeds':list(segment_speeds),'protocol':protocol,'completion_barriers':1} if segment_speeds is not None else {}))
             except Exception as error:
                 if begun:
                     try: self.stop_controller()

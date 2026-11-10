@@ -1,0 +1,92 @@
+{
+  "status": "failed_or_uncertain",
+  "before": {
+    "robot": {
+      "ok": true,
+      "connected": true,
+      "endpoint": "192.168.201.220:56788",
+      "system_state": {
+        "value": 2,
+        "state": "running"
+      },
+      "control_mode": {
+        "value": 1,
+        "mode": "auto"
+      },
+      "enabled": true,
+      "program_state": {
+        "value": 1,
+        "state": "running"
+      },
+      "lua_app_initialized": true,
+      "errors": [],
+      "pose_mm": {
+        "X": 289.958,
+        "Y": 62.604,
+        "Z": 248.005,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.845
+      },
+      "joints": {
+        "J1": 209.4058374383477,
+        "J2": 84.87361500105843,
+        "J3": 52.04960272145057,
+        "J4": -140.76785475527907
+      },
+      "external_axes": {
+        "E1": -0.004487772457650863
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      }
+    },
+    "native": {
+      "manual": false,
+      "enabled": true,
+      "disabled": false,
+      "moving": false,
+      "emergency": false,
+      "drag": false,
+      "error": false,
+      "firmware": "1.8.2504101654",
+      "external_axes": {
+        "E1": -0.004308011284592794,
+        "E2": 91.67791360617267
+      },
+      "external_units": {
+        "E1": "mm",
+        "E2": "degrees"
+      }
+    }
+  },
+  "origin_degrees": 91.67791360617267,
+  "target_degrees": 1.6751663261435092,
+  "requested_final_direction": "counterclockwise",
+  "direction_verified": true,
+  "at": 1794300639.5703282,
+  "motion_sent": true,
+  "speed_setting": 1,
+  "probe_sha256": "9ba95497e79a1213b9336090f3c65c0707392cf65cca09a3a4922e8f35cac1bf",
+  "operator_observation": "User confirmed positive E2 test turned counterclockwise.",
+  "original_e2_degrees": 1.6751663261435092,
+  "previous_receipt_sha256": "0bf375cc7fb4561c06b0e92ce6ec43f5819c9f17ad6f65c1a8a73ba041ee5e63",
+  "capability_response": {
+    "ok": true,
+    "completion_reply": {
+      "index": 1,
+      "value": 1
+    }
+  },
+  "capability_registers": {
+    "7": 839695,
+    "8": 250102
+  },
+  "motion_result": {
+    "ok": false,
+    "error": "UNKNOWN STATE: setSysVarI: connection lost while the command was executing \u2014 physical state unknown Physical state must be re-checked (status + pose) before any retry. Do NOT resend blindly."
+  },
+  "error": "UNKNOWN STATE: setSysVarI: connection lost while the command was executing \u2014 physical state unknown Physical state must be re-checked (status + pose) before any retry. Do NOT resend blindly.",
+  "finished_at": 1794300669.8983617
+}

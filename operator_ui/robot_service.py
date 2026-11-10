@@ -715,7 +715,9 @@ class RobotService:
             cur = pose["Rz"]
             delta = (force_delta if force_delta is not None
                      else (rz_target - cur + 180.0) % 360.0 - 180.0)
-            if abs(delta) < 0.05:
+            # Explicit checked rotations must not be silently skipped by the
+            # ordinary jog deadband (Home transit has a stricter yaw guard).
+            if abs(delta) < (1e-6 if force_delta is not None else 0.05):
                 return {"ok": True, "note": "already at target Rz",
                         "pose_after": pose}
             spd = (min(speed, JOINT_SPEED_MAX) if speed > 0

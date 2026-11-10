@@ -1,0 +1,11 @@
+{
+  "status": "reviewed_no_home_travel_dispatched",
+  "ik_record": "operator_ui/reports/ik_home/1793729692715347100_fc9ca6fd88ce4e81956451acebecb6ec.json",
+  "ik_canonical_sha256": "18f32af8b7d6e9d3808659e9612c76f7311158ae32df54a33ce8d96d6c5e06b3",
+  "route_record": "operator_ui/reports/trajectory_smoothing/latest_button_runs/1793729692820367300_saved_home.json",
+  "route_canonical_sha256": "0fcbc1f571054ffbd3b760395f157156d676c48eae4afdb83cddfff29b4c60eb",
+  "basis": "IK sequence log contains preparation then shape rejection only. Failure stack terminates in validate_home_transit via prepare_points at trajectory_queue.py:221, before Executing/queue upload/locked dispatch. First stage is a queue; no preceding wrist or route movement. Matching route record has no prefix or connector. Controller startup did occur; no Home trajectory was uploaded.",
+  "original_records_modified": false,
+  "limits_changed": false,
+  "next_step": "Prepare the empty-gripper controller first, then generate and confirm a fresh Home plan from settled live readings. Preserve all route-shape and snapshot checks."
+}

@@ -1,0 +1,5380 @@
+{
+  "status": "completed",
+  "started_at": 1794309849.7184653,
+  "actions": [
+    {
+      "at": 1794309850.8861847,
+      "endpoint": "enable",
+      "body": {
+        "confirm": true
+      },
+      "response": {
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    },
+    {
+      "at": 1794309850.9587204,
+      "endpoint": "program",
+      "body": {
+        "action": "start",
+        "force": true
+      },
+      "response": {
+        "gripper_after_start": {
+          "e1_position": 0.084,
+          "e1_torque": 1.867
+        },
+        "notes": [
+          "E1 was reset to ~0 by the controller runtime (plates closed) \u2014 press Open (28) before any grip work"
+        ],
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    },
+    {
+      "at": 1794309852.078825,
+      "endpoint": "researcher/api/lacry/button/move_home",
+      "body": {},
+      "response": {
+        "ok": true,
+        "plan": {
+          "actions": [
+            "move_home"
+          ],
+          "at": 1794309852.3230925,
+          "cfg": {
+            "base_x_mm": 126.0,
+            "base_y_mm": 0.0,
+            "claw_gap_max_mm": 88.0,
+            "claw_gap_min_mm": 60.0,
+            "extension_margin_mm": 8.0,
+            "inner_reach_mm": 280.0,
+            "j2_margin_deg": 2.0,
+            "j2_min_deg": -95.0,
+            "j2_offset_deg": 0.0,
+            "j3_offset_deg": 180.0,
+            "j4_hard_abs_deg": 220.0,
+            "j4_pref_abs_deg": 220.0,
+            "link1_mm": 200.0,
+            "link2_mm": 200.0,
+            "reach_hard_mm": 460.0
+          },
+          "checked": [
+            {
+              "joints": {
+                "J1": 261.400761798454,
+                "J2": 42.268722078731194,
+                "J3": 56.941170125217376,
+                "J4": -11.229808942951117
+              },
+              "pose": {
+                "Rz": 87.98,
+                "X": 306.01,
+                "Y": -62.9,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.400761798454,
+                "J2": 42.268722078731194,
+                "J3": 56.941170125217376,
+                "J4": -34.197058942951095
+              },
+              "pose": {
+                "Rz": 65.01275000000001,
+                "X": 306.01,
+                "Y": -62.9,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.400761798454,
+                "J2": 42.268722078731194,
+                "J3": 56.941170125217376,
+                "J4": -57.16130894295109
+              },
+              "pose": {
+                "Rz": 42.048500000000004,
+                "X": 306.01,
+                "Y": -62.9,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.400761798454,
+                "J2": 42.268722078731194,
+                "J3": 56.941170125217376,
+                "J4": -80.12555894295107
+              },
+              "pose": {
+                "Rz": 19.084249999999997,
+                "X": 306.01,
+                "Y": -62.9,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.400761798454,
+                "J2": 42.268722078731194,
+                "J3": 56.941170125217376,
+                "J4": -103.08980894295107
+              },
+              "pose": {
+                "Rz": -3.8799999999999955,
+                "X": 306.01,
+                "Y": -62.9,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.400761798454,
+                "J2": 84.87688206683333,
+                "J3": 52.05596109242011,
+                "J4": -140.81275989825593
+              },
+              "pose": {
+                "Rz": -3.88,
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 209.4207617984541,
+                "J2": 84.87688206683333,
+                "J3": 52.05596109242011,
+                "J4": -140.81275989825593
+              },
+              "pose": {
+                "Rz": -3.88,
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02
+              }
+            }
+          ],
+          "dispatch": "ik_home_return",
+          "e1": 0.08395469922106713,
+          "envelope": {
+            "X": [
+              200.0,
+              450.0
+            ],
+            "Y": [
+              -250.0,
+              380.0
+            ],
+            "Z": [
+              70.0,
+              400.0
+            ]
+          },
+          "home": {
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          },
+          "id": "2026-11-10T11:24:12.323092+00:00:1794309852323",
+          "joints": {
+            "J1": 82.80076179845408,
+            "J2": 42.26782310700781,
+            "J3": 56.9410533112946,
+            "J4": -11.231793157304942
+          },
+          "labels": [
+            "Return Home"
+          ],
+          "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+          "preserve_gripper": true,
+          "requirements": [
+            "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+            "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+          ],
+          "source": "button",
+          "stages": [
+            {
+              "kind": "queue",
+              "points": [
+                {
+                  "Rz": 87.98,
+                  "X": 306.01,
+                  "Y": -62.9,
+                  "Z": 300.0
+                }
+              ]
+            },
+            {
+              "kind": "rotate",
+              "rz": 65.01275000000001
+            },
+            {
+              "kind": "rotate",
+              "rz": 42.048500000000004
+            },
+            {
+              "kind": "rotate",
+              "rz": 19.084249999999997
+            },
+            {
+              "kind": "rotate",
+              "rz": -3.8799999999999955
+            },
+            {
+              "kind": "queue",
+              "points": [
+                {
+                  "Rz": -3.88,
+                  "X": 289.97,
+                  "Y": 62.63,
+                  "Z": 300.0
+                },
+                {
+                  "Rz": -3.88,
+                  "X": 289.97,
+                  "Y": 62.63,
+                  "Z": 248.02
+                }
+              ]
+            }
+          ],
+          "start": {
+            "Rz": 87.977,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.4
+          },
+          "steps": [
+            {
+              "kind": "home_return",
+              "label": "Move to X306.01 / Y-62.90 / Z300.00 mm"
+            },
+            {
+              "kind": "home_return",
+              "label": "Turn the wrist to 65.01 degrees at clearance height"
+            },
+            {
+              "kind": "home_return",
+              "label": "Turn the wrist to 42.05 degrees at clearance height"
+            },
+            {
+              "kind": "home_return",
+              "label": "Turn the wrist to 19.08 degrees at clearance height"
+            },
+            {
+              "kind": "home_return",
+              "label": "Turn the wrist to -3.88 degrees at clearance height"
+            },
+            {
+              "kind": "home_return",
+              "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+            },
+            {
+              "kind": "home_return",
+              "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+            }
+          ],
+          "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+          "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69"
+        }
+      }
+    },
+    {
+      "at": 1794309852.3275115,
+      "endpoint": "researcher/api/lacry/confirm",
+      "body": {
+        "ready": true,
+        "plan_id": "2026-11-10T11:24:12.323092+00:00:1794309852323"
+      },
+      "response": {
+        "activity": [
+          {
+            "at": "2026-11-10T11:24:12.721427+00:00",
+            "line": "Displayed plan and requirements confirmed by researcher in chat."
+          },
+          {
+            "at": "2026-11-10T11:24:12.721427+00:00",
+            "line": "Confirmed and started: reviewed Home connection."
+          },
+          {
+            "at": "2026-11-10T11:24:12.323092+00:00",
+            "line": "Plan proposed: Return Home."
+          }
+        ],
+        "busy": false,
+        "capabilities": {
+          "automatic_squid": true
+        },
+        "configured": true,
+        "experiment": {
+          "name": "Return Home",
+          "total_steps": null
+        },
+        "links": {
+          "arm": {
+            "available": true,
+            "connected": true,
+            "message": "Arm connected."
+          },
+          "hamilton": {
+            "available": true,
+            "connected": true,
+            "door_automation_ready": true,
+            "global_state": "Idle",
+            "initialized": true,
+            "message": "Hamilton Idle; initialized.",
+            "operation": null,
+            "parked": true,
+            "pending_errors": [],
+            "polling": {
+              "calibration_default": "reduced",
+              "camera_paused": false,
+              "mode": "normal",
+              "purpose": null
+            },
+            "prompt": null,
+            "protocol_catalog": [
+              {
+                "dateModified": "2026-11-08T00:00:17.3276729",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 7,
+                "name": "Protocol"
+              },
+              {
+                "dateModified": "2026-11-08T02:15:26.3343363",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 8,
+                "name": "Lacry plate transfer 4 to 3 20261108T101236282327Z"
+              },
+              {
+                "dateModified": "2026-11-08T02:26:03.8078045",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 9,
+                "name": "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z"
+              },
+              {
+                "dateModified": "2026-11-08T02:30:01.3603117",
+                "dateRun": "2026-11-08T02:31:37.8295282",
+                "favorite": true,
+                "id": 10,
+                "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z"
+              },
+              {
+                "dateModified": "2026-11-08T03:19:50.076936",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 11,
+                "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z"
+              },
+              {
+                "dateModified": "2026-11-09T23:39:04.8957091",
+                "dateRun": "2026-11-09T23:40:15.4085454",
+                "favorite": true,
+                "id": 12,
+                "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z"
+              },
+              {
+                "dateModified": "2026-11-09T23:56:21.443924",
+                "dateRun": "2026-11-09T23:56:50.7857662",
+                "favorite": true,
+                "id": 13,
+                "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 tips6 20261110T075548Z"
+              },
+              {
+                "dateModified": "2026-11-10T00:09:16.6342697",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 14,
+                "name": "DRY MOCK 48 WELL corrected site4 tips6 20261110T080843Z"
+              }
+            ],
+            "protocols": [
+              "Protocol",
+              "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+              "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+              "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+              "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z",
+              "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z",
+              "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 tips6 20261110T075548Z",
+              "DRY MOCK 48 WELL corrected site4 tips6 20261110T080843Z"
+            ],
+            "ready_for_robot": false,
+            "recipes": [],
+            "run": {
+              "currentStep": 47,
+              "currentTime": "2026-11-09T23:58:50.2387981-08:00",
+              "endPauseTime": "0001-01-01T00:00:00",
+              "estimatedEndTime": "2026-11-09T23:58:52-08:00",
+              "isRunInProgress": false,
+              "isSimulation": true,
+              "pauseSeconds": 0,
+              "preLoadHepaFiltration": false,
+              "preLoadThermalDeviceUsed": "None",
+              "protocolId": 0,
+              "protocolName": null,
+              "protocolRunState": 0,
+              "runDatalId": null,
+              "startTime": "2026-11-09T23:56:50.7897671-08:00"
+            },
+            "serial": "PRPGJ2494",
+            "session_id": "594c5387e35e428aa227674b7846c483",
+            "simulation": false,
+            "state": "idle"
+          },
+          "squid": {
+            "available": true,
+            "completion_confirmed": false,
+            "connected": false,
+            "job": null,
+            "message": "Connect to Squid to follow imaging progress.",
+            "simulation": null,
+            "status": "disconnected"
+          }
+        },
+        "ok": true,
+        "pending": null,
+        "question": null,
+        "review": null,
+        "running": {
+          "active": true,
+          "done": [],
+          "error": "",
+          "message": "Returning Home along the reviewed connection.",
+          "ok": null,
+          "step": "Return Home"
+        },
+        "transcript": [
+          {
+            "at": "2026-11-10T11:24:12.323092+00:00",
+            "role": "lacry",
+            "text": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.\nConfirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop. Any held plate is secure and can lift clear of its support. The claw position will stay unchanged.\nReply \u201cYes\u201d to confirm these requirements and start, or tell me what to change."
+          },
+          {
+            "at": "2026-11-10T11:24:12.341168+00:00",
+            "role": "researcher",
+            "text": "Yes"
+          },
+          {
+            "at": "2026-11-10T11:24:12.721427+00:00",
+            "role": "lacry",
+            "text": "Returning Home. Keep hands clear."
+          }
+        ]
+      }
+    }
+  ],
+  "samples": [
+    {
+      "at": 1794309849.7928777,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": false,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.8005543593305,
+            "J2": 42.267869880428414,
+            "J3": 56.94115247304027,
+            "J4": -11.231444522223992
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.978,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.399
+          },
+          "program_state": {
+            "state": "stopped",
+            "value": 0
+          },
+          "system_state": {
+            "state": "idle",
+            "value": 1
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "short_side_full_trial03",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1794309849.7769935
+      },
+      "native": {
+        "manual": false,
+        "enabled": false,
+        "disabled": true,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.81274037419632
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309850.0355568,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": false,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08395469922106713
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.80034692020696,
+            "J2": 42.267869880428414,
+            "J3": 56.94115247304027,
+            "J4": -11.231444522223992
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.978,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.399
+          },
+          "program_state": {
+            "state": "stopped",
+            "value": 0
+          },
+          "system_state": {
+            "state": "idle",
+            "value": 1
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "short_side_full_trial03",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1794309850.0291457
+      },
+      "native": {
+        "manual": false,
+        "enabled": false,
+        "disabled": true,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08395469922106713,
+          "E2": 90.81274037419632
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309850.2979152,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": false,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08395469922106713
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.80034692020696,
+            "J2": 42.26784649371811,
+            "J3": 56.94115247304027,
+            "J4": -11.231618839764467
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.978,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.399
+          },
+          "program_state": {
+            "state": "stopped",
+            "value": 0
+          },
+          "system_state": {
+            "state": "idle",
+            "value": 1
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "short_side_full_trial03",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1794309850.2832432
+      },
+      "native": {
+        "manual": false,
+        "enabled": false,
+        "disabled": true,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309852.078825,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08377493941225111
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.80096923757762,
+            "J2": 42.26784649371811,
+            "J3": 56.9410533112946,
+            "J4": -11.231618839764467
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.977,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.4
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "short_side_full_trial03",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1794309852.072973
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08377493941225111,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309852.8362389,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08395469922106713
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.8005543593305,
+            "J2": 42.267869880428414,
+            "J3": 56.94115247304027,
+            "J4": -11.231618839764467
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.977,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.4
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309852.823142
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08395469922106713,
+          "E2": 90.80450316605729
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309853.1155908,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08395469922106713
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.8005543593305,
+            "J2": 42.267869880428414,
+            "J3": 56.94115247304027,
+            "J4": -11.231793157304942
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.977,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.4
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309853.0985813
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309853.3916545,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08395469922106713
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.80034692020696,
+            "J2": 42.267869880428414,
+            "J3": 56.94115247304027,
+            "J4": -11.231618839764467
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.977,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.399
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309853.3760543
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309853.6605875,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.80034692020696,
+            "J2": 42.267869880428414,
+            "J3": 56.94115247304027,
+            "J4": -11.231618839764467
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.977,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.4
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309853.6446307
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309853.9858966,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 82.8005543593305,
+            "J2": 42.26789326713871,
+            "J3": 56.94115247304027,
+            "J4": -11.231793157304942
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.977,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.399
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309853.9718535
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309854.2632117,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 83.0801822978723,
+            "J2": 42.267869880428414,
+            "J3": 56.94125163478592,
+            "J4": -11.231444522223992
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.978,
+            "X": 306.009,
+            "Y": -62.903,
+            "Z": 121.679
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309854.2481632
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309854.530449,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 109.24219712053655,
+            "J2": 42.26801020069022,
+            "J3": 56.9410533112946,
+            "J4": -11.231270204683515
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.978,
+            "X": 306.009,
+            "Y": -62.902,
+            "Z": 147.841
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309854.5154922
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309854.8094635,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 145.4058892850348,
+            "J2": 42.26812713424173,
+            "J3": 56.94125163478592,
+            "J4": -11.23057293452161
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.979,
+            "X": 306.01,
+            "Y": -62.902,
+            "Z": 184.005
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309854.7920702
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309855.0672657,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 183.77237750248202,
+            "J2": 42.268314227924144,
+            "J3": 56.94085498780329,
+            "J4": -11.230921569602563
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.978,
+            "X": 306.008,
+            "Y": -62.901,
+            "Z": 222.371
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309855.0619903
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.81274037419632
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309855.3431165,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08395469922106713
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 218.83145633409075,
+            "J2": 42.268477934896254,
+            "J3": 56.94115247304027,
+            "J4": -11.229875664359708
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.98,
+            "X": 306.01,
+            "Y": -62.901,
+            "Z": 257.43
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309855.3283896
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08395469922106713,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309855.6210268,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 255.3604487951558,
+            "J2": 42.26861825515807,
+            "J3": 56.9410533112946,
+            "J4": -11.229527029278756
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.98,
+            "X": 306.009,
+            "Y": -62.9,
+            "Z": 293.959
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309855.6054804
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08449398592347279,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309855.8714752,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4052248553247,
+            "J2": 42.26868841528897,
+            "J3": 56.94115247304027,
+            "J4": -11.230049981900184
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.98,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.004
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309855.8646564
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309856.129818,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4029430249656,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -11.229875664359708
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.98,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.002
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309856.1228452
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08449398592347279,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309856.3879068,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40190582934787,
+            "J2": 42.26871180199927,
+            "J3": 56.94115247304027,
+            "J4": -11.345971146316808
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 87.864,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.001
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309856.3813298
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309856.6656556,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40211326847145,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -21.21652755823719
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 78.426,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.001
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309856.651087
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309856.9155922,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40356534233626,
+            "J2": 42.26871180199927,
+            "J3": 56.94115247304027,
+            "J4": -33.37604759414965
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 65.834,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309856.9085352
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309857.1962883,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4039802205834,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -34.19690889225174
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 65.013,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309857.1808803
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309857.458105,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26871180199927,
+            "J3": 56.94125163478592,
+            "J4": -34.19690889225174
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 65.013,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309857.441618
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80450316605729
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309857.728299,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26866502857867,
+            "J3": 56.94115247304027,
+            "J4": -35.86878842295831
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 63.341,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309857.7220628
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309857.9856832,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4039802205834,
+            "J2": 42.26871180199927,
+            "J3": 56.94115247304027,
+            "J4": -48.9378973850752
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 50.705,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309857.970342
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309858.2664673,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -57.146336048555696
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 42.075,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309858.2498147
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309858.5364718,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -57.16132735703665
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 42.049,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309858.5302596
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80450316605729
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309858.8040652,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40439509883043,
+            "J2": 42.26871180199927,
+            "J3": 56.94115247304027,
+            "J4": -58.39741303655288
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 40.812,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309858.7895956
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08395469922106713,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309859.072696,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26871180199927,
+            "J3": 56.94125163478592,
+            "J4": -71.90318743756248
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 27.738,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309859.0667262
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309859.342943,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40439509883043,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -80.1107545133406
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 19.11,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309859.3273869
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309859.6114006,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08449398592347279
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26871180199927,
+            "J3": 56.94115247304027,
+            "J4": -80.12557150428106
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 19.084,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309859.5952225
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309859.8900096,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40439509883043,
+            "J2": 42.26866502857867,
+            "J3": 56.94125163478592,
+            "J4": -81.35973969085207
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 18.039,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309859.8734238
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309860.165727,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26868841528897,
+            "J3": 56.94125163478592,
+            "J4": -94.43739021245229
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 4.773,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309860.1509187
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309860.427966,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -103.07517297812548
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.865,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309860.4220765
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.81274037419632
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309860.6905696,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26871180199927,
+            "J3": 56.9410533112946,
+            "J4": -103.08981565152547
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309860.6845622
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309860.9616272,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40439509883043,
+            "J2": 42.26871180199927,
+            "J3": 56.94115247304027,
+            "J4": -103.08998996906595
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309860.947347
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.81274037419632
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309861.2399154,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40439509883043,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -103.08981565152547
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309861.224369
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309861.5637915,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 42.26873518870958,
+            "J3": 56.94115247304027,
+            "J4": -103.08981565152547
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309861.5472026
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309861.8322365,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40439509883043,
+            "J2": 42.31536828905113,
+            "J3": 56.921320123908565,
+            "J4": -103.11631191767786
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 305.993,
+            "Y": -62.765,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309861.8172667
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309862.1003182,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08413446630584076
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40418765970696,
+            "J2": 50.30237420457087,
+            "J3": 53.97730705705242,
+            "J4": -108.1598413162737
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 303.078,
+            "Y": -39.935,
+            "Z": 300.003
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309862.085443
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309862.3771782,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4031504640892,
+            "J2": 63.86898146386561,
+            "J3": 51.00652031886849,
+            "J4": -118.7557330141153
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.881,
+            "X": 298.351,
+            "Y": -2.976,
+            "Z": 300.002
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309862.362041
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309862.6574183,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.40252814671857,
+            "J2": 76.5026928492263,
+            "J3": 50.65707432716783,
+            "J4": -131.03675237573958
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.877,
+            "X": 293.488,
+            "Y": 35.085,
+            "Z": 300.002
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309862.641537
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08413446630584076,
+          "E2": 90.81548611024267
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309862.9375465,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 261.4014909511008,
+            "J2": 84.78764545398946,
+            "J3": 52.03155528374072,
+            "J4": -140.69987091449337
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 290.025,
+            "Y": 62.192,
+            "Z": 300.0
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309862.9214153
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80999463814997
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309863.2054005,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08449398592347279
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 258.29571239335036,
+            "J2": 84.87686575379037,
+            "J3": 52.05604823491838,
+            "J4": -140.8128286807219
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 296.895
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309863.1908536
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309863.4786572,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 225.1382280072999,
+            "J2": 84.87686575379037,
+            "J3": 52.05604823491838,
+            "J4": -140.8128286807219
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 264.809
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309863.460368
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80450316605729
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309863.7397594,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08467374573228881
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 209.42201768998436,
+            "J2": 84.87686575379037,
+            "J3": 52.05594907317273,
+            "J4": -140.8128286807219
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.021
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": true,
+          "name": "researcher_home",
+          "state": "running"
+        },
+        "target": null,
+        "ts": 1794309863.7337413
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08449398592347279,
+          "E2": 90.80450316605729
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309864.012682,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 209.42015073787246,
+            "J2": 84.87684236708007,
+            "J3": 52.05594907317273,
+            "J4": -140.81300299826242
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.019
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "researcher_home",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1794309864.0064876
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794309864.082117,
+      "state": {
+        "camera": {
+          "age_s": null,
+          "device": null,
+          "enabled": true,
+          "error": "",
+          "open": false
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 0.08431422611465678
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 209.42015073787246,
+            "J2": 84.87684236708007,
+            "J3": 52.05594907317273,
+            "J4": -140.81265436318145
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.019
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "researcher_home",
+          "state": "done"
+        },
+        "target": null,
+        "ts": 1794309864.0650303
+      },
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.08431422611465678,
+          "E2": 90.80724890210364
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    }
+  ],
+  "operator_confirmed_plate_reseated_empty_jaws": true,
+  "authorization": "Operator confirmed plate flat in rotated holder, jaws empty, hands clear, E-stop supervised and requested whole-sequence retry. Existing Home and new overhead Hamilton paths remain authorized.",
+  "monitor_policy": "Holder reference required at stationary setup and through gripping; logged only during proof lift and loaded transport. Existing Lacry Home monitors unchanged.",
+  "jaw_position_preserved_mm": 0.08377493941225111,
+  "home_plan": {
+    "actions": [
+      "move_home"
+    ],
+    "at": 1794309852.3230925,
+    "cfg": {
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "claw_gap_max_mm": 88.0,
+      "claw_gap_min_mm": 60.0,
+      "extension_margin_mm": 8.0,
+      "inner_reach_mm": 280.0,
+      "j2_margin_deg": 2.0,
+      "j2_min_deg": -95.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j4_hard_abs_deg": 220.0,
+      "j4_pref_abs_deg": 220.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "reach_hard_mm": 460.0
+    },
+    "checked": [
+      {
+        "joints": {
+          "J1": 261.400761798454,
+          "J2": 42.268722078731194,
+          "J3": 56.941170125217376,
+          "J4": -11.229808942951117
+        },
+        "pose": {
+          "Rz": 87.98,
+          "X": 306.01,
+          "Y": -62.9,
+          "Z": 300.0
+        }
+      },
+      {
+        "joints": {
+          "J1": 261.400761798454,
+          "J2": 42.268722078731194,
+          "J3": 56.941170125217376,
+          "J4": -34.197058942951095
+        },
+        "pose": {
+          "Rz": 65.01275000000001,
+          "X": 306.01,
+          "Y": -62.9,
+          "Z": 300.0
+        }
+      },
+      {
+        "joints": {
+          "J1": 261.400761798454,
+          "J2": 42.268722078731194,
+          "J3": 56.941170125217376,
+          "J4": -57.16130894295109
+        },
+        "pose": {
+          "Rz": 42.048500000000004,
+          "X": 306.01,
+          "Y": -62.9,
+          "Z": 300.0
+        }
+      },
+      {
+        "joints": {
+          "J1": 261.400761798454,
+          "J2": 42.268722078731194,
+          "J3": 56.941170125217376,
+          "J4": -80.12555894295107
+        },
+        "pose": {
+          "Rz": 19.084249999999997,
+          "X": 306.01,
+          "Y": -62.9,
+          "Z": 300.0
+        }
+      },
+      {
+        "joints": {
+          "J1": 261.400761798454,
+          "J2": 42.268722078731194,
+          "J3": 56.941170125217376,
+          "J4": -103.08980894295107
+        },
+        "pose": {
+          "Rz": -3.8799999999999955,
+          "X": 306.01,
+          "Y": -62.9,
+          "Z": 300.0
+        }
+      },
+      {
+        "joints": {
+          "J1": 261.400761798454,
+          "J2": 84.87688206683333,
+          "J3": 52.05596109242011,
+          "J4": -140.81275989825593
+        },
+        "pose": {
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0
+        }
+      },
+      {
+        "joints": {
+          "J1": 209.4207617984541,
+          "J2": 84.87688206683333,
+          "J3": 52.05596109242011,
+          "J4": -140.81275989825593
+        },
+        "pose": {
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02
+        }
+      }
+    ],
+    "dispatch": "ik_home_return",
+    "e1": 0.08395469922106713,
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "Rz": -3.88,
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02
+    },
+    "id": "2026-11-10T11:24:12.323092+00:00:1794309852323",
+    "joints": {
+      "J1": 82.80076179845408,
+      "J2": 42.26782310700781,
+      "J3": 56.9410533112946,
+      "J4": -11.231793157304942
+    },
+    "labels": [
+      "Return Home"
+    ],
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "preserve_gripper": true,
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+    ],
+    "source": "button",
+    "stages": [
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "Rz": 87.98,
+            "X": 306.01,
+            "Y": -62.9,
+            "Z": 300.0
+          }
+        ]
+      },
+      {
+        "kind": "rotate",
+        "rz": 65.01275000000001
+      },
+      {
+        "kind": "rotate",
+        "rz": 42.048500000000004
+      },
+      {
+        "kind": "rotate",
+        "rz": 19.084249999999997
+      },
+      {
+        "kind": "rotate",
+        "rz": -3.8799999999999955
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 300.0
+          },
+          {
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          }
+        ]
+      }
+    ],
+    "start": {
+      "Rz": 87.977,
+      "X": 306.009,
+      "Y": -62.903,
+      "Z": 121.4
+    },
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Move to X306.01 / Y-62.90 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to 65.01 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to 42.05 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to 19.08 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69"
+  },
+  "final_state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.08431422611465678
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42015073787246,
+        "J2": 84.87684236708007,
+        "J3": 52.05594907317273,
+        "J4": -140.81265436318145
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.019
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1794309864.0650303
+  },
+  "final_sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 0.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: upload 1/1",
+        "t": 1.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 1.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 1.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 1/100",
+        "t": 1.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 8/100",
+        "t": 1.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 18/100",
+        "t": 1.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 28/100",
+        "t": 2.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 38/100",
+        "t": 2.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 48/100",
+        "t": 2.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 61/100",
+        "t": 2.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 71/100",
+        "t": 2.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 81/100",
+        "t": 2.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 91/100",
+        "t": 2.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 2.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 3.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 3.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 100/100",
+        "t": 3.2
+      },
+      {
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 7.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: upload 2/2",
+        "t": 8.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 8.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 9.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 1/100",
+        "t": 9.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 8/100",
+        "t": 9.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 17/100",
+        "t": 9.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 27/100",
+        "t": 9.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 38/100",
+        "t": 9.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 47/100",
+        "t": 9.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 61/100",
+        "t": 10.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 69/100",
+        "t": 10.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 71/100",
+        "t": 10.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 71/100",
+        "t": 10.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 75/100",
+        "t": 10.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 84/100",
+        "t": 10.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 94/100",
+        "t": 10.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 10.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 11.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 100/100",
+        "t": 11.2
+      }
+    ],
+    "name": "researcher_home",
+    "result": {
+      "home": {
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "ok": true
+    },
+    "state": "done",
+    "target": null
+  },
+  "finished_at": 1794309864.082117
+}

@@ -1,0 +1,2239 @@
+{
+  "started_at": 1794302563.160019,
+  "status": "completed_awaiting_operator_inspection",
+  "plan_sha256": "defca78bddc86066b4082d2d39f04a4c3067f8b98d478d080f9146dfdfc6c284",
+  "actions": [
+    {
+      "endpoint": "program",
+      "response": {
+        "ok": true,
+        "reply": "CmdDone"
+      },
+      "at": 1794302563.7084737
+    },
+    {
+      "endpoint": "mode",
+      "response": {
+        "ok": true,
+        "reply": "CmdDone"
+      },
+      "at": 1794302563.759323
+    },
+    {
+      "endpoint": "enable",
+      "response": {
+        "ok": true,
+        "reply": "CmdDone"
+      },
+      "at": 1794302563.8155682
+    },
+    {
+      "endpoint": "program",
+      "response": {
+        "gripper_after_start": {
+          "e1_position": 0.016,
+          "e1_torque": 0.0
+        },
+        "notes": [
+          "E1 was reset to ~0 by the controller runtime (plates closed) \u2014 press Open (28) before any grip work"
+        ],
+        "ok": true,
+        "reply": "CmdDone"
+      },
+      "at": 1794302564.738746
+    },
+    {
+      "endpoint": "researcher/api/lacry/button/move_home",
+      "response": {
+        "ok": true,
+        "plan": {
+          "actions": [
+            "move_home"
+          ],
+          "at": 1794302564.9668918,
+          "cfg": {
+            "base_x_mm": 126.0,
+            "base_y_mm": 0.0,
+            "claw_gap_max_mm": 88.0,
+            "claw_gap_min_mm": 60.0,
+            "extension_margin_mm": 8.0,
+            "inner_reach_mm": 280.0,
+            "j2_margin_deg": 2.0,
+            "j2_min_deg": -95.0,
+            "j2_offset_deg": 0.0,
+            "j3_offset_deg": 180.0,
+            "j4_hard_abs_deg": 220.0,
+            "j4_pref_abs_deg": 220.0,
+            "link1_mm": 200.0,
+            "link2_mm": 200.0,
+            "reach_hard_mm": 460.0
+          },
+          "checked": [
+            {
+              "joints": {
+                "J1": 261.4010140368981,
+                "J2": 42.26073367374662,
+                "J3": 56.41590953725506,
+                "J4": -10.946055091376524
+              },
+              "pose": {
+                "Rz": 87.73,
+                "X": 304.19,
+                "Y": -63.21,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.4010140368981,
+                "J2": 42.26073367374662,
+                "J3": 56.41590953725506,
+                "J4": -33.852305091376515
+              },
+              "pose": {
+                "Rz": 64.82374999999999,
+                "X": 304.19,
+                "Y": -63.21,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.4010140368981,
+                "J2": 42.26073367374662,
+                "J3": 56.41590953725506,
+                "J4": -56.75355509137651
+              },
+              "pose": {
+                "Rz": 41.9225,
+                "X": 304.19,
+                "Y": -63.21,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.4010140368981,
+                "J2": 42.26073367374662,
+                "J3": 56.41590953725506,
+                "J4": -79.65480509137652
+              },
+              "pose": {
+                "Rz": 19.02125000000001,
+                "X": 304.19,
+                "Y": -63.21,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.4010140368981,
+                "J2": 42.26073367374662,
+                "J3": 56.41590953725506,
+                "J4": -102.55605509137652
+              },
+              "pose": {
+                "Rz": -3.8799999999999955,
+                "X": 304.19,
+                "Y": -63.21,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 261.4010140368981,
+                "J2": 84.87688206683333,
+                "J3": 52.05596109242009,
+                "J4": -140.81225503962827
+              },
+              "pose": {
+                "Rz": -3.88,
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 300.0
+              }
+            },
+            {
+              "joints": {
+                "J1": 209.42101403689816,
+                "J2": 84.87688206683333,
+                "J3": 52.05596109242009,
+                "J4": -140.81225503962827
+              },
+              "pose": {
+                "Rz": -3.88,
+                "X": 289.97,
+                "Y": 62.63,
+                "Z": 248.02
+              }
+            }
+          ],
+          "dispatch": "ik_home_return",
+          "e1": 0.01546571365906857,
+          "envelope": {
+            "X": [
+              200.0,
+              450.0
+            ],
+            "Y": [
+              -250.0,
+              380.0
+            ],
+            "Z": [
+              70.0,
+              400.0
+            ]
+          },
+          "home": {
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          },
+          "id": "2026-11-10T09:22:44.966891+00:00:1794302564966",
+          "joints": {
+            "J1": 65.79801403689811,
+            "J2": 42.261555468646954,
+            "J3": 56.4150002505761,
+            "J4": -10.950967599597897
+          },
+          "labels": [
+            "Return Home"
+          ],
+          "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+          "preserve_gripper": true,
+          "requirements": [
+            "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+            "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+          ],
+          "source": "button",
+          "stages": [
+            {
+              "kind": "queue",
+              "points": [
+                {
+                  "Rz": 87.73,
+                  "X": 304.19,
+                  "Y": -63.21,
+                  "Z": 300.0
+                }
+              ]
+            },
+            {
+              "kind": "rotate",
+              "rz": 64.82374999999999
+            },
+            {
+              "kind": "rotate",
+              "rz": 41.9225
+            },
+            {
+              "kind": "rotate",
+              "rz": 19.02125000000001
+            },
+            {
+              "kind": "rotate",
+              "rz": -3.8799999999999955
+            },
+            {
+              "kind": "queue",
+              "points": [
+                {
+                  "Rz": -3.88,
+                  "X": 289.97,
+                  "Y": 62.63,
+                  "Z": 300.0
+                },
+                {
+                  "Rz": -3.88,
+                  "X": 289.97,
+                  "Y": 62.63,
+                  "Z": 248.02
+                }
+              ]
+            }
+          ],
+          "start": {
+            "Rz": 87.725,
+            "X": 304.187,
+            "Y": -63.208,
+            "Z": 104.397
+          },
+          "steps": [
+            {
+              "kind": "home_return",
+              "label": "Move to X304.19 / Y-63.21 / Z300.00 mm"
+            },
+            {
+              "kind": "home_return",
+              "label": "Turn the wrist to 64.82 degrees at clearance height"
+            },
+            {
+              "kind": "home_return",
+              "label": "Turn the wrist to 41.92 degrees at clearance height"
+            },
+            {
+              "kind": "home_return",
+              "label": "Turn the wrist to 19.02 degrees at clearance height"
+            },
+            {
+              "kind": "home_return",
+              "label": "Turn the wrist to -3.88 degrees at clearance height"
+            },
+            {
+              "kind": "home_return",
+              "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+            },
+            {
+              "kind": "home_return",
+              "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+            }
+          ],
+          "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+          "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69"
+        }
+      },
+      "at": 1794302564.9678988
+    },
+    {
+      "endpoint": "researcher/api/lacry/confirm",
+      "response": {
+        "activity": [
+          {
+            "at": "2026-11-10T09:22:45.333777+00:00",
+            "line": "Displayed plan and requirements confirmed by researcher in chat."
+          },
+          {
+            "at": "2026-11-10T09:22:45.333777+00:00",
+            "line": "Confirmed and started: reviewed Home connection."
+          },
+          {
+            "at": "2026-11-10T09:22:44.966891+00:00",
+            "line": "Plan proposed: Return Home."
+          }
+        ],
+        "busy": false,
+        "capabilities": {
+          "automatic_squid": true
+        },
+        "configured": true,
+        "experiment": {
+          "name": "Return Home",
+          "total_steps": null
+        },
+        "links": {
+          "arm": {
+            "available": true,
+            "connected": true,
+            "message": "Arm connected."
+          },
+          "hamilton": {
+            "available": true,
+            "connected": true,
+            "door_automation_ready": true,
+            "global_state": "Idle",
+            "initialized": true,
+            "message": "Hamilton Idle; initialized.",
+            "operation": null,
+            "parked": true,
+            "pending_errors": [],
+            "polling": {
+              "calibration_default": "reduced",
+              "camera_paused": false,
+              "mode": "normal",
+              "purpose": null
+            },
+            "prompt": null,
+            "protocol_catalog": [
+              {
+                "dateModified": "2026-11-08T00:00:17.3276729",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 7,
+                "name": "Protocol"
+              },
+              {
+                "dateModified": "2026-11-08T02:15:26.3343363",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 8,
+                "name": "Lacry plate transfer 4 to 3 20261108T101236282327Z"
+              },
+              {
+                "dateModified": "2026-11-08T02:26:03.8078045",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 9,
+                "name": "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z"
+              },
+              {
+                "dateModified": "2026-11-08T02:30:01.3603117",
+                "dateRun": "2026-11-08T02:31:37.8295282",
+                "favorite": true,
+                "id": 10,
+                "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z"
+              },
+              {
+                "dateModified": "2026-11-08T03:19:50.076936",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 11,
+                "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z"
+              },
+              {
+                "dateModified": "2026-11-09T23:39:04.8957091",
+                "dateRun": "2026-11-09T23:40:15.4085454",
+                "favorite": true,
+                "id": 12,
+                "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z"
+              },
+              {
+                "dateModified": "2026-11-09T23:56:21.443924",
+                "dateRun": "2026-11-09T23:56:50.7857662",
+                "favorite": true,
+                "id": 13,
+                "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 tips6 20261110T075548Z"
+              },
+              {
+                "dateModified": "2026-11-10T00:09:16.6342697",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 14,
+                "name": "DRY MOCK 48 WELL corrected site4 tips6 20261110T080843Z"
+              }
+            ],
+            "protocols": [
+              "Protocol",
+              "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+              "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+              "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+              "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z",
+              "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z",
+              "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 tips6 20261110T075548Z",
+              "DRY MOCK 48 WELL corrected site4 tips6 20261110T080843Z"
+            ],
+            "ready_for_robot": false,
+            "recipes": [],
+            "run": {
+              "currentStep": 47,
+              "currentTime": "2026-11-09T23:58:50.2387981-08:00",
+              "endPauseTime": "0001-01-01T00:00:00",
+              "estimatedEndTime": "2026-11-09T23:58:52-08:00",
+              "isRunInProgress": false,
+              "isSimulation": true,
+              "pauseSeconds": 0,
+              "preLoadHepaFiltration": false,
+              "preLoadThermalDeviceUsed": "None",
+              "protocolId": 0,
+              "protocolName": null,
+              "protocolRunState": 0,
+              "runDatalId": null,
+              "startTime": "2026-11-09T23:56:50.7897671-08:00"
+            },
+            "serial": "PRPGJ2494",
+            "session_id": "525ad27cbc2e4265830537c6d24113a5",
+            "simulation": false,
+            "state": "idle"
+          },
+          "squid": {
+            "available": true,
+            "completion_confirmed": false,
+            "connected": false,
+            "job": null,
+            "message": "Connect to Squid to follow imaging progress.",
+            "simulation": null,
+            "status": "disconnected"
+          }
+        },
+        "ok": true,
+        "pending": null,
+        "question": null,
+        "review": null,
+        "running": {
+          "active": true,
+          "done": [],
+          "error": "",
+          "message": "Returning Home along the reviewed connection.",
+          "ok": null,
+          "step": "Return Home"
+        },
+        "transcript": [
+          {
+            "at": "2026-11-10T09:22:44.966891+00:00",
+            "role": "lacry",
+            "text": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.\nConfirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop. Any held plate is secure and can lift clear of its support. The claw position will stay unchanged.\nReply \u201cYes\u201d to confirm these requirements and start, or tell me what to change."
+          },
+          {
+            "at": "2026-11-10T09:22:44.981500+00:00",
+            "role": "researcher",
+            "text": "Yes"
+          },
+          {
+            "at": "2026-11-10T09:22:45.333777+00:00",
+            "role": "lacry",
+            "text": "Returning Home. Keep hands clear."
+          }
+        ]
+      },
+      "at": 1794302565.3741348
+    },
+    {
+      "endpoint": "gripper",
+      "response": {
+        "commanded": {
+          "e1": 28.0,
+          "speed": 10.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 27.992,
+          "e1_torque": 193.869,
+          "e1_torque_normalized": 0.727,
+          "grip_detected": false,
+          "joints": {
+            "J1": 403,
+            "J2": 50,
+            "J3": 9,
+            "J4": -124
+          },
+          "position_error": -0.008,
+          "telemetry_live": true
+        },
+        "ok": true
+      },
+      "at": 1794302577.4304636
+    },
+    {
+      "endpoint": "developer/api/holder/alignment-trial",
+      "response": {
+        "ok": true,
+        "started": "short_side_alignment_trial"
+      },
+      "at": 1794302577.9387326
+    }
+  ],
+  "samples": [
+    {
+      "label": "home",
+      "at": 1794302565.3912897,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302565.7142313,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302566.0436084,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302566.3651345,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302566.6930792,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302567.023693,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302567.3412943,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015825235095690005,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302567.659341,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302567.990909,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302568.3240154,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302568.642991,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302568.9530363,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.3211033577388
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302569.280721,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302569.600794,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302569.9206405,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302570.2512243,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302570.5833833,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302570.9114227,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302571.2411137,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302571.559922,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01528595203126315,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302571.8801894,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01528595203126315,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302572.210398,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302572.5378363,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01528595203126315,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302572.867965,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302573.1990092,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01528595203126315,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302573.5270755,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31011358336426
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302573.8481166,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302574.1764417,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302574.4955735,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302574.8250804,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302575.155824,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302575.485743,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.01546571365906857,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302575.815558,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302576.134668,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015645473467884585,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "home",
+      "at": 1794302576.4660356,
+      "sequence_state": "done",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 0.015825235095690005,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302577.9469993,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 28.004992753267288,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302578.2564106,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 28.003014624118805,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302578.5749063,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 28.001397848129272,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302578.8965006,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 28.00067700445652,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302579.2156923,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 28.000138700008392,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302579.5469134,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302579.8660402,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302580.194411,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302580.525678,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302580.8453276,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302581.176369,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302581.5061631,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.999958023428917,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302581.8356304,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.999958023428917,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302582.1637843,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302582.4945116,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302582.8144264,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.999958023428917,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302583.1331403,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.999958023428917,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302583.4630938,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302583.7927744,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302584.1127977,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.999958023428917,
+          "E2": 90.31835762169246
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302584.44109,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.999958023428917,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302584.7712064,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302585.080787,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302585.409718,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": true,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.999958023428917,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302585.739275,
+      "sequence_state": "running",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.3128593194106
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "label": "alignment",
+      "at": 1794302586.0489922,
+      "sequence_state": "done",
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 27.99977920949459,
+          "E2": 90.31560505545694
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    }
+  ],
+  "authorization": "Both paths and jaw opening clear; empty gripper, arm released, hands clear, E-stop supervised; run Home then taught direct approach.",
+  "before": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "manual",
+        "value": 0
+      },
+      "enabled": false,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.01546571365906857
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 65.797599158651,
+        "J2": 42.261555468646954,
+        "J3": 56.4150002505761,
+        "J4": -10.950967599597897
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 87.726,
+        "X": 304.188,
+        "Y": -63.208,
+        "Z": 104.396
+      },
+      "program_state": {
+        "state": "paused",
+        "value": 2
+      },
+      "system_state": {
+        "state": "idle",
+        "value": 1
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "",
+      "state": "idle"
+    },
+    "target": null,
+    "ts": 1794302563.228967
+  },
+  "home_sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 0.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: upload 1/1",
+        "t": 0.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 1.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 1.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 1/100",
+        "t": 1.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 7/100",
+        "t": 1.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 16/100",
+        "t": 1.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 25/100",
+        "t": 1.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 35/100",
+        "t": 2.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 43/100",
+        "t": 2.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 52/100",
+        "t": 2.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 61/100",
+        "t": 2.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 70/100",
+        "t": 2.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 79/100",
+        "t": 2.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 88/100",
+        "t": 2.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 97/100",
+        "t": 2.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 3.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 3.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 100/100",
+        "t": 3.2
+      },
+      {
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 7.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: upload 2/2",
+        "t": 8.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 8.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 0/100",
+        "t": 8.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 1/100",
+        "t": 8.9
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 7/100",
+        "t": 9.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 17/100",
+        "t": 9.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 27/100",
+        "t": 9.3
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 37/100",
+        "t": 9.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 47/100",
+        "t": 9.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 57/100",
+        "t": 9.7
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 66/100",
+        "t": 9.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 71/100",
+        "t": 10.0
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 71/100",
+        "t": 10.1
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 72/100",
+        "t": 10.2
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 80/100",
+        "t": 10.4
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 90/100",
+        "t": 10.5
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 98/100",
+        "t": 10.6
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 99/100",
+        "t": 10.8
+      },
+      {
+        "level": "info",
+        "msg": "Home: motion 100/100",
+        "t": 10.9
+      }
+    ],
+    "name": "researcher_home",
+    "result": {
+      "home": {
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "ok": true
+    },
+    "state": "done",
+    "target": null
+  },
+  "alignment_sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Executing 10 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 0.1
+      }
+    ],
+    "name": "short_side_alignment_trial",
+    "result": {
+      "e1": 27.99977920949459,
+      "endpoint": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 87.73,
+        "X": 304.19,
+        "Y": -63.21,
+        "Z": 104.397
+      },
+      "ok": true,
+      "queues": 1,
+      "report": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\holder_short_side\\alignment\\trial_direct.json",
+      "speed": 137
+    },
+    "state": "done",
+    "target": null
+  },
+  "finished_at": 1794302586.090281
+}

@@ -405,3 +405,99 @@
 - Accepted destination: X186.42/Y-366.27/Z45.20/Rz-1.10. Release opened to 7 mm at speed 5. Empty return lifted 5 mm at speed 5, then ascended to hover and returned through the taught approach at speed 137 (leg speeds 5/137/137/137). Candidate SHA-256: `d747003b6883dc1c2e4999cf241833756e03e379a9c753711650c293cbaafd9c`.
 - Final measured Home: X289.970/Y62.630/Z248.023/Rz-3.880; claws 7.00242 mm. Controller errors were empty at completion. This is one successful handling run, not a Hamilton liquid-handling or internal plate-transfer test.
 - [Operator acceptance and evidence hashes](hamilton_reteach_20261108/full_calibration_dropoff_speed137_repeat01_acceptance.json), [calibration receipt](../squid_48well_approach/calibration_hamilton_dropoff_repeat01_20261108/run.json), [forward transfer](hamilton_reteach_20261108/forward_repeat01_20261108.json), and [release/return receipt](hamilton_reteach_20261108/release_empty_home_speed137_repeat01_20261108.json). Original pending-assessment telemetry remains unchanged; the linked acceptance records subsequent human confirmation. Existing local controller, camera and pickup-profile dependencies apply.
+
+
+## Turned-holder short-side approach: one motion - November 10, 2026
+
+- Operator confirmed the ten-point trial's open jaws and alignment, but reported unnecessary separate turns. Replaced its ten collinear MoveL commands with one coordinated XYZ/yaw MoveL at speed 137, in one Lua queue. Endpoint and E1=28 mm unchanged; maximum planned difference 0.0075 mm / 0.008 degrees. Full IK, winding, workspace, monitoring and controller fault checks retained; 34 focused offline checks passed, including real Lua serialization with one MoveL and one completion barrier.
+- Returned Home and physically repeated the approach. Completed without controller errors at X304.190/Y-63.210/Z104.400/Rz87.730, E1=27.9998 mm, E2=90.3211 degrees, stationary. Approach execution receipt duration fell from 7.77 to 3.25 s; both include validation/upload/monitoring and are not isolated motion timings. No grasp or further descent. Visual smoothness acceptance remains pending.
+- Baseline and failures preserved. [Candidate and source hashes](../holder_short_side/alignment/smooth_plan.json), [trial telemetry](../holder_short_side/alignment/trial_smooth_direct.json), [Home and approach workflow](../holder_short_side/alignment/home_then_smooth_direct_trial.json).
+
+
+### Operator acceptance and first short-side descent
+
+- Operator: "Yes, that was perfect. Save this." The single-motion speed-137 approach is accepted; [acceptance bound to trial hashes](../holder_short_side/alignment/smooth_operator_acceptance.json). Grip height and closure remain untaught.
+- At the operator's request, descended vertically 30 mm at speed 5, stopping at X304.190/Y-63.210/Z74.398/Rz87.730. Jaws stayed open at 28 mm; holder orientation unchanged; no controller errors. Further descent awaits the operator's height inspection. [Descent telemetry](../holder_short_side/alignment/descent_30mm_trial.json).
+
+
+### First short-side grip trial stopped on wrist collision
+
+- Operator accepted the 30 mm descent height and requested incremental closure. At speed 5, E1 28 -> 27 mm completed; settled 26.995-26.997 mm, E1 torque 129.335-135.735 reported units. Wrist torque rose from baseline 96-111 to 403-410 counts. These are measurements, not validated grip-force thresholds.
+- The following 26 mm command did not confirm completion; controller reported axis-4 collision and disabled. Stop was sent. Later readback: E1 approximately 25.326 mm, E2 89.816 degrees, wrist yaw 87.154 degrees. Cause of these changes is not established; no reset, further closure or lift attempted. This is not an accepted grasp. [Trial](../holder_short_side/alignment/grip_28_to_26_trial.json), [fault readback](../holder_short_side/alignment/grip_28_to_26_fault_readback.json).
+
+
+### Revised taught alignment and requested faster descent saved
+
+- Operator manually corrected alignment and asked to save it as ideal with 30 mm descent at speed 137. Three stationary readings captured X306.197/Y-62.885/Z104.368/Rz87.879 and holder E2=90.7166 degrees. Descent target: same XY/yaw, Z74.368. Open jaws to E1=28 before approach/descent; no short-side grip target established.
+- Saved `Pick and Hold/Descend/short_side_taught_endpoint.json` with evidence hash and [corrected capture plus dense IK checks](../holder_short_side/alignment/corrected_alignment_02.json). Original successful approach and grip fault remain unchanged. No movement performed; this corrected geometry and descent at speed 137 are saved candidates, not yet physically validated.
+
+
+### Corrected placement accepted; short-side closure reaches 26 mm
+
+- Operator: "This worked nicely. Now attempt to grip with the same method you tried last time." This accepts the corrected approach/descent positioning. At that same fixed pose, E1 28 -> 27 -> 26 mm at speed 5 completed without controller errors; final native E1=25.9994 mm. No lift performed and secure grasp remains unverified.
+- At 27 mm, stationary wrist torque was 96-114 counts (previous placement 403-410). At 26 mm it was 215-217 counts; E1 torque 138.402-143.735 reported units. This is a placement comparison, not a force calibration or proof of even contact. Stopped for visual contact/gap inspection before any smaller closing increments. [Separate grip receipt](../holder_short_side/alignment/grip_corrected02_28_to_26_trial.json).
+
+
+### Short-side 26 mm proof lift completed; retention inspection pending
+
+- Operator confirmed even jaw contact with no gap and requested a small lift. Lifted vertically 5 mm at speed 5 to Z79.370, preserving X306.200/Y-62.880/Rz87.880 and holder angle. E1 settled at 26.0003 mm, no controller errors; no gripper commands or further travel.
+- [Proof-lift telemetry and contact confirmation](../holder_short_side/alignment/proof_lift_corrected02_e1_26.json). Physical retention/levelness awaits operator observation; no accepted grasp or new Hamilton route claimed yet.
+
+
+### Short-side pickup accepted; new Hamilton site-4 endpoint taught
+
+- Operator confirmed the 25 mm grip and 5 mm proof lift worked and requested this setting from now on. Saved `Pick and Hold/Grip/short_side_48well_reference.json`, bound to accepted trial evidence. Long-side reference remains separate.
+- Captured manually taught Hamilton endpoint X374.043/Y-184.174/Z52.027/Rz-93.564 and its actual joint winding. The current grip reading during teaching was 25.348 mm; this is recorded as feedback, not a replacement for the accepted 25 mm grip target.
+- Direct Home-to-endpoint candidate: 326.175 mm, one coordinated XYZ/yaw MoveL in one Lua queue at speed 137, no intermediate points or separate wrist turns. Forward and reverse IK pass; J4 remains approximately -197.52 to -140.80 degrees. A level-then-vertical alternative is 456.716 mm. Actual loaded sweep clearance remains unverified; no motion was sent.
+- Operator clarified Z70 floor scope applies to calibration-holder descent, not Hamilton. [Hamilton-specific plan](../holder_short_side/alignment/hamilton_short_side_station_plan.json) checks this exact route down to its taught Z52.027 without changing global/calibration limits. Original floor-blocked analysis retained. Published Lua simulated with fake vendor functions verifies one MoveL and one completion barrier in each direction; existing Hamilton route is not replaced yet.
+
+
+
+### 2026-11-10 — Short-side Hamilton direct roundtrip, empty trial 01
+- Operator confirmed both diagonal routes and full sweep clear; removed plate before controller startup. Empty jaws; E-stop supervised.
+- New exact site-4/Home route passed IK, joint/route checks and 48 focused offline checks. One MoveL in one Lua queue per direction, speed 137; station-specific floor, global workspace unchanged.
+- Reverse leg started but controller reported axis-3/axis-4 collision faults and servo-enable faults. Program stopped, arm disabled at X338.849/Y-92.073/Z134.101/Rz-61.641. Home not reached; forward leg never started. No reset or retry.
+- Operator confirmed the arm/jaw is touching or caught on Hamilton. Failed candidate retained; not an accepted path. No automatic recovery. Records: `holder_short_side/alignment/hamilton_short_side_{empty_roundtrip01,reverse_trial01,trial01_stopped}.json`.
+
+
+### 2026-11-10 — Short-side full sequence trial 01
+- Operator cleared faults and repositioned; confirmed empty jaws, plate in rotated holder and all revised routes clear. Existing Lacry IK returned empty arm to true Home.
+- Accepted corrected02 approach and 30 mm descent at 137, staged closure to E1=25 at speed 5, 5 mm lift at speed 5, and loaded Lacry Home return completed without reported faults. Retention still requires physical observation.
+- Revised two-command Hamilton Lua queue at 137 reached taught turning point X332.670/Y-70.401/Z134.093/Rz-55.610 accurately. Axis-4 collision fault followed on the final approach. Stopped/disabled at X336.342/Y-82.327/Z117.934/Rz-58.618; E1 about 25.432 after fault. No release, reset or retry.
+- The taught waypoint was executed; it did not establish clearance for the following simultaneous wrist turn/descent. Revised path remains unaccepted. All phase logs and final controller state saved under `holder_short_side/alignment/full_sequence01_*.json`.
+
+
+### 2026-11-10 — Direct short-side pickup to Hamilton, trial 02
+- Operator cleared collision faults and confirmed empty jaws, rotated-holder plate placement and new paths clear. Empty Home return completed. Small E2 drift restored from 90.829 to 90.719 degrees at Home using the existing slow holder Lua command.
+- Accepted approach/descent, E1=25 closure and 5 mm slow lift completed. Executed direct pickup -> taught turn02 -> finish wrist turn -> Hamilton; no loaded Home detour. One three-command Lua queue at speed 137.
+- Reached X374.039/Y-184.170/Z52.030/Rz-93.560 with no controller errors. Host stopped near arrival on transient E1=24.915976, exceeding target 25 +/-0.07. Settled E1 about 24.997; three stationary endpoint readings verified. Normal queue completion remains interrupted, not retrospectively marked successful.
+- Plate retention and physical clearance await operator inspection. No release/reset/retry. Original guard-stop records retained alongside `full_sequence02_outcome.json`.
+
+
+
+### 2026-11-10 - Hamilton overhead approach, offline revision 03
+- Operator reported slow turning and requested overhead entry instead of diagonal descent. Revision02 telemetry shows about 5 seconds on the stationary wrist turn despite commanded speed137; subsequent diagonal transit reached about 130-139 mm/s. This identifies the slow phase, not the controller's internal cause.
+- Preserve taught turn X312.57/Y-43.52/Z117.93/Rz-56.32. Combine remaining yaw to -93.56 with a proposed 20 mm rise, cross level to X374.04/Y-184.17/Z137.93, then descend vertically. No Home detour after pickup.
+- Operator corrected the speed transition: descend at137 to Z55, then at5 for the final 2.97 mm to unchanged taught Z52.03 placement. Five MoveL points in one queue, speeds [137,137,137,137,5]; reverse geometry uses reversed speeds. Accepted pickup/opening/grip25/proof-lift settings unchanged.
+- Dense IK and joint/workspace checks pass both directions; global Z70 minimum unchanged. New hover height and swept clearance are NOT physically validated. Commanded speed does not guarantee actual velocity or blending at corners.
+- 58 focused offline tests pass: new geometry, published Lua220109 with fake hardware, five commands/one completion barrier, exact speed mask, external-axis preservation, interrupted-upload Stop, and existing Hamilton/Squid queues. No hardware movement, restart, fault reset, backend reload or new publication performed.
+- Saved holder_short_side/alignment/hamilton_short_side_hover03_plan.json, archived revision02 selection, and selected revision03 as the next offline trial candidate. Developer trial03 and runner --revision 03 are prepared on disk, not activated in the running backend. Earlier successes and failed/uncertain trials retained. Pending supervised clearance and physical acceptance.
+
+
+
+### 2026-11-10 - Hamilton hover revision03 live trial stopped at pickup
+- Operator confirmed empty jaws, plate in rotated holder, Home and new hover sweep clear, E-stop supervised. First Home preparation refused startup on stale grip25 telemetry; no travel/start command sent. Controller was subsequently observed running externally. Three unchanged-pose/near-zero-jaw samples recorded; no force-start override used. Fresh Home return completed.
+- Loaded tested backend at stationary empty Home. Accepted short-side open28 approach/descent reached X306.2/Y-62.88/Z74.37/Rz87.88. Staged closing reached E1~25 mm.
+- During the 5 mm proof lift at speed5, native E2 reached 91.002251 vs reference90.716612 (0.285639 degrees), exceeding the existing +/-0.1 holder monitor. Host Stop confirmed. Final Z76.730: approximately 2.36 mm lift, short of Z79.37. E1~24.999; no controller errors. Stop was followed by an interrupted move/reconnect/arrival-mismatch response; the first trigger was the holder-angle monitor.
+- No Hamilton queue was uploaded or executed; new overhead path remains physically untested. Plate/contact observation pending. No release, reset, further closure or automatic retry. Original refusal, Home retry, approach, grip/lift failure, whole-run samples and stopped outcome preserved under holder_short_side/alignment/full_sequence03_*.json.
+
+
+
+### 2026-11-10 - Accepted short-side pickup -> Hamilton -> Home, revision04
+- Operator accepted corrected Hamilton placement and confirmed the plate stayed level and secure throughout the loaded return Home. No reported controller faults; jaws remained at E1 about25 mm. No release was performed.
+- Taught endpoint X372.426/Y-186.666/Z51.718/Rz-93.017; commanded X372.43/Y-186.67/Z51.72/Rz-93.02. Retain taught turn X312.57/Y-43.52/Z117.93/Rz-56.32 and overhead crossing at Z137.93. Outbound five-point Lua queue: speeds137 to Z55, then5 to seat. No Home detour after pickup.
+- Departure reverses the entry to the taught turn: four queued points, speeds[5,137,137,137]. Existing loaded IK Home return then lifts to Z300, turns at wrist speed30, crosses and lowers at137 to X289.97/Y62.63/Z248.02. Actual final Z248.019; plate remained secure per operator.
+- Holder angle is checked/restored before pickup and monitored through grasp; its telemetry does not stop loaded lift/travel. E1, faults, IK, joints, corridor and Stop checks remain. Global workspace unchanged; exact taught Hamilton station endpoint exception retained.
+- 12 focused offline checks pass, including corrected endpoint, reversed departure, mixed speeds in published Lua220109, rejection of stale endpoints/fast seating, acceptance gating and grip preservation. Earlier stopped/uncertain trials and original teachings retained. Successful reference: holder_short_side/alignment/successful_short_side_hamilton04.json.
+
+- Commit verification: isolated staged snapshot ran 123 focused tests, 122 passed and 1 skipped. Accepted trial evidence hashes and Python syntax checks passed; credential-pattern scan had no matches.

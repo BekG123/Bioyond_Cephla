@@ -1,0 +1,68 @@
+{
+  "authorization": "User confirmed positive E2 is CCW; requested return to original E2 then faster quarter turn; plate retained by stops/clamp.",
+  "original_e2": 1.6751663261435092,
+  "expected_start": 91.67516787012633,
+  "target": 1.6751663261435092,
+  "started": 1794300639.477864,
+  "response": {
+    "ok": true,
+    "started": "holder_return_original"
+  },
+  "completion": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "err",
+        "msg": "SEQUENCE ERROR: ValueError: UNKNOWN STATE: setSysVarI: connection lost while the command was executing \u2014 physical state unknown Physical state must be re-checked (status + pose) before any retry. Do NOT resend blindly.",
+        "t": 30.4
+      }
+    ],
+    "name": "holder_return_original",
+    "result": {
+      "error": "UNKNOWN STATE: setSysVarI: connection lost while the command was executing \u2014 physical state unknown Physical state must be re-checked (status + pose) before any retry. Do NOT resend blindly.",
+      "failure_context": {
+        "captured_at_failure": true,
+        "frames": [
+          {
+            "function": "_run",
+            "line": 431,
+            "path": "operator_ui/sequences.py"
+          },
+          {
+            "function": "<lambda>",
+            "line": 1531,
+            "path": "operator_ui/app.py"
+          },
+          {
+            "function": "direction_probe",
+            "line": 145,
+            "path": "operator_ui/holder_rotation_trial.py"
+          },
+          {
+            "function": "_locked",
+            "line": 540,
+            "path": "operator_ui/robot_service.py"
+          },
+          {
+            "function": "command",
+            "line": 127,
+            "path": "operator_ui/holder_rotation_trial.py"
+          }
+        ],
+        "location": {
+          "function": "command",
+          "line": 127,
+          "path": "operator_ui/holder_rotation_trial.py"
+        },
+        "source": "    def command():\n        current = snapshot(service, origin)\n        if abs(current['native']['external_axes']['E2']-origin) > .05 or run.stopped():\n            raise ValueError('Holder changed or stop requested before probe.')\n        token = secrets.randbelow(1000000)+1\n        response = service._hostpoint({7: float(token)}, 11 if fast else 9, 5)\n        record['capability_response'] = response\n        if not response.get('ok'):\n            raise ValueError(response.get('error', 'Capability probe failed'))\n        registers = service.robot.get_sys_var_i([7, 8])\n        record['capability_registers'] = registers\n        if registers.get(7) != token or registers.get(8) != (250103 if fast else 250102):\n            raise ValueError('Published holder interface not verified; no rotation sent.')\n        if run.stopped():\n            raise ValueError('Stopped before rotation')\n        record.update(status='moving', motion_sent=True)\n        save()\n        result = service._hostpoint({7: float(token), 8: origin, 9: target}, 12 if fast else 10, 120 if quarter or return_original else 30)\n        record['motion_result'] = result\n        if not result.get('ok'):\n            raise ValueError(result.get('error', 'Unknown rotation completion; do not retry.'))\n        n = DragGoRPC(service._endpoint_addr()[0]).info()\n        s = service.status()\n        record['after'] = dict(robot=s, native=n)\n        if run.stopped() or s.get('errors') or any(n.get(k, True) for k in ('moving','error','emergency','drag')):\n            raise ValueError('Rotation finished with uncertain controller state.')\n        if abs(n['external_axes']['E2']-target) > .1:\n            raise ValueError('Holder arrival mismatch')\n        for key in HOME:\n            if abs(s['pose_mm'][key]-before['robot']['pose_mm'][key]) > .1:\n                raise ValueError('Arm changed during holder-only rotation')\n        for key, value in before['native']['external_axes'].items():\n            if key != 'E2' and abs(n['external_axes'][key]-value) > .05:\n                raise ValueError('Another external axis changed during holder-only rotation')\n        return dict(ok=True, actual_e2=n['external_axes']['E2'], report=str(path),\n                    awaiting='Fast rotation package publication' if return_original else 'New short-side pickup alignment' if quarter or fast else 'Operator observation of clockwise or counterclockwise direction')",
+        "source_sha256": "b9df579a59eadc4b1d9647e82e6532724301c31f4e9aa4c73d414e2ce3c5c7ac",
+        "source_start_line": 107
+      },
+      "ok": false
+    },
+    "state": "error",
+    "target": null
+  },
+  "error": "Quarter turn did not verify"
+}

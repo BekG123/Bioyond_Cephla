@@ -13,6 +13,7 @@ from researcher_home import queued_station_stages, home_route_error
 from researcher_teaching import TeachingError
 from reviewed_home import ReviewedHomeConnection
 from home_attempts import known_no_travel, UNCERTAIN_MESSAGE
+from home_recovery import recovered, digest
 
 ROOT=Path(__file__).resolve().parent
 
@@ -44,6 +45,20 @@ class IKHomeConnection:
         self.home=home
         self.folder=Path(folder) if folder else ROOT/'reports/ik_home'
 
+    def unresolved_attempts(self):
+        unresolved = {}
+        for path in sorted(self.folder.glob('*.json')):
+            try:
+                record = json.loads(path.read_text(encoding='utf-8'))
+                seq = record.get('sequence') or {}
+                complete = (record.get('status') == 'completed' and seq.get('state') == 'done'
+                            and (seq.get('result') or {}).get('ok') is True)
+                if not complete and not known_no_travel(record) and not recovered(path):
+                    unresolved[path.name] = digest(path)
+            except (OSError, ValueError, TypeError, AttributeError):
+                raise TeachingError('Home attempt evidence is unreadable; repair the evidence before recovery.')
+        return unresolved
+
     def history(self):
         records=[]
         for path in sorted(self.folder.glob('*.json')):
@@ -53,13 +68,17 @@ class IKHomeConnection:
                 seq=record.get('sequence') or {}
                 complete=record.get('status')=='completed' and seq.get('state')=='done' and (seq.get('result') or {}).get('ok') is True
             except (OSError,ValueError,TypeError,AttributeError):complete=False
-            if not complete and not known_no_travel(record):
+            if not complete and not known_no_travel(record) and not recovered(path):
                 raise TeachingError(UNCERTAIN_MESSAGE)
             records.append(record)
         return records
 
     def propose(self):
         self.history()
+        return self._propose_current()
+
+    def _propose_current(self):
+        """Geometry/readiness only; callers must enforce normal or recovery authorization."""
         svc=self.home.get_service();run=self.home.get_runner();state=svc.status()
         if run.active or (getattr(run,'reserved',False) and not getattr(run,'owns_reservation',False)):
             raise TeachingError('Wait for the current action to finish.')
@@ -117,10 +136,16 @@ class IKHomeConnection:
             raise TeachingError('Home path changed since preview. Request a new plan.')
         if any(record.get('plan_id')==plan['id'] for record in self.history()):
             raise TeachingError('That confirmation was already used. Request Return Home again.')
+        return self._dispatch(plan)
+
+    def _dispatch(self, plan):
+        """Persist and dispatch an already checked, explicitly confirmed plan."""
         self.folder.mkdir(parents=True,exist_ok=True)
         attempt=self.folder/(str(time.time_ns())+'_'+uuid4().hex+'.json')
         record=dict(status='confirmed',at=time.time(),plan_id=plan['id'],plan=deepcopy(plan),
             requirements_confirmed=plan['requirements'],physical_clearance_confirmed=True)
+        if plan.get('recovery_of'):
+            record['recovery_of'] = deepcopy(plan['recovery_of'])
         with attempt.open('x',encoding='utf-8') as stream:json.dump(record,stream,indent=2,allow_nan=False)
         dispatch_entered = False
         def before_dispatch():

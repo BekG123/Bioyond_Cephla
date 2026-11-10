@@ -1,0 +1,147 @@
+{
+  "before": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "manual",
+        "value": 0
+      },
+      "enabled": false,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": -0.00466753317596158
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.40562999922412,
+        "J2": 84.87361500105843,
+        "J3": 52.049503559704924,
+        "J4": -140.76802907281956
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.845,
+        "X": 289.958,
+        "Y": 62.604,
+        "Z": 248.005
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "idle",
+        "value": 1
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "",
+      "state": "idle"
+    },
+    "target": null,
+    "ts": 1794300180.9361799
+  },
+  "native": {
+    "manual": true,
+    "enabled": false,
+    "disabled": true,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": -0.00466753317596158,
+      "E2": 1.680659505783492
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "authorization": "Operator confirmed empty jaws, plate flat in holder, full rotation clear, hands clear and supervised E-stop; published and asked to continue.",
+  "actions": [
+    {
+      "endpoint": "mode",
+      "response": {
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    },
+    {
+      "endpoint": "enable",
+      "response": {
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    },
+    {
+      "endpoint": "program",
+      "response": {
+        "gripper_after_start": {
+          "e1_position": -0.004,
+          "e1_torque": -0.533
+        },
+        "notes": [
+          "E1 was reset to ~0 by the controller runtime (plates closed) \u2014 press Open (28) before any grip work"
+        ],
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    }
+  ],
+  "start": {
+    "ok": true,
+    "started": "holder_direction_probe"
+  },
+  "completion": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Holder direction probe complete. Arm and claw remained stationary.",
+        "t": 2.7
+      }
+    ],
+    "name": "holder_direction_probe",
+    "result": {
+      "actual_e2": 6.682185374000921,
+      "awaiting": "Operator observation of clockwise or counterclockwise direction",
+      "ok": true,
+      "report": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\holder_short_side\\direction_probe.json"
+    },
+    "state": "done",
+    "target": null
+  }
+}

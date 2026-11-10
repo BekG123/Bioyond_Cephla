@@ -1,0 +1,249 @@
+{
+  "at": 1794306688.1031044,
+  "status": "pickup_and_home_completed_hamilton_failed",
+  "state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": false,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-10 02:30:26 Motion error: axis 4 collision detected"
+        },
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-10 02:30:26 Motion error: axis 4 collision detected"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-10 02:30:26 Motion error: failed to enable axis 2 servo"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-10 02:30:26 Motion error: failed to enable axis 3 servo"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-10 02:30:26 Motion error: failed to enable axis 4 servo"
+        },
+        {
+          "errCode": 3929,
+          "errMsg": "2026-11-10 02:30:26 Motion error: external axis 1 servo enable failed"
+        },
+        {
+          "errCode": 3929,
+          "errMsg": "2026-11-10 02:30:26 Motion error: external axis 2 servo enable failed"
+        }
+      ],
+      "external_axes": {
+        "E1": 25.351177901029587
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 79.33466148310191,
+        "J2": 48.254587077135085,
+        "J3": 57.2320930348024,
+        "J4": -161.80676166796465
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -56.32,
+        "X": 312.567,
+        "Y": -43.516,
+        "Z": 117.934
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "error",
+        "value": 3
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "short_side_full_trial01",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1794306688.1020992
+  },
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 0.2
+      },
+      {
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: robot has active errors, refusing to move: [{'errCode': 3873, 'errMsg': '2026-11-10 02:30:26 Motion error: axis 4 collision detected'}, {'errCode': 3873, 'errMsg': '2026-11-10 02:30:26 Motion error: axis 4 collision detected'}, {'errCode': 3960, 'errMsg': '2026-11-10 02:30:26 Motion error: failed to enable axis 2 servo'}, {'errCode': 3960, 'errMsg': '2026-11-10 02:30:26 Motion error: failed to enable axis 3 servo'}, {'errCode': 3960, 'errMsg': '2026-11-10 02:30:26 Motion error: failed to enable axis 4 servo'}, {'errCode': 3929, 'errMsg': '2026-11-10 02:30:26 Motion error: external axis 1 servo enable failed'}, {'errCode': 3929, 'errMsg': '2026-11-10 02:30:26 Motion error: external axis 2 servo enable failed'}] \u2014 resolve the cause, then Clear errors (operator-confirmed)",
+        "t": 3.7
+      }
+    ],
+    "name": "short_side_full_trial01",
+    "result": {
+      "error": "robot has active errors, refusing to move: [{'errCode': 3873, 'errMsg': '2026-11-10 02:30:26 Motion error: axis 4 collision detected'}, {'errCode': 3873, 'errMsg': '2026-11-10 02:30:26 Motion error: axis 4 collision detected'}, {'errCode': 3960, 'errMsg': '2026-11-10 02:30:26 Motion error: failed to enable axis 2 servo'}, {'errCode': 3960, 'errMsg': '2026-11-10 02:30:26 Motion error: failed to enable axis 3 servo'}, {'errCode': 3960, 'errMsg': '2026-11-10 02:30:26 Motion error: failed to enable axis 4 servo'}, {'errCode': 3929, 'errMsg': '2026-11-10 02:30:26 Motion error: external axis 1 servo enable failed'}, {'errCode': 3929, 'errMsg': '2026-11-10 02:30:26 Motion error: external axis 2 servo enable failed'}] \u2014 resolve the cause, then Clear errors (operator-confirmed)",
+      "failure_context": {
+        "captured_at_failure": true,
+        "frames": [
+          {
+            "function": "_run",
+            "line": 431,
+            "path": "operator_ui/sequences.py"
+          },
+          {
+            "function": "execute",
+            "line": 89,
+            "path": "operator_ui/short_side_full_trial.py"
+          },
+          {
+            "function": "execute",
+            "line": 398,
+            "path": "operator_ui/trajectory_queue.py"
+          },
+          {
+            "function": "_locked",
+            "line": 540,
+            "path": "operator_ui/robot_service.py"
+          },
+          {
+            "function": "locked",
+            "line": 368,
+            "path": "operator_ui/trajectory_queue.py"
+          },
+          {
+            "function": "healthy",
+            "line": 318,
+            "path": "operator_ui/trajectory_queue.py"
+          }
+        ],
+        "location": {
+          "function": "healthy",
+          "line": 318,
+          "path": "operator_ui/trajectory_queue.py"
+        },
+        "source": "            def healthy():\n                if run.stopped(): raise TransferError('Queued replay stopped by operator.')\n                refusal = self.service._preflight()\n                if refusal: raise TransferError(refusal)\n                q = self.service.joints() or {}\n                values = [q.get(k) for k in ('J1','J2','J3','J4')]\n                if any(type(v) not in (int,float) or not math.isfinite(v) for v in values):\n                    raise TransferError('Joint feedback is unavailable.')\n                if abs(q['J2'])>abs(cfg['j2_min_deg'])-cfg['j2_margin_deg'] or abs(q['J4'])>min(cfg['j4_pref_abs_deg'],cfg['j4_hard_abs_deg']-5):\n                    raise TransferError('Measured joints exceed automatic limits.')",
+        "source_sha256": "923501858713af246fbfa9109f286fec0261df6a1e50cb15e51bd18eba01556e",
+        "source_start_line": 315
+      },
+      "ok": false
+    },
+    "state": "error",
+    "target": null
+  },
+  "closest_turning_waypoint_sample": {
+    "at": 1794306626.4554396,
+    "stage": "motion",
+    "done": 55.20978341836397,
+    "total": 100,
+    "robot": {
+      "ok": true,
+      "connected": true,
+      "endpoint": "192.168.201.220:56788",
+      "system_state": {
+        "value": 2,
+        "state": "running"
+      },
+      "control_mode": {
+        "value": 1,
+        "mode": "auto"
+      },
+      "enabled": true,
+      "program_state": {
+        "value": 1,
+        "state": "running"
+      },
+      "lua_app_initialized": true,
+      "errors": [],
+      "pose_mm": {
+        "X": 332.67,
+        "Y": -70.401,
+        "Z": 134.093,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -55.61
+      },
+      "joints": {
+        "J1": 95.49437664656158,
+        "J2": 38.10742089117999,
+        "J3": 66.16279817230104,
+        "J4": -159.88055284570342
+      },
+      "external_axes": {
+        "E1": 24.996690452098846
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      }
+    },
+    "native": {
+      "manual": false,
+      "enabled": true,
+      "disabled": false,
+      "moving": true,
+      "emergency": false,
+      "drag": false,
+      "error": false,
+      "firmware": "1.8.2504101654",
+      "external_axes": {
+        "E1": 24.99650977551937,
+        "E2": 90.73308670809564
+      },
+      "external_units": {
+        "E1": "mm",
+        "E2": "degrees"
+      }
+    }
+  },
+  "completed_phases": [
+    "empty Home",
+    "accepted open-jaw approach/descent",
+    "E1 25 mm closure",
+    "5 mm lift at speed 5",
+    "loaded Home"
+  ],
+  "physical_plate_retention": "pending operator inspection; telemetry alone does not verify",
+  "fault": "Axis 4 collision reported after taught waypoint, on final site-4 approach",
+  "route_accepted": false,
+  "gripper_released": false,
+  "reset_attempted": false,
+  "retry_attempted": false
+}

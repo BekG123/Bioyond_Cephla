@@ -65,18 +65,26 @@ class LatestHamilton(RecordedReturn):
             result['blocker'] = 'The saved route needs developer review.'
         return result
 
-    def check_previous_attempt(self):
-        from home_attempts import known_startup_refusal
+    def blocking_attempts(self):
+        from home_attempts import known_no_travel
+        from home_recovery import digest
+        unresolved = {}
         previous = sorted(self.attempts.glob('*.json'))
         for path in reversed(previous):
             try:
                 record = json.loads(path.read_text())
-                if known_startup_refusal(record):
+                if known_no_travel(record):
                     continue
                 if record.get('status') == 'completed':
-                    return
+                    break
             except (OSError, ValueError, TypeError, AttributeError):
-                pass
+                raise TeachingError('Route attempt evidence is unreadable; review it before recovery.')
+            unresolved[path.name] = digest(path)
+        return unresolved
+
+    def check_previous_attempt(self, *, reviewed_attempts=None):
+        unresolved = self.blocking_attempts()
+        if unresolved and reviewed_attempts != unresolved:
             raise TeachingError('The previous route has no verified completion or proof that travel never started. '
                                 'Ask the developer to review its log and the current arm position. '
                                 'Resetting the controller does not resolve this saved attempt.')

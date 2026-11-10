@@ -22,7 +22,7 @@ from test_researcher_workflow import FakeRunner
 
 class Controller:
     connected = True
-    def __init__(self, service, legacy=False):
+    def __init__(self, service, legacy=False, source=None):
         self.service = service
         self.vars, self.floats, self.calls, self.jobs = {},{},[],[]
         self.reply = None
@@ -42,7 +42,8 @@ class Controller:
         g.MoveL = self.move
         g.MOVFINISH = self.finish
         g.T0,g.U0 = 'T0','U0'
-        if legacy:
+        if source is not None:pass
+        elif legacy:
             filename=f'main_hostpoint_trajectory_{legacy}.bin' if legacy in (47,55,70,80,100,130) else 'main_hostpoint_trajectory.bin'
             with zipfile.ZipFile(CONTROLLER_DIR/filename) as archive:
                 source=archive.read('main/mod_Trajectory.lua').decode()

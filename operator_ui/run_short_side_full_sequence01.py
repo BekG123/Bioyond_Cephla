@@ -1,0 +1,115 @@
+"""Accepted short-side pickup -> Home -> revised Hamilton, one authorized run."""
+from concurrent.futures import ThreadPoolExecutor
+import json
+import time
+from proof_lift_plate import api,near
+from draggo import DragGoRPC
+from autonomy import check_path
+from short_side_full_trial import reference,FOLDER,validate_route
+from short_side_alignment_trial import reference_for_candidate,candidate_points,validate_route as validate_pickup
+from researcher_home import queued_station_stages
+
+plan,parent,grip=reference();path=FOLDER/'full_sequence01_run.json';grip_path=FOLDER/'full_sequence01_grip_lift.json'
+if path.exists() or grip_path.exists():raise RuntimeError('Trial already attempted; review saved evidence')
+record=dict(status='started',started_at=time.time(),actions=[],samples=[],
+    authorization='Operator confirmed all routes clear, plate flat in rotated holder, empty jaws, arm free and released, hands clear and E-stop supervised.',
+    settings=grip,plate_retention_operator_verified=False,release_requested=False)
+def save():path.write_text(json.dumps(record,indent=2))
+def checked(e1_range,pose=None,allow_sequence=False):
+    s=api('state');r=s['robot'];n=DragGoRPC('192.168.201.220').info()
+    record['samples'].append(dict(at=time.time(),state=s,native=n))
+    if not r.get('ok') or not r.get('connected') or r.get('errors') or not r.get('enabled') or r['control_mode']['mode']!='auto' or r['program_state']['state']!='running' or not r.get('lua_app_initialized'):
+        raise RuntimeError('Healthy running Auto required; no reset or restart')
+    if (s['sequence']['active'] and not allow_sequence) or any(n[k] for k in ('manual','drag','error','emergency')):raise RuntimeError('Conflicting activity or fault')
+    if abs(n['external_axes']['E2']-grip['holder_e2_degrees'])>.1:raise RuntimeError('Holder changed')
+    if not e1_range[0]<=n['external_axes']['E1']<=e1_range[1]:raise RuntimeError('Jaw position outside current step')
+    if pose is not None:near(r['pose_mm'],pose,.1)
+    return s,n
+def call(ep,body):
+    item=dict(at=time.time(),endpoint=ep,command=body);record['actions'].append(item);save()
+    item['response']=api(ep,body);save();r=item['response']
+    if not r.get('ok') or r.get('recovered') or r.get('gripper_warning'):raise RuntimeError(str(r))
+    return r
+def monitored_command(ep,body,e1_range,pose=None,vertical=None):
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        future=pool.submit(call,ep,body)
+        while not future.done():
+            try:
+                s,n=checked(e1_range,pose)
+                if vertical:
+                    low,high=vertical;p=s['robot']['pose_mm']
+                    if any(abs(p[k]-low[k])>.15 for k in ('X','Y','Rz')) or not low['Z']-.15<=p['Z']<=high['Z']+.15:raise RuntimeError('Proof lift left vertical corridor')
+                save()
+            except Exception:
+                record['stop_response']=api('program',{'action':'stop'});raise
+            time.sleep(.1)
+        return future.result()
+def wait(label,e1):
+    deadline=time.monotonic()+150
+    while time.monotonic()<deadline:
+        s,n=checked((e1-.07,e1+.07),allow_sequence=True);seq=api('seq');save()
+        if not seq['active']:
+            record[label]=seq;save()
+            if seq['state']!='done' or not (seq.get('result') or {}).get('ok'):raise RuntimeError(str(seq.get('result')))
+            if n['moving']:raise RuntimeError('Motion not settled')
+            print(json.dumps(dict(stage=label,pose=s['robot']['pose_mm'])),flush=True);return
+        time.sleep(.2)
+    raise RuntimeError('Sequence timed out')
+
+s=api('state')
+if not s['robot'].get('connected') and not s['sequence']['active']:assert api('connect',{'ip':'192.168.201.220'})['ok']
+s,n=checked((-.15,.15),parent['home']);assert not n['moving']
+assert api('researcher/api/status')['hand_guiding']['state']=='off'
+assert not api('researcher/api/lacry/state')['running']['active']
+assert s['envelope']['enabled']
+cfg=api('robot_params');env={k:(s['envelope'][k]['min'],s['envelope'][k]['max']) for k in ('X','Y','Z')}
+pickup,_=reference_for_candidate('corrected02');points=candidate_points(pickup,'corrected02')
+q=validate_pickup(s['robot']['pose_mm'],points,s['robot']['joints'],cfg,env,'corrected02')
+low=grip['descent_endpoint'];high=grip['proof_lift_endpoint'];hq=check_path(low,high,q,cfg,env)
+record['loaded_home_preview']=queued_station_stages(high,parent['home'],hq,cfg,env)
+validate_route(parent['home'],plan['routes']['forward']['points'],parent['home_joints'],cfg,env,'turning01_forward')
+with path.open('x') as f:json.dump(record,f,indent=2)
+try:
+    monitored_command('gripper',dict(action='move',e1=28,speed=10),(-.15,28.07),parent['home'])
+    checked((27.93,28.07),parent['home'])
+    call('developer/api/short-side-full-trial01',dict(phase='approach',ready=True,setup_confirmed=True,path_clear=True));wait('approach',28)
+    checked((27.93,28.07),low)
+    gr=dict(status='started',started_at=time.time(),settings=grip,steps=[],force_limits_changed=False)
+    with grip_path.open('x') as f:json.dump(gr,f,indent=2)
+    previous=28
+    for target in grip['closing_targets_mm']:
+        checked((previous-.07,previous+.07),low)
+        response=monitored_command('gripper',dict(action='move',e1=target,speed=5),(target-.07,previous+.07),low)
+        if response.get('gripper',{}).get('grip_detected'):raise RuntimeError('Unexpected contact/stall indication; no further closure')
+        step=dict(target=target,response=response,reports=[]);gr['steps'].append(step)
+        for _ in range(3):
+            checked((target-.07,target+.07),low)
+            report=call('gripper',{'action':'torque'});step['reports'].append(report)
+            if not report.get('telemetry_live') or abs(report.get('e1_position',999)-target)>.07:raise RuntimeError('Settled grip report unconfirmed')
+            time.sleep(.15)
+        grip_path.write_text(json.dumps(gr,indent=2));previous=target
+    monitored_command('move',dict(x=high['X'],y=high['Y'],z=high['Z'],rz=high['Rz'],speed=5,interpolation='linear'),(24.93,25.07),vertical=(low,high))
+    for _ in range(5):s,n=checked((24.93,25.07),high);time.sleep(.2)
+    assert not n['moving'];gr.update(status='completed',finished_at=time.time(),final_state=s,operator_retention_observation='pending')
+    grip_path.write_text(json.dumps(gr,indent=2))
+    print(json.dumps(dict(stage='grip25_and_lift5_completed',pose=s['robot']['pose_mm'])),flush=True)
+    proposed=call('researcher/api/lacry/button/move_home',{})['plan']
+    if proposed['dispatch']!='ik_home_return' or not proposed.get('preserve_gripper'):raise RuntimeError('Loaded Home must preserve the gripper without startup')
+    near(proposed['start'],high,.1);near(proposed['home'],parent['home'],.01)
+    call('researcher/api/lacry/confirm',dict(ready=True,plan_id=proposed['id']));wait('loaded_home',25)
+    checked((24.93,25.07),parent['home'])
+    call('developer/api/short-side-full-trial01',dict(phase='hamilton',ready=True,setup_confirmed=True,path_clear=True));wait('hamilton',25)
+    s,n=checked((24.93,25.07),plan['routes']['forward']['points'][-1])
+    record.update(status='completed_awaiting_operator_inspection',final_state=s)
+except Exception as e:
+    record.update(status='failed_or_uncertain',error=str(e))
+    if grip_path.exists():
+        gr=json.loads(grip_path.read_bytes())
+        if gr['status']=='started':gr.update(status='failed_or_uncertain',error=str(e));grip_path.write_text(json.dumps(gr,indent=2))
+    try:
+        if api('seq')['active']:record['stop_response']=api('researcher/api/lacry/stop',{})
+        else:record['stop_response']=api('program',{'action':'stop'})
+    except Exception as stop_error:record['stop_error']=str(stop_error)
+    raise
+finally:record['finished_at']=time.time();save()
+print(json.dumps(dict(status=record['status'],pose=s['robot']['pose_mm'],report=str(path))))

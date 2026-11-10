@@ -1,4 +1,32 @@
 """Evidence for Home startup refusals, distinct from uncertain travel."""
+import hashlib
+import json
+
+# Individually reviewed historical records only. This failure occurred during
+# first-batch prepare_points, before queue dispatch; original record is retained.
+# Review: reports/ik_home/shape_refusal_1793520304775515000_review.md
+REVIEWED_NO_TRAVEL = frozenset({
+    # Nov 7 first-queue shape rejection; no upload. See shape_refusal_1794117932.json.
+    '50726d14711f5c8c2fc8e7a95e74388033aa3f778e0e820faa517ffc3ff4cb5e',
+    # Exact Nov 3 first-batch prepare_points rejection before queue upload.
+    # See reports/home_attempt_reviews/shape_refusal_1793729692.json.
+    '18f32af8b7d6e9d3808659e9612c76f7311158ae32df54a33ce8d96d6c5e06b3',
+    # Exact first-batch shape refusal; see reports/home_attempt_reviews/shape_refusal_1793535738.json.
+    'b7be3d64972500de8fa8500f1b3f08d05a2244df841f57637f6991859293e67a',
+    '0fcbc1f571054ffbd3b760395f157156d676c48eae4afdb83cddfff29b4c60eb',
+    '788a0085973ab404c6d30bbd95ca65300ec1dbc97604174b91d905ff529c296c',
+    '3786f4965927f66e4cd5f4ed209bf275ef84e62818d837c49f23fe4f14a0964d',
+})
+
+
+def known_reviewed_no_travel(record):
+    if not isinstance(record, dict):
+        return False
+    try:
+        raw = json.dumps(record, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+    except (TypeError, ValueError):
+        return False
+    return hashlib.sha256(raw).hexdigest() in REVIEWED_NO_TRAVEL
 
 START_REFUSED = 'gripper_held_start_refused'
 START_MESSAGE = (
@@ -51,4 +79,4 @@ def known_preflight_refusal(record):
 
 
 def known_no_travel(record):
-    return known_startup_refusal(record) or known_preflight_refusal(record)
+    return known_startup_refusal(record) or known_preflight_refusal(record) or known_reviewed_no_travel(record)

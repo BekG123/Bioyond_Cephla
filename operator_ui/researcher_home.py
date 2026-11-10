@@ -5,12 +5,49 @@ import math
 import time
 from pathlib import Path
 
-from autonomy import AlignmentGuard, TransferError, alignment_plan, ensure_arrival, check_path
+from autonomy import AlignmentGuard, TransferError, alignment_plan, ensure_arrival, check_path, wrap
 from researcher_teaching import TeachingError, numbers
 from imitation_agent import close_pose
 from trajectory_queue import LuaTrajectory, prepare_points
 
 HOME_SPEED = 137
+HOME_WRIST_TOLERANCE = .01
+
+
+def rotate_home_wrist(guard, rz):
+    """Complete the planned in-place correction before queued translation."""
+    result = guard.rotate_to_rz(rz)
+    measured = guard.service.pose_mm()['Rz']
+    if not math.isfinite(measured) or abs(wrap(rz - measured)) > HOME_WRIST_TOLERANCE:
+        raise TransferError('Home wrist correction did not settle; no translation or retry.')
+    return result
+
+
+def settled_home_stages(start, settled, target, joints, params, envelope, reviewed):
+    """Revalidate a small preparation shift without changing the reviewed route."""
+    from autonomy import wrap
+    for key in ('X', 'Y', 'Z', 'Rz'):
+        delta = settled[key] - start[key]
+        if key == 'Rz':
+            delta = wrap(delta)
+        if not math.isfinite(delta) or abs(delta) > .05:
+            raise TransferError('Arm moved during preparation. Request a fresh Home plan.')
+    stages = queued_station_stages(settled, target, joints, params, envelope)
+    if len(stages) != len(reviewed):
+        raise TransferError('Home stages changed during preparation. Request a fresh Home plan.')
+    for actual, expected in zip(stages, reviewed):
+        if actual['kind'] != expected['kind']:
+            raise TransferError('Home stage type changed during preparation.')
+        if actual['kind'] == 'rotate':
+            if abs(wrap(actual['rz'] - expected['rz'])) > .02:
+                raise TransferError('Home rotation changed during preparation.')
+        else:
+            if len(actual['points']) != len(expected['points']):
+                raise TransferError('Home points changed during preparation.')
+            for point, original in zip(actual['points'], expected['points']):
+                if any(abs(point[k] - original[k]) > .05 for k in ('X', 'Y', 'Z', 'Rz')):
+                    raise TransferError('Home route changed during preparation.')
+    return stages
 
 
 def compact_home_connection(start, target, joints, params, envelope):
@@ -50,12 +87,12 @@ def queued_station_stages(start, target, joints, params, envelope):
             q=check_path(current,point,q,params,envelope)
             current=point
         stages.append(dict(kind='queue',points=points))
-    if height-current['Z']>.02:
+    if height-current['Z']>.001:
         queue([{**current,'Z':height}])
     # Preserve the original planner's bounded wrist steps at clearance height.
     previous=start
     for point in original:
-        rotation=all(abs(previous[k]-point[k])<.05 for k in ('X','Y','Z')) and abs(previous['Rz']-point['Rz'])>.02
+        rotation=all(abs(previous[k]-point[k])<.05 for k in ('X','Y','Z')) and abs(wrap(previous['Rz']-point['Rz']))>HOME_WRIST_TOLERANCE
         if rotation:
             rotated={**current,'Rz':point['Rz']}
             q=check_path(current,rotated,q,params,envelope)
@@ -112,7 +149,7 @@ class HomeReturn:
         point = self.hamilton_route.reviewed()[2]['start']
         return point, hashlib.sha256(json.dumps(point,sort_keys=True).encode()).hexdigest()
 
-    def public(self, robot, hand):
+    def public(self, robot, hand, *, approved_ik=None):
         run = self.get_runner()
         active = run.active and run.name == 'researcher_home'
         ident, blocker = None, ''
@@ -142,7 +179,16 @@ class HomeReturn:
             start, params, envelope = robot['pose_mm'], self.params(), self.get_service().envelope
             try:
                 target, _ = self.target()
-                proposed=self.route_plan(start, target, robot['joints'], params, envelope)
+                if approved_ik is not None and approved_ik.get('recovery_of'):
+                    # Only the recovery executor supplies this server-held plan.
+                    # Review BOTH histories before using its ordinary IK stages.
+                    if self.hamilton_route:
+                        self.hamilton_route.check_previous_attempt(
+                            reviewed_attempts=approved_ik.get('route_recovery_of'))
+                    proposed = dict(prefix=None, stages=queued_station_stages(
+                        start, target, robot['joints'], params, envelope))
+                else:
+                    proposed=self.route_plan(start, target, robot['joints'], params, envelope)
                 route_review=(proposed.get('prefix') or {}).get('requirement','')
             except TeachingError as error:
                 blocker = str(error)
@@ -170,7 +216,7 @@ class HomeReturn:
             raise TeachingError('Confirm the saved Home and clear return route with an empty gripper.', 400)
         service = self.get_service()
         state = service.status()
-        ready = self.public(state, self.get_draggo().public(state))
+        ready = self.public(state, self.get_draggo().public(state), approved_ik=approved_ik)
         if not ready['can_start']:
             raise TeachingError(ready['blocker'])
         target, ident = self.target()
@@ -304,6 +350,19 @@ class HomeReturn:
                 preparing = True
                 self.prepare(run, service)
                 preparing = False
+                if not prefix and not plan.get('queued_connector') and plan.get('stages'):
+                    from ik_home import ready_auto
+                    state = service.status()
+                    if not state.get('ok') or state.get('errors') or not ready_auto(state):
+                        raise TransferError('Controller is not ready after Home preparation.')
+                    settled = state['pose_mm']
+                    stages = settled_home_stages(start, settled, target, state['joints'],
+                                                 self.params(), service.envelope, plan['stages'])
+                    if attempt is not None:
+                        attempt['post_prepare_revalidation'] = dict(
+                            reviewed_start=start, settled_start=settled, stages=stages)
+                    plan = {**plan, 'stages': stages}
+                    start = settled
             if plan.get('monitor_gripper'):
                 from scope_compact137 import HoldingService
                 held_e1=plan.get('preserve_e1')
@@ -355,7 +414,7 @@ class HomeReturn:
                 travel_dispatched = True
                 if stage['kind']=='rotate':
                     self.message='Adjusting the wrist above Home. Keep hands clear.'
-                    guard.rotate_to_rz(stage['rz'])
+                    rotate_home_wrist(guard, stage['rz'])
                 else:
                     self.message='Moving Home. Keep hands clear.'
                     current,joints=service.pose_mm(),service.joints()
