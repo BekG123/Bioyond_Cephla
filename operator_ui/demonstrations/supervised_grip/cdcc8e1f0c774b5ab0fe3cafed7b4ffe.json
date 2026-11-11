@@ -1,0 +1,223 @@
+{
+  "kind": "supervised_plate_present_increment",
+  "target_mm": 3.9,
+  "speed": 5,
+  "plate_present": true,
+  "before": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 4.000050947070122
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 35.119012298991,
+        "J2": 40.79930140703436,
+        "J3": 59.33005808769994,
+        "J4": -10.26485376028385
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.865,
+        "X": 312.575,
+        "Y": -66.2,
+        "Z": 73.718
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "supervised_grip_batch",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1792483435.1128821
+  },
+  "samples": [
+    {
+      "e1_position": 3.896,
+      "e1_torque": 105.601,
+      "joints": {
+        "J1": 497,
+        "J2": 3,
+        "J3": 1,
+        "J4": -12
+      },
+      "ok": true,
+      "telemetry_live": true
+    },
+    {
+      "e1_position": 3.899,
+      "e1_torque": 106.401,
+      "joints": {
+        "J1": 494,
+        "J2": 0,
+        "J3": 4,
+        "J4": 9
+      },
+      "ok": true,
+      "telemetry_live": true
+    },
+    {
+      "e1_position": 3.9,
+      "e1_torque": 106.135,
+      "joints": {
+        "J1": 492,
+        "J2": -1,
+        "J3": 1,
+        "J4": -3
+      },
+      "ok": true,
+      "telemetry_live": true
+    }
+  ],
+  "operator_feedback": "Plate replaced; slight visible gap; keep squeezing.",
+  "operator_confirmed": true,
+  "restoration_reference": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\demonstrations\\supervised_grip\\restore_4mm_631f3b5bead14844b24869ee39757abe.json",
+  "baseline_comparison_applicable": false,
+  "grasp_verified": false,
+  "lift_requested": false,
+  "started_utc": "2026-10-20T08:03:55.233342+00:00",
+  "status": "stopped_awaiting_operator_review",
+  "command_result": {
+    "commanded": {
+      "e1": 3.9,
+      "speed": 5.0
+    },
+    "completion_reply": {
+      "index": 1,
+      "value": 1
+    },
+    "gripper": {
+      "e1_position": 3.896,
+      "e1_torque": 102.135,
+      "e1_torque_normalized": 0.383,
+      "grip_detected": false,
+      "joints": {
+        "J1": 499,
+        "J2": 0,
+        "J3": -1,
+        "J4": 2
+      },
+      "position_error": -0.004,
+      "telemetry_live": true
+    },
+    "ok": true
+  },
+  "after": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.9004632271826267
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 35.119012298991,
+        "J2": 40.79930140703436,
+        "J3": 59.33005808769994,
+        "J4": -10.26485376028385
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.865,
+        "X": 312.575,
+        "Y": -66.2,
+        "Z": 73.718
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "supervised_grip_batch",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1792483437.6541579
+  },
+  "mean_raw_torque": 106.04566666666666,
+  "finished_utc": "2026-10-20T08:03:57.656768+00:00"
+}

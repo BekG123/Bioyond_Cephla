@@ -1,4 +1,5 @@
 """One operator-authorized replacement, regrip and repeat of an accepted lift."""
+from gripper_closure import POLICY, closing_targets, closure_commands
 import hashlib
 import json
 import math
@@ -70,8 +71,7 @@ def review(service,cfg,opening_mm=5.0):
                 acceptance_sha256=hashlib.sha256(accepted_raw).hexdigest(),
                 start=start,legs=legs,cfg=cfg,envelope=previous_plan['envelope'],
                 open_e1_mm=opening_mm,close_e1_mm=3.7,grip_speed=5,
-                closing_targets=([6.0,5.0] if opening_mm == 7 else [])+
-                                [4.8,4.6,4.4,4.2,4.0,3.9,3.8,3.7])
+                closure_policy=POLICY,closing_targets=closing_targets(opening_mm,3.7),closing_commands=closure_commands(opening_mm,3.7))
 
 
 def execute(run,service,cfg,approved):
@@ -112,13 +112,13 @@ def execute(run,service,cfg,approved):
             raise TransferError('Arm motion uncertain; no next action.')
         near(service.pose_mm(),leg['target'],.05)
     holder=approved['legs'][0]['target']
-    def jaw(target,expected):
+    def jaw(target,expected,speed=5):
         check(holder)
         if abs(service.external_axes()['E1']-expected) > .05:
             raise TransferError('Jaw opening changed before command.')
-        item=dict(kind='gripper',target_e1_mm=target,speed=5,at=time.time())
+        item=dict(kind='gripper',target_e1_mm=target,speed=speed,at=time.time())
         record['stages'].append(item);save()
-        response=service.move_gripper(target,speed=5)
+        response=service.move_gripper(target,speed=speed)
         item['response']=response;save()
         if not response.get('ok') or response.get('recovered') or response.get('gripper_warning'):
             raise TransferError('Jaw command uncertain; no retry or lift.')
@@ -142,8 +142,9 @@ def execute(run,service,cfg,approved):
         travel(approved['legs'][0])
         jaw(opening,3.7)
         expected=opening
-        for target in approved['closing_targets']:
-            jaw(target,expected)
+        for command in approved['closing_commands']:
+            target=command['target_e1_mm']
+            jaw(target,expected,command['speed'])
             expected=target
         end=time.monotonic()+2
         while time.monotonic()<end:

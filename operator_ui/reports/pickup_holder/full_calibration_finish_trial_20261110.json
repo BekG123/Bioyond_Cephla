@@ -1,0 +1,37 @@
+{
+  "schema": "cephla.pickup-holder-trial-summary.v1",
+  "status": "controller_sequence_completed_operator_visual_assessment_pending",
+  "date": "2026-11-10",
+  "operator_request": "Test it. First, take it to IDLE state. Path is clear, jaws empty",
+  "idle_plan_id": "2026-11-10T21:50:33.532546+00:00:1794347433532",
+  "idle_receipt": "operator_ui/reports/ik_home/1794347441376435200_70e668aeaa674df2b465d3241e40cc2f.json",
+  "idle_measured_pose_mm": {"X": 289.97, "Y": 62.63, "Z": 248.02, "Rz": -3.88},
+  "prestart_events": [
+    "Enable rejected in Manual with controller error 10; switched to Auto and prepared empty controller. No fault reset.",
+    "First calibration confirmation rejected because controller connection was lost while idle. No calibration motion dispatched. Reconnected, verified unchanged IDLE and healthy running Auto, then generated a fresh plan."
+  ],
+  "calibration_plan_id": "2026-11-10T21:52:33.608636+00:00:1794347553608",
+  "profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+  "stages_completed": ["Calibrate", "Align", "Descend", "Grip", "Lift", "Reseat", "Release", "Clearance"],
+  "e2_verified_degrees_displayed": 1.771,
+  "grip_target_e1_mm": 3.9,
+  "proof_lift_mm": 5,
+  "proof_lift_speed": 5,
+  "reseat_speed": 5,
+  "release_target_e1_mm": 28,
+  "empty_rise_mm": 30,
+  "empty_rise_speed": 137,
+  "finish_receipts": [
+    "operator_ui/demonstrations/pickup_holder/2c180308c2604c6887f74e14dbb7a48f.json",
+    "operator_ui/demonstrations/pickup_holder/e12060552851435cba797689c04c848c.json",
+    "operator_ui/demonstrations/pickup_holder/9fe5b00bbd4f45e4a64eda85d3256cd3.json",
+    "operator_ui/demonstrations/pickup_holder/b6cc0923df3046f79251a56dc015c980.json"
+  ],
+  "final_measured_pose_mm": {"X": 312.01, "Y": -65.48, "Z": 103.72, "Rz": 89.77},
+  "final_measured_e1_mm": 28.000138700008392,
+  "final_controller_errors": [],
+  "lacry_running_ok": true,
+  "operator_visual_seating_confirmed": false,
+  "holder_destination_rotation_executed": false,
+  "hamilton_or_squid_travel_executed": false
+}

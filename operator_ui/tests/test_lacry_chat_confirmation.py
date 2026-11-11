@@ -48,10 +48,10 @@ class ChatConfirmationTests(unittest.TestCase):
         self.agent.propose = Mock(side_effect=TeachingError(reason))
         self.client.complete.side_effect = [
             dict(stop_reason='tool_use', content=[dict(type='tool_use', id='home',
-                 name='propose_actions', input=dict(actions=['move_home']))]),
+                 name='propose_actions', input=dict(actions=['move_idle']))]),
             dict(content=[dict(type='text', text='Reset the system and try again.')])]
-        self.agent.send('Send the arm home')
-        self.assertEqual(self.agent.transcript[-1]['text'], reason+' No Home movement was started.')
+        self.agent.send('Send the arm to IDLE')
+        self.assertEqual(self.agent.transcript[-1]['text'], reason+' No movement was started.')
         self.backend.execute_step.assert_not_called()
 
     def setUp(self):
@@ -95,11 +95,13 @@ class ChatConfirmationTests(unittest.TestCase):
         return workflow
 
     def test_complete_squid_request_includes_retrieval_even_if_model_omits_it(self):
-        workflow = self.squid_plan_fixture('plan_squid_experiment', dict(retrieve=False))
+        # An already-held plate uses the established instrument loop. A new
+        # calibration session is separately checked by test_plate_session.
+        workflow = self.squid_plan_fixture('plan_squid_experiment', dict(retrieve=False, pickup_from_calibration=False))
         self.agent.automatic_workflow = Mock(return_value=workflow)
         self.agent.send('Yes, use the complete Squid experiment workflow')
         self.assertTrue(workflow.propose.call_args.kwargs['retrieve'])
-        self.assertIn('Retrieve plate to Home', self.agent.transcript[-1]['text'])
+        self.assertIn('Retrieve plate to IDLE', self.agent.transcript[-1]['text'])
         workflow.start.assert_not_called()
         self.backend.execute_step.assert_not_called()
 
@@ -283,18 +285,20 @@ class ChatConfirmationTests(unittest.TestCase):
     def test_calibration_refusal_cannot_be_recast_as_hand_guiding_or_skip_pickup(self):
         self.agent.credentials.model = 'fixture'
         reason = 'The post-calibration Squid connection needs review. Calibration uses the saved automatic pickup.'
-        self.agent.propose = Mock(side_effect=TeachingError(reason))
+        self.agent.plan_plate_session = Mock(side_effect=TeachingError(reason))
+        self.agent.propose = Mock()
         self.client.complete.side_effect = [
             dict(stop_reason='tool_use', content=[
                 dict(type='tool_use', id='full', name='propose_actions',
-                     input=dict(actions=['move_home','full_calibration','move_scope'])),
+                     input=dict(actions=['move_idle','full_calibration','move_scope'])),
                 dict(type='tool_use', id='skip', name='propose_actions',
-                     input=dict(actions=['move_home','move_scope']))]),
+                     input=dict(actions=['move_idle','move_scope']))]),
             dict(content=[dict(type='text', text='You must teach the pickup by hand.')])]
-        self.agent.send('Return Home, run calibration, then go to Squid')
+        self.agent.send('Return IDLE, run calibration, then go to Squid')
         self.assertEqual(self.agent.transcript[-1]['text'], reason+' No movement was started.')
         self.assertIsNone(self.agent.pending)
-        self.agent.propose.assert_called_once()
+        self.agent.plan_plate_session.assert_called_once()
+        self.agent.propose.assert_not_called()
         self.client.complete.assert_called_once()
         results=self.agent.history[-2]['content']
         self.assertEqual({r['tool_use_id'] for r in results},{'full','skip'})

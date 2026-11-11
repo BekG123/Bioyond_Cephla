@@ -1,0 +1,287 @@
+schema_version: 1
+id: bioyond_s4
+name: Bioyond LabGenius S4 arm
+kind: robot_arm
+summary: >
+  Four-axis SCARA-type arm (J1 vertical ram, J2/J3 planar links, J4 wrist yaw) with an E1
+  pronged rack gripper. It moves plates between the Hamilton Prep, the Squid stage and
+  other taught stations. It has no force-calibrated gripper: grip is judged by torque
+  and a position stall. A human is at the E-stop for every motion.
+
+identity:
+  vendor: Bioyond
+  model: LabGenius S4
+  serial: null   # not recorded in the workspace; AGENT_CONTEXT.md lists it as a missing deployment input
+  software:
+    controller_program: controller/main_hostpoint.bin
+    mcp_server: bioyond-s4-mcp/server.py
+
+connection:
+  exclusive_clients: true
+  exclusive_note: >
+    The controller accepts ONE raw TCP client. The bioyond-s4 MCP server, the operator
+    console (operator_ui) and Bioyond Works are mutually exclusive. The GigE camera also
+    allows one grab controller; close the MVS live view first.
+  network_assumption: >
+    Commissioned address in CLAUDE.md. The protocol manual and C# sample list other
+    addresses; use the commissioned one only.
+  paths:
+    - name: brcapi
+      transport: tcp_json
+      address: 192.168.201.220:56788
+      purpose: Controller protocol (newline-framed JSON, ids correlate replies).
+      implemented_in: bioyond-s4-mcp/robot.py
+    - name: mcp
+      transport: mcp
+      address: bioyond-s4 (registered in .mcp.json)
+      purpose: Agent-facing tools.
+      implemented_in: bioyond-s4-mcp/server.py
+    - name: operator_console
+      transport: other
+      address: http://127.0.0.1:5002
+      purpose: Human-driven console with sequences and arrival verification.
+      implemented_in: operator_ui/robot_service.py
+    - name: eye_in_hand_camera
+      transport: other
+      address: GigE 192.168.201.89 (JHEM600GM-HM, MVS SDK)
+      purpose: Precision sensor, about 13 px/mm at deck depth.
+
+frames:
+  robot_t0_u0_mm:
+    units: mm and degrees for commands; the pose query returns meters and radians
+    notes: Only feed rotation_deg back into moves, never pose_raw.
+  e1_gap_mm:
+    units: mm
+    notes: E1 is the gap between the rack plates. 28 is open. Free torque baseline is +150..+195.
+
+locations:
+  - name: idle
+    frame: robot_t0_u0_mm
+    status: operator_confirmed
+    source: operator_ui/points.json and accepted true-Home route evidence
+    legacy_route_key: Home
+    notes: Former true Home; initial camera-viewing pose and optional parking, not the full-calibration endpoint. Preserve historical route keys and coordinates.
+  - name: home
+    frame: robot_t0_u0_mm
+    status: holder_preparation_pending_supervised_trial
+    source: Pick and Hold/plate_session_workflow.json
+    notes: Calibration holder station, with separate placement, clearance and orientation-specific grip poses; not a single TCP coordinate. Never substitute the old Home parking route.
+  - name: squid_dropoff
+    frame: robot_t0_u0_mm
+    status: operator_confirmed
+    source: run_station_job device 12 (Squid)
+  - name: home_48well_long_side_alignment
+    frame: robot_t0_u0_mm
+    status: operator_confirmed
+    source: Pick and Hold/Calibration/plate_48_pickup_profile.json
+    hover_pose_key: alignment_pose_mm
+    gripping_pose_key: candidate_endpoint
+    grip_acceptance_key: accepted_grip_reference
+    notes: Confirmed +Y10.4 mm long-side pickup, already included in the stored coordinates. Alignment hover Z300 and gripping Z73.718 are distinct poses; original holder orientation near E2=1.77 degrees. Do not add the correction again or use this for the rotated short-side grip.
+  - name: hamilton_handoff
+    frame: robot_t0_u0_mm
+    status: unknown
+    notes: Not yet verified in this manifest; the route comes from the recorded Hamilton routine (docs/DESIGN.md section 2).
+
+plate_session_workflow:
+  source: Pick and Hold/plate_session_workflow.json
+  calibration: Once per valid session; proof lift 5 mm at speed 5, reseat at speed 5, open E1 to 28, then raise empty arm 30 mm at speed 137 above HOME. No final IDLE travel.
+  sequence: [calibration, proof_lift, home_seated, home_released, home_clear, home_oriented, home_verified, home_gripped, pickup_verified, destination]
+  lift_after_release_mm: 30
+  lift_after_release_speed: 137
+  open_axis: E1
+  open_mm: 28
+  rotation_axis: E2
+  rotation_units: degrees
+  hamilton_absolute_target_degrees: 90.71661229181757
+  hamilton_target_tolerance_degrees: 0.1
+  hamilton_direction_from_original: counterclockwise viewed from above
+  squid_original_target_degrees: 1.77
+  squid_original_acceptance: round(E2, 3) >= 1.769 and E2 <= 1.82
+  squid_rotation: none; stop if original orientation is not verified
+  commissioning: Revised reseat/open-28/empty-rise-30 finish implemented with offline checks; physical validation pending. Earlier 7 mm release/5 mm rise trial is historical evidence. Rotation/re-grip integration remains pending.
+  home_exchange_evidence: operator_ui/reports/squid_48well_approach/calibration_home_exchange_retry01_20261110/home_holder_release_clearance.json
+  rotation_checks: [plate_supported, plate_released, empty_jaws, stationary, open_28_mm, measured_30_mm_lift, full_sweep_clear, E_stop_supervised]
+  arrival_check: Three fresh E2 readings must match the destination reference before re-gripping.
+  timeout_policy: Stop and preserve evidence; no automatic retry.
+
+labware:
+  - name: 48-well plate
+    notes: Held by E1 using the pronged rack.
+  - name: calibration disk and ArUco-tagged objects
+    notes: Used by the grab pipeline.
+
+limits:
+  workspace_envelope_default:
+    value: {x: [200, 450], y: [-250, 50], z: [350, 400]}
+    units: mm
+    source: CLAUDE.md
+    enforced_in: bioyond-s4-mcp/robot.py
+    # Placeholder. It does NOT match the real working area. Set it per task.
+  workspace_envelope_console_preset:
+    value: {x: [180, 470], y: [-400, -100], z: [35, 420]}
+    units: mm
+    source: operator_ui/README.md
+  reach:
+    value: 480
+    units: mm
+    source: operator_ui/README.md (base-centred reach check)
+  speed_travel_max:
+    value: 30
+    source: docs/DESIGN.md section 7
+  speed_approach_max:
+    value: [15, 20]
+    source: docs/DESIGN.md section 7
+  speed_probe:
+    value: 5
+    source: docs/DESIGN.md section 7
+  speed_lift:
+    value: [8, 10]
+    source: docs/DESIGN.md section 7
+  speed_hard_cap:
+    value: 200
+    source: CLAUDE.md move_to_cartesian
+  e1_open:
+    value: 28
+    units: mm
+    source: CLAUDE.md
+  grip_torque_threshold:
+    value: -100
+    source: CLAUDE.md grip_by_torque
+  arrival_tolerance:
+    value: unknown
+    source: pose-after must match the commanded target in robot_service.py; the numeric tolerance is not recorded here
+
+operations:
+  - name: connect
+    description: Opens the TCP connection. No motion, no enabling, no error clearing.
+    risk: read_only
+    implemented_by: MCP connect
+  - name: get_status
+    description: Mode, enabled, program state, errors, lua_app_initialized. Error 3611/3608 is E-stop, 3873 is collision.
+    risk: read_only
+    timeout_s: 5
+    on_timeout: requery_state
+    implemented_by: MCP get_status, get_robot_errors
+  - name: get_pose
+    description: Cartesian pose (pose_mm and rotation_deg) and J1-J4.
+    risk: read_only
+    implemented_by: MCP get_cartesian_pose, get_joint_positions
+  - name: enable_robot
+    description: Switch to Auto and enable. Never automatic after a reconnect.
+    risk: state_change
+    human_gate: [the cell is clear, I am at the E-stop]
+    implemented_by: MCP switch_mode, enable_robot(operator_confirmed=true)
+    notes: The agent must not pass operator_confirmed on its own.
+  - name: start_program
+    description: Start the Lua program. Never while an object is held, because E1 resets to 0.
+    risk: state_change
+    human_gate: [no object is held]
+    postconditions: [lua_app_initialized is true]
+    implemented_by: MCP stop_program, start_program
+  - name: move_to_cartesian
+    description: Envelope-checked move, linear by default. Joint interpolation only for zero-translation rotations.
+    risk: motion
+    human_gate: [at the E-stop]
+    preconditions: [enabled, no errors, envelope set for the task, target inside envelope and reach]
+    postconditions: [pose-after matches the target]
+    timeout_s: 60
+    on_timeout: requery_state
+    implemented_by: MCP move_to_cartesian
+    notes: A success code can still hide a mid-path fault; success is only pose-after matching.
+  - name: run_station_job
+    description: Taught pick or place at a station.
+    risk: motion
+    human_gate: [at the E-stop, destination empty, path clear]
+    parameters:
+      device_id: "11=P1, 12=Squid, 13=Scale, 14=FluidicsSystem, 15=Lid, 9998, 9999"
+      action: pick or place
+    implemented_by: MCP run_station_job
+    notes: Reply value 1 is success, -1 means the controller rejected the job and nothing moved.
+  - name: go_home
+    description: Legacy controller homing job to idle (former Home), NOT the new home holder station. Large and fast.
+    risk: motion
+    human_gate: [at the E-stop, path clear]
+    implemented_by: MCP go_home
+  - name: grip_by_torque
+    description: Open to 28, close in 0.1 mm steps reading torque, stop at the threshold; reopens if nothing is gripped.
+    risk: motion
+    human_gate: [at the E-stop]
+    postconditions: [grip_detected reported, object seen to move with the gripper when vision is available]
+    implemented_by: MCP grip_by_torque
+  - name: release
+    description: move_gripper(28).
+    risk: motion
+    human_gate: [at the E-stop]
+    implemented_by: MCP move_gripper
+  - name: aruco_grab
+    description: Anchor-free grab of an ArUco-tagged object at any deck position.
+    risk: motion
+    human_gate: [at the E-stop, marker centered in view]
+    implemented_by: .claude/skills/aruco-grab
+  - name: capture_image
+    description: Frames from the two Arducams or the GigE eye camera, with an optional coordinate grid.
+    risk: read_only
+    implemented_by: MCP camera_capture, camera2_capture, gige_capture
+    notes: Two identical Arducams can swap enumeration order after a reboot; verify by scene content.
+
+interlocks:
+  - Physical E-stop is the authoritative safety control.
+  - Software STOP SEQ in the console is not an E-stop.
+  - Hardware guarding is independent of the host application.
+
+known_faults:
+  - id: tcp_drop_mid_command
+    status: mitigated
+    summary: >
+      One unexplained TCP drop mid-command was seen. The Lua program keeps executing after
+      the socket dies. After any drop, reconnect, verify pose and joints, and clear stale
+      SysVarI before the next command. operator_ui/robot_service.py handles this; the MCP
+      server does not yet.
+  - id: stale_success_ack
+    status: mitigated
+    summary: A move can return value 1 while the controller faulted mid-path. Judge by pose.
+  - id: squid_retrieval_tilt
+    status: open
+    summary: Later Squid retrievals were reported tilted after earlier accepted deliveries.
+    affects: [run_station_job]
+    evidence: operator_ui/bind_y84_grip_acceptance.py (acceptance context text)
+  - id: program_restart_zeroes_e1
+    status: mitigated
+    summary: Starting the program re-zeroes E1 and slams the plates shut. Never start or stop it while holding an object.
+
+recovery:
+  - situation: Motion timeout or disconnect
+    do:
+      - Reconnect.
+      - Read get_status and get_cartesian_pose, and compare with the last commanded pose.
+      - Write zeros to stale SysVarI.
+      - Ask a person before any re-enable.
+    never: [resend the command, clear errors without confirmation, enable automatically]
+  - situation: Uncertain grip, double pick, drop, or occupied destination
+    do:
+      - Enter a quarantine or error state and stop the job.
+      - Report which step the physical state is unknown at.
+    never: [start a new job while the previous physical state is unknown]
+  - situation: After publishing a controller program in Bioyond Works
+    do: [Stop then start the program, because a resumed program keeps running the old code.]
+
+qualification:
+  state_read:
+    status: qualified
+    evidence: Verified on the live robot 2026-07-18 (CLAUDE.md).
+  move_to_cartesian:
+    status: qualified
+    evidence: +20 mm Z MoveL with 0.000 mm lateral drift, 2026-07-18.
+  aruco_grab:
+    status: qualified
+    evidence: Validated live 2026-07-24 on three blind placements (CLAUDE.md).
+  squid_dropoff:
+    status: supervised_only
+    evidence: Operator confirmed the loading position matches a successful robot drop-off, 2026-11-03.
+  squid_retrieve:
+    status: needs_review
+    blocker: Retrievals were reported tilted; see squid_retrieval_tilt.
+  hamilton_handoff:
+    status: blocked
+    blocker: Depends on the Hamilton gripper release, which has zero completed round trips.

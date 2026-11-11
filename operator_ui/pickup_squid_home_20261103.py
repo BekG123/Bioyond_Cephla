@@ -1,4 +1,5 @@
-"""One authorized pickup using the accepted route and gradual jaw sequence."""
+"""One authorized pickup using the accepted route and two-speed jaw closure."""
+from gripper_closure import POLICY, closing_targets, closure_commands
 import argparse
 from copy import deepcopy
 import json
@@ -59,10 +60,10 @@ def main(output_dir=None, authorization=None, *, route_source=LEGACY_SOURCE, rou
     for path, digest, trial, speeds in plans:
         if trial.exists():
             raise RuntimeError('Phase already attempted; no retry')
-    print(json.dumps(dict(validated=True, execute=args.execute, jaw_targets=[6, 5, 4.8, 4.6, 4.4, 4.2, 4, 3.9])), flush=True)
+    print(json.dumps(dict(validated=True, execute=args.execute, closure_policy=POLICY, jaw_targets=closing_targets(7,3.9))), flush=True)
     if not args.execute:
         return
-    record = dict(status='started', at=time.time(), source_state=initial,
+    record = dict(closure_policy=POLICY, status='started', at=time.time(), source_state=initial,
                   operator_confirmation=authorization or 'yes, now attempt to pick it up and take it home',
                   source_sha256=source_hash, steps=[], phases=[])
     write(output, record)
@@ -77,12 +78,13 @@ def main(output_dir=None, authorization=None, *, route_source=LEGACY_SOURCE, rou
     try:
         travel(0)
         opening = 7
-        for target in (6, 5, 4.8, 4.6, 4.4, 4.2, 4.0, 3.9):
+        for command in closure_commands(7,3.9):
+            target=command['target_e1_mm']
             ready(route[4], opening)
-            step = dict(target_e1=target, speed=5, status='requested', samples=[])
+            step = dict(target_e1=target, speed=command['speed'], status='requested', samples=[])
             record['steps'].append(step)
             write(output, record)
-            response = api('gripper', dict(action='move', e1=target, speed=5))
+            response = api('gripper', dict(action='move', e1=target, speed=command['speed']))
             step['response'] = response
             write(output, record)
             if not response.get('ok') or response.get('recovered'):

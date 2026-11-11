@@ -1,8 +1,8 @@
 {
   "schema": "cephla.projected-pickup-profile.v1",
   "id": "48_well_projected_20261026",
-  "acceptance": "operator_ui/reports/projected_alignment/full7_reseat_trial_authorization_20261027.json",
-  "acceptance_sha256": "c16ce86ae93683f2fc82b85793b7996a1e7bc2a0a60cdbfa6e2ae69e14386de5",
+  "acceptance": "operator_ui/reports/projected_alignment/positive_y104_0a6831631d984aa0bdd44540a0516785/authorization.json",
+  "acceptance_sha256": "39ec46138bfc63679379078b1c26a4ef41dcfd64d71086ac4a1c99e3d1d45704",
   "alignment_log": "operator_ui/reports/projected_alignment/20261027_070718_7c272570.jsonl",
   "alignment_log_sha256": "4d02f9e5a0b2da7aae27bb1dd4a3e52dd6319799b666c4bd8109e1d885014bf4",
   "alignment_pose_mm": {
@@ -10,26 +10,24 @@
     "Ry": 0.0,
     "Rz": 89.7652192188176,
     "X": 312.0124178577057,
-    "Y": -75.87790542678249,
+    "Y": -65.47790542678248,
     "Z": 300.0
   },
   "descent_status": "operator_accepted_open_claw_descent",
-  "gripping_edge_height": "unknown; operator requested supervised verification",
+  "gripping_edge_height": "Accepted long-side gripping TCP Z73.718 mm at the unchanged HOME holder setup.",
   "candidate_endpoint": {
     "Rx": 0.0,
     "Ry": 0.0,
     "Rz": 89.7652192188176,
     "X": 312.0124178577057,
-    "Y": -75.87790542678249,
+    "Y": -65.47790542678248,
     "Z": 73.718
   },
-  "candidate_z_basis": "Unchanged taught Z73.718; inspect open-claw placement before any grip.",
+  "candidate_z_basis": "Operator-accepted long-side descent/grip endpoint; successful recorded pickup and 5 mm lift.",
   "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
   "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
   "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
   "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5, stop at accepted 48-well E1=3.9",
-  "accepted_grip_reference": "operator_ui/reports/projected_alignment/full7_reseat_grip_binding_20261027.json",
-  "accepted_grip_reference_sha256": "d1a75633f5198ccfc069be089e506cb84a4bf171b303cd639db110e10e922355",
   "automatic_lift_enabled": false,
   "full_pickup_verified": false,
   "inward_correction_already_applied": false,
@@ -47,7 +45,28 @@
   "additional_down_mm": 5.0,
   "physical_grip_validated_for_plate": true,
   "alignment_source": "Approved rigid plate-relative transform from fresh reseated-plate measurement",
-  "current_placement_grip_tested": false,
-  "descent_acceptance": "operator_ui/reports/projected_alignment/full7_reseat_visual_acceptance_20261027.json",
-  "descent_acceptance_sha256": "2daea3696ceaa42c415efb475dc79e714fe1e69f865f2118fe6846ad629cc003"
+  "current_placement_grip_tested": true,
+  "pickup_correction": {
+    "direction": "positive_base_y",
+    "distance_mm": 10.4,
+    "parent_profile_sha256": "583b14820fbacae665fb3e66953c87a54bf210fd510dc01035d139e7164357f5",
+    "source_endpoint": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.7652192188176,
+      "X": 312.0124178577057,
+      "Y": -75.87790542678249,
+      "Z": 73.718
+    }
+  },
+  "squid_destination_candidate": "operator_ui/reports/squid_48well_approach/destination_calibration_y114_20261101.json",
+  "descent_acceptance": "operator_ui/reports/projected_alignment/descent_accepted_1793731432033015200.json",
+  "descent_acceptance_sha256": "fc5d3b130b432a9c59bf18ca5d9b8c137554d5efbbc27132e5e56094f4dd5e07",
+  "accepted_grip_reference": "operator_ui/reports/projected_alignment/long_side_y104_acceptance_20261110/accepted_grip_binding.json",
+  "accepted_grip_reference_sha256": "23316b41410cda3e2c230117c5f72310c7ce736f5e1de17b87b66ff4a014d2d1",
+  "alignment_name": "48-well long-side alignment at HOME",
+  "alignment_frame": "robot base Cartesian TCP, mm/degrees",
+  "alignment_scope": "Original holder orientation near E2=1.77 degrees; +Y10.4 already included, never cumulative.",
+  "alignment_hover_pose_key": "alignment_pose_mm",
+  "long_side_gripping_pose_key": "candidate_endpoint"
 }

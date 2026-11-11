@@ -1,4 +1,4 @@
-"""One supervised regrip: reuse staged commands, stop at previously settled 3.9.
+"""One supervised regrip: two-speed closure, stop at previously settled 3.9.
 
 No arm travel, startup, force-limit changes, retry, or commands below 3.9 mm.
 """
@@ -9,7 +9,7 @@ import math
 import time
 import projected_pickup as p
 from proof_lift_plate import api, near, write
-from pick_and_hold.Grip.fast_position_plan import plan_closure
+from gripper_closure import POLICY, closure_plan
 from pick_and_hold.Grip.reference_grip import ReferenceGrip
 
 RECORD=p.ROOT/'operator_ui/reports/projected_alignment/regrip_3p9_reseated_20261027.json'
@@ -232,12 +232,12 @@ def main():
     prior=json.loads(prior_path.read_bytes())
     accepted=[x for x in prior['steps'] if x['command']['target_e1_mm']==3.9 and abs(x.get('settled_e1_mm',0)-3.9)<=.02]
     if len(accepted)!=1:raise RuntimeError('Previous settled 3.9 mm evidence missing.')
-    steps=[s for s in plan_closure(28)['commands'] if s['target_e1_mm']>=3.9]
-    if steps[-1]['target_e1_mm']!=3.9:raise RuntimeError('Unexpected staged plan.')
-    record=dict(at=time.time(),operator_confirmation='Plate replaced flat and centered, hands clear, E-stop supervised; staged regrip before lift.',
+    steps=closure_plan(28,3.9)['commands']
+    if steps[-1]['target_e1_mm']!=3.9:raise RuntimeError('Unexpected closure endpoint.')
+    record=dict(closure_policy=POLICY,at=time.time(),operator_confirmation='Plate replaced flat and centered, hands clear, E-stop supervised; two-speed regrip before lift.',
         reason='Stop at last successfully settled 3.9 mm; do not repeat the failed 3.8 mm step.',
         previous_grip=str(prior_path),previous_grip_sha256=p.sha(prior_path.read_bytes()),
-        profile_sha256=digest,pose=pose,before=state,target_e1_mm=3.9,speed=5,
+        profile_sha256=digest,pose=pose,before=state,target_e1_mm=3.9,approach_speed=10,final_speed=5,
         planned_commands=steps,steps=[],samples=[],grasp_verified=False,lift_started=False,
         status='prepared',force_limits_changed=False)
     if args.accepted_repeat:
@@ -256,7 +256,7 @@ def main():
         record.update(operator_confirmation='Repeat authorized with unchanged pickup setup; prior human acceptance retained, no new visual observation claimed.',
             repeat_receipt=str(repeat_path),repeat_receipt_sha256=p.sha(repeat_path.read_bytes()))
     write(RECORD,record);sent=False
-    if inspected:
+    if inspected and repeat_receipt is None:
         record.update(reason=f'Operator accepted +Y {inspected_distance} mm open-claw descent and requested usual 3.9 mm grip; stop before lift.',
             operator_confirmation='Yes: claws aligned and clear, ready to grip.',
             settle_tolerance_mm=ReferenceGrip.SETTLE_TOLERANCE_MM,
@@ -275,7 +275,7 @@ def main():
             item=dict(command=step,at=time.time());record['steps'].append(item);record['status']='closing';write(RECORD,record)
             sent=True
             with ThreadPoolExecutor(max_workers=1) as pool:
-                future=pool.submit(api,'gripper',dict(action='move',e1=step['target_e1_mm'],speed=5))
+                future=pool.submit(api,'gripper',dict(action='move',e1=step['target_e1_mm'],speed=step['speed']))
                 while not future.done():
                     try:s=checked(pose)
                     except Exception:

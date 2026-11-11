@@ -1,4 +1,4 @@
-"""Staged Grip commissioning checks, fake hardware only."""
+"""Continuous Grip commissioning checks, fake hardware only."""
 import json
 from pathlib import Path
 import sys
@@ -58,14 +58,14 @@ class ReferenceGripTests(unittest.TestCase):
         self.assertFalse(self.r.active)
         return self.r.result
 
-    def test_complete_exact_staged_plan_without_grasp_claim(self):
+    def test_two_speed_closure_without_grasp_claim(self):
         result=self.start()
         self.assertTrue(result['ok'],result)
-        self.assertEqual(len(self.s.calls),30)
-        self.assertEqual(self.s.calls[-2:],[(3.9,5),(3.8,5)])
+        self.assertEqual(len(self.s.calls),2)
+        self.assertEqual(self.s.calls,[(4.8,10),(3.8,5)])
         self.assertFalse(result['grasp_verified'])
         self.assertTrue(result['awaiting_inspection'])
-        self.assertEqual(len(json.loads(Path(result['record']).read_text())['steps']),30)
+        self.assertEqual(len(json.loads(Path(result['record']).read_text())['steps']),2)
         with self.assertRaises(TeachingError):
             self.g.start(dict(ready=True,descent_id=self.g.receipt['id']))
 
@@ -85,7 +85,8 @@ class ReferenceGripTests(unittest.TestCase):
             self.assertEqual(self.g.public(self.s.status())['target_e1_mm'],3.9)
             result=self.start()
         self.assertTrue(result['ok'],result)
-        self.assertEqual(len(self.s.calls),29)
+        self.assertEqual(len(self.s.calls),2)
+        self.assertEqual(self.s.calls,[(4.9,10),(3.9,5)])
         self.assertEqual(self.s.calls[-1],(3.9,5))
         self.assertTrue(all(target>=3.9 for target,speed in self.s.calls))
         self.assertFalse(result['grasp_verified'])
@@ -96,7 +97,7 @@ class ReferenceGripTests(unittest.TestCase):
             with self.assertRaises(TeachingError):self.start()
         self.assertEqual(self.s.calls,[])
 
-    def test_stop_blocks_next_increment(self):
+    def test_stop_blocks_completion_and_lift(self):
         original=self.s.torque_report
         def stop():
             self.r.request_stop()
@@ -104,13 +105,13 @@ class ReferenceGripTests(unittest.TestCase):
         self.s.torque_report=stop
         result=self.start()
         self.assertFalse(result['ok'])
-        self.assertEqual(self.s.calls,[(27,5)])
+        self.assertEqual(self.s.calls,[(4.8,10)])
 
     def test_uncertain_command_no_retry(self):
         self.s.result=dict(ok=True,recovered='uncertain')
         result=self.start()
         self.assertFalse(result['ok'])
-        self.assertEqual(self.s.calls,[(27,5)])
+        self.assertEqual(self.s.calls,[(4.8,10)])
 
     def test_pose_change_stops(self):
         original=self.s.torque_report
@@ -126,6 +127,47 @@ class ReferenceGripTests(unittest.TestCase):
         self.assertFalse(self.start()['ok'])
         self.assertEqual(len(self.s.calls),1)
 
+    def test_inspected_offset_passes_position_checks_without_grasp_claim(self):
+        original = self.s.move_gripper
+        def offset(target, speed):
+            result = original(target, speed)
+            self.s.e1 = target + .059372
+            return result
+        self.s.move_gripper = offset
+        result = self.start()
+        self.assertTrue(result['ok'], result)
+        self.assertFalse(result['grasp_verified'])
+        self.assertTrue(result['awaiting_inspection'])
+        record = json.loads(Path(result['record']).read_text())
+        self.assertEqual(record['settle_tolerance_mm'], .07)
+        self.assertEqual(record['position_tolerance_mm'], .07)
+        self.assertIn('settled_e1_mm', record['steps'][0])
+
+    def test_fresh_report_outside_position_band_stops_without_retry(self):
+        original = self.s.torque_report
+        def outside_band():
+            report=original()
+            report['e1_position']+=.071
+            return report
+        self.s.torque_report=outside_band
+        result=self.start()
+        self.assertFalse(result['ok'])
+        self.assertIn('Fresh grip feedback',result['error'])
+        self.assertEqual(len(self.s.calls),1)
+
+    def test_offset_outside_new_settle_tolerance_stops(self):
+        original = self.s.move_gripper
+        def offset(target, speed):
+            result = original(target, speed)
+            self.s.e1 = target + .071
+            return result
+        self.s.move_gripper = offset
+        self.g.SETTLE_TIMEOUT = .03
+        result = self.start()
+        self.assertFalse(result['ok'])
+        self.assertIn('did not settle', result['error'])
+        self.assertEqual(len(self.s.calls), 1)
+
     def prepare_3p7(self):
         profile = json.loads(self.profile.read_text())
         profile.update(target_e1_mm=3.7, supervised_trial='e1_3p7_20261020',
@@ -134,13 +176,13 @@ class ReferenceGripTests(unittest.TestCase):
         self.profile.write_text(json.dumps(profile))
         self.g.completed_descent(dict(ok=True,executor='lua_descent'), self.s.pose)
 
-    def test_3p7_one_additional_step_and_one_attempt_only(self):
+    def test_3p7_single_closure_and_one_attempt_only(self):
         self.prepare_3p7()
         self.assertEqual(self.g.public(self.s.status())['target_e1_mm'],3.7)
         result = self.start()
         self.assertTrue(result['ok'],result)
-        self.assertEqual(len(self.s.calls),31)
-        self.assertEqual(self.s.calls[-3:],[(3.9,5),(3.8,5),(3.7,5)])
+        self.assertEqual(len(self.s.calls),2)
+        self.assertEqual(self.s.calls,[(4.7,10),(3.7,5)])
         self.assertEqual(result['target_e1_mm'],3.7)
         self.assertFalse(result['grasp_verified'])
         self.assertFalse(json.loads(self.profile.read_text())['live_enabled'])
@@ -156,7 +198,7 @@ class ReferenceGripTests(unittest.TestCase):
         self.s.move_gripper = fail_final
         result = self.start()
         self.assertFalse(result['ok'])
-        self.assertEqual(len(self.s.calls),31)
+        self.assertEqual(len(self.s.calls),2)
         self.assertEqual(self.s.program_stop_called,'stop')
         self.assertFalse(json.loads(self.profile.read_text())['live_enabled'])
 

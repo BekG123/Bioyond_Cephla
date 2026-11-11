@@ -137,7 +137,7 @@ class ProjectedPickup:
                 profile_sha256=digest,
                 descent_status=p['descent_status'],candidate_endpoint=p['candidate_endpoint'],
                 candidate_height_verified=p['descent_status']=='operator_accepted_open_claw_descent',
-                grip_method='existing staged ReferenceGrip',grip_target_e1_mm=3.9 if accepted_grip(p) else 3.7,
+                grip_method='two-speed (approach10, final1mm at5) ReferenceGrip',grip_target_e1_mm=3.9 if accepted_grip(p) else 3.7,
                 automatic_lift_enabled=False,full_pickup_verified=False,
                 blocker='' if p['descent_status']=='operator_accepted_open_claw_descent' else
                     '48-well gripping height needs an open-claw trial and visual acceptance.')

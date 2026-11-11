@@ -10,7 +10,10 @@ from trajectory_queue import LuaTrajectory, prepare_points
 
 class ReleaseTests(unittest.TestCase):
     stop = fixture.SquidHandlingTests.stop
-    jaw = fixture.SquidHandlingTests.jaw
+    def jaw(self,target,speed):
+        self.assertEqual(speed,10 if target==4.9 else 5)
+        self.s.grips.append(target);self.e1=target
+        return dict(ok=True)
 
     def setUp(self):
         fixture.SquidHandlingTests.setUp(self)
@@ -58,6 +61,29 @@ class ReleaseTests(unittest.TestCase):
         self.run.start('release',release.execute,self.s,self.cfg,plan)
         with self.assertRaisesRegex(Exception,'did not settle'):
             self.run.finish()
+        self.assertFalse(self.s.robot.calls)
+
+    def test_pickup_uses_fresh_approach_and_slow_lift(self):
+        _,receipt,_,_=release.reference()
+        self.e1=7;receipt['final_robot']['external_axes']['E1']=7
+        with patch.object(release.taught,'OUTPUT',Path(self.temp.name)/'forward.json'):
+            path=release.taught.output_path(False,'approach');path.write_text(json.dumps(receipt))
+            # Geometry reference remains identical; its default receipt is only used for route validation.
+            release.taught.OUTPUT.write_text(json.dumps(receipt))
+            plan=release.review(self.s,self.cfg,'pickup','approach','pickup')
+            self.run.start('pickup',release.execute,self.s,self.cfg,plan)
+            result=self.run.finish()
+            self.assertTrue(result['ok'],result);self.assertTrue(result['loaded_home'])
+            self.assertEqual(self.s.grips,[4.9,3.9])
+            self.assertEqual([x[1] for x in self.s.robot.calls],[5,137,137,137])
+            with self.assertRaisesRegex(Exception,'already attempted'):
+                release.review(self.s,self.cfg,'pickup','approach','pickup')
+
+    def test_pickup_requires_fresh_binding_and_rejects_invalid_record_id(self):
+        with self.assertRaisesRegex(Exception,'fresh handling'):
+            release.review(self.s,self.cfg,'fresh',None,'pickup')
+        with self.assertRaisesRegex(Exception,'record ID'):
+            release.output_path('../escape')
         self.assertFalse(self.s.robot.calls)
 
 

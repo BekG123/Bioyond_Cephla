@@ -7,7 +7,7 @@ from scope_compact137 import HoldingService
 from squid_48well_endpoint_trial import check_route
 from squid_48well_higher_route import reference,SHA
 from trajectory_queue import LuaTrajectory,travel_program_blocker
-from pick_and_hold.Grip.fast_position_plan import plan_closure
+from gripper_closure import POLICY, closure_plan
 from squid_48well_handling import settings as handling_settings
 
 FOLDER=ROOT/'operator_ui/reports/projected_alignment'
@@ -45,11 +45,11 @@ def review(service,cfg,stop_before_release=False):
     selected=phases()[:2] if stop_before_release else phases()
     for _,phase,start,points,_ in selected:
         q=check_route(start,points,q,cfg,service.envelope,phase)
-    return dict(candidate_sha256=SHA,phases=selected,e1=e1,joints=state['joints'],envelope=plan['envelope'],handling=handling_settings(),stop_before_release=stop_before_release)
+    return dict(closure_policy=POLICY,candidate_sha256=SHA,phases=selected,e1=e1,joints=state['joints'],envelope=plan['envelope'],handling=handling_settings(),stop_before_release=stop_before_release)
 
 def execute(run,service,cfg,approved):
     fresh=review(service,cfg,approved.get('stop_before_release',False))
-    if fresh['phases']!=approved['phases'] or fresh['handling']!=approved['handling'] or abs(fresh['e1']-approved['e1'])>.05:
+    if fresh['closure_policy']!=approved.get('closure_policy') or fresh['phases']!=approved['phases'] or fresh['handling']!=approved['handling'] or abs(fresh['e1']-approved['e1'])>.05:
         raise TransferError('Reviewed trial changed.')
     if any(abs(fresh['joints'][k]-approved['joints'][k])>.5 for k in fresh['joints']):
         raise TransferError('Starting joints changed.')
@@ -93,16 +93,16 @@ def execute(run,service,cfg,approved):
                 record['open_at_home_settled_mm']=held;save()
             if name=='loaded_lift':
                 near(service.pose_mm(),start,.05)
-                commands=[s for s in plan_closure(opening)['commands'] if s['target_e1_mm']>=grip]
+                commands=closure_plan(opening,grip)['commands']
                 if not commands or commands[-1]['target_e1_mm']!=grip:raise TransferError('Unexpected grip plan.')
                 for command in commands:
-                    if run.stopped():raise TransferError('Stopped before grip increment')
+                    if run.stopped():raise TransferError('Stopped before grip closure')
                     preflight(HoldingService(service,held,fresh['envelope']))
                     near(service.pose_mm(),start,.05)
-                    step=dict(target=command['target_e1_mm'],speed=5);record['grip_steps'].append(step);save()
-                    response=service.move_gripper(step['target'],5);step['response']=response;save()
+                    step=dict(target=command['target_e1_mm'],speed=command['speed']);record['grip_steps'].append(step);save()
+                    response=service.move_gripper(step['target'],step['speed']);step['response']=response;save()
                     if not response.get('ok') or response.get('recovered') or response.get('gripper_warning'):
-                        raise TransferError('Grip increment uncertain; no retry.')
+                        raise TransferError('Grip closure uncertain; no retry.')
                     deadline=time.monotonic()+GRIP_SETTLE_SECONDS;stable=0
                     tolerance=.05 if step['target']==grip else .03
                     step.update(settling_tolerance_mm=tolerance,settling_samples=[])

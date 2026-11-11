@@ -1,3 +1,13 @@
+**2026-11-11 direct HOME/Squid round trip accepted:** Exact reverse queue completed with slow Squid departure5, travel137 and final HOME seating5. Operator confirmed secure return and supported plate. Released toE1=28 and raised empty30 without faults; final X312.01/Y-65.48/Z103.723/Rz89.77. Installed `home-squid-direct-roundtrip-v1`. No release at Squid was tested. Evidence: `operator_ui/reports/plate_session/home_squid/roundtrip_operator_success_20261111.json`.
+
+**2026-11-11 direct HOME to Squid success (operator confirmed):** Restored released holder from90.667 to1.774 degrees; reused accepted +Y10.4 long-side endpoint, existing staged grip3.9 and5 mm proof lift at5. New route rises at pickup XY toZ291.24, crosses viaX354/Y270/Rz49.02, then uses the accepted November8 Squid endpoint X223.941/Y373.759/Z266.768/Rz88.34. One mixed-speed Lua queue [137,137,137,5], no IDLE stop. Controller completed without faults; operator confirmed secure travel, flat supported seating and free jaws. Jaws remain closed; no release.45 focused offline checks passed. Receipt: `operator_ui/reports/plate_session/home_squid/edb64dd55d6642aa9c35a02320e6ffc0.json`.
+
+**2026-11-11 five Hamilton handling cycles successful (operator confirmed):** All25 phases completed, no reported faults; plate released in HOME, empty jaws28, clearanceZ104.37. Operator confirmed all five releases stayed flat and all pickups/transfers remained secure without slipping. Acceptance saved alongside the batch as `operator_success.json`. Batch: `operator_ui/reports/plate_session/hamilton_dropoffs/batch_cc1d25096a4c4953b3015d19d21422dc/run.json`.
+
+**2026-11-11 Hamilton retrieval accepted:** Empty approach at E1=28, short-side grip25, exact revision04 loaded reverse, HOME reseating and release28/empty rise30 completed without faults. Operator confirmed secure retrieval and supported HOME seating. Evidence: `hamilton_dropoffs/1e669fcdfa164196b7ee8099d1d7aa2a.json`, `22ab342aa83d4762b30f1990ea5a44bd.json`, `retrieval_operator_success.json`. Installed skill `home-hamilton-dropoff-retrieval-v1`; five full handling cycles now requested. Ten focused offline checks passed.
+
+**2026-11-11 short-side Hamilton delivery/release success:** HOME pickup at E1=25, accepted revision04 forward queue (travel137/final descent5), supported Hamilton release to28, then the exact reverse queue empty and30 mm HOME clearance all completed without controller faults. Operator confirmed plate supported before release and flat/jaws clear afterward. Final HOME X306.20/Y-62.88/Z104.37/Rz87.88, E1?28. Plate remains at Hamilton site4. Hamilton retrieval has not been tested in this new short-side workflow. Evidence: `operator_ui/reports/plate_session/hamilton_dropoffs/trial_6a44c3894b9143fe851cf1384e4c39ea_observations.json`. Six offline checks passed.
+
 # Squid — 20 October 2026
 
 Operator accepted drop-off, empty return, pickup, and loaded return.
@@ -104,3 +114,85 @@ The first live routine reached Hamilton Z38.61/E1≈3.70, then waited before jaw
 - The optional `operator_ui/squid_bridge/launch.py` add-on captures the selected Squid GUI settings on its Qt thread and checks them again before starting. Shipped Squid files remain unchanged; Python Exec stays disabled. Unsupported focus maps/offsets are reported rather than omitted.
 - Settings, imaging IDs, results and failures go to `reports/autonomous_squid/<run>/workflow.json` with a settings YAML. Failed/uncertain jobs stop progression; Stop targets only the owned acquisition. The arm stays reserved during imaging and retrieval waits for the microscope's loading-position feedback.
 - Offline planner/Lua, Qt add-on and browser tests passed. No real arm motion or native imaging run was started for this change. The operator is away: Squid and Flask were not restarted; loading and the complete physical trial remain pending.
+
+
+## 2026-11-10 HOME holder exchange trial
+
+### Revised full-calibration finish (software update; not a physical trial)
+
+- Superseding request: grip, lift 5 mm at speed 5, lower back 5 mm at speed 5, open E1 to 28 mm while seated, then raise the EMPTY arm 30 mm at speed 137. No final IDLE travel or automatic holder rotation.
+- Implemented in `operator_ui/pickup_holder.py` and connected to the full-calibration workflow, Lacry plan text, manifest and saved skills. Session completion is recorded only after the empty clearance phase verifies.
+- 91 focused offline checks passed. Failed reseating inhibits release; failed/uncertain opening inhibits the fast rise. Idle console reloaded without hardware motion; Lacry status returns normally.
+- At this implementation checkpoint, the active-profile grip binding was missing; resolved by the later confirmed long-side binding entry below. The exact revised physical finish and destination rotation/re-grip remain untested.
+
+### Earlier supervised trial (preserved)
+
+- First calibration stopped before travel: E2 -1.629 deg exceeded the 2-degree correction bound. Operator restored E2 and explicitly requested the fresh retry; preserve both receipts.
+- Unchanged accepted 48-well calibration/alignment/descent, E1=3.9 grip, 5 mm proof lift and loaded IDLE return completed without faults. The reverse holder-return route passed IK/workspace checks and seated at Z73.714; operator confirmed plate fully supported and jaws clear.
+- Released to E1=7, lifted 5 mm at speed 5, then opened to 28. Final TCP X312.010/Y-65.478/Z78.714/Rz89.765; E1=28.006 mm, E2=1.771 deg, no faults. No holder rotation.
+- Final visual acceptance, near-holder rotation/re-grip and automatic Lacry integration remain pending. The larger E2 restoration request needs the dedicated checked rotation path, not removal of the small-correction bound.
+- Evidence: `operator_ui/reports/squid_48well_approach/calibration_home_exchange_retry01_20261110/`. Executors: `home_exchange_holder_trial.py`, `home_exchange_clearance_trial.py`; eight offline failure-inhibition checks passed.
+# 2026-11-10 — Confirmed long-side grip binding
+
+- Operator confirmed the +Y10.4 mm correction and requested linking the successful grip evidence. Saved the name **48-well long-side alignment at HOME** in the active pickup profile and machine manifest.
+- X312.012418 / Y-65.477905 / Rz89.765219; alignment hover Z300, gripping endpoint Z73.718 mm. E1=3.9 mm, closing speed 5; coordinates and motion settings unchanged.
+- Linked the recorded November 10 descent, grip, 5 mm lift and loaded IDLE return to `operator_ui/reports/projected_alignment/long_side_y104_acceptance_20261110/accepted_grip_binding.json`. Original logs and pre-binding profile preserved. This is retrospective acceptance, not a new physical trial.
+- The new reseat/open-28/empty-rise-30 calibration finish and holder rotation retain their separate pending physical-validation status. No hardware movement for this binding update.
+- Verification: live projected-pickup endpoint accepts the binding and reports E1=3.9; calibration/holder readiness accepts it. 49 focused offline tests passed (pickup, workflow, holder finish, E2). Updated the workflow test fixture to supply simulated E2 feedback; production E2 checks unchanged.
+
+## 2026-11-10 — Revised calibration finish, first live trial
+
+- Empty arm returned to IDLE X289.97/Y62.63/Z248.02/Rz-3.88. Following an idle connection loss before calibration dispatch, reconnected and verified the unchanged pose before a fresh plan; no fault reset or uncertain motion replay.
+- Calibrate, long-side Align, Descend, Grip3.9, Lift5 at speed5, Reseat5 at speed5, Release28, and empty Rise30 at speed137 all completed through Lacry with no controller errors. E2 verified at 1.771 degrees.
+- Final measured X312.01/Y-65.48/Z103.72/Rz89.77, E1=28.00014 mm. Controller sequence succeeded; operator visual confirmation of plate seating remains pending. Destination rotation, re-grip and Hamilton/Squid travel were not attempted.
+- Evidence: `operator_ui/reports/pickup_holder/full_calibration_finish_trial_20261110.json`, linking all four new finishing-stage receipts. This supersedes the earlier "no physical trial" status for the ending only; it does not commission the remaining holder exchange.
+
+## 2026-11-10 — Two-cycle IDLE/full-calibration repeat
+
+- Operator reduced the requested ten repeats to two total. Both performed IDLE first, then Calibrate/Align/Descend/Grip3.9/Lift5/Reseat/Release28/empty Rise30 through the existing Lacry workflow. No destination rotation or Hamilton/Squid travel.
+- Cycle 1 completed physically but the batch observed a brief `active=false, ok=null` gap before Lacry's completion callback. It stopped without another move. Fresh final receipt, endpoint and terminal success verified the completed cycle; the original failure record is retained and cycle 1 was not replayed.
+- Batch runner now waits up to ten seconds for that terminal status to publish, without retrying motion. Seven offline checks pass. Cycle 2 completed normally; both final controller results show no faults. Visual plate-retention/seating observations are not inferred from telemetry.
+- Combined evidence: `operator_ui/reports/pickup_holder/2_cycles_6648f312eff840e8b198c447191bd8e7/run.json` (2/2 complete), referencing the original interrupted reporting record. Final arm remains at HOME clearance with jaws open to 28 mm.
+
+
+## 2026-11-11 ? Two-speed grip and combined CLI: accepted live run
+
+- Grip approaches at speed 10 to target + 1 mm, then finishes at speed 5: long-side 4.9 ? 3.9 mm; short-side 26 ? 25 mm. Opening, travel speeds, routes and fault/arrival checks unchanged. No Lua republish.
+- Fresh IDLE/full calibration ? Hamilton delivery, release, empty HOME return, retrieval and HOME release ? Squid delivery, release, empty HOME return, retrieval and HOME release completed in 350.7 seconds without reported controller faults.
+- Operator confirmed: ?Yes?all pickups and releases were good.? Final HOME clearance X312.009/Y?65.480/Z103.720/Rz89.770; E1=28.0014 mm. Plate released in HOME.
+- Evidence: `operator_ui/reports/plate_session/continuous_grip_handling_7be41e1ef6f54581b4802c58b1ba678a/` (`run.json`, `summary.json`, `operator_acceptance.json`). Calibration receipt: `calibration_hamilton_c83e3ac2df4047c1b3ede141db88d078/calibration_1.json` under the same plate-session reports root.
+- Previous single-speed attempt remains failed: closure readback mismatch followed by E2 servo fault 0x3230. Speed was already 5; cause was not established. Operator reset and confirmed plate supported before this new attempt; no automatic reset/retry.
+- CLI: `operator_ui/run_plate_workflow.py --full-calibration --home-to-hamilton-roundtrip --home-to-squid-roundtrip --execute`. Flags can be selected individually; omit `--execute` to preview. Reuses existing executors and fresh evidence, with no instrument experiment/imaging. Focused closure, route and CLI tests passed.
+
+
+## 2026-11-11 - Windows run-log replacement failure
+
+- Batch `continuous_grip_handling_115c2267c613480a8a52bdfa13025183` stopped in cycle 1 during Hamilton pickup because Windows denied replacing `run.tmp` with `run.json`; zero complete handling cycles. A later save succeeded, consistent with a temporary file lock; the holding process is unknown. Original motion/failure receipts preserved.
+- Both workflow and calibration/IDLE CLI writers now use the existing Windows-safe atomic replacement helper with unique temporary files and bounded file-only retries (0.7 seconds total wait). Permanent failures still stop; no motion command is retried. Invalid numeric feedback is retained as explicit evidence without modifying live telemetry.
+- 36 offline tests passed, one integration test skipped, including real Windows lock contention. No arm movement or automatic resume. See `logging_failure_diagnosis.json` in the failed batch folder.
+
+
+## 2026-11-11 - Five combined handling cycles accepted
+
+- Batch `continuous_grip_handling_1b0d4dc9cc984d47bab9138889191f5b`: one calibration, then 5/5 Hamilton and Squid drop-off/retrieval cycles completed. Operator confirmed success; acceptance is saved beside `run.json`.
+- Qualification: the plate drops slightly/audibly during HOME release. Operator requested a slightly lower seating endpoint. Do not describe these releases as perfectly seated; correction amount and affected HOME returns are being confirmed. Original pickup geometry and run evidence retained.
+
+
+## 2026-11-11 - HOME seating refinement loaded; live trial pending
+
+- Operator selected 1 mm lower on both returns. Before HOME release, retain the grip and lower at speed 5: Hamilton Z74.37 -> 73.37; Squid Z73.72 -> 72.72 mm. Verify arrival, open to28, then rise to the original clearance. Pickup profiles, travel queues and calibration finish unchanged.
+- Applied to Hamilton drop-off/retrieval and original holder round-trip, plus direct/handling Squid HOME release. Failed lowering prevents opening or retreat; the new target/speed are bound into each preview.
+- 69 offline tests passed. Console loaded without arm motion; physical seating acceptance pending. Prior five-cycle success remains qualified by the reported slight drop. Evidence: `operator_ui/reports/plate_session/home_seating_adjustment_22090a2a618b454b830f4fd7ce3ca743.json`.
+
+
+## 2026-11-11 - Continuous HOME seating descent
+
+- Supersedes the separate extra 1 mm motion: operator reported its pause and requested one continuous descent. Hamilton and Squid retrieval/return now descend from the 5 mm proof height directly to the 1 mm-lower seating endpoint, one 6 mm command at speed 5. No intermediate target at the old seating height. HOME release only opens after verified arrival, then rises empty.
+- Pickup geometry, final release heights (Hamilton Z73.37 / Squid Z72.72), and travel routes unchanged. Updated Hamilton holder round-trip and both direct/handling Squid returns; old in-progress seating receipts cannot silently trigger an extra move.
+- 71 offline checks passed; host reloaded without arm movement. Physical smoothness/seating acceptance pending. Evidence: `operator_ui/reports/plate_session/continuous_home_seating_95385f08ddd243e8a2e8a304d9de5d6e.json`.
+
+
+## 2026-11-11 - Continuous HOME seating accepted
+
+- Operator confirmed the new workflow successful after one complete Hamilton/Squid handling cycle; controller logs show 1/1 completed. Both HOME returns use the continuous descent to the 1 mm-lower seat at speed 5, followed by release.
+- Evidence: `operator_ui/reports/plate_session/continuous_grip_handling_144cd4486087457e90ae550b304aa3ee/run.json` and its `operator_acceptance.json`. This supersedes the preceding pending-trial note; it does not relabel failed or earlier separate-move trials.

@@ -23,6 +23,8 @@ from lacry_backend import LABELS
 from station_handling import RULES as STATION_HANDLING_RULES, station_plan
 from lacry_memory import GUIDANCE as MEMORY_GUIDANCE
 from lacry_decision_log import DecisionTrace
+from plate_session import (RULES as PLATE_SESSION_RULES, legacy_text, public_labels,
+                           preview as plate_session_preview, setup_digest, CalibrationSession)
 
 PREPARE_LABEL = 'Prepare the controller (Auto, servos on, program started)'
 PREPARE_NOTE = ('The controller will be switched to Auto, its servos enabled and its program '
@@ -77,12 +79,15 @@ clearly asking for technical detail.
 ## What you can do
 
 - **Run Full Calibration** — the plate pickup chain as one sequential
-  operation: calibrate the two-disk plate, align to it, lower onto it, and
-  close the gripper to the accepted 3.7 mm setting, lift 5 mm at speed 5,
-  then immediately return Home using the existing Home route at translation
-  speed 137 (wrist speed 30). There is no separate 25 mm lift and no inspection
-  pause between the slow lift and Home. Use action `full_calibration` for
-  this entire workflow; include the loaded Home corridor in its confirmation.
+  operation: calibrate the 48-well plate using its well grid and verified
+  height reference, align to its accepted placement, lower onto it, and
+  close the gripper to the accepted 3.9 mm setting, lift 5 mm at speed 5,
+  lower those 5 mm at speed 5 into the HOME holder, open E1 to 28 mm,
+  then raise the EMPTY arm 30 mm at speed 137. No return to IDLE and no holder
+  rotation occurs inside full calibration. There is no routine inspection
+  pause between these phases for an unchanged accepted holder setup. Use action
+  `full_calibration` for this entire workflow; include reseating, opening and
+  the empty 30 mm vertical rise in its confirmation.
   Report a single plain-language result at the end.
   For "return Home, then run full calibration", call propose_actions ONCE
   with actions ["move_home", "full_calibration"]. This is one confirmed
@@ -98,9 +103,9 @@ clearly asking for technical detail.
   Full calibration is AUTOMATIC camera-guided pickup using existing saved
   references. It NEVER means a new hand-guided demonstration or manually
   loading the jaws. Manual controller mode alone is not a teaching requirement.
-  The calibration-station Grip uses the accepted staged position closure at
-  speed 5 after the corrected Lua Descent. Torque is recorded, not a force
-  target. The host checks each step and stops on fault, uncertain completion
+  The calibration-station Grip uses a two-speed position closure to the accepted endpoint:
+  approach at speed10, then the final1mm at speed5 after the corrected Lua Descent. Torque is recorded, not a force
+  target. The host checks final arrival and stops on fault, uncertain completion
   or operator Stop. Never silently retry or claim plate retention from encoder
   positions alone. Squid drop-off and retrieval are validated components of the
   single-confirmation plan_squid_experiment workflow; they can also run separately.
@@ -440,7 +445,7 @@ self calibrate AND arm full calibration" means commands
 ["hamilton_self_calibration", "arm_full_calibration"]. "Chain" means sequential
 execution with verified completion between commands, not simultaneous motion.
 Hamilton initialization, self-calibration and full calibration can be placed before
-or after arm full calibration. The arm routine includes pickup, slow lift and Home;
+or after arm full calibration. The arm routine ends with the plate released at HOME and the empty arm raised 30 mm;
 include it once, starting empty. One Yes covers the complete batch. Do not call
 plan_hamilton and propose_actions separately: they replace the pending plan, and
 would lose part of the request. Do not require a dispensing recipe for maintenance.
@@ -480,7 +485,7 @@ TOOLS = [
              arm_calibration=dict(type='boolean',description='True when the researcher requests arm calibration/pickup once. Preserve this step in the combined preview.'),
              tip_site=dict(type='integer',minimum=1,maximum=8),tip_labware_id=dict(type='integer')),
              required=['pair_count','hamilton_calibration','arm_calibration'],additionalProperties=False)),
-    dict(name='plan_command_batch',description='Compose Hamilton maintenance and arm full calibration as one ordered batch with one confirmation. Preserves all commands and waits for verified completion; no hardware writes while planning. Arm full calibration includes pickup and return Home and may occur once. Use this for combined Hamilton self-calibration AND arm full calibration, not separate plans.',
+    dict(name='plan_command_batch',description='Compose Hamilton maintenance and arm full calibration as one ordered batch with one confirmation. Preserves all commands and waits for verified completion; no hardware writes while planning. Arm full calibration includes proof lift, reseating/release at HOME and empty 30 mm rise, and may occur once. Use this for combined Hamilton self-calibration AND arm full calibration, not separate plans.',
          input_schema=dict(type='object',properties=dict(commands=dict(type='array',minItems=1,maxItems=10,items=dict(type='string',enum=['hamilton_initialize','hamilton_self_calibration','hamilton_channel_calibration','hamilton_full_calibration','arm_full_calibration']))),required=['commands'],additionalProperties=False)),
     dict(name='get_hamilton_status',description='Read the physical Hamilton Prep connection, initialization, current run, errors, maintenance, saved protocols and API prompts. No movement.',
          input_schema=dict(type='object',properties={},additionalProperties=False)),
@@ -572,6 +577,23 @@ TOOLS = [
 ]
 
 
+# Only the model-facing contract is renamed. Signed routes, controller jobs and
+# developer APIs still use their historical Home key for the IDLE parking pose.
+SYSTEM = legacy_text(SYSTEM).replace('move_home', 'move_idle') + '\n' + PLATE_SESSION_RULES
+for _tool in TOOLS:
+    _tool['description'] = legacy_text(_tool['description']).replace('move_home', 'move_idle')
+    if _tool['name'] == 'propose_actions':
+        _tool['input_schema']['properties']['actions']['items']['enum'].append('move_idle')
+TOOLS.append(dict(name='plan_plate_session',
+    description='Preview once-per-session calibration ending with a 5 mm proof lift, reseating, release to 28 mm and empty 30 mm rise, followed by destination-specific orientation and re-grip. Hamilton uses absolute E2 90.717 degrees. Squid retains the original angle. This near-holder rotation awaits a supervised clearance trial; no motion is started.',
+    input_schema=dict(type='object', properties=dict(first_destination=dict(type='string',enum=['Hamilton','Squid'])),
+                      required=['first_destination'], additionalProperties=False)))
+TOOLS.append(dict(name='begin_plate_session',
+    description='Begin a new calibration session only when the researcher explicitly requests it or reports a changed fixture/setup. Invalidates the calibration receipt and pending plan, but does not reset faults, start hardware or bypass any motion history.',
+    input_schema=dict(type='object',properties=dict(reason=dict(type='string',minLength=1,maxLength=300)),
+                      required=['reason'],additionalProperties=False)))
+
+
 class LacryAgent:
     def __init__(self, backend, credentials, get_runner, client=None, max_tokens=1000,
                  prepare=None, home_return=None, classic_pickup=None, reviewed_home=None, memory=None):
@@ -624,7 +646,7 @@ class LacryAgent:
             else:
                 message+=' I can return Squid to its saved loading position and retrieve the plate to Home. No plate movement has started.'
         self.note(message)
-        self._say('lacry',message)
+        self._say('lacry',legacy_text(message))
         if self.memory is not None and job.get('run_id'):
             self.memory.add('Squid '+event['status'],json.dumps(event),
                 kind='observation',status='observed',source='Squid acquisition monitor',
@@ -666,6 +688,7 @@ class LacryAgent:
         if plan.get('prepare'):
             steps.insert(0, dict(label=PREPARE_LABEL, kind='prepare'))
         return dict(id=plan['id'], summary=plan.get('summary', ''),
+                    location_schema=plan.get('location_schema',1),
                     labels=plan.get('labels', []), requirements=plan.get('requirements', []),
                     executable=plan.get('executable',True),blockers=plan.get('blockers',[]),
                     steps=steps,repetitions=plan.get('repetitions',1),
@@ -698,7 +721,66 @@ class LacryAgent:
             state['running']['active'] = bool((run.active and run.name in ('lacry_plan', 'researcher_home', 'lacry_squid_stage','lacry_roundtrip_step','lacry_squid_retrieval','lacry_hamilton')) or (self.roundtrip is not None and self.roundtrip.active) or (self.retrieval is not None and self.retrieval.active))
         if developer:
             state['model'] = self.credentials.model
-        return state
+        state['plate_session'] = self.plate_session_status()
+        return public_labels(state)
+
+    def plate_session_status(self, robot=None, hand=None):
+        session = getattr(self.classic, 'calibration_session', None)
+        if not isinstance(session, CalibrationSession):
+            return dict(calibrated=False, reason='No session calibration receipt is available.')
+        if robot is None:
+            service = getattr(self.backend, 's', None)
+            if service is not None:
+                try:robot = service.status()
+                except Exception:
+                    session.invalidate('Robot feedback unavailable; recheck the setup.')
+        if hand is None and getattr(getattr(self.backend, 'draggo', None), 'blocks_motion', False) is True:
+            hand = {'state': 'active'}
+        if isinstance(robot, dict):
+            if not robot.get('connected') or not robot.get('ok') or robot.get('errors'):
+                session.invalidate('Robot connection or fault state changed; recheck the setup.')
+        if isinstance(hand, dict) and hand.get('state') not in (None, 'off'):
+            session.invalidate('Hand-guiding changed the setup; calibration must be rechecked.')
+        try:
+            return session.public(setup_digest())
+        except (OSError, ValueError) as error:
+            session.invalidate('Calibration reference unavailable: '+str(error))
+            return session.public()
+
+    def begin_plate_session(self, reason):
+        """Explicit session renewal only; no motion or fault/history changes."""
+        if not isinstance(reason, str) or not reason.strip() or len(reason) > 300:
+            raise TeachingError('State why a new calibration session is needed.', 400)
+        if self.get_runner().active or getattr(self.get_runner(), 'reserved', False) or self.review:
+            raise TeachingError('Finish or stop the current task before beginning a new session.')
+        if not isinstance(getattr(self.classic, 'calibration_session', None), CalibrationSession):
+            raise TeachingError('The calibration workflow is not configured.')
+        with self.lock:
+            self.classic.calibration_session = CalibrationSession()
+            self.pending = None
+        self.note('New calibration session: '+reason.strip())
+        return dict(ok=True, motion_started=False, session=self.plate_session_status())
+
+    def plan_plate_session(self, first_destination=None, *, home_only=False, request=None):
+        if self.get_runner().active or getattr(self.get_runner(), 'reserved', False):
+            raise TeachingError('Wait for the current lab task to finish.')
+        with self.lock:
+            if self.review:
+                raise TeachingError('Finish the current review first.')
+        # Read status only. No startup, gripper operation, rotation or motion.
+        state = self.backend.state()
+        session = self.plate_session_status(state.get('robot'), state.get('hand'))
+        try:
+            plan = plate_session_preview(first_destination, session, home_only=home_only)
+        except ValueError as error:
+            raise TeachingError(str(error), 400) from error
+        if request:
+            plan['requested_workflow'] = deepcopy(request)
+            plan['blockers'].append('The requested instrument workflow remains pending; this is its holder-preparation preview only.')
+        with self.lock:
+            self.pending = plan
+        self._announce_plan(plan)
+        return deepcopy(plan)
 
     @staticmethod
     def hamilton_routes():
@@ -714,6 +796,7 @@ class LacryAgent:
             return dict(available=False, problem=str(error))
         robot = data.get('robot') or {}
         hand = data.get('hand') or {}
+        self.plate_session_status(robot, hand)
         camera = data.get('camera') or {}
         run = self.get_runner()
         with self.lock:
@@ -760,6 +843,7 @@ class LacryAgent:
         return deepcopy(plan)
 
     def _announce_plan(self,plan):
+        plan = public_labels(plan)
         with self.lock:self.question=None
         text=plan.get('summary') or ', '.join(plan.get('labels',[])) or ', '.join(s['label'] for s in plan.get('steps',[]))
         if plan.get('executable') is False:
@@ -848,6 +932,8 @@ class LacryAgent:
                                  ['move_home', 'plate_calibration', 'align', 'descend', 'grip'])
         pickup = home_first or pickup_actions in (['full_calibration'], ['plate_calibration', 'align', 'descend', 'grip'])
         if pickup:
+            if to_scope and self.classic is not None and getattr(self.classic.transport, 'completion_action', None) == 'Clearance':
+                return self.plan_plate_session('Squid', request=dict(tool='propose_actions', actions=list(actions)))
             if not home_first:
                 self.backend.camera_plate_only(['full_calibration'])
             if self.classic is None:
@@ -861,7 +947,7 @@ class LacryAgent:
                             labels=['Return Home', 'Full Calibration'],
                             home_prefix=prefix,
                             steps=[dict(kind='home_return', label='Return Home')] + plan['steps'],
-                            summary='Return Home, then calibrate, align, descend, grip, lift 5 mm slowly and return Home.')
+                            summary='Return IDLE, then run full calibration, reseat and release the plate at HOME, and raise the empty arm 30 mm.')
                 plan['requirements'] = list(prefix.get('requirements', [])) + [
                     requirement.replace('Start in the camera viewing position (normally saved Home), with both disks visible in Camera View.',
                                         'Both disks must be visible from Home after the initial return.')
@@ -993,7 +1079,7 @@ class LacryAgent:
                 self.run_state=dict(active=False,step=None if ok else 'Return Home',done=['Return Home'] if ok else [],
                     ok=ok,error='' if ok else message,message=message)
             self.note(message)
-            self._say('lacry',message)
+            self._say('lacry',legacy_text(message))
         threading.Thread(target=finished,daemon=True,name='reviewed-home-result').start()
         self.note('Confirmed and started: reviewed Home connection.')
         return dict(ok=True,message=result.get('message','Returning Home.'))
@@ -1007,14 +1093,19 @@ class LacryAgent:
     ]
 
     def _classic_plan(self):
-        """Full Calibration includes the configured pickup and Home stages."""
+        """Full Calibration includes its configured terminal handling stages."""
+        if self.plate_session_status().get('calibrated'):
+            raise TeachingError('Full calibration already completed in this session. Prepare the plate at HOME for its first destination; do not repeat calibration automatically.')
+        requirements = getattr(self.classic, 'requirements', None)
+        if not isinstance(requirements, list):
+            requirements = None
         ready = self.classic.public()
         if not ready.get('can_start'):
             raise TeachingError(ready.get('blocker') or 'The pickup sequence is not available.')
         return dict(actions=['classic_pickup'], labels=['Full Calibration'],
                     dispatch='classic_pickup',
                     steps=[dict(kind='classic', label=label) for label in self.classic.labels()],
-                    requirements=[
+                    requirements=requirements or [
                         'Start in the camera viewing position (normally saved Home), with both disks visible in Camera View.',
                         'The calibration plate is in its taught location and orientation.',
                         'The gripper is empty, the area is clear, and you are supervising the '
@@ -1022,15 +1113,17 @@ class LacryAgent:
                         'Each step runs exactly as its button does in the classic view, including '
                         'the controller preparation it does for itself.',
                         'The plate and holder match the accepted pickup setup.',
-                        'Confirm the upward path, wrist sweep, crossing and lowering to Home are clear.',
-                        'After gripping, the arm lifts 5 mm slowly and immediately returns Home with the claw unchanged.',
+                        'Confirm the upward path, reseating into the holder, jaw opening and empty-arm clearance are clear.',
+                        'After gripping, lift 5 mm at speed 5, reseat at speed 5, open to 28 mm, and raise the empty arm 30 mm at speed 137.',
                     ],
-                    summary='Calibrate, align, descend, grip, lift 5 mm slowly, then return Home.')
+                    summary='Calibrate, align, descend, grip, lift 5 mm, reseat and release at HOME, then raise the empty arm 30 mm.')
 
     def _start_classic(self, plan):
         home_prefix = self._pickup_home_callbacks(plan['home_prefix']) if plan.get('home_prefix') else None
         continuation = None
         if plan.get('scope_continuation'):
+            if getattr(self.classic.transport, 'completion_action', None) == 'Clearance':
+                raise TeachingError('Full calibration now leaves the plate at HOME. Prepare and verify the destination re-grip before loaded station travel.')
             self.backend.verify_pickup_to_scope_plan(plan['scope_continuation'])
             continuation = self._pickup_scope_callbacks(plan['scope_continuation'])
         if not home_prefix:
@@ -1041,7 +1134,7 @@ class LacryAgent:
                                       ok=final.get('ok'), error=final.get('error', ''),
                                       message=final.get('message', ''))
             self.note(final.get('message', 'Pickup finished.'))
-            self._say('lacry', final.get('message', 'Pickup finished.'))
+            self._say('lacry', legacy_text(final.get('message', 'Pickup finished.')))
         with self.lock:
             self.pending = None
             self.run_meta = dict(name='Full Calibration then Squid' if continuation else
@@ -1386,7 +1479,7 @@ class LacryAgent:
                 self.run_state = dict(active=False, step=None, done=done, ok=True,
                                       error='', message=message)
             self.note(message)
-            self._say('lacry', message)
+            self._say('lacry', legacy_text(message))
             return dict(ok=True, done=done)
         except Exception as error:               # noqa: BLE001 — surfaced to the researcher
             message = 'Stopped during ' + current + ': ' + str(error)
@@ -1395,7 +1488,7 @@ class LacryAgent:
                 self.run_state = dict(active=False, step=current, done=done, ok=False,
                                       error=str(error), message=message)
             self.note(message)
-            self._say('lacry', message)
+            self._say('lacry', legacy_text(message))
             run.state = 'stopped' if run.stopped() else 'error'
             return dict(ok=False, error=str(error), done=done)
 
@@ -1464,7 +1557,7 @@ class LacryAgent:
         try:
             result=self.confirm(dict(ready=True,plan_id=plan_id))
             self.note('Displayed plan and requirements confirmed by researcher in chat.')
-            self._say('lacry',result.get('message','Run requested.'))
+            self._say('lacry',legacy_text(result.get('message','Run requested.')))
         except TeachingError as error:
             self._say('lacry',str(error))
             raise
@@ -1507,6 +1600,41 @@ class LacryAgent:
         return name, arguments
 
     def _run_tool(self, name, arguments):
+        """Translate current location names at the model boundary only."""
+        try:
+            if name == 'begin_plate_session':
+                return _json(self.begin_plate_session(arguments.get('reason'))), False
+            if name == 'plan_plate_session':
+                plan = self.plan_plate_session(arguments.get('first_destination'))
+                return _json(dict(ok=True, awaiting_confirmation=False, plan=plan), 18000), False
+            destination = None
+            if name == 'propose_actions':
+                actions = arguments.get('actions') or []
+                if 'move_home' in actions:
+                    if actions != ['move_home']:
+                        raise TeachingError('Use plan_plate_session with the first destination for a HOME holder workflow.')
+                    plan = self.plan_plate_session(home_only=True)
+                    return _json(dict(ok=True, awaiting_confirmation=False, plan=plan), 18000), False
+                # A new calibration-to-destination request must include the
+                # released-plate HOME preparation; old compound actions skip it.
+                if 'full_calibration' in actions:
+                    destination = ('Hamilton' if 'move_hamilton' in actions else
+                                   'Squid' if 'move_scope' in actions else None)
+                arguments = dict(arguments, actions=['move_home' if a == 'move_idle' else a for a in actions])
+            elif name in ('plan_squid_experiment', 'plan_lab_roundtrip') and arguments.get('pickup_from_calibration', True):
+                destination = 'Squid' if name == 'plan_squid_experiment' else 'Hamilton'
+            if destination:
+                plan = self.plan_plate_session(destination, request=dict(tool=name, arguments=arguments))
+                return _json(dict(ok=True, awaiting_confirmation=False, plan=plan), 18000), False
+            result, failed = self._run_legacy_tool(name, arguments)
+            if isinstance(result, str):
+                try:result = json.dumps(public_labels(json.loads(result)), ensure_ascii=False)
+                except (ValueError, TypeError):pass
+            return result, failed
+        except TeachingError as error:
+            return _json(dict(ok=False, refused=str(error))), True
+
+    def _run_legacy_tool(self, name, arguments):
         if name=='ask_researcher':
             try:return _json(dict(ok=True,question=self.ask_researcher(**arguments),awaiting_answer=True)),False
             except TeachingError as error:return _json(dict(ok=False,refused=str(error))),True
@@ -1637,7 +1765,9 @@ class LacryAgent:
         run=self.get_runner()
         classic=self.classic.public() if self.classic is not None else {}
         with self.lock:
-            return dict(pending=self._plan_view(self.pending),
+            return dict(location_contract=PLATE_SESSION_RULES,
+                        plate_session=self.plate_session_status(),
+                        pending=self._plan_view(self.pending),
                         question=deepcopy(self.question),
                         review=({'label':self.review['label']} if self.review else None),
                         running=({k:deepcopy(classic.get(k)) for k in ('active','step','done','ok','error','message')}
@@ -1669,7 +1799,7 @@ class LacryAgent:
 
     def _ground_plan_reply(self, reply, proposed=False):
         """A model cannot invent an approval or resume button for a stale plan."""
-        state=self._conversation_state()
+        state=public_labels(self._conversation_state())
         if self.question and not state['pending'] and not proposed:return self.question['text']
         if proposed and state['pending'] and state['pending'].get('executable') is False:
             return state['pending']['summary']+'\nPreview only. '+' '.join(state['pending'].get('blockers',[]))
@@ -1855,8 +1985,12 @@ class LacryAgent:
                    move_hamilton=['move_hamilton'])
 
     def button(self, name):
+        if name == 'move_home':
+            return self.plan_plate_session(home_only=True)
+        if name == 'move_idle':
+            return self.propose(['move_home'], source='button')
         if name == 'automatic_experiment':
-            return self.automatic_workflow().propose('current')
+            return self.plan_plate_session('Squid', request=dict(tool='automatic_experiment', protocol='current'))
         if name == 'rehearse_five':
             return self.plan_transport_rehearsal(5)
         if name == 'full_calibration' and self.classic is not None:

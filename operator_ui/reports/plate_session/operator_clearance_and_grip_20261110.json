@@ -1,0 +1,25 @@
+{
+  "recorded_at_utc": "2026-11-10T12:26:47Z",
+  "kind": "operator_observation_and_requested_grip_reference",
+  "operator_statement": "Btw, the 5 mm rotation clearance is fine, I checked ewith my own eyes. The missing grip acceptance should be 3.9 mm, not sure why it is missing",
+  "holder_clearance": {
+    "lift_mm": 5.0,
+    "operator_visual_clearance_confirmed": true,
+    "motion_performed_in_this_turn": false,
+    "automated_rotation_trial_completed": false
+  },
+  "grip": {
+    "long_side_target_e1_mm": 3.9,
+    "existing_accepted_reference": "Pick and Hold/Grip/accepted_48well_grip_reference.json",
+    "short_side_target_e1_mm_unchanged": 25.0,
+    "active_adjusted_endpoint_acceptance_inferred": false,
+    "note": "The target 3.9 mm already exists. The active +10.4 mm Y pickup profile lacks an accepted grip-to-endpoint evidence binding; a target confirmation does not establish a new successful physical pickup at that endpoint."
+  },
+  "requested_plan": {
+    "first_destination": "Hamilton",
+    "process_order": ["PCR_or_confirmed_mock", "Squid_imaging"],
+    "repetitions": 5,
+    "initial_arm_calibration_complete": false,
+    "motion_authorized_by_this_plan_review": false
+  }
+}

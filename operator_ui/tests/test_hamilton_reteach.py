@@ -46,6 +46,29 @@ class ReteachTests(unittest.TestCase):
                 trial.review(self.s,self.cfg,reverse=True)
         self.assertFalse(self.s.robot.calls)
 
+    def test_fresh_repeat_records_preserve_history_and_bind_return(self):
+        self.s.external_axes=lambda:{'E1':self.e1}
+        with patch.object(trial,'OUTPUT',Path(self.temp.name)/'legacy.json'):
+            approved=trial.review(self.s,self.cfg,trial_id='repeat_a')
+            self.run.start('forward_a',trial.execute,self.s,self.cfg,approved)
+            self.assertTrue(self.run.finish()['ok'])
+            saved=trial.output_path(False,'repeat_a').read_bytes()
+            with self.assertRaisesRegex(Exception,'already attempted'):
+                trial.review(self.s,self.cfg,trial_id='repeat_a')
+            approved=trial.review(self.s,self.cfg,True,'return_a','repeat_a')
+            self.run.start('return_a',trial.execute,self.s,self.cfg,approved)
+            self.assertTrue(self.run.finish()['ok'])
+            approved=trial.review(self.s,self.cfg,trial_id='repeat_b')
+            self.run.start('forward_b',trial.execute,self.s,self.cfg,approved)
+            self.assertTrue(self.run.finish()['ok'])
+            self.assertEqual(trial.output_path(False,'repeat_a').read_bytes(),saved)
+            self.assertFalse(self.s.grips)
+
+    def test_repeat_ids_cannot_escape_record_folder(self):
+        for value in ('../escape','C:/escape','x/y','',123):
+            with self.subTest(value=value),self.assertRaisesRegex(Exception,'record ID'):
+                trial.output_path(False,value)
+
     def test_rejects_changed_points_settings_or_unreviewed_flag(self):
         path=trial.reference()['routes']['forward'];points=deepcopy(path[1:])
         points[-1]['X']+=.01

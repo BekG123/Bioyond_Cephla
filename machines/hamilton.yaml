@@ -1,0 +1,204 @@
+schema_version: 1
+id: hamilton_prep
+name: Hamilton Prep
+kind: liquid_handler
+summary: >
+  Hamilton Prep with two Y-driven channels (rear = channel 1, front = channel 2) and a
+  DCG plate gripper tool that carries a 48-well plate between the Prep and the Bioyond
+  arm. The gripper cannot yet release a plate reliably, so no round trip has completed.
+  Treat every operation that holds or releases a plate as blocked until the tool is
+  inspected or replaced.
+
+identity:
+  vendor: Hamilton
+  model: Prep
+  serial: PRPGJ2494
+  software:
+    MLPrep: 4.5.14.740
+    NGC: 2.2.6.260
+
+connection:
+  exclusive_clients: true
+  exclusive_note: >
+    Operations are serialized with a lock file (reports/hamilton_api/dcg48_execution.lock)
+    and an ownership marker (reports/hamilton_api/active.json). While the marker exists
+    the console refuses new Hamilton operations. Never delete it to make a test pass.
+  paths:
+    - name: rest
+      transport: rest
+      address: http://192.168.100.101/NimbusLite/api/v1
+      purpose: Status, connectivity and readiness checks.
+      implemented_in: operator_ui/hamilton_prep.py
+    - name: tcp
+      transport: tcp_binary
+      address: 192.168.100.102:2000
+      purpose: Firmware commands through the pinned PyLabRobot toolkit (PrepDriver).
+      implemented_in: operator_ui/tmp/prep-jog-audit
+
+frames:
+  prep_deck_mm:
+    units: mm
+    notes: >
+      Channel roots are Ngc. Y drives 1025:1:515 = rear (channel 1, +Y outward) and
+      1026:1:515 = front (channel 2, -Y outward). Jaw spacing = rear Y - front Y.
+  y_drive_counter:
+    units: mm
+    notes: >
+      The firmware position counter mirrors the encoder during a move and is overwritten
+      with the commanded target at move end. Arrival reported by the counter is not
+      evidence of travel; compare with EncoderPosition.
+
+locations:
+  - name: dcg_dock
+    frame: prep_deck_mm
+    coordinates: {x: 289.41, y_rear: 295.8, y_front: 260.8}
+    tolerance_mm: 0.5
+    status: operator_confirmed
+    source: operator_ui/return_dcg_tool_guarded.py DOCK (2026-11-08 return)
+    notes: Dock needs the jaws about 35 mm apart (encoder spacing 35.5-39.7 mm).
+  - name: park_bare_channels
+    frame: prep_deck_mm
+    coordinates: {x: 289.29, y_rear: 414.50, y_front: 394.50, z: 200.0}
+    status: verified
+    source: reports/hamilton_api/bare_park_*.jsonl (2026-11-09 park, PrepIsParked true)
+
+labware:
+  - name: 48-well plate
+    notes: Carried in the DCG gripper. Release mechanics not yet reliable.
+
+limits:
+  y_step_per_jaw:
+    value: 0.5
+    units: mm
+    source: encoder_opening_test.py STEP
+    enforced_in: operator_ui/encoder_opening_test.py (MoveYStep.build_parameters)
+  y_move_velocity:
+    value: 1
+    units: mm/s
+    source: encoder_opening_test.py (MoveYRelative payload)
+  y_guard_window:
+    value: 4.0
+    units: mm
+    source: encoder_opening_test.py HARD_Y
+    enforced_in: operator_ui/encoder_opening_test.py
+  dock_spacing_band:
+    value: [35.5, 39.7]
+    units: mm
+    source: return_dcg_tool_guarded.py SPACING
+    enforced_in: operator_ui/return_dcg_tool_guarded.py
+  supervised_xz_speed_scale:
+    value: 5
+    source: park_bare_channels.py and return_dcg_tool_guarded.py
+  host_abort_latency:
+    value: 2.1
+    units: s
+    source: Findings 2026-11-09. MethodAbort takes about 2.1 s to reply; plan stops with that delay in mind.
+
+operations:
+  - name: get_status
+    description: >
+      Connectivity, initialization, door, enclosure, parked, tool held, plate held,
+      Y-drive status (initialized, position, encoder, home sensor), pending errors.
+    risk: read_only
+    timeout_s: 5
+    on_timeout: requery_state
+    implemented_by: operator_ui/hamilton_prep.py plus park_bare_channels.py preflight
+  - name: park_bare_channels
+    description: Native Park at X/Z speed scale 5 with bare channels. Verifies PrepIsParked, restores scales.
+    risk: motion
+    human_gate: [at the E-stop, door closed, deck clear]
+    preconditions: [initialized, door and enclosure closed, no plate held, channels bare, REST ready]
+    postconditions: [PrepIsParked is true, scales restored, no pending errors]
+    timeout_s: 60
+    on_timeout: abort_and_requery
+    implemented_by: operator_ui/park_bare_channels.py --execute-confirmed
+    notes: Default run is read-only. Leaves active.json in place.
+  - name: return_dcg_tool
+    description: Return the empty DCG tool to its dock while watching both Y-drive encoders.
+    risk: motion
+    human_gate: [at the E-stop, door closed, path clear, jaws empty and pushed closed by hand]
+    preconditions: [encoder spacing within dock_spacing_band, counter equals encoder, no plate held]
+    postconditions: [PrepDropTool done, no tool held on the channels]
+    timeout_s: 120
+    on_timeout: abort_and_requery
+    implemented_by: operator_ui/return_dcg_tool_guarded.py
+  - name: encoder_opening_test
+    description: >
+      Diagnostic. Opens the jaws in 0.5 mm steps and logs position and encoder per drive.
+      A single symmetric step, or a front-only walk, with or without the tool.
+    risk: motion
+    human_gate: [at the E-stop, jaws empty, site clear]
+    postconditions: [result.json and samples.json written, stops at first anomalous step]
+    on_timeout: abort_and_requery
+    implemented_by: operator_ui/encoder_opening_test.py
+    parameters:
+      front_to: Target front-drive Y for a front-only walk.
+      no_tool: Requires bare channels.
+  - name: dcg_plate_transfer_48well
+    description: Carry a 48-well plate in the DCG and release it to the Bioyond arm, then retrieve it.
+    risk: motion
+    human_gate: [at the E-stop, door closed, path clear, plate seated]
+    preconditions: [qualification.dcg_plate_release is qualified, active.json cleared by a person]
+    on_timeout: abort_and_requery
+    implemented_by: operator_ui/hamilton_dcg_transfer.py
+    notes: Blocked. See known_faults dcg_release_slip.
+
+interlocks:
+  - Door closed (DoorClosed) and enclosure present (PrepGetIsEnclosurePresent) polled every 0.25 s during motion.
+  - Unresolved-batch marker active.json (request_id dcg48_repeat_683af88d0e764de8b7a8617903ffd172, status failed_or_uncertain).
+  - Lock file dcg48_execution.lock held for the length of any motion script.
+
+known_faults:
+  - id: dcg_release_slip
+    status: open
+    summary: >
+      With the DCG attached the front jaw slips inward at about 53-60 mm encoder spacing.
+      The same walk with bare channels follows through 85 mm, so the fault follows the
+      tool, not the Y drives or the firmware command. The top metal band linking the
+      paddles is buckled (already buckled before 2026-11-08), which is the candidate and
+      is not proven.
+    affects: [dcg_plate_transfer_48well, encoder_opening_test]
+    evidence: operator_ui/reports/hamilton_api/release_investigation_20261109/Findings.md
+  - id: counter_mirrors_encoder
+    status: mitigated
+    summary: >
+      The firmware position counter mirrors the encoder during a move and is overwritten
+      with the commanded target at the end. Always read EncoderPosition as well.
+    evidence: encoder_opening_test_* results, 2026-11-09
+  - id: jaws_close_by_hand
+    status: open
+    summary: >
+      Stopped drives do not resist. Jaws pushed closed by hand rest at about 35.4-38 mm,
+      so the coordinator Y can be stale after hand movement.
+    affects: [return_dcg_tool]
+    evidence: Observations.md 2026-11-09
+
+recovery:
+  - situation: Any motion times out or the connection drops
+    do:
+      - Re-query status and Y-drive encoders.
+      - Check REST pending errors.
+      - Report the state to the user and wait.
+    never: [resend the move, clear errors without a person confirming, change limits or servo settings]
+  - situation: Tool stuck or plate not released
+    do:
+      - Stop at the first anomalous step; do not retry the same release.
+      - Ask a person to check the jaws by hand and photograph the tool.
+
+qualification:
+  status_read:
+    status: qualified
+    evidence: Used in every preflight on 2026-11-09.
+  park_bare_channels:
+    status: supervised_only
+    evidence: bare_park_*.jsonl, 2026-11-09, parked and verified.
+  return_dcg_tool:
+    status: supervised_only
+    evidence: tool_return_20261110T033021Z, jaws empty and closed by hand.
+  dcg_plate_release:
+    status: blocked
+    blocker: Gripper tool cannot release a plate reliably; zero completed round trips.
+    evidence: Findings.md, release_investigation_20261109
+  dcg_plate_transfer_48well:
+    status: blocked
+    blocker: Depends on dcg_plate_release and on a person clearing active.json.

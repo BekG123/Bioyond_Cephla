@@ -20,6 +20,7 @@ class GridPatternTracker:
 
     def __init__(self, reference, corners, outlines, *, reference_grid=None):
         self.refinement_motion=cv2.MOTION_HOMOGRAPHY
+        self.full_resolution_refinement=False
         self.scale=1200/reference.shape[1]
         self.corners=quadrilateral(corners)*self.scale
         self.outlines={k:np.asarray(v)*self.scale for k,v in outlines.items()}
@@ -84,14 +85,18 @@ class GridPatternTracker:
 
     def refine(self,image,seed,mask):
         aligned=cv2.warpPerspective(image,np.linalg.inv(seed),self.size)
-        small=np.diag([.5,.5,1.])
+        factor=1. if self.full_resolution_refinement else .5
+        small=np.diag([factor,factor,1.])
+        fit_size=self.size if self.full_resolution_refinement else (600,400)
         initial=np.eye(3,dtype=np.float32)
         if self.refinement_motion==cv2.MOTION_AFFINE:initial=initial[:2]
         try:
-            cc,h=cv2.findTransformECC(cv2.resize(self.reference_signal,(600,400)),
-                cv2.resize(self.signal(aligned),(600,400)),initial,
-                self.refinement_motion,(cv2.TERM_CRITERIA_COUNT|cv2.TERM_CRITERIA_EPS,80,1e-6),
-                cv2.resize(mask,(600,400),interpolation=cv2.INTER_NEAREST),5)
+            cc,h=cv2.findTransformECC(cv2.resize(self.reference_signal,fit_size),
+                cv2.resize(self.signal(aligned),fit_size),initial,
+                self.refinement_motion,(cv2.TERM_CRITERIA_COUNT|cv2.TERM_CRITERIA_EPS,
+                    100 if self.full_resolution_refinement else 80,
+                    1e-7 if self.full_resolution_refinement else 1e-6),
+                cv2.resize(mask,fit_size,interpolation=cv2.INTER_NEAREST),5)
         except cv2.error as e:raise DetectionError('Whole-grid registration did not converge.') from e
         if not np.isfinite(cc) or cc<.8:raise DetectionError(f'Weak grid-pattern correlation: {cc:.3f}.')
         if h.shape==(2,3):h=np.vstack([h,[0.,0.,1.]])
@@ -284,6 +289,9 @@ class HeightReferencedGridPattern(AnchoredGridPattern):
             reference_grid=dict(h=grid_h, pitch=pitch,
                                 source='verified source grid mapped to fixed height image'))
         self.anchor.refinement_motion = cv2.MOTION_AFFINE
+        # Retain full ring detail for live same-height fits; keep the frozen
+        # upstream registrations and all consistency/placement gates unchanged.
+        self.anchor.full_resolution_refinement = True
         self.size = self.original.size
         self.anchor_hash = hashlib.sha256(image.tobytes()).hexdigest()
         self.seed_tracker = Tracker(self.anchor.ref, self.anchor.corners,

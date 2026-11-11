@@ -136,6 +136,9 @@ class PickupTests(unittest.TestCase):
         self.assertEqual(len(result['results']),6)
         self.pickup.transport.finish_home.assert_called_once()
         self.assertIn('at Home',result['message'])
+        session = self.pickup.calibration_session.public()
+        self.assertTrue(session['calibrated'])
+        self.assertEqual(session['evidence']['run_id'], self.run.run_id)
 
     def test_failed_lift_blocks_home_and_does_not_retry(self):
         self.enable_transport();self.fail='Lift'
@@ -164,7 +167,28 @@ class PickupTests(unittest.TestCase):
         result=self.finish()
         self.assertFalse(result['ok'])
         self.assertEqual(result['step'],'Return Home')
+        self.assertFalse(self.pickup.calibration_session.public()['calibrated'])
         self.pickup.transport.finish_home.assert_called_once()
+
+    def test_holder_finish_completes_session_only_after_empty_clearance(self):
+        from pickup_holder import PickupHolder
+        self.enable_transport()
+        transport=self.pickup.transport
+        transport.completion_action='Clearance'
+        transport.completion_message=PickupHolder.completion_message
+        def dispatch(action,job):
+            self.calls.append(action)
+            self.assertFalse(self.pickup.calibration_session.public()['calibrated'])
+            return self.run.start(job,lambda run:dict(ok=True))
+        for action,job,_ in PickupHolder.steps[1:]:
+            setattr(transport,'start_'+action.lower(),lambda previous,a=action,j=job:dispatch(a,j))
+        self.pickup.steps=STEPS+PickupHolder.steps
+        self.pickup.start(); result=self.finish()
+        self.assertTrue(result['ok'],result)
+        self.assertEqual(self.calls,['Calibrate','Align','Descend','Grip','Lift','Reseat','Release','Clearance'])
+        transport.finish_home.assert_not_called()
+        self.assertTrue(self.pickup.calibration_session.public()['calibrated'])
+        self.assertIn('plate is in the HOME holder',result['message'])
 
 
 class AgentTests(unittest.TestCase):
@@ -185,12 +209,13 @@ class AgentTests(unittest.TestCase):
         self.backend.compile.assert_not_called()
         self.classic.start.assert_not_called()  # Proposals never move hardware.
 
-    def test_integrated_plan_discloses_slow_lift_and_loaded_home(self):
-        self.classic.labels.return_value=[s[2] for s in STEPS+TRANSPORT_STEPS]
+    def test_integrated_plan_discloses_reseat_release_and_empty_clearance(self):
+        from pickup_holder import PickupHolder
+        self.classic.labels.return_value=[s[2] for s in STEPS+PickupHolder.steps]
         plan=self.agent.button('full_calibration')
-        self.assertEqual(len(plan['steps']),6)
+        self.assertEqual(len(plan['steps']),8)
         self.assertIn('upward path',' '.join(plan['requirements']))
-        self.assertIn('immediately returns Home',' '.join(plan['requirements']))
+        self.assertIn('raise the empty arm 30 mm at speed 137',' '.join(plan['requirements']))
         self.classic.start.assert_not_called()
 
     def test_classic_activity_and_stop_visible_between_jobs(self):
@@ -252,7 +277,7 @@ class AgentTests(unittest.TestCase):
         self.assertTrue(self.agent.run_state['ok'])
         self.assertEqual(self.agent.run_state['message'],'Returned to saved Home.')
         connection.finish.assert_called_once()
-        self.assertEqual(self.agent.transcript[-1]['text'],'Returned to saved Home.')
+        self.assertEqual(self.agent.transcript[-1]['text'],'Returned to saved IDLE.')
 
     def test_failure_reports_actual_stage(self):
         self.backend.execute_step.side_effect=[{'ok':True},{'ok':False,'error':'bad marker'}]

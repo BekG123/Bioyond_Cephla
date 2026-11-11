@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "status": "prepared_pending_orientation_exchange_integration",
+  "selected_supervised_trial_destination": "Hamilton",
+  "locations": {
+    "idle": {"meaning": "Former true Home; camera observation entry and optional parking, not the full-calibration endpoint", "legacy_route_key": "Home"},
+    "home": {"meaning": "Calibration holder; placement, rotation and re-grip station", "single_tcp_pose": false}
+  },
+  "calibration": {"frequency": "once_per_session", "invalidate_on": ["restart", "fault", "disconnect", "hand_guiding", "setup_or_reference_change", "uncertain_grip_or_position"]},
+  "holder_clearance": {
+    "release_before_lift": true,
+    "open_before_lift": true,
+    "lift_mm": 30.0,
+    "lift_speed": 137,
+    "open_axis": "E1",
+    "open_mm": 28.0,
+    "opening_tolerance_mm": 0.1,
+    "lift_tolerance_mm": 0.1,
+    "operator_visual_clearance_confirmed": false,
+    "operator_clearance_record": "operator_ui/reports/plate_session/operator_clearance_and_grip_20261110.json",
+    "verified_rotation_sweep_receipt": null
+  },
+  "destinations": {
+    "Hamilton": {
+      "holder_axis": "E2",
+      "target_degrees": 90.71661229181757,
+      "target_mode": "absolute",
+      "direction_from_original": "counterclockwise viewed from above",
+      "tolerance_degrees": 0.1,
+      "grip_profile": "48well_short_side_corrected02_e1_25",
+      "reference": "Pick and Hold/Grip/short_side_48well_reference.json",
+      "target_e1_mm": 25.0
+    },
+    "Squid": {
+      "holder_axis": "E2",
+      "target_degrees": 1.77,
+      "target_mode": "verify_original_no_rotation",
+      "acceptance_rule": "round(E2, 3) >= 1.769 and E2 <= 1.82",
+      "reference": "operator_ui/e2_reference.json",
+      "grip_profile": "accepted_48well_long_side",
+      "target_e1_mm": 3.9
+    }
+  },
+  "execution": {
+    "commissioned": false,
+    "reason": "Revised full calibration ends with a held 5 mm lift at speed 5, reseating at speed 5, opening to 28 mm, and an EMPTY 30 mm rise at speed 137; no final IDLE travel. This exact revised finish awaits its physical trial. Destination-specific holder rotation and re-grip remain separate and uncommissioned. The earlier 7 mm release/5 mm rise trial remains historical evidence only.",
+    "retry_after_timeout": false,
+    "rotate_with_plate_held": false,
+    "travel_speed": 137,
+    "proof_lift_mm": 5,
+    "proof_lift_speed": 5,
+    "full_calibration_finish": ["proof_lift_5mm_speed5", "reseat_5mm_speed5", "release_e1_28", "empty_rise_30mm_speed137"],
+    "retain_existing_final_approach_speeds": true,
+    "home_seating_trial": "operator_ui/reports/squid_48well_approach/calibration_home_exchange_retry01_20261110/home_holder_seating_trial.json",
+    "home_release_clearance_trial": "operator_ui/reports/squid_48well_approach/calibration_home_exchange_retry01_20261110/home_holder_release_clearance.json",
+    "original_orientation_restore_policy": "Use the existing small calibration correction within its reviewed range. Larger restoration needs the dedicated absolute holder-rotation executor with measured orientation, supported released plate and checked full sweep; do not silently widen the small-correction bound.",
+    "larger_original_orientation_restore_integrated": false
+  }
+}

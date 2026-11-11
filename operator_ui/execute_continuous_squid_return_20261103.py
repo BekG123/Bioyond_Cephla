@@ -11,9 +11,13 @@ from proof_lift_plate import api, near, write
 PLAN=FOLDER/'loaded_return_continuous_lift_z266p81_20261103.json'
 SHA='269694264565a4aef4d9b53a586d80925aa222df2aca7f3fa3d6f1aa84454fb7'
 OUTPUT=FOLDER/'loaded_return_continuous_trial_20261103.json'
+# Shared approach/release/pickup helpers use the new queue. Refuse before motion
+# until 220109 is published; never silently fall back to separate host moves.
+# single_queue=False remains available for an explicit legacy comparison.
+USE_SINGLE_QUEUE=True
 
 
-def main(expected_speeds=(5,137,137,137), vertical_legs=(0,)):
+def main(expected_speeds=(5,137,137,137), vertical_legs=(0,), single_queue=None):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute',action='store_true');args=parser.parse_args()
     if OUTPUT.exists():raise RuntimeError('Already attempted; no replay')
@@ -38,8 +42,16 @@ def main(expected_speeds=(5,137,137,137), vertical_legs=(0,)):
     check(state)
     checked=validate(route,r['joints'],cfg,plan['envelope'])
     assert plan['leg_speeds']==list(expected_speeds) and len(route)==len(expected_speeds)+1
+    queued=USE_SINGLE_QUEUE if single_queue is None else single_queue
+    if queued:
+        from squid_queue_client import preview,execute as execute_queue
+        body,queue_preview=preview(route,plan['leg_speeds'])
     print(json.dumps(dict(route=route,speeds=plan['leg_speeds'],preserved_e1=baseline,execute=args.execute)),flush=True)
     if not args.execute:return
+    if queued:
+        record=execute_queue(body,plan,route,baseline,state,OUTPUT,PLAN,SHA)
+        print(json.dumps(dict(report=str(OUTPUT),status=record['status'],executor='lua_queue_segment_speeds')),flush=True)
+        return
     record=dict(status='started',at=time.time(),plan=str(PLAN),plan_sha256=SHA,route=route,
         speeds=plan['leg_speeds'],source_state=state,validation=checked,steps=[],samples=[],
         authorization=plan.get('operator_intent','Operator requested execution of saved continuous-lift loaded return and confirmed controller ready. Preserve current claws.'),

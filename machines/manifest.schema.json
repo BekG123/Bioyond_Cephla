@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "machine-manifest-v1",
+  "title": "Machine manifest",
+  "description": "Static facts about one lab machine, for an agent that plans experiments. Live state is NOT stored here: it is queried through the status operation. Every non-obvious value should carry a source.",
+  "type": "object",
+  "required": ["schema_version", "id", "name", "kind", "identity", "connection", "operations", "limits", "known_faults", "qualification"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+    "name": {"type": "string"},
+    "kind": {"enum": ["robot_arm", "liquid_handler", "microscope"]},
+    "summary": {"type": "string", "description": "One paragraph the agent can hold in its prompt."},
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "vendor": {"type": "string"},
+        "model": {"type": "string"},
+        "serial": {"type": ["string", "null"]},
+        "software": {"type": "object", "additionalProperties": {"type": "string"}}
+      },
+      "required": ["vendor", "model"]
+    },
+    "connection": {
+      "type": "object",
+      "required": ["exclusive_clients"],
+      "additionalProperties": false,
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "transport", "address"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {"type": "string"},
+              "transport": {"enum": ["tcp_json", "tcp_binary", "rest", "mcp", "other"]},
+              "address": {"type": "string"},
+              "purpose": {"type": "string"},
+              "implemented_in": {"type": "string", "description": "Repo path of the client code."}
+            }
+          }
+        },
+        "exclusive_clients": {
+          "type": "boolean",
+          "description": "True when only one client may talk to the machine at a time. The executor must hold a lease."
+        },
+        "exclusive_note": {"type": "string"},
+        "network_assumption": {"type": "string"}
+      }
+    },
+    "frames": {
+      "type": "object",
+      "description": "Coordinate frames this machine reports in, with units. Positions in different frames must never be mixed.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["units"],
+        "additionalProperties": false,
+        "properties": {"units": {"type": "string"}, "notes": {"type": "string"}}
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "frame", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {"type": "string"},
+          "frame": {"type": "string"},
+          "coordinates": {"type": "object", "additionalProperties": {"type": "number"}},
+          "tolerance_mm": {"type": "number"},
+          "status": {"enum": ["verified", "operator_confirmed", "stale", "unknown"]},
+          "source": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "labware": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {"name": {"type": "string"}, "notes": {"type": "string"}}
+      }
+    },
+    "limits": {
+      "type": "object",
+      "description": "Hard bounds the executor enforces in code. Each entry: value plus where it is enforced.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["value", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "value": {},
+          "units": {"type": "string"},
+          "source": {"type": "string"},
+          "enforced_in": {"type": "string"}
+        }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/operation"}
+    },
+    "interlocks": {"type": "array", "items": {"type": "string"}},
+    "known_faults": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "summary", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string"},
+          "summary": {"type": "string"},
+          "status": {"enum": ["open", "mitigated", "resolved", "suspected"]},
+          "affects": {"type": "array", "items": {"type": "string"}, "description": "Operation names."},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "recovery": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["situation", "do"],
+        "additionalProperties": false,
+        "properties": {
+          "situation": {"type": "string"},
+          "do": {"type": "array", "items": {"type": "string"}},
+          "never": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "qualification": {
+      "type": "object",
+      "description": "What has actually been shown to work. The agent must not plan an operation whose status is blocked or untested without a human gate.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status"],
+        "additionalProperties": false,
+        "properties": {
+          "status": {"enum": ["qualified", "supervised_only", "blocked", "untested", "needs_review"]},
+          "evidence": {"type": "string"},
+          "blocker": {"type": "string"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "operation": {
+      "type": "object",
+      "required": ["name", "risk", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "description": {"type": "string"},
+        "risk": {"enum": ["read_only", "motion", "state_change"],
+                 "description": "read_only sends no write. motion moves hardware. state_change enables, clears errors, or alters configuration."},
+        "human_gate": {"type": "array", "items": {"type": "string"},
+                       "description": "Confirmations a person must give, in their own words, immediately before the call."},
+        "preconditions": {"type": "array", "items": {"type": "string"}},
+        "postconditions": {"type": "array", "items": {"type": "string"}},
+        "timeout_s": {"type": "number"},
+        "on_timeout": {"enum": ["requery_state", "abort_and_requery", "not_applicable"],
+                       "description": "A timeout means unknown state. Never resend."},
+        "implemented_by": {"type": "string", "description": "Script or tool that executes it."},
+        "parameters": {"type": "object", "additionalProperties": {"type": "string"}},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

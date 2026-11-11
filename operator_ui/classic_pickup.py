@@ -23,6 +23,7 @@ import threading
 import time
 
 from researcher_teaching import TeachingError
+from plate_session import CalibrationSession, setup_digest
 
 STEP_TIMEOUT_S = 1200
 POLL_S = 0.25
@@ -45,6 +46,7 @@ class ClassicPickup:
         self.descent, self.grip = descent, grip
         self.get_service, self.get_runner = get_service, get_runner
         self.transport = transport
+        self.calibration_session = CalibrationSession()
         self.steps = STEPS + TRANSPORT_STEPS if transport is not None else STEPS
         self.lock = threading.RLock()
         self.thread = None
@@ -97,6 +99,9 @@ class ClassicPickup:
             if include_pickup and self.transport is not None:
                 self.transport.configuration_ready()
             if include_pickup:self._draft_body()
+            if include_pickup:
+                self.calibration_session.invalidate('A new full-calibration run is starting.')
+                self.calibration_setup = setup_digest()
             self.cancel = threading.Event()
             token = object()
             if not self.get_runner().reserve(token, self.cancel):
@@ -132,6 +137,8 @@ class ClassicPickup:
         return dict(ready=True, draft_id=draft['id'], revision=draft['revision'])
 
     def _dispatch(self, action):
+        if action in ('Reseat', 'Release', 'Clearance'):
+            return getattr(self.transport, 'start_'+action.lower())(deepcopy(self.get_runner().result or {}))
         if action == 'Lift':
             return self.transport.start_lift(deepcopy(self.get_runner().result or {}))
         if action == 'Home':
@@ -235,6 +242,14 @@ class ClassicPickup:
                             run_id=run.run_id, state=run.state, result=deepcopy(run.result),
                             target=deepcopy(run.target), log=deepcopy(run.log)))
                 done.append(label)
+                if self.transport is not None and action == getattr(self.transport, 'completion_action', 'Home'):
+                    # Bind completion to the configured final transport phase,
+                    # never a later experiment/continuation result.
+                    current_setup = setup_digest()
+                    if current_setup != self.calibration_setup:
+                        raise TeachingError('Pickup setup changed during calibration.')
+                    self.calibration_session.complete(run_id=run.run_id,
+                        result={'ok': True}, setup=current_setup)
             if continuation:
                 label = continuation['label']
                 if self.cancel.is_set():
@@ -271,12 +286,15 @@ class ClassicPickup:
                        if self.transport is not None else
                        'Calibration, alignment, descent and grip complete. '
                        'Claw reached the saved setting; inspect the hold before lifting.')
+            if self.transport is not None and isinstance(getattr(self.transport, 'completion_message', None), str):
+                message = self.transport.completion_message
             if continuation:
                 message = continuation['message']
             if completion_message:
                 message = completion_message
             self._note(active=False, step=None, done=done, ok=True,message=message)
         except Exception as error:               # noqa: BLE001 — reported to the researcher
+            self.calibration_session.invalidate('The workflow stopped with an uncertain outcome.')
             detail = str(error)
             if 'disk not detected' in detail:
                 detail = ('Both disks are not visible. Return to the camera viewing position '

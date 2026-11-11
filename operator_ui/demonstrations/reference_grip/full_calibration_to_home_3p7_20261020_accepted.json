@@ -1,0 +1,55 @@
+{
+  "schema": "cephla.operator-accepted-pickup-home.v1",
+  "date": "2026-10-20",
+  "name": "Full Calibration -> Home",
+  "status": "operator_accepted_successful_sequence",
+  "operator_feedback": "Record this as a succesful sequence of Full Calibration -> Home",
+  "physical_pickup_success": true,
+  "plate_retained_during_lift_and_home_operator_confirmed": true,
+  "sequence": [
+    "Calibrate two-disk plate",
+    "Align",
+    "Corrected Descent",
+    "Grip to E1=3.7 mm",
+    "Lift 5 mm at speed 5",
+    "Lift another 25 mm at speed 137",
+    "Lacry IK Return Home"
+  ],
+  "settings": {
+    "pickup_pose_mm_degrees": {"X": 312.575, "Y": -66.2, "Z": 73.718, "Rz": 89.865},
+    "grip_target_e1_mm": 3.7,
+    "grip_speed": 5,
+    "staged_closure_step_mm": [1.0, 0.2, 0.1],
+    "accepted_regrip_openings_e1_mm": [5.0, 7.0],
+    "initial_lift_mm": 5,
+    "initial_lift_speed": 5,
+    "subsequent_lift_mm": 25,
+    "subsequent_lift_speed": 137,
+    "home_translation_speed": 137,
+    "home_wrist_speed": 30,
+    "home_clearance_z_mm": 300,
+    "home_pose_mm_degrees": {"X": 289.97, "Y": 62.63, "Z": 248.02, "Rz": -3.88},
+    "final_e1_mm_approx": 3.7,
+    "controller_errors_at_home": []
+  },
+  "evidence": {
+    "full_calibration_and_grip": "e1_3p7_20261020_result.json",
+    "grip_steps": "917f9536b09c4f04b24b748c59187e97.json",
+    "first_two_speed_lift": "e1_3p7_20261020_two_speed_lift.json",
+    "first_lift_acceptance": "e1_3p7_20261020_lift_acceptance.json",
+    "open5_regrip_lift": "e1_3p7_20261020_replace_regrip_lift.json",
+    "open5_acceptance": "e1_3p7_20261020_replace_regrip_acceptance.json",
+    "open7_regrip_lift": "e1_3p7_20261020_open7_regrip_lift.json",
+    "open7_acceptance_and_home_link": "e1_3p7_20261020_open7_acceptance.json",
+    "home_record_project_relative": "operator_ui/reports/ik_home/1792489133824142000_f1b9ac135e7a4f4bb3ab78beeb0d61b3.json"
+  },
+  "validation_scope": {
+    "protocol": "Supervised sequence with inspection pauses and two replacement/regrip comparison trials before the final loaded Home return.",
+    "single_uninterrupted_full_pipeline_tested": false,
+    "lift_speed_transition": "Two consecutive Lua queue batches with an endpoint stop between speeds.",
+    "force_limits_changed": false,
+    "torque_is_raw_observation_not_force_target": true,
+    "new_automatic_workflow_deployed_by_this_acceptance": false,
+    "historical_failed_3p8_trials_preserved": true
+  }
+}

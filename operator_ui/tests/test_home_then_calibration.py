@@ -177,15 +177,15 @@ class CompoundTests(unittest.TestCase):
         self.assertNotIn('calibration', plan['summary'])
         reply = self.agent._ground_plan_reply('Both moves are ready. Reply Yes.')
         self.assertNotIn('calibration', reply)
-        self.assertIn('Return Home', reply)
+        self.assertIn('Return IDLE', reply)
 
     def test_chat_builds_whole_compound_then_yes_runs_it(self):
         self.agent.credentials.model = 'fixture'
         self.agent.client.complete.side_effect = [
             dict(stop_reason='tool_use', content=[dict(type='tool_use', id='combined',
-                name='propose_actions', input=dict(actions=['move_home', 'full_calibration']))]),
+                name='propose_actions', input=dict(actions=['move_idle', 'full_calibration']))]),
             dict(content=[dict(type='text', text='I will do both.')])]
-        self.agent.send('Return Home, then run full calibration')
+        self.agent.send('Return IDLE, then run full calibration')
         self.assertEqual(self.calls, [])
         self.assertIn('Descent', self.agent.transcript[-1]['text'])
         self.agent.send('Yes')

@@ -36,10 +36,14 @@ class E2Tests(unittest.TestCase):
             verify(None, run, read=read)
         read.assert_not_called()
 
-    def test_positive_tolerance_only(self):
+    def test_monitoring_accepts_lower_tolerance(self):
+        self.assertEqual(self.check(external_axes={'E2': 1.750}), [1.750]*3)
+        self.assertEqual(self.check(external_axes={'E2': 1.7575638072998392}), [1.7575638072998392]*3)
+        self.assertEqual(self.check(external_axes={'E2': 1.760}), [1.760]*3)
+        self.assertEqual(self.check(external_axes={'E2': 1.7630568802181161}), [1.7630568802181161]*3)
         self.assertEqual(self.check(external_axes={'E2': 1.76855}), [1.76855]*3)
         self.assertEqual(self.check(external_axes={'E2': 1.82}), [1.82]*3)
-        for value in (1.76, 1.7684, 1.8201, 1.97):
+        for value in (1.62, 1.749999, 1.8201, 1.97):
             with self.subTest(value=value), self.assertRaises(RuntimeError):
                 self.check(external_axes={'E2': value})
 
@@ -68,6 +72,44 @@ class E2Tests(unittest.TestCase):
             verify(svc, run, read, correct=True)
         svc.position_calibration_e2.assert_called_once()
         self.assertEqual(read.call_count, 1)
+
+    def test_correction_below_minimum_cannot_pass_or_repeat(self):
+        run, svc = Mock(), Mock()
+        run.stopped.return_value = False
+        svc.position_calibration_e2.return_value = {'ok': True}
+        def state(value):
+            return dict(error=False, emergency=False, moving=False, drag=False,
+                        external_axes={'E2': value}, external_units={'E2': 'degrees'})
+        read = Mock(side_effect=[state(1.62), state(1.749999)])
+        with self.assertRaisesRegex(RuntimeError, 'minimum'):
+            verify(svc, run, read, lambda _: None, correct=True)
+        svc.position_calibration_e2.assert_called_once()
+        self.assertEqual(read.call_count, 2)
+
+    def test_correction_accepts_recorded_cycle_five_feedback(self):
+        run, svc = Mock(), Mock()
+        run.stopped.return_value = False
+        svc.position_calibration_e2.return_value = {'ok': True}
+        def state(value):
+            return dict(error=False, emergency=False, moving=False, drag=False,
+                        external_axes={'E2': value}, external_units={'E2': 'degrees'})
+        actual = 1.7658034700381073
+        read = Mock(side_effect=[state(actual)] + [state(actual)]*3)
+        self.assertEqual(verify(svc, run, read, lambda _: None, correct=True), [actual]*3)
+        svc.position_calibration_e2.assert_called_once()
+
+    def test_calibration_corrects_monitoring_drift_to_original_target(self):
+        from calibration_e2 import TARGET_DEGREES
+        self.assertEqual(TARGET_DEGREES,1.77)
+        run,svc=Mock(),Mock()
+        run.stopped.return_value=False
+        svc.position_calibration_e2.return_value={'ok':True}
+        def state(value):
+            return dict(error=False,emergency=False,moving=False,drag=False,
+                        external_axes={'E2':value},external_units={'E2':'degrees'})
+        read=Mock(side_effect=[state(1.763057)]+[state(1.7713)]*3)
+        self.assertEqual(verify(svc,run,read,lambda _:None,correct=True),[1.7713]*3)
+        svc.position_calibration_e2.assert_called_once()
 
 
 if __name__ == '__main__':

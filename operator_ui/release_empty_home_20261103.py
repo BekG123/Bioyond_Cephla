@@ -10,7 +10,8 @@ from proof_lift_plate import api, near, write
 from squid_handling_route import load_route, LEGACY_SOURCE, LEGACY_SHA
 
 
-def main(output_dir=None, authorization=None, *, route_source=LEGACY_SOURCE, route_sha=LEGACY_SHA):
+def main(output_dir=None, authorization=None, *, route_source=LEGACY_SOURCE, route_sha=LEGACY_SHA,
+         completed_forward_receipt=None, completed_forward_plan=None):
     output_dir = FOLDER if output_dir is None else output_dir
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
@@ -19,15 +20,28 @@ def main(output_dir=None, authorization=None, *, route_source=LEGACY_SOURCE, rou
     if output.exists():
         raise RuntimeError('Already attempted; no automatic retry')
     plan = load_route(route_source, route_sha)
-    approach = output_dir / 'dropoff_approach_trial_20261103.json'
+    if (completed_forward_receipt is None) != (completed_forward_plan is None):
+        raise RuntimeError('Both original forward receipt and plan required')
+    approach = completed_forward_receipt or output_dir / 'dropoff_approach_trial_20261103.json'
     receipt = json.loads(approach.read_bytes())
-    if receipt['status'] != 'at_squid_awaiting_supported_plate_confirmation':
+    expected_status = ('loaded_squid_forward_completed_pending_operator_assessment'
+                       if completed_forward_receipt else 'at_squid_awaiting_supported_plate_confirmation')
+    if receipt['status'] != expected_status:
         raise RuntimeError('Completed approach required')
-    approach_plan = output_dir / 'dropoff_approach_plan_20261103.json'
+    approach_plan = completed_forward_plan or output_dir / 'dropoff_approach_plan_20261103.json'
     approach_data = json.loads(approach_plan.read_bytes())
+    if completed_forward_receipt:
+        steps = receipt.get('steps', [])
+        if (len(steps) != 4 or any(s.get('status') != 'arrived' for s in steps)
+                or receipt.get('release_executed') is not False
+                or receipt.get('gripper_commands') != []
+                or receipt.get('startup_commands') != []
+                or approach_data.get('source_plan_sha256') != route_sha):
+            raise RuntimeError('Original closed-claw forward completion unverified')
+        near(receipt['final_state']['robot']['pose_mm'], plan['routes']['from_capture'][4], .1)
     if (receipt.get('plan_sha256') != sha(approach_plan)
             or approach_data['routes']['from_capture'] != plan['routes']['from_capture'][:5]
-            or approach_data.get('route_source_sha256', LEGACY_SHA) != route_sha):
+            or approach_data.get('route_source_sha256', approach_data.get('source_plan_sha256', LEGACY_SHA)) != route_sha):
         raise RuntimeError('Approach receipt does not match selected route')
     plan['routes']['from_capture'] = plan['routes']['from_capture'][4:]
     plan['leg_speeds'] = [5, 137, 137, 137]

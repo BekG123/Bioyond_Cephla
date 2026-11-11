@@ -167,8 +167,10 @@ class ProjectedPickupTests(unittest.TestCase):
             physical_grip_validated_for_plate=True,settings=dict(target_e1_mm=3.9,closing_speed=5))
         actual=plan_for_reference(reference)
         self.assertEqual(actual['commands'][-1]['target_e1_mm'],3.9)
-        self.assertTrue(all(step['target_e1_mm']>=3.9 and step['speed']==5 for step in actual['commands']))
-        self.assertEqual(actual['commands'],baseline['commands'][:len(actual['commands'])])
+        self.assertTrue(all(step['target_e1_mm']>=3.9 and step['speed'] in (10,5) for step in actual['commands']))
+        self.assertEqual(actual['command_count'],2)
+        self.assertEqual(baseline['command_count'],2)
+        self.assertNotEqual(actual['target_e1_mm'],baseline['target_e1_mm'])
         self.assertEqual(plan_for_reference({}),baseline)
         reference['settings']['target_e1_mm']=3.7
         with self.assertRaises(TeachingError):plan_for_reference(reference)

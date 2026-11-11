@@ -65,6 +65,20 @@ def register_researcher(app, read_state, teaching=None, draggo=None, workflow=No
     def lacry_state():
         return jsonify(_lacry_call('state', lambda: _lacry().public()))
 
+    @api.post('/lacry/plate-session/begin')
+    def plate_session_begin():
+        body = request.get_json(silent=True)
+        if not isinstance(body, dict) or set(body) != {'reason'}:
+            raise TeachingError('State why a new calibration session is needed.', 400)
+        return jsonify(_lacry_call('begin plate session', lambda: _lacry().begin_plate_session(body['reason'])))
+
+    @api.post('/lacry/plate-session/plan')
+    def plate_session_plan():
+        body = request.get_json(silent=True)
+        if not isinstance(body, dict) or set(body) != {'first_destination'}:
+            raise TeachingError('Choose Hamilton or Squid as the first destination.', 400)
+        return jsonify(ok=True, plan=_lacry().plan_plate_session(body['first_destination']))
+
     @api.get('/lacry/hamilton/status')
     def hamilton_status():
         return jsonify(_lacry().backend.instrument.detail())
@@ -147,6 +161,15 @@ def register_researcher(app, read_state, teaching=None, draggo=None, workflow=No
 
     @api.errorhandler(TeachingError)
     def teaching_error(error):
+        # Capture Home pre-dispatch failures as well as background Runner errors.
+        diagnostics = app.extensions.get('developer_diagnostics')
+        if diagnostics is not None and request.path == '/researcher/api/home/start':
+            try:
+                from developer_diagnostics import capture_failure
+                diagnostics.observe('request_failed', dict(sequence='researcher_home_preflight',
+                    result=dict(ok=False, error=str(error), failure_context=capture_failure(error))))
+            except Exception:
+                app.logger.exception('Home diagnostic capture failed')
         return jsonify(ok=False, message=str(error)), error.status
 
     @api.after_request

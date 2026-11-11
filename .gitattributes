@@ -4,3 +4,23 @@ operator_ui/points.json -text
 "Pick and Hold/Grip/short_side_48well_reference.json" -text
 "Pick and Hold/Descend/short_side_taught_endpoint.json" -text
 "Pick and Hold/short_side_hamilton_route.json" -text
+
+# Workflow receipts and accepted geometry are verified by byte-level hashes.
+operator_ui/reports/** -text
+"Pick and Hold/Calibration/plate_48_pickup_profile.json" -text
+operator_ui/e2_reference.json -text
+operator_ui/squid_stage_reference.json -text
+work/home_squid_live_start.json -text
+
+# Required accepted grip evidence; other demonstration captures stay local.
+"operator_ui/demonstrations/supervised_grip/cdcc8e1f0c774b5ab0fe3cafed7b4ffe.json" -text
+"operator_ui/demonstrations/supervised_grip/5b78a0334fc34f2885208bc453e3a7bf.json" -text
+"operator_ui/demonstrations/supervised_grip/5b78a0334fc34f2885208bc453e3a7bf_review.json" -text
+"operator_ui/demonstrations/supervised_grip/contact_3p8_first_lift_acceptance.json" -text
+"operator_ui/demonstrations/supervised_grip/contact_3p8_proof_lift_plan_proof_lift.json" -text
+"operator_ui/demonstrations/supervised_grip/contact_3p8_second_lift_plan_proof_lift.json" -text
+"operator_ui/demonstrations/supervised_grip/contact_3p8_lacry_home_trial.json" -text
+"operator_ui/reports/ik_home/1792484685745825600_5245de30b33e4c25b5dc686c6320ddeb.json" -text
+"Pick and Hold/Grip/accepted_grip_previous_descent.json" -text
+"operator_ui/demonstrations/reference_grip/full_calibration_to_home_3p7_20261020_accepted.json" -text
+"operator_ui/demonstrations/reference_grip/e1_3p7_20261020.json" -text

@@ -6,9 +6,15 @@
   "observed_degrees": 1.7712966496780902,
   "after_startup_degrees": 1.7658034700381073,
   "date": "2026-10-27",
-  "automatic_correction": false,
+  "automatic_correction": true,
+  "automatic_correction_requires_controller_protocol": 250101,
+  "precalibration_min_degrees": 1.769,
+  "precalibration_min_uses_display_rounding_decimals": 3,
+  "precalibration_max_degrees": 1.82,
+  "precalibration_instruction": "Restored previous calibration rule: target 1.77 degrees; accept E2 rounded to three decimals >= 1.769 with raw E2 <= 1.82. Correct once if outside this range, then verify three fresh readings.",
   "operator_accepts_approximate_reference": true,
-  "latest_operator_instruction": "It doesn't perfectly have to be 1.77; go with current setting. That is fine [in response to 1.909-degree transient]. Retry the whole sequence again.",
+  "latest_operator_instruction": "No, use the previous full calibration code, not the one with the stricter E2 minimum.",
+  "previous_operator_instruction": "It doesn't perfectly have to be 1.77; go with current setting. That is fine [in response to 1.909-degree transient]. Retry the whole sequence again.",
   "accepted_readback_degrees_20261027": [1.7877761885980386, 1.7905227784180298, 1.9086],
   "previous_tolerance_degrees": 0.05
 }

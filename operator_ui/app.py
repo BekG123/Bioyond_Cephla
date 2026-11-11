@@ -5,7 +5,8 @@ state control, jog, gripper, and the vision pipeline broken into operator-
 triggered stages (Find disk -> Align -> Descend -> Grip -> Lift), each of
 which reports back and waits for the human's next decision.
 
-Run:  py operator_ui/app.py   ->  http://127.0.0.1:5002
+Run: .venv-realsense/Scripts/python.exe -B operator_ui/app.py
+Legacy py launches redirect to that same validated environment.
 
 Exclusivity (one owner at a time, both links):
  - robot TCP: disconnect the MCP server / Bioyond Works first
@@ -20,6 +21,9 @@ import sys
 import threading
 import time
 from collections import deque
+
+from vision_runtime import bootstrap, verify as verify_vision_runtime
+VISION_RUNTIME = bootstrap() if __name__ == '__main__' else verify_vision_runtime()
 
 from flask import Flask, jsonify, request, Response, send_from_directory
 
@@ -71,6 +75,11 @@ from sequences import (  # noqa: E402
 )
 
 app = Flask(__name__, static_folder="static")
+
+@app.get('/developer/api/vision/runtime')
+def vision_runtime_status():
+    return jsonify(VISION_RUNTIME)
+
 from lacry_memory import LacryMemory, register_memory_api
 lacry_memory = LacryMemory(os.path.join(HERE,'logs','lacry_memory','memory.sqlite3'))
 lacry_memory.seed(os.path.join(HERE,'lacry_memory_seed.json'))
@@ -97,6 +106,8 @@ researcher_teaching = StationTeaching(os.path.join(HERE, 'demonstrations', 'teac
 draggo = DragGo(lambda: svc, os.path.join(HERE, 'demonstrations', 'draggo-active.json'))
 svc.draggo_guard = draggo
 def researcher_calibration(run, service, camera):
+    from calibration_e2 import verify
+    verify(service, run, correct=True)
     from pick_and_hold.Calibration.fast_disk import run_fast_disk
     return run_fast_disk(run, service, camera, teach, get_robot_params(), config='Wide',
         trace=run.calibration_trace, publish=plate_teaching.publish_guidance)
@@ -141,11 +152,15 @@ lacry_backend = LacryBackend(svc, runner, cam, draggo, home_return, latest_hamil
 lacry_backend.projected_pickup = projected_pickup
 from ik_home import IKHomeConnection
 from pickup_home import PickupHome
+from pickup_holder import PickupHolder
 ik_home_connection = IKHomeConnection(home_return)
 from guarded_home_recovery import GuardedHomeRecovery
 guarded_home_recovery = GuardedHomeRecovery(ik_home_connection)
-pickup_home = PickupHome(ik_home_connection,os.path.join(HERE,'demonstrations','pickup_home'))
-classic_pickup = ClassicPickup(researcher_teaching, plate_teaching, researcher_descent,
+from plate48_workflow import Plate48Teaching, Plate48Pickup
+plate48_teaching = Plate48Teaching(lambda:svc,lambda:runner,lambda:cam,get_robot_params,
+    plate_teaching._prepare,home_return,lambda:(plate_teaching.invalidate(),position_grip.invalidate()),band_floor)
+pickup_home = PickupHolder(home_return,os.path.join(HERE,'demonstrations','pickup_holder'))
+classic_pickup = Plate48Pickup(researcher_teaching, plate48_teaching, researcher_descent,
     position_grip, lambda: svc, lambda: runner, transport=pickup_home)
 lacry = LacryAgent(lacry_backend, plate_agent.client, lambda: runner,
     memory=lacry_memory,
@@ -1123,6 +1138,22 @@ def projected_alignment_route():
     return jsonify(runner.start('projected_alignment',align,svc,cam,get_robot_params(),config))
 
 
+@app.post('/seq/calibrate_48well')
+def calibrate_48well_route():
+    refusal = _refuse_if_sequencing()
+    if refusal is not None:
+        return refusal
+    body = _body()
+    if any(body.get(k) is not True for k in ('confirm','cell_clear','empty_gripper','plate_unchanged')):
+        return jsonify(ok=False,error='Confirm the empty gripper, unchanged 48-well setup and clear observation route.'),400
+    if recorder._run:
+        return jsonify(ok=False,error='Stop torque recording before 48-well calibration.'),409
+    try:
+        return jsonify(plate48_teaching.start('Calibrate',dict(ready=True)))
+    except (TeachingError, TransferError) as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
 @app.get('/researcher/api/projected-pickup')
 def projected_pickup_status():
     return jsonify(projected_pickup.public())
@@ -1501,6 +1532,108 @@ def short_side_full_trial02():
         return jsonify(ok=False,error=str(error)),409
 
 
+@app.post('/developer/api/home-hamilton-exchange/preview')
+@app.post('/developer/api/home-hamilton-exchange/start')
+def home_hamilton_exchange():
+    from home_hamilton_exchange import plan,execute
+    body=_body()
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body) not in ({'calibration_record'},{'calibration_record','delivery_only'}):raise ValueError('Provide the fresh calibration record.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['calibration_record'],body.get('delivery_only',False)))
+        if set(body)!={'plan','ready','path_clear','setup_confirmed'} or any(body[k] is not True for k in ('ready','path_clear','setup_confirmed')):
+            raise ValueError('Confirm the HOME rotation, Hamilton path and holder return are clear.')
+        return jsonify(runner.start('home_hamilton_exchange',execute,svc,cfg,body['plan']))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/home-hamilton-exchange/restore-original')
+def home_hamilton_restore_original():
+    from home_hamilton_exchange import restore_original
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    if _body()!={'ready':True,'empty_gripper':True,'holder_clear':True}:
+        return jsonify(ok=False,error='Confirm released plate and clear holder rotation at IDLE.'),400
+    return jsonify(runner.start('home_hamilton_restore_original',restore_original,svc))
+
+
+@app.post('/developer/api/home-squid-transfer/preview')
+@app.post('/developer/api/home-squid-transfer/start')
+def home_squid_transfer_route():
+    from home_squid_transfer import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'source'}:raise ValueError('Provide completed HOME receipt.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['source']))
+        if set(body)!={'plan','ready','setup_confirmed','path_clear'} or any(body[k] is not True for k in ('ready','setup_confirmed','path_clear')):
+            raise ValueError('Confirm released plate, clear holder rotation and new HOME/Squid route.')
+        return jsonify(runner.start('home_squid_transfer',execute,svc,cfg,body['plan'],position_grip))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/home-squid-return/preview')
+@app.post('/developer/api/home-squid-return/start')
+def home_squid_return_route():
+    from home_squid_transfer import plan_return,execute_return
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'source','phase'}:raise ValueError('Provide predecessor receipt and return phase.')
+            return jsonify(ok=True,plan=plan_return(svc,cfg,body['source'],body['phase']))
+        if set(body)!={'plan','ready','setup_confirmed','path_clear'} or any(body[k] is not True for k in ('ready','setup_confirmed','path_clear')):
+            raise ValueError('Confirm held plate and route; release requires supported HOME seating.')
+        return jsonify(runner.start('home_squid_return',execute_return,svc,cfg,body['plan']))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/home-squid-handling/preview')
+@app.post('/developer/api/home-squid-handling/start')
+def home_squid_handling_route():
+    from home_squid_handling import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'source','phase'}:raise ValueError('Provide fresh source receipt and handling phase.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['source'],body['phase']))
+        if set(body)!={'plan','ready','setup_confirmed','path_clear'} or any(body[k] is not True for k in ('ready','setup_confirmed','path_clear')):
+            raise ValueError('Confirm supported Squid release, unchanged holder and clear empty/loaded routes.')
+        return jsonify(runner.start('home_squid_handling',execute,svc,cfg,body['plan']))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/hamilton-holder-dropoff/preview')
+@app.post('/developer/api/hamilton-holder-dropoff/start')
+def hamilton_holder_dropoff():
+    from hamilton_holder_dropoff import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'phase','source'}:raise ValueError('Provide phase and completed source receipt.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['phase'],body['source']))
+        if set(body)!={'plan','ready','setup_confirmed','path_clear'} or any(body[k] is not True for k in ('ready','setup_confirmed','path_clear')):
+            raise ValueError('Confirm setup and route; release requires supported plate, return requires jaws clear.')
+        return jsonify(runner.start('hamilton_holder_dropoff',execute,svc,cfg,body['plan']))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
 @app.post('/developer/api/short-side-full-trial04')
 @app.post('/developer/api/short-side-full-trial03')
 def short_side_full_trial03():
@@ -1609,19 +1742,55 @@ def holder_direction_probe():
         return jsonify(ok=False, error=str(error)), 409
 
 
-@app.post('/developer/api/hamilton-release/preview')
-@app.post('/developer/api/hamilton-release/start')
-def hamilton_release_start():
-    from hamilton_release_20261108 import review,execute
-    from hamilton_reteach_trial import SHA
-    if _body() != dict(ready=True,supported_and_clear=True,candidate_sha256=SHA):
-        return jsonify(ok=False,error='Confirm supported plate, clear claws and this exact Hamilton endpoint.'),400
+@app.post('/developer/api/hamilton-stopped-return/preview')
+@app.post('/developer/api/hamilton-stopped-return/start')
+def hamilton_stopped_return():
+    from hamilton_stopped_return import review,execute
+    if _body()!={'ready':True,'plate_secure':True,'path_clear':True}:
+        return jsonify(ok=False,error='Confirm secure plate and clear Hamilton recovery route.'),400
     refusal=_refuse_if_sequencing()
     if refusal:return refusal
     try:
         cfg=get_robot_params();plan=review(svc,cfg)
         if request.path.endswith('/preview'):return jsonify(ok=True,plan=plan)
+        return jsonify(runner.start('hamilton_stopped_return',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/hamilton-release/preview')
+@app.post('/developer/api/hamilton-release/start')
+def hamilton_release_start():
+    from hamilton_release_20261108 import review,execute
+    from hamilton_reteach_trial import SHA
+    body=_body()
+    if (body.get('ready') is not True or body.get('supported_and_clear') is not True or body.get('candidate_sha256')!=SHA
+            or set(body)-{'ready','supported_and_clear','candidate_sha256','trial_id','forward_trial_id','operation'}):
+        return jsonify(ok=False,error='Confirm supported plate, clear claws and this exact Hamilton endpoint.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();plan=review(svc,cfg,body.get('trial_id'),body.get('forward_trial_id'),body.get('operation','release'))
+        if request.path.endswith('/preview'):return jsonify(ok=True,plan=plan)
         return jsonify(runner.start('hamilton_release_empty_home',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/squid-queue/preview')
+@app.post('/developer/api/squid-queue/start')
+def squid_single_queue_start():
+    from squid_single_queue import review,execute,CURRENT_SHA
+    body=_body()
+    if (set(body)!={'ready','direction','trial_id','candidate_sha256'} or body.get('ready') is not True
+            or body.get('candidate_sha256')!=CURRENT_SHA or body.get('direction') not in ('forward','reverse')):
+        return jsonify(ok=False,error='Confirm this exact Squid route, direction and fresh trial ID.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    try:
+        cfg=get_robot_params();plan=review(svc,cfg,body['direction'],body['trial_id'])
+        if request.path.endswith('/preview'):return jsonify(ok=True,plan=plan)
+        return jsonify(runner.start('squid_single_queue',execute,svc,cfg,plan))
     except Exception as error:
         return jsonify(ok=False,error=str(error)),409
 
@@ -1631,10 +1800,13 @@ def hamilton_reteach_start():
     from hamilton_reteach_trial import SHA,review,execute
     body=_body();direction=body.get('direction','forward')
     if (direction not in ('forward','reverse') or body.get('ready') is not True
-            or body.get('candidate_sha256')!=SHA or set(body)-{'ready','candidate_sha256','direction'}):
+            or body.get('candidate_sha256')!=SHA or set(body)-{'ready','candidate_sha256','direction','trial_id','forward_trial_id'}):
         return jsonify(ok=False,error='Confirm the exact revised Hamilton trial and clear supervised route.'),400
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
     try:
-        cfg=get_robot_params();plan=review(svc,cfg,reverse=direction=='reverse')
+        cfg=get_robot_params();plan=review(svc,cfg,reverse=direction=='reverse',
+            trial_id=body.get('trial_id'),forward_trial_id=body.get('forward_trial_id'))
         return jsonify(runner.start('hamilton_reteach',execute,svc,cfg,plan))
     except Exception as error:
         return jsonify(ok=False,error=str(error)),409
@@ -1651,6 +1823,21 @@ def squid_48well_endpoint_start():
     try:
         cfg=get_robot_params();plan=review(svc,cfg)
         return jsonify(runner.start('squid_48well_endpoint_trial',execute,svc,cfg,plan))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/squid-48well-approach/start')
+def squid_48well_approach_start():
+    from squid_48well_approach import SHA, review, execute
+    if _body() != dict(ready=True, plate_held=True, approach_only=True, candidate_sha256=SHA):
+        return jsonify(ok=False,error='Confirm held plate, clear supervised route, and approach only.'),400
+    refusal = _refuse_if_sequencing()
+    if refusal is not None:
+        return refusal
+    try:
+        cfg=get_robot_params();plan=review(svc,cfg)
+        return jsonify(runner.start('squid_48well_approach',execute,svc,cfg,plan))
     except Exception as error:
         return jsonify(ok=False,error=str(error)),409
 

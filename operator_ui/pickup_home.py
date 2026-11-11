@@ -13,25 +13,31 @@ from researcher_teaching import TeachingError
 
 
 class PickupHome:
-    def __init__(self, connection, folder):
+    def __init__(self, connection, folder, plate_profile=False):
         self.connection = connection
         self.home = connection.home
         self.folder = Path(folder)
         self.lift_receipt = None
         self.home_attempt = None
+        self.plate_profile = plate_profile
+        self.grip_mm = 3.9 if plate_profile else 3.7
 
     def configuration_ready(self):
         from pick_and_hold.Grip.reference_grip import configuration
         from pick_and_hold.Grip.fast_position_plan import plan_closure
         configuration()
-        if plan_closure(28)['target_e1_mm'] != 3.7:
+        if self.plate_profile:
+            from projected_pickup import load, accepted_grip
+            if not accepted_grip(load()[0]):
+                raise TeachingError('Accepted 48-well grip evidence is required before lift/Home.')
+        elif plan_closure(28)['target_e1_mm'] != 3.7:
             raise TeachingError('Pickup Home requires the accepted 3.7 mm grip.')
         self.connection.history()
         self.home.target()
 
     def start_lift(self, grip_result):
         self.configuration_ready()
-        if (grip_result.get('ok') is not True or grip_result.get('target_e1_mm') != 3.7
+        if (grip_result.get('ok') is not True or grip_result.get('target_e1_mm') != self.grip_mm
                 or grip_result.get('executor') != 'staged_reference_position'):
             raise TeachingError('Successful current Grip is required before pickup lift.')
         service,run = self.home.get_service(),self.home.get_runner()
@@ -39,11 +45,11 @@ class PickupHome:
             raise TeachingError('The confirmed pickup workflow must own the lift.')
         # Verify the full existing Home corridor before beginning the 5 mm lift.
         context = self.connection.propose()
-        if not context['preserve_gripper'] or abs(context['e1']-3.7) > .05:
+        if not context['preserve_gripper'] or abs(context['e1']-self.grip_mm) > .05:
             raise TeachingError('Keep the accepted grip and running Auto state; no startup is allowed.')
         source = Path(grip_result['record'])
         grip = json.loads(source.read_bytes())
-        if not grip.get('ok') or grip.get('target_e1_mm') != 3.7 or not 0 <= time.time()-grip['at'] <= 600:
+        if not grip.get('ok') or grip.get('target_e1_mm') != self.grip_mm or not 0 <= time.time()-grip['at'] <= 600:
             raise TeachingError('Current grip evidence is unavailable or stale.')
         near(context['start'],grip['pose_mm'])
         target = {**context['start'],'Z':context['start']['Z']+5}
@@ -56,7 +62,7 @@ class PickupHome:
 
     def execute_lift(self, run, context, target, grip_record):
         service = self.home.get_service()
-        guarded = HoldingService(service,3.7,context['envelope'])
+        guarded = HoldingService(service,self.grip_mm,context['envelope'])
         record = dict(at=time.time(),start=context['start'],target=target,speed=5,
                       grip_record=grip_record,home_context=context,samples=[],
                       grasp_verified=False,status='started')
@@ -100,7 +106,7 @@ class PickupHome:
         for key in ('cfg','envelope','home','target_id','points_sha256'):
             if plan[key] != receipt['context'][key]:
                 raise TeachingError('Home settings changed during pickup; no Home move started.')
-        if not plan['preserve_gripper'] or abs(plan['e1']-3.7) > .05:
+        if not plan['preserve_gripper'] or abs(plan['e1']-self.grip_mm) > .05:
             raise TeachingError('Grip/controller state changed; no Home move started.')
         plan.update(id='pickup-home-'+uuid4().hex,
                     authorization_scope='Confirmed Full Calibration includes slow lift and loaded Home.')

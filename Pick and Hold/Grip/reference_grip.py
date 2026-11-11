@@ -1,4 +1,5 @@
-"""Staged E1 position closure from accepted evidence; no force-limit writes."""
+"""Two-speed E1 closure to the accepted endpoint; no force-limit writes."""
+from gripper_closure import POLICY, closure_plan
 from copy import deepcopy
 import hashlib
 import json
@@ -30,6 +31,7 @@ def plan_for_reference(reference):
             raise TeachingError('Reviewed closure does not contain the accepted 3.9 mm stop.')
         plan.update(target_e1_mm=3.9,commands=commands,command_count=len(commands),
                     validation_status='operator_accepted_48well_grip')
+    plan.update(closure_plan(28, plan['target_e1_mm']))
     return plan
 
 
@@ -72,13 +74,17 @@ def configuration():
                     or trial.get('force_limits_changed') is not False):
                 raise ValueError('3.7 mm trial authorization is unavailable.')
             files.append(trial_path)
-        digest = hashlib.sha256(b''.join(p.read_bytes() for p in files)).hexdigest()
+        digest = hashlib.sha256(POLICY.encode()+b''.join(p.read_bytes() for p in files)).hexdigest()
         return reference, digest
     except (OSError, ValueError, KeyError, TypeError) as error:
         raise TeachingError('Accepted Grip reference or descent settings need review: '+str(error)) from error
 
 
 class ReferenceGrip(PositionGrip):
+    # Operator-reviewed position band for the approach and slow final move.
+    SETTLE_TOLERANCE_MM = .07
+    POSITION_TOLERANCE_MM = .07
+
     def __init__(self, folder, service, runner):
         super().__init__(folder, service, runner)
         self.message = 'After Descent, close to the configured setting and inspect before lifting.'
@@ -116,8 +122,8 @@ class ReferenceGrip(PositionGrip):
 
     def public(self, robot):
         state = super().public(robot)
-        state.update(method='staged_reference_position', supervised_validation=True,
-                     force_control=False, increment_phases_mm=[1, .2, .1])
+        state.update(method='two_speed_reference_position', closure_policy=POLICY,
+                     supervised_validation=True, force_control=False, command_count=2, approach_speed=10, final_distance_mm=1, speed=5)
         try:
             reference,_ = self._configuration(self.receipt)
             state['target_e1_mm'] = plan_for_reference(reference)['target_e1_mm']
@@ -127,10 +133,12 @@ class ReferenceGrip(PositionGrip):
 
     def execute(self, run, receipt):
         svc = self.service()
-        record = dict(id=uuid4().hex, at=time.time(), method='staged_reference_position',
-                      descent=deepcopy(receipt), speed=5,
+        record = dict(id=uuid4().hex, at=time.time(), method='two_speed_reference_position', closure_policy=POLICY,
+                      descent=deepcopy(receipt), approach_speed=10, final_speed=5, final_distance_mm=1,
                       steps=[], grasp_verified=False, contact_detected=False,
                       force_limits_changed=False)
+        record['settle_tolerance_mm'] = self.SETTLE_TOLERANCE_MM
+        record['position_tolerance_mm'] = self.POSITION_TOLERANCE_MM
         path = self.folder/(record['id']+'.json')
         sent = False
 
@@ -140,7 +148,7 @@ class ReferenceGrip(PositionGrip):
 
         def check():
             if run.stopped():
-                raise TeachingError('Grip stopped; no next increment.')
+                raise TeachingError('Grip stopped; no further motion.')
             refusal = svc._preflight()
             if refusal:
                 raise TeachingError(refusal)
@@ -175,25 +183,25 @@ class ReferenceGrip(PositionGrip):
             for index, step in enumerate(planned, 1):
                 check()
                 if abs(self._number(svc.external_axes().get('E1'))-previous) > .05:
-                    raise TeachingError('Claw moved between increments.')
+                    raise TeachingError('Claw moved before closure.')
                 target = step['target_e1_mm']
                 item = dict(command=step, started_at=time.time())
                 record['steps'].append(item)
                 save()
                 sent = True
-                response = svc.move_gripper(target, speed=5)
+                response = svc.move_gripper(target, speed=step['speed'])
                 item['response'] = response
                 save()
                 if not response.get('ok') or response.get('recovered') or response.get('gripper_warning'):
-                    raise TeachingError('Uncertain Grip increment; no retry.')
+                    raise TeachingError('Uncertain Grip closure; no retry.')
                 deadline = time.monotonic()+self.SETTLE_TIMEOUT
                 stable = 0
                 while stable < self.SETTLE_SAMPLES:
                     check()
                     actual = self._number(svc.external_axes().get('E1'))
                     if time.monotonic() > deadline:
-                        raise TeachingError('Grip increment did not settle; no further closure.')
-                    stable = stable+1 if abs(actual-target) <= .02 else 0
+                        raise TeachingError('Grip closure did not settle; no further closure.')
+                    stable = stable+1 if abs(actual-target) <= self.SETTLE_TOLERANCE_MM else 0
                     if stable < self.SETTLE_SAMPLES:
                         time.sleep(self.SETTLE_INTERVAL)
                 report = svc.torque_report()
@@ -201,7 +209,7 @@ class ReferenceGrip(PositionGrip):
                 save()
                 if (report.get('ok') is not True or report.get('telemetry_live') is not True
                         or report.get('recovered')
-                        or abs(self._number(report.get('e1_position'))-target) > .05):
+                        or abs(self._number(report.get('e1_position'))-target) > self.POSITION_TOLERANCE_MM):
                     raise TeachingError('Fresh grip feedback was not confirmed.')
                 self._number(report.get('e1_torque'))
                 check()
@@ -212,7 +220,7 @@ class ReferenceGrip(PositionGrip):
             end = time.monotonic()+2
             while time.monotonic() < end:
                 check()
-                if abs(self._number(svc.external_axes().get('E1'))-final_target) > .05:
+                if abs(self._number(svc.external_axes().get('E1'))-final_target) > self.POSITION_TOLERANCE_MM:
                     raise TeachingError('Claw moved after closing.')
                 time.sleep(.1)
             record.update(ok=True, measured_e1_mm=svc.external_axes()['E1'],
@@ -220,7 +228,8 @@ class ReferenceGrip(PositionGrip):
             save()
             self.message = f'Grip reached {final_target:.1f} mm. Inspect the plate before lifting.'
             run.audit('reference_grip_complete', record=record)
-            return dict(ok=True, executor='staged_reference_position', e1_position=record['measured_e1_mm'],
+            # Retain the public executor ID used by pickup receipt consumers.
+            return dict(ok=True, executor='staged_reference_position', closure_policy=POLICY, e1_position=record['measured_e1_mm'],
                         target_e1_mm=final_target, gripped=False, grasp_verified=False,
                         awaiting_inspection=True, record=str(path))
         except Exception as error:

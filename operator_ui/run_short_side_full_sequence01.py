@@ -1,4 +1,5 @@
 """Accepted short-side pickup -> Home -> revised Hamilton, one authorized run."""
+from gripper_closure import POLICY, closure_commands
 from concurrent.futures import ThreadPoolExecutor
 import json
 import time
@@ -74,14 +75,15 @@ try:
     checked((27.93,28.07),parent['home'])
     call('developer/api/short-side-full-trial01',dict(phase='approach',ready=True,setup_confirmed=True,path_clear=True));wait('approach',28)
     checked((27.93,28.07),low)
-    gr=dict(status='started',started_at=time.time(),settings=grip,steps=[],force_limits_changed=False)
+    gr=dict(closure_policy=POLICY,status='started',started_at=time.time(),settings=grip,steps=[],force_limits_changed=False)
     with grip_path.open('x') as f:json.dump(gr,f,indent=2)
     previous=28
-    for target in grip['closing_targets_mm']:
+    for command in closure_commands(28,grip['target_e1_mm']):
+        target=command['target_e1_mm']
         checked((previous-.07,previous+.07),low)
-        response=monitored_command('gripper',dict(action='move',e1=target,speed=5),(target-.07,previous+.07),low)
+        response=monitored_command('gripper',dict(action='move',e1=target,speed=command['speed']),(target-.07,previous+.07),low)
         if response.get('gripper',{}).get('grip_detected'):raise RuntimeError('Unexpected contact/stall indication; no further closure')
-        step=dict(target=target,response=response,reports=[]);gr['steps'].append(step)
+        step=dict(target=target,speed=command['speed'],response=response,reports=[]);gr['steps'].append(step)
         for _ in range(3):
             checked((target-.07,target+.07),low)
             report=call('gripper',{'action':'torque'});step['reports'].append(report)

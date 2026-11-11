@@ -1,0 +1,192 @@
+schema_version: 1
+id: squid
+name: Squid microscope
+kind: microscope
+summary: >
+  Cephla Squid automated microscope. Its XY stage has a saved loading (drop-off) position
+  where the Bioyond arm places and retrieves a plate. After loading, it runs a selected
+  imaging protocol (wells, channels, grid) and writes images and an acquisition record.
+  The agent reaches it through a local JSON TCP server that the Squid software opens.
+  Stage moves and imaging starts are separate, named, confirmed actions.
+
+identity:
+  vendor: Cephla
+  model: Squid
+  serial: null   # stage controller serial is 12769210 (see limits.stage_controller_serial)
+  software:
+    entry_point: main_hcs.py
+    simulator_flag: --simulation
+
+connection:
+  exclusive_clients: false
+  exclusive_note: >
+    One Squid process must own port 5050. squid_process() in operator_ui/squid_adapter.py
+    refuses to connect if it finds zero or more than one candidate. Imaging and stage
+    moves must not overlap: a scan in progress blocks stage commands.
+  network_assumption: Loopback only, the server must be enabled in Squid (Settings, Enable MCP Control Server).
+  paths:
+    - name: status_server
+      transport: tcp_json
+      address: 127.0.0.1:5050
+      purpose: >
+        Newline-framed JSON, request {command, params}, reply {success, result | error}.
+        Read-only adapter allows only ping and get_acquisition_status.
+      implemented_in: operator_ui/squid_adapter.py
+    - name: watchdog_state
+      transport: other
+      address: "%LOCALAPPDATA%/cephla/squid/watchdog/run.json"
+      purpose: Native run record; the adapter uses it to confirm that imaging completed.
+
+frames:
+  squid_stage_mm:
+    units: mm
+    notes: >
+      Squid stage coordinates, not robot TCP. This controller homes XY at the negative
+      ends, so a negative taught readback is not a repeatable absolute target after
+      rehoming.
+
+locations:
+  - name: loading_dropoff
+    frame: squid_stage_mm
+    coordinates: {x: 0.5000625, y: 0.5000625, z: 0.063984375}
+    tolerance_mm: 0.02
+    status: operator_confirmed
+    source: operator_ui/squid_stage_reference.json (operator_acceptance 2026-11-03)
+    notes: >
+      stage_return_verified is false in the file. The saved reference is a hash-checked
+      record; the extension refuses a move if the hash or controller serial differs.
+  - name: stage_home
+    frame: squid_stage_mm
+    status: verified
+    notes: Native XYZ referencing. It is not the loading position and not robot Home.
+
+labware:
+  - name: 48-well plate
+    notes: Layout identity comes from the live acquisition settings (layout_key); saved imaging sites only apply to the matching layout.
+  - name: 96 well plate
+    notes: Format named in the mock acquisition request (test_squid_connection.py).
+
+limits:
+  stage_controller_serial:
+    value: "12769210"
+    source: operator_ui/squid_stage_reference.json
+    enforced_in: operator_ui/squid_stage.py (ready)
+  position_tolerance:
+    value: 0.02
+    units: mm
+    source: operator_ui/squid_execution.py at_position
+    enforced_in: operator_ui/squid_execution.py
+  status_staleness:
+    value: 10
+    units: s
+    source: operator_ui/squid_adapter.py status()
+    enforced_in: operator_ui/squid_adapter.py
+  stage_command_timeout:
+    value: 180
+    units: s
+    source: operator_ui/squid_stage.py
+  loading_xy_floor:
+    value: 0
+    units: mm
+    source: validate_loading_target in operator_ui/squid_stage.py
+    enforced_in: operator_ui/squid_stage.py
+
+operations:
+  - name: ping
+    description: Confirms the control server is alive.
+    risk: read_only
+    timeout_s: 2
+    implemented_by: operator_ui/squid_adapter.py read_command
+  - name: get_acquisition_status
+    description: Whether imaging is in progress, the job identity (run_id, experiment_id), and completion.
+    risk: read_only
+    timeout_s: 2
+    on_timeout: requery_state
+    implemented_by: operator_ui/squid_adapter.py
+    notes: A status older than 10 s is treated as unknown, never as completed.
+  - name: get_position
+    description: Current stage x, y, z in mm.
+    risk: read_only
+    implemented_by: operator_ui/squid_stage.py
+  - name: get_channels
+    description: Available imaging channels, for example brightfield.
+    risk: read_only
+    implemented_by: operator_ui/test_squid_connection.py
+  - name: get_current_acquisition_settings
+    description: Live acquisition controls (YAML plus checksum). Used to bind saved imaging sites to the current layout.
+    risk: read_only
+    implemented_by: operator_ui/squid_execution.py (current_controls)
+  - name: return_to_loading
+    description: Move the stage to the saved loading position with return_to_recorded_dropoff and the reference hash.
+    risk: motion
+    human_gate: [robot is at Home, stage path is clear, at the E-stop]
+    preconditions: [Squid connected and stage not simulated, controller serial matches, no scan running, reference hash matches the loaded extension, robot at Home within 0.2 mm]
+    postconditions: [position equals loading_dropoff within 0.02 mm after a 0.2 s settle]
+    timeout_s: 180
+    on_timeout: requery_state
+    implemented_by: operator_ui/squid_stage.py (SquidStage.execute)
+    notes: No automatic retry. Stop cancels later steps but not an already started scan.
+  - name: home_stage
+    description: Native XYZ homing sequence.
+    risk: motion
+    human_gate: [stage path is clear, at the E-stop]
+    postconditions: [result.homed is true]
+    implemented_by: operator_ui/squid_stage.py
+    notes: Different from the loading position.
+  - name: run_imaging
+    description: Run the confirmed acquisition (wells, channels, grid) with prepare_confirmed_imaging, then run_acquisition.
+    risk: motion
+    human_gate: [plate loaded and supported, imaging sites reviewed by a person]
+    preconditions: [no acquisition in progress, saved imaging sites match the current layout, controller serial and loading reference hash match]
+    postconditions: [completion confirmed by the native run record, not guessed]
+    on_timeout: requery_state
+    implemented_by: operator_ui/squid_execution.py (SquidExecution)
+    notes: Never retried on a start failure. Abort with abort_current_acquisition.
+  - name: abort_imaging
+    description: Abort the current acquisition.
+    risk: state_change
+    human_gate: [a person asked to stop]
+    implemented_by: operator_ui/squid_execution.py (abort_current_acquisition)
+
+interlocks:
+  - Stage path must be clear of the robot arm; the arm must be at Home before any stage move.
+  - Slack notifications and simulated disk writes are checked off before a mock run.
+
+known_faults:
+  - id: negative_loading_target
+    status: mitigated
+    summary: >
+      A negative taught XY readback is not repeatable after rehoming on this controller.
+      The loading target is validated and never clamped silently.
+    affects: [return_to_loading]
+  - id: stage_return_unverified
+    status: open
+    summary: The saved reference has stage_return_verified false. Treat the first return after any rehome as supervised.
+    evidence: operator_ui/squid_stage_reference.json
+  - id: tilted_retrieval
+    status: open
+    summary: Plates were reported tilted on retrieval after earlier accepted deliveries. This is on the arm side; see bioyond_s4.
+    affects: [return_to_loading]
+
+recovery:
+  - situation: Status is stale, the scan outcome is uncertain, or the process changed
+    do:
+      - Re-query get_acquisition_status and the native run record.
+      - Report that imaging completion is not confirmed.
+    never: [assume completed, restart the process while a scan is running, send a second start]
+  - situation: Zero or two Squid processes listen on 5050
+    do: [Stop and ask a person which instance is real. Do not pick one.]
+
+qualification:
+  status_read:
+    status: qualified
+    evidence: operator_ui/reports/squid_connection and autonomous_squid runs, 2026-10-20 to 2026-10-24.
+  return_to_loading:
+    status: supervised_only
+    evidence: operator_ui/reports/squid_stage, loading reference confirmed 2026-11-03; stage_return_verified false.
+  run_imaging:
+    status: supervised_only
+    evidence: confirmed_acquisition.yaml in operator_ui/reports/autonomous_squid runs (2026-10-24 and later).
+  full_handoff_with_hamilton:
+    status: blocked
+    blocker: Needs the Hamilton to Bioyond plate hand-off, which is blocked.

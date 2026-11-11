@@ -21,11 +21,11 @@ STEPS = (
     ('Grip', 'position_grip', 'Grip the 48-well plate'),
 )
 REQUIREMENTS = [
-    'Start at saved Home with empty jaws. The 48-well plate is flat in its accepted holder and orientation.',
+    'Start at IDLE with empty jaws. The 48-well plate is flat in its accepted HOME holder and orientation.',
     'Keep the same plate support and camera settings as the reviewed 48-well setup.',
-    'Confirm the lift to the observation height, alignment sweep, descent, and loaded Home route are clear; supervise the emergency stop.',
+    'Confirm the observation/alignment sweep, descent, reseating, jaw opening and 30 mm empty-arm rise are clear; supervise the emergency stop.',
     'Uses well-grid detection and the verified height reference, then the taught descent and accepted 3.9 mm grip.',
-    'After gripping, lift 5 mm slowly and return Home with the claw unchanged. Changed plate placement stops for review.',
+    'After gripping, lift 5 mm at speed 5, lower the same 5 mm at speed 5 into the unchanged supporting holder, open E1 to 28 mm, then raise the empty arm 30 mm at speed 137. No return to IDLE or holder rotation. Changed plate placement stops for review.',
 ]
 
 
@@ -177,7 +177,9 @@ class Plate48Pickup(ClassicPickup):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.steps = STEPS + TRANSPORT_STEPS if self.transport else STEPS
+        self.steps = STEPS + getattr(self.transport, 'steps', TRANSPORT_STEPS) if self.transport else STEPS
+        if getattr(self.transport, 'completion_action', None) == 'Clearance':
+            self.state['message'] = 'Calibrate, align, descend, grip, proof lift, reseat, release and clear HOME.'
 
     def _draft_body(self):
         reference()

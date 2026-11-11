@@ -62,7 +62,11 @@ def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=
         validate_short_shape(start,points,short_side_alignment)
     if squid_queue:
         if not reviewed:raise TransferError('Squid queue requires explicit route review.')
-        from squid_single_queue import validate_route as validate_squid_queue
+        if squid_queue == 'home_holder':
+            from home_squid_transfer import validate_route as validate_squid_queue
+        elif squid_queue is True:
+            from squid_single_queue import validate_route as validate_squid_queue
+        else:raise TransferError('Unknown Squid queue profile.')
         validate_squid_queue(start,points)
     if scope_phase is not None and not (scope_compact or scope_trial):
         raise TransferError('Scope phases require the reviewed microscope route.')
@@ -242,7 +246,11 @@ class LuaTrajectory:
         if squid_queue:
             if not reviewed or grouped or segment_speeds is None or any((research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_speed137,scope_speed137)):
                 raise TransferError('Squid queue requires its reviewed segment-speed profile.')
-            from squid_single_queue import validate_route, check_route
+            if squid_queue == 'home_holder':
+                from home_squid_transfer import validate_route, check_route
+            elif squid_queue is True:
+                from squid_single_queue import validate_route, check_route
+            else:raise TransferError('Unknown Squid queue profile.')
             expected_speeds=validate_route(start,points)[1]
             if (list(segment_speeds)!=expected_speeds or any(type(v) not in (int,float) or not math.isfinite(v) for v in segment_speeds) or speed!=137):
                 raise TransferError('Squid queue speeds must preserve transit 137 and vertical seating/lift 5.')

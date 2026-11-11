@@ -31,7 +31,7 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual(self.e1,3.9)
         self.assertTrue(self.grips)
         self.assertEqual(self.grips[0],(7.0,5))
-        self.assertTrue(all(3.9<=v<=7 and speed==5 for v,speed in self.grips))
+        self.assertEqual(self.grips,[(7,5),(7,5),(4.9,10),(3.9,5)])
         self.assertEqual([c[1] for c in self.s.robot.calls],
                          [137,137,137,5,5,137,137,137,137,137,137,137,5,5,137,137,137,137])
         self.assertEqual(self.stops,[])

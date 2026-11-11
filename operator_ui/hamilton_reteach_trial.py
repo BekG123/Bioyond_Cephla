@@ -3,6 +3,7 @@ from copy import deepcopy
 import hashlib
 import json
 import math
+import re
 import time
 from autonomy import check_path, TransferError
 from hamilton_true_home import ROOT, configured, segment_envelope
@@ -10,10 +11,14 @@ from scope_step_trial import near, preflight
 
 PLAN=ROOT/'reports/trajectory_smoothing/hamilton_reteach_20261108/candidate.json'
 SHA='d747003b6883dc1c2e4999cf241833756e03e379a9c753711650c293cbaafd9c'
-OUTPUT=PLAN.with_name('forward_repeat01_20261108.json')
+OUTPUT=PLAN.with_name('forward_from_squid_repeat02_20261109.json')
 
 
-def output_path(reverse=False):
+def output_path(reverse=False, trial_id=None):
+    if trial_id is not None:
+        if not isinstance(trial_id,str) or not re.fullmatch(r'[a-z0-9][a-z0-9_-]{0,63}',trial_id):
+            raise TransferError('Invalid Hamilton repeat record ID.')
+        return OUTPUT.with_name(('reverse_' if reverse else 'forward_')+trial_id+'.json')
     return OUTPUT.with_name('reverse_speed137_trial.json') if reverse else OUTPUT
 
 
@@ -62,11 +67,13 @@ def check_route(start,points,joints,cfg,envelope):
     return q
 
 
-def review(service,cfg,reverse=False):
-    if output_path(reverse).exists():raise TransferError('Hamilton trial already attempted; review before any retry.')
+def review(service,cfg,reverse=False,trial_id=None,forward_trial_id=None):
+    if forward_trial_id is not None and not reverse:
+        raise TransferError('Forward receipt binding applies only to return travel.')
+    if output_path(reverse,trial_id).exists():raise TransferError('Hamilton trial already attempted; review before any retry.')
     forward_hash=None
     if reverse:
-        raw=OUTPUT.read_bytes();forward=json.loads(raw)
+        raw=output_path(False,forward_trial_id).read_bytes();forward=json.loads(raw)
         if forward['status']!='completed' or forward['plan']['candidate_sha256']!=SHA or forward['result'].get('ok') is not True:
             raise TransferError('Successful matching forward trial required before returning.')
         forward_hash=hashlib.sha256(raw).hexdigest()
@@ -76,12 +83,14 @@ def review(service,cfg,reverse=False):
     e1=state.get('external_axes',{}).get('E1')
     if type(e1) not in (int,float) or not math.isfinite(e1):raise TransferError('Claw feedback unavailable.')
     return dict(candidate_sha256=SHA,start=path[0],points=path[1:],
-                joints=state['joints'],e1=e1,speed=137,reverse=reverse,forward_trial_sha256=forward_hash)
+                joints=state['joints'],e1=e1,speed=137,reverse=reverse,forward_trial_sha256=forward_hash,
+                trial_id=trial_id,forward_trial_id=forward_trial_id)
 
 
 def execute(run,service,cfg,approved):
-    fresh=review(service,cfg,approved.get('reverse',False));output=output_path(fresh['reverse'])
-    if any(fresh[k]!=approved[k] for k in ('candidate_sha256','start','points','speed','reverse','forward_trial_sha256')):
+    fresh=review(service,cfg,approved.get('reverse',False),approved.get('trial_id'),approved.get('forward_trial_id'))
+    output=output_path(fresh['reverse'],fresh['trial_id'])
+    if any(fresh[k]!=approved[k] for k in ('candidate_sha256','start','points','speed','reverse','forward_trial_sha256','trial_id','forward_trial_id')):
         raise TransferError('Hamilton trial changed before dispatch.')
     if abs(fresh['e1']-approved['e1'])>.05:raise TransferError('Claw changed before dispatch.')
     if any(abs(fresh['joints'][k]-approved['joints'][k])>.5 for k in ('J1','J2','J3','J4')):
