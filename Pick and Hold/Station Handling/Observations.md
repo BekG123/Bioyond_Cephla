@@ -196,3 +196,9 @@ The first live routine reached Hamilton Z38.61/E1≈3.70, then waited before jaw
 
 - Operator confirmed the new workflow successful after one complete Hamilton/Squid handling cycle; controller logs show 1/1 completed. Both HOME returns use the continuous descent to the 1 mm-lower seat at speed 5, followed by release.
 - Evidence: `operator_ui/reports/plate_session/continuous_grip_handling_144cd4486087457e90ae550b304aa3ee/run.json` and its `operator_acceptance.json`. This supersedes the preceding pending-trial note; it does not relabel failed or earlier separate-move trials.
+
+
+## 2026-11-11 - Five combined handling cycles accepted
+
+- Run `continuous_grip_handling_dd538f47b7334f6d92bea4be4bedcea0`: one full calibration, then 5/5 Hamilton and Squid drop-off/retrieval cycles completed. Operator confirmed the finished run successful.
+- Controller phase results and measurements are preserved; operator acceptance is recorded separately in `operator_ui/reports/plate_session/continuous_grip_handling_dd538f47b7334f6d92bea4be4bedcea0/operator_acceptance.json` and linked from `run.json`. Handling success does not imply dispensing or imaging ran.
