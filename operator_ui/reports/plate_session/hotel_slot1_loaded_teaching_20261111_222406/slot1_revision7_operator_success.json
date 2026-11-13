@@ -1,0 +1,39 @@
+{
+ "schema": "cephla.operator-accepted-workflow.v1",
+ "recorded_at_utc": "2026-11-13T14:34:26.272079+00:00",
+ "operator_statement": "plate is secure in slot 1, save as successful run",
+ "outcome": "One accepted slot1 retrieval and delivery at revision 7 (horizontal rack entry and withdrawal at 50); plate secure in slot 1",
+ "revision": 7,
+ "horizontal_entry_exit_speed": 50,
+ "completed_round_trips": 1,
+ "plate": "Cellvis P24-1.5H-N",
+ "final_plate_state": "Released and secure in slot 1",
+ "durations_s": {
+  "retrieve": 47.7,
+  "deliver": 45.2,
+  "revision5_reference": {
+   "retrieve": 52.5,
+   "deliver": 51.8
+  }
+ },
+ "holder_correction": "E2 1.873 corrected once to 1.771 before the retrieval approach (calibration_e2.verify)",
+ "previous_failure": "operator_ui/reports/plate_session/hotel_slot1_loaded_teaching_20261111_222406/slot1_revision6_live_failure.json",
+ "trial_record": "operator_ui/reports/plate_session/hotel_slot1_loaded_teaching_20261111_222406/revision7_trial_d0f8b43aceab48899d15d3c23c23e702.json",
+ "artifact_sha256": {
+  "operator_ui/reports/plate_session/hotel_slot1_loaded_teaching_20261111_222406/deliveries/f1cbe54727fb4372b868f92e857fd4d2.json": "4c4d17b7405a2b66f5cfa55064ed89c7ce7060be088e3ce954846aee8713db75",
+  "operator_ui/reports/plate_session/hotel_slot1_loaded_teaching_20261111_222406/retrievals/ff5c95098be9427eab8fd31c501c97e6.json": "794b013f576b8945889feee6920e1e6c7ceab6d1a305968925ee6e43c77708c7"
+ },
+ "implementation_sha256": {
+  "operator_ui/hotel_slot1_delivery.py": "4cfada827ccfbe29c4826051b9d1658152d1cd6aa793c836548710adcba26c3a",
+  "operator_ui/hotel_slot1_retrieval.py": "007c5d09fd7d36fb41d1bb172ec124595f02804b92b10bce2b89591ea68d7bcd"
+ },
+ "geometry_sha256": {
+  "deliver": "ffe621fe57b1840b278e91be490d200ce654555a711f119a93c5874e5424ebd3",
+  "retrieve": "e7b038ae753d40d5713d323b32c2708be290f4b7899156dd1250a0db96b758e8"
+ },
+ "telemetry_modified": false,
+ "unvalidated_slots": [
+  2,
+  3
+ ]
+}

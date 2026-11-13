@@ -41,6 +41,7 @@ class FakeController:
         self.var_i: dict[int, int] = {}
         self.hostpoint_supported = True
         self.job_log: list[dict] = []
+        self.cmd_log: list[tuple[float, str]] = []  # (time.monotonic(), cmd) of every frame received
         self._srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self._srv.bind((host, port))
@@ -74,6 +75,7 @@ class FakeController:
 
     def _handle(self, conn: socket.socket, req: dict) -> None:
         cmd, fid, params = req.get("cmd"), req.get("id"), req.get("params")
+        self.cmd_log.append((time.monotonic(), cmd))
         api = {"BRCAPI": "1.0", "id": fid}
 
         def ret(value):

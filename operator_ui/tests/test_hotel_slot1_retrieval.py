@@ -23,8 +23,14 @@ class RetrievalTests(unittest.TestCase):
         self.run=SimpleNamespace(stopped=lambda:False,say=Mock(),audit=Mock())
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
         read=lambda svc:dict(moving=False,error=False,emergency=False,drag=False,manual=False,external_axes=deepcopy(self.axes))
-        for p in (patch.object(state_module,'native',read),patch.object(h,'OUTPUT',Path(self.tmp.name))):
+        self.correction_failure=None
+        for p in (patch.object(state_module,'native',read),patch.object(h,'OUTPUT',Path(self.tmp.name)),
+                  patch.object(h,'verify',self.correct_holder)):
             p.start();self.addCleanup(p.stop)
+    def correct_holder(self,service,run,correct=False):
+        self.calls.append(('holder_correction',correct))
+        if self.correction_failure:raise RuntimeError(self.correction_failure)
+        self.axes['E2']=1.77;return [1.77,1.77,1.77]
     def jaw(self,target,speed):
         self.axes['E1']=target;self.calls.append(('jaw',target,speed));return {'ok':True}
     def queue(self,run,start,joints,points,cfg,speed,monitor,**kw):
@@ -37,6 +43,33 @@ class RetrievalTests(unittest.TestCase):
         self.assertTrue(result['ok'])
         self.assertEqual(self.calls,[('queue','approach'),('jaw',4.9,10),('jaw',3.9,5),('queue','lift'),
             ('queue','return'),('queue','seat'),('jaw',28,5),('queue','clear')])
+    def test_drifted_holder_corrected_once_before_any_arm_motion(self):
+        self.axes['E2']=1.873;p=h.preview(self.svc,self.cfg)
+        with patch('trajectory_queue.LuaTrajectory.execute',side_effect=self.queue):result=h.execute(self.run,self.svc,self.cfg,p)
+        self.assertTrue(result['ok'])
+        self.assertEqual(self.calls[:2],[('holder_correction',True),('queue','approach')])
+        self.assertEqual(self.calls.count(('holder_correction',True)),1)
+        record=json.loads(Path(result['record']).read_text());self.assertEqual(record['holder_readings'],[1.77,1.77,1.77])
+
+    def test_accepted_holder_gets_no_correction(self):
+        for angle in (1.745,1.77,1.815):
+            self.calls.clear();self.axes.update(E1=7.,E2=angle);self.s['pose_mm']=deepcopy(self.g['home'])
+            self.s['joints']=deepcopy(reference()[0]['start_joints']);p=h.preview(self.svc,self.cfg)
+            with patch('trajectory_queue.LuaTrajectory.execute',side_effect=self.queue):h.execute(self.run,self.svc,self.cfg,p)
+            self.assertNotIn(('holder_correction',True),self.calls)
+
+    def test_holder_beyond_correction_bound_refused_before_motion(self):
+        self.axes['E2']=3.9
+        with self.assertRaisesRegex(Exception,'original accepted orientation'):h.preview(self.svc,self.cfg)
+        self.assertEqual(self.calls,[])
+
+    def test_failed_holder_correction_stops_before_approach(self):
+        self.axes['E2']=1.873;self.correction_failure='E2 correction did not verify';p=h.preview(self.svc,self.cfg)
+        with patch('trajectory_queue.LuaTrajectory.execute',side_effect=self.queue):
+            with self.assertRaisesRegex(Exception,'did not verify'):h.execute(self.run,self.svc,self.cfg,p)
+        self.assertNotIn(('queue','approach'),self.calls)
+        self.assertEqual(self.calls,[('holder_correction',True),('program','stop')])
+
     def test_failed_lift_stops_without_withdrawal_or_release(self):
         p=h.preview(self.svc,self.cfg)
         def execute(*args,**kw):
@@ -51,9 +84,10 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual(lift['Z']-end['Z'],5)
         for key in ('Y','Z','Rz'):self.assertEqual(exit[key],lift[key])
         self.assertEqual(exit['X'],154.409)
-        self.assertEqual(r['lift']['speeds'],[5]);self.assertEqual(r['approach']['speeds'][-2:],[137,20])
+        self.assertEqual(r['lift']['speeds'],[5]);self.assertEqual(r['approach']['speeds'][-2:],[137,50])
         self.assertAlmostEqual(end['X'],290.878)
-        self.assertEqual(r['return']['speeds'],[20,137,137,137,137,137])
+        self.assertEqual(r['return']['speeds'],[50,137,137,137,137,137])
+        self.assertEqual(r['seat']['speeds'],[5,5])  # contact phases stay slow
     def test_route_speed_and_owner_bound(self):
         p=h.preview(self.svc,self.cfg);owner=h.RetrievalService(self.svc,p);r=self.g['routes']['approach']
         h.prepare_for_service(owner,h.PREFIX+'approach',p['start'],p['joints'],r['points'],self.cfg,self.g['envelope'],r['speeds'])

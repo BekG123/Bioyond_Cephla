@@ -27,6 +27,12 @@ OUTSIDE_X=154.409
 CORRECTION=FOLDER/'slot1_approach_revision3.json'
 RETURN_CORRECTION=FOLDER/'slot1_return_speed_revision4.json'
 HORIZONTAL_CORRECTION=FOLDER/'slot1_horizontal_speed_revision5.json'
+HORIZONTAL_SPEED6=FOLDER/'slot1_horizontal_speed_revision6.json'
+HORIZONTAL_SPEED7=FOLDER/'slot1_horizontal_speed_revision7.json'
+# Horizontal rack entry (last 'deliver' segment) and withdrawal (first 'return' segment), by revision.
+# Revision 6 (70) stopped with a collision on the loaded entry (slot1_revision6_live_failure.json).
+ENTRY_SPEED={3:10,4:10,5:20,6:70,7:50}
+WITHDRAWAL_SPEED={4:5,5:20,6:70,7:50}
 SOURCES=[FOLDER/'slot_1_loaded_endpoint_capture.json',
          FOLDER/'lower_recovery/77e9989b2e904acda6ec27fac3312ce3.json',
          FOLDER/'slot1_loaded_clearance_revision2.json']
@@ -50,8 +56,8 @@ def check_geometry(start,points,joints,cfg,env,allow_outside=False):
     return v
 
 
-def geometry(revision=5):
-    if revision not in (2,3,4,5):raise TransferError('Unknown slot1 revision.')
+def geometry(revision=7):
+    if revision not in (2,3,4,5,6,7):raise TransferError('Unknown slot1 revision.')
     base,digest=reference();profile,sha=load()
     if not accepted_grip(profile):raise TransferError('Accepted48-well pickup required.')
     capture=json.loads(SOURCES[0].read_bytes());recovery=json.loads(SOURCES[1].read_bytes())
@@ -77,12 +83,24 @@ def geometry(revision=5):
                 outside_descent_and_home_return_speed=137,parent_approach_sha256=hashes[str(CORRECTION)]).items()):
             raise TransferError('Slot1 return-speed correction changed.')
         hashes[str(RETURN_CORRECTION)]=hashlib.sha256(RETURN_CORRECTION.read_bytes()).hexdigest()
-    if revision==5:
+    if revision>=5:
         horizontal=json.loads(HORIZONTAL_CORRECTION.read_bytes())
         if any(horizontal.get(k)!=v for k,v in dict(revision=5,horizontal_entry_speed=20,
                 horizontal_withdrawal_speed=20,parent_return_sha256=hashes[str(RETURN_CORRECTION)]).items()):
             raise TransferError('Slot1 horizontal-speed correction changed.')
         hashes[str(HORIZONTAL_CORRECTION)]=hashlib.sha256(HORIZONTAL_CORRECTION.read_bytes()).hexdigest()
+    if revision>=6:
+        faster=json.loads(HORIZONTAL_SPEED6.read_bytes())
+        if any(faster.get(k)!=v for k,v in dict(revision=6,horizontal_entry_speed=ENTRY_SPEED[6],
+                horizontal_withdrawal_speed=WITHDRAWAL_SPEED[6],parent_horizontal_sha256=hashes[str(HORIZONTAL_CORRECTION)]).items()):
+            raise TransferError('Slot1 horizontal-speed revision6 changed.')
+        hashes[str(HORIZONTAL_SPEED6)]=hashlib.sha256(HORIZONTAL_SPEED6.read_bytes()).hexdigest()
+    if revision==7:
+        slower=json.loads(HORIZONTAL_SPEED7.read_bytes())
+        if any(slower.get(k)!=v for k,v in dict(revision=7,horizontal_entry_speed=ENTRY_SPEED[7],
+                horizontal_withdrawal_speed=WITHDRAWAL_SPEED[7],parent_horizontal_sha256=hashes[str(HORIZONTAL_SPEED6)]).items()):
+            raise TransferError('Slot1 horizontal-speed revision7 changed.')
+        hashes[str(HORIZONTAL_SPEED7)]=hashlib.sha256(HORIZONTAL_SPEED7.read_bytes()).hexdigest()
     pivot=dict(X=240.,Y=25.,Z=191.196,Rz=end['Rz'])
     inside=dict(X=205.,Y=-115.001,Z=191.196,Rz=end['Rz'])
     outside=dict(inside,X=OUTSIDE_X)
@@ -93,8 +111,8 @@ def geometry(revision=5):
         'connect':dict(start=home,points=[clear],speeds=[5],e1=0),
         'descend':dict(start=clear,points=[dict(seat,Z=seat['Z']+20),seat],speeds=[137,5],e1=28),
         'proof':dict(start=seat,points=[proof],speeds=[5],e1=3.9),
-        'deliver':dict(start=proof,points=forward,speeds=([137]*6+[20 if revision==5 else 10] if revision>=3 else [5]*len(forward)),e1=3.9),
-        'return':dict(start=end,points=back,speeds=([20 if revision==5 else 5]+[137]*5 if revision>=4 else [5]*len(back)),e1=7)}
+        'deliver':dict(start=proof,points=forward,speeds=([137]*6+[ENTRY_SPEED[revision]] if revision>=3 else [5]*len(forward)),e1=3.9),
+        'return':dict(start=end,points=back,speeds=([WITHDRAWAL_SPEED[revision]]+[137]*5 if revision>=4 else [5]*len(back)),e1=7)}
     q=base['start_joints']
     for name,r in routes.items():
         v=check_geometry(r['start'],r['points'],q,base['config'],base['envelope'],name in ('deliver','return'))

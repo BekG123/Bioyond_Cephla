@@ -10,6 +10,9 @@ This client fixes the known problems in the vendor reference code:
 - correct mode values (Manual=0, Auto=1) and program state Error=3
 - a timeout NEVER implies the command was not executed; motion timeouts raise
   UnknownStateError so callers do not blindly resend
+- a keepalive read while the link is otherwise silent: the controller closes a
+  client that sends nothing for about 30 s (the vendor SDK sends getRobotErr
+  every 0.8 s for the same reason)
 """
 
 from __future__ import annotations
@@ -19,6 +22,7 @@ import json
 import logging
 import socket
 import threading
+import time
 from queue import Empty, Queue
 from typing import Any, Optional
 
@@ -26,6 +30,9 @@ log = logging.getLogger("bioyond.robot")
 
 BRCAPI_VERSION = "1.0"
 DEFAULT_PORT = 56788
+# Seen on 2026-11-13: the link held while something read the robot every ~2-28 s,
+# and dropped after ~30 s with no frame (both times with the arm idle at HOME).
+KEEPALIVE_S = 2.0
 
 # getCtrlMode (protocol values — the vendor Python sample has these reversed)
 MODE_MANUAL = 0
@@ -70,7 +77,9 @@ class _Pending:
 
 
 class RobotClient:
-    def __init__(self) -> None:
+    def __init__(self, keepalive_s: Optional[float] = KEEPALIVE_S) -> None:
+        """keepalive_s: send a read-only getRobotErr when no frame was sent for this
+        long, so that the controller does not close an idle link. None: never."""
         self._sock: Optional[socket.socket] = None
         self._connected = False
         self._ip: Optional[str] = None
@@ -81,6 +90,8 @@ class RobotClient:
         self._pending: dict[int, _Pending] = {}
         self._pending_lock = threading.Lock()
         self._rx_thread: Optional[threading.Thread] = None
+        self._keepalive_s = keepalive_s
+        self._last_send = 0.0  # time.monotonic() of the last frame sent
         self.unsolicited: list[dict] = []  # frames we could not correlate
 
     # ------------------------------------------------------------------ link
@@ -112,6 +123,11 @@ class RobotClient:
                 target=self._rx_loop, name="brcapi-rx", daemon=True
             )
             self._rx_thread.start()
+            self._last_send = time.monotonic()
+            if self._keepalive_s:
+                threading.Thread(
+                    target=self._keepalive_loop, args=(sock,), name="brcapi-keepalive", daemon=True
+                ).start()
         log.info("connected to %s:%s", ip, port)
 
     def disconnect(self) -> None:
@@ -135,6 +151,22 @@ class RobotClient:
             pendings = list(self._pending.values())
         for p in pendings:
             p.queue.put(None)  # sentinel: link lost
+
+    def _keepalive_loop(self, sock: socket.socket) -> None:
+        """While this socket is the live link: a read-only getRobotErr when no frame was
+        sent for keepalive_s. Never during traffic (motion monitoring reads constantly),
+        never a retry of anything, and a failure is left to the receive loop."""
+        interval = float(self._keepalive_s or 0)
+        while self._connected and self._sock is sock:
+            idle = time.monotonic() - self._last_send
+            if idle < interval:
+                time.sleep(min(interval - idle, interval / 2) + 0.01)
+                continue
+            try:
+                self.request("getRobotErr", timeout=5.0)
+            except RobotError as ex:
+                log.debug("keepalive read failed: %s", ex)
+                time.sleep(interval / 2)
 
     # ------------------------------------------------------------- rx loop
 
@@ -190,6 +222,7 @@ class RobotClient:
         try:
             with self._send_lock:
                 self._sock.sendall(data)
+                self._last_send = time.monotonic()
         except OSError as ex:
             self._unregister(fid)
             self._connected = False

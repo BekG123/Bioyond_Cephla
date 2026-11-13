@@ -5,7 +5,7 @@ import math
 import time
 from uuid import uuid4
 from autonomy import TransferError,check_path
-from calibration_e2 import accepted
+from calibration_e2 import accepted,verify
 from hotel_slot1_delivery import FOLDER,KEYS,OUTSIDE_X,CORRECTION,geometry as delivery_geometry
 from hotel_slot_trial import reference
 from hotel_slot2_pickup import state
@@ -21,6 +21,9 @@ PREFIX='slot1_retrieval_'
 SOURCE=FOLDER/'deliveries/c29d5b8024a74fefb209b59b6e2274e8.json'
 ACCEPTANCE=SOURCE.with_name(SOURCE.stem+'_operator_acceptance.json')
 OUTPUT=FOLDER/'retrievals'
+# A holder outside the accepted 1.740-1.820 band but within this bound of 1.77 gets the single E2 correction
+# that the slot-1 delivery makes at its start (calibration_e2.verify, RobotService.position_calibration_e2).
+HOLDER_CORRECTION_BOUND_DEG=2
 
 
 def checked(start,points,joints,cfg,env,outside=False):
@@ -49,10 +52,12 @@ def geometry():
     reverse=[dict(d['routes']['return']['points'][0],Z=lift['Z'])]+d['routes']['return']['points'][1:]
     pickup=d['routes']['descend']['points'][-1];seat=seating_plan(pickup)['pose']
     clear=d['routes']['connect']['points'][-1]
+    # The horizontal slot entry and withdrawal follow the delivery revision (revision7: 50, revision5: 20).
+    entry=d['routes']['deliver']['speeds'][-1];withdrawal=d['routes']['return']['speeds'][0]
     routes={
-        'approach':dict(start=home,points=approach,speeds=[137,137,137,137,137,20],e1=7),
+        'approach':dict(start=home,points=approach,speeds=[137,137,137,137,137,entry],e1=7),
         'lift':dict(start=end,points=[lift],speeds=[5],e1=3.9),
-        'return':dict(start=lift,points=reverse,speeds=[20,137,137,137,137,137],e1=3.9),
+        'return':dict(start=lift,points=reverse,speeds=[withdrawal,137,137,137,137,137],e1=3.9),
         'seat':dict(start=home,points=[dict(seat,Z=home['Z']),seat],speeds=[5,5],e1=3.9),
         'clear':dict(start=seat,points=[clear,home],speeds=[137,137],e1=28)}
     base,_=reference();q=base['start_joints']
@@ -66,7 +71,9 @@ def geometry():
 def preview(service,cfg):
     s,n=state(service,7);g=geometry();check_home_start(s['pose_mm'],g['home'])
     if cfg!=g['cfg'] or {k:list(v) for k,v in service.envelope.items()}!=g['envelope']:raise TransferError('Geometry changed.')
-    if not accepted(n['external_axes']['E2']):raise TransferError('HOME holder must remain in its original accepted orientation.')
+    e2=n['external_axes']['E2']
+    if not accepted(e2) and not abs(e2-1.77)<=HOLDER_CORRECTION_BOUND_DEG:
+        raise TransferError('HOME holder must remain in its original accepted orientation.')
     # Check the actual approach, not a substituted nominal HOME coordinate.
     r=g['routes']['approach']
     v=checked(s['pose_mm'],r['points'],s['joints'],cfg,service.envelope,True)
@@ -182,6 +189,13 @@ def execute(run,service,cfg,approved,*,restore_holder_for_handoff=False):
         monitor();near(service.status()['pose_mm'],before,.05)
     save()
     try:
+        if not accepted(p['axes']['E2']):
+            # The empty HOME holder drifted out of the accepted band: one correction toward 1.77 before any
+            # arm motion, as the slot-1 delivery does at its start. No retry; the arm stays at HOME clearance.
+            monitor();record['motion_sent']=True;save()
+            record['holder_readings']=verify(service,run,correct=True);save()
+            _,corrected=state(service,expected)
+            if not accepted(corrected['external_axes']['E2']):raise TransferError('HOME holder not corrected; no retrieval.')
         queue('approach')
         for command in closure_commands(7,3.9):jaw(command['target_e1_mm'],command['speed'])
         queue('lift');queue('return')

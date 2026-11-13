@@ -109,9 +109,9 @@ class DeliveryTests(unittest.TestCase):
         self.assertAlmostEqual(previous['X']-endpoint['X'],6.35)
         for key in ('Y','Z','Rz'):self.assertEqual(previous[key],endpoint[key])
         self.assertEqual(new['routes']['return']['start'],endpoint)
-        self.assertEqual(new['routes']['deliver']['speeds'],[137]*6+[20])
+        self.assertEqual(new['routes']['deliver']['speeds'],[137]*6+[50])
         self.assertEqual(new['routes']['proof']['speeds'],[5])
-        self.assertEqual(new['routes']['return']['speeds'],[20,137,137,137,137,137])
+        self.assertEqual(new['routes']['return']['speeds'],[50,137,137,137,137,137])
         self.assertNotIn(str(h.CORRECTION),old['source_hashes'])
         self.assertIn(str(h.CORRECTION),new['source_hashes'])
 
@@ -126,7 +126,7 @@ class DeliveryTests(unittest.TestCase):
         self.assertIn(str(h.RETURN_CORRECTION),new['source_hashes'])
 
     def test_horizontal_twenty_preserves_other_speeds_and_geometry(self):
-        old=h.geometry(revision=4);new=h.geometry()
+        old=h.geometry(revision=4);new=h.geometry(revision=5)
         for name in old['routes']:
             self.assertEqual(old['routes'][name]['points'],new['routes'][name]['points'])
             self.assertEqual(old['routes'][name]['expected'],new['routes'][name]['expected'])
@@ -134,6 +134,46 @@ class DeliveryTests(unittest.TestCase):
         self.assertEqual(new['routes']['deliver']['speeds'],[137]*6+[20])
         self.assertEqual(new['routes']['return']['speeds'],[20]+[137]*5)
         self.assertIn(str(h.HORIZONTAL_CORRECTION),new['source_hashes'])
+        self.assertNotIn(str(h.HORIZONTAL_SPEED6),new['source_hashes'])
+
+    def test_horizontal_fifty_default_changes_only_horizontal_speeds(self):
+        old=h.geometry(revision=5);new=h.geometry()
+        for name in old['routes']:
+            self.assertEqual(old['routes'][name]['points'],new['routes'][name]['points'])
+            self.assertEqual(old['routes'][name]['expected'],new['routes'][name]['expected'])
+            if name not in ('deliver','return'):self.assertEqual(old['routes'][name],new['routes'][name])
+        self.assertEqual(new['routes']['deliver']['speeds'],[137]*6+[50])
+        self.assertEqual(new['routes']['return']['speeds'],[50]+[137]*5)
+        added={str(h.HORIZONTAL_SPEED6),str(h.HORIZONTAL_SPEED7)}
+        self.assertTrue(added<=set(new['source_hashes']))
+        self.assertEqual({k:v for k,v in new['source_hashes'].items() if k not in added},old['source_hashes'])
+
+    def test_changed_revision7_speed_rejected_before_motion(self):
+        data=json.loads(h.HORIZONTAL_SPEED7.read_bytes());data['horizontal_entry_speed']=70
+        candidate=Path(self.tmp.name)/'changed7.json';candidate.write_text(json.dumps(data))
+        with patch.object(h,'HORIZONTAL_SPEED7',candidate):
+            with self.assertRaisesRegex(Exception,'revision7 changed'):h.geometry()
+        self.assertEqual(self.calls,[])
+
+    def test_horizontal_seventy_changes_only_horizontal_speeds(self):
+        old=h.geometry(revision=5);new=h.geometry(revision=6)
+        for name in old['routes']:
+            self.assertEqual(old['routes'][name]['points'],new['routes'][name]['points'])
+            self.assertEqual(old['routes'][name]['expected'],new['routes'][name]['expected'])
+            if name not in ('deliver','return'):self.assertEqual(old['routes'][name],new['routes'][name])
+        self.assertEqual(new['routes']['deliver']['speeds'],[137]*6+[70])
+        self.assertEqual(new['routes']['return']['speeds'],[70]+[137]*5)
+        self.assertIn(str(h.HORIZONTAL_CORRECTION),new['source_hashes'])
+        self.assertIn(str(h.HORIZONTAL_SPEED6),new['source_hashes'])
+        self.assertEqual({k:v for k,v in new['source_hashes'].items() if k!=str(h.HORIZONTAL_SPEED6)},old['source_hashes'])
+
+    def test_changed_revision6_speed_rejected_before_motion(self):
+        data=json.loads(h.HORIZONTAL_SPEED6.read_bytes());data['horizontal_withdrawal_speed']=137
+        candidate=Path(self.tmp.name)/'changed6.json';candidate.write_text(json.dumps(data))
+        with patch.object(h,'HORIZONTAL_SPEED6',candidate):
+            with self.assertRaisesRegex(Exception,'revision6 changed'):h.geometry()
+        self.assertEqual(h.geometry(revision=5)['routes']['return']['speeds'][0],20)
+        self.assertEqual(self.calls,[])
 
     def test_changed_correction_rejected_before_motion(self):
         data=json.loads(h.CORRECTION.read_bytes());data['endpoint_x_mm']=300
