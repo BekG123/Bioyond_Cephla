@@ -126,6 +126,25 @@ class ExecutionTests(unittest.TestCase):
         self.plan=self.engine.prepare()
         return self.engine.start(self.plan,Path(self.tmp.name),self.save,lambda:False)
 
+    def test_mode_mismatch_identifies_profile_and_connected_session_without_commands(self):
+        self.fake.state['simulation']=False
+        with self.assertRaisesRegex(TeachingError,"'current' expects simulated imaging.*uses real imaging"):
+            self.engine.prepare()
+        self.assertEqual(self.fake.calls,[])
+
+    def test_real_profile_reads_selected_settings_without_starting_imaging(self):
+        self.fake.physical_loading()
+        data=json.loads(self.fake.config.read_text())
+        data['profiles']['current'].update(simulation=False,camera_simulated=False)
+        self.fake.config.write_text(json.dumps(data))
+        self.fake.state.update(simulation=False,camera_simulated=False)
+        plan=self.engine.prepare(allow_loading_return=True)
+        self.assertFalse(plan['simulation'])
+        self.assertEqual(plan['profile']['captured_yaml'],self.fake.yaml)
+        self.assertEqual(plan['loading_position'],self.fake.loading)
+        self.assertEqual(self.fake.acquisition_count,0)
+        self.assertTrue(all(name.startswith('get_') for name,_ in self.fake.calls))
+
     def test_exact_selected_settings_and_completed_job(self):
         ticket=self.start()
         result=self.engine.wait(self.plan,ticket,self.save,lambda:False,lambda state:None)

@@ -62,7 +62,7 @@ class DecisionLogTests(unittest.TestCase):
             rows = [json.loads(line) for line in audit.path.read_text().splitlines()]
             records = {row['event']: row for row in rows}
             request = records['lacry_decision_request']['payload']
-            self.assertIn('273', request['system'])
+            self.assertIn('273', request['messages'][0]['content'])
             self.assertEqual(records['lacry_decision_tool_dispatch']['dispatched_arguments']['tip_labware_id'], 1)
             self.assertEqual(records['lacry_decision_tool_result']['tool_use_id'], 'tool-1')
             self.assertEqual(records['lacry_decision_response']['summary_status'], 'model_reported_not_verified')

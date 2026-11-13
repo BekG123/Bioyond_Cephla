@@ -87,6 +87,7 @@ class SquidAdapter:
         self.port, self.clock = port, clock
         self.identify = identify or (lambda: squid_process(port))
         self.request = request or (lambda command: read_command(command, port))
+        self.read_live_bridge = request is None
         self.log_path = Path(log_path or ROOT/'logs/squid/events.jsonl')
         self.completion_path=self.log_path.with_suffix('.completion.json')
         self.background = background
@@ -256,6 +257,12 @@ class SquidAdapter:
                     snapshot.update(stage_simulated=owner['stage_simulated'],
                                     camera_simulated=owner['camera_simulated'],
                                     controller_serial=owner.get('controller_serial'))
+                    if self.read_live_bridge:
+                        # The bridge reports the USB device actually open in Squid.
+                        # A missing launch override is not a missing controller.
+                        bridge=native_command('get_stage_reference',port=self.port,timeout=2)
+                        snapshot['controller_serial']=bridge.get('controller_serial')
+                        snapshot['loading']=deepcopy(bridge.get('loading'))
                     if owner['camera_simulated'] and not owner['stage_simulated']:
                         snapshot['message'] = 'Squid real-stage test with simulated camera: '+descriptions[status]
                 if status=='failed' and api.get('cleanup',{}).get('status')=='failed':

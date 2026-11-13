@@ -101,23 +101,11 @@ class Perception:
             self.tracker.previous_verified_seed=None
         tracked=self.tracker.track(frame)
         self.last_measurement_pose=dict(pose)
-        centers={}
+        from projected_plate_calibration import measurement_from_outlines
         scale=frame.shape[1]/tracked['image_size_px'][0]
-        for c in tracked['virtual_circles']:
-            p=np.array(c['pixels'])*scale
-            fit,_,rank,_=np.linalg.lstsq(np.column_stack([2*p,np.ones(len(p))]),np.sum(p*p,axis=1),rcond=None)
-            if rank!=3 or not np.isfinite(fit).all(): raise TransferError('Invalid projected disk center.')
-            centers[c['label']]=fit[:2]
-        big,small=centers['large'],centers['small']
-        midpoint=(big+small)/2
-        angle=float(np.degrees(np.arctan2(*(small-big)[::-1]))%360)
-        mark=[float(midpoint[0]),float(midpoint[1]),angle]
-        current=teach.mark_in_robot_pose(self.cfg,mark)
-        offset=np.zeros(6);offset[:2]=current[:2]-self.cfg['model_mark_robot'][:2]
-        correction=teach.new_acc_pose([pose['X'],pose['Y'],pose['Z'],0,0,pose['Rz']],offset)
-        error=correction[:2]-[pose['X'],pose['Y']]
-        return dict(mark=mark,error_xy_mm=error.tolist(),tracking=tracked,
-                    depth_estimated=False,grasp_target_created=False)
+        measured=measurement_from_outlines(
+            {c['label']:np.array(c['pixels'])*scale for c in tracked['virtual_circles']},pose,self.cfg)
+        return dict(measured,tracking=tracked,grasp_target_created=False)
 
 
 def observe(guard,cam,perception,record):

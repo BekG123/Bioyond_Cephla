@@ -40,6 +40,11 @@ class Controller:
         g.GetElem = lambda t,i:t[i]
         g.RobTarget = lambda *args:self.lua.table_from(args)
         g.MoveL = self.move
+        self.motion_kinds=[]
+        def joint_move(*args):
+            self.motion_kinds.append('MoveJ')
+            self.move(*args)
+        g.MoveJ = joint_move
         g.MOVFINISH = self.finish
         g.T0,g.U0 = 'T0','U0'
         if source is not None:pass

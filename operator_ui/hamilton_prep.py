@@ -178,7 +178,10 @@ class HamiltonPrep:
                       data=None if body is None else json.dumps(body,allow_nan=False).encode(),
                       headers={'Content-Type':'application/json'}, method=method)
         try:
-            with self.opener.open(req, timeout=30 if method!='GET' else 5) as response:
+            # Validation is a server-side operation despite its GET verb.
+            # Its duration must not inherit the short telemetry-read timeout.
+            timeout=90 if method=='GET' and path.startswith('protocols/validate/') else 30 if method!='GET' else 5
+            with self.opener.open(req, timeout=timeout) as response:
                 raw = response.read(16000000)
         except HTTPError as error:
             detail=error.read(16000).decode('utf-8',errors='replace')
@@ -906,7 +909,14 @@ class HamiltonPrep:
                 self.consume(self._stream,owned)
                 self.guard_errors(owned,set(owned['baseline']))
                 state=self.verify(plan);run=state['run'];progress(state)
-                if not sent and run.get('protocolRunState') in (0,1,2,'Idle','Scheduling','Scheduled'):
+                # Native completion may clear protocolId. The captured exact
+                # job and its result remain mandatory evidence for pickup.
+                if sent and run.get('isRunInProgress') is False and state['global_state']=='Idle':
+                    self.completed_for_pickup(plan,owned)
+                    owned['status']='completed';save(deepcopy(owned));ticket.update(deepcopy(owned))
+                    self.journal(owned,'outcome',owned)
+                    return dict(ok=True,job_id=owned['job_id'])
+                if not sent and run.get('protocolRunState') in (0,1,2,10,15,'Idle','Scheduling','Scheduled'):
                     self.sleep(.5);continue
                 if run.get('protocolId')!=plan['recipe']['protocol_id'] or run.get('isSimulation') is not False:
                     raise TeachingError('Hamilton run identity or simulation state changed.')
@@ -915,7 +925,8 @@ class HamiltonPrep:
                     if run_id==owned['previous_run_id'] or (owned.get('job_id') and owned['job_id']!=run_id):
                         raise TeachingError('Hamilton reported a stale or different run.')
                     owned['job_id']=run_id
-                if run.get('protocolRunState') in (3,'Loading') and not sent:
+                if run.get('protocolRunState') in (3,20,'Loading') and not sent:
+                    if not owned.get('job_id'):raise TeachingError('Hamilton loading has no fresh owned job ID.')
                     instructions=self.call('GET','protocol-run/load-instructions')
                     if digest(instructions)!=owned['cycle_load']['load_instructions_hash']:
                         raise TeachingError('Hamilton loading instructions changed. Inspect the deck before continuing.')
@@ -923,11 +934,6 @@ class HamiltonPrep:
                     body.update(protocolId=plan['recipe']['protocol_id'],simulate=False,loadCompleteAction='Run')
                     sent=True;owned['status']='running';save(deepcopy(owned))
                     self.write(owned,'PUT','protocol-run/load-complete',body)
-                if sent and run.get('isRunInProgress') is False and state['global_state']=='Idle':
-                    self.completed_for_pickup(plan,owned)
-                    owned['status']='completed';save(deepcopy(owned));ticket.update(deepcopy(owned))
-                    self.journal(owned,'outcome',owned)
-                    return dict(ok=True,job_id=owned['job_id'])
                 self.sleep(.5)
             raise TeachingError('Hamilton run timed out. Pickup blocked.')
         except Exception:

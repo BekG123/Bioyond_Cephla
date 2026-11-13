@@ -126,7 +126,9 @@ class IKHomeConnection:
             points_sha256=hashlib.sha256(self.home.path.read_bytes()).hexdigest(),
             stages=stages,checked=checked,preserve_gripper=preserve,
             steps=[dict(kind='home_return',label=label) for label in labels],requirements=requirements,
-            summary='Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.')
+            summary=('Return Home from the current position using IK. Translation speed 137; '
+                     + ('queued pivot turn speed 137. ' if any(s.get('queued_pivot') for s in stages) else 'wrist speed 30. ')
+                     + 'Review the physical route before confirming.'))
 
     def start(self,plan):
         fresh=self.propose()

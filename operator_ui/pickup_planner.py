@@ -7,6 +7,7 @@ import threading
 from uuid import uuid4
 
 from imitation_agent import HaikuTools, digest
+from lacry_model import request_options
 from researcher_teaching import TeachingError, numbers, utc_now
 from researcher_routine_check import check_routine
 
@@ -194,7 +195,7 @@ class PickupPlanner:
     def run(self, ident, packet):
         try:
             self.output_dir.mkdir(parents=True,exist_ok=True)
-            payload=dict(model=self.credentials.model,max_tokens=2200,temperature=0,system=SYSTEM,
+            payload=dict(**request_options(self.credentials.model),system=SYSTEM,
                 tools=[TOOL],tool_choice=dict(type='auto',disable_parallel_tool_use=True),
                 messages=[dict(role='user',content=json.dumps(packet,allow_nan=False))])
             evidence_path=self.output_dir/(ident+'_evidence.json')

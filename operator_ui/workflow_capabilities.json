@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "capabilities": [
+    {
+      "id": "cellvis_deliver_squid",
+      "operation": "deliver_squid",
+      "profile": "Cellvis P24-1.5H-N",
+      "executor": "cellvis_station_phase",
+      "station": "Squid",
+      "phase": "delivery",
+      "requires": {
+        "plate_location": "HOME",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "effects": {
+        "plate_location": "Squid",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "description": "Deliver and release the Cellvis plate at Squid; return the empty arm to HOME.",
+      "auto_prepare": true,
+      "allow_preparation": true
+    },
+    {
+      "id": "cellvis_retrieve_squid",
+      "operation": "retrieve_squid",
+      "profile": "Cellvis P24-1.5H-N",
+      "executor": "cellvis_station_phase",
+      "station": "Squid",
+      "phase": "retrieval",
+      "requires": {
+        "plate_location": "Squid",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "effects": {
+        "plate_location": "HOME",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "description": "Retrieve the Cellvis plate from Squid, reseat and release it in HOME; finish with empty jaws at HOME clearance.",
+      "auto_prepare": true
+    },
+    {
+      "id": "cellvis_deliver_hamilton",
+      "operation": "deliver_hamilton",
+      "profile": "Cellvis P24-1.5H-N",
+      "executor": "cellvis_station_phase",
+      "station": "Hamilton",
+      "phase": "delivery",
+      "requires": {
+        "plate_location": "HOME",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "effects": {
+        "plate_location": "Hamilton",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "description": "Deliver and release the Cellvis plate at Hamilton site 4; return the empty arm to HOME.",
+      "auto_prepare": true,
+      "allow_preparation": true
+    },
+    {
+      "id": "cellvis_retrieve_hamilton",
+      "operation": "retrieve_hamilton",
+      "profile": "Cellvis P24-1.5H-N",
+      "executor": "cellvis_station_phase",
+      "station": "Hamilton",
+      "phase": "retrieval",
+      "requires": {
+        "plate_location": "Hamilton",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "effects": {
+        "plate_location": "HOME",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "description": "Retrieve the Cellvis plate from Hamilton site 4, reseat and release it in HOME; finish with empty jaws at HOME clearance.",
+      "auto_prepare": true
+    },
+    {
+      "id": "cellvis_retrieve_hotel",
+      "operation": "retrieve_hotel",
+      "profile": "Cellvis P24-1.5H-N",
+      "slots": [
+        1
+      ],
+      "executor": "hotel_retrieval",
+      "requires": {
+        "plate_location": "hotel",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "effects": {
+        "plate_location": "HOME",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "description": "Retrieve the declared source slot and release in HOME using its accepted profile binding."
+    },
+    {
+      "id": "48well_retrieve_hotel",
+      "operation": "retrieve_hotel",
+      "profile": "48_well_projected_20261026",
+      "slots": [
+        1,
+        2,
+        3
+      ],
+      "executor": "hotel_retrieval",
+      "requires": {
+        "plate_location": "hotel",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "effects": {
+        "plate_location": "HOME",
+        "payload": "empty",
+        "arm_location": "HOME"
+      },
+      "description": "Retrieve the declared source slot and release in HOME using its accepted profile binding."
+    },
+    {
+      "id": "cellvis_register",
+      "operation": "register_plate",
+      "profile": "Cellvis P24-1.5H-N",
+      "executor": "cellvis_registration",
+      "auto_prepare": true,
+      "requires": {
+        "plate_location": "HOME",
+        "payload": "empty",
+        "arm_location": "HOME",
+        "registered": false
+      },
+      "effects": {
+        "registered": true
+      },
+      "description": "Fresh barcode registration with verified release back into HOME; no read or mismatch stops."
+    },
+    {
+      "id": "cellvis_hamilton_protocol",
+      "operation": "hamilton_protocol",
+      "profile": "Cellvis P24-1.5H-N",
+      "executor": "hamilton_job",
+      "station": "Hamilton",
+      "requires": {
+        "plate_location": "Hamilton",
+        "payload": "empty",
+        "arm_location": "HOME",
+        "registered": true
+      },
+      "effects": {},
+      "inputs": {
+        "one_of": [
+          "recipe",
+          "draft_id"
+        ]
+      },
+      "description": "Run one exact instrument job to verified completion; preserve plate location.",
+      "allow_preparation": true
+    },
+    {
+      "id": "cellvis_squid_image",
+      "operation": "squid_image",
+      "profile": "Cellvis P24-1.5H-N",
+      "executor": "squid_job",
+      "station": "Squid",
+      "requires": {
+        "plate_location": "Squid",
+        "payload": "empty",
+        "arm_location": "HOME",
+        "registered": true
+      },
+      "effects": {},
+      "inputs": {
+        "optional": [
+          "imaging_profile",
+          "image_count"
+        ]
+      },
+      "description": "Run one exact instrument job to verified completion; preserve plate location.",
+      "allow_preparation": true
+    }
+  ],
+  "goals": {
+    "return_HOME": {
+      "plate_location": "HOME",
+      "payload": "empty",
+      "arm_location": "HOME"
+    }
+  }
+}

@@ -139,6 +139,11 @@
       text.className = 'bubble';
       if (item.role === 'researcher') { text.textContent = item.text; }
       else { messageContent(text, item.text); }
+      if (item.attachments && item.attachments.length) {
+        var attached = document.createElement('div'); attached.className = 'message-documents';
+        item.attachments.forEach(function (doc) { var name = document.createElement('span'); name.textContent = '📎 ' + doc.name; attached.appendChild(name); });
+        text.appendChild(attached);
+      }
       wrap.appendChild(who); wrap.appendChild(text); row.appendChild(wrap);
       log.appendChild(row);
     });
@@ -354,9 +359,9 @@
     } else {
       el('cam-state').textContent = cameraViewState;
     }
-    el('chat-send').disabled = thinking || state.sending;
+    el('chat-send').disabled = thinking || state.sending || (window.LacryAttachments && window.LacryAttachments.busy());
     el('chat-input').disabled = thinking || state.sending;
-    el('chat-hint').textContent = thinking || state.sending ? 'Thinking…' : 'Your lab assistant';
+    el('chat-hint').textContent = thinking || state.sending ? 'Thinking…' : 'Agentic Lab Assistant';
     el('chat-input').placeholder = 'Message Lacry…';
     if (lacry && lacry.configured === false) {
       el('chat-hint').textContent = 'API key needed';
@@ -549,6 +554,7 @@
         state.lacryBusy=!!lacry.busy;
         renderTranscript(lacry.transcript || []);
         renderPlan(lacry.pending);
+        if (window.renderSupervisedExperiment) { window.renderSupervisedExperiment(lacry); }
         renderQuestion(lacry.question);
         if (window.renderHamiltonInstruction) { window.renderHamiltonInstruction(); }
         renderReview(lacry.review);
@@ -654,13 +660,16 @@
       if (state.sending || state.answering || el('chat-send').disabled) { return; }
       var input = el('chat-input');
       var message = input.value.trim();
-      if (!message) { return; }
+      var attachments = window.LacryAttachments ? window.LacryAttachments.ids() : [];
+      if (window.LacryAttachments && window.LacryAttachments.busy()) { return; }
+      if (!message && !attachments.length) { return; }
+      if (!message) { message = 'Read the attached documents and summarize them. Do not start any hardware.'; }
       state.sending = true;
       input.value = ''; resizeComposer(); alertBox(''); el('chat-send').disabled = true;
       var questionId=state.planId ? null : state.questionId;
       post(questionId ? '/researcher/api/lacry/question/answer' : '/researcher/api/lacry/chat',
-        questionId ? { question_id: questionId, answer: message } : { message: message })
-        .then(poll)
+        questionId ? { question_id: questionId, answer: message, attachments: attachments } : { message: message, attachments: attachments })
+        .then(function () { if (window.LacryAttachments) { window.LacryAttachments.sent(attachments); } return poll(); })
         .catch(function (error) { alertBox(error.message); if (!input.value) { input.value = message; resizeComposer(); } return poll(); })
         .then(function () { state.sending = false; el('chat-send').disabled = false; input.disabled = false; input.focus(); });
     });

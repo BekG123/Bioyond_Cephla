@@ -96,7 +96,7 @@ def plan(service,cfg,source):
     if not cap.get('available') or cap.get('version')!=220109:raise TransferError('Mixed-speed Lua queue220109 required.')
     return dict(id=uuid4().hex,source=str(source),source_sha256=exchange.digest(source),start=s['pose_mm'],joints=s['joints'],
         closure_policy=POLICY,e2=angle,geometry=g,rotation_target=TARGET_DEGREES,rotate_holder=rotate_holder,
-        calibration_binding=binding,holder_acceptance=[1.750,1.82],release_at_squid=False,idle_travel=False)
+        calibration_binding=binding,holder_acceptance=[1.740,1.82],release_at_squid=False,idle_travel=False)
 
 
 def execute(run,service,cfg,approved,gripper):

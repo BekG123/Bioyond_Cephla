@@ -123,6 +123,24 @@ class PrepTests(unittest.TestCase):
             fresh.run_action('initialize')
         self.assertEqual(self.device.start_count,1)
 
+    def test_native_numeric_loading_and_cleared_protocol_id_on_completion(self):
+        native=self.adapter.request
+        class SpacedEnums:
+            @property
+            def events(inner):return native.events
+            def __call__(inner,method,path,body):
+                result=native(method,path,body)
+                if path=='protocol-run':
+                    if result['protocolRunState']=='Loading':result['protocolRunState']=20
+                    elif result['protocolRunState']=='Idle':result['protocolId']=0
+                return result
+        self.adapter.request=SpacedEnums()
+        plan=self.adapter.prepare('Water')
+        ticket=self.adapter.start(plan,'plate',lambda _:None)
+        result=self.adapter.wait(plan,ticket,lambda _:None,lambda:False,lambda _:None)
+        self.assertTrue(result['ok'])
+        self.assertEqual(self.device.start_count,1)
+
     def test_failed_owned_operation_keeps_actual_diagnosis_after_restart(self):
         with self.assertRaisesRegex(TeachingError,'abort acknowledgment missing'):
             with self.adapter.owned('full_calibration') as ticket:

@@ -16,6 +16,8 @@ import urllib.error
 import urllib.request
 
 from researcher_teaching import TeachingError, numbers, utc_now
+from lacry_model import request_options
+from lacry_decision_log import evidence as public_evidence
 
 
 def digest(value):
@@ -115,6 +117,17 @@ class HaikuTools:
         self.credentials = credentials
 
     def complete(self, payload):
+        if os.environ.get('LACRY_LLM_PROVIDER') == 'codex_mcp':
+            raise TeachingError('Anthropic API calls are disabled in Codex MCP mode. Use Lacry chat and its camera tools.')
+        # Compatibility for existing analysis callers still specifying a small
+        # Haiku token budget. Keep history and signed response blocks untouched.
+        if payload.get('model') == 'claude-sonnet-5-5':
+            payload = deepcopy(payload)
+            for parameter in ('temperature','top_p','top_k'):
+                payload.pop(parameter,None)
+            payload.setdefault('thinking',dict(type='adaptive'))
+            payload.setdefault('output_config',dict(effort='medium'))
+            payload['max_tokens']=max(8192,payload.get('max_tokens',8192))
         key = self.credentials.key or os.environ.get('ANTHROPIC_API_KEY')
         if not key:
             raise TeachingError('Add the Haiku API key in Developer view.')
@@ -122,7 +135,7 @@ class HaikuTools:
             data=json.dumps(payload, allow_nan=False).encode(), method='POST',
             headers={'Content-Type':'application/json', 'anthropic-version':'2023-06-01', 'x-api-key':key})
         try:
-            with urllib.request.urlopen(request, timeout=25) as response:
+            with urllib.request.urlopen(request, timeout=60 if payload.get('model') == 'claude-sonnet-5-5' else 25) as response:
                 return json.load(response)
         except urllib.error.HTTPError as error:
             detail = ''
@@ -139,10 +152,10 @@ class HaikuTools:
                         detail = kind.replace(key, '[REDACTED]')[:80] + ': ' + detail
             except (OSError, ValueError, AttributeError, TypeError):
                 pass
-            raise TeachingError(f'Haiku returned HTTP {error.code}. ' +
+            raise TeachingError(f'Agent API returned HTTP {error.code}. ' +
                                 (detail or 'No error detail was supplied. Check the API connection in Developer view.')) from None
         except (OSError, ValueError):
-            raise TeachingError('Haiku could not be reached. No automatic retry was made.') from None
+            raise TeachingError('Agent API could not be reached. No automatic retry was made.') from None
 
 
 SYSTEM = '''You assist a supervised robot by imitating a reviewed measured reference.
@@ -181,6 +194,7 @@ class ImitationAgent:
         self.descended = None
 
     def record(self, run, kind, **values):
+        values = public_evidence(values)
         row = dict(at=utc_now(), kind=kind, **deepcopy(values))
         with self.lock:
             self.events.append(row)
@@ -304,7 +318,7 @@ class ImitationAgent:
             self.message = 'Preparing ' + action.lower() + '. Keep hands clear.'
             with self.lock:
                 outcomes = [deepcopy(e) for e in self.events if e['kind'] == 'tool_result'][-6:]
-            payload = dict(model=self.credentials.model, max_tokens=700, temperature=0, system=SYSTEM,
+            payload = dict(**request_options(self.credentials.model), system=SYSTEM,
                 tools=[dict(name=tool, description='Execute only this reviewed stage using host-controlled guarded increments. No other stage follows.',
                     input_schema=dict(type='object', properties=dict(reference_id=dict(type='string', enum=[reference['id']])),
                                       required=['reference_id'], additionalProperties=False))],
@@ -320,7 +334,7 @@ class ImitationAgent:
             blocks = answer.get('content', [])
             calls = [b for b in blocks if b.get('type') == 'tool_use']
             if (answer.get('stop_reason') != 'tool_use' or len(calls) != 1 or
-                    any(b.get('type') not in ('text', 'tool_use') for b in blocks) or
+                    any(b.get('type') not in ('text', 'tool_use', 'thinking', 'redacted_thinking') for b in blocks) or
                     calls[0].get('name') != tool or not isinstance(calls[0].get('id'), str) or
                     calls[0].get('input') != dict(reference_id=reference['id'])):
                 raise TeachingError('Haiku did not return a valid action. No movement was made; see Developer view.')

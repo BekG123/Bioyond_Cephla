@@ -1,0 +1,40 @@
+{
+  "schema": "cephla.hotel-handling-workflow.v1",
+  "id": "home-hotel-slot3-handling-v1",
+  "slot": 3,
+  "status": "operator_accepted",
+  "plate_profile": "48_well_projected_20261026",
+  "acceptance": "operator_ui/reports/plate_session/hotel_slot2_loaded_teaching_20261111_234954/slot3_operator_success.json",
+  "acceptance_sha256": "16cd3d939f4152d9a6a4e26d9db4ee9020d08ca05be277e16e34aeee94d80c5f",
+  "geometry_sha256": "dfab2da6e2b54d9464f96e506c9713a5e83e5a37d82f38b2c1e3c240e8970157",
+  "cli": "operator_ui/run_hotel_slot3_workflow.py",
+  "actions": [
+    "deliver",
+    "retrieve",
+    "roundtrip"
+  ],
+  "delivery_endpoint": {
+    "X": 293.72,
+    "Y": -135.351,
+    "Z": 352.387,
+    "Rz": -0.652
+  },
+  "grip_target_mm": 3.9,
+  "slot_release_mm": 7,
+  "home_release_mm": 28,
+  "proof_lift_mm": 5,
+  "proof_lift_speed": 5,
+  "horizontal_entry_exit_speed": 20,
+  "outside_travel_speed": 137,
+  "home_seating_speed": 5,
+  "home_seating_pose": {
+    "X": 312.01,
+    "Y": -65.48,
+    "Z": 72.72,
+    "Rz": 89.77
+  },
+  "api": "developer/api/hotel-slot3-handling",
+  "unvalidated_slots": [
+    4
+  ]
+}

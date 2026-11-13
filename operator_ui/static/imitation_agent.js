@@ -14,7 +14,7 @@
   $('imitation-key-save').onclick = async () => {
     try {
       await request('/agent/settings',{api_key:$('imitation-key').value});
-      notice('Haiku key saved securely on this computer and restored after reloads. No movement requested.');
+      notice('Sonnet key saved securely on this computer and restored after reloads. No movement requested.');
     } catch(error) { notice(error.message); }
     finally { $('imitation-key').value = ''; }
   };

@@ -301,7 +301,7 @@ class RobotService:
             if (any(after.get(k, True) for k in ('error', 'emergency', 'moving', 'drag'))
                     or after.get('external_units', {}).get('E2') != 'degrees'
                     or not accepted(after['external_axes']['E2'])):
-                return _fail('E2 correction did not verify within the accepted 1.750–1.820 degree range; no retry.')
+                return _fail('E2 correction did not verify within the accepted 1.740–1.820 degree range; no retry.')
             if any(abs(self.pose_mm()[k] - pose[k]) > .1 for k in ('X', 'Y', 'Z', 'Rz')):
                 return _fail('Arm pose changed during E2 correction; inspect before continuing.')
             if any(abs(after['external_axes'][k] - v) > .05

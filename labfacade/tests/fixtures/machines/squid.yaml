@@ -1,0 +1,29 @@
+# Test fixture. Not the real Squid manifest.
+schema_version: 1
+id: squid
+name: Fixture microscope
+kind: microscope
+identity: {vendor: Fixture, model: Squid}
+connection: {exclusive_clients: false}
+limits: {}
+operations:
+  - name: get_status
+    description: Read status.
+    risk: read_only
+    timeout_s: 1
+  - name: return_to_loading
+    description: Move the stage to the loading position.
+    risk: motion
+    human_gate: [at the E-stop]
+    preconditions: [no scan running]
+    postconditions: [at loading position]
+    timeout_s: 0.3
+  - name: run_imaging
+    description: Run the confirmed acquisition.
+    risk: motion
+    postconditions: [acquisition complete]
+    timeout_s: 1
+known_faults: []
+qualification:
+  return_to_loading: {status: supervised_only}
+  run_imaging: {status: qualified}

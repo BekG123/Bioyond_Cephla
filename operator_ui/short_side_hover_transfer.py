@@ -88,6 +88,27 @@ def validate_shape(start,points,profile):
     return route
 
 def validate_speeds(start,points,profile,speeds):
+    if profile in ('cellvis24_recorded_forward','cellvis24_recorded_reverse','cellvis24_smoothed_forward','cellvis24_smoothed_reverse','cellvis24_opposite_forward','cellvis24_opposite_reverse'):
+        from cellvis24_recorded_hamilton_route import validate_speeds as recorded
+        return recorded(start,points,profile,speeds)
+    if profile in ('cellvis24_taught_three_forward','cellvis24_taught_three_reverse'):
+        from cellvis24_taught_three_route import validate_speeds as taught
+        return taught(start,points,profile,speeds)
+    if profile in ('cellvis24_direct_forward','cellvis24_direct_reverse'):
+        from cellvis24_direct_rack import validate_speeds as direct_rack
+        return direct_rack(start,points,profile,speeds)
+    if profile in ('cellvis24_rack_forward','cellvis24_rack_reverse'):
+        from cellvis24_rack_route import validate_speeds as loaded_rack
+        return loaded_rack(start,points,profile,speeds)
+    if profile in ('empty_rack03_idle','empty_rack03_hamilton','empty_rack04_home','empty_rack04_hamilton','empty_original40_home','empty_original40_hamilton','empty_turn05_home','empty_turn05_hamilton','empty_rack06_home','empty_rack06_hamilton','empty_rack07_home','empty_rack07_hamilton'):
+        from hamilton_rack_clearance import validate_speeds as rack
+        return rack(start,points,profile,speeds)
+    if profile=='empty_home_hamilton40':
+        from hamilton_empty_clearance import validate_speeds as empty
+        return empty(start,points,profile,speeds)
+    if profile in ('cellvis24_hamilton_forward','cellvis24_hamilton_reverse'):
+        from cellvis24_hamilton_route import validate_speeds as cellvis
+        return cellvis(start,points,profile,speeds)
     route=validate_shape(start,points,profile)
     if speeds is None or list(speeds)!=route['segment_speeds'] or any(type(v) not in (int,float) or not math.isfinite(v) for v in speeds):
         raise TransferError('Hover route requires speed 137 to Z55 and speed 5 only for final seating (reversed on departure)')

@@ -111,7 +111,7 @@
       button.disabled = !data.connected || busy ||
         (travel.travel_verified !== true && travel.empty_travel_verified !== true);
     });
-    list('protocols', (data.protocol_catalog || []).map(function (x) { return x.name; }));
+    list('protocols', (data.protocol_catalog || []).map(function (x) { return '#' + x.id + ' · ' + x.name; }));
     list('errors', ((data.errors || {}).items || []).map(function (x) { return x.date + ' · ' + x.message; }));
     var recipes = data.recipes || [], signature = JSON.stringify(recipes);
     if (signature !== recipeSignature) {
@@ -123,7 +123,7 @@
       if (recipes.indexOf(selected) >= 0) { byId('protocol').value = selected; }
     }
     byId('plan-protocol').disabled = !recipes.length;
-    byId('recipes-note').textContent = recipes.length ? 'Recipe setup includes the reviewed deck and tip/liquid capacity.' : 'No commissioned liquid-handling recipe yet. Define and verify the reservoir, tips, plate and volumes before a live experiment.';
+    byId('recipes-note').textContent = recipes.length ? 'Recipe setup includes the reviewed deck and tip/liquid capacity.' : 'Native protocols are listed below. Ask Lacry to draft or adopt the exact liquid transfers, simulate them and execute on success under one approval. No commissioning step is required for that experiment.';
     var mirror = data.touchscreen || {};
     chatPrompt = data.connected && operation.status === 'running' ? data.prompt : null;
     // Hamilton reuses the completion view ID across calibration stages.

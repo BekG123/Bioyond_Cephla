@@ -17,6 +17,7 @@ import cv2
 HERE = os.path.dirname(os.path.abspath(__file__))
 UI = os.path.dirname(HERE)
 ROOT = os.path.dirname(UI)
+sys.path.insert(0, ROOT)
 sys.path.insert(0, UI)
 sys.path.insert(0, os.path.join(ROOT, "bioyond-s4-mcp", "tests"))
 
@@ -393,7 +394,7 @@ def main() -> int:
     # ---- standalone grabber: the model-version stamp gate must accept
     # the current (matching) calibration stamps
     sys.path.insert(0, os.path.join(ROOT, "grab_skill"))
-    import grab_aruco
+    from Misc.aruco import grab_aruco
     ok_stamp, stamp_note = grab_aruco._claw_arm_stamp_ok()
     check("grab_aruco stamp gate accepts matching stamps",
           ok_stamp is True and stamp_note == "",

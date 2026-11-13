@@ -48,7 +48,8 @@ async def check(ws_url, url, output):
                 if await js(expression):
                     return
                 await asyncio.sleep(.1)
-            raise AssertionError(expression)
+            raise AssertionError(dict(waiting=expression, errors=errors,
+                page=await js("({url:location.href,state:document.readyState,status:document.getElementById('dsl-status')?.textContent,error:document.getElementById('dsl-error')?.textContent})")))
 
         await call('Runtime.enable')
         await call('Emulation.setDeviceMetricsOverride', dict(width=1440, height=1100, deviceScaleFactor=1, mobile=False))
@@ -57,16 +58,24 @@ async def check(ws_url, url, output):
         assert await js("!document.getElementById('dev-legacy').open")
         assert await js("document.querySelector('#right > .card h2').textContent==='Connection & state'")
         assert await js("document.getElementById('dev-api-settings').contains(document.getElementById('imitation-key'))")
-        assert await js("document.querySelectorAll('#right > div.card').length===3")
+        assert await js("document.querySelectorAll('#right > div.card').length===4")
+        assert await js("['calibrate-two-disk','calibrate-48well'].every(id => document.getElementById('dev-calibration').contains(document.getElementById(id)) && document.getElementById(id).getClientRects().length > 0)")
         image = await call('Page.captureScreenshot', dict(format='png'))
         (output/'developer_console.png').write_bytes(base64.b64decode(image['data']))
         await js("showTab('3d')")
         await until("document.getElementById('three3d').querySelector('canvas') !== null")
         await js("showTab('dsl'); document.getElementById('dsl-example').click()")
+        await until("document.querySelector('.devin-brand img').complete && document.querySelector('.devin-brand img').naturalWidth > 0")
+        assert await js("document.querySelector('.dsl-heading h2').textContent.includes('Debugger') && !document.body.textContent.includes('Understand the failure. Write the intended behavior.')")
+        assert await js("!document.getElementById('dsl-python-panel').open && !document.querySelector('.dev-reference').open")
         await until("document.getElementById('dsl-editor').value.includes('count = 0')")
         await js("document.getElementById('dsl-translate').click()")
         await until("document.getElementById('dsl-python').textContent.includes('def decide')")
         assert await js("document.getElementById('dsl-roundtrip').textContent.includes('IF Machine.parked & no.tips')")
+        await until("!document.getElementById('dsl-devin').disabled")
+        await js("document.getElementById('dsl-devin').click()")
+        await until("document.getElementById('dsl-devin-output').textContent.includes('OFFLINE DEVIN PROPOSAL')")
+        assert await js("document.getElementById('dsl-devin-output').textContent.includes('Not applied')")
         image = await call('Page.captureScreenshot', dict(format='png', captureBeyondViewport=True))
         (output/'developer_dsl.png').write_bytes(base64.b64decode(image['data']))
         await js("document.getElementById('dsl-editor').value += ';'; document.getElementById('dsl-editor').dispatchEvent(new Event('input')); document.getElementById('dsl-translate').click()")
@@ -78,7 +87,7 @@ async def check(ws_url, url, output):
         assert await js("document.documentElement.scrollWidth <= 392")
         assert not errors, errors
         return dict(ok=True, checks=['essential controls', 'API key retained', 'legacy collapsed',
-            '3D canvas', 'DSL compile and roundtrip', 'invalid draft clears preview', 'mobile layout'], browser_errors=errors)
+            '3D canvas', 'DSL compile and roundtrip', 'Devin proposal handoff (fake worker)', 'invalid draft clears preview', 'mobile layout'], browser_errors=errors)
 
 
 def main():
@@ -93,9 +102,16 @@ def main():
                 source='def fixture_only():\n    if not parked:\n        raise RuntimeError("not ready")'))))
         app = Flask(__name__, static_folder=str(UI/'static'))
         seen = []
+        fake_job = {}
+        def fake_review(failure, source):
+            fake_job.update(id='offline-devin-job', failure_id=failure['id'], source=source,
+                state='complete', response='OFFLINE DEVIN PROPOSAL', error='')
+            return dict(fake_job)
+        fake_devin = SimpleNamespace(folder=Path(folder), resolve_cli=lambda: 'fake',
+            snapshot=lambda: dict(fake_job) if fake_job else None, start=fake_review)
         register_developer_diagnostics(app, diagnostics,
             lambda: SimpleNamespace(snapshot=lambda: dict(state='idle', result=None)),
-            lambda: None, lambda: SimpleNamespace(ready=lambda: False))
+            lambda: None, lambda: SimpleNamespace(ready=lambda: False), devin_worker=fake_devin)
 
         @app.get('/')
         def page():

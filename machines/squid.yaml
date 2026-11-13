@@ -183,10 +183,16 @@ qualification:
     evidence: operator_ui/reports/squid_connection and autonomous_squid runs, 2026-10-20 to 2026-10-24.
   return_to_loading:
     status: supervised_only
-    evidence: operator_ui/reports/squid_stage, loading reference confirmed 2026-11-03; stage_return_verified false.
+    evidence: >
+      operator_ui/reports/squid_stage, loading reference confirmed 2026-11-03;
+      stage_return_verified is still false in the reference file. One supervised return
+      through labfacade on 2026-11-11 with no plate on the stage reached the target and
+      verified (runs/20261111T142841Z_squid-return-to-loading, local only).
   run_imaging:
     status: supervised_only
     evidence: confirmed_acquisition.yaml in operator_ui/reports/autonomous_squid runs (2026-10-24 and later).
   full_handoff_with_hamilton:
-    status: blocked
-    blocker: Needs the Hamilton to Bioyond plate hand-off, which is blocked.
+    status: supervised_only
+    evidence: >
+      Plate handling Hamilton to HOME to Squid and back, 5 of 5 cycles, operator accepted
+      2026-11-11 (see bioyond_s4 run_plate_workflow). No imaging ran in that batch.

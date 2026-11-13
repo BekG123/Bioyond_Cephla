@@ -88,5 +88,35 @@
     "title": "Developers teach corrections by demonstration",
     "body": "Coactive trajectory corrections are demonstrated by hand and reviewed by developers. Preserve original recordings and successful endpoints. Researcher requests use approved host routines; do not generate new robot coordinates from memory.",
     "source": "Operator preferences from taught Hamilton and Squid sessions"
+  },
+  {
+    "id": "hotel-slot1-handling-accepted-20261111",
+    "title": "Hotel rack slot1 HOME delivery and retrieval accepted; slots2/3 pending teaching",
+    "body": "Operator confirmed one successful 48-well long-side slot1 delivery and retrieval, secure plate and flat HOME reseating. Use Pick and Hold/Station Handling/workflows/hotel_slot1_v1.json and skill home-hotel-slot1-handling-v1. CLI operator_ui/run_hotel_slot1_workflow.py --action deliver|retrieve|roundtrip previews by default; --execute requires the described empty-arm HOME-clearance and fixture setup. Existing developer preview/start endpoints hotel-slot1-delivery and hotel-slot1-retrieval are the execution interfaces. Healthy running Auto required; no startup, fault clearing or retry. Endpoint X290.878/Y-139.412/Z240.603/Rz0.752. Entry/exit20, outside Z and travel137; long-side grip3.9, lift5mm at5, slot release7, HOME release28. Withdraw horizontally to X154.409 before lowering/turning below the shelf. Do not substitute generic Home return inside the rack. Accepted evidence is slot1_revision5_operator_success.json in reports/plate_session/hotel_slot1_loaded_teaching_20261111_222406. Slots2/3 require new manual endpoints and full clearance/IK validation; old failed slot2 routes and automatic Z extrapolation are not commissioned. Memory records a capability; it does not bypass live checks or add a model tool automatically.",
+    "source": "Operator success confirmation 2026-11-11; hotel_slot1_v1.json and hashed delivery/retrieval receipts"
+  },
+  {
+    "id": "hotel-slot2-taught-endpoint-20261111",
+    "title": "Hotel slot2 taught endpoint; slot1-pattern higher approach pending live validation",
+    "body": "Operator taught slot2 dropoff at X293.720/Y-135.351/Z295.995/Rz-0.652 on2026-11-11. Difference from accepted slot1 is +2.842X,+4.061Y,+55.392Z,-1.404deg yaw; preserve exact taught endpoint, not a pure shelf-Z shift. Candidate at Pick and Hold/Station Handling/workflows/hotel_slot2_candidate_v1.json reuses accepted slot1 HOME pickup, lower turning corridor, horizontal entry/exit20, outside rise/return137 and pickup5mm at5. Offline continuous/quantized IK passes. No physical trial or runtime slot2 adapter has been commissioned. Keep slot1 runtime and limits unchanged. Coordinate names the station independent of plate type, but plate dimensions, grip target and clearances remain profile-specific; captured E1/E2 are observations, not grip targets. Slot3 not yet taught. Do not run earlier failed slot2 paths.",
+    "source": "Pick and Hold\\Station Handling\\workflows\\hotel_slot2_candidate_v1.json"
+  },
+  {
+    "id": "hotel-upper-slots-derived-20261111",
+    "title": "Hotel slots3/4 calculated from taught slot2: slot3 IK valid, slot4 blocked by Z ceiling",
+    "body": "Operator confirmed equal vertical spacing above slot2 and requested reuse of slot1 workflow. Preserve slot2 X293.720/Y-135.351/Rz-0.652 and add55.392mm per higher slot, not the XY/yaw differences from slot1. Slot3 endpoint Z351.387; lift Z356.387. Offline continuous IK and scoped-corridor checks pass, but live sweep/clearance and runtime adapter remain pending. Slot4 endpoint Z406.779; proof lift Z411.779 exceeds unchanged workspace Z400. Save it blocked; do not execute or expand limits from this instruction. HOME pickup/seating and lower turning corridor stay unchanged. Horizontal rack entry/exit20, outside travel137, lift5mm at5. Candidates and hashes in Pick and Hold/Station Handling/workflows/hotel_slot3_candidate_v1.json and hotel_slot4_candidate_v1.json. Station poses are plate-independent; accepted grip and physical plate clearance remain plate-specific. Only slot1 has accepted live delivery/retrieval evidence.",
+    "source": "Operator equal-spacing instruction; offline slot2-derived candidate validation 2026-11-11"
+  },
+  {
+    "id": "hotel-slot2-accepted-20261112",
+    "title": "Accepted HOME / hotel slot2 48-well handling",
+    "body": "Slot2 48-well HOME delivery/drop-off/empty return/retrieval succeeded; operator confirmed clean and secure, plate flat in HOME. Use home-hotel-slot2-handling-v1 and operator_ui/run_hotel_slot2_workflow.py. Endpoint X293.720/Y-135.351/Z295.995/Rz-0.652; horizontal entry/exit20, outside travel137, grip3.9, release7, pickup lift5mm at5. Withdraw horizontally before lowering. HOME seating Z72.72, release28. Slot3/4 remain unvalidated. Source: operator_ui\\reports\\plate_session\\hotel_slot2_loaded_teaching_20261111_234954\\slot2_operator_success.json",
+    "source": "operator_ui\\reports\\plate_session\\hotel_slot2_loaded_teaching_20261111_234954\\slot2_operator_success.json"
+  },
+  {
+    "id": "hotel-slot3-accepted-20261112",
+    "title": "Accepted HOME / hotel slot3 handling with +1mm correction",
+    "body": "Supersedes earlier notes that slot3 is pending. Corrected slot3 48-well HOME delivery/drop-off/empty return/retrieval succeeded; operator confirmed clean and secure, plate flat in HOME. Use home-hotel-slot3-handling-v1 and operator_ui/run_hotel_slot3_workflow.py. Accepted endpoint X293.720/Y-135.351/Z352.387/Rz-0.652 (+1mm correction); pickup lift Z357.387. Horizontal entry/exit20, outside travel137, grip3.9, release7, lift5mm at5. Withdraw horizontally before lowering. HOME seating Z72.72, release28. Prior failed slot3 run and Z351.387 candidate remain historical, not accepted. Slot4 remains blocked above Z400. Source: operator_ui\\reports\\plate_session\\hotel_slot2_loaded_teaching_20261111_234954\\slot3_operator_success.json",
+    "source": "operator_ui\\reports\\plate_session\\hotel_slot2_loaded_teaching_20261111_234954\\slot3_operator_success.json"
   }
 ]

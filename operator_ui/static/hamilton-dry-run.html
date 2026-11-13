@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cephla · Hamilton dry run</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f7;color:#24323d;font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1050px;margin:36px auto;padding:0 24px}header{display:flex;justify-content:space-between;align-items:center;gap:20px}h1{font-size:27px;letter-spacing:-.7px;margin:8px 0}p{color:#657583;line-height:1.5}.brand{font-size:14px;font-weight:650;letter-spacing:2px}.badge{padding:9px 14px;border:1px solid #b9d7bc;background:#eaf4ec;border-radius:10px;font-size:14px;white-space:nowrap}.panel{background:white;border:1px solid #dce2e6;border-radius:18px;margin-top:24px;overflow:hidden;box-shadow:0 8px 24px #22334408}.bar{padding:18px 22px;border-bottom:1px solid #e5e9ed;display:flex;justify-content:space-between;align-items:center;gap:16px}.bar strong{font-size:18px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4eaa67;margin-right:8px}#scene{display:block;width:100%;height:auto;background:linear-gradient(#fcfdfe,#f2f5f7)}svg text{font-family:inherit;fill:#4d606d}.site{fill:#eaf0f3;stroke:#d4dfe5}.plate{fill:#fff;stroke:#a9bac5}.well{fill:#eef4f6;stroke:#b0c2cb;transition:fill .3s,stroke .3s}.well.active{fill:#b8dfed;stroke:#328cac;stroke-width:3}.well.done{fill:#d8ecde;stroke:#70ac82}.tip{fill:#485d6b}.used{fill:#d8e1e7}.head{filter:drop-shadow(0 4px 4px #293b4c25)}.controls{padding:18px 22px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-top:1px solid #e5e9ed}button{font:inherit;background:white;color:#344858;border:1px solid #aebdc7;border-radius:9px;padding:10px 17px;cursor:pointer}button.selected{border:2px solid #69af74;background:#f1f8f2;padding:9px 16px}button:disabled{opacity:.4;cursor:default}input{flex:1;min-width:140px;accent-color:#4d9562}.caption{margin:0;padding:0 22px 18px;font-size:13px;color:#71818d}.summary{display:flex;justify-content:space-between;padding:20px 22px;gap:20px}progress{width:100%;height:8px;accent-color:#64a978;display:block;border:0}.progress{padding:0 22px 20px}.small{font-size:13px;color:#74818c}#phase{min-height:28px}#clock{font-variant-numeric:tabular-nums}@media(max-width:600px){main{padding:0 12px;margin:20px auto}header{align-items:flex-start}.badge{font-size:12px}h1{font-size:23px}.summary{font-size:14px}svg text{font-size:15px}.bar{padding:14px}.controls{padding:14px}}
+</style></head><body><main>
+<header><div><div class="brand">CEPHLA</div><h1>Hamilton · One row</h1><p>Site 2 A1 → Site 3 A1–A6 · Fresh tip for every well</p></div><span class="badge">Physical dry run · air only</span></header>
+<section class="panel"><div class="bar"><strong id="phase"><span class="dot"></span>Ready for dry run</strong><span id="modeLabel" class="small">Live instrument events</span></div>
+<svg id="scene" viewBox="0 0 980 510" role="img" aria-label="Schematic deck animation showing tips at site 7, source A1 at site 2, destination row A at site 3, and tip waste">
+<rect x="30" y="35" width="920" height="425" rx="24" fill="#dce5eb" stroke="#c1cdd5"/>
+<g id="sites"></g><g id="plates"></g><g id="tips"></g>
+<rect x="805" y="355" width="100" height="65" rx="8" fill="#c6d0d6" stroke="#9aabb6"/><text x="855" y="444" text-anchor="middle" font-size="15">Tip waste</text>
+<g id="pipette" transform="translate(95 75)" class="head"><rect x="-17" y="-36" width="34" height="48" rx="8" fill="#61798c"/><rect x="-9" y="8" width="18" height="14" rx="3" fill="#91a8b8"/><path d="M-6 22 L6 22 L2 45 L-2 45Z" fill="#dae8ed" stroke="#7794a4"/><circle r="3" cy="-22" fill="#a4e3b0"/></g>
+<text x="55" y="492" font-size="13">SCHEMATIC DECK — NOT A CAMERA VIEW OR MEASURED HEAD TRAJECTORY</text></svg>
+<div class="summary"><div><strong id="count">0 / 6 wells</strong><div class="small">10 µL air stroke per well · no liquid transferred</div></div><div id="clock" class="small">Waiting for events</div></div><div class="progress"><progress id="progress" max="6" value="0"></progress></div>
+<div class="controls"><button id="live" class="selected">Live progress</button><button id="replay" disabled>Replay in 30 seconds</button><button id="pause" disabled>Pause replay</button><input id="scrub" aria-label="Replay time" type="range" min="0" max="30" value="0" step="0.05" disabled></div>
+<p class="caption">Stages follow Hamilton’s reported events. Movement between stages is illustrative. These controls only affect this animation.</p></section>
+</main><script id="recorded-run" type="application/json">null</script>
+<script>
+const NS='http://www.w3.org/2000/svg', $=s=>document.querySelector(s);
+function el(n,a,parent){const e=document.createElementNS(NS,n);for(const[k,v]of Object.entries(a))e.setAttribute(k,v);parent.append(e);return e}
+const sites={};for(let i=1;i<=8;i++){const x=55+((i-1)%4)*218,y=i<=4?65:270;sites[i]={x,y};el('rect',{x,y,width:190,height:175,rx:12,class:'site'},$('#sites'));el('text',{x:x+12,y:y+24,'font-size':14},$('#sites')).textContent='Site '+i;}
+const wells={};for(const site of[2,3]){const{x,y}=sites[site];el('rect',{x:x+12,y:y+40,width:166,height:106,rx:7,class:'plate'},$('#plates'));for(let r=0;r<4;r++)for(let c=0;c<6;c++){const cx=x+28+c*27,cy=y+57+r*24;wells[site+':'+r+':'+c]={x:cx,y:cy,e:el('circle',{cx,cy,r:8,class:'well'},$('#plates'))};}el('text',{x:x+95,y:y+163,'text-anchor':'middle','font-size':13},$('#plates')).textContent=site===2?'Source · A1':'Destination · A1–A6';}
+const tips=[];{const{x,y}=sites[7];el('rect',{x:x+12,y:y+40,width:166,height:106,rx:7,class:'plate'},$('#tips'));for(let r=0;r<8;r++)for(let c=0;c<12;c++){const cx=x+24+c*13,cy=y+51+r*12;const e=el('circle',{cx,cy,r:3.5,class:'tip'},$('#tips'));if(r===0)tips[c]={x:cx,y:cy,e};}el('text',{x:x+95,y:y+164,'text-anchor':'middle','font-size':13},$('#tips')).textContent='300 µL tips';}
+const recorded=JSON.parse($('#recorded-run').textContent);
+let data=recorded||{events:[],completed:0,status:'Ready for dry run'};
+let replayEvents=[],replaying=false,playing=false,seconds=0,lastFrame=null;
+const home={x:95,y:120};
+function position(e){
+  if(!e)return home;
+  if(e.mode==='Pick-Up Tips')return tips[e.column-1];
+  if(e.mode==='Aspirate')return wells['2:0:0'];
+  if(e.mode==='Dispense')return wells['3:0:'+(e.column-1)];
+  return {x:855,y:382};
+}
+function draw(events,complete,status,pos){
+  const e=events.at(-1);let text=status;
+  for(const [key,w] of Object.entries(wells)){
+    const done=key.startsWith('3:0:')&&Number(key.split(':')[2])<complete;
+    const active=e&&((e.mode==='Aspirate'&&key==='2:0:0')||(e.mode==='Dispense'&&key==='3:0:'+(e.column-1)));
+    w.e.setAttribute('class','well'+(done?' done':'')+(active?' active':''));
+  }
+  tips.forEach((t,i)=>t.e.setAttribute('class','tip'+(i<complete?' used':'')));
+  if(e){
+    const labels={'Pick-Up Tips':'Pick up fresh tip · well A'+e.column,'Aspirate':'Aspirate air · site 2 A1','Dispense':'Dispense air · site 3 A'+e.column,'Eject Tips':'Discard tip · well A'+e.column};
+    text=status==='Completed'?'Completed · six wells':status.startsWith('Stopped')?status:labels[e.mode]||status;
+  }
+  pos=pos||position(e);
+  $('#pipette').setAttribute('transform',`translate(${pos.x} ${pos.y-45})`);
+  $('#phase').textContent=text;$('#count').textContent=complete+' / 6 wells';$('#progress').value=complete;
+  document.body.dataset.rendered='true';
+}
+function replayFrame(){
+  if(!replayEvents.length)return;
+  const ev=replayEvents,first=ev[0].at,span=ev.at(-1).at+3-first;
+  const t=first+span*seconds/30,visible=ev.filter(e=>e.at<=t),index=visible.length-1;
+  const target=position(ev[index]),previous=position(ev[index-1]);
+  const eventTime=(ev[index].at-first)*30/span;
+  const nextTime=index+1<ev.length?(ev[index+1].at-first)*30/span:30;
+  const fraction=Math.min(1,Math.max(0,(seconds-eventTime)/Math.min(.65,(nextTime-eventTime)*.75)));
+  const ease=fraction*fraction*(3-2*fraction);
+  const pos={x:previous.x+(target.x-previous.x)*ease,y:previous.y+(target.y-previous.y)*ease};
+  const done=seconds>=30?6:visible.filter(e=>e.mode==='Eject Tips').length;
+  draw(visible,done,seconds>=30?'Completed':'Replay',pos);
+  $('#scrub').value=seconds;$('#clock').textContent=seconds.toFixed(1)+' / 30 s';
+}
+function showLive(){
+  const stale=data.updated&&Date.now()/1000-data.updated>8&&data.status!=='Completed';
+  draw(data.events||[],data.completed||0,stale?'Feedback stale — motion state unknown':data.status);
+  $('#clock').textContent=stale?'Feedback stale':data.status==='Completed'?'Run report verified':'Listening to Hamilton';
+}
+function acceptData(){
+  $('#replay').disabled=data.status!=='Completed'||!data.events?.length;
+  if(!replaying)showLive();
+}
+async function poll(){
+  try{const r=await fetch('/data',{cache:'no-store'});data=await r.json();acceptData();}
+  catch(e){if(!replaying)$('#phase').textContent='Feedback unavailable';}
+  setTimeout(poll,600);
+}
+function startReplay(){
+  replayEvents=(data.events||[]).slice().sort((a,b)=>a.at-b.at);
+  if(!replayEvents.length)return;
+  replaying=true;playing=true;seconds=0;lastFrame=null;
+  $('#live').classList.remove('selected');$('#replay').classList.add('selected');
+  $('#pause').disabled=false;$('#pause').textContent='Pause replay';$('#scrub').disabled=false;
+  $('#modeLabel').textContent='30-second replay of recorded events';replayFrame();
+}
+$('#replay').onclick=startReplay;
+$('#live').onclick=()=>{
+  replaying=false;playing=false;lastFrame=null;
+  $('#live').classList.add('selected');$('#replay').classList.remove('selected');
+  $('#pause').disabled=true;$('#scrub').disabled=true;
+  $('#modeLabel').textContent=recorded?'Recorded run result':'Live instrument events';showLive();
+};
+$('#pause').onclick=()=>{
+  if(!playing&&seconds>=30){startReplay();return;}
+  playing=!playing;lastFrame=null;$('#pause').textContent=playing?'Pause replay':'Resume replay';
+};
+$('#scrub').oninput=e=>{
+  seconds=+e.target.value;playing=false;lastFrame=null;
+  $('#pause').textContent=seconds>=30?'Play again':'Resume replay';replayFrame();
+};
+document.addEventListener('visibilitychange',()=>{lastFrame=null;});
+function frame(now){
+  if(replaying&&playing&&!document.hidden){
+    if(lastFrame!==null)seconds=Math.min(30,seconds+Math.min(.1,Math.max(0,(now-lastFrame)/1000)));
+    replayFrame();
+    if(seconds>=30){playing=false;$('#pause').textContent='Play again';}
+  }
+  lastFrame=now;requestAnimationFrame(frame);
+}
+draw([],0,'Ready for dry run');
+if(recorded){$('#live').textContent='Run result';acceptData();startReplay();}else poll();
+requestAnimationFrame(frame);
+</script></body></html>

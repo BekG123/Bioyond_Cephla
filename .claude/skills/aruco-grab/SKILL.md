@@ -174,7 +174,7 @@ Two hard-won rules about these entries (2026-07-28, ring tray):
 
 ## Standalone program
 
-`grab_skill/grab_aruco.py` is the whole pipeline as one CLI (no browser,
+`Misc/aruco/grab_aruco.py` is the whole pipeline as one CLI (no browser,
 no MCP): bring-up guards -> find (center-view, 2-agree, multi-viewpoint,
 XY mean + Z MEDIAN) -> exact-IK candidate pick -> J4-planned align ->
 optional `--hold` verdict stop at grip+20 -> torque-guarded descent ->

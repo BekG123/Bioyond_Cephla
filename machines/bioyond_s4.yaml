@@ -55,6 +55,26 @@ frames:
     notes: E1 is the gap between the rack plates. 28 is open. Free torque baseline is +150..+195.
 
 locations:
+  - name: hotel_slot_1
+    frame: robot_t0_u0_mm
+    status: operator_confirmed
+    source: Pick and Hold/Station Handling/workflows/hotel_slot1_v1.json
+    notes: Accepted 48-well HOME delivery and retrieval, revision5. Horizontal rack entry/exit20, outside travel137, pickup lift5mm at5. Use bound executor; no vertical retreat until horizontally outside rack.
+  - name: hotel_slot_2
+    frame: robot_t0_u0_mm
+    status: operator_confirmed
+    source: Pick and Hold/Station Handling/workflows/hotel_slot2_v1.json
+    notes: Accepted 48-well delivery and retrieval; taught X293.720/Y-135.351/Z295.995/Rz-0.652. Horizontal entry/exit20, outside travel137, pickup lift5mm at5, release7; withdraw horizontally before lowering. Other plate profiles and upper slots remain separately validated.
+  - name: hotel_slot_3
+    frame: robot_t0_u0_mm
+    status: operator_confirmed
+    source: Pick and Hold/Station Handling/workflows/hotel_slot3_v1.json
+    notes: Accepted 48-well delivery and retrieval at X293.720/Y-135.351/Z352.387/Rz-0.652, including operator-requested +1mm over the original slot3 candidate. Pickup lift ends Z357.387. Horizontal entry/exit20, outside travel137, lift5mm at5, slot release7. Withdraw horizontally before lowering. Slot4 remains blocked above the workspace ceiling.
+  - name: hotel_slot_4
+    frame: robot_t0_u0_mm
+    status: unknown
+    source: Pick and Hold/Station Handling/workflows/hotel_slot4_candidate_v1.json
+    notes: Operator-directed second55.392mm extension above slot2. Endpoint Z406.779 and proof lift Z411.779 exceed Z400 workspace ceiling; saved blocked, no limit expansion or execution.
   - name: idle
     frame: robot_t0_u0_mm
     status: operator_confirmed
@@ -80,8 +100,9 @@ locations:
     notes: Confirmed +Y10.4 mm long-side pickup, already included in the stored coordinates. Alignment hover Z300 and gripping Z73.718 are distinct poses; original holder orientation near E2=1.77 degrees. Do not add the correction again or use this for the rotated short-side grip.
   - name: hamilton_handoff
     frame: robot_t0_u0_mm
-    status: unknown
-    notes: Not yet verified in this manifest; the route comes from the recorded Hamilton routine (docs/DESIGN.md section 2).
+    status: operator_confirmed
+    source: Pick and Hold/Station Handling/Observations.md (2026-11-10 and 2026-11-11 entries)
+    notes: Short-side grip, Hamilton holder at the pinned site-4 endpoint with the taught clearance turn. Coordinates live in the route files used by operator_ui/run_plate_workflow.py; this manifest carries no copy.
 
 plate_session_workflow:
   source: Pick and Hold/plate_session_workflow.json
@@ -148,6 +169,10 @@ limits:
   grip_torque_threshold:
     value: -100
     source: CLAUDE.md grip_by_torque
+  cycles:
+    value: [1, 5]
+    source: Largest accepted batch is five cycles (2026-11-11, continuous_grip_handling_dd538f47b7334f6d92bea4be4bedcea0).
+    enforced_in: labfacade (manifest limit) and labfacade/backends.py MAX_CYCLES
   arrival_tolerance:
     value: unknown
     source: pose-after must match the commanded target in robot_service.py; the numeric tolerance is not recorded here
@@ -219,6 +244,28 @@ operations:
     risk: motion
     human_gate: [at the E-stop, marker centered in view]
     implemented_by: .claude/skills/aruco-grab
+  - name: run_plate_workflow
+    description: >
+      Calibration once, then HOME to Hamilton and HOME to Squid round trips: delivery,
+      release, empty return to HOME, retrieval, release back in HOME. Handling only; it
+      does not pipette or image. Without the execute flag it previews and sends nothing.
+    risk: motion
+    human_gate: [at the E-stop, plate supported in HOME, destination holders empty, Hamilton access open, routes clear]
+    preconditions:
+      - operator console running
+      - controller running and fault-free
+      - Hamilton idle and parked and error-free when selected
+      - Squid idle at the loading position when selected
+      - calibration evidence fresh (30 minutes) or full_calibration selected
+    postconditions: [every selected cycle recorded as completed in run.json, plate released in HOME]
+    on_timeout: requery_state
+    implemented_by: operator_ui/run_plate_workflow.py --execute
+    parameters:
+      full_calibration: Run the full calibration once before the cycles.
+      home_to_hamilton_roundtrip: Include the Hamilton round trip.
+      home_to_squid_roundtrip: Include the Squid round trip.
+      cycles: Number of station round-trip repeats; default 1.
+    notes: A failed or uncertain step stops the batch with no retry and no next cycle. The runner never resets faults or starts a stopped Lua program.
   - name: capture_image
     description: Frames from the two Arducams or the GigE eye camera, with an optional coordinate grid.
     risk: read_only
@@ -276,12 +323,19 @@ qualification:
   aruco_grab:
     status: qualified
     evidence: Validated live 2026-07-24 on three blind placements (CLAUDE.md).
+  run_plate_workflow:
+    status: supervised_only
+    evidence: >
+      One calibration then 5 of 5 Hamilton and Squid drop-off and retrieval cycles,
+      operator accepted 2026-11-11:
+      operator_ui/reports/plate_session/continuous_grip_handling_dd538f47b7334f6d92bea4be4bedcea0/operator_acceptance.json.
+      Handling only; no dispensing or imaging ran.
   squid_dropoff:
     status: supervised_only
-    evidence: Operator confirmed the loading position matches a successful robot drop-off, 2026-11-03.
+    evidence: Included in the accepted five-cycle run of 2026-11-11 (see run_plate_workflow).
   squid_retrieve:
-    status: needs_review
-    blocker: Retrievals were reported tilted; see squid_retrieval_tilt.
+    status: supervised_only
+    evidence: Included in the accepted five-cycle run of 2026-11-11. The earlier tilt report (squid_retrieval_tilt) has not been formally closed.
   hamilton_handoff:
-    status: blocked
-    blocker: Depends on the Hamilton gripper release, which has zero completed round trips.
+    status: supervised_only
+    evidence: Arm places and retrieves the plate at the Hamilton holder; included in the accepted five-cycle run of 2026-11-11.

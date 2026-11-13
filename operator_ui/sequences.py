@@ -1642,10 +1642,10 @@ def seq_calibrate_aruco(run: Runner, svc, cam, aruco, marker_id=None) -> dict:
 # ----------------------------------------------------------------- align
 
 
-def seq_align(run, svc, target, hover_z, validate_descent=True):
+def seq_align(run, svc, target, hover_z, validate_descent=True, translation_speed=5):
     """Compatibility entry point for Pick and Hold/Align."""
     from pick_and_hold.Align.motion import seq_align as execute
-    return execute(run, svc, target, hover_z, validate_descent=validate_descent)
+    return execute(run, svc, target, hover_z, validate_descent=validate_descent, translation_speed=translation_speed)
 
 
 

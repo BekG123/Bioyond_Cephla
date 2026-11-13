@@ -1,0 +1,50 @@
+{
+  "schema": "cephla.hotel-handling-workflow.v1",
+  "id": "home-hotel-slot1-handling-v1",
+  "slot": 1,
+  "status": "operator_accepted",
+  "plate_profile": "48_well_projected_20261026",
+  "acceptance": "operator_ui/reports/plate_session/hotel_slot1_loaded_teaching_20261111_222406/slot1_revision5_operator_success.json",
+  "acceptance_sha256": "a58572bcac476e172b14df559021b728d57e6071f2b4e333f5732c8c08dedac6",
+  "geometry_sha256": {
+    "deliver": "bdc86faa71102324cb196f220b13220541001a90886a59631075e54ca18b7ace",
+    "retrieve": "91f8225199e4716ff14352f0019f8f54faa38017b23264f075584e78e9793356"
+  },
+  "cli": "operator_ui/run_hotel_slot1_workflow.py",
+  "actions": [
+    "deliver",
+    "retrieve",
+    "roundtrip"
+  ],
+  "delivery_endpoint": {
+    "X": 290.878,
+    "Y": -139.412,
+    "Z": 240.603,
+    "Rz": 0.752
+  },
+  "grip_target_mm": 3.9,
+  "slot_release_mm": 7,
+  "home_release_mm": 28,
+  "proof_lift_mm": 5,
+  "proof_lift_speed": 5,
+  "horizontal_entry_exit_speed": 20,
+  "outside_travel_speed": 137,
+  "home_seating_speed": 5,
+  "home_seating_pose": {
+    "X": 312.01,
+    "Y": -65.48,
+    "Z": 72.72,
+    "Rz": 89.77
+  },
+  "slots_2_and_3": "Await taught endpoints and validated approach/retreat; do not infer commissioned height offsets",
+  "api": {
+    "deliver": {
+      "preview": "developer/api/hotel-slot1-delivery/preview",
+      "start": "developer/api/hotel-slot1-delivery/start"
+    },
+    "retrieve": {
+      "preview": "developer/api/hotel-slot1-retrieval/preview",
+      "start": "developer/api/hotel-slot1-retrieval/start"
+    }
+  }
+}

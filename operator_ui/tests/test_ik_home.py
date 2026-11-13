@@ -131,7 +131,7 @@ class IKHomeTests(unittest.TestCase):
                               program_state=dict(state='stopped'))
             self.home.prepare = Mock(side_effect=error)
         else:
-            self.service.rotate_to_rz = Mock(side_effect=error)
+            self.service.robot.set_sys_var_i = Mock(side_effect=error)
         plan = self.plan()
         _, attempt = self.connection.start(plan)
         self.runner._thread.join(5)
@@ -165,7 +165,7 @@ class IKHomeTests(unittest.TestCase):
     def test_refusal_exception_after_travel_dispatch_does_not_unlock(self):
         _, attempt = self.run_failed_home(ProgramStartRefused('unexpected after dispatch'),
                                          preparing=False)
-        self.service.rotate_to_rz.assert_called()
+        self.service.robot.set_sys_var_i.assert_called()
         self.assertFalse(known_startup_refusal(json.loads(attempt.read_text())))
         with self.assertRaisesRegex(TeachingError, 'previous IK Home return'):
             self.plan()

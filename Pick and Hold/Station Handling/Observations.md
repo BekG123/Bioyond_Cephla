@@ -202,3 +202,182 @@ The first live routine reached Hamilton Z38.61/E1≈3.70, then waited before jaw
 
 - Run `continuous_grip_handling_dd538f47b7334f6d92bea4be4bedcea0`: one full calibration, then 5/5 Hamilton and Squid drop-off/retrieval cycles completed. Operator confirmed the finished run successful.
 - Controller phase results and measurements are preserved; operator acceptance is recorded separately in `operator_ui/reports/plate_session/continuous_grip_handling_dd538f47b7334f6d92bea4be4bedcea0/operator_acceptance.json` and linked from `run.json`. Handling success does not imply dispensing or imaging ran.
+
+## 2026-11-11 - Barcode scanner connection and successful read
+
+- Scanner access was blocked by a subnet mismatch. Adding temporary `192.168.1.15/24` to the PC's Ethernet adapter exposed the reader at `192.168.1.10:1024` (MAC `00-02-C4-3B-53-62`), preserving the existing robot/Hamilton addresses. Administrator command: `New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.15 -PrefixLength 24 -SkipAsSource $true -PolicyStore ActiveStore`. This temporary address must be rechecked after reboot; no Windows Remote Desktop login was needed.
+- Direct TCP trial: bind to `192.168.1.15`, send ASCII `start`, read through byte `0x04`, then send `stop` and close. Earlier reads returned `NG`; the successful read returned `99ACXC` at 07:39:56 PST. Operator reported approximately 9 inches (229 mm) distance; this is one accepted setup, not a validated operating range.
+- Both arm base connections were attached to the shared switch during discovery. Their contribution was not isolated; adding the matching PC address was the observed change that enabled communication.
+- No arm motion, scanner image capture, or Lacry roundtrip integration occurred. Vendor `modScan.lua` contains a positioning path but remains unvalidated for this setup and uses vendor grip settings.
+- Raw successful scan evidence: [scan receipt](../../operator_ui/reports/barcode_scanner/scan_20261111_073956.json).
+
+## 2026-11-11 - Cellvis continuous turns and contact-angle recovery
+
+- Operator confirmed the Hamilton path worked, but requested fewer turn segments. The new candidate replaces the two turn-in bends with a coordinated straight XYZ/yaw approach, retains the Z77 crossing and site-4 endpoint, and uses one Lua queue per direction. Two collinear points preserve the intended negative wrist winding. Dense IK and limits checks pass; the changed swept path has not been physically tested.
+- Cellvis alignment translation is now15 instead of5; measured targets and verification are unchanged. Both empty-jaw Hamilton HOME descents now use137. Proof lifts, loaded HOME seating, final station seating and the last1 mm of gripping remain5.
+- IDLE's taught-pivot wrist command is now one queued MoveJ at controller setting137. Publish `controller/main_hostpoint_e2_holder_pivot137_queue_220110.bin` before using it. The optional capability is checked before moving; old220109 mixed-speed routes remain compatible. No claim of measured angular speed or live smoothness yet.
+- The previous combined run `cellvis24_workflows/d96640d3884f498195b07bb8d245b85b/run.json` finished calibration and Hamilton handling, then stopped during the Squid pickup proof lift when E2 briefly read1.732844 degrees. Subsequent stopped readings returned near1.77 without a controller fault. Squid travel did not run; this is not a completed combined cycle.
+- During plate contact, E2 deviation is bounded to0.5 degrees and logged instead of treating the old narrow setup band as a new placement. Once jaws are open28 and the arm is at HOME clearance, require three settled readings. A remaining bounded offset gets one correction to the target, then fresh verification. No rotation while holding the plate, no fault clearing, and no retry after an uncertain command.
+- Offline suites passed:24 Cellvis workflow tests,100 queue/route/Home tests,12 alignment tests, and7 focused correction/new-Lua tests (overlapping coverage). No hardware run was started for these changes. Prior failure and motion receipts remain intact.
+
+## 2026-11-11 - Revised rack turn after collision
+
+- Fresh Cellvis run `c1d0b78a69674a9cae642d05b10200ff` passed camera checks, alignment, calibration finish and Hamilton pickup. The combined XYZ/yaw shortcut then reported an axis-4 collision before Hamilton arrival. Controller stopped; this candidate is not accepted. Original telemetry and failed path retained.
+- Operator repositioned the arm for more clearance. Saved three stationary readings: X236.193/Y-56.221/Z110.645/Rz-4.757, with measured joint winding, in `cellvis24_validation/hamilton_taught_turn_1794431728156528700.json`. Plate subsequently reported back in HOME.
+- Deblur revision2 reaches that XYZ with pickup yaw unchanged before turning through the taught yaw to Hamilton yaw. It then lowers to Z77 and follows the unchanged crossing/final seating. Reverse retraces the same path. One queue per direction; transit137, final contact5. No shortcut of the newly taught clearance maneuver.
+- Dense IK checks:1056 samples each direction; limits and taught pivot/end joint winding pass.20 focused route/workflow tests pass, including real Lua execution against fake hardware, speed serialization and one completion barrier. New path is prepared, not yet physically accepted; collision/contact recovery must precede a live rerun.
+
+## 2026-11-11 - Cellvis borderline placement measurement diagnosed offline
+
+- Empty horizontal recovery and IDLE return completed. The next run `633b3cebf767442ead7dbe91f6366786` stopped at camera verification, before alignment/pickup: target shifts0.5332/0.4610/0.4642 mm, versus the unchanged0.50 mm per-burst limit. Plate reported fully seated by operator. Grid checks passed22/23/23 wells; E2 about1.774 degrees; no controller fault.
+- Saved reference used JPEG82 frames from `/frame`; live calibration uses raw PNG bursts from `cam.snap()`. Offline re-encoding those same raw frames to JPEG82 changed target estimates by0.0947/0.0234/0.0548 mm, yielding shifts0.4388/0.4395/0.5148 mm. Compression changes the rim fit near the threshold; it does not eliminate all failures and is not a fix by itself.
+- Median estimated offset is0.4640 mm (X-0.4128/Y+0.2119). Current fitted corners are consistently2.5-3.6 preview pixels from baseline. Therefore a systematic image/reference difference remains; these data do not establish whether its cause is physical placement, camera/fixture drift or vision bias. Operator seating confirmation retained, not contradicted by a claim of proven plate movement.
+- Existing stationary summary reports center-translation spread0.0230 mm, while transformed tool-target spread is0.0832 mm: the yaw-dependent tool offset amplifies small rim-angle noise. Raw reference, acceptance limits, motion endpoints and executor unchanged. No automatic retry or movement during diagnosis.
+- Reproducible offline script: `work/diagnose_cellvis_measurement_20261111.py`. Full report: `operator_ui/reports/plate_session/cellvis24_workflows/633b3cebf767442ead7dbe91f6366786/offline_measurement_diagnosis.json`.
+
+## 2026-11-11 - Scanner return seating monitor and empty-arm recovery
+
+- The scanner-to-HOME reverse queue completed at137. The final5 mm seating at5 stopped on the narrow E2 setup check; the operator confirmed the plate supported and jaws clear. The offending E2 sample was not saved, so its exact magnitude is unknown. Original failed receipt remains unchanged: `cellvis24_scanner_returns/2094a75669894864bf1efdfcb4f2c807/return_home.json`.
+- Scanner-return seating/release now uses the existing0.5-degree contact allowance, with offending readings logged before refusal. After release28 and clearance30, require the original setup range again; a bounded residual can be corrected once while empty and clear. No holder rotation while loaded or retry after uncertainty.
+- Following operator-confirmed plate removal, stopped the paused program before enabling, restarted empty, opened28 and raised30 at5. Small checked connector reached accepted HOME clearance X312.50/Y-66.30/Z105.72/Rz89.84 without faults. Recovery: `cellvis24_recoveries/1794439229357393900/run.json`. The plate must be reseated before Hamilton travel; this is not a successful full round trip.
+- New `run_cellvis24_scanner_hamilton.py` previews by default; `--execute` runs scanner return, supported release and held Hamilton round trip through the taught rack pivot. `--from-home --source` accepts fresh verified HOME evidence. Historical failures are preserved; manual reseating gets a separate observation bound to the recovery and failed receipt.
+
+## 2026-11-11 - Accepted rack round trip and direct wrist candidate
+
+- Operator accepted `cellvis24_workflows/105936a6411a46a49fc7db88e1107cd4`: plate secure throughout Hamilton round trip and flat in HOME after release. Fourteen handling stages completed, no controller fault; final E1=27.9996, E2=90.7194, HOME clearance Z106.371. This accepted run followed the separately logged scanner-return recovery. Operator acceptance is saved alongside the run.
+- Measured fixed-pivot wrist turns took23.70 s forward and23.63 s reverse, about7.6 degrees/s including boundaries. The route sent two stationary MoveL turns per direction at setting137; that setting was not a measured angular velocity. No extra Python delay was inserted between those turns.
+- New opt-in candidate removes the lateral X236.19 detour: rise above HOME to Z110.65, rotate at X306.20/Y-62.88 using two queued MoveJ137 segments preserving negative winding, then cross directly to site4 at Z77. Keep final Z53.72 and final seating/departure5. Translation length falls321.73 to196.93 mm,38.8%; actual cycle-time gain is unmeasured.
+- `hamilton_direct_fast_wrist_candidate_v3.json` preserves the accepted baseline and passes dense IK/joint/envelope checks both ways. New loaded wrist sweep and direct rack corridor are NOT clearance-verified. Optional Lua220111 extension and `--direct-hamilton` are prepared; no new-route hardware motion or automatic default change occurred.
+
+## 2026-11-11 - Direct wrist trial stopped before Hamilton crossing
+
+- After publication and explicit clearance confirmation, direct candidate trial `cellvis24_workflows/51a92ebf9dd841edb7a2b057a03cad75` completed short-side pickup/proof lift, rose to Z110.65, then reported axis4 collision during the first MoveJ wrist turn above HOME. The direct Hamilton crossing never started.
+- Last valid sample: X306.20/Y-62.88/Z110.651/Rz37.306, E1=24.9983. Stopped feedback: X306.993/Y-61.959/Z110.641/Rz15.41, E1 approximately25.346; controller disabled, Lua stopped. Do not assume retained grip after servo disable.
+- No automatic retry, fault clearing or recovery motion. Contact/payload inspection requested. Physical contact versus dynamic loading remains unresolved; the faster wrist setting is not accepted. The earlier successful seven-point rack route remains the default.
+- Operator subsequently confirmed the claw/plate is touching or caught. The new above-HOME wrist sweep is therefore not clear; no further motion or restart. Contacted object and a non-pulling recovery direction still need identification.
+
+### 2026-11-11 — Manual Hamilton re-teaching after wrist-turn contact
+- Operator taught a revised approach; recording stopped on “done.” Saved 378 polling samples, 247 containing poses. Initial 26.36 seconds had no connected telemetry; that movement was not captured.
+- Preserved Hamilton endpoint X372.43/Y-186.67/Z53.72/Rz-93.02; manual demonstration ended above/beside it, not at the placement pose.
+- Offline three-target candidate: taught turning area X259.452/Y20.127/Z110.64/Rz-57.168 ? above original endpoint at Z110.64 ? original endpoint. Forward/reverse dense IK and configured workspace pass (658 samples each).
+- Candidate starts at first captured pose, NOT HOME. HOME connector, simplified turning sweep and higher rack crossing clearance remain unresolved. No hardware motion, route replacement, or success claim. Final descent planned at speed 5; other segments 137, one queue intended.
+- Evidence: operator_ui/reports/plate_session/hamilton_three_waypoint_teaching_20261111_154732/{samples.jsonl,three_waypoint_ik_candidate.json}. Offline builder: operator_ui/plan_hamilton_teaching_20261111.py.
+
+### 2026-11-11 — Complete HOME ? Hamilton three-target IK candidate
+- Connected known HOME short-side proof-lift pose X306.20/Y-62.88/Z81.37/Rz87.88 to taught turning-area sample 191, then original Hamilton entry Z77 and unchanged placement X372.43/Y-186.67/Z53.72/Rz-93.02.
+- Three targets: X262.365/Y21.754/Z110.64/Rz41.012; X372.43/Y-186.67/Z77/Rz-93.02; original endpoint. Speeds 137/137/5; one coordinated MoveL queue intended per direction. Existing pickup, proof lift and HOME reseating stay separate.
+- Both directions pass 752 dense IK samples and existing station envelope; J4 approximately -196.49 to -11.38 degrees. Three targets versus prior seven, but Cartesian distance is longer (361.07 versus 321.73 mm); speed/time improvement has NOT been measured.
+- Unlike the manual demonstration, calculated legs combine rotation with translation. HOME entry and changed loaded sweep require clearance verification; no live motion, fault reset, executor activation or baseline replacement occurred.
+- Evidence: operator_ui/reports/plate_session/hamilton_three_waypoint_teaching_20261111_154732/home_hamilton_three_waypoint_ik.json. Reproducible offline builder: operator_ui/plan_hamilton_home_three_waypoints.py.
+
+### 2026-11-11 — Three-waypoint delivery integration and supervised calibration start
+- Added opt-in `taught_hamilton_delivery`: fresh HOME receipt ? existing holder rotation/short-side pickup ? one three-point MoveL queue ? stop at original Hamilton endpoint holding the plate. No release or automatic return; existing routes remain defaults.
+- Queue-rounded candidate saved separately as home_hamilton_three_waypoint_ik_queue_v2.json. Four focused tests pass, including actual Lua emulator forward/reverse (one completion barrier, speeds137/137/5), changed-geometry/speed rejection and held-payload receipt. Existing 11 workflow/CLI checks passed.
+- Empty-arm recovery reached Z300; the direct HTTP client timed out after30 seconds. Three stationary fault-free readings verified arrival; no movement was resent. Receipt and separate arrival reconciliation retained. Existing IDLE planner then completed at X289.97/Y62.63/Z248.02/Rz-3.88.
+- Fresh learned projected Cellvis calibration reached open-jaw endpoint X312.85/Y-66.28/Z75.719/Rz89.97 without faults. Run 1af8787771484d0a8c8c8468ab022b1d awaits operator centering/height observation before grip. Full calibration and new Hamilton transfer are not yet complete.
+
+
+### 2026-11-11 - Second Hamilton demonstration preserved
+- Recording stopped on operator done: 428 polls, 324 poses; initial 20.985 seconds lacked telemetry. After connection, the initial pose was stationary for about29 seconds before the teaching movement began.
+- Demonstrated travel stayed at Z98.597..98.598 mm: inward retreat, turning arc near X212.5/Y-9.3, then approach ending X359.736/Y-155.924/Rz-91.746. The final Hamilton placement remains X372.43/Y-186.67/Z53.72/Rz-93.02.
+- Preserved ordered demonstration within1 mm XYZ/1 degree yaw:38 recorded poses retained. Known HOME connector and separate original-endpoint approach/descent produce42 total targets. Forward and reverse IK/workspace pass951 dense samples each. More than three targets are needed for this chosen approximation bound; no forced shortcut or simultaneous lowering during the taught span.
+- Candidate is offline only; not uploaded or selected. New connectors and swept clearance remain unverified. Existing failed three-point run remains recorded as physical contact and is not accepted.
+- Evidence: operator_ui/reports/plate_session/hamilton_reteach_after_three_point_contact_v2/{samples.jsonl,constant_height_order_preserving_ik.json}.
+
+### 2026-11-11 - Continuous recorded Hamilton command
+- Added `run_cellvis24_recorded_hamilton.py --full-calibration --execute --path-clear`: learned Cellvis calibration/scanner, HOME exchange, then the ordered 42-target Hamilton queue, ending held at Hamilton. Backend route identity is checked before calibration.
+- Per operator request, inspection prompts are off by default. Runtime grip, arrival and fault checks remain; no automatic retries. Logs identify accepted-setup progression without inventing fresh visual observations. Optional `--pause-for-inspection` restores the prompts.
+- Offline checks cover queue order/speeds, continuous progression, stopping on an uncertain proof lift, and retaining inspection behavior when requested. No physical trial of this new recorded route was performed during this CLI change.
+
+### 2026-11-11 - Recorded route cleared; reduced transit prepared
+- Run `cellvis24_workflows/2dfe8d618cd7410589e9634558a138a9/run.json` completed at the original Hamilton endpoint. Operator reported the intermediate path cleared everything but felt chopped up. It was already one Lua queue with 42 targets and one final barrier.
+- New opt-in `--smooth-transit` uses three level transit targets plus the unchanged initial lift and two final descent phases: six commands in one queue, speed137 except final seating5. Endpoint unchanged. No inspection prompts by default.
+- Offline IK passes forward/reverse (795 forward samples). Candidate differs from the successful ordered path by up to12.71 mm /10.30 degrees; this is a new sweep requiring clearance review, not a physically accepted replacement. Previous successful route remains default. No blending parameter or global envelope changed.
+- Scanner CLI logs `scan_20261112T002512Z_77eb3b0b.json` and `scan_20261112T002513Z_6c0c1119.json` both decoded `SU-PRKL-P-2611-0001`; the preceding trigger returned no-read. Operator also reported scanner success.
+
+### 2026-11-11 - Reduced transit succeeded; corner-blending trial prepared
+- Operator accepted the six-command `smooth3` run `cellvis24_workflows/18bb9caaf70f41b4a026241c9d1466e2/run.json` as successful, but requested continuous movement through its three transit segments. Original report and separate operator acceptance retained.
+- Installed vendor command reference describes MoveL ZP as blending-region trajectory length. Current queue hardcodes -1. Added optional Lua capability220112 and CLI `--blend-transit`: same six targets, zones[-1,1,1,-1,-1,-1], speeds[137,137,137,137,137,5], one final barrier. Only the two level transit corners request blending; lift/entry/seating remain unchanged.
+- Legacy queue/pivot/wrist protocols retained. Host rejects unpublished capability before calibration. Lua authenticates zone values with the checksum and rejects blending at lift/final seating or nonlevel corners. Existing fault, timeout and2mm/2degree route monitoring remain unchanged.
+- Prepared for publication and supervised testing; physical continuity and the actual blended sweep are not yet verified. No hardware movement during this change.
+
+### 2026-11-11 - Cellvis rim consensus rejection fixed
+- Failed burst stopped at 103/160 rim samples because support was checked before refining the rough RANSAC line. Added bounded consensus refitting for rejected estimates only; the same image now supports 104/160 at 0.506 px RMS. Existing 65% support, distributed coverage, residual, grid and pose checks remain unchanged.
+- 40 checks passed; 12 recent successful bursts and all three commissioned reference targets remain unchanged. Three fresh stationary bursts passed detection/stability. Failed bursts now retain their hashes and error in the receipt; detector code is included in preview bindings.
+- Reloaded without arm movement. Fresh images separately request a 1.062 mm endpoint correction (limit1.000 mm), so no alignment/transfer was attempted. Evidence: operator_ui/reports/plate_session/cellvis24_validation/rim_consensus_1794445043176890800/.
+
+### 2026-11-11 - Dense opposite-wrist teaching, three-travel-target candidate
+- Recorded 2264 valid samples at about19.1 Hz with no read failures. Four outward demonstrations plus returns were retained; the third outward pass came closest to the established Hamilton endpoint. The wrist turns positively to yaw266.98 (same orientation as -93.02), ending J4+163.51 rather than -196.49.
+- Operator selected three travel targets while retaining lift/descent phases: six total queue targets, intended137 transit and5 final seating. Calculated length247.45 mm versus410.45 mm previously; forward/reverse IK and station envelope pass. Approximation differs from the selected demonstration by up to8.72 mm /5.17 degrees; no obstacle-clearance proof or powered trial. Active CLI remains unchanged. Evidence: operator_ui/reports/plate_session/hamilton_reteach_dense_1794445845223043300/selected_three_travel_plan.json.
+
+### 2026-11-11 - Opposite-wrist CLI trial loaded
+- Added explicit --opposite-wrist to run_cellvis24_recorded_hamilton.py; uses the selected three travel targets plus unchanged lift/descent phases in one six-command Lua220112 blended queue. Keeps original endpoint orientation with the newly taught positive J4 winding; earlier CLI variants remain available.
+- 20 focused checks pass, including real Lua with fake hardware, one completion barrier, preserved external axes, wrapped Cartesian yaw with positive joints, rejection of the wrong terminal winding, and missing publication before calibration. Backend route hash verified after reload. No arm movement or new publication; powered clearance/blend continuity remain untested.
+
+### 2026-11-11 - Holder restoration split diagnosed
+- Restore receipt restore_61141d886ce24b1e9368ec6d40d751e2.json commanded 91.419732 -> 46.594866 -> 1.770 degrees. Python split the 89.649732-degree rotation at its 89.5-degree segment threshold; the holder Lua was unchanged between queue publications220111 and220112.
+- Raised the planner segment maximum to89.9 degrees, retaining margin for the existing0.1-degree pre-dispatch readback check within Lua's unchanged90.01-degree bound. This measured restoration now plans one motion; larger turns still split. Targets, arrival checks and no-retry behavior are unchanged.
+- 30 exchange tests pass. Prepared on disk without hardware motion or console reload while the operator's workflow was active. Diagnosis: operator_ui/reports/plate_session/hamilton_exchanges/two_segment_diagnosis_1794446717680193400.json.
+
+### 2026-11-11 - Cellvis straight-rim profile and stable line fit
+- Run a04cc11d024b4461b295820402b30245 stopped before grip: left edge support103/160. End regions include rounded/corner and fixture responses; brightness/gamma experiments alone did not reliably recover the latest image. Hardware GammaEnable remains off.
+- Added Cellvis reference v3, retaining the old reference and all original frames. Reference and live images use a fixed central50% span on each rim, five-pixel averaging along the rim, and smoothly weighted robust line fitting. Recompute measured support after fitting: at least104/160, at least15 per quarter, RMS<=0.6px; existing three-burst stability and motion bounds unchanged. Generic/48-well callers keep the legacy defaults.
+- Reprocessed the same commissioned reference; taught alignment/grip/descent and station motion poses are unchanged. New reference/processing hashes invalidate old previews. This is an image-measurement correction, not new physical route acceptance.
+- 25 focused checks pass, including missing/blank edges, known image translation, reference reproduction and zero adjustment at the reference grasp. Offline validation rim_roi_1794448037834374400 passes39 saved images across16 groups, with all10 complete burst groups stable. Earlier candidate failures are retained.
+- Independent fresh stationary validation rim_consensus_1794448081146727800 passes all three bursts (left-rim support135/133/131). Target spread0.0591mm, corner spread0.5006px, yaw spread0.0137degrees. Projected pickup correction0.2528mm is within the existing scope. No motion was sent during diagnosis/validation; arm remains stopped. Loaded through the guarded console reload after checks.
+
+
+### 2026-11-11 ? Final Hamilton crossing lowered; existing Lua retained
+Operator reported rack collision near X369.35/Y-176.31/Z118.15 after the first two opposite-wrist turns cleared. Requested Z77 only for the final turn/crossing, explicitly excluding a new Lua publication. Preserved original opposite_wrist_runtime_plan.json and failed workflow e5b6fc1ba49643e5aa79d6a41cc8ea1e. Revision: opposite_wrist_z77_runtime_plan.json in hamilton_reteach_dense_1794445845223043300. First two turns remain at Z118.15; lower at X345.03/Y-94.47/Rz245.85 to Z77 without turning, then cross/turn to X372.43/Y-186.67/Rz266.98 at Z77 and seat at Z53.72. Travel137, final seating5. Uses existing mixed-speed queue220109 available in published220112, six targets, one completion barrier, zones all -1. Published optional two-level-corner blending is incompatible with the changed descent location, so this revision uses ordinary queue mode; waypoint velocity continuity is not claimed. No Lua source/archive changed. Dense forward/reverse IK evidence and full-leg forward IK pass; reverse remains disabled. 32 focused offline tests passed including actual existing Lua with fake hardware, positive wrist winding, Z77 serialization, stale backend rejection and legacy blending. No physical motion or fault recovery; new clearance not physically tested. Loaded Flask still needs a code reload before this revision can execute; route hash check rejects the stale backend.
+
+
+### 2026-11-11 ? Authorized update to existing Lua for Z77 blending
+Operator approved modifying/republishing existing Lua after explanation that ordinary queue mode retains exact waypoint boundaries. Prepared controller/main_hostpoint_z77_transit_queue_220113.bin: only main/mod_Trajectory.lua changed from220112; old capabilities and blend layout retained. Z77 route coordinates, positive wrist winding and speeds unchanged. Zones [-1,1,-1,-1,-1,-1] blend only the level turn junction; exact completion of the high turn, arrival atZ77 before crossing, and final seating remain. Six targets in one queue/one MOVFINISH; this is not a promise of nonzero velocity through every boundary. Controller pins the revised layout, validates speed/zone/checksum, and rejects early lowering/rotation. Host requires220113 before starting calibration. 36 offline tests passed using real Lua with fake hardware, including legacy routes and archive integrity. Flask reloaded PID29456 with matching route hash; no motion or fault recovery. Publication and physical blending trial remain pending. Receipt: z77_blend_validation.json in hamilton_reteach_dense_1794445845223043300.
+
+
+### 2026-11-11 ? Accepted Z77 forward, reverse HOME and taught Squid delivery
+Operator accepted forward blended Z77 delivery8f84ec8fba484c38ac28541372df80f1 and requested reverse return then HOME-to-Squid. Added receipt-bound continuation using the existing monitored workflow executor; no Lua publication, startup or fault reset. Reverse of six pinned points at speeds[5,137,137,137,137,137] passed live IK and real-Lua/fake-hardware winding tests. Return c3d7e5ec93884f1ca73a00d47736a734 completed, reseated at Z76.37, opened28 and rose30. Holder restored1.77 while released; accepted Cellvis long-side pickup and four-point Squid route completed in068826a5faec477b9542d716113270a5. Ends held at X223.94/Y373.76/Z268.767/Rz88.34; no Squid release/imaging. No reported faults. Physical retention/support observation for this continuation remains pending; controller completion is not that observation. Original offline-only reverse artifact retained as historical evidence; new continuation binds the completed forward receipt.
+
+
+### 2026-11-11 ? Squid return to HOME after accepted continuation
+Operator confirmed secure arrival and flat support at Squid in068826a5faec477b9542d716113270a5 and requested HOME return. Added receipt-bound return_squid phase reusing the accepted Cellvis loaded-retrieval reverse route, seating, release28 and30mm clearance. Three focused continuation tests passed before loading. Live return7aaa94a4cb0141dbb4030b92b85810f4 completed without reported faults, ending X312.5/Y-66.3/Z105.721/Rz89.84 after release in HOME. No imaging, new Hamilton path, automatic retry or controller startup. Physical HOME seating observation remains pending.
+
+
+### 2026-11-11 ? Hamilton bidirectional blending and Squid departure timing (offline integration)
+
+Operator approved Z82 final-turn allowance and requested forward/reverse integration. Existing pinned Hamilton waypoints, wrist winding, Z77 crossing and placement remain unchanged. New optional capability 220114 requests native MoveL zones forward [-1,1,1,5,-1,-1], reverse [-1,5,1,1,-1,-1], one MOVFINISH per queue. Upper turns retain their original targets. The existing mod_Trajectory module is the only archive member changed; legacy protocols remain available. Z82 is monitored, not certified from the vendor zone length; native interpolation/clearance and physical smoothness still need a supervised trial. No hardware movement was run during this integration.
+
+Squid already used one queue, travel137, with the entire24.47mm departure at5. Runtime profile now retains5mm at5 then19.47mm at137 to the unchanged293.24mm clearance. Remaining return travel137; forward seating remains5. No geometric shortcut or reduced clearance. The ideal departure duration changes from4.894s to1.142s before acceleration/settling.
+
+50 offline checks passed, including real Lua serialization on fake hardware, both directions, wrong packet/height/yaw/speed rejection, preserved legacy behavior, and the unchanged monitor corridor. Host reloaded without movement (PID29072). Publication and physical trial pending. Evidence: operator_ui/reports/plate_session/hamilton_squid_smoothing_220114/integration.json.
+
+
+### 2026-11-11 ? Rounded Hamilton reverse and revised Squid handling live cycle
+
+Under the operator request, published capability220114 verified; latest completed Hamilton arrival matched fresh pose/joints/grip. Hamilton reverse with zones[-1,5,1,1,-1,-1] completed, reseated and released at HOME. Followed by one Squid drop-off, empty HOME return, retrieval and loaded HOME return/release cycle. Squid departure used5mm at5 then137 within one queue. No controller faults or automatic motion retries. One transport reconnect was needed before Squid preview; no Lua startup. Final empty jaws28, HOME clearance X312.5/Y-66.3/Z105.721/Rz89.84. Physical retention/smoothness acceptance remains pending operator observation.
+
+Hamilton receipt: C:\Users\Cephla\Downloads\Bioyond_Cephla\Bioyond_Cephla\operator_ui\reports\plate_session\cellvis24_workflows\97f5e54fe9804a729d511144a73edaf0\run.json
+
+Squid receipt: C:\Users\Cephla\Downloads\Bioyond_Cephla\Bioyond_Cephla\operator_ui\reports\plate_session\cellvis24_workflows\6a6d32484b4a4cc3badb217d26acffac\run.json
+
+
+Operator confirmed the rounded Hamilton reverse + Squid handling cycle successful. Acceptance: operator_ui\reports\plate_session\cellvis24_workflows\6a6d32484b4a4cc3badb217d26acffac\operator_success.json.
+
+
+### 2026-11-11 ? Combined rounded Hamilton and Squid handling stopped at Hamilton retrieval
+
+Prior run operator success preserved separately. New full handling selection uses opposite3 rounded Hamilton route for forward/reverse while retaining Squid queue;18 focused checks passed before reload. Live run completed Hamilton delivery/release and empty return, then returned to Hamilton for pickup. Jaw arrival verification failed before lift. No automatic retry or fault reset; Squid not started. Receipt: C:\Users\Cephla\Downloads\Bioyond_Cephla\Bioyond_Cephla\operator_ui\reports\plate_session\cellvis24_workflows\d3ed31c49530401bb14474d85de2a954\run.json.
+
+## Hotel slot 1 delivery and retrieval accepted - 11 November 2026
+
+Operator confirmed secure return and flat HOME reseating after one revision-5 round trip. Both controller receipts completed without reported faults. Horizontal entry/exit20, outside travel137, proof lift5mm at5; slot insertion shortened6.35mm to X290.878. Slot release7mm; HOME release28mm. Original logs preserved. Workflow: `workflows/hotel_slot1_v1.json`; skill: `home-hotel-slot1-handling-v1`. Slots2/3 remain unvalidated pending teaching.
+
+
+## Slot2 accepted handling ? 2026-11-12
+Slot2 48-well HOME delivery/drop-off/empty return/retrieval succeeded; operator confirmed clean and secure, plate flat in HOME. Use home-hotel-slot2-handling-v1 and operator_ui/run_hotel_slot2_workflow.py. Endpoint X293.720/Y-135.351/Z295.995/Rz-0.652; horizontal entry/exit20, outside travel137, grip3.9, release7, pickup lift5mm at5. Withdraw horizontally before lowering. HOME seating Z72.72, release28. Slot3/4 remain unvalidated. Source: operator_ui\reports\plate_session\hotel_slot2_loaded_teaching_20261111_234954\slot2_operator_success.json
+Operator: ?Yes?all clean and secure; plate flat in HOME.? Raw trial receipts preserved.
+
+
+## Slot3 accepted handling ? 2026-11-12
+Supersedes earlier notes that slot3 is pending. Corrected slot3 48-well HOME delivery/drop-off/empty return/retrieval succeeded; operator confirmed clean and secure, plate flat in HOME. Use home-hotel-slot3-handling-v1 and operator_ui/run_hotel_slot3_workflow.py. Accepted endpoint X293.720/Y-135.351/Z352.387/Rz-0.652 (+1mm correction); pickup lift Z357.387. Horizontal entry/exit20, outside travel137, grip3.9, release7, lift5mm at5. Withdraw horizontally before lowering. HOME seating Z72.72, release28. Prior failed slot3 run and Z351.387 candidate remain historical, not accepted. Slot4 remains blocked above Z400. Source: operator_ui\reports\plate_session\hotel_slot2_loaded_teaching_20261111_234954\slot3_operator_success.json
+Operator: ?Yes?all clean and secure; save slot 3 as successful.? Raw receipts and earlier failed attempts preserved.

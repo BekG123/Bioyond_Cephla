@@ -1,4 +1,4 @@
-"""Image-only well-grid detection for transparent 48/96-well plates.
+"""Image-only well-grid detection for 24/48/96-well plates.
 
 Coordinates are dimensionless grid intervals and image pixels. This estimates
 neither physical distance nor a grasp pose. Grid symmetry leaves A1 unknown.
@@ -14,8 +14,8 @@ from vision import DetectionError
 
 
 def supported(rows,columns):
-    if (rows,columns) not in ((6,8),(8,12)):
-        raise DetectionError('Choose a 6 x 8 or 8 x 12 grid.')
+    if (rows,columns) not in ((4,6),(6,8),(8,12)):
+        raise DetectionError('Choose a 4 x 6, 6 x 8 or 8 x 12 grid.')
 
 
 def clusters(values,count):
@@ -80,8 +80,10 @@ def fit_grid(points,rows=6,columns=8):
     return result
 
 
-def detect(image,rows=6,columns=8):
+def detect(image,rows=6,columns=8,*,candidate_votes=30):
     supported(rows,columns)
+    if type(candidate_votes) not in (int,float) or not math.isfinite(candidate_votes) or not 20<=candidate_votes<=40:
+        raise DetectionError('Invalid well-ring candidate vote threshold.')
     gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) if image.ndim==3 else image.copy()
     factor=min(1.,1200/gray.shape[1])
     small=cv2.resize(gray,None,fx=factor,fy=factor,interpolation=cv2.INTER_AREA)
@@ -92,7 +94,7 @@ def detect(image,rows=6,columns=8):
     width=small.shape[1]
     layout_scale=8/columns
     circles=cv2.HoughCircles(enhanced,cv2.HOUGH_GRADIENT,1.2,width*.05*layout_scale,
-        param1=80,param2=30,minRadius=round(width*.023*layout_scale),maxRadius=round(width*.046*layout_scale))
+        param1=80,param2=candidate_votes,minRadius=round(width*.023*layout_scale),maxRadius=round(width*.046*layout_scale))
     if circles is None:raise DetectionError('No well-ring candidates found.')
     fit=fit_grid(circles[0,:,:2],rows,columns)
     scale=np.diag([1/factor,1/factor,1.])

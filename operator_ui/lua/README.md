@@ -6,6 +6,24 @@ Prepared package: `controller/main_hostpoint_trajectory_137.bin`. Only the traje
 differs from speed 130: version 220108 and a 137 mm/s ceiling. Host permits 137
 only for the two `entry_speed137_*` reviewed variants with separate one-run
 permissions. Same geometry, acceleration, blending and collision settings.
+
+### Optional Hamilton transit corner blending (220112, November 11)
+
+`controller/main_hostpoint_blended_transit_queue_220112.bin` preserves base
+queue220109 and optional pivot220110/mixed-wrist220111. New capability15 reports
+220112; begin16 and append17 carry six values per point (XYZ/yaw/speed/zone),
+including zone in the checksum. Only the pinned six-point forward Hamilton
+candidate may request zones `[-1,1,1,-1,-1,-1]`. The two level transit corners
+use zone1; the lift and descent phases retain -1, with final seating speed5.
+All six moves are queued before the single final MOVFINISH.
+
+Select with `run_cellvis24_recorded_hamilton.py --full-calibration --blend-transit
+--execute --path-clear`. No inspection prompts by default. The command checks
+the published capability before calibration. Existing `--smooth-transit` keeps
+the physically successful unblended route. Publish is required for blending;
+the generated package has offline tests only, not physical continuity evidence.
+Do not restart Lua with a held plate: startup can close the jaws. This change
+does not reset faults, start the robot program, relax tracking limits, or retry.
 Publish and freshly verify 220108 before execution. Hardware results belong in
 Observations.md; the 10-second objective is not a measured result or guarantee.
 

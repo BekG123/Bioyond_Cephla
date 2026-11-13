@@ -11,7 +11,7 @@ normally, and launch with **Squid's own Python environment**:
 ```powershell
 & 'C:/Users/Cephla/AppData/Local/Programs/Python/Python310/python.exe' `
   'C:/Users/Cephla/Downloads/Bioyond_Cephla/Bioyond_Cephla/operator_ui/squid_bridge/launch.py' `
-  --software 'C:/Users/Cephla/AppData/Local/Temp/claude/squid-latest/software' `
+  --software 'C:/Users/Cephla/Desktop/squid-latest/software' `
   --simulation --start-server
 ```
 
@@ -19,6 +19,30 @@ On Linux the command is the same with Linux paths and the Squid environment's
 `python`. Do not launch a second Squid instance or point it at hardware during
 offline tests. Reload the idle Lacry backend, select the acquisition tab/settings
 in Squid, then **Connect to Squid** in Lacry.
+
+### Desktop installation and the existing mock-image cycle workflow
+
+The active installation is now `C:/Users/Cephla/Desktop/squid-latest/software`.
+The old Temp copy is not used. `launch.py` defaults to the current user's
+`Desktop/squid-latest/software`; `--software` or `SQUID_SOFTWARE_DIR` can select
+another installation explicitly. Missing installations fail without fallback.
+Use `--check` to print the resolved paths without importing Squid or starting it.
+
+For this cell's established physical-XYZ/simulated-camera cycle workflow, run
+`operator_ui/reports/restart_squid_lifecycle.ps1 -PreviewOnly` to inspect the launch.
+After saving the current imaging settings and closing Squid normally, an operator
+must confirm the stage is empty/clear for startup homing and the arm is at Home.
+Then run the script with `-StageClearAndArmHome`. It uses the Desktop installation,
+controller 12769210, the existing settings/stage/completion bridge, and the
+Windows status-file fix. It refuses a second Squid process even if MCP is off.
+
+In Researcher view, use the existing **Connect to Squid** control, select the
+imaging sites/settings in Squid, and request the normal repeated Squid workflow.
+No new robot trajectory, loading coordinate, imaging selection or automatic run
+is created by this installation change. Existing selections are checked against
+the new process session before use. The read-only `get_stage_reference` response
+now includes `software_directory` so deployment can be verified. These mock-image
+cycles exercise real stage motion, not optical acquisition from a real camera.
 
 Ask: “Fully calibrate, leave the plate at Squid, image using its selected settings,
 then retrieve the plate to Home when imaging finishes.” Or choose **Calibrate,
@@ -145,7 +169,41 @@ This addresses the October 24 cycle-7 failure: images and stage cleanup finished
 but Windows denied replacement of watchdog `run.json` at 08:06:18.065, leaving
 stale running status. It does not replay imaging or resume that failed batch.
 
+The 2026-11-12 composed-transfer run `d8a9f067c8c44c1f97b9b4c61a094c2e`
+stopped before its first executor call when ReplaceFileW returned 1175 while
+saving the dispatch record. The bounded identical-file retry now includes
+1175 (both names remain intact per the Windows API contract). Errors 1176/1177,
+which can leave partially renamed files, are not retried. Permanent failures
+still stop the workflow, preserve the previous record and retain its review
+hold. Regression tests inject failures before and after a step and verify no
+motion is repeated. Reloading the console loads this fix for transfer logs;
+the running Squid writer picks it up on its next separately approved restart.
+
 Run `test_state_io.py` with Squid's Python from its software directory for real
 Windows sharing tests plus the native `RunStateWriter` check, with no hardware.
 A normal Squid restart loads the writer fix; `get_stage_reference` then reports
 `state_io_version: 1`. Restart requires clearance for native startup homing.
+
+### Loading completion and physical controller identity (2026-11-12)
+
+The external add-on now reports `get_stage_reference.loading.version: 2`.
+It records a session-local receipt only after Squid's GUI loading callback
+reports success, or the approved named loading command completes. The GUI's
+button label alone is not evidence: the shipped callback also updates that
+label after a failed move. Stage commands and acquisition starts invalidate
+the receipt; a new session, controller or reference cannot reuse it.
+
+Loading readiness allows 0.020 mm in X/Y and 0.050 mm in Z against the taught
+reference and checks that the stage remains at its completed loading position.
+Thus native Z0.100 is accepted against the saved Z0.063984375 after successful
+loading. These tolerances do not change imaging, robot or general arrival checks.
+The actual open USB serial port supplies controller identity, rather than an
+optional launcher override. Auto-detected controller 12769210 is consequently
+identified without reconnecting or changing the taught reference.
+
+Host stage status, Cellvis transfer and acquisition entry share this completion
+check. The older bridge keeps its original strict coordinate check until the
+add-on is loaded. Deploy with a normal Squid restart after operator clearance
+for startup homing, and reload the console. Then complete Load position and
+verify a fresh receipt before proposing robot transfer. No shipped Squid source,
+saved loading target, robot path, or approval requirement is changed.

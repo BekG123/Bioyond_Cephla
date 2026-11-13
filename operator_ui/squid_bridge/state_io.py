@@ -14,6 +14,11 @@ import time
 VERSION = 1
 RETRY_DELAYS = (.02, .04, .08, .16, .20, .20)
 READ_DELAYS = (.01, .02, .04, .08)
+# ReplaceFile error 1175 preserves both original filenames, so the same
+# serialized candidate can be retried. Do NOT include 1176/1177: those can
+# leave partially renamed files and need inspection, not another replacement.
+# https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-replacefilew
+RETRYABLE_REPLACE_ERRORS = (5, 32, 33, 1175)
 
 
 @contextmanager
@@ -102,7 +107,7 @@ def atomic_write_json(path, data):
             except OSError as error:
                 # Access denied can be transient on Windows rename; permanent
                 # permission failures still propagate after this small bound.
-                if getattr(error, 'winerror', None) not in (5, 32, 33) or attempt == len(RETRY_DELAYS):
+                if getattr(error, 'winerror', None) not in RETRYABLE_REPLACE_ERRORS or attempt == len(RETRY_DELAYS):
                     raise
                 time.sleep(RETRY_DELAYS[attempt])
     finally:

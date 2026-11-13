@@ -42,12 +42,14 @@ def check_route(start,points,joints,cfg,envelope):
         previous=p
     return q
 
-def check_vertical_feedback(pose,path):
-    if pose['Z']<291.24-.15:
+def check_vertical_feedback(pose,path,clearance_z=291.24):
+    if not math.isfinite(clearance_z):
+        raise TransferError('Invalid reviewed Squid clearance height')
+    if pose['Z']<clearance_z-.15:
         ends=(path[0],path[-1])
         if not any(pose['Z']>=p['Z']-.15 and math.hypot(pose['X']-p['X'],pose['Y']-p['Y'])<=.15 and abs(wrap(pose['Rz']-p['Rz']))<=.15 for p in ends):
             raise TransferError('Squid vertical departure/descent left its checked line')
-    if pose['Z']<min(path[0]['Z'],path[-1]['Z'])-.15 or pose['Z']>291.24+.15:
+    if pose['Z']<min(path[0]['Z'],path[-1]['Z'])-.15 or pose['Z']>clearance_z+.15:
         raise TransferError('Squid vertical motion exceeded reviewed height')
 
 def output_path(trial_id):

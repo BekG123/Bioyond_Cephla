@@ -56,6 +56,8 @@ def install(server):
         return all(abs(actual[k]-target[k])<=.02 for k in AXES)
 
     def run(*args,**kwargs):
+        tracker=getattr(server,'_lacry_loading_tracker',None)
+        if tracker is not None:tracker.invalidate('Acquisition started.')
         with lock:
             if gate['status'] in ('pending','running','failed'):
                 raise RuntimeError('Squid acquisition cleanup is unfinished or failed; operator review is required.')
@@ -101,7 +103,9 @@ def install(server):
         if info['reference_hash']!=reference_hash:raise ValueError('Loading reference changed.')
         if status()['in_progress'] or gate['status']=='failed':
             raise RuntimeError('Squid is busy or its acquisition cleanup failed. No scan-entry move started.')
-        if not within(pos(),info['dropoff']):raise ValueError('Squid must be at its verified loading position before scan entry.')
+        loaded=(info['loading'].get('at_dropoff') is True if info.get('loading',{}).get('version')==2
+                else within(pos(),info['dropoff']))
+        if not loaded:raise ValueError('Squid must complete its loading move before scan entry.')
         target=imaging_target(settings_yaml,info['scan_limits'])
         # Native transition engages the holder using the configured scan entry;
         # validate that entry too, rather than changing its limits or geometry.

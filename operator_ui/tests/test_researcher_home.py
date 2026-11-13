@@ -25,7 +25,9 @@ class HomeTests(unittest.TestCase):
         self.service = FakeService()
         self.service.pose = dict(X=292.872,Y=-68.723,Z=300.,Rz=84.637)
         self.service.q = dict(J1=261.401,J2=40.79778,J3=53.63798,J4=-9.79890)
-        self.service.robot=Controller(self.service)
+        from build_pivot_joint_program import candidate_lua
+        source=Path(__file__).resolve().parents[1]/'lua/mod_Trajectory_segment_speeds.lua'
+        self.service.robot=Controller(self.service,source=candidate_lua(source.read_text()))
         self.service._locked=lambda fn:fn()
         def stop_program(action):
             self.service.robot.program_state='stopped'
@@ -33,7 +35,7 @@ class HomeTests(unittest.TestCase):
             return dict(ok=True)
         self.service.program=stop_program
         self.state = dict(ok=True,connected=True,errors=[],control_mode={'mode':'auto'},enabled=True,program_state={'state':'running'})
-        self.service.status = lambda: self.state.copy()
+        self.service.status = lambda: {**self.state,'pose_mm':self.service.pose_mm(),'joints':self.service.joints()}
         self.rotations = []
         def rotate(rz, speed, force_delta):
             self.rotations.append(rz)
@@ -56,11 +58,10 @@ class HomeTests(unittest.TestCase):
         result = self.runner.finish()
         self.assertTrue(result['ok'])
         for k,v in self.home.target()[0].items():self.assertAlmostEqual(self.service.pose[k],v,places=3)
-        self.assertEqual(len(self.service.robot.calls),2)
-        self.assertTrue(all(c[1]==137 for c in self.service.robot.calls))
+        self.assertEqual([c[1] for c in self.service.robot.calls],[137]*4)
         self.assertEqual(self.service.grips,[])
         self.assertEqual(original,self.path.read_bytes())
-        self.assertTrue(self.rotations)
+        self.assertEqual(self.rotations,[])  # Wrist now uses a single Lua command at the taught pivot.
         self.invalidated.assert_called_once()
 
     def test_no_confirmation_no_move(self):
@@ -174,23 +175,29 @@ class HomeTests(unittest.TestCase):
 
     def test_uncertain_motion_stops_without_retry(self):
         self.home.start(self.body)
-        self.service.robot.set_sys_var_i=Mock(side_effect=TimeoutError('Unconfirmed queue handshake'))
+        original=self.service.robot.set_sys_var_i
+        def fail_queue(values,**kwargs):
+            if values.get(4)==11:return original(values,**kwargs)
+            raise TimeoutError('Unconfirmed queue handshake')
+        self.service.robot.set_sys_var_i=Mock(side_effect=fail_queue)
         with self.assertRaises(Exception): self.runner.finish()
-        self.assertEqual(self.service.robot.set_sys_var_i.call_count,1)
+        self.assertEqual(self.service.robot.set_sys_var_i.call_count,2)
         self.assertEqual(self.service.robot.calls,[])
         self.assertEqual(self.service.robot.program_state,'stopped')
 
     def test_lower_start_queues_lift_then_rotates_then_crosses_and_lowers(self):
         self.service.pose['Z']=150.
+        self.service.q['J1']=150.-38.599
         self.home.start(self.body)
         self.assertTrue(self.runner.finish()['ok'])
         calls=self.service.robot.calls
-        self.assertEqual(len(calls),3)
-        self.assertEqual([c[1] for c in calls],[137]*3)
+        self.assertEqual(len(calls),5)
+        self.assertEqual([c[1] for c in calls],[137]*5)
         self.assertAlmostEqual(calls[0][0][2],300.)
         self.assertAlmostEqual(calls[0][0][5],84.64,places=2)
-        self.assertAlmostEqual(calls[1][0][5],-3.88,places=2)
-        self.assertTrue(self.rotations)
+        self.assertAlmostEqual(calls[1][0][5],84.64,places=2)
+        self.assertAlmostEqual(calls[2][0][5],-3.88,places=2)
+        self.assertEqual(self.rotations,[])
 
     def test_older_lua_rejected_before_preparation(self):
         self.service.robot=Controller(self.service,legacy=130)

@@ -44,8 +44,13 @@ def checksum(points, segment_speeds=None):
     return value
 
 
-def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, home_transit=False, scope_compact=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False, squid_queue=False, short_side_alignment=None, hamilton_short_side=None):
+def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, home_transit=False, scope_compact=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False, squid_queue=False, short_side_alignment=None, hamilton_short_side=None, idle_pivot_rotation=False):
     """Quantize to 0.01 mm/degree, then recheck the exact transmitted path."""
+    if idle_pivot_rotation:
+        if not reviewed or short_side_alignment is not None or hamilton_short_side is not None or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,home_transit,scope_compact,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue)):
+            raise TransferError('IDLE pivot rotation requires its own reviewed profile.')
+        from idle_pivot import validate_rotation
+        validate_rotation(start,points)
     if not 1 <= len(points) <= 1024:
         raise TransferError('Lua queue requires 1–1024 points.')
     if sum(bool(v) for v in (vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,home_transit,scope_compact,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue))>1:
@@ -64,6 +69,8 @@ def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=
         if not reviewed:raise TransferError('Squid queue requires explicit route review.')
         if squid_queue == 'home_holder':
             from home_squid_transfer import validate_route as validate_squid_queue
+        elif squid_queue == 'cellvis24_home_holder':
+            from cellvis24_squid_route import validate_route as validate_squid_queue
         elif squid_queue is True:
             from squid_single_queue import validate_route as validate_squid_queue
         else:raise TransferError('Unknown Squid queue profile.')
@@ -121,7 +128,7 @@ def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=
         long_vertical=(reviewed and vertical_runs and distance<=200.02
                        and math.dist([previous[k] for k in ('X','Y')],[point[k] for k in ('X','Y')])<=.25
                        and abs(wrap(point['Rz']-previous['Rz']))<=.1)
-        if not (straight_transfer or level_return or forward_entry or reverse_entry or home_transit or scope_compact or hamilton_home or hamilton_trial or scope_trial or hamilton_release or squid_queue or short_side_alignment is not None or hamilton_short_side is not None) and ((distance > (50.02 if reviewed else 5.02) and not long_vertical) or abs(wrap(point['Rz']-previous['Rz'])) > (10.02 if reviewed else 1.02)):
+        if not (idle_pivot_rotation or straight_transfer or level_return or forward_entry or reverse_entry or home_transit or scope_compact or hamilton_home or hamilton_trial or scope_trial or hamilton_release or squid_queue or short_side_alignment is not None or hamilton_short_side is not None) and ((distance > (50.02 if reviewed else 5.02) and not long_vertical) or abs(wrap(point['Rz']-previous['Rz'])) > (10.02 if reviewed else 1.02)):
             raise TransferError('Queued path segment exceeds the reviewed step size.')
         q = check_path(previous,point,q,cfg,None)
         out.append(point)
@@ -153,6 +160,7 @@ def prepare_points(start, joints, points, cfg, *, reviewed=False, vertical_runs=
     if reverse_entry:
         reversed_path=list(reversed([start]+out))
         validate_forward_entry(reversed_path[0],reversed_path[1:])
+    if idle_pivot_rotation:validate_rotation(start,out)
     return out, q
 
 
@@ -175,7 +183,9 @@ def locate(pose, path):
         t = max(0.,min(1.,dot/norm2)) if norm2 else 0.
         d = math.sqrt(sum((pose[k]-a[k]-t*v)**2 for k,v in zip(KEYS,delta)))
         yaw = abs(wrap(pose['Rz']-(a['Rz']+t*wrap(b['Rz']-a['Rz']))))
-        length = math.sqrt(length2)
+        # Pure wrist turns have no XYZ length; include their angular distance
+        # in progress only. Corridor limits below remain separate mm/degrees.
+        length = math.sqrt(norm2)
         score = d*d+yaw*yaw
         if best is None or score<best[3]: best = (d,yaw,along+t*length,score)
         along += length
@@ -186,6 +196,11 @@ def locate(pose, path):
 class LuaTrajectory:
     def __init__(self, service):
         self.service = service
+
+    def require_joint_pivot(self):
+        reply=self.service.robot.set_sys_var_i({0:22,1:1,2:0,3:0,4:11,5:0,6:0},reply_timeout=10)
+        if reply!={'index':1,'value':220110}:
+            raise TransferError('Publish the queued wrist137 program (pivot capability220110) before this IDLE route; no turn sent.')
 
     def capability(self):
         try:
@@ -226,11 +241,27 @@ class LuaTrajectory:
         self.service.trajectory_fault = True
         raise TransferError('Controller has not reported stopped. Use the E-stop; inspect Developer view.')
 
-    def execute(self, run, start, joints, points, cfg, speed, progress, *, grouped=False, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, research_speed47=False, research_speed55=False, research_speed70=False, research_speed80=False, research_speed100=False, research_speed130=False, research_speed137=False, home_transit=False, home_speed137=False, scope_compact=False, scope_speed137=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False, squid_queue=False, segment_speeds=None, short_side_alignment=None, hamilton_short_side=None):
-        hamilton_hover=hamilton_short_side in ('pickup_hover03_forward','pickup_hover03_reverse','pickup_hover04_forward','pickup_hover04_reverse','pickup_hover04_departure')
+    def execute(self, run, start, joints, points, cfg, speed, progress, *, grouped=False, reviewed=False, vertical_runs=False, straight_transfer=False, level_return=False, forward_entry=False, reverse_entry=False, research_speed47=False, research_speed55=False, research_speed70=False, research_speed80=False, research_speed100=False, research_speed130=False, research_speed137=False, home_transit=False, home_speed137=False, scope_compact=False, scope_speed137=False, hamilton_home=False, scope_phase=None, hamilton_trial=False, scope_trial=False, hamilton_release=False, squid_queue=False, segment_speeds=None, short_side_alignment=None, hamilton_short_side=None, scanner_empty=False, scanner_loaded=False, idle_pivot_rotation=False, hotel_route=None):
+        if hotel_route is not None:
+            if speed!=137 or not reviewed or grouped or segment_speeds is None or short_side_alignment is not None or hamilton_short_side is not None or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_transit,home_speed137,scope_compact,scope_speed137,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue,scanner_empty,scanner_loaded,idle_pivot_rotation)):
+                raise TransferError('Hotel trial requires only its pinned empty-arm mixed-speed profile.')
+            from hotel_slot_trial import prepare_for_service as prepare_hotel
+            prepare_hotel(self.service,hotel_route,start,joints,points,cfg,self.service.envelope,segment_speeds)
+        if idle_pivot_rotation:
+            if speed!=137 or not reviewed or grouped or segment_speeds is not None or scanner_empty or scanner_loaded or any((research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_speed137,scope_speed137)):
+                raise TransferError('IDLE pivot rotation requires speed137 with no mixed profile.')
+        empty_hamilton = hamilton_short_side in ('empty_home_hamilton40','empty_rack03_idle','empty_rack03_hamilton','empty_rack04_home','empty_rack04_hamilton','empty_original40_home','empty_original40_hamilton','empty_turn05_home','empty_turn05_hamilton','empty_rack06_home','empty_rack06_hamilton')
+        hamilton_hover=hamilton_short_side in ('empty_rack07_home','empty_rack07_hamilton','empty_turn05_home','empty_turn05_hamilton','empty_rack06_home','empty_rack06_hamilton','empty_original40_home','empty_original40_hamilton','empty_rack04_home','empty_rack04_hamilton','empty_rack03_idle','empty_rack03_hamilton','empty_home_hamilton40','pickup_hover03_forward','pickup_hover03_reverse','pickup_hover04_forward','pickup_hover04_reverse','pickup_hover04_departure','cellvis24_hamilton_forward','cellvis24_hamilton_reverse')
+        hamilton_hover = hamilton_hover or hamilton_short_side in ('cellvis24_rack_forward','cellvis24_rack_reverse')
+        hamilton_hover = hamilton_hover or hamilton_short_side in ('cellvis24_taught_three_forward','cellvis24_taught_three_reverse')
+        hamilton_hover = hamilton_hover or hamilton_short_side in ('cellvis24_recorded_forward','cellvis24_recorded_reverse','cellvis24_smoothed_forward','cellvis24_smoothed_reverse','cellvis24_opposite_forward','cellvis24_opposite_reverse')
+        if hamilton_short_side in ('cellvis24_direct_forward','cellvis24_direct_reverse'):
+            from cellvis24_direct_rack import MixedWristTrajectory
+            if not isinstance(self,MixedWristTrajectory):raise TransferError('Direct route requires the mixed-wrist executor.')
+            hamilton_hover=True
         if hamilton_short_side is not None:
-            if speed!=137 or not reviewed or grouped or short_side_alignment is not None or (segment_speeds is not None and not hamilton_hover) or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_transit,home_speed137,scope_compact,scope_speed137,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue)):
-                raise TransferError('Hamilton short-side requires its exact speed-137 profile.')
+            if speed!=(40 if empty_hamilton else 137) or not reviewed or grouped or short_side_alignment is not None or (segment_speeds is not None and not hamilton_hover) or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_transit,home_speed137,scope_compact,scope_speed137,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue)):
+                raise TransferError('Hamilton route requires its exact speed profile.')
             from hamilton_short_side_trial import validate_route as validate_hamilton_short
             validate_hamilton_short(start,points,joints,cfg,self.service.envelope,hamilton_short_side)
             if hamilton_hover:
@@ -241,13 +272,15 @@ class LuaTrajectory:
                 raise TransferError('Short-side alignment requires its own pinned route profile.')
             from short_side_alignment_trial import validate_route as validate_short_side
             validate_short_side(start,points,joints,cfg,self.service.envelope,short_side_alignment)
-        if segment_speeds is not None and not (squid_queue or hamilton_hover):
+        if segment_speeds is not None and not (squid_queue or hamilton_hover or hotel_route is not None):
             raise TransferError('Segment speeds require an exact reviewed mixed-speed route.')
         if squid_queue:
             if not reviewed or grouped or segment_speeds is None or any((research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_speed137,scope_speed137)):
                 raise TransferError('Squid queue requires its reviewed segment-speed profile.')
             if squid_queue == 'home_holder':
                 from home_squid_transfer import validate_route, check_route
+            elif squid_queue == 'cellvis24_home_holder':
+                from cellvis24_squid_route import validate_route, check_route
             elif squid_queue is True:
                 from squid_single_queue import validate_route, check_route
             else:raise TransferError('Unknown Squid queue profile.')
@@ -256,8 +289,10 @@ class LuaTrajectory:
                 raise TransferError('Squid queue speeds must preserve transit 137 and vertical seating/lift 5.')
         if sum(bool(v) for v in (research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_speed137,scope_speed137))>1:raise TransferError('Choose one research speed profile.')
         speed_limit=(137 if research_speed137 else 130 if research_speed130 else 100 if research_speed100 else 80 if research_speed80 else 70 if research_speed70 else 55 if research_speed55 else 47) if (research_speed47 or research_speed55 or research_speed70 or research_speed80 or research_speed100 or research_speed130 or research_speed137) and reviewed and (forward_entry or reverse_entry) else 40
-        if squid_queue:speed_limit=137
+        if squid_queue or hotel_route is not None:speed_limit=137
         if short_side_alignment is not None or hamilton_short_side is not None:speed_limit=137
+        if empty_hamilton:speed_limit=40
+        if idle_pivot_rotation:speed_limit=137
         if home_speed137:
             if not reviewed or not (home_transit or straight_transfer or hamilton_home or hamilton_trial or hamilton_release):
                 raise TransferError('Home speed requires the checked Home transit profile.')
@@ -277,13 +312,45 @@ class LuaTrajectory:
         if hamilton_release:
             from hamilton_release_20261108 import validate_route, SPEEDS
             speed_limit=min(speed_limit,SPEEDS[validate_route(start,points)])
+        if scanner_empty or scanner_loaded:
+            if scanner_loaded and ((scanner_loaded is not True and scanner_loaded not in ('direct','cellvis_direct','cellvis_return','cellvis_opposite')) or scanner_empty):
+                raise TransferError('Loaded and empty scanner profiles cannot be mixed.')
+            if not scanner_loaded and scanner_empty is not True and scanner_empty != 'continuous':
+                raise TransferError('Unknown scanner route profile.')
+            if speed != 137 or not reviewed or grouped or segment_speeds is not None or short_side_alignment is not None or hamilton_short_side is not None or scope_phase is not None or any((vertical_runs,straight_transfer,level_return,forward_entry,reverse_entry,research_speed47,research_speed55,research_speed70,research_speed80,research_speed100,research_speed130,research_speed137,home_transit,home_speed137,scope_compact,scope_speed137,hamilton_home,hamilton_trial,scope_trial,hamilton_release,squid_queue)):
+                raise TransferError('Scanner speed137 requires only its exact empty-arm route profile.')
+            from scanner_empty_route import validate_route as validate_scanner
+            if scanner_loaded=='cellvis_direct':
+                from cellvis24_scanner_route import prepare_for_service
+                prepare_direct_scanner=lambda *args:prepare_for_service(self.service,*args)
+            elif scanner_loaded=='cellvis_return':
+                from cellvis24_scanner_return import prepare_for_service
+                prepare_direct_scanner=lambda *args:prepare_for_service(self.service,*args)
+            elif scanner_loaded=='cellvis_opposite':
+                from barcode_opposite_transport import prepare_for_service
+                prepare_direct_scanner=lambda *args:prepare_for_service(self.service,*args)
+            elif scanner_loaded:
+                from scanner_plate_workflow import require_holding
+                require_holding(self.service,direct=scanner_loaded=='direct')
+            if scanner_loaded=='direct':
+                from scanner_direct_route import prepare as prepare_direct_scanner
+            if scanner_loaded in ('direct','cellvis_direct','cellvis_return','cellvis_opposite'):
+                prepare_direct_scanner(start,joints,points,cfg,self.service.envelope)
+            else:
+                validate_scanner(start,points,joints,cfg,self.service.envelope,continuous=scanner_empty=='continuous' or scanner_loaded)
+            speed_limit=137
         if type(speed) not in (int,float) or not math.isfinite(speed) or not 0<speed<=speed_limit:
             raise TransferError(f'Queued replay speed must be greater than zero and at most {speed_limit} mm/s for this route.')
         if reviewed and grouped:
             raise TransferError('An explicitly reviewed route must execute its exact points without regrouping.')
         if vertical_runs and not reviewed:
             raise TransferError('Long vertical segments require a separately reviewed route.')
-        points, expected = prepare_points(start,joints,points,cfg,reviewed=reviewed,vertical_runs=vertical_runs,straight_transfer=straight_transfer,level_return=level_return,forward_entry=forward_entry,reverse_entry=reverse_entry,home_transit=home_transit,scope_compact=scope_compact,hamilton_home=hamilton_home,scope_phase=scope_phase,hamilton_trial=hamilton_trial,scope_trial=scope_trial,hamilton_release=hamilton_release,squid_queue=squid_queue,short_side_alignment=short_side_alignment,hamilton_short_side=hamilton_short_side)
+        if hotel_route is not None:
+            points,expected=prepare_hotel(self.service,hotel_route,start,joints,points,cfg,self.service.envelope,segment_speeds)
+        elif scanner_loaded in ('direct','cellvis_direct','cellvis_return','cellvis_opposite'):
+            points,expected=prepare_direct_scanner(start,joints,points,cfg,self.service.envelope)
+        else:
+            points, expected = prepare_points(start,joints,points,cfg,reviewed=reviewed,vertical_runs=vertical_runs,straight_transfer=straight_transfer,level_return=level_return,forward_entry=forward_entry,reverse_entry=reverse_entry,home_transit=home_transit,scope_compact=scope_compact,hamilton_home=hamilton_home,scope_phase=scope_phase,hamilton_trial=hamilton_trial,scope_trial=scope_trial,hamilton_release=hamilton_release,squid_queue=squid_queue,short_side_alignment=short_side_alignment,hamilton_short_side=hamilton_short_side,idle_pivot_rotation=idle_pivot_rotation)
         if hamilton_short_side is not None:
             expected=validate_hamilton_short(start,points,joints,cfg,self.service.envelope,hamilton_short_side)
         if short_side_alignment is not None:
@@ -303,6 +370,9 @@ class LuaTrajectory:
             from squid_48well_endpoint_trial import check_route
             check_route(start,points,joints,cfg,self.service.envelope,scope_phase)
         reference_points = points
+        if scanner_empty == 'continuous' or scanner_loaded is True:
+            from scanner_empty_route import continuous_endpoint
+            points,expected=continuous_endpoint(start,points,joints,cfg,self.service.envelope)
         grouping = None
         if reviewed:
             run.say(f'Executing {len(points)} explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.')
@@ -341,6 +411,7 @@ class LuaTrajectory:
                     raise TransferError('Joint configuration changed during upload.')
             healthy()
             at_start()
+            if idle_pivot_rotation:self.require_joint_pivot()
             begun = False
             try:
                 begun = True # a timeout after writing BEGIN is uncertain; stop, never resend
@@ -348,7 +419,7 @@ class LuaTrajectory:
                 if reply != {'index':1,'value':protocol}:
                     raise TransferError('Lua queue handshake failed; no trajectory uploaded or executed.')
                 header = [len(points),speed,-1]+[start[k] for k in KEYS]+[joints[k] for k in ('J1','J2','J3','J4')]
-                self._job(8 if segment_speeds is not None else 1,token,dict(enumerate(header)))
+                self._job(10 if idle_pivot_rotation else 8 if segment_speeds is not None else 1,token,dict(enumerate(header)))
                 for offset in range(0,len(points),3):
                     healthy()
                     batch = points[offset:offset+3]
@@ -379,9 +450,17 @@ class LuaTrajectory:
                 while not done.wait(.1):
                     healthy()
                     measured = self.service.pose_mm()
+                    extra_monitor=getattr(self,'check_motion_feedback',None)
+                    if extra_monitor is not None:extra_monitor(measured)
                     if squid_queue:
                         from squid_single_queue import check_vertical_feedback
-                        check_vertical_feedback(measured,path)
+                        # Cellvis geometry has already passed its pinned route,
+                        # IK and configuration checks above. Monitor that route's
+                        # clearance, retaining the old ceiling for other profiles.
+                        if squid_queue=='cellvis24_home_holder':
+                            check_vertical_feedback(measured,path,clearance_z=max(p['Z'] for p in path))
+                        else:
+                            check_vertical_feedback(measured,path)
                     d,yaw,percent = locate(measured,path)
                     if d>2 or yaw>2:
                         raise TransferError(f'Measured arm pose left the taught trajectory corridor: position error {d:.4f} mm, yaw error {yaw:.4f} deg, pose {measured}.')
@@ -399,6 +478,8 @@ class LuaTrajectory:
                     raise TransferError('Final queued trajectory joint configuration mismatch.')
                 progress('motion',100,100)
                 return dict(ok=True,executor='lua_queue',points=len(points),zone=-1,endpoint=points[-1],grouping=grouping,
+                            **({'validation_waypoints':len(reference_points),'continuous_collinear':True,'completion_barriers':1} if scanner_empty=='continuous' or scanner_loaded is True else {}),
+                            **({'direct_from_home':scanner_loaded!='cellvis_return','direct_to_home':scanner_loaded=='cellvis_return','idle_travel':False,'completion_barriers':1} if scanner_loaded in ('direct','cellvis_direct','cellvis_return') else {}),
                             **({'segment_speeds':list(segment_speeds),'protocol':protocol,'completion_barriers':1} if segment_speeds is not None else {}))
             except Exception as error:
                 if begun:

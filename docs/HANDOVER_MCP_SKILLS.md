@@ -15,7 +15,7 @@ a Bioyond LabGenius S4 4-axis SCARA, through (a) an MCP server for agents,
 
 Status: the full pipeline (find → align → torque-guarded descend → grip →
 lift) is live-validated multiple times, including one fully autonomous
-run of `grab_skill/grab_aruco.py` (drop-recovery fired twice mid-run and
+run of `Misc/aruco/grab_aruco.py` (drop-recovery fired twice mid-run and
 continued; grip stall measured the object span; lift verified). The last
 session ended mid-grab (see §13 Physical state).
 
@@ -186,7 +186,7 @@ viewpoint; spread >3 mm ⇒ recalibrate the camera.
 
 ## 9. Standalone grabber
 
-`py grab_skill/grab_aruco.py [--hold] [--hover 300] [--open 28]
+`py Misc/aruco/grab_aruco.py [--hold] [--hover 300] [--open 28]
 [--no-lift] [--ip …]` — full pipeline, no browser/MCP: stamp gate →
 preflight (auto+enabled+running, torque telemetry live, envelope armed)
 → find (center-view, 2-agree, multi-viewpoint, XY mean + Z MEDIAN) →

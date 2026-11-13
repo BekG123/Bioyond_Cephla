@@ -23,6 +23,27 @@ def reference():
     return p,parent
 
 def validate_shape(start,points,direction):
+    if direction in ('cellvis24_recorded_forward','cellvis24_recorded_reverse','cellvis24_smoothed_forward','cellvis24_smoothed_reverse','cellvis24_opposite_forward','cellvis24_opposite_reverse'):
+        from cellvis24_recorded_hamilton_route import validate_shape as recorded
+        return recorded(start,points,direction)
+    if direction in ('cellvis24_taught_three_forward','cellvis24_taught_three_reverse'):
+        from cellvis24_taught_three_route import validate_shape as taught
+        return taught(start,points,direction)
+    if direction in ('cellvis24_direct_forward','cellvis24_direct_reverse'):
+        from cellvis24_direct_rack import validate_shape as direct_rack
+        return direct_rack(start,points,direction)
+    if direction in ('cellvis24_rack_forward','cellvis24_rack_reverse'):
+        from cellvis24_rack_route import validate_shape as loaded_rack
+        return loaded_rack(start,points,direction)
+    if direction in ('empty_rack03_idle','empty_rack03_hamilton','empty_rack04_home','empty_rack04_hamilton','empty_original40_home','empty_original40_hamilton','empty_turn05_home','empty_turn05_hamilton','empty_rack06_home','empty_rack06_hamilton','empty_rack07_home','empty_rack07_hamilton'):
+        from hamilton_rack_clearance import validate_shape as rack
+        return rack(start,points,direction)
+    if direction=='empty_home_hamilton40':
+        from hamilton_empty_clearance import validate_shape as empty
+        return empty(start,points,direction)
+    if direction in ('cellvis24_hamilton_forward','cellvis24_hamilton_reverse'):
+        from cellvis24_hamilton_route import validate_shape as cellvis
+        return cellvis(start,points,direction)
     if direction in ('pickup_hover03_forward','pickup_hover03_reverse','pickup_hover04_forward','pickup_hover04_reverse','pickup_hover04_departure'):
         from short_side_hover_transfer import validate_shape as hover
         return hover(start,points,direction)
@@ -39,6 +60,27 @@ def validate_shape(start,points,direction):
     if points!=route['points']:raise TransferError('Hamilton queue differs from approved direct route')
 
 def validate_route(start,points,joints,cfg,envelope,direction):
+    if direction in ('cellvis24_recorded_forward','cellvis24_recorded_reverse','cellvis24_smoothed_forward','cellvis24_smoothed_reverse','cellvis24_opposite_forward','cellvis24_opposite_reverse'):
+        from cellvis24_recorded_hamilton_route import validate_route as recorded
+        return recorded(start,points,joints,cfg,envelope,direction)
+    if direction in ('cellvis24_taught_three_forward','cellvis24_taught_three_reverse'):
+        from cellvis24_taught_three_route import validate_route as taught
+        return taught(start,points,joints,cfg,envelope,direction)
+    if direction in ('cellvis24_direct_forward','cellvis24_direct_reverse'):
+        from cellvis24_direct_rack import validate_route as direct_rack
+        return direct_rack(start,points,joints,cfg,envelope,direction)
+    if direction in ('cellvis24_rack_forward','cellvis24_rack_reverse'):
+        from cellvis24_rack_route import validate_route as loaded_rack
+        return loaded_rack(start,points,joints,cfg,envelope,direction)
+    if direction in ('empty_rack03_idle','empty_rack03_hamilton','empty_rack04_home','empty_rack04_hamilton','empty_original40_home','empty_original40_hamilton','empty_turn05_home','empty_turn05_hamilton','empty_rack06_home','empty_rack06_hamilton','empty_rack07_home','empty_rack07_hamilton'):
+        from hamilton_rack_clearance import validate_route as rack
+        return rack(start,points,joints,cfg,envelope,direction)
+    if direction=='empty_home_hamilton40':
+        from hamilton_empty_clearance import validate_route as empty
+        return empty(start,points,joints,cfg,envelope,direction)
+    if direction in ('cellvis24_hamilton_forward','cellvis24_hamilton_reverse'):
+        from cellvis24_hamilton_route import validate_route as cellvis
+        return cellvis(start,points,joints,cfg,envelope,direction)
     if direction in ('pickup_hover03_forward','pickup_hover03_reverse','pickup_hover04_forward','pickup_hover04_reverse','pickup_hover04_departure'):
         from short_side_hover_transfer import validate_route as hover
         return hover(start,points,joints,cfg,envelope,direction)

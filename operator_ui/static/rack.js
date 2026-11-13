@@ -1,5 +1,6 @@
 /* Visual shelf selection only; no robot commands. */
 function loadRackModel(){
+  refreshRackInventory();
   const group=new THREE.Group();three.world.add(group);three.rack=group;
   try{const saved=JSON.parse(localStorage.getItem('bioyond-rack-v1')||'{}');
     for(const k of ['x','y','z','rz','shelf']) if(saved[k]!==undefined) el('rack-'+k).value=saved[k];
@@ -32,4 +33,17 @@ function focusRack(){
   if(!three?.rackObject)return;
   const b=new THREE.Box3().setFromObject(three.rack),c=b.getCenter(new THREE.Vector3()),s=b.getSize(new THREE.Vector3()).length();
   three.controls.target.copy(c);three.camera.position.copy(c).add(new THREE.Vector3(s,s*.7,s));three.controls.update();
+}
+
+async function refreshRackInventory(){
+  const target=document.getElementById('rack-inventory');
+  if(!target)return;
+  target.textContent='Loading plate records...';
+  try{
+    const response=await fetch('/researcher/api/rack-slots');
+    const data=await response.json();
+    if(!response.ok||!data.ok)throw new Error(data.message||'Inventory unavailable');
+    target.textContent=data.slots.map(s=>`${s.slot}: reserved ${s.assigned_plate_id===null?'none':JSON.stringify(s.assigned_plate_id)}; reported here ${s.reported_plate_id===null?'none':JSON.stringify(s.reported_plate_id)}`).join('\n')+
+      '\nHistorical records only. Reservations do not confirm placement. Rack motion is not commissioned.';
+  }catch(error){target.textContent='Plate inventory unavailable: '+error.message;}
 }

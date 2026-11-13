@@ -247,7 +247,7 @@ class ChatConfirmationTests(unittest.TestCase):
         self.client.complete.return_value=dict(content=[
             dict(type='text',text='The plan is ready and waiting. Reply Yes to start.')])
         self.agent.send('Drop the plate off at Squid')
-        prompt=self.client.complete.call_args.args[0]['system']
+        prompt=self.client.complete.call_args.args[0]['messages'][0]['content']
         self.assertIn('Current host state',prompt)
         self.assertIn('"pending": null',prompt)
         self.assertIn('Gripper feedback changed.',prompt)
@@ -269,6 +269,39 @@ class ChatConfirmationTests(unittest.TestCase):
             'Confirm the pending move_scope plan with "Yes", then I can help you drop it off.')
         self.assertIn('There is no plan waiting',reply)
         self.assertNotIn('pending move_scope',reply)
+
+    def test_document_and_approval_explanations_are_not_phantom_plans(self):
+        self.agent.pending=None
+        replies=[
+            "Yes, I can read PDFs. Attach the file to the chat and I'll go through it. "
+            "For any experiment in it, I'll prepare a normal plan that you review. "
+            "Nothing moves until you reply Yes.",
+            "Sorry, that last message was confusing. It said there was no plan waiting, "
+            "which has nothing to do with your question. Yes, I can read a PDF. "
+            "Nothing runs until I prepare a plan and you reply Yes.",
+            "You confirm a plan before hardware starts; reading a document needs no approval.",
+            "There is no pending plan. You can still attach and discuss your document.",
+        ]
+        for reply in replies:
+            with self.subTest(reply=reply):
+                self.assertEqual(self.agent._ground_plan_reply(reply),reply)
+        self.backend.execute_step.assert_not_called()
+
+    def test_pdf_capability_question_keeps_model_answer_without_moving(self):
+        self.agent.pending=None
+        self.agent.credentials.model='fixture'
+        reply=("Yes, I can read PDFs. Attach it here. I'll prepare a plan that you review. "
+               "Nothing moves until you reply Yes.")
+        self.client.complete.return_value=dict(content=[dict(type='text',text=reply)])
+        self.agent.send('Would you be able to read a PDF of experiments for the three machines?')
+        self.assertEqual(self.agent.transcript[-1]['text'],reply)
+        self.backend.verify_confirmation.assert_not_called()
+        self.backend.execute_step.assert_not_called()
+
+    def test_capability_answer_does_not_represent_an_existing_plan_as_new_approval(self):
+        reply="Yes, attach the PDF. I'll prepare a plan for review before you reply Yes."
+        self.assertEqual(self.agent._ground_plan_reply(reply),reply)
+        self.backend.execute_step.assert_not_called()
 
     def test_station_tool_refusal_is_not_reinterpreted(self):
         self.agent.credentials.model='fixture'

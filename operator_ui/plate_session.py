@@ -200,8 +200,13 @@ RULES = '''
 Current robot location contract (supersedes historical Home naming):
 IDLE is the former true Home parking pose. HOME is the calibration holder,
 not the old parking pose and not a single universal TCP coordinate.
-Use move_idle for the old parking route. move_home means the holder preparation
-preview; never substitute the legacy parking route for a request to go HOME.
+Use move_idle for the old parking route. move_home plans Cellvis empty-arm
+recovery from either accepted HOME clearance: restore the released holder to
+1.77 degrees, then use the accepted short-to-long clearance connector if needed.
+It requires current confirmation of empty jaws and a seated lid-off Cellvis
+P24-1.5H-N plate; do not infer these from encoder readings. It never calibrates,
+descends, grips, restarts the controller or resumes an experiment. Unknown
+positions remain refused; never substitute the legacy parking route.
 For the new experiment/session departure call plan_plate_session with the first
 destination Hamilton or Squid. Ask which if unspecified. Calibrate once per
 valid session: grip and lift 5 mm at speed 5, lower those 5 mm at speed 5 into
@@ -210,11 +215,11 @@ at speed 137. Full calibration ends there with the plate in HOME, not at IDLE.
 Only then separately verify clearance, orient the holder, verify E2 and re-grip.
 Hamilton uses absolute E2=90.71661229181757 degrees (about 90.717),
 NOT current angle plus 90. Squid uses the original E2=1.77 degrees and the
-accepted monitoring range 1.750<=E2<=1.82, with no rotation. Calibration
+accepted monitoring range 1.740<=E2<=1.82, with no rotation. Calibration
 still corrects toward E2=1.77 using its original correction threshold.
 Never rotate while held. Grip profiles differ: Hamilton short side E1=25 mm;
 Squid long side uses the accepted 48-well profile, not the two-disk grip.
-This new near-holder workflow is prepared, not physically commissioned. Report
+The new 48-well session workflow is prepared, not physically commissioned. Report
 its trial blocker plainly; do not substitute old travel to bypass the new steps.
 An experiment preview is not an executed run. Do not infer plate security from
 an E1 reading or a cached calibration success. Native microscope/Hamilton homing

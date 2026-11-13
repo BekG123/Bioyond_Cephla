@@ -37,13 +37,15 @@ class E2Tests(unittest.TestCase):
         read.assert_not_called()
 
     def test_monitoring_accepts_lower_tolerance(self):
+        for value in (1.74, 1.749324037839865):
+            self.assertEqual(self.check(external_axes={'E2': value}), [value]*3)
         self.assertEqual(self.check(external_axes={'E2': 1.750}), [1.750]*3)
         self.assertEqual(self.check(external_axes={'E2': 1.7575638072998392}), [1.7575638072998392]*3)
         self.assertEqual(self.check(external_axes={'E2': 1.760}), [1.760]*3)
         self.assertEqual(self.check(external_axes={'E2': 1.7630568802181161}), [1.7630568802181161]*3)
         self.assertEqual(self.check(external_axes={'E2': 1.76855}), [1.76855]*3)
         self.assertEqual(self.check(external_axes={'E2': 1.82}), [1.82]*3)
-        for value in (1.62, 1.749999, 1.8201, 1.97):
+        for value in (1.62, 1.739999, 1.8201, 1.97):
             with self.subTest(value=value), self.assertRaises(RuntimeError):
                 self.check(external_axes={'E2': value})
 
@@ -80,7 +82,7 @@ class E2Tests(unittest.TestCase):
         def state(value):
             return dict(error=False, emergency=False, moving=False, drag=False,
                         external_axes={'E2': value}, external_units={'E2': 'degrees'})
-        read = Mock(side_effect=[state(1.62), state(1.749999)])
+        read = Mock(side_effect=[state(1.62), state(1.739999)])
         with self.assertRaisesRegex(RuntimeError, 'minimum'):
             verify(svc, run, read, lambda _: None, correct=True)
         svc.position_calibration_e2.assert_called_once()

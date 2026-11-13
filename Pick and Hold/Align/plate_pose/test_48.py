@@ -59,6 +59,21 @@ class Plate48Tests(unittest.TestCase):
         points,_,_=self.points()
         with self.assertRaises(DetectionError):fit_grid(points,8,12)
 
+    def test_24_lattice_with_perspective_rotation_and_missing_well(self):
+        for angle in (0,20,80,170):
+            points,_,_=self.points(4,6,angle)
+            noisy=points+np.random.default_rng(123).normal(0,.5,points.shape)
+            fit=fit_grid(np.delete(noisy,7,axis=0),4,6)
+            self.assertEqual(len(fit['points']),23)
+            self.assertLess(fit['rmse'],1.)
+
+    def test_24_rejects_wrong_layout_missing_row_and_blank(self):
+        points,_,_=self.points(4,6)
+        for rows,columns in ((6,8),(8,12)):
+            with self.assertRaises(DetectionError):fit_grid(points,rows,columns)
+        with self.assertRaises(DetectionError):fit_grid(points[6:],4,6)
+        with self.assertRaises(DetectionError):preview(np.zeros((800,1200),np.uint8),4,6)
+
     def test_blank_image_has_no_virtual_landmarks(self):
         with self.assertRaises(DetectionError):preview(np.zeros((800,1200),np.uint8))
 

@@ -83,6 +83,15 @@ def register_researcher(app, read_state, teaching=None, draggo=None, workflow=No
     def hamilton_status():
         return jsonify(_lacry().backend.instrument.detail())
 
+    @api.get('/lacry/hamilton/api-catalog')
+    def hamilton_api_catalog():
+        catalog=_lacry().hamilton_api.catalog
+        if request.args.get('operation'):
+            return jsonify(catalog.detail(request.args['operation']))
+        try:offset=int(request.args.get('offset',0))
+        except ValueError:raise TeachingError('Catalog offset must be an integer.',400)
+        return jsonify(catalog.search(query=request.args.get('q',''),offset=offset,limit=25))
+
     @api.get('/lacry/hamilton/camera')
     def hamilton_camera():
         return Response(_lacry().backend.instrument.call('GET','camera/true',binary=True),
@@ -119,7 +128,17 @@ def register_researcher(app, read_state, teaching=None, draggo=None, workflow=No
         body = request.get_json(silent=True)
         if not isinstance(body, dict):
             raise TeachingError('Refresh the page and try again.', 400)
-        return jsonify(_lacry_call('chat', lambda: _lacry().send(body.get('message'))))
+        return jsonify(_lacry_call('chat', lambda: _lacry().send(body.get('message'),attachments=body.get('attachments'))))
+
+    @api.post('/lacry/documents')
+    def lacry_document_upload():
+        from lacry_documents import MAX_BYTES
+        request.max_content_length=MAX_BYTES+65536
+        files=request.files.getlist('file')
+        if len(files)!=1:raise TeachingError('Upload one file at a time.',400)
+        item=files[0]
+        return jsonify(ok=True,document=_lacry_call('document upload',
+            lambda:_lacry().documents.upload(item.filename,item.stream.read(MAX_BYTES+1))))
 
     @api.post('/lacry/question/answer')
     def lacry_question_answer():
@@ -421,4 +440,6 @@ def register_researcher(app, read_state, teaching=None, draggo=None, workflow=No
             return jsonify(ok=False, message='This action is not available.'), 404
         return jsonify(ok=False, message='Continuous recording and model playback are not implemented yet. You can capture station positions in Teach.'), 501
 
+    from plate_transfer_api import register as register_plate_transfer
+    register_plate_transfer(api, _lacry)
     app.register_blueprint(api)

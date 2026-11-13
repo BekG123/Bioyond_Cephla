@@ -17,7 +17,7 @@ py operator_ui/app.py        ->  http://127.0.0.1:5002
 - It is its OWN BRCAPI TCP client — mutually exclusive with the
   bioyond-s4 MCP server and Bioyond Works (one controller client).
 - It holds the GigE camera (Release/Resume buttons; exclusive with MVS).
-- The standalone `grab_skill/grab_aruco.py` reuses this package's
+- The standalone `Misc/aruco/grab_aruco.py` reuses this package's
   service/sequence layers headlessly — changes here propagate there.
 
 ## 2. Architecture
@@ -189,3 +189,102 @@ Keep it green; add a regression for every new live lesson.
    revisit if unattended operation is ever wanted.
 6. The MCP server lacks the drop-recovery the console has — port it.
 7. UI has no explicit E-stop status chip (errors chip covers it).
+
+
+## HOME / IDLE location contract (2026-11-10)
+
+IDLE is the former true Home at X289.97/Y62.63/Z248.02/Rz-3.88. HOME now
+means the calibration holder, with separate seating, clearance and grip poses.
+Historical coordinates, controller route keys and trial hashes stay unchanged:
+in the legacy procedures below, Home means IDLE unless explicitly marked HOME
+holder. The old Home-area remains a distinct historical waypoint.
+
+For a new experiment, use `operator_ui/plate_session.py` and
+`Pick and Hold/plate_session_workflow.json`: full calibration once per valid
+session -> grip -> lift 5 mm at speed 5 -> lower the same 5 mm at speed 5
+into the unchanged HOME holder -> open E1 to 28 mm while seated -> raise the
+EMPTY arm 30 mm at speed 137. Full calibration ends here, with no final IDLE
+travel. Separately verify the full sweep -> orient -> verify three fresh E2
+readings -> re-grip -> proof lift -> accepted destination route. The revised
+calibration finish is implemented and offline-tested; its exact physical
+trial is pending. Earlier 5 mm empty-clearance evidence is not that trial. Never rotate a held plate. The new near-holder
+rotation is prepared, NOT yet physically commissioned; the old rotation trial
+was with the arm away at IDLE. Do not substitute it as clearance evidence.
+
+Hamilton first (selected for the next supervised trial): absolute E2 target
+90.71661229181757 degrees (90.717 displayed), tolerance 0.1 degree, using the
+accepted short-side E1=25 mm profile. Positive E2 from the original orientation
+was observed counterclockwise from above. Do not command current E2 plus 90.
+Squid first: no rotation, verify E2 around 1.77 degrees using the existing rule
+`round(E2, 3) >= 1.769 and E2 <= 1.82`, and use the accepted 48-well long-side
+grip. A wrong original angle requires review, not a blind no-op or re-grip.
+
+Lacry chat uses `move_idle` for old parking and `move_home` for the new holder
+preparation preview. `/researcher/api/lacry/button/move_idle` selects old
+parking. Legacy developer planner `propose(['move_home'])`, controller job names
+and archived scripts still refer to IDLE; do not change their recorded poses.
+The new preview API is POST `/researcher/api/lacry/plate-session/plan` with
+`{"first_destination":"Hamilton"}` or `"Squid"`. It is not executable until
+the new released-plate placement/clearance/re-grip connection is reviewed.
+Do not claim it ran or bypass the preview with old compound station travel.
+
+Session reuse is tied to completed full calibration plus setup fingerprints.
+Restart, fault/disconnection, hand-guiding, changed references or uncertain
+motion invalidate reuse; physical fixture changes must also be reported.
+Keep the E-stop supervised, envelope/IK and payload checks, and stop on faults,
+uncertain grip/position or timeout. No automatic retries or controller restart
+with a held plate. No existing trajectory was requalified by this name change.
+
+## Empty-arm recovery in Lacry (2026-11-11)
+
+Researchers can use **Recover from fault**, or ask Lacry to recover the arm;
+`plan_robot_recovery` proposes the checked operation and the existing Yes/No
+confirmation starts it. Bioyond UI is not required for the supported recovery.
+
+`operator_ui/empty_home_recovery.py` currently covers the first high wrist turn
+of the recorded opposite-wrist Hamilton route. The operator must remove the
+plate from the jaws, support it in HOME, clear the obstruction/path, release the
+arm and supervise the E-stop. The planner checks the current pose/joints,
+configuration and workspace. It clears faults once if necessary, enables the
+controller, starts Lua with confirmed-empty jaws, returns in a monitored queue
+at speed 5 to HOME clearance X312.5/Y-66.3/Z105.72/Rz89.84, and opens to28 mm.
+The holder remains at its measured angle; this is not pickup or seating.
+
+The live trial completed without reported faults and verified the final pose
+and open jaws. Receipt:
+`operator_ui/reports/plate_session/empty_home_recovery/5aa1280c44754017bf445f66576a9c66.json`.
+The test did not establish loaded recovery or native `moveBackwards` behavior.
+Other positions retain the existing nonmoving clear/enable option. A failure,
+timeout, changed start, unsupported location or uncertain feedback stops the
+attempt; the experiment and old failed receipts are not reset or retried.
+After recovery, a new checked experiment plan is required.
+
+## Lacry model — Sonnet 5.5 (2026-11-12)
+
+`operator_ui/lacry_model.py` defaults to `claude-sonnet-5-5`. The optional
+`LACRY_MODEL` environment variable overrides it at console startup. This replaces
+the former `BIOYOND_AGENT_MODEL` setting and applies to Lacry and existing image,
+pickup-analysis and developer-explanation calls. The saved Anthropic key is reused.
+Lacry's `look_at_camera` tool returns image content directly to the same Sonnet
+conversation; no separate camera agent is needed for researcher chat.
+
+Sonnet requests omit sampling parameters, use adaptive thinking with medium
+effort, and allow 8192 output tokens (including thinking). The request timeout is
+60 seconds, with no automatic retry. Signed assistant blocks are retained unchanged;
+live state and memory are appended to new turns instead of rewriting the system
+prefix. Model history is not silently truncated. Incomplete, refused or oversized
+responses stop before dispatching their tools. Existing host confirmation and
+execution checks remain authoritative. Audit/UI output omits private thinking.
+
+Read active settings with `GET /developer/api/lacry/model`. After changing the
+setting, reload only an idle console. Refresh the browser to load updated labels.
+An isolated live-model check is available from the repository root:
+
+```powershell
+.\.venv-realsense\Scripts\python.exe -B operator_ui/check_lacry_model.py --live
+```
+
+That check uses synthetic images and fake tools/telemetry. It blocks network
+connections other than Anthropic HTTPS, checks image analysis, a follow-up turn
+and tool planning, and writes `operator_ui/reports/model_checks/sonnet_*.json`.
+It never authorizes or tests physical motion.

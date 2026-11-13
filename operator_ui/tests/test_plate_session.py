@@ -29,9 +29,9 @@ class PlateSessionTests(unittest.TestCase):
         plan = preview('Squid', dict(calibrated=True))
         self.assertFalse(next(s for s in plan['steps'] if s['state']=='HOME_ORIENTED')['rotate'])
         self.assertNotIn('CALIBRATING', [s['state'] for s in plan['steps']])
-        for value in (1.750, 1.7575638072998392, 1.760, 1.763057, 1.769, 1.77, 1.82):
+        for value in (1.740, 1.749324037839865, 1.750, 1.7575638072998392, 1.760, 1.763057, 1.769, 1.77, 1.82):
             verify_holder('Squid', self.readings(value), now=100)
-        for value in (1.749999, 1.821, 90.717, float('nan')):
+        for value in (1.739999, 1.821, 90.717, float('nan')):
             with self.assertRaises(ValueError):
                 verify_holder('Squid', self.readings(value), now=100)
 
@@ -99,14 +99,41 @@ class PlateSessionTests(unittest.TestCase):
     def test_new_home_never_dispatches_legacy_parking_move(self):
         agent = self.agent()
         agent._run_legacy_tool = Mock(side_effect=AssertionError('must not dispatch parking'))
+        agent.plan_home_clearance_recovery = Mock(return_value=dict(
+            id='recovery', executable=True, dispatch='home_clearance_recovery'))
         response, failed = agent._run_tool('propose_actions', dict(actions=['move_home']))
         self.assertFalse(failed)
         plan = json.loads(response)['plan']
-        self.assertFalse(plan['executable'])
-        self.assertFalse(json.loads(response)['awaiting_confirmation'])
-        with self.assertRaisesRegex(TeachingError, 'preview only'):
-            agent.confirm(dict(ready=True, plan_id=plan['id']))
+        self.assertTrue(plan['executable'])
+        self.assertEqual(plan['dispatch'], 'home_clearance_recovery')
+        self.assertTrue(json.loads(response)['awaiting_confirmation'])
+        agent.plan_home_clearance_recovery.assert_called_once_with()
         agent._run_legacy_tool.assert_not_called()
+
+    def test_home_button_selects_clearance_recovery(self):
+        agent = self.agent()
+        agent.plan_home_clearance_recovery = Mock(return_value={'recovery': True})
+        agent.plan_plate_session = Mock(side_effect=AssertionError('must not select calibration'))
+        self.assertEqual(agent.button('move_home'), {'recovery': True})
+        agent.plan_home_clearance_recovery.assert_called_once_with(source='button')
+
+    def test_recover_button_preserves_bound_recovery_id(self):
+        agent = self.agent()
+        agent._recovery_plan = Mock(return_value=dict(id='a'*32, steps=[], requirements=[],
+            dispatch='home_clearance_recovery', labels=['Recover HOME clearance']))
+        plan = agent.button('recover')
+        self.assertEqual(plan['id'], 'a'*32)
+        self.assertEqual(agent.pending['id'], plan['id'])
+
+    def test_home_refusal_does_not_substitute_calibration_or_parking(self):
+        from autonomy import TransferError
+        agent = self.agent()
+        agent.plan_home_clearance_recovery = Mock(side_effect=TransferError('Unknown recovery position'))
+        agent._run_legacy_tool = Mock(side_effect=AssertionError('must not dispatch parking'))
+        agent.plan_plate_session = Mock(side_effect=AssertionError('must not select calibration'))
+        response, failed = agent._run_tool('propose_actions', dict(actions=['move_home']))
+        self.assertTrue(failed)
+        self.assertIn('Unknown recovery position', response)
 
     def test_idle_alias_uses_unchanged_legacy_route(self):
         agent = self.agent()

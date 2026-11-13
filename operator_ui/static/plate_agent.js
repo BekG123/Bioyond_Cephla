@@ -36,7 +36,7 @@
       await post('/agent/settings', {api_key:el('agent-key').value});
       el('agent-key').value = '';
       el('agent-settings').open = false;
-      notice('Haiku key configured.');
+      notice('Sonnet key configured.');
     } catch (error) { notice(error.message); }
   });
   async function poll() {
@@ -66,7 +66,7 @@
         if (sequence.name === 'camera_agent') {
           if (sequence.active) status(sequence.log?.at(-1)?.msg || 'Processing scene...');
           else if (sequence.result) status(sequence.result.ok ? 'Scene request complete. No robot motion.' : sequence.result.error);
-        } else status(agent.configured ? 'Ready to analyze a camera scene.' : 'Local depth and captures are ready. Add an API key for Haiku descriptions.');
+        } else status(agent.configured ? 'Ready to analyze a camera scene.' : 'Local depth and captures are ready. Add an API key for Sonnet descriptions.');
       }
     } catch (error) { status('Scene agent unavailable. Reload after restarting Flask.'); }
     finally { setTimeout(poll, 1500); }

@@ -10,6 +10,19 @@ POLICY = 'approach10_final1mm_speed5_v2'
 SPEED = 5
 APPROACH_SPEED = 10
 FINAL_DISTANCE_MM = 1.0
+GRIP_ABOVE_TARGET_MM = 0.2
+
+
+def grip_feedback_matches(actual, target, *, lower_tolerance=0.07):
+    """Accepted closing feedback: existing inward bound, +0.2mm outward.
+
+    Position acceptance alone does not establish plate retention. Opening
+    commands keep their separate, tighter checks.
+    """
+    if any(type(v) not in (int,float) or not math.isfinite(v)
+           for v in (actual,target,lower_tolerance)) or lower_tolerance<0:
+        return False
+    return target-lower_tolerance-1e-9 <= actual <= target+GRIP_ABOVE_TARGET_MM+1e-9
 
 
 def closure_plan(start_mm, target_mm):

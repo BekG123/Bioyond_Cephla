@@ -1,0 +1,34 @@
+{
+  "source_sha256": "cfed03c43ee40ae29c8771e3685d4409692c8cdd525de1a6735b865f9a7bfcf1",
+  "sha256": "90d021ab27958916a5c9dfc1519b7c837bf204f23e94539c09138984e80f83ef",
+  "changed": [
+    "main/mod_Trajectory.lua"
+  ],
+  "base_protocol": 220109,
+  "optional_blended_transit_capability": 220112,
+  "legacy_capabilities_preserved": [
+    220110,
+    220111
+  ],
+  "segment_zones": [
+    -1,
+    1,
+    1,
+    -1,
+    -1,
+    -1
+  ],
+  "segment_speeds": [
+    137,
+    137,
+    137,
+    137,
+    137,
+    5
+  ],
+  "completion_barriers": 1,
+  "publish_required": true,
+  "hardware_tested": false,
+  "source_documentation": "Installed Bioyond BYCommand.json MoveL Chinese description: ZP is blend-region trajectory length; vendor MoveJump uses positive length zones.",
+  "limitation": "Exact controller blend shape and physical velocity continuity require a supervised trial; no guarantee of speed137 through corners."
+}

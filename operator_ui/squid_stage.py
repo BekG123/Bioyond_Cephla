@@ -9,6 +9,7 @@ from researcher_teaching import TeachingError
 from scope_step_trial import near
 from squid_execution import AXES, at_position, digest, position
 from squid_adapter import native_command
+from squid_loading import at_loading
 
 ROOT = Path(__file__).resolve().parent
 REFERENCE = ROOT / 'squid_stage_reference.json'
@@ -48,9 +49,14 @@ class SquidStage:
         state = self.adapter.poll()
         ref = self.saved()
         actual = position(self.command('get_position', {})) if state.get('connected') else None
+        bridge=self.command('get_stage_reference',{}) if actual is not None else {}
+        try:
+            if actual is None:raise TeachingError('Disconnected.')
+            at_loading(actual,ref['dropoff'],bridge,ref['controller_serial']);loaded=True
+        except TeachingError:loaded=False
         return dict(instrument=state, position_mm=actual, dropoff_mm=ref['dropoff'],
-                    at_dropoff=actual is not None and all(abs(actual[k]-ref['dropoff'][k]) <= .02 for k in AXES),
-                    controller_serial=ref['controller_serial'],
+                    at_dropoff=loaded,loading=bridge.get('loading'),
+                    controller_serial=bridge.get('controller_serial'),
                     motion_hold=ref.get('motion_hold'),
                     home_definition='Native Squid XYZ referencing; different from saved drop-off and robot Home.',
                     reference_source=ref['source'])
@@ -195,7 +201,9 @@ class SquidStage:
                 expected = position(result['position'])
             else:
                 expected = self.saved()['dropoff']
-                if any(abs(before[k]-expected[k]) > .02 for k in AXES):
+                try:at_loading(before,expected,self.command('get_stage_reference',{}),self.saved()['controller_serial']);loaded=True
+                except TeachingError:loaded=False
+                if not loaded:
                     self.check_job(plan,guard())
                     save('command_requested',command='return_to_recorded_dropoff',target=expected)
                     result = self.command('return_to_recorded_dropoff',{'reference_hash':plan['reference_hash']})
@@ -204,8 +212,13 @@ class SquidStage:
             self.check_job(plan,guard())
             actual = position(self.command('get_position',{}))
             self.sleep(.2)
-            at_position(self.command('get_position',{}),expected)
-            at_position(actual,expected)
+            if plan['destination']=='dropoff':
+                bridge=self.command('get_stage_reference',{})
+                at_loading(self.command('get_position',{}),expected,bridge,self.saved()['controller_serial'])
+                at_loading(actual,expected,bridge,self.saved()['controller_serial'])
+            else:
+                at_position(self.command('get_position',{}),expected)
+                at_position(actual,expected)
             done.append(label)
             record.update(status='completed',final_position=actual)
             save('verified',position=actual)

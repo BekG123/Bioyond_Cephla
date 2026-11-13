@@ -86,9 +86,16 @@ class PlanningSemantics(unittest.TestCase):
         self.backend.execute_step.assert_not_called()
         self.assertIsNone(self.agent.pending)
         self.assertIn('not a dispensing/imaging loop',self.agent.transcript[-1]['text'])
-        prompt=self.client.complete.call_args.args[0]['system']
-        self.assertIn('"travel_verified": true',prompt)
-        self.assertIn('"completed_supervised": false',prompt)
+        payload=self.client.complete.call_args.args[0]
+        # Append-only model history keeps live state in the newest message,
+        # not in the stable system prefix behind signed thinking blocks.
+        current=json.dumps(payload['messages'][-1]['content'])
+        self.assertIn('travel_verified',current)
+        content=payload['messages'][-1]['content']
+        text=content if isinstance(content,str) else '\n'.join(x.get('text','') for x in content)
+        self.assertIn('"travel_verified": true',text)
+        self.assertIn('"completed_supervised": false',text)
+        self.assertNotIn('"travel_verified": true',payload['system'])
 
 
 if __name__=='__main__':unittest.main()

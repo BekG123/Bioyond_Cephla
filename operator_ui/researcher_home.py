@@ -39,6 +39,8 @@ def settled_home_stages(start, settled, target, joints, params, envelope, review
         if actual['kind'] != expected['kind']:
             raise TransferError('Home stage type changed during preparation.')
         if actual['kind'] == 'rotate':
+            if actual.get('queued_pivot',False)!=expected.get('queued_pivot',False):
+                raise TransferError('Home wrist executor changed during preparation.')
             if abs(wrap(actual['rz'] - expected['rz'])) > .02:
                 raise TransferError('Home rotation changed during preparation.')
         else:
@@ -74,9 +76,12 @@ def plan_station_route(start, target, joints, params, envelope):
 
 
 def queued_station_stages(start, target, joints, params, envelope):
-    """Validate the original Home route, then queue its straight translations."""
+    """Use the taught IDLE pivot; retain the legacy planner for other targets."""
     if close_pose(start,target):
         return []
+    from idle_pivot import stages_for_idle
+    pivot_stages=stages_for_idle(start,target,joints,params,envelope)
+    if pivot_stages is not None:return pivot_stages
     original=plan_station_route(start,target,joints,params,envelope)
     height=max(300.,start['Z'],target['Z']+20.)
     current,q,stages=dict(start),joints,[]
@@ -374,6 +379,8 @@ class HomeReturn:
             ensure_arrival(service.pose_mm(), start)
             if prefix or plan.get('queued_connector') or plan.get('stages'):
                 self.require_home_queue(LuaTrajectory(service).capability())
+            if any(s.get('queued_pivot') for s in plan.get('stages',[])):
+                LuaTrajectory(service).require_joint_pivot()
             if prefix:
                 travel_dispatched = True
                 self.message = 'Following the taught Hamilton return, then finishing at saved Home.'
@@ -413,8 +420,20 @@ class HomeReturn:
                 guard._preflight()
                 travel_dispatched = True
                 if stage['kind']=='rotate':
-                    self.message='Adjusting the wrist above Home. Keep hands clear.'
-                    rotate_home_wrist(guard, stage['rz'])
+                    if stage.get('queued_pivot'):
+                        self.message='Turning at the taught IDLE pivot. Keep hands clear.'
+                        current=service.pose_mm()
+                        self.queued_phase=True
+                        result=LuaTrajectory(service).execute(run,current,service.joints(),[{**current,'Rz':stage['rz']}],self.params(),HOME_SPEED,
+                            lambda phase,done,total:run.say(f'IDLE pivot: {phase} {done:.0f}/{total}'),
+                            reviewed=True,idle_pivot_rotation=True)
+                        self.queued_phase=False
+                        if not result.get('ok') or result.get('recovered'):raise TransferError('IDLE pivot turn uncertain; no translation.')
+                        if abs(wrap(service.pose_mm()['Rz']-stage['rz']))>HOME_WRIST_TOLERANCE:
+                            raise TransferError('IDLE pivot wrist arrival mismatch; no translation.')
+                    else:
+                        self.message='Adjusting the wrist above Home. Keep hands clear.'
+                        rotate_home_wrist(guard, stage['rz'])
                 else:
                     self.message='Moving Home. Keep hands clear.'
                     current,joints=service.pose_mm(),service.joints()

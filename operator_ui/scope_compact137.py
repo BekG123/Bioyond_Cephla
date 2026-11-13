@@ -113,7 +113,7 @@ class HoldingService:
             return 'Scope workspace changed.'
         value=self.service.external_axes().get('E1')
         if type(value) not in (float,int) or not math.isfinite(value) or abs(value-self.e1)>.1:
-            return 'Gripper feedback changed; inspect before continuing.'
+            return f'Gripper feedback changed: measured E1={value!r}, expected {self.e1!r} mm (tolerance0.1); inspect before continuing.'
         return None
 
 

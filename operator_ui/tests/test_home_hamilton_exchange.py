@@ -196,6 +196,22 @@ class ExchangeTests(TestCase):
         result=exchange.restore_original(self.run,self.svc)
         self.assertFalse(result['motion_sent']);self.svc._hostpoint.assert_not_called()
 
+    def test_latest_89_65_degree_restore_uses_one_motion(self):
+        from repeat_holder_calibration_20261110 import IDLE
+        self.state['pose_mm']=deepcopy(IDLE);self.angle=91.41973245554618
+        result=exchange.restore_original(self.run,self.svc)
+        self.assertTrue(result['ok']);self.assertEqual(self.rotations,[1.77])
+        self.assertEqual([c.args[1] for c in self.svc._hostpoint.call_args_list],[13,14])
+
+    def test_restore_retains_readback_margin_and_splits_larger_turn(self):
+        for origin in (91.41973245554618,91.59276846797928):
+            self.assertEqual(exchange.holder_restore_targets(origin),[1.77])
+        origin=92.59801521945425
+        self.assertEqual(len(exchange.holder_restore_targets(origin)),2)
+        # Allow the full permitted pre-command readback difference, while
+        # staying strictly inside Lua's unchanged 90.01-degree bound.
+        self.assertLess(exchange.HOLDER_RESTORE_MAX_STEP_DEG+.1,90.01)
+
     def test_restore_accepts_recorded_cycle_five_arrival_and_three_fresh_samples(self):
         from repeat_holder_calibration_20261110 import IDLE
         self.state['pose_mm']=deepcopy(IDLE);self.angle=90.73308670809564
@@ -217,10 +233,10 @@ class ExchangeTests(TestCase):
         original=self.host
         def below(params,mode,timeout):
             result=original(params,mode,timeout)
-            if mode==14:self.angle=1.749
+            if mode==14:self.angle=1.739
             return result
         self.svc._hostpoint.side_effect=below
-        with self.assertRaisesRegex(exchange.TransferError,'E2=1.749000'):
+        with self.assertRaisesRegex(exchange.TransferError,'E2=1.739000'):
             exchange.restore_original(self.run,self.svc)
         self.assertEqual(self.rotations,[1.77]);self.assertEqual(self.moves,[])
 
@@ -288,7 +304,7 @@ class ExchangeTests(TestCase):
             previous=origin
             for target in targets:
                 self.assertLessEqual(abs(target),360)
-                self.assertLessEqual(abs(target-previous),89.500001)
+                self.assertLessEqual(abs(target-previous),exchange.HOLDER_RESTORE_MAX_STEP_DEG+1e-6)
                 self.assertLess(abs(1.77-target),abs(1.77-previous))
                 previous=target
             self.assertEqual(previous,1.77)

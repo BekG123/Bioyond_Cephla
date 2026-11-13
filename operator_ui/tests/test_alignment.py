@@ -33,6 +33,18 @@ class WristService(FakeService):
 
 
 class AlignmentTests(unittest.TestCase):
+    def test_cellvis_speed15_changes_only_translation_speed(self):
+        from unittest.mock import Mock
+        target=dict(x=340,y=0,rz=0,z_calibrated=100)
+        a=FakeService();b=FakeService()
+        b.move_cartesian=Mock(wraps=b.move_cartesian)
+        self.assertTrue(seq_align(Runner(),a,target,300)['ok'])
+        self.assertTrue(seq_align(Runner(),b,target,300,translation_speed=15)['ok'])
+        self.assertEqual(a.moves,b.moves)
+        self.assertTrue(all(c.args[4]==15 for c in b.move_cartesian.call_args_list))
+        c=FakeService()
+        self.assertFalse(seq_align(Runner(),c,target,300,translation_speed=137)['ok'])
+        self.assertEqual(c.moves,[])
     def test_live_yaw_uses_small_movej_segments_then_linear_translation(self):
         svc = WristService()
         svc.pose = dict(X=304.203, Y=21.388, Z=285.175, Rz=10.253)

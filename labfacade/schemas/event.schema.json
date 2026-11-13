@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "labfacade-event-v1",
+  "title": "Run event",
+  "description": "One line of events.jsonl. Append-only. Arrays and images live in their own files and are referenced under artifacts.",
+  "type": "object",
+  "required": ["v", "run", "step", "seq", "ts", "mono_ns", "machine", "kind", "op", "status", "data", "artifacts"],
+  "additionalProperties": false,
+  "properties": {
+    "v": {"const": 1},
+    "run": {"type": "string", "description": "Run id, same as the run folder name."},
+    "step": {"type": ["string", "null"], "description": "Plan step id, or null for run-level events."},
+    "seq": {"type": "integer", "minimum": 1, "description": "Strictly increasing within a run."},
+    "ts": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$",
+           "description": "UTC, ISO 8601 with milliseconds, from the facade's clock for every machine."},
+    "mono_ns": {"type": "integer", "description": "Monotonic clock, for durations within one process."},
+    "machine": {"type": ["string", "null"]},
+    "kind": {"enum": ["status", "command", "gate", "approval", "result", "anomaly", "artifact", "pause", "resume"]},
+    "op": {"type": ["string", "null"], "description": "Operation name from the machine's manifest."},
+    "status": {"type": ["string", "null"]},
+    "data": {"type": "object"},
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "path": {"type": "string", "description": "Relative to the run folder, forward slashes."},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

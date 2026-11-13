@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "cellvis24_home_hamilton_squid_v1",
+  "plate_profile": "Pick and Hold/Calibration/plate_profiles/cellvis_p24_1_5h_n_validated_v1.json",
+  "profile_sha256": "eddcba743b8aa7c4f1d6c8b9b7222758a0f16bd92f089b09c60f01da95eda7ec",
+  "accepted_evidence": "operator_ui/reports/plate_session/cellvis24_validation/accepted_sequence_20261111.json",
+  "acceptance_sha256": "b69b47a7bd1e00d90deae8990441fdbfea37321b38cd4d05670d9e4a743bafc6",
+  "physical_stage_acceptance": "Calibration, Hamilton round trip and corrected Squid dropoff/retrieval accepted by operator on2026-11-11",
+  "reusable_runner_validation": "offline only; next commanded live repetition validates new orchestration",
+  "initial_calibration": {
+    "mode": "fresh_camera_verification_of_accepted_Cellvis_fixture",
+    "runs_per_session": 1,
+    "automatic_runner_supported": true,
+    "measurement_script": "operator_ui/cellvis24_observation.py",
+    "reference_receipt": "operator_ui/reports/plate_session/cellvis24_validation/calibration_finish.json",
+    "endpoint": "plate released in calibrated HOME; jaws28; original holder orientation",
+    "flag": "--full-calibration",
+    "executor": "operator_ui/cellvis24_calibration.py",
+    "camera_reference": "Pick and Hold/Calibration/plate_profiles/cellvis24_camera_reference_v1.json",
+    "recalibrate_between_cycles": false,
+    "validation": "offline tested; combined live run pending"
+  },
+  "handling": {
+    "runner": "operator_ui/run_cellvis24_workflow.py",
+    "server_executor": "operator_ui/cellvis24_workflow.py",
+    "default_stations": [
+      "hamilton",
+      "squid"
+    ],
+    "default_cycles": 1,
+    "calibration_runs": 0,
+    "order_per_station": [
+      "rotate released holder at HOME clearance",
+      "pickup and5mm proof lift",
+      "deliver",
+      "release",
+      "return empty HOME",
+      "retrieve",
+      "reseat HOME",
+      "release28 and rise30"
+    ],
+    "transit_speed": 137,
+    "final_seating_and_departure_speed": 5,
+    "grip_policy": "approach10_final1mm_speed5_v2",
+    "long_side_e1": 3.9,
+    "short_side_e1": 25,
+    "hamilton_release_e1": 28,
+    "squid_release_e1": 7,
+    "idle_detour": false,
+    "hardware_startup": false,
+    "automatic_retries": false,
+    "imaging": false,
+    "pipetting": false
+  },
+  "skill": "Codex SKILLS/cellvis24-calibration-station-workflow-v1/SKILL.md"
+}

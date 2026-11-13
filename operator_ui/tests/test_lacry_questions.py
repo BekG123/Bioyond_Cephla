@@ -67,6 +67,33 @@ class QuestionTests(unittest.TestCase):
         with self.assertRaises(TeachingError):self.agent.answer_question(dict(question_id=q['id'],answer='Site 7'))
         self.client.complete.assert_called_once()
 
+    def test_structured_question_preserves_explanation_and_stops_tools(self):
+        explanation=('I could not find plate ID 1 in the registry. Your request is '
+                     '20 fields across A5, B5, C5 and D5; no imaging has started.')
+        blocks=[dict(type='text',text=explanation),dict(type='tool_use',
+            name='ask_researcher',id='ask',input=dict(question='How should I proceed?',
+            options=['Check the barcode','Cancel'])),dict(type='tool_use',
+            name='get_lab_status',id='later',input={})]
+        self.client.complete.return_value=dict(stop_reason='tool_use',content=blocks)
+        self.agent.send('Plan imaging for plate 1.')
+        self.assertEqual(self.agent.transcript[-1]['text'],explanation+'\n\nHow should I proceed?')
+        self.assertEqual(self.agent.question['options'],['Check the barcode','Cancel'])
+        self.assertEqual(self.agent.history[1]['content'],blocks)
+        self.assertTrue(self.agent.history[2]['content'][1]['is_error'])
+        self.client.complete.assert_called_once()
+        self.backend.execute_step.assert_not_called()
+        self.backend.verify_confirmation.assert_not_called()
+
+    def test_question_already_in_explanation_is_not_duplicated(self):
+        reply='The plate ID is missing. Which barcode should I look up?'
+        self.agent.ask_researcher('Which barcode should I look up?')
+        self.assertEqual(self.agent._ground_plan_reply(reply),reply)
+
+    def test_question_does_not_hide_phantom_plan_checks(self):
+        self.agent.ask_researcher('How should I proceed?')
+        reply=self.agent._ground_plan_reply('The plan is ready. Reply Yes to start.')
+        self.assertIn('There is no plan waiting',reply)
+
     def test_open_questions_have_written_answer_button_contract(self):
         self.client.complete.return_value=self.reply('What is the rack part number?')
         self.agent.send('Identify tips')

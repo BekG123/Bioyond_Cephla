@@ -14,6 +14,7 @@ from uuid import uuid4
 
 from researcher_teaching import TeachingError
 from squid_adapter import native_command
+from squid_loading import at_loading
 
 ROOT = Path(__file__).resolve().parent
 CONFIG = ROOT / 'squid_protocols.json'
@@ -199,7 +200,12 @@ class SquidExecution:
         configured_hash = digest(profile)
         state = self.ready(idle=True)
         if state['simulation'] != profile['simulation']:
-            raise TeachingError('This Squid protocol does not match the connected real/simulation session.')
+            expected = 'simulated' if profile['simulation'] else 'real'
+            actual = 'simulated' if state['simulation'] else 'real'
+            raise TeachingError(f"Squid imaging profile '{profile['id']}' expects {expected} imaging, "
+                f"but the connected Squid session uses {actual} imaging. Update or select a profile "
+                'for this hardware mode; exposure, channels and objective do not fix this mismatch. '
+                'Squid is already connected. Nothing was started.')
         if 'stage_simulated' in profile and state.get('stage_simulated') is not profile['stage_simulated']:
             raise TeachingError('This protocol requires the configured physical/simulated stage mode.')
         if state.get('stage_simulated') is False and profile.get('loading_position') is None:
@@ -219,7 +225,7 @@ class SquidExecution:
         # Acquisition selection can move the stage. Only workflows that include
         # an explicit, reviewed return before delivery may plan from there.
         if not (allow_loading_return and profile.get('loading_command')):
-            at_position(actual, loading)
+            at_loading(actual,loading,bridge if profile.get('loading_command') else {},profile.get('stage_controller_serial'))
         if profile.get('return_waypoints'):
             at_position(profile['return_waypoints'][-1], loading)
         if profile['command'] == 'current_settings':
@@ -231,7 +237,7 @@ class SquidExecution:
                     raise TeachingError('Cannot read the selected Squid settings. '+str(error)) from None
                 # Missing sites at loading are an expected GUI state. Elsewhere
                 # ask for an explicit site rather than guessing from history.
-                at_position(actual,loading)
+                at_loading(actual,loading,bridge if profile.get('loading_command') else {},profile.get('stage_controller_serial'))
                 current=self.current_controls()
                 saved=self.saved_selection(profile,configured_hash,state,current)
                 prior=saved['plan']['profile']
@@ -318,12 +324,14 @@ class SquidExecution:
                     if (str(error).strip()!=MISSING_SITES
                             or profile.get('selection_source',{}).get('kind')!='saved_coordinates'):
                         raise
-                    at_position(self.command('get_position',{}),plan['loading_position'])
+                    at_loading(self.command('get_position',{}),plan['loading_position'],
+                        bridge if plan['profile'].get('loading_reference_hash') else {},plan['profile'].get('stage_controller_serial'))
                     current=self.current_with_saved_xy(profile['coordinate_reference_yaml'])
                 if current is not None and current.get('sha256') != profile['params']['settings_sha256']:
                     raise TeachingError('Squid settings changed before confirmation. Request a new experiment.')
         if check_position:
-            at_position(self.command('get_position', {}), plan['loading_position'])
+            at_loading(self.command('get_position', {}),plan['loading_position'],
+                bridge if plan['profile'].get('loading_reference_hash') else {},plan['profile'].get('stage_controller_serial'))
         return state
 
     def prepare_imaging(self,plan,stopped,arm_at_home):

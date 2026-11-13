@@ -15,6 +15,7 @@ import teach
 from projected_disk_trial import ROOT, Perception, same_pose, stationary_observation
 from grid_pattern import HeightReferencedGridPattern
 from autonomy import GuardedService, TransferError, alignment_plan, number, wrap
+from projected_plate_calibration import target_from_mark
 
 REFERENCE = ROOT/'Pick and Hold/Calibration/plate_48_height_reference_20261026.json'
 
@@ -56,17 +57,6 @@ def perception_at_height():
     return p, reference, dict(image=frames[-1]['median_image'],
         image_sha256=hashlib.sha256(frame.tobytes()).hexdigest(),
         reference_sha256=hashlib.sha256(REFERENCE.read_bytes()).hexdigest())
-
-
-def target_from_mark(pose, measurement, cfg):
-    current = teach.mark_in_robot_pose(cfg, measurement['mark'])
-    camera = teach.new_acc_pose([pose['X'], pose['Y'], pose['Z'], 0, 0, pose['Rz']],
-                               teach.tool_offset_xyrz(cfg, current))
-    tool = teach.final_acc_pose(cfg, camera)
-    if not np.isfinite(tool).all():
-        raise TransferError('Nonfinite projected alignment target.')
-    # Z is deliberately absent: this is a lateral/yaw alignment reference only.
-    return dict(x=float(tool[0]), y=float(tool[1]), rz=float(wrap(tool[5])))
 
 
 def plan(pose, measurement, cfg, joints, params, envelope):

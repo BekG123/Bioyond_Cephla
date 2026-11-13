@@ -1,10 +1,13 @@
 """Existing guarded stage, extracted without behavior changes."""
 from __future__ import annotations
 
-def seq_align(run: Runner, svc, target: dict, hover_z: float, validate_descent=True) -> dict:
+def seq_align(run: Runner, svc, target: dict, hover_z: float, validate_descent=True, translation_speed=5) -> dict:
     """Disk and ArUco use the same fully preflighted, branch-safe approach."""
     from sequences import (AlignmentGuard, _RP, alignment_plan, TransferError, ensure_arrival, _abort)
     try:
+        import math
+        if type(translation_speed) not in (int,float) or not math.isfinite(translation_speed) or not 1<=translation_speed<=15:
+            raise TransferError('Alignment translation speed must be1..15.')
         guard = AlignmentGuard(svc, run, _RP)
         pose = guard.pose_mm()
         legs = alignment_plan(pose, target, svc.joints() or {}, _RP,
@@ -20,7 +23,7 @@ def seq_align(run: Runner, svc, target: dict, hover_z: float, validate_descent=T
             else:
                 run.say(f"alignment MoveL to X {point['X']:.3f} Y {point['Y']:.3f} Z {point['Z']:.3f}")
                 guard.move_cartesian(point["X"], point["Y"], point["Z"],
-                                     point["Rz"], 5, "linear")
+                                     point["Rz"], translation_speed, "linear")
             ensure_arrival(guard.pose_mm(), point)
             run.say(f"alignment waypoint reached: {point}")
             previous = point

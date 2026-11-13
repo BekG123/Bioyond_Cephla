@@ -1,0 +1,48 @@
+# Test fixture. Not the real Hamilton manifest.
+schema_version: 1
+id: hamilton_prep
+name: Fixture Hamilton
+kind: liquid_handler
+identity: {vendor: Fixture, model: Prep}
+connection: {exclusive_clients: true}
+limits:
+  y_step:
+    value: 0.5
+    units: mm
+    source: fixture
+operations:
+  - name: get_status
+    description: Read status.
+    risk: read_only
+    timeout_s: 1
+  - name: park
+    description: Park the channels.
+    risk: motion
+    human_gate: [at the E-stop, door closed]
+    preconditions: [initialized]
+    postconditions: [parked]
+    timeout_s: 0.3
+  - name: open_jaws
+    description: Open the jaws by a small step.
+    risk: motion
+    human_gate: [at the E-stop]
+    parameters:
+      y_step: Outward step per jaw in mm.
+    timeout_s: 1
+  - name: plate_transfer
+    description: Carry and release a plate.
+    risk: motion
+    timeout_s: 1
+  - name: untested_move
+    description: A motion nobody has qualified.
+    risk: motion
+    timeout_s: 1
+known_faults:
+  - id: release_slip
+    summary: Fixture fault.
+    status: open
+    affects: [plate_transfer]
+qualification:
+  park: {status: supervised_only}
+  open_jaws: {status: supervised_only}
+  plate_transfer: {status: blocked, blocker: Gripper cannot release reliably.}

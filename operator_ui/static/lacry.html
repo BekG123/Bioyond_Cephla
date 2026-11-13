@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cephla · Lacry lab agent</title>
 <link rel="icon" href="/static/cephla-logo.jpg">
-<link rel="stylesheet" href="/static/lacry.css?v=20261026-hamilton-park">
-<script defer src="/static/lacry.js?v=20261026-single-composer"></script>
-<script defer src="/static/hamilton.js?v=20261026-accepted-route"></script>
+<link rel="stylesheet" href="/static/lacry.css?v=20261112-documents">
+<script defer src="/static/lacry_documents.js?v=20261112-documents"></script>
+<script defer src="/static/lacry.js?v=20261112-lacry-chat-label"></script>
+<script defer src="/static/hamilton.js?v=20261112-simulate-execute"></script>
+<link rel="stylesheet" href="/static/supervised_experiment.css?v=20261112-dilution">
+<script defer src="/static/supervised_experiment.js?v=20261112-simulate-execute"></script>
+<script defer src="/static/hamilton_api.js?v=20261112"></script>
 </head>
 <body>
 <a class="skip" href="#tiles">Skip to controls</a>
@@ -77,6 +81,27 @@
       <div class="running-history" tabindex="0" aria-label="Workflow step history"><ol class="steps" id="running-steps"></ol></div>
     </details>
 
+
+    <section class="panel chat" aria-label="Conversation with Lacry">
+      <div class="chat-head"><div class="chat-identity"><span class="chat-avatar" aria-hidden="true">L</span><div><strong>Lacry</strong><span id="chat-hint">Agentic Lab Assistant</span></div></div><span class="chat-caption">Cephla</span></div>
+      <div class="log" id="chat-log" tabindex="0" role="log" aria-label="Conversation with Lacry" aria-live="polite" aria-relevant="additions text"></div>
+      <form class="composer" id="composer">
+        <div id="document-list" class="document-list" aria-label="Attached files" hidden></div>
+        <div class="composer-entry">
+        <label class="skip" for="chat-input">Message Lacry</label>
+        <textarea id="chat-input" rows="2" wrap="soft" autocomplete="off" maxlength="4000" placeholder="Message Lacry…"></textarea>
+        <button class="send" id="chat-send" type="submit" aria-label="Send message" title="Send message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="composer-actions">
+          <button type="button" class="document-attach" id="document-attach" aria-label="Attach documents or images">＋ Attach</button>
+          <input type="file" id="document-input" multiple hidden accept=".pdf,.docx,.xlsx,.pptx,.odt,.ods,.odp,.txt,.md,.csv,.tsv,.json,.yaml,.yml,.xml,.html,.htm,.log,.png,.jpg,.jpeg,.webp">
+        </div>
+        <span id="document-status" role="status" aria-live="polite"></span>
+      </form>
+    </section>
+  </main>
+
+  <aside class="rail" aria-label="Instruments, controls and camera">
     <section id="tiles" aria-label="Instruments">
       <p class="group-label">Instruments</p>
       <div class="control-grid instrument-grid">
@@ -109,28 +134,26 @@
       <div class="control-grid">
         <div class="control-cell">
           <button class="control-button calibrate" data-action="full_calibration" aria-describedby="calibration-help">
-            <span class="control-face">Full Calibration</span>
+            <span class="control-face">S4 Arm<br>Full Calibration</span>
           </button>
-          <span class="button-tooltip" role="tooltip" id="calibration-help">Calibrate, align, descend and grip, then lift slowly and return Home. Confirm with Lacry before starting.</span>
+          <span class="button-tooltip" role="tooltip" id="calibration-help">Calibrate, align, descend and grip, then lift slowly and return IDLE. Confirm with Lacry before starting.</span>
         </div>
         <div class="control-cell">
           <button class="control-button stop-control" id="stop-button" aria-describedby="stop-help">
             <span class="stop-face">STOP</span>
+            <span>Active workflow</span>
           </button>
           <span class="button-tooltip" role="tooltip" id="stop-help">Stop the workflow after the current movement finishes. Use the physical E-stop for an immediate stop.</span>
         </div>
         <div class="control-cell">
           <button class="control-button recover-control" data-action="recover" aria-describedby="recovery-help">
-            <span class="control-face">Recover from fault</span>
+            <span class="control-face">S4 Arm<br>Recover from fault</span>
           </button>
-          <span class="button-tooltip" role="tooltip" id="recovery-help">Review the fault and confirm with Lacry before clearing it and re-enabling the arm.</span>
+          <span class="button-tooltip" role="tooltip" id="recovery-help">Review recovery with Lacry. Where a checked route is available, confirm empty jaws and a clear path to return to HOME. Otherwise, clear the fault without starting travel.</span>
         </div>
       </div>
     </section>
 
-  </main>
-
-  <aside class="rail">
     <section class="panel cam" aria-label="Camera views">
       <div class="cam-tabs" role="tablist" aria-label="Camera views">
         <button class="cam-tab active" role="tab" aria-selected="true" data-cam="eye">Eye-in-hand</button>
@@ -145,16 +168,6 @@
       <div class="cam-bar"><span id="cam-name">Eye-in-hand</span><span id="cam-state">checking…</span></div>
     </section>
 
-    <section class="panel chat" aria-label="Conversation with Lacry">
-      <div class="chat-head"><div class="chat-identity"><span class="chat-avatar" aria-hidden="true">L</span><div><strong>Lacry</strong><span id="chat-hint">Your lab assistant</span></div></div><span class="chat-caption">Cephla</span></div>
-      <div class="log" id="chat-log" tabindex="0" role="log" aria-label="Conversation with Lacry" aria-live="polite" aria-relevant="additions text"></div>
-      <form class="composer" id="composer">
-        <label class="skip" for="chat-input">Message Lacry</label>
-        <textarea id="chat-input" rows="2" wrap="soft" autocomplete="off" maxlength="4000" placeholder="Message Lacry…" aria-describedby="chat-input-help"></textarea>
-        <button class="send" id="chat-send" type="submit" aria-label="Send message" title="Send message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <span class="composer-help" id="chat-input-help">Enter to send · Shift+Enter for a new line</span>
-      </form>
-    </section>
 
     <section class="panel" aria-label="Activity">
       <p class="group-label" style="margin-bottom:9px">Activity</p>
@@ -177,9 +190,9 @@
       <p id="hamilton-travel-status" role="status">Checking saved travel and plate-handling history...</p>
       <div class="hamilton-actions">
         <button data-hamilton-handling="hamilton_dropoff">Leave plate at Hamilton</button>
-        <button data-hamilton-handling="hamilton_retrieve">Retrieve plate to Home</button>
+        <button data-hamilton-handling="hamilton_retrieve">Retrieve plate to IDLE</button>
       </div>
-      <p class="sub">Both routines start and finish at Home. Review the complete plan in chat before starting. These supervised routines pause to check plate alignment and the lift.</p>
+      <p class="sub">Both routines start and finish at IDLE. Review the complete plan in chat before starting. These supervised routines pause to check plate alignment and the lift.</p>
       <h3>Liquid handling</h3>
       <label for="hamilton-protocol">Commissioned recipe</label>
       <select id="hamilton-protocol"><option value="">No recipe selected</option></select>
@@ -193,6 +206,15 @@
       <div id="hamilton-prompt" class="notice" hidden><h3>Hamilton needs attention</h3><p id="hamilton-prompt-text"></p><label><input id="hamilton-prompt-ready" type="checkbox">I have completed this instruction.</label><button id="hamilton-prompt-ok">Continue</button></div>
       <h3>Current operation</h3><p id="hamilton-operation">None</p><ol id="hamilton-calibration-steps"></ol>
       <h3>Saved protocols</h3><ul id="hamilton-protocols"></ul>
+      <details id="hamilton-api-catalog">
+        <summary>Explore Hamilton API</summary>
+        <p>Search native operations. Lacry can inspect their inputs and prepare supported requests for your review.</p>
+        <input id="hamilton-api-search" type="search" placeholder="Protocols, labware, camera, calibration…" aria-label="Search Hamilton API">
+        <button id="hamilton-api-find" type="button">Search</button>
+        <p id="hamilton-api-count"></p>
+        <ul id="hamilton-api-results"></ul>
+        <button id="hamilton-api-next" type="button" hidden>More operations</button>
+      </details>
       <h3>Recent errors</h3><p class="sub">History can include earlier faults; it is separate from the current operation.</p><ul id="hamilton-errors"></ul>
     </section>
   </div>

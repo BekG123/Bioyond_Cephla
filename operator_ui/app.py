@@ -22,6 +22,12 @@ import threading
 import time
 from collections import deque
 
+# Lacry's local chat now uses ChatGPT-authenticated Codex and MCP by default.
+# An explicit legacy override is required to allow Anthropic API traffic.
+os.environ.setdefault('LACRY_LLM_PROVIDER', 'codex_mcp')
+if os.environ['LACRY_LLM_PROVIDER'] not in ('codex_mcp', 'anthropic'):
+    raise RuntimeError('Choose LACRY_LLM_PROVIDER=codex_mcp or explicitly select legacy anthropic mode.')
+
 from vision_runtime import bootstrap, verify as verify_vision_runtime
 VISION_RUNTIME = bootstrap() if __name__ == '__main__' else verify_vision_runtime()
 
@@ -92,6 +98,7 @@ svc.audit_sink = audit.event
 cam = CameraService()
 from developer_diagnostics import DeveloperDiagnostics, register_developer_diagnostics
 developer_diagnostics = DeveloperDiagnostics(os.path.join(HERE, 'reports', 'developer_dsl'))
+app.extensions['developer_diagnostics'] = developer_diagnostics
 def audit_and_remember(event,**fields):
     developer_diagnostics.observe(event, fields)
     audit.event(event,**fields)
@@ -169,6 +176,9 @@ lacry = LacryAgent(lacry_backend, plate_agent.client, lambda: runner,
     # confirmation card.
     prepare=plate_teaching._prepare, home_return=home_return,
     classic_pickup=classic_pickup, reviewed_home=ik_home_connection)
+if os.environ['LACRY_LLM_PROVIDER'] == 'codex_mcp':
+    from lacry_codex import CodexChat
+    lacry.codex_chat = CodexChat(lacry)
 register_researcher(app, lambda: dict(
     robot=svc.status(), camera=cam.info(),
     sequence=dict(active=runner.active or getattr(runner, 'reserved', False))), researcher_teaching, draggo, plate_teaching, imitation, home_return, hand_claw,
@@ -176,11 +186,32 @@ register_researcher(app, lambda: dict(
     pickup_planner=pickup_planner,recorded_return=recorded_return,latest_hamilton=latest_hamilton,descent=researcher_descent,grip=position_grip,
     lacry=lacry)
 
+@app.get('/developer/api/lacry/model')
+def lacry_model_status():
+    from lacry_model import request_options
+    if lacry.codex_chat:
+        return jsonify(ok=True, configured=True, **lacry.codex_chat.public(),
+                       image_analysis_model='Codex via MCP camera image; legacy API analysis disabled')
+    return jsonify(ok=True, configured=lacry.credentials.ready(),
+                   **request_options(lacry.model,lacry.max_tokens),
+                   image_analysis_model=plate_agent.client.model)
+
+
 CAL_PATH = os.path.join(os.path.dirname(HERE), "grab_skill",
                         "calibration.json")
 
 register_developer_diagnostics(app, developer_diagnostics, lambda: runner,
                                lambda: lacry.client, lambda: lacry.credentials)
+
+
+@app.post('/developer/api/dsl/devin/home-check')
+def developer_home_check():
+    # Observation only: use the same Home preflight as the researcher button.
+    from devin_review import capture_home_preflight, local_developer_request
+    if not local_developer_request():
+        return jsonify(ok=False, error='Use the local developer console.'), 403
+    return jsonify(capture_home_preflight(developer_diagnostics, svc, home_return,
+                                          draggo, get_robot_params))
 
 
 class TorqueRecorder:
@@ -247,12 +278,25 @@ recorder = TorqueRecorder(svc)
 # Serialize mutating requests through dispatch. This closes the race between
 # a manual command being admitted and a new sequence acquiring ownership.
 _dispatch_lock = threading.RLock()
+from lacry_mcp_api import register as register_lacry_mcp
+register_lacry_mcp(app, lacry, _dispatch_lock)
 
 
 @app.before_request
 def command_ownership():
     if request.method != "POST":
         return None
+    if request.path.startswith('/researcher/api/lacry/mcp/'):
+        return None  # Authenticated MCP handlers share _dispatch_lock; Stop stays available.
+    if request.path == '/researcher/api/plate-transfer/stop':
+        return None  # Exact-plan cancellation must remain available during motion.
+    if request.path in ('/researcher/api/plate-transfer/plan', '/researcher/api/plate-transfer/start'):
+        if not _dispatch_lock.acquire(blocking=False):
+            return jsonify(ok=False, message='Another control is busy; no transfer was dispatched.'), 409
+        request.environ['bioyond.dispatch_locked'] = True
+        if runner.active or getattr(runner, 'reserved', False):
+            return jsonify(ok=False, message='A lab task owns the runner; no transfer was dispatched.'), 409
+        return None  # Preserve receipt/calibration state; the composition validates its own plan.
     if request.path == '/agent/settings':
         return None  # API credentials do not move or change the controller, including during DragGo.
     if request.path.startswith('/developer/api/dsl/'):
@@ -282,7 +326,8 @@ def command_ownership():
     if request.path in ('/researcher/api/lacry/stop', '/researcher/api/lacry/review',
                         '/researcher/api/lacry/hamilton/abort', '/researcher/api/lacry/hamilton/respond',
                         '/researcher/api/lacry/hamilton/observe',
-                        '/researcher/api/lacry/cancel', '/researcher/api/lacry/chat'):
+                        '/researcher/api/lacry/cancel', '/researcher/api/lacry/chat',
+                        '/researcher/api/lacry/question/answer'):
         return None  # Chat can confirm a pending host plan. The agent applies
                      # readiness and runner ownership checks before starting it.
     # Stop/disable must never queue behind a long synchronous manual move.
@@ -1927,6 +1972,596 @@ def _target_from(b: dict) -> dict | None:
         except ValueError:
             return None
     return runner.target
+
+
+@app.post('/developer/api/cellvis24-short-side/preview')
+@app.post('/developer/api/cellvis24-short-side/start')
+def cellvis24_short_side_trial():
+    from cellvis24_station_trial import plan, execute
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    body = _body()
+    try:
+        cfg = get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:
+                raise ValueError('This Cellvis trial takes no arbitrary targets.')
+            return jsonify(ok=True, plan=plan(svc, cfg))
+        if set(body) != {'plan', 'ready', 'path_clear', 'setup_confirmed'} or any(body[k] is not True for k in ('ready','path_clear','setup_confirmed')):
+            raise ValueError('Confirmed Cellvis setup and clear holder/arm sweep required.')
+        return jsonify(runner.start('cellvis24_short_side', execute, svc, cfg, body['plan']))
+    except Exception as error:
+        return jsonify(ok=False, error=str(error)), 409
+
+
+@app.post('/developer/api/cellvis24-hamilton/preview')
+@app.post('/developer/api/cellvis24-hamilton/start')
+def cellvis24_hamilton_delivery():
+    from cellvis24_hamilton_route import plan, execute
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    body = _body()
+    try:
+        cfg = get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:
+                raise ValueError('This Cellvis route takes no arbitrary targets.')
+            return jsonify(ok=True, plan=plan(svc, cfg))
+        if set(body) != {'plan','ready','path_clear','setup_confirmed'} or any(body[k] is not True for k in ('ready','path_clear','setup_confirmed')):
+            raise ValueError('Confirmed Cellvis grip, Hamilton setup and route clearance required.')
+        return jsonify(runner.start('cellvis24_hamilton', execute, svc, cfg, body['plan']))
+    except Exception as error:
+        return jsonify(ok=False, error=str(error)), 409
+
+
+@app.post('/developer/api/cellvis24-handling/preview')
+@app.post('/developer/api/cellvis24-handling/start')
+def cellvis24_station_handling():
+    from cellvis24_station_handling import plan, execute
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    body = _body()
+    try:
+        cfg = get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body) != {'phase'}:
+                raise ValueError('Select the Cellvis handling phase.')
+            return jsonify(ok=True, plan=plan(svc, cfg, body['phase']))
+        if set(body) != {'plan','ready','path_clear','setup_confirmed'} or any(body[k] is not True for k in ('ready','path_clear','setup_confirmed')):
+            raise ValueError('Confirmed Cellvis handling setup and clear route required.')
+        return jsonify(runner.start('cellvis24_handling', execute, svc, cfg, body['plan']))
+    except Exception as error:
+        return jsonify(ok=False, error=str(error)), 409
+
+
+@app.post('/developer/api/cellvis24-squid/preview')
+@app.post('/developer/api/cellvis24-squid/start')
+def cellvis24_squid_handling():
+    from cellvis24_squid_route import plan, execute
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    body = _body()
+    try:
+        cfg = get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body) != {'phase'}:
+                raise ValueError('Select the Cellvis Squid phase.')
+            return jsonify(ok=True, plan=plan(svc, cfg, body['phase']))
+        if set(body) != {'plan','ready','path_clear','setup_confirmed'} or any(body[k] is not True for k in ('ready','path_clear','setup_confirmed')):
+            raise ValueError('Confirmed Cellvis handling setup and clear route required.')
+        return jsonify(runner.start('cellvis24_squid', execute, svc, cfg, body['plan']))
+    except Exception as error:
+        return jsonify(ok=False, error=str(error)), 409
+
+
+@app.get('/developer/api/cellvis24-workflow/capabilities')
+def cellvis24_workflow_capabilities():
+    from cellvis24_recorded_hamilton_route import PLAN,reference,plan_path
+    import hashlib
+    reference()
+    return jsonify(ok=True,recorded_hamilton_delivery=True,
+                   route_sha256=hashlib.sha256(PLAN.read_bytes()).hexdigest(),
+                   recorded_route_variants={v:hashlib.sha256(plan_path(v).read_bytes()).hexdigest() for v in ('recorded','smooth3','blend3','opposite3')})
+
+
+@app.post('/developer/api/cellvis24-workflow/blend-ready')
+def cellvis24_blend_ready():
+    """Nonmoving capability handshake before calibration; never starts Lua."""
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    from hamilton_transit_blend import require_capability
+    try:
+        body=_body()
+        if set(body)-{'variant'} or body.get('variant','blend3') not in ('blend3','opposite3'):
+            raise ValueError('Only a known blend variant is accepted; no motion parameters.')
+        refusal=svc._preflight()
+        if refusal:raise ValueError(refusal)
+        result=svc._locked(lambda:require_capability(svc,body.get('variant','blend3')))
+        return jsonify(result),200 if result.get('ok') else 409
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/home-clearance-recovery/preview')
+@app.post('/developer/api/home-clearance-recovery/start')
+def cellvis_home_clearance_recovery():
+    from home_clearance_recovery import preview, execute
+    refusal = _refuse_if_sequencing()
+    if refusal:
+        return refusal
+    body = _body()
+    try:
+        cfg = get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:
+                raise ValueError('HOME recovery preview accepts no arbitrary positions or routes.')
+            return jsonify(ok=True, plan=preview(svc, cfg))
+        required = {'plan', 'ready', 'empty_jaws', 'plate_seated', 'path_clear'}
+        if set(body) != required or any(body[k] is not True for k in required - {'plan'}):
+            raise ValueError('Confirm empty jaws, seated Cellvis plate and clear HOME holder/connector.')
+        return jsonify(runner.start('home_clearance_recovery', execute, svc, cfg, body['plan'], True, True))
+    except Exception as error:
+        return jsonify(ok=False, error=str(error)), 409
+
+
+@app.post('/developer/api/cellvis24-workflow/preview')
+@app.post('/developer/api/cellvis24-workflow/start')
+def cellvis24_reusable_workflow():
+    from cellvis24_workflow import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if not {'stations','cycles','source'}<=set(body) or set(body)-{'stations','cycles','source','full_calibration','projected_trial','held_hamilton_roundtrip','direct_hamilton','taught_hamilton_delivery','recorded_hamilton_delivery','recorded_hamilton_variant'}:raise ValueError('Select stations, cycles, source receipt and optional calibration/held-Hamilton mode.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['stations'],body['cycles'],body['source'],body.get('full_calibration',False),body.get('projected_trial',False),body.get('held_hamilton_roundtrip',False),body.get('direct_hamilton',False),body.get('taught_hamilton_delivery',False),body.get('recorded_hamilton_delivery',False),body.get('recorded_hamilton_variant','recorded')))
+        required={'plan','ready','path_clear','setup_confirmed'}
+        if body.get('plan',{}).get('recorded_hamilton_delivery') or body.get('plan',{}).get('recorded_hamilton_variant')=='opposite3':
+            required.add('recorded_clearance_confirmed')
+            if body.get('recorded_clearance_confirmed') is not True:raise ValueError('Confirm the recorded-height route and its HOME/final placement connectors are clear.')
+        if body.get('plan',{}).get('taught_hamilton_delivery'):
+            required.add('taught_clearance_confirmed')
+            if body.get('taught_clearance_confirmed') is not True:raise ValueError('Confirm the combined HOME-to-taught-turn-to-Hamilton sweep is clear.')
+        if body.get('plan',{}).get('direct_hamilton'):
+            required.add('direct_clearance_confirmed')
+            if body.get('direct_clearance_confirmed') is not True:raise ValueError('Review the new HOME wrist sweep and direct diagonal rack crossing first.')
+        if set(body)!=required or any(body[k] is not True for k in ('ready','path_clear','setup_confirmed')):
+            raise ValueError('Confirmed Cellvis setup and clear route required.')
+        return jsonify(runner.start('cellvis24_workflow',execute,svc,cfg,body['plan'],cam))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/cellvis24-hamilton-continuation/preview')
+@app.post('/developer/api/cellvis24-hamilton-continuation/start')
+def cellvis24_hamilton_continuation():
+    from cellvis24_hamilton_continuation import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'source','phase'}:raise ValueError('Source receipt and continuation phase required.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['source'],body['phase']))
+        if set(body)!={'plan','ready','path_clear','setup_confirmed'} or any(body[k] is not True for k in ('ready','path_clear','setup_confirmed')):
+            raise ValueError('Confirmed loaded return and HOME/Squid setup required.')
+        return jsonify(runner.start('cellvis24_continuation',execute,svc,cfg,body['plan']))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/cellvis24-adjustment/prepare')
+@app.post('/developer/api/cellvis24-adjustment/trial')
+def cellvis24_adjustment_trial():
+    # Operator rejected the adapted alignment. Preserve its evidence, but do
+    # not allow an old browser/request to dispatch it again.
+    return jsonify(ok=False,error='Experimental Cellvis adjustment retired. Use the accepted Cellvis full-calibration sequence.'),410
+
+
+@app.post('/developer/api/scanner-empty/preview')
+@app.post('/developer/api/scanner-empty/start')
+def scanner_empty_trial():
+    from scanner_empty_route import plan, execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Scanner preview accepts no arbitrary route parameters.')
+            return jsonify(ok=True,plan=plan(svc,cfg))
+        if set(body)!={'plan','ready','path_clear','empty_gripper','workspace_change_confirmed'} or any(body[k] is not True for k in ('ready','path_clear','empty_gripper','workspace_change_confirmed')):
+            raise ValueError('Confirm supervised empty-arm scanner route and temporary X minimum80.')
+        return jsonify(runner.start('scanner_empty_trial',execute,svc,cfg,body['plan']))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/cellvis-scanner-return/review-home')
+def cellvis_scanner_review_home():
+    from cellvis24_scanner_return import review_recovered_home
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        if set(body)!={'recovery','plate_seated','hands_clear','estop_supervised'} or any(body[k] is not True for k in ('plate_seated','hands_clear','estop_supervised')):
+            raise ValueError('Confirm plate reseated flat in HOME, hands clear and E-stop supervised.')
+        return jsonify(review_recovered_home(svc,get_robot_params(),body['recovery'],True))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/cellvis-scanner-return/preview')
+@app.post('/developer/api/cellvis-scanner-return/start')
+def cellvis_scanner_return():
+    from cellvis24_scanner_return import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'trial_id','phase'}:raise ValueError('Supply trial_id and return_home/release_home phase.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['trial_id'],body['phase']))
+        if set(body)!={'plan','ready','path_clear','plate_supported'} or body['ready'] is not True or body['path_clear'] is not True:
+            raise ValueError('Confirm secure plate, clear loaded return and supervised E-stop.')
+        if body['plan']['phase']=='release_home' and body['plate_supported'] is not True:
+            raise ValueError('Confirm plate supported in HOME and jaws clear before release.')
+        return jsonify(runner.start('cellvis_scanner_return',execute,svc,cfg,body['plan']))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/cellvis-scanner/preview')
+@app.post('/developer/api/cellvis-scanner/start')
+def cellvis_scanner_transfer():
+    from cellvis24_scanner_route import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'trial_id'}:raise ValueError('Supply the completed Cellvis trial ID.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['trial_id']))
+        confirmations=('plate_secure','loaded_path_clear','estop_supervised')
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm secure proof lift, cleared loaded scanner route and E-stop supervision.')
+        return jsonify(runner.start('cellvis_scanner_transfer',execute,svc,cfg,body['plan']))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+_scanner_plate_workflow = None
+
+@app.get('/developer/api/scanner-plate/status')
+@app.post('/developer/api/scanner-plate/preview')
+@app.post('/developer/api/scanner-plate/start')
+def scanner_plate_trial():
+    global _scanner_plate_workflow
+    from scanner_plate_workflow import ScannerPlateWorkflow, ScannerProofLift
+    try:
+        if _scanner_plate_workflow is None:
+            transport=ScannerProofLift(home_return,os.path.join(HERE,'demonstrations','scanner_proof_lift'))
+            flow=Plate48Pickup(researcher_teaching,plate48_teaching,researcher_descent,
+                position_grip,lambda:svc,lambda:runner,transport=transport)
+            _scanner_plate_workflow=ScannerPlateWorkflow(flow,svc,runner,get_robot_params)
+        if request.method=='GET':return jsonify(ok=True,**_scanner_plate_workflow.public())
+        refusal=_refuse_if_sequencing()
+        if refusal:return refusal
+        body=_body()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Scanner pickup preview accepts no arbitrary targets.')
+            return jsonify(ok=True,plan=_scanner_plate_workflow.preview())
+        confirmations=('ready','path_clear','empty_gripper','plate_unchanged','loaded_path_clear','workspace_change_confirmed')
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm unchanged 48-well HOME setup, empty starting arm, loaded clearance, E-stop supervision and temporary X minimum80.')
+        return jsonify(_scanner_plate_workflow.start(body['plan']))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/hamilton-empty-clearance/preview')
+@app.post('/developer/api/hamilton-empty-clearance/start')
+def hamilton_empty_clearance_trial():
+    from hamilton_rack_clearance import plan, execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)-{'direction'}:raise ValueError('Preview accepts only a route direction.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body.get('direction','roundtrip')))
+        confirmations=('empty_gripper','path_clear','door_open','estop_supervised','arm_released')
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm empty jaws, open Hamilton access, clear route, released arm and supervised E-stop.')
+        return jsonify(runner.start('hamilton_empty_clearance',execute,svc,cfg,body['plan']))
+    except Exception as error:
+        return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/hotel-home-pickup/preview')
+@app.post('/developer/api/hotel-home-pickup/start')
+def hotel_home_pickup():
+    from hotel_home_pickup import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Saved 48-well pickup only.')
+            return jsonify(ok=True,plan=preview(svc,cfg))
+        confirmations={'plate_setup_confirmed','empty_gripper','route_and_holder_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm HOME pickup setup, empty jaws, route/holder clearance and supervision.')
+        return jsonify(runner.start('hotel_home_pickup',execute,svc,cfg,body['plan'],position_grip))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot1-retrieval/preview')
+@app.post('/developer/api/hotel-slot1-retrieval/start')
+def hotel_slot1_retrieval():
+    from hotel_slot1_retrieval import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Exact accepted slot1 retrieval only.')
+            return jsonify(ok=True,plan=preview(svc,cfg))
+        confirmations={'plate_in_slot1','home_empty','lift5_and_route_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm slot1 plate, empty HOME, five-millimeter lift and route clearance, supervision.')
+        return jsonify(runner.start('hotel_slot1_retrieval',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot2-taught/preview')
+@app.post('/developer/api/hotel-slot2-taught/start')
+@app.post('/developer/api/hotel-slot3-taught/preview')
+@app.post('/developer/api/hotel-slot3-taught/start')
+def hotel_slot2_taught():
+    from hotel_slot2_trial import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    slot=3 if '/hotel-slot3-taught/' in request.path else 2
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError(f'Exact slot{slot} approach only.')
+            return jsonify(ok=True,plan=preview(svc,cfg,slot))
+        confirmations={'plate_secure',f'slot{slot}_empty','loaded_route_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError(f'Confirm held plate, empty slot{slot}, loaded route clearance and supervision.')
+        if body['plan']['geometry']['slot']!=slot:raise ValueError('Preview slot differs from requested slot.')
+        return jsonify(runner.start(f'hotel_slot{slot}_taught',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot2-handling/preview')
+@app.post('/developer/api/hotel-slot2-handling/start')
+@app.post('/developer/api/hotel-slot3-handling/preview')
+@app.post('/developer/api/hotel-slot3-handling/start')
+def hotel_slot2_handling_route():
+    slot=3 if '/hotel-slot3-handling/' in request.path else 2
+    if slot==3:
+        from hotel_slot3_handling import preview,execute
+    else:
+        from hotel_slot2_handling import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'action'}:raise ValueError('Specify release_return or retrieve.')
+            return jsonify(ok=True,plan=preview(svc,cfg,body['action']))
+        confirmations={'plate_setup_confirmed','route_and_lift_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm plate support/location, opening and horizontal retreat, 5mm lift clearance and supervision.')
+        if body['plan']['geometry']['approach_geometry']['slot']!=slot:raise ValueError('Handling preview slot differs from request.')
+        return jsonify(runner.start(f'hotel_slot{slot}_handling',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-home-teaching-pickup/preview')
+@app.post('/developer/api/hotel-home-teaching-pickup/start')
+def hotel_home_teaching_pickup():
+    from hotel_slot1_delivery import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Accepted HOME pickup only.')
+            return jsonify(ok=True,plan=preview(svc,cfg))
+        confirmations={'plate_in_home','empty_gripper','pickup_route_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm plate in HOME, empty jaws, pickup/lift clearance and supervision.')
+        def pickup(run):
+            return execute(run,svc,cfg,body['plan'],position_grip,pickup_only=True)
+        return jsonify(runner.start('hotel_home_teaching_pickup',pickup))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot1-delivery/preview')
+@app.post('/developer/api/hotel-slot1-delivery/start')
+def hotel_slot1_delivery():
+    from hotel_slot1_delivery import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Exact taught slot1 delivery only.')
+            return jsonify(ok=True,plan=preview(svc,cfg))
+        confirmations={'plate_in_home','slot1_empty','loaded_route_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm plate in HOME, empty slot1, loaded route/release clearance and supervision.')
+        return jsonify(runner.start('hotel_slot1_delivery',execute,svc,cfg,body['plan'],position_grip))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot1-lower-recovery/preview')
+@app.post('/developer/api/hotel-slot1-lower-recovery/start')
+def hotel_slot1_lower_recovery():
+    from hotel_slot1_lower_recovery import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Recovery is pinned to the confirmed manual exit.')
+            return jsonify(ok=True,plan=preview(svc,cfg))
+        confirmations={'empty_and_free','route_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm empty free arm, exact route and supervision.')
+        return jsonify(runner.start('hotel_slot1_lower_recovery',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot1-empty-recovery/preview')
+@app.post('/developer/api/hotel-slot1-empty-recovery/start')
+def hotel_slot1_empty_recovery():
+    from hotel_slot1_empty_recovery import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Recovery is pinned to the confirmed manual exit.')
+            return jsonify(ok=True,plan=preview(svc,cfg))
+        confirmations={'empty_and_free','route_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm empty free arm, exact route and supervision.')
+        return jsonify(runner.start('hotel_slot1_empty_recovery',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot2-recovery/preview')
+@app.post('/developer/api/hotel-slot2-recovery/start')
+def hotel_slot2_recovery():
+    from hotel_slot2_recovery import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if body:raise ValueError('Recovery uses its pinned current-pose route only.')
+            return jsonify(ok=True,plan=preview(svc,cfg))
+        confirmations={'empty_and_free','route_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm empty free arm, exact recovery clearance and supervision.')
+        return jsonify(runner.start('hotel_slot2_recovery',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot2-pickup/preview')
+@app.post('/developer/api/hotel-slot2-pickup/start')
+def hotel_slot2_pickup():
+    from hotel_slot2_pickup import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)-{'phase','source'}:raise ValueError('Only slot2 phase/source accepted.')
+            return jsonify(ok=True,plan=preview(svc,cfg,body.get('phase','pickup'),body.get('source')))
+        confirmations={'plate_setup_confirmed','route_clear','estop_supervised'}
+        if body.get('plan',{}).get('phase')=='return':confirmations.add('retention_confirmed')
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Slot2 plate, route and supervision confirmations required; return requires secure lift observation.')
+        return jsonify(runner.start('hotel_slot2_pickup',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/hotel-slot1-trial/preview')
+@app.post('/developer/api/hotel-slot1-trial/start')
+def hotel_slot1_trial():
+    from hotel_slot_trial import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)-{'direction'}:raise ValueError('Only Path A direction may be selected.')
+            return jsonify(ok=True,plan=preview(svc,cfg,body.get('direction','forward')))
+        confirmations={'empty_gripper','routes_clear','arm_released','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm empty jaws, clear HOME/slot1 routes, arm released and E-stop supervised.')
+        return jsonify(runner.start('hotel_slot1_trial',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/cellvis-recovery-handoff/preview')
+@app.post('/developer/api/cellvis-recovery-handoff/start')
+def cellvis_recovery_handoff():
+    from cellvis_recovery_handoff import preview,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body)!={'recovery','trial_id'}:raise ValueError('Supply completed recovery and accepted scanner geometry.')
+            return jsonify(ok=True,plan=preview(svc,cfg,body['recovery'],body['trial_id']))
+        confirmations={'plate_seated','empty_gripper','rotation_clear','estop_supervised'}
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm supported plate, empty open jaws, clear holder rotation and supervised E-stop.')
+        return jsonify(runner.start('cellvis_recovery_handoff',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
+
+
+@app.post('/developer/api/barcode-opposite-trial/preview')
+@app.post('/developer/api/barcode-opposite-trial/start')
+def barcode_opposite_trial():
+    from barcode_opposite_side_trial import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body) not in ({'source'},{'source','target'}):raise ValueError('Provide the completed scanner HOME release receipt and optional inspected orientation.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['source'],body.get('target')))
+        confirmations=('plate_seated','empty_gripper','rotation_and_approach_clear','estop_supervised')
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm supported plate, released jaws, clear half-turn/approach and supervised E-stop.')
+        return jsonify(runner.start('barcode_opposite_trial',execute,svc,cfg,body['plan']))
+    except Exception as error:return jsonify(ok=False,error=str(error)),409
+
+
+@app.post('/developer/api/barcode-opposite-transport/preview')
+@app.post('/developer/api/barcode-opposite-transport/start')
+def barcode_opposite_transport():
+    from barcode_opposite_transport import plan,execute
+    refusal=_refuse_if_sequencing()
+    if refusal:return refusal
+    body=_body()
+    try:
+        cfg=get_robot_params()
+        if request.path.endswith('/preview'):
+            if set(body) not in ({'source','phase'},{'source','phase','scanner_z'}):raise ValueError('Provide pickup receipt, transport phase and optional reviewed scanner Z.')
+            return jsonify(ok=True,plan=plan(svc,cfg,body['source'],body['phase'],body.get('scanner_z')))
+        confirmations={'retention_confirmed','route_clear','estop_supervised'}
+        if body.get('plan',{}).get('binding',{}).get('phase')=='release_restore':confirmations.add('plate_supported')
+        if set(body)!={'plan',*confirmations} or any(body[k] is not True for k in confirmations):
+            raise ValueError('Confirm secure plate, cleared scanner route and supervised E-stop.')
+        return jsonify(runner.start('barcode_opposite_transport',execute,svc,cfg,body['plan']))
+    except Exception as e:return jsonify(ok=False,error=str(e)),409
 
 
 if __name__ == "__main__":

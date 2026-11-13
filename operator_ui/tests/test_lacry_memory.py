@@ -50,7 +50,7 @@ class MemoryTests(unittest.TestCase):
         self.store.seed(seed);row=self.store.search('two disk calibration')[0]
         self.store.update(row['id'],1,'archived');self.store.seed(seed)
         self.assertEqual(self.store.status()['counts']['archived'],1)
-        self.assertEqual(self.store.status()['total'],8)
+        self.assertEqual(self.store.status()['total'], len(json.loads(seed.read_text(encoding='utf-8'))))
 
     def test_concurrent_writes_and_bounded_context(self):
         with ThreadPoolExecutor(max_workers=4) as workers:
@@ -80,8 +80,8 @@ class MemoryTests(unittest.TestCase):
         result,error=agent._run_tool('save_memory_note',dict(title='Suggestion',body='Pending suggestion'))
         self.assertFalse(error);self.assertEqual(json.loads(result)['status'],'pending')
         agent.send('What is the Hamilton route?')
-        system=client.complete.call_args.args[0]['system']
-        self.assertIn('Hamilton uses Home.',system);self.assertNotIn('Pending suggestion',system)
+        context=client.complete.call_args.args[0]['messages'][-1]['content']
+        self.assertIn('Hamilton uses Home.',context);self.assertNotIn('Pending suggestion',context)
         backend.execute_step.assert_not_called()
 
     def test_developer_api_review_and_export(self):

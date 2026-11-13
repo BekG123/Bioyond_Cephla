@@ -37,7 +37,9 @@ def clean(text,limit):
 
 
 class LacryMemory:
-    def __init__(self,path):
+    def __init__(self,path,plate_registry=None):
+        from plate_registry import PlateRegistry
+        self.plates = plate_registry if plate_registry is not None else PlateRegistry()
         self.path=Path(path);self.path.parent.mkdir(parents=True,exist_ok=True)
         self.last_error=None
         with self.db() as db:
@@ -154,6 +156,8 @@ class LacryMemory:
 
 
 def register_memory_api(app,memory):
+    from plate_memory import register_plate_api
+    register_plate_api(app, memory.plates)
     from flask import jsonify, request, Response
 
     @app.get('/developer/api/lacry-memory')

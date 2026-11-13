@@ -3,11 +3,12 @@ id: hamilton_prep
 name: Hamilton Prep
 kind: liquid_handler
 summary: >
-  Hamilton Prep with two Y-driven channels (rear = channel 1, front = channel 2) and a
-  DCG plate gripper tool that carries a 48-well plate between the Prep and the Bioyond
-  arm. The gripper cannot yet release a plate reliably, so no round trip has completed.
-  Treat every operation that holds or releases a plate as blocked until the tool is
-  inspected or replaced.
+  Hamilton Prep with two Y-driven channels (rear = channel 1, front = channel 2). Plates
+  reach and leave the Prep deck through the Bioyond arm, which places the 48-well plate
+  in the Hamilton holder and retrieves it (HOME to Hamilton round trip; five combined
+  Hamilton and Squid handling cycles were accepted on 2026-11-11). The Prep's own DCG
+  plate gripper is not part of that path and stays blocked: it cannot release a plate
+  reliably until the tool is inspected or replaced.
 
 identity:
   vendor: Hamilton
@@ -135,7 +136,10 @@ operations:
       front_to: Target front-drive Y for a front-only walk.
       no_tool: Requires bare channels.
   - name: dcg_plate_transfer_48well
-    description: Carry a 48-well plate in the DCG and release it to the Bioyond arm, then retrieve it.
+    description: >
+      Carry a 48-well plate in the Prep's own DCG gripper and release it. Not used by the
+      accepted workflow, where the Bioyond arm places and retrieves the plate (see
+      bioyond_s4 run_plate_workflow).
     risk: motion
     human_gate: [at the E-stop, door closed, path clear, plate seated]
     preconditions: [qualification.dcg_plate_release is qualified, active.json cleared by a person]
@@ -145,7 +149,8 @@ operations:
 
 interlocks:
   - Door closed (DoorClosed) and enclosure present (PrepGetIsEnclosurePresent) polled every 0.25 s during motion.
-  - Unresolved-batch marker active.json (request_id dcg48_repeat_683af88d0e764de8b7a8617903ffd172, status failed_or_uncertain).
+  - Unresolved-batch marker active.json blocks new Hamilton operations while it exists. None was present in reports/hamilton_api when checked on 2026-11-11; the 2026-11-08 marker (dcg48_repeat_683af88d0e764de8b7a8617903ffd172) is gone.
+  - The arm may enter only when the Prep is Idle, has no pending errors and its channels are confirmed parked (hamilton_prep.py verify, robot_access).
   - Lock file dcg48_execution.lock held for the length of any motion script.
 
 known_faults:
@@ -156,7 +161,8 @@ known_faults:
       The same walk with bare channels follows through 85 mm, so the fault follows the
       tool, not the Y drives or the firmware command. The top metal band linking the
       paddles is buckled (already buckled before 2026-11-08), which is the candidate and
-      is not proven.
+      is not proven. Plate hand-off no longer depends on this tool: the Bioyond arm
+      places and retrieves the plate.
     affects: [dcg_plate_transfer_48well, encoder_opening_test]
     evidence: operator_ui/reports/hamilton_api/release_investigation_20261109/Findings.md
   - id: counter_mirrors_encoder
@@ -195,10 +201,17 @@ qualification:
   return_dcg_tool:
     status: supervised_only
     evidence: tool_return_20261110T033021Z, jaws empty and closed by hand.
+  plate_exchange_by_arm:
+    status: supervised_only
+    evidence: >
+      One calibration then 5 of 5 Hamilton and Squid drop-off and retrieval cycles,
+      operator accepted 2026-11-11:
+      operator_ui/reports/plate_session/continuous_grip_handling_dd538f47b7334f6d92bea4be4bedcea0/operator_acceptance.json.
+      Handling only; no dispensing ran. The operation itself is bioyond_s4 run_plate_workflow.
   dcg_plate_release:
     status: blocked
-    blocker: Gripper tool cannot release a plate reliably; zero completed round trips.
+    blocker: The DCG tool cannot release a plate reliably; zero completed DCG round trips.
     evidence: Findings.md, release_investigation_20261109
   dcg_plate_transfer_48well:
     status: blocked
-    blocker: Depends on dcg_plate_release and on a person clearing active.json.
+    blocker: Depends on dcg_plate_release. Not needed for the accepted arm-based workflow.

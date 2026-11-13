@@ -21,12 +21,15 @@ class BridgeTests(unittest.TestCase):
         path.write_text(json.dumps(dict(operator_confirmed=True,controller_serial='12769210',dropoff=self.target)))
         for p in (patch.object(stage_position,'REFERENCE',path),
                   patch.object(config,'CONTROLLER_SN','12769210'),
+                  patch('serial.tools.list_ports.comports',return_value=[NS(device='COM4',serial_number='12769210')]),
                   patch.object(config,'SIMULATE_MICROCONTROLLER',False)):
             p.start();self.addCleanup(p.stop)
         self.stage=Mock()
         self.stage.get_config.return_value=NS(X_AXIS=NS(MIN_POSITION=5,MAX_POSITION=115),
             Y_AXIS=NS(MIN_POSITION=4,MAX_POSITION=76),Z_AXIS=NS(MIN_POSITION=.05,MAX_POSITION=6))
-        self.server=NS(microscope=NS(stage=self.stage),_commands={},
+        self.move_z=self.stage.move_z_to
+        mcu=NS(_serial=NS(_serial=NS(port='COM4',is_open=True)),is_busy=lambda:False)
+        self.server=NS(microscope=NS(stage=self.stage,low_level_drivers=NS(microcontroller=mcu)),_commands={},
             _cmd_get_acquisition_status=Mock(return_value={'in_progress':False}),
             _cmd_get_position=Mock(return_value=self.target))
         self.native=Mock()
@@ -44,14 +47,14 @@ class BridgeTests(unittest.TestCase):
         self.native.assert_called_once_with(self.stage,blocking=True,is_wellplate=True)
         self.assertEqual((config.SLIDE_POSITION.LOADING_X_MM,config.SLIDE_POSITION.LOADING_Y_MM),self.original)
         self.stage.set_limits.assert_called_once_with(x_pos_mm=115,x_neg_mm=5,y_pos_mm=76,y_neg_mm=4)
-        self.stage.move_z_to.assert_called_once_with(1.05,blocking=True)
+        self.move_z.assert_called_once_with(1.05,blocking=True)
 
     def test_failure_restores_limits_without_retry_or_z_raise(self):
         self.native.side_effect=TimeoutError('uncertain')
         with self.assertRaises(TimeoutError):self.move(self.hash)
         self.assertEqual(self.native.call_count,1)
         self.stage.set_limits.assert_called_once()
-        self.stage.move_z_to.assert_not_called()
+        self.move_z.assert_not_called()
         self.assertEqual((config.SLIDE_POSITION.LOADING_X_MM,config.SLIDE_POSITION.LOADING_Y_MM),self.original)
 
     def test_scan_and_wrong_reference_refuse_before_motion(self):
@@ -74,7 +77,7 @@ class BridgeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Negative loading'):self.move(fingerprint)
         self.native.assert_not_called()
         self.stage.set_limits.assert_not_called()
-        self.stage.move_z_to.assert_not_called()
+        self.move_z.assert_not_called()
 
 
 if __name__=='__main__':unittest.main()

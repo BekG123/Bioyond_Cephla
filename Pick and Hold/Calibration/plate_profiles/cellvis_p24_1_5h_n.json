@@ -1,0 +1,580 @@
+{
+  "schema_version": 1,
+  "id": "cellvis_p24_1_5h_n",
+  "manufacturer": "Cellvis",
+  "catalog_number": "P24-1.5H-N",
+  "well_count": 24,
+  "lid": "off",
+  "status": "long_side_pickup_accepted_calibration_finish_completed",
+  "validated_for_motion": false,
+  "identity": {
+    "source": "operator confirmation",
+    "confirmed": true,
+    "barcode_verified": false
+  },
+  "manufacturer_geometry": {
+    "source": "https://www.cellvis.com/_24-well-glass-bottom-plate-with-high-performance-number-1.5-cover-glass_/product_detail.php?product_id=49",
+    "length_mm": 127.5,
+    "width_mm": 85.25,
+    "height_without_lid_mm": 20.0,
+    "height_with_lid_mm": 22.5,
+    "well_pitch_mm": 19.3,
+    "coverslip_thickness_mm": 0.17,
+    "coverslip_tolerance_mm": 0.005,
+    "bottom_height_mm": 0.83,
+    "note": "Catalog dimensions, not measurements of this specimen. Footprint is not assumed coplanar with well rims."
+  },
+  "vision": {
+    "grid": {
+      "rows": 4,
+      "columns": 6
+    },
+    "detector": "Pick and Hold/Align/plate_pose/grid_preview.py",
+    "scope": "image-only grid validation",
+    "image_size_px": [
+      3072,
+      2048
+    ],
+    "orientation_resolved": false,
+    "feature_plane_dimensions_mm": null,
+    "first_well_center_mm": null,
+    "virtual_disk_mapping": null,
+    "metric_camera_pose": null,
+    "stability": {
+      "frames": 5,
+      "successful_grid_fits": 5,
+      "measured_wells": [
+        23,
+        23,
+        22,
+        23,
+        24
+      ],
+      "fit_rmse_px": [
+        7.421138375344936,
+        6.068602678151386,
+        6.833464812565325,
+        5.880990208886998,
+        6.6416056883305385
+      ],
+      "motion_sent": false,
+      "orientation_resolved": false,
+      "metric_pose_estimated": false,
+      "max_grid_corner_displacement_from_first_px": 9.190697976542658,
+      "image_size_px": [
+        3072,
+        2048
+      ]
+    },
+    "rim_projection_trial": {
+      "method": "Measured rim edge lines and a perspective transform of the original printed-disk outlines; 4x6 grid cross-check; vendor Wide XY/yaw transform. Three independent five-frame median bursts.",
+      "reference": "operator_ui/reports/plate_projection_taught_48/result.json",
+      "orientation_assumption": "Large left, small right at original holder angle; A1 identification not established.",
+      "stationary_checks": {
+        "stationary_checks_passed": true,
+        "xy_spread_mm": 0.015815461498967967,
+        "corner_spread_preview_px": 0.18749822178633208,
+        "yaw_spread_deg": 0.014062583797510797,
+        "motion_authorized": false,
+        "full_calibration_complete": false
+      },
+      "camera_response": {
+        "forward_mm": 0.4480122803336484,
+        "sideways_mm": 0.12648313698106317,
+        "remaining_xy_error_mm": 0.33981394267326814,
+        "observation": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\plate_session\\cellvis24_validation\\observation_53eb4e48abd6\\run.json"
+      },
+      "observation_pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 279.379,
+        "Y": 25.829,
+        "Z": 289.129
+      },
+      "depth_from_virtual_radii": false,
+      "height_basis": "Manufacturer lid-off height20 mm; same nominal height as48-well plate. Observation height borrowed for supervised commissioning, not independent depth measurement."
+    }
+  },
+  "handling": {
+    "long_side_grip_e1_mm": 3.9,
+    "short_side_grip_e1_mm": 25,
+    "descent_pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.842,
+      "X": 312.495,
+      "Y": -66.304,
+      "Z": 75.718
+    },
+    "release_pose_mm": null,
+    "proof_lift_accepted": true,
+    "home_holder_fit_accepted": true,
+    "hamilton_placement_accepted": false,
+    "squid_placement_accepted": false,
+    "note": "Cellvis long-side pickup accepted at the measured HOME placement. Short-side grip and Hamilton/Squid seating remain unvalidated; do not inherit 48-well acceptance.",
+    "candidate_open_claw_endpoint_mm": {
+      "X": 312.49492958096266,
+      "Y": -66.30383063006757,
+      "Z": 78.718,
+      "Rz": 89.84169015568585
+    },
+    "trial_basis": "Rigidly transferred the complete accepted 48-well plate-relative XY/yaw offset (including the existing +Y10.4 correction exactly once); stopped5 mm above its accepted gripping height. New Cellvis grip and seating acceptance not inherited.",
+    "open_claw_trial_controller_completed": true,
+    "operator_centering_and_height_acceptance": {
+      "accepted": true,
+      "comment": "Evenly spaced; gripping height looks correct",
+      "pose_mm": {
+        "X": 312.49492958096266,
+        "Y": -66.30383063006757,
+        "Z": 78.718,
+        "Rz": 89.84169015568585
+      }
+    },
+    "candidate_grip": {
+      "target_e1_mm": 3.9,
+      "policy": "approach10_final1mm_speed5_v2",
+      "approach_target_e1_mm": 4.9,
+      "approach_speed": 10,
+      "final_speed": 5,
+      "measured_e1_after_closure_mm": 3.8992047775536776,
+      "measured_e1_after_lift_mm": 3.898665541782975,
+      "closure_torque_report": {
+        "e1_position": 3.898,
+        "e1_torque": -111.735,
+        "joints": {
+          "J1": 419,
+          "J2": -37,
+          "J3": 37,
+          "J4": 106
+        },
+        "ok": true,
+        "telemetry_live": true
+      },
+      "lift_torque_report": {
+        "e1_position": 3.902,
+        "e1_torque": -108.268,
+        "joints": {
+          "J1": 532,
+          "J2": -37,
+          "J3": 27,
+          "J4": 91
+        },
+        "ok": true,
+        "telemetry_live": true
+      },
+      "torque_interpretation": "Raw controller feedback only; no calibrated physical force inferred. No force-limit changes."
+    },
+    "candidate_proof_lift": {
+      "lift_mm": 5,
+      "speed": 5,
+      "controller_completed": true,
+      "start_pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.842,
+        "X": 312.495,
+        "Y": -66.304,
+        "Z": 75.718
+      },
+      "end_pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.842,
+        "X": 312.495,
+        "Y": -66.304,
+        "Z": 80.722
+      },
+      "operator_retention_acceptance": {
+        "accepted": true,
+        "comment": "Yes?level and securely held",
+        "source": "operator confirmation after 3 mm lower grip and 5 mm lift"
+      },
+      "record": "operator_ui/reports/plate_session/cellvis24_validation/lower3_lift_after_readback_review.json"
+    },
+    "candidate_grip_pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.842,
+      "X": 312.495,
+      "Y": -66.304,
+      "Z": 75.718
+    },
+    "height_adjustment": {
+      "delta_z_mm": -3,
+      "source": "Operator requested0.3 cm lower after first lift worked but grip appeared liable to slip",
+      "prior_grip_z_mm": 78.718,
+      "candidate_grip_z_mm": 75.718,
+      "operator_acceptance_pending": false
+    },
+    "grip_timing_observation": "Initial post-command report4.124 mm triggered an early position check. Subsequent native/report samples verified3.9 mm without another closing command or fault reset; separate reviewed5 mm lift completed. Original interruption record preserved.",
+    "calibration_finish": {
+      "record": "operator_ui\\reports\\plate_session\\cellvis24_validation\\calibration_finish.json",
+      "controller_completed": true,
+      "status": "calibration_finish_completed_plate_released_in_HOME"
+    },
+    "short_side_pickup": {
+      "accepted": true,
+      "pose_mm": {
+        "X": 306.2,
+        "Y": -62.88,
+        "Z": 76.367,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 87.88
+      },
+      "proof_lift": {
+        "X": 306.2,
+        "Y": -62.88,
+        "Z": 81.367,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 87.88
+      },
+      "operator_retention_acceptance": {
+        "accepted": true,
+        "operator_statement": "Yes?level, secure, and free of holder",
+        "source_sha256": "716d6a25dff8f936779dbb086847f09468ae677c094bc1186ee9e175feae72f3",
+        "at": 1794415984.4323587
+      },
+      "record": "operator_ui\\reports\\plate_session\\cellvis24_validation\\short_side_grip_lift_trial.json",
+      "open_e1_mm": 28
+    }
+  },
+  "evidence": {
+    "directory": "operator_ui/reports/plate_session/cellvis24_validation",
+    "summary": "stability_summary.json",
+    "files": [
+      {
+        "path": "actual_disk_projection.jpg",
+        "sha256": "022b6d6222b2878582e563963bf3e7b322b0b17cfc5e99405c358ea4653de974"
+      },
+      {
+        "path": "cellvis_grip_0409887ac5c2429c8ddf54b91ac9325e.json",
+        "sha256": "d104c47dc3c141ce434a350be7e917f6c32ae602f10bff23e34a2b234d6742e4"
+      },
+      {
+        "path": "cellvis_grip_5a8470db40a6475490dcdb470bf853b6.json",
+        "sha256": "26f929527c92d25f58bd45d11821c65ac7676207cb21f30455bf90e889bea03e"
+      },
+      {
+        "path": "centering_pilot.json",
+        "sha256": "8e1374ab0a9fccba67b33b5f78cc3cc090abe2caf79fa7472e71a5db98514d43"
+      },
+      {
+        "path": "connected_state.json",
+        "sha256": "67bd2b32dafe0f49ca66a941a2de29d1247f8e2c5e7ae83e7f0e1c06f28fe4d8"
+      },
+      {
+        "path": "grid_initial/overlay.jpg",
+        "sha256": "805349452f1712e89caeb3f8e673d1bbd31f803a4cf92fd942a7fd93132f527a"
+      },
+      {
+        "path": "grid_initial/result.json",
+        "sha256": "378af768e1acfc831a69cfd8ad7563fd10f7cc23bb91dc06ee0faeb6f07f0583"
+      },
+      {
+        "path": "grip_trial.json",
+        "sha256": "60d26479db327765901e85233fd4ab02f27a5245a0f437c58979934f233bc8c7"
+      },
+      {
+        "path": "idle_inspection.jpg",
+        "sha256": "66398b8955ff33419abb7743c1fae0340a77070aa2f6b1f13aac88618fce9b88"
+      },
+      {
+        "path": "idle_inspection_state.json",
+        "sha256": "afb08c0760f650de90b4a680ec7421ea9faf47513f93c5bedc1963c2612b0be8"
+      },
+      {
+        "path": "inspection.jpg",
+        "sha256": "a2fac672e8142b169a86d2ac04821d2f2b4d54d0e2af7b7afab429f8ca7ed291"
+      },
+      {
+        "path": "inspection_state.json",
+        "sha256": "728759d84eba7034bcf84ec0a8828749d06292d300838f87d20627b04977ce12"
+      },
+      {
+        "path": "lower3_lift_after_readback_review.json",
+        "sha256": "f1900da469771cb5f4cf3ca07323a1db71130c70db4aa2cce1c186b785e8bbe7"
+      },
+      {
+        "path": "lower3_trial.json",
+        "sha256": "268cd658518a78b435d07f59a3dde122ba185c492ca4afc84dc8f04f7dab9724"
+      },
+      {
+        "path": "observation.jpg",
+        "sha256": "472fc5c1335333f39894efec561a8644814eb6de9d4fad169d604fb8291152c2"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_0_0.jpg",
+        "sha256": "b580dca4099eb349b5535f432a87a97ffb566122e83eae91447c3c1483bc4b08"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_0_1.jpg",
+        "sha256": "9a14847568963ad6962d41cbf96f202cc407336d8f1d4e537cc6952ada99efa3"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_0_2.jpg",
+        "sha256": "a3a8b5736035eb557ffa66e2b4c99c2d937fc56afce705e74b436a222381f817"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_0_3.jpg",
+        "sha256": "1429907ccd14d1b930f75619e05fcb3ec7aaf7c752dffeb3b242e5cc0641b8aa"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_0_4.jpg",
+        "sha256": "5deba638615d2fbbdba00e3fcd797f3b875d9554ba6f40dce018a26cf9049473"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_1_0.jpg",
+        "sha256": "f1bbbb60847d744e4ed6e92933e09818f3d536bdd508eeb514f5f72f31686798"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_1_1.jpg",
+        "sha256": "471641e0e1f8e38c3025a96c0d4b2ecd851e9ca817ba6029568119da6f839e33"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_1_2.jpg",
+        "sha256": "530df1909a82b470237cf906f4d3798767cda82c4ddb698cbde28f69d79223a0"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_1_3.jpg",
+        "sha256": "6d2053419e6c87651c4ecf6cab6a6faa3d0aca7f7914575bb5b0ea8c45d452e5"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_1_4.jpg",
+        "sha256": "4b13d0c7c17649d20a394d40b052b89e8a624534fecca2543f5a5f73cb2fab80"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_2_0.jpg",
+        "sha256": "8c71ddcabf5f95f422390ff09c3b667eea2c0d60f66351318ad427e3b21a96d0"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_2_1.jpg",
+        "sha256": "ee90ba6b36a81f4adef9f67d7da14dbfcc43b277abc72460b56219366a660785"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_2_2.jpg",
+        "sha256": "0b446e8bd1fa5cb2234db5ab65cb45ff88e5b2d6fbad422c10c2db6987511957"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_2_3.jpg",
+        "sha256": "6243d8ea7b365e05ddd785180a25175eca4be6b1ab0ae12137ed9c7787e83b70"
+      },
+      {
+        "path": "observation_53eb4e48abd6/burst_2_4.jpg",
+        "sha256": "c9c94b775c2d56a63b87c000fe9f6e665e5fbc576d195a433c21ec04e2ff6c2f"
+      },
+      {
+        "path": "observation_53eb4e48abd6/median_0.png",
+        "sha256": "dd1ee5e21a9e20124c83f2ddf9f229e4b6a21ad5475ee95a047485489e817f8b"
+      },
+      {
+        "path": "observation_53eb4e48abd6/median_1.png",
+        "sha256": "4c7642f4a4ce629d8a81f7cb55ef9efd7d3c5533c2d030a69809676eef68a170"
+      },
+      {
+        "path": "observation_53eb4e48abd6/median_2.png",
+        "sha256": "deaaf7a0c21bb52f34a222929dab0435f119998da034a98cff91edfacbff1b9b"
+      },
+      {
+        "path": "observation_53eb4e48abd6/run.json",
+        "sha256": "26dba8268f5c1136b26e0d020ee0f677f93d20aa34b160108bc358894eba92e3"
+      },
+      {
+        "path": "observation_551808c60bee/burst_0_0.jpg",
+        "sha256": "1f0eac64db5a5758c1cd36e80dab90b7afb8cd9f727733a70874525128007e63"
+      },
+      {
+        "path": "observation_551808c60bee/burst_0_1.jpg",
+        "sha256": "7618c7c9486e8847d0833b70e60d91345359689ceeddc9dbf32b6e5ca0aa2373"
+      },
+      {
+        "path": "observation_551808c60bee/burst_0_2.jpg",
+        "sha256": "8dc67b2f5dcbefda880820dda8ba3948c2cb925d1b7964f6a67f9d6956b42e8d"
+      },
+      {
+        "path": "observation_551808c60bee/burst_0_3.jpg",
+        "sha256": "a0f56c1c1e02971395bf78c24177bb4a2c33943fce219931ac667e367781d491"
+      },
+      {
+        "path": "observation_551808c60bee/burst_0_4.jpg",
+        "sha256": "fc21e48a3ddb1b1f6c2906a4d144b4dec0ca6faa324ac56f4cbbea4356baa690"
+      },
+      {
+        "path": "observation_551808c60bee/burst_1_0.jpg",
+        "sha256": "a2d974df7681d7352cee93f3069202646cb362933fd9449eb845251e294867f2"
+      },
+      {
+        "path": "observation_551808c60bee/burst_1_1.jpg",
+        "sha256": "ec1056b682f4c37a0c282f81938a0ae0d1512d4ffe3665444789af4023070251"
+      },
+      {
+        "path": "observation_551808c60bee/burst_1_2.jpg",
+        "sha256": "49d5af21b065242676a5d48646f0ff172d71689a4e0102ac2205afdd2040b1b6"
+      },
+      {
+        "path": "observation_551808c60bee/burst_1_3.jpg",
+        "sha256": "559731ab352fd97b3e22195e6201688f60ea53dd494698d21a0586507ba53c99"
+      },
+      {
+        "path": "observation_551808c60bee/burst_1_4.jpg",
+        "sha256": "6ee12d312613ec3cd2edfefcfc7edf1e4cfb29e252b0975f2c045b86da8a9cdd"
+      },
+      {
+        "path": "observation_551808c60bee/burst_2_0.jpg",
+        "sha256": "43419a5ad198f2d17d1e36026a1b9487c7f9d6e55e02e7782ac26ee8317d44a1"
+      },
+      {
+        "path": "observation_551808c60bee/burst_2_1.jpg",
+        "sha256": "ce85b6aa489455729bcc7896c8d71c0d8fa8700a87df90c37a17537a06c406bf"
+      },
+      {
+        "path": "observation_551808c60bee/burst_2_2.jpg",
+        "sha256": "1d81eee87875630e0b14a7930a7f69d5c0437e0601e729d21a26770d9176b25a"
+      },
+      {
+        "path": "observation_551808c60bee/burst_2_3.jpg",
+        "sha256": "f2f2aa05a8caf8aa1a8bd7d890b277963967a1c2d8735c8277bf325b4b097c0d"
+      },
+      {
+        "path": "observation_551808c60bee/burst_2_4.jpg",
+        "sha256": "6861e478c7237466fc3fc87202484bc3dbd3f2f8610dd1130bca5956f026bb24"
+      },
+      {
+        "path": "observation_551808c60bee/median_0.png",
+        "sha256": "e3c4b5369a687c58d0c36a0f09c824cc2b351d490f29f3adf9602e186195f0eb"
+      },
+      {
+        "path": "observation_551808c60bee/median_1.png",
+        "sha256": "77a41e99672d1f76d810d612d4a299ed6a24adf6c12a09798c4a4b9258825af1"
+      },
+      {
+        "path": "observation_551808c60bee/median_2.png",
+        "sha256": "85cda646c70e6b30d7c73253bb82b9007566862fd9f6cce4c47ca82dbe1869b3"
+      },
+      {
+        "path": "observation_551808c60bee/run.json",
+        "sha256": "739bb6995b5de55764aacc7b5fdf88b6ba763d6a023ef5dceda10ccba5ee5992"
+      },
+      {
+        "path": "observation_grid.json",
+        "sha256": "d719311a3b37238ceaafb290f7b62d1166d3b22df7707d9aee062799f204b4da"
+      },
+      {
+        "path": "observation_plan.json",
+        "sha256": "cb76a8782f4eab3f815458af6f302637cea2c0e21f507957598e599e90c4fd99"
+      },
+      {
+        "path": "observation_run.json",
+        "sha256": "e0ca79b4f1ccfaed3c9a27f8895470104ba9e48307a41336eec7e612535d1ece"
+      },
+      {
+        "path": "open_claw_plan.json",
+        "sha256": "ac7c6c51f828b26b0e8c0e2bc626f6084186d7c8fc32b1c70dc2ff3c9ec9f147"
+      },
+      {
+        "path": "open_claw_run.json",
+        "sha256": "aec0848643e9a130de74abc68e6339c5c05a538c1b2c2c98ac47946ac03632fb"
+      },
+      {
+        "path": "projection_preview.json",
+        "sha256": "42b5f6d53332e9258de3a63953958aca5bbc0495bbd6c22dece0f96b97655e5a"
+      },
+      {
+        "path": "proof_lift.json",
+        "sha256": "28a84aa110d155b5a6d540e464823357d7d244a793e2f0d3bab18baf8be42b13"
+      },
+      {
+        "path": "rim_check.jpg",
+        "sha256": "940e30ed86b62626b907013c6f837481cdf5285ca0b39692cb30e99c68a89290"
+      },
+      {
+        "path": "rim_seed.json",
+        "sha256": "aee78728b3d76442c479ba953767efcf696454a5b079123f5212c5e92e5824a0"
+      },
+      {
+        "path": "stability_01.jpg",
+        "sha256": "00d811ee308a8ceae707c56a98f9c31b9d841ae8e84ef6a016f138f6fa21c919"
+      },
+      {
+        "path": "stability_01.json",
+        "sha256": "b965a0ffeb95e8eda55043d213511ef44be99ef6fb96095a4562b41ef15b8d9a"
+      },
+      {
+        "path": "stability_01_overlay.jpg",
+        "sha256": "f2840e33de3eb4392f26047dad630cb2904717eb96b5e5851453d16086215b72"
+      },
+      {
+        "path": "stability_02.jpg",
+        "sha256": "5b131f5c4f82cb32194ff8c7893e75a38811aa36a15d85f6735913604392a3e1"
+      },
+      {
+        "path": "stability_02.json",
+        "sha256": "35fe3b4afe17dd4773bec70b1c254459a75d3bdf117c697928777b7a2323ee04"
+      },
+      {
+        "path": "stability_02_overlay.jpg",
+        "sha256": "8dcca91d0c1d7c873873e5266c6a06be34eb42c0b7c91c1f28757db86aabf73b"
+      },
+      {
+        "path": "stability_03.jpg",
+        "sha256": "5ffde52c4954e7e891e6c6a965bd71b1b78eeb7a4d2c782fc0f9ad2de0d74e76"
+      },
+      {
+        "path": "stability_03.json",
+        "sha256": "f9e1e41a40eeafae5298271c5a7a730bd8a7817a46ee3dc338494ba01b952997"
+      },
+      {
+        "path": "stability_03_overlay.jpg",
+        "sha256": "6b7890f341ec76750670001ccd3038f1dcc073498a0699e25f06c84cfffbcd5f"
+      },
+      {
+        "path": "stability_04.jpg",
+        "sha256": "37daa4ee8acf0d11b137a93fb48829b67ee9c4bcedf5c581dc5190a0627a71e0"
+      },
+      {
+        "path": "stability_04.json",
+        "sha256": "56ca54cc2e6488d83e085c0bfd6207e5f600717c83a67bb2ccd76c8f58f093a1"
+      },
+      {
+        "path": "stability_04_overlay.jpg",
+        "sha256": "4590f974c7d1d9d7e985aa3107783dcecb10c715dae889b7b79661bd0a4d56f0"
+      },
+      {
+        "path": "stability_05.jpg",
+        "sha256": "5193d7dd30e7c4d95f663a9f6f695ef1f62a85473e728d92898454638cdc6096"
+      },
+      {
+        "path": "stability_05.json",
+        "sha256": "a136f7acafedfdb7a8d4959339c2f902bad577d70f0afe9fb0c66aeae775c844"
+      },
+      {
+        "path": "stability_05_overlay.jpg",
+        "sha256": "b2ca066116854f5dd708ca69b7dedc8af6e09af79c98210d9010263651085400"
+      },
+      {
+        "path": "stability_summary.json",
+        "sha256": "2f4649bfa47065f417eceb6dc3e2bc432b66fc00ae17e26988cc9422d9b3f948"
+      },
+      {
+        "path": "calibration_finish.json",
+        "sha256": "6b41d41beeff81947468394707ca576180b6e59d3e7b7942cd6cb3a7bbbab7e5"
+      }
+    ]
+  },
+  "remaining_validation": [
+    "Short-side grip and proof lift for Hamilton",
+    "Hamilton and Squid placement/retrieval trials",
+    "Repeatability before unattended routine execution",
+    "Automatic A1 identification; mapping currently uses original holder orientation"
+  ],
+  "created_at": "2026-11-11T08:21:48.764939-08:00",
+  "trial_record": "operator_ui/reports/plate_session/cellvis24_validation/open_claw_run.json",
+  "updated_at": "2026-11-11T08:45:34.621305-08:00",
+  "validated_motion_scope": [
+    "Supervised long-side descent at saved Cellvis placement",
+    "E1 3.9 mm grip and 5 mm proof lift at speed 5",
+    "HOME reseat, release to 28 mm and empty 30 mm rise"
+  ]
+}

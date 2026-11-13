@@ -72,8 +72,10 @@ class DiagnosticsTests(unittest.TestCase):
         self.model = Mock()
         self.model.complete.return_value = dict(content=[dict(type='text', text='IF fault:\n    PAUSE = human.review')])
         app = Flask(__name__)
+        from devin_review import DevinReview
+        offline_devin = DevinReview(self.folder / 'devin', lambda value: str(value), resolve_cli=lambda: None)
         register_developer_diagnostics(app, self.diagnostics, lambda: self.runner,
-                                       lambda: self.model, lambda: self.credentials)
+                                       lambda: self.model, lambda: self.credentials, devin_worker=offline_devin)
         self.client = app.test_client()
 
     def test_capture_source_without_locals(self):

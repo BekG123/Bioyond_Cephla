@@ -70,6 +70,7 @@ class ReviewedHomeConnection:
         for a,b in zip(actual,expected):
             if a['kind']!=b['kind']:return False
             if a['kind']=='rotate':
+                if a.get('queued_pivot',False)!=b.get('queued_pivot',False):return False
                 if abs(wrap(a['rz']-b['rz']))>.02:return False
             else:
                 if len(a['points'])!=len(b['points']):return False

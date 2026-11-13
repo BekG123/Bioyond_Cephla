@@ -19,12 +19,47 @@ def install(server):
     import control._def as config
     from squid.stage.utils import move_to_loading_position
     lock = threading.Lock()
+    try:from .loading_state import LoadingState,controller_identity,near_loading
+    except ImportError:from loading_state import LoadingState,controller_identity,near_loading
+    from serial.tools import list_ports
+    tracker=LoadingState()
+    server._lacry_loading_tracker=tracker
+    stage=server.microscope.stage
+    def serial():return controller_identity(server.microscope,list_ports.comports())
+    def complete(success,error=None):
+        _,fingerprint=reference()
+        tracker.completed(success,server._cmd_get_position(),serial(),fingerprint,error)
+    # Invalidate before ANY stage motion, including GUI, joystick API and imaging.
+    # No motion is introduced; these wrappers call the original methods once.
+    for name in ('move_x','move_y','move_z','move_x_to','move_y_to','move_z_to',
+                 'home','home_x','home_y','home_z','zero_x','zero_y','zero_z'):
+        method=getattr(stage,name,None)
+        if not callable(method):continue
+        def movement(*args,_method=method,**kwargs):
+            tracker.invalidate()
+            return _method(*args,**kwargs)
+        setattr(stage,name,movement)
+    widget=getattr(getattr(server,'gui',None),'stageUtils',None)
+    if widget is not None:
+        original=widget._callback_loading_position_reached
+        def loading_finished(success,error_message):
+            complete(success,error_message)
+            return original(success,error_message)
+        widget._callback_loading_position_reached=loading_finished
+        widget.signal_threaded_stage_move_started.connect(lambda:tracker.invalidate())
+        widget.signal_scanning_position_reached.connect(lambda:tracker.invalidate('Squid left loading position.'))
 
     def info():
         ref, fingerprint = reference()
         stage_config = server.microscope.stage.get_config()
-        return dict(controller_serial=str(config.CONTROLLER_SN),
+        actual=server._cmd_get_position();identity=serial()
+        acquisition=server._cmd_get_acquisition_status()
+        mcu=server.microscope.low_level_drivers.microcontroller
+        busy=bool(mcu.is_busy() or acquisition.get('in_progress') is not False
+                  or acquisition.get('cleanup',{}).get('status')=='failed')
+        return dict(controller_serial=identity,
                     stage_simulated=bool(config.SIMULATE_MICROCONTROLLER),
+                    loading=tracker.snapshot(actual,ref['dropoff'],identity,fingerprint,busy),
                     reference_hash=fingerprint,dropoff=ref['dropoff'],
                     loading_route='Squid native loading path: retract objective, Y15, X35, loading Y, loading X, restore scanning limits, taught Z',
                     scan_limits={axis.lower()+'_mm':[getattr(stage_config,axis+'_AXIS').MIN_POSITION,
@@ -39,7 +74,7 @@ def install(server):
                 raise RuntimeError(ref['motion_hold'])
             if fingerprint != reference_hash:
                 raise ValueError('Squid loading reference changed.')
-            if config.SIMULATE_MICROCONTROLLER or str(config.CONTROLLER_SN) != ref['controller_serial']:
+            if config.SIMULATE_MICROCONTROLLER or serial() != ref['controller_serial']:
                 raise ValueError('Physical Squid controller does not match the loading reference.')
             acquisition=server._cmd_get_acquisition_status()
             if acquisition.get('cleanup',{}).get('status')=='failed':
@@ -67,9 +102,13 @@ def install(server):
                                  y_pos_mm=stage_config.Y_AXIS.MAX_POSITION,y_neg_mm=stage_config.Y_AXIS.MIN_POSITION)
             stage.move_z_to(target['z_mm'],blocking=True)
             actual = server._cmd_get_position()
-            if any(abs(actual[k]-target[k])>.02 for k in ('x_mm','y_mm','z_mm')):
+            if not near_loading(actual,target):
                 raise RuntimeError(f'Squid loading feedback does not match the taught target. Target: {target}; measured: {actual}.')
-            return dict(at_dropoff=True,position=actual)
+            complete(True)
+            return dict(at_dropoff=True,position=actual,loading=info()['loading'])
+        except Exception:
+            tracker.invalidate('Loading command failed or uncertain.')
+            raise
         finally:
             lock.release()
 

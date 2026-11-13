@@ -11,7 +11,7 @@ from unittest.mock import Mock, patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import squid_stage
 from squid_stage import SquidStage, digest, validate_loading_target
-from lacry_agent import LacryAgent, TOOLS, SYSTEM
+from lacry_agent import LacryAgent, TOOLS
 from sequences import Runner
 from researcher_teaching import TeachingError
 
@@ -189,10 +189,11 @@ class StageTests(unittest.TestCase):
 
     def test_model_tools_and_readonly_status(self):
         self.assertIn('plan_squid_stage',{t['name'] for t in TOOLS})
-        self.assertIn('NOT robot move_home',SYSTEM)
+        tool=next(t for t in TOOLS if t['name']=='plan_squid_stage')
+        self.assertIn('Robot stays at IDLE',tool['description'])
         data,error=self.agent._run_tool('get_squid_stage',{})
         self.assertFalse(error);self.assertTrue(json.loads(data)['ok'])
-        self.assertEqual({n for n,p in self.calls},{'get_position'})
+        self.assertEqual({n for n,p in self.calls},{'get_position','get_stage_reference'})
 
 
 if __name__=='__main__':unittest.main()

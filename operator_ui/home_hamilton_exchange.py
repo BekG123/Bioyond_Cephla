@@ -29,6 +29,10 @@ KEYS=('X','Y','Z','Rz')
 # Keep commanded rotation arrival tight; allow small subsequent readback drift.
 HOLDER_ARRIVAL_TOLERANCE_DEG=.10
 HOLDER_MONITOR_TOLERANCE_DEG=.5
+# Lua permits 90.01 degrees per command. Keep 0.11 degrees of margin for
+# the existing 0.10-degree pre-dispatch readback check, without splitting
+# an ordinary ~89.65-degree restoration into two equal half-turns.
+HOLDER_RESTORE_MAX_STEP_DEG=89.9
 
 
 def holder_restore_targets(origin,target=1.77):
@@ -39,7 +43,7 @@ def holder_restore_targets(origin,target=1.77):
     """
     if any(type(v) not in (int,float) or not math.isfinite(v) or abs(v)>360 for v in (origin,target)):
         raise TransferError('Holder feedback/target must be finite and within the published +/-360-degree range.')
-    count=math.ceil(abs(target-origin)/89.5)
+    count=math.ceil(abs(target-origin)/HOLDER_RESTORE_MAX_STEP_DEG)
     return [target if i==count else origin+(target-origin)*i/count for i in range(1,count+1)]
 
 
@@ -96,7 +100,7 @@ def restore_original(run,service):
             actual=n['external_axes']['E2']
             if not accepted(actual):
                 raise TransferError(f'Original holder arrival mismatch: E2={actual:.6f} degrees; '
-                                    f'target {TARGET_DEGREES:.3f}, accepted 1.750–1.820; no retry.')
+                                    f'target {TARGET_DEGREES:.3f}, accepted 1.740–1.820; no retry.')
             time.sleep(.1)
         record.update(status='completed',final=s)
         return dict(ok=True,record=str(path),actual_e2=n['external_axes']['E2'],motion_sent=record['motion_sent'])

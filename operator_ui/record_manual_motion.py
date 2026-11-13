@@ -6,6 +6,7 @@ Write STOP in the session directory to stop. Samples are not replay approval.
 import argparse
 from datetime import datetime, timezone
 import json
+import math
 from pathlib import Path
 import time
 import urllib.request
@@ -28,6 +29,8 @@ def update_status(folder, status):
 
 
 def record(folder, url, interval=.2):
+    if not math.isfinite(interval) or interval < .05:
+        raise ValueError('Sampling interval must be finite and at least 0.05 seconds.')
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=False)
     metadata = dict(started_at=now(), source=url+'/state', target_interval_s=interval,
@@ -38,6 +41,7 @@ def record(folder, url, interval=.2):
                       'Every segment needs review; collision/contact segments must not be replayed.'])
     (folder/'metadata.json').write_text(json.dumps(metadata,indent=2),encoding='utf-8')
     samples = failures = 0
+    last_status = 0.
     started = time.monotonic()
     try:
         with (folder/'samples.jsonl').open('x',encoding='utf-8',buffering=1) as stream:
@@ -59,8 +63,12 @@ def record(folder, url, interval=.2):
                 samples += 1
                 status = dict(recording=True,samples=samples,failures=failures,
                               last_sample=sample['received_at'],last_valid=sample['valid'],
-                              elapsed_s=round(time.monotonic()-started,2))
-                update_status(folder, status)
+                              elapsed_s=round(time.monotonic()-started,2),
+                              target_interval_s=interval,
+                              effective_samples_per_s=round(samples/max(time.monotonic()-started,.001),2))
+                if samples==1 or time.monotonic()-last_status>=1.:
+                    update_status(folder, status)
+                    last_status=time.monotonic()
                 time.sleep(max(0,interval-(time.monotonic()-began)))
     finally:
         update_status(folder, dict(recording=False,samples=samples,
@@ -71,5 +79,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--session',required=True)
     parser.add_argument('--url',default='http://127.0.0.1:5002')
+    parser.add_argument('--interval',type=float,default=.2,
+                        help='Target seconds between reads (minimum0.05); actual rate depends on feedback latency.')
     args = parser.parse_args()
-    record(args.session,args.url.rstrip('/'))
+    record(args.session,args.url.rstrip('/'),args.interval)

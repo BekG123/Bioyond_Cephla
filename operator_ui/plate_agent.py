@@ -16,8 +16,9 @@ import numpy as np
 
 from depth_scene import DepthScene, capture_sample, write_json
 from credential_store import CredentialError
+from lacry_model import DEFAULT_MODEL, configured_model, request_options
 
-MODEL = 'claude-haiku-4-5-20251001'
+MODEL = DEFAULT_MODEL
 SYSTEM = """You describe camera scenes for calibration data collection.
 You receive a camera image, a Depth Anything V2 visualization, depth metadata,
 and optional measured robot coordinates. You have NO tools or hardware access.
@@ -63,7 +64,7 @@ class VisionClient:
                 self.key = store.load()
             except CredentialError as ex:
                 self.credential_error = str(ex)
-        self.model = os.environ.get('BIOYOND_AGENT_MODEL', MODEL)
+        self.model = configured_model()
 
     def ready(self):
         return bool(self.key or os.environ.get('ANTHROPIC_API_KEY'))
@@ -92,10 +93,12 @@ class VisionClient:
                     data=base64.b64encode(jpeg).decode('ascii')))
 
     def describe(self, frame, preview, context):
+        if os.environ.get('LACRY_LLM_PROVIDER') == 'codex_mcp':
+            raise AgentError('Anthropic image analysis is disabled in Codex MCP mode. Ask Lacry to inspect the camera through MCP.')
         if not self.ready():
-            raise AgentError('Add the Haiku API key, or use Local depth / Save capture without a key')
+            raise AgentError('Add the Anthropic API key, or use Local depth / Save capture without a key')
         # Deliberately no tools, tool_choice, function calls or output dispatch.
-        payload = dict(model=self.model, max_tokens=500, temperature=0, system=SYSTEM,
+        payload = dict(**request_options(self.model), system=SYSTEM,
             messages=[dict(role='user', content=[
                 dict(type='text', text='Original camera image:'), self.image(frame),
                 dict(type='text', text='Depth visualization (not ground truth):'),
@@ -105,18 +108,18 @@ class VisionClient:
             headers={'Content-Type': 'application/json', 'anthropic-version': '2023-06-01',
                      'x-api-key': self.key or os.environ['ANTHROPIC_API_KEY']})
         try:
-            with urllib.request.urlopen(request, timeout=25) as response:
+            with urllib.request.urlopen(request, timeout=60 if self.model == DEFAULT_MODEL else 25) as response:
                 data = json.load(response)
         except urllib.error.HTTPError as ex:
-            raise AgentError(f'Haiku API HTTP {ex.code}; capture and local depth are saved') from None
+            raise AgentError(f'Agent API HTTP {ex.code}; capture and local depth are saved') from None
         except (OSError, ValueError):
-            raise AgentError('Haiku API unavailable; capture and local depth are saved') from None
+            raise AgentError('Agent API unavailable; capture and local depth are saved') from None
         blocks = data.get('content', [])
-        if data.get('stop_reason') != 'end_turn' or not blocks or any(b.get('type') != 'text' for b in blocks):
-            raise AgentError('Expected a complete text-only Haiku response; nothing was executed')
-        summary = '\n'.join(b.get('text', '') for b in blocks).strip()
+        if data.get('stop_reason') != 'end_turn' or not blocks or any(b.get('type') not in ('text','thinking','redacted_thinking') for b in blocks):
+            raise AgentError('Expected a complete scene description; nothing was executed')
+        summary = '\n'.join(b.get('text', '') for b in blocks if b.get('type') == 'text').strip()
         if not summary or len(summary) > 6000:
-            raise AgentError('Invalid Haiku scene description')
+            raise AgentError('Invalid scene description')
         return dict(summary=summary, usage=data.get('usage', {}))
 
 

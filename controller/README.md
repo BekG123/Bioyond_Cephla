@@ -18,3 +18,16 @@ start the published program afterward; do not resume stale paused code.
 
 Build scripts live in `operator_ui/` and write packages/manifests here by
 default. Only publish reviewed packages, with the robot supervised.
+# Optional mixed wrist queue (220111)
+
+`main_hostpoint_mixed_wrist137_queue_220111.bin` adds fixed-XYZ `MoveJ` wrist
+turns at controller setting137 to a mixed linear/joint queue, with one final
+completion barrier. It preserves base protocol220109 and the optional220110
+IDLE turn interface; legacy route commands remain `MoveL`.
+
+Build offline with `operator_ui/build_mixed_wrist_program.py`. The host checks
+the new capability before starting the opt-in Cellvis direct Hamilton trial.
+Lua rejects a joint segment that translates, exceeds180 degrees, changes its
+authenticated motion kind, or requests a wrist setting other than137.
+Publication does not select the new route or establish its rack clearance.
+No physical speed result is claimed until the supervised trial is recorded.

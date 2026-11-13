@@ -4,10 +4,12 @@ import time
 
 TARGET_DEGREES = 1.77
 PRECAL_TOLERANCE_DEGREES = 0.05
+MIN_ACCEPTED_DEGREES = 1.74
+MAX_ACCEPTED_DEGREES = 1.82
 
 
 def accepted(value):
-    return math.isfinite(value) and 1.750 <= value <= 1.82
+    return math.isfinite(value) and MIN_ACCEPTED_DEGREES <= value <= MAX_ACCEPTED_DEGREES
 
 
 def calibration_ready(value):
@@ -38,7 +40,7 @@ def verify(service, run, read=None, sleep=time.sleep, correct=False):
         # The tighter gate requests one correction toward 1.77. Its arrival
         # uses the operator-approved feedback band, not the correction trigger.
         needs_correction = correct and not corrected
-        minimum = 1.769 if needs_correction else 1.750
+        minimum = 1.769 if needs_correction else MIN_ACCEPTED_DEGREES
         if not (calibration_ready(value) if needs_correction else accepted(value)):
             if not correct or corrected:
                 raise RuntimeError(f'E2 is {value:.6f} degrees; this check requires a minimum of {minimum:.3f} and maximum of 1.82 degrees.')

@@ -1,0 +1,206 @@
+{
+  "schema": "cellvis24.accepted-calibration-sequence.v1",
+  "basis": "Exact plan from the operator-accepted Cellvis full calibration, using the shared 48-well alignment and accepted Cellvis descent height.",
+  "source_run": {
+    "path": "operator_ui/reports/plate_session/cellvis24_workflows/1a1dbefadbc0413e8ad242d4e287fc75/run.json",
+    "sha256": "1cbb683aabd16d5d3004c3dd17c626afc0039c849e02061a18d2e618707e826d"
+  },
+  "operator_acceptance": {
+    "path": "operator_ui/reports/plate_session/cellvis24_workflows/1a1dbefadbc0413e8ad242d4e287fc75/operator_success.json",
+    "sha256": "28ff70c8627ad6f067189401433f200d70232cec79ad1fad5067bac50d7230b9",
+    "accepted": true,
+    "statement": "Yes?level lift and flat reseating"
+  },
+  "camera_target_adaptation": false,
+  "grip_e1_mm": 3.9,
+  "steps": [
+    {
+      "cycle": 0,
+      "flags": {},
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Reach accepted camera observation pose",
+      "points": [
+        {
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 289.129
+        },
+        {
+          "Rz": -3.88,
+          "X": 279.379,
+          "Y": 25.829,
+          "Z": 289.129
+        }
+      ],
+      "speed": 5,
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "vision",
+      "label": "Measure Cellvis rim, 4x6 grid and projected disks",
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "holder": true,
+      "holder_angle": 1.77,
+      "hover_z": 300,
+      "kind": "align",
+      "label": "Align with accepted Cellvis gripping edges",
+      "station": "calibration",
+      "target": {
+        "rz": 89.84,
+        "x": 312.5,
+        "y": -66.3,
+        "z_calibrated": 75.72
+      },
+      "translation_speed": 15
+    },
+    {
+      "cycle": 0,
+      "flags": {
+        "home_speed137": true,
+        "home_transit": true
+      },
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Fast open-jaw approach",
+      "points": [
+        {
+          "Rz": 89.84,
+          "X": 312.5,
+          "Y": -66.3,
+          "Z": 95.72
+        }
+      ],
+      "speed": 137,
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "flags": {
+        "vertical_runs": true
+      },
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Final open-jaw descent",
+      "points": [
+        {
+          "Rz": 89.84,
+          "X": 312.5,
+          "Y": -66.3,
+          "Z": 75.72
+        }
+      ],
+      "speed": 5,
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "jaws",
+      "label": "Close jaws",
+      "speed": 10,
+      "station": "calibration",
+      "target": 4.9
+    },
+    {
+      "cycle": 0,
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "jaws",
+      "label": "Close jaws",
+      "speed": 5,
+      "station": "calibration",
+      "target": 3.9
+    },
+    {
+      "cycle": 0,
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "observe",
+      "label": "Verify settled grip",
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "flags": {
+        "home_transit": true
+      },
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Proof lift 5 mm at speed 5",
+      "points": [
+        {
+          "Rz": 89.84,
+          "X": 312.5,
+          "Y": -66.3,
+          "Z": 80.72
+        }
+      ],
+      "speed": 5,
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "flags": {
+        "home_transit": true
+      },
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Reseat plate in HOME",
+      "points": [
+        {
+          "Rz": 89.84,
+          "X": 312.5,
+          "Y": -66.3,
+          "Z": 75.72
+        }
+      ],
+      "speed": 5,
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "jaws",
+      "label": "Release plate in HOME",
+      "speed": 5,
+      "station": "calibration",
+      "target": 28
+    },
+    {
+      "cycle": 0,
+      "flags": {
+        "home_speed137": true,
+        "home_transit": true
+      },
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Released HOME clearance",
+      "points": [
+        {
+          "Rz": 89.84,
+          "X": 312.5,
+          "Y": -66.3,
+          "Z": 105.72
+        }
+      ],
+      "speed": 137,
+      "station": "calibration"
+    }
+  ]
+}

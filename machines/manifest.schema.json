@@ -72,11 +72,20 @@
           "frame": {"type": "string"},
           "coordinates": {"type": "object", "additionalProperties": {"type": "number"}},
           "tolerance_mm": {"type": "number"},
-          "status": {"enum": ["verified", "operator_confirmed", "stale", "unknown"]},
+          "status": {"enum": ["verified", "operator_confirmed", "stale", "unknown",
+                              "holder_preparation_pending_supervised_trial"]},
+          "legacy_route_key": {"type": "string"},
+          "hover_pose_key": {"type": "string"},
+          "gripping_pose_key": {"type": "string"},
+          "grip_acceptance_key": {"type": "string"},
           "source": {"type": "string"},
           "notes": {"type": "string"}
         }
       }
+    },
+    "plate_session_workflow": {
+      "type": "object",
+      "description": "Per-session plate handling sequence and its acceptance values. Free-form; the facade does not enforce it yet."
     },
     "labware": {
       "type": "array",
@@ -152,6 +161,22 @@
     }
   },
   "$defs": {
+    "gate": {
+      "oneOf": [
+        {"type": "string"},
+        {
+          "type": "object",
+          "required": ["type"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {"enum": ["sensor_check", "presence_attestation", "fresh_confirmation"],
+                     "description": "sensor_check: a sensor answers. presence_attestation: covered by the run-level E-stop attestation. fresh_confirmation: a person answers for this step."},
+            "sensor": {"type": "string", "description": "Sensor key the backend reports, for sensor_check."},
+            "text": {"type": "string", "description": "What the person is asked, or what the sensor means."}
+          }
+        }
+      ]
+    },
     "operation": {
       "type": "object",
       "required": ["name", "risk", "description"],
@@ -161,8 +186,8 @@
         "description": {"type": "string"},
         "risk": {"enum": ["read_only", "motion", "state_change"],
                  "description": "read_only sends no write. motion moves hardware. state_change enables, clears errors, or alters configuration."},
-        "human_gate": {"type": "array", "items": {"type": "string"},
-                       "description": "Confirmations a person must give, in their own words, immediately before the call."},
+        "human_gate": {"type": "array", "items": {"$ref": "#/$defs/gate"},
+                       "description": "What must be true before the call. A plain string is treated as a fresh confirmation unless the facade recognizes it."},
         "preconditions": {"type": "array", "items": {"type": "string"}},
         "postconditions": {"type": "array", "items": {"type": "string"}},
         "timeout_s": {"type": "number"},

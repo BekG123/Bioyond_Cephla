@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock,patch
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from squid_adapter import SquidAdapter, read_command
@@ -62,6 +62,16 @@ class SquidAdapterTests(unittest.TestCase):
         self.api['in_progress']=True
         self.assertEqual(self.adapter.poll()['status'],'finishing')
         self.assertFalse(self.adapter.status()['completion_confirmed'])
+
+    def test_live_identity_comes_from_open_controller_not_launch_override(self):
+        self.owner.update(stage_simulated=False,camera_simulated=False,simulation=False,controller_serial=None)
+        self.adapter.read_live_bridge=True
+        with patch('squid_adapter.native_command',return_value=dict(controller_serial='12769210',
+                   loading=dict(version=2,at_dropoff=True))) as command:
+            result=self.adapter.connect()
+        self.assertEqual(result['controller_serial'],'12769210')
+        self.assertTrue(result['loading']['at_dropoff'])
+        self.assertEqual({call.args[0] for call in command.call_args_list},{'get_stage_reference'})
 
     def test_status_accepts_current_run_or_experiment_identity(self):
         self.adapter.connect();self.now=1002.;self.complete();self.adapter.poll()

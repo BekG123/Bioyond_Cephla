@@ -88,7 +88,9 @@ class GuardedRecoveryTests(unittest.TestCase):
 
     def test_failed_motion_does_not_resolve_original(self):
         plan = self.preview()
-        self.service.rotate_to_rz = Mock(side_effect=RuntimeError('fake soft limit'))
+        # IDLE now uses the Lua pivot queue; fail its upload, not the unused
+        # legacy discrete wrist function.
+        self.service.robot.set_sys_var_i = Mock(side_effect=RuntimeError('fake queue failure'))
         self.recovery.confirm(self.confirmation(plan))
         self.wait()
         self.assertFalse(recovered(self.failed))

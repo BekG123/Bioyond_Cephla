@@ -1,0 +1,47 @@
+# Test fixture. Not the real Bioyond manifest.
+schema_version: 1
+id: bioyond_s4
+name: Fixture arm
+kind: robot_arm
+identity: {vendor: Fixture, model: S4}
+connection: {exclusive_clients: true}
+limits:
+  dz:
+    value: [-5, 5]
+    units: mm
+    source: fixture
+operations:
+  - name: get_status
+    description: Read status.
+    risk: read_only
+    timeout_s: 1
+  - name: place_plate
+    description: Place the held plate at a station.
+    risk: motion
+    parameters:
+      station: Station name.
+    postconditions: [plate released]
+    timeout_s: 0.3
+  - name: pick_plate
+    description: Pick a plate from a station.
+    risk: motion
+    human_gate: [path clear]
+    parameters:
+      station: Station name.
+    timeout_s: 1
+  - name: move_z
+    description: Small vertical move.
+    risk: motion
+    parameters:
+      dz: Vertical distance in mm.
+    timeout_s: 1
+  - name: enable_robot
+    description: Enable the arm.
+    risk: state_change
+    timeout_s: 1
+known_faults: []
+qualification:
+  place_plate: {status: qualified}
+  pick_plate: {status: qualified}
+  move_z: {status: qualified}
+  enable_robot: {status: qualified}
