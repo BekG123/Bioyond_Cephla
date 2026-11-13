@@ -1,0 +1,99 @@
+{
+  "location_schema": 2,
+  "id": "6565ba344ea44bcb8d619fd78b90d095",
+  "at": 1794313308.0168235,
+  "dispatch": "plate_session_preview",
+  "executable": false,
+  "actions": [
+    "plate_session"
+  ],
+  "labels": [
+    "HOME plate preparation"
+  ],
+  "summary": "Calibrate once, prepare the plate at HOME, then carry it to Hamilton.",
+  "steps": [
+    {
+      "kind": "plate_session",
+      "state": "CALIBRATING",
+      "label": "Run full calibration once; finish at IDLE holding the plate"
+    },
+    {
+      "kind": "plate_session",
+      "state": "IDLE",
+      "label": "Verify the held plate and the checked IDLE-to-HOME route"
+    },
+    {
+      "kind": "plate_session",
+      "state": "HOME_SEATED",
+      "label": "Place the plate in HOME and verify it is fully supported"
+    },
+    {
+      "kind": "plate_session",
+      "state": "HOME_RELEASED",
+      "label": "Release the plate before lifting"
+    },
+    {
+      "kind": "plate_session",
+      "state": "HOME_CLEAR",
+      "label": "Lift 5 mm at speed 5, then open E1 to 28 mm; verify the full sweep",
+      "lift_mm": 5,
+      "open_e1_mm": 28
+    },
+    {
+      "kind": "plate_session",
+      "state": "HOME_ORIENTED",
+      "label": "Rotate the released holder to the taught absolute E2 90.717 degrees",
+      "target_e2_degrees": 90.71661229181757,
+      "relative_rotation": false
+    },
+    {
+      "kind": "plate_session",
+      "state": "HOME_VERIFIED",
+      "label": "Verify three fresh holder-angle readings before re-gripping"
+    },
+    {
+      "kind": "plate_session",
+      "state": "HOME_GRIPPED",
+      "label": "Re-grip using the accepted Hamilton plate profile",
+      "target_e1_mm": 25.0
+    },
+    {
+      "kind": "plate_session",
+      "state": "PICKUP_VERIFIED",
+      "label": "Lift 5 mm slowly and verify plate retention"
+    },
+    {
+      "kind": "plate_session",
+      "state": "IN_TRANSIT",
+      "label": "Follow the reviewed route to Hamilton; retain the slower final approach"
+    }
+  ],
+  "rotation": {
+    "holder_axis": "E2",
+    "target_degrees": 90.71661229181757,
+    "target_mode": "absolute",
+    "direction_from_original": "counterclockwise viewed from above",
+    "tolerance_degrees": 0.1,
+    "grip_profile": "48well_short_side_corrected02_e1_25",
+    "reference": "Pick and Hold/Grip/short_side_48well_reference.json",
+    "target_e1_mm": 25.0
+  },
+  "first_destination": "Hamilton",
+  "session": {
+    "calibrated": false,
+    "reason": "Offline preparation; no live session receipt asserted."
+  },
+  "configuration_sha256": "657a53b224cb7fa0ad730498aa40e6342e65ad1ea92ab9f9f87b5effd4afd7b7",
+  "blockers": [
+    "The released-plate return, 5 mm lift/open-28 holder sweep and re-grip connection require a bound supervised trial before automatic execution.",
+    "The active 48-well pickup profile has no accepted grip binding for its current endpoint. Review that reference before full calibration/pickup."
+  ],
+  "requirements": [
+    "The plate is supported before release; never rotate a held plate.",
+    "Verify the 5 mm clearance and full holder/plate/jaw sweep in the first supervised trial.",
+    "Keep hands clear and supervise the E-stop for every motion.",
+    "Check the envelope, IK, arrival and grip; stop on faults, uncertainty or timeouts. No automatic retry."
+  ],
+  "motion_started": false,
+  "hardware_observations": null
+}

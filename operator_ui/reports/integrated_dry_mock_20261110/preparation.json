@@ -1,0 +1,377 @@
+{
+  "initial_state": {
+    "available": true,
+    "connected": true,
+    "simulation": false,
+    "serial": "PRPGJ2494",
+    "initialized": true,
+    "global_state": "Idle",
+    "state": "idle",
+    "run": {
+      "protocolId": 0,
+      "runDatalId": null,
+      "isRunInProgress": false,
+      "isSimulation": true,
+      "protocolRunState": 0,
+      "startTime": "2026-11-08T02:31:37.8375247-08:00",
+      "estimatedEndTime": "2026-11-08T02:33:11-08:00",
+      "currentTime": "2026-11-08T02:33:08.6518343-08:00",
+      "pauseSeconds": 0,
+      "endPauseTime": "0001-01-01T00:00:00",
+      "protocolName": null,
+      "currentStep": 33,
+      "preLoadThermalDeviceUsed": "None",
+      "preLoadHepaFiltration": false
+    },
+    "pending_errors": [],
+    "protocol_catalog": [
+      {
+        "id": 7,
+        "name": "Protocol",
+        "favorite": true,
+        "dateModified": "2026-11-08T00:00:17.3276729",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 8,
+        "name": "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:15:26.3343363",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 9,
+        "name": "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:26:03.8078045",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 10,
+        "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:30:01.3603117",
+        "dateRun": "2026-11-08T02:31:37.8295282"
+      },
+      {
+        "id": 11,
+        "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T03:19:50.076936",
+        "dateRun": "0001-01-01T00:00:00"
+      }
+    ],
+    "protocols": [
+      "Protocol",
+      "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+      "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+      "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+      "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z"
+    ],
+    "recipes": [],
+    "session_id": "6bdcb20e441940959be4be86688823be",
+    "parked": true,
+    "door_automation_ready": true,
+    "ready_for_robot": false,
+    "message": "Hamilton Idle; initialized.",
+    "operation": {
+      "request_id": "dcg48_repeat_683af88d0e764de8b7a8617903ffd172",
+      "action": "falcon48_staged_dcg",
+      "plan_sha256": "e532028afdabdab6a5c3a38538abad05f7721015342571f6e51dddf80854ec2a",
+      "status": "failed_or_uncertain",
+      "rounds_requested": 5,
+      "rounds_completed": 0,
+      "transfers_completed": 0,
+      "write_attempted": true,
+      "operator_confirmation": "Five round trips 3 -> 4 -> 3; original recorded placement at both sites",
+      "original_site3": [
+        62.09500002861023,
+        139.82999801635742,
+        24.1899995803833
+      ],
+      "original_site4": [
+        54.04006282697236,
+        44.166698939616914,
+        24.1899995803833
+      ],
+      "release_clearance_y_mm": 4,
+      "release_mode": "coordinated_open_retreat",
+      "release_outward_mm": 10,
+      "temporal_camera_frames": 5,
+      "cycle": 1,
+      "source_site": 3,
+      "destination_site": 4,
+      "capture_tag": "cycle1_site3_before",
+      "stage": "release_return",
+      "original_scales": [
+        5,
+        5
+      ],
+      "checkpoint": {
+        "positions": {
+          "positions": [
+            {
+              "default_values": false,
+              "channel": 1,
+              "position_x": 54.041507720947266,
+              "position_y": 84.72623443603516,
+              "position_z": 17.18988609313965
+            },
+            {
+              "default_values": false,
+              "channel": 2,
+              "position_x": 54.041507720947266,
+              "position_y": 3.607741117477417,
+              "position_z": 17.19011878967285
+            }
+          ]
+        },
+        "plate_held": true,
+        "tool": {
+          "value": {
+            "default_values": false,
+            "id": 253,
+            "volume": 0.0,
+            "length": 22.899999618530273,
+            "tip_type": 0,
+            "has_filter": false,
+            "is_needle": false,
+            "is_tool": true,
+            "label": "DCG"
+          }
+        }
+      },
+      "error": "Unexpected channel 1 position_z: 18.152; expected 17.190..17.190"
+    },
+    "prompt": null,
+    "polling": {
+      "mode": "normal",
+      "purpose": null,
+      "calibration_default": "reduced",
+      "camera_paused": false
+    }
+  },
+  "labware": {
+    "2": {
+      "wellMap": {},
+      "disabledWells": [],
+      "id": 128,
+      "name": "P24w3600dnptmHAM",
+      "containerName": "",
+      "rows": 4,
+      "columns": 6,
+      "volume": 3600.0,
+      "displayName": "Cellvis, 24, Culture Plate, 3.6 mL, Glass Bottom, Black",
+      "imageExtension": null,
+      "imageData": null,
+      "partNumbers": "P24-1.5H-N",
+      "categories": [
+        {
+          "id": 25,
+          "displayName": "24-well",
+          "name": "Well24",
+          "grouping": "Number of Wells",
+          "classification": "plate"
+        },
+        {
+          "id": 1,
+          "displayName": "MTP",
+          "name": "MicrotiterPlate",
+          "grouping": "Plate Type",
+          "classification": "plate"
+        }
+      ],
+      "classification": "plate",
+      "siteAlignments": [
+        "SiteAlignment_Pipetting",
+        "SiteAlignment_Flat",
+        "SiteAlignment_HHC_6601877_01"
+      ],
+      "isFavorite": false,
+      "parts": []
+    },
+    "4": {
+      "wellMap": {},
+      "disabledWells": [],
+      "id": 166,
+      "name": "P48w800kmmtjFAL",
+      "containerName": "",
+      "rows": 6,
+      "columns": 8,
+      "volume": 1300.0,
+      "displayName": "Falcon, 48, Cell Culture Plate, 0.8 mL, Clear",
+      "imageExtension": null,
+      "imageData": null,
+      "partNumbers": "353078",
+      "categories": [
+        {
+          "id": 24,
+          "displayName": "48-well",
+          "name": "Well48",
+          "grouping": "Number of Wells",
+          "classification": "plate"
+        },
+        {
+          "id": 1,
+          "displayName": "MTP",
+          "name": "MicrotiterPlate",
+          "grouping": "Plate Type",
+          "classification": "plate"
+        }
+      ],
+      "classification": "plate",
+      "siteAlignments": [
+        "SiteAlignment_Pipetting",
+        "SiteAlignment_Flat",
+        "WasteAlignment_FrontChute",
+        "WasteAlignment_BackChute",
+        "SiteAlignment_ee_presentation",
+        "EntryExitAlignment_BeamAlignmentEntry",
+        "SiteAlignment_EERAMTP8pos",
+        "SiteAlignment_HHC_6601877_01"
+      ],
+      "isFavorite": false,
+      "parts": []
+    },
+    "7": {
+      "id": 8,
+      "name": "235903",
+      "containerName": "",
+      "rows": 8,
+      "columns": 12,
+      "volume": 300.0,
+      "displayName": "300 \u00b5L Framed Conductive Filtered",
+      "imageExtension": null,
+      "imageData": null,
+      "partNumbers": "235903",
+      "categories": [
+        {
+          "id": 7,
+          "displayName": "300 \u03bcL",
+          "name": "Tip300uL",
+          "grouping": "Tip Size",
+          "classification": "tiprack"
+        },
+        {
+          "id": 31,
+          "displayName": "Black (conductive)",
+          "name": "ConductiveTips",
+          "grouping": "Tip Color (Conductivity)",
+          "classification": "tiprack"
+        },
+        {
+          "id": 5,
+          "displayName": "Filtered",
+          "name": "FilteredTips",
+          "grouping": "Filter",
+          "classification": "tiprack"
+        },
+        {
+          "id": 10,
+          "displayName": "Framed",
+          "name": "FTR",
+          "grouping": "Rack Type",
+          "classification": "tiprack"
+        }
+      ],
+      "classification": "tiprack",
+      "siteAlignments": [
+        "SiteAlignment_Framed",
+        "SiteAlignment_EERAFTR4pos",
+        "SiteAlignment_EERAFTR6pos"
+      ],
+      "isFavorite": false,
+      "parts": []
+    }
+  },
+  "protocol_request": {
+    "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z",
+    "makeNameUnique": false,
+    "skipValidation": false,
+    "deck": {
+      "positions": [
+        {
+          "position": 1,
+          "positionName": "Site 1",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        },
+        {
+          "position": 2,
+          "positionName": "Site 2",
+          "labwarePositions": [],
+          "labwareGroup": {
+            "labwareId": 128,
+            "groupName": "EMPTY Cellvis source",
+            "reuseTipsBetweenSteps": false,
+            "liquidName": "",
+            "liquidType": "Water",
+            "liquidVolumeOptions": "CalculateForMe"
+          },
+          "liquidVolume": 0
+        },
+        {
+          "position": 3,
+          "positionName": "Site 3",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        },
+        {
+          "position": 4,
+          "positionName": "Site 4",
+          "labwarePositions": [],
+          "labwareGroup": {
+            "labwareId": 166,
+            "groupName": "Transported EMPTY Falcon 48 well",
+            "reuseTipsBetweenSteps": false,
+            "liquidName": "",
+            "liquidType": "Water",
+            "liquidVolumeOptions": "CalculateForMe"
+          },
+          "liquidVolume": 0
+        },
+        {
+          "position": 5,
+          "positionName": "Site 5",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        },
+        {
+          "position": 6,
+          "positionName": "Site 6",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        },
+        {
+          "position": 7,
+          "positionName": "Site 7",
+          "labwarePositions": [],
+          "labwareGroup": {
+            "labwareId": 8,
+            "groupName": "Six fresh 300uL tips",
+            "reuseTipsBetweenSteps": false,
+            "liquidName": "",
+            "liquidType": "Water",
+            "liquidVolumeOptions": "CalculateForMe"
+          },
+          "liquidVolume": 0
+        },
+        {
+          "position": 8,
+          "positionName": "Site 8",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        }
+      ]
+    }
+  },
+  "prior_success": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\hamilton_api\\dry_run_60910d1cfa244d2ab20f38ce4b07636a\\result.json",
+  "prior_protocol_sha256": "5210919709c8e6e979ba9610f421996251cd0dde2e281916132aaba26600688c",
+  "operator_authorization": "Dry mock; transported 48-well at site4; empty Cellvis source site2 and six fresh 300uL tips site7 A1-A6 confirmed. Five real brightfield frames at previous saved single site approved.",
+  "hardware_motion_sent": false
+}

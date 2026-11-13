@@ -1,0 +1,348 @@
+{
+  "status": "stopped_or_failed",
+  "started_at": 1793529778.4076319,
+  "planned_cycles": 5,
+  "completed_cycles": 4,
+  "candidate": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\destination_leveled_20261101T103159Z.json",
+  "candidate_sha256": "255f431bf8eef3c100f9f163603d656fe666d9e825683f8d0f9e54850710047e",
+  "authorization": "Operator confirmed corrected pickup held plate securely and level; explicitly requested five loaded delivery, release, empty Home, pickup and loaded Home cycles.",
+  "initial_state": {
+    "camera": {
+      "age_s": 15.4,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.884284757077694
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.4211879334902,
+        "J2": 84.87688914050068,
+        "J3": 52.05594907317273,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": false,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "b687fa2cf3747acebfd3da8a56a2e4d330e9d074bb907b8877072e35db8d04da",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -67.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1793529778.3704278
+  },
+  "cycles": [
+    {
+      "number": 1,
+      "status": "completed_pending_operator_inspection",
+      "started_at": 1793529778.4087274,
+      "artifacts": [
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\loaded_trial_f9079139f62c4ebf9c373c6bc2fdd50b.json",
+          "sha256": "6191b8130e02bcd0d9f5e521ed64862398e482d5ea8d47a128e0ccecb2f35dfb"
+        },
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\roundtrip_1a01a6b13c494d11a63c8674a80381bb.json",
+          "sha256": "f305d9eeae9dd77befe281be38a2a3fdaccd4cfd90f3d00d516664cd150bdece"
+        }
+      ],
+      "finished_at": 1793529883.7665792,
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8902168162167072
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.41890610313115,
+          "J2": 84.87684236708007,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.018
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 2,
+      "status": "completed_pending_operator_inspection",
+      "started_at": 1793529883.795817,
+      "artifacts": [
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\loaded_trial_47a28f04a96b4729af3ad537c76e55e1.json",
+          "sha256": "d13fa1dd150e23e13da07266ffa7273e772ab8397799003c40655714005e870c"
+        },
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\roundtrip_b53bb59b58234528aeaf5a0cacf94c9a.json",
+          "sha256": "23c9d4b707294a214ad036c66ed57561b67ee350f61a9a7f086e12f527df18a9"
+        }
+      ],
+      "finished_at": 1793529988.6144102,
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.884284757077694
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.41869866400762,
+          "J2": 84.87688914050068,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.018
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 3,
+      "status": "completed_pending_operator_inspection",
+      "started_at": 1793529988.664893,
+      "artifacts": [
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\loaded_trial_131108a807c646f8bf07262cc5a3ff34.json",
+          "sha256": "71f13a26b7cf7607b07d62767068dcd4c335e1d296cce8c5c24d267ae822b402"
+        },
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\roundtrip_cdd548e2260340798f4b68f1ff9f0773.json",
+          "sha256": "f832cf8ebaffc24ee9106472fe0af4089e6b7b0631760c36f62e51819c247cbf"
+        }
+      ],
+      "finished_at": 1793530093.822207,
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8853632286190987
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.41890610313115,
+          "J2": 84.87686575379037,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.018
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 4,
+      "status": "completed_pending_operator_inspection",
+      "started_at": 1793530093.8755016,
+      "artifacts": [
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\loaded_trial_9e254aabb70d449ab5e4e3e991d9090e.json",
+          "sha256": "b62523cf1a99b40d9675105b47d2f8ac218ce5241cd4a4b4d28e153ab0f2ff0e"
+        },
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\roundtrip_9070c9149e0b42dbb97dfa8acd1bb794.json",
+          "sha256": "4f74eae0a08f81a6c2ba903f8083fe45f7b04046574b38577f0df2be8e72b05d"
+        }
+      ],
+      "finished_at": 1793530198.6573324,
+      "final_robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 3.8844645023345947
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 209.41849122488404,
+          "J2": 84.87686575379037,
+          "J3": 52.05594907317273,
+          "J4": -140.8128286807219
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.017
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      }
+    },
+    {
+      "number": 5,
+      "status": "stopped_or_failed",
+      "started_at": 1793530198.6858585,
+      "artifacts": [
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\loaded_trial_70129617229a437d812cfabc1166d3eb.json",
+          "sha256": "a3d01cf602921e5aa84e2ffc581ef57f4024fdf0acd03d33c2801c5c1cd9eccf"
+        },
+        {
+          "path": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\squid_48well_approach\\roundtrip_a15a481f6a3b490382e5191fc0d2cab6.json",
+          "sha256": "eeb15851e49c462a5ad1e84c1e407696dadd8f2a946493a1f7b514f2a507e3ac"
+        }
+      ],
+      "error": "Unexpected grip position"
+    }
+  ],
+  "automatic_retries": false,
+  "physical_repeatability_acceptance": "pending_operator_observation",
+  "error": "Unexpected grip position",
+  "stop_response": {
+    "ok": true,
+    "reply": "CmdDone"
+  },
+  "finished_at": 1793530280.6553798
+}

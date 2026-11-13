@@ -1,0 +1,83 @@
+{
+  "status": "integrated_offline_tested_host_loaded_pending_Hamilton_publication_and_live_trial",
+  "at": 1794451590.6066952,
+  "motion_started": false,
+  "host_route_sha256": "1c84fe6da693d62f8ee46a260d722f96292d0069629a58342845b46175f12800",
+  "capability_required": 220114,
+  "hamilton_segment_zones": {
+    "forward": [
+      -1,
+      1,
+      1,
+      5,
+      -1,
+      -1
+    ],
+    "reverse": [
+      -1,
+      5,
+      1,
+      1,
+      -1,
+      -1
+    ]
+  },
+  "squid_forward_speeds": [
+    137,
+    137,
+    137,
+    5
+  ],
+  "squid_reverse_speeds": [
+    5,
+    137,
+    137,
+    137,
+    137
+  ],
+  "squid_reverse_points": [
+    {
+      "X": 223.94,
+      "Y": 373.76,
+      "Z": 273.77,
+      "Rz": 88.34
+    },
+    {
+      "X": 223.94,
+      "Y": 373.76,
+      "Z": 293.24,
+      "Rz": 88.34
+    },
+    {
+      "X": 354.0,
+      "Y": 270.0,
+      "Z": 293.24,
+      "Rz": 49.02
+    },
+    {
+      "X": 312.5,
+      "Y": -66.3,
+      "Z": 293.24,
+      "Rz": 89.84
+    },
+    {
+      "X": 312.5,
+      "Y": -66.3,
+      "Z": 80.72,
+      "Rz": 89.84
+    }
+  ],
+  "tests_passed": 50,
+  "test_suites": [
+    "test_hamilton_opposite_wrist",
+    "test_hamilton_transit_blend",
+    "test_cellvis_hamilton_continuation",
+    "test_cellvis24_squid_route",
+    "test_rounded_transit_and_squid_speed"
+  ],
+  "hardware_tested": false,
+  "loaded_process": 29072,
+  "limitation": "Native blend geometry and velocity are not simulated by the fake controller tests. Selected Bezier passes IK/corridor checks but native zone5 does not certify Z82 onset; runtime checks stop on departures.",
+  "queue_geometry_unchanged": true,
+  "publication": "controller/main_hostpoint_rounded_transit_queue_220114.bin"
+}

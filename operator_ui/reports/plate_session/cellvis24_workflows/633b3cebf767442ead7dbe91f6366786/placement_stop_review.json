@@ -1,0 +1,101 @@
+{
+  "record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\plate_session\\cellvis24_workflows\\633b3cebf767442ead7dbe91f6366786\\run.json",
+  "status": "stopped_or_uncertain",
+  "error": "Cellvis placement differs from the accepted pickup; recheck seating before a new trial.",
+  "measurements": [
+    {
+      "wells": 22,
+      "grid_rmse_px": 5.955861626154559,
+      "dx_mm": -0.49231006463509175,
+      "dy_mm": 0.20468305291707622,
+      "shift_mm": 0.533164469833149,
+      "yaw_delta_deg": -0.015781902601929687,
+      "calibration_error_mm": 0.28979391288313516
+    },
+    {
+      "wells": 23,
+      "grid_rmse_px": 5.534462872568143,
+      "dx_mm": -0.4093907477380867,
+      "dy_mm": 0.2119419823292361,
+      "shift_mm": 0.4609991195297405,
+      "yaw_delta_deg": 0.008093723662284447,
+      "calibration_error_mm": 0.2753989441308437
+    },
+    {
+      "wells": 23,
+      "grid_rmse_px": 4.574788077021922,
+      "dx_mm": -0.41277455959072995,
+      "dy_mm": 0.21243353824395683,
+      "shift_mm": 0.46423145651298525,
+      "yaw_delta_deg": 0.014097873436753616,
+      "calibration_error_mm": 0.2955966690579146
+    }
+  ],
+  "repeatability": {
+    "stationary_checks_passed": true,
+    "xy_spread_mm": 0.02303268617513744,
+    "corner_spread_preview_px": 0.44258603108306377,
+    "yaw_spread_deg": 0.029879776038683303,
+    "motion_authorized": false,
+    "full_calibration_complete": false
+  },
+  "native": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 28.001757338643074,
+      "E2": 1.7740432394980816
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 28.001757338643074
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 250.53105855985063,
+      "J2": 76.67629239979568,
+      "J3": 45.765822060815104,
+      "J4": -126.32216017602217
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": -3.88,
+      "X": 279.38,
+      "Y": 25.83,
+      "Z": 289.13
+    },
+    "program_state": {
+      "state": "stopped",
+      "value": 0
+    },
+    "system_state": {
+      "state": "enabled",
+      "value": 5
+    }
+  }
+}

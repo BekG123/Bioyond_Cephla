@@ -1,0 +1,505 @@
+{
+  "status": "completed",
+  "at": 1794451670.8570154,
+  "plan_id": "2026-11-12T02:47:50.330137+00:00:1794451670330",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 312.48,
+      "Y": -66.298,
+      "Z": 105.704,
+      "Rz": 89.81
+    },
+    "joints": {
+      "J1": 67.10508795436976,
+      "J2": 40.77296797123468,
+      "J3": 59.311217356024834,
+      "J4": -10.27461554255051
+    },
+    "e1": 0.0895272969501093,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 312.48,
+            "Y": -66.3,
+            "Z": 300.0,
+            "Rz": 89.81
+          },
+          {
+            "X": 322.27,
+            "Y": 45.61,
+            "Z": 300.0,
+            "Rz": 89.81
+          }
+        ]
+      },
+      {
+        "kind": "rotate",
+        "rz": -3.8799999999999955,
+        "queued_pivot": true
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 300.0,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 312.48,
+          "Y": -66.3,
+          "Z": 300.0,
+          "Rz": 89.81
+        },
+        "joints": {
+          "J1": 261.40108795436976,
+          "J2": 40.77217096015245,
+          "J3": 59.31158856104202,
+          "J4": -10.274189736485479
+        }
+      },
+      {
+        "pose": {
+          "X": 322.27,
+          "Y": 45.61,
+          "Z": 300.0,
+          "Rz": 89.81
+        },
+        "joints": {
+          "J1": 261.40108795436976,
+          "J2": 72.83404210195185,
+          "J3": 60.496765876938305,
+          "J4": -43.521238194181166
+        }
+      },
+      {
+        "pose": {
+          "X": 322.27,
+          "Y": 45.61,
+          "Z": 300.0,
+          "Rz": -3.8799999999999955
+        },
+        "joints": {
+          "J1": 261.40108795436976,
+          "J2": 72.83404210195185,
+          "J3": 60.496765876938305,
+          "J4": -137.21123819418116
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 261.40108795436976,
+          "J2": 84.87688206683335,
+          "J3": 52.0559610924201,
+          "J4": -140.81327337454445
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.42108795436974,
+          "J2": 84.87688206683335,
+          "J3": 52.0559610924201,
+          "J4": -140.81327337454445
+        }
+      }
+    ],
+    "preserve_gripper": true,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Move to X312.48 / Y-66.30 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X322.27 / Y45.61 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; queued pivot turn speed 137. Review the physical route before confirming.",
+    "id": "2026-11-12T02:47:50.330137+00:00:1794451670330",
+    "at": 1794451670.3301373,
+    "source": "button",
+    "confirmation_source": "researcher_button"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1794451680.8738098,
+  "sequence": {
+    "state": "done",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 0.3,
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 1.1,
+        "level": "info",
+        "msg": "Home: upload 2/2"
+      },
+      {
+        "t": 1.5,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.6,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.7,
+        "level": "info",
+        "msg": "Home: motion 1/100"
+      },
+      {
+        "t": 1.9,
+        "level": "info",
+        "msg": "Home: motion 5/100"
+      },
+      {
+        "t": 2.0,
+        "level": "info",
+        "msg": "Home: motion 10/100"
+      },
+      {
+        "t": 2.1,
+        "level": "info",
+        "msg": "Home: motion 16/100"
+      },
+      {
+        "t": 2.2,
+        "level": "info",
+        "msg": "Home: motion 22/100"
+      },
+      {
+        "t": 2.4,
+        "level": "info",
+        "msg": "Home: motion 28/100"
+      },
+      {
+        "t": 2.5,
+        "level": "info",
+        "msg": "Home: motion 34/100"
+      },
+      {
+        "t": 2.6,
+        "level": "info",
+        "msg": "Home: motion 40/100"
+      },
+      {
+        "t": 2.8,
+        "level": "info",
+        "msg": "Home: motion 46/100"
+      },
+      {
+        "t": 2.9,
+        "level": "info",
+        "msg": "Home: motion 52/100"
+      },
+      {
+        "t": 3.0,
+        "level": "info",
+        "msg": "Home: motion 58/100"
+      },
+      {
+        "t": 3.2,
+        "level": "info",
+        "msg": "Home: motion 63/100"
+      },
+      {
+        "t": 3.3,
+        "level": "info",
+        "msg": "Home: motion 63/100"
+      },
+      {
+        "t": 3.5,
+        "level": "info",
+        "msg": "Home: motion 64/100"
+      },
+      {
+        "t": 3.6,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 3.7,
+        "level": "info",
+        "msg": "Home: motion 72/100"
+      },
+      {
+        "t": 3.8,
+        "level": "info",
+        "msg": "Home: motion 77/100"
+      },
+      {
+        "t": 4.0,
+        "level": "info",
+        "msg": "Home: motion 83/100"
+      },
+      {
+        "t": 4.1,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 4.3,
+        "level": "info",
+        "msg": "Home: motion 96/100"
+      },
+      {
+        "t": 4.4,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 4.5,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 4.6,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      },
+      {
+        "t": 4.7,
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 5.6,
+        "level": "info",
+        "msg": "IDLE pivot: upload 1/1"
+      },
+      {
+        "t": 6.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 8/100"
+      },
+      {
+        "t": 6.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 32/100"
+      },
+      {
+        "t": 6.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 56/100"
+      },
+      {
+        "t": 6.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 81/100"
+      },
+      {
+        "t": 6.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 98/100"
+      },
+      {
+        "t": 7.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 99/100"
+      },
+      {
+        "t": 7.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 100/100"
+      },
+      {
+        "t": 7.2,
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 7.9,
+        "level": "info",
+        "msg": "Home: upload 2/2"
+      },
+      {
+        "t": 8.3,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 8.5,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 8.6,
+        "level": "info",
+        "msg": "Home: motion 3/100"
+      },
+      {
+        "t": 8.7,
+        "level": "info",
+        "msg": "Home: motion 19/100"
+      },
+      {
+        "t": 8.9,
+        "level": "info",
+        "msg": "Home: motion 38/100"
+      },
+      {
+        "t": 9.0,
+        "level": "info",
+        "msg": "Home: motion 41/100"
+      },
+      {
+        "t": 9.1,
+        "level": "info",
+        "msg": "Home: motion 42/100"
+      },
+      {
+        "t": 9.3,
+        "level": "info",
+        "msg": "Home: motion 50/100"
+      },
+      {
+        "t": 9.4,
+        "level": "info",
+        "msg": "Home: motion 67/100"
+      },
+      {
+        "t": 9.5,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 9.6,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 9.8,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 9.9,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      }
+    ],
+    "result": {
+      "ok": true,
+      "home": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      }
+    },
+    "target": null,
+    "detection_ts": 0.0
+  }
+}

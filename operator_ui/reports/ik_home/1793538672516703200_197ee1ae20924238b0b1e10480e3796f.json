@@ -1,0 +1,302 @@
+{
+  "status": "failed_or_stopped",
+  "at": 1793538672.5167031,
+  "plan_id": "2026-11-01T13:11:12.341406+00:00:1793538672341",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 227.381,
+      "Y": 20.467,
+      "Z": 288.498,
+      "Rz": -8.168
+    },
+    "joints": {
+      "J1": 249.89878411127845,
+      "J2": 86.42829334178329,
+      "J3": 29.97005010963068,
+      "J4": -124.56608527326566
+    },
+    "e1": 0.02876803591789212,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 227.38,
+            "Y": 20.47,
+            "Z": 300.0,
+            "Rz": -8.17
+          }
+        ]
+      },
+      {
+        "kind": "rotate",
+        "rz": -3.8799999999999883
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 300.0,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 227.38,
+          "Y": 20.47,
+          "Z": 300.0,
+          "Rz": -8.17
+        },
+        "joints": {
+          "J1": 261.4007841112785,
+          "J2": 86.43039477030733,
+          "J3": 29.969845240575413,
+          "J4": -124.56998183273444
+        }
+      },
+      {
+        "pose": {
+          "X": 227.38,
+          "Y": 20.47,
+          "Z": 300.0,
+          "Rz": -3.8799999999999883
+        },
+        "joints": {
+          "J1": 261.4007841112785,
+          "J2": 86.43039477030733,
+          "J3": 29.969845240575413,
+          "J4": -120.27998183273442
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 261.4007841112785,
+          "J2": 84.87688206683332,
+          "J3": 52.05596109242009,
+          "J4": -140.8125849811051
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.42078411127846,
+          "J2": 84.87688206683332,
+          "J3": 52.05596109242009,
+          "J4": -140.8125849811051
+        }
+      }
+    ],
+    "preserve_gripper": true,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Move to X227.38 / Y20.47 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+    "id": "2026-11-01T13:11:12.341406+00:00:1793538672341",
+    "at": 1793538672.341407,
+    "source": "button",
+    "confirmation_source": "researcher_button"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1793538674.928167,
+  "sequence": {
+    "state": "error",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 0.1,
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 0.7,
+        "level": "info",
+        "msg": "Home: upload 1/1"
+      },
+      {
+        "t": 1.1,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.2,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.4,
+        "level": "info",
+        "msg": "Home: motion 7/100"
+      },
+      {
+        "t": 1.5,
+        "level": "info",
+        "msg": "Home: motion 56/100"
+      },
+      {
+        "t": 1.6,
+        "level": "info",
+        "msg": "Home: motion 94/100"
+      },
+      {
+        "t": 1.7,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 1.8,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      },
+      {
+        "t": 2.3,
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: MOVE DID NOT ARRIVE (stale/false completion ack): Rz -8.17 vs -3.88. Controller errors: [{'errCode': 3571, 'errMsg': '2026-11-01 06:11:14 Motion error: joint reached soft limit'}]. The motion faulted mid-path or the ack was stale after a reconnect \u2014 re-check state before ANY retry."
+      }
+    ],
+    "result": {
+      "ok": false,
+      "error": "MOVE DID NOT ARRIVE (stale/false completion ack): Rz -8.17 vs -3.88. Controller errors: [{'errCode': 3571, 'errMsg': '2026-11-01 06:11:14 Motion error: joint reached soft limit'}]. The motion faulted mid-path or the ack was stale after a reconnect \u2014 re-check state before ANY retry.",
+      "failure_context": {
+        "frames": [
+          {
+            "path": "operator_ui/sequences.py",
+            "line": 431,
+            "function": "_run"
+          },
+          {
+            "path": "operator_ui/researcher_home.py",
+            "line": 358,
+            "function": "execute"
+          },
+          {
+            "path": "operator_ui/autonomy.py",
+            "line": 99,
+            "function": "rotate_to_rz"
+          },
+          {
+            "path": "Pick and Hold/Calibration/fast_disk.py",
+            "line": 801,
+            "function": "checked"
+          }
+        ],
+        "location": {
+          "path": "Pick and Hold/Calibration/fast_disk.py",
+          "line": 801,
+          "function": "checked"
+        },
+        "source": "    def checked(result):\n        if not result.get(\"ok\") or result.get(\"recovered\") or result.get(\"gripper_warning\"):\n            raise TransferError(str(result.get(\"error\") or result.get(\"gripper_warning\") or \"connection recovery during transfer; inspect before retry\"))\n        return result",
+        "source_start_line": 799,
+        "source_sha256": "df2fce7b64f44ced0afb1ab35fc9dcfd4931c952b219b9735f4b289e7edbf341",
+        "captured_at_failure": true
+      }
+    },
+    "target": {
+      "x": 312.0124178577057,
+      "y": -63.67790542678249,
+      "rz": 89.7652192188176,
+      "z_calibrated": 73.718,
+      "config": "Wide",
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "2fee57aac025419e41988d62c2bcb2a66a01f3084b66b412708ef83fdc580099",
+      "open_claw_trial": true
+    },
+    "detection_ts": 0.0
+  }
+}

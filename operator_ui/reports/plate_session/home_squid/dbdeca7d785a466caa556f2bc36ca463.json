@@ -1,0 +1,678 @@
+{
+  "status": "plate_released_at_HOME_clearance",
+  "at": 1794400974.837552,
+  "plan": {
+    "e2": 1.7712966496780902,
+    "geometry": {
+      "cfg": {
+        "base_x_mm": 126.0,
+        "base_y_mm": 0.0,
+        "claw_gap_max_mm": 88.0,
+        "claw_gap_min_mm": 60.0,
+        "extension_margin_mm": 8.0,
+        "inner_reach_mm": 280.0,
+        "j2_margin_deg": 2.0,
+        "j2_min_deg": -95.0,
+        "j2_offset_deg": 0.0,
+        "j3_offset_deg": 180.0,
+        "j4_hard_abs_deg": 220.0,
+        "j4_pref_abs_deg": 220.0,
+        "link1_mm": 200.0,
+        "link2_mm": 200.0,
+        "reach_hard_mm": 460.0
+      },
+      "clearance": {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 103.72
+      },
+      "envelope": {
+        "X": [
+          200.0,
+          450.0
+        ],
+        "Y": [
+          -250.0,
+          380.0
+        ],
+        "Z": [
+          70.0,
+          400.0
+        ]
+      },
+      "points": [
+        {
+          "Rz": 89.77,
+          "X": 312.01,
+          "Y": -65.48,
+          "Z": 291.24
+        },
+        {
+          "Rz": 49.02,
+          "X": 354.0,
+          "Y": 270.0,
+          "Z": 291.24
+        },
+        {
+          "Rz": 88.34,
+          "X": 223.94,
+          "Y": 373.76,
+          "Z": 291.24
+        },
+        {
+          "Rz": 88.34,
+          "X": 223.94,
+          "Y": 373.76,
+          "Z": 266.77
+        }
+      ],
+      "profile": {
+        "acceptance": "operator_ui/reports/projected_alignment/positive_y104_0a6831631d984aa0bdd44540a0516785/authorization.json",
+        "acceptance_sha256": "39ec46138bfc63679379078b1c26a4ef41dcfd64d71086ac4a1c99e3d1d45704",
+        "accepted_grip_reference": "operator_ui/reports/projected_alignment/long_side_y104_acceptance_20261110/accepted_grip_binding.json",
+        "accepted_grip_reference_sha256": "23316b41410cda3e2c230117c5f72310c7ce736f5e1de17b87b66ff4a014d2d1",
+        "additional_down_mm": 5.0,
+        "additional_outward_correction": "operator_ui/reports/projected_alignment/additional_outward_5mm_1793088900811628000.json",
+        "additional_outward_correction_sha256": "ff5ad09ae3f3075bd3060d861bae94e51e697cbaed86df92f086570b8fd104f0",
+        "alignment_frame": "robot base Cartesian TCP, mm/degrees",
+        "alignment_hover_pose_key": "alignment_pose_mm",
+        "alignment_log": "operator_ui/reports/projected_alignment/20261027_070718_7c272570.jsonl",
+        "alignment_log_sha256": "4d02f9e5a0b2da7aae27bb1dd4a3e52dd6319799b666c4bd8109e1d885014bf4",
+        "alignment_name": "48-well long-side alignment at HOME",
+        "alignment_pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.7652192188176,
+          "X": 312.0124178577057,
+          "Y": -65.47790542678248,
+          "Z": 300.0
+        },
+        "alignment_scope": "Original holder orientation near E2=1.77 degrees; +Y10.4 already included, never cumulative.",
+        "alignment_source": "Approved rigid plate-relative transform from fresh reseated-plate measurement",
+        "automatic_lift_enabled": false,
+        "candidate_endpoint": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.7652192188176,
+          "X": 312.0124178577057,
+          "Y": -65.47790542678248,
+          "Z": 73.718
+        },
+        "candidate_z_basis": "Operator-accepted long-side descent/grip endpoint; successful recorded pickup and 5 mm lift.",
+        "correction_feedback": "operator_ui/reports/projected_alignment/restore_even_spacing_request_20261027.json",
+        "correction_feedback_sha256": "01b9a39a9ac2c885f2dbb0e1965d4d0d7ade60ffcd08a29f881d229543fa8144",
+        "current_placement_grip_tested": true,
+        "descent_acceptance": "operator_ui/reports/projected_alignment/descent_accepted_1793731432033015200.json",
+        "descent_acceptance_sha256": "fc5d3b130b432a9c59bf18ca5d9b8c137554d5efbbc27132e5e56094f4dd5e07",
+        "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+        "descent_status": "operator_accepted_open_claw_descent",
+        "forward_adjustment_pending_mm": 0.0,
+        "forward_along_plate_long_edge_mm": 0.0,
+        "full_pickup_verified": false,
+        "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5, stop at accepted 48-well E1=3.9",
+        "gripping_edge_height": "Accepted long-side gripping TCP Z73.718 mm at the unchanged HOME holder setup.",
+        "id": "48_well_projected_20261026",
+        "inward_correction_already_applied": false,
+        "jaw_sequence": "Open to E1=28 mm at Z300 before lowering; verify opening before descent.",
+        "long_side_gripping_pose_key": "candidate_endpoint",
+        "outward_correction_already_applied": true,
+        "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+        "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+        "physical_grip_validated_for_plate": true,
+        "pickup_correction": {
+          "direction": "positive_base_y",
+          "distance_mm": 10.4,
+          "parent_profile_sha256": "583b14820fbacae665fb3e66953c87a54bf210fd510dc01035d139e7164357f5",
+          "source_endpoint": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.7652192188176,
+            "X": 312.0124178577057,
+            "Y": -75.87790542678249,
+            "Z": 73.718
+          }
+        },
+        "previous_profile": "operator_ui/reports/projected_alignment/profile_before_full7_reseat_trial_20261027.json",
+        "previous_profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+        "schema": "cephla.projected-pickup-profile.v1",
+        "squid_destination_candidate": "operator_ui/reports/squid_48well_approach/destination_calibration_y114_20261101.json",
+        "total_outward_correction_mm": 7
+      },
+      "profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+      "proof": {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 78.72
+      },
+      "seat": {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 73.72
+      },
+      "speeds": [
+        137,
+        137,
+        137,
+        5
+      ],
+      "squid_sha256": "9805c608b92e8efcd2c046f5f06b50d79b63d7ae61ee95dcb6c948af6050d3ff"
+    },
+    "home_seating": {
+      "lower_mm": 1.0,
+      "pose": {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 72.72
+      },
+      "speed": 5
+    },
+    "id": "dbdeca7d785a466caa556f2bc36ca463",
+    "joints": {
+      "J1": 35.121086690226456,
+      "J2": 41.06895017681274,
+      "J3": 59.07541072484884,
+      "J4": -10.374325175702856
+    },
+    "phase": "release_home",
+    "points": [
+      {
+        "Rz": 88.34,
+        "X": 223.94,
+        "Y": 373.76,
+        "Z": 291.24
+      },
+      {
+        "Rz": 49.02,
+        "X": 354.0,
+        "Y": 270.0,
+        "Z": 291.24
+      },
+      {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 291.24
+      },
+      {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 78.72
+      }
+    ],
+    "source": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\plate_session\\home_squid\\aa8fd1156a504810ae106a453a629d9e.json",
+    "source_sha256": "557b597cc1fc3f47d68a3556cae09bdcf54cf2f9552d5d3e0e70e64cad9c0811",
+    "speeds": [
+      5,
+      137,
+      137,
+      137
+    ],
+    "start": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.77,
+      "X": 312.01,
+      "Y": -65.48,
+      "Z": 73.72
+    }
+  },
+  "phases": [
+    {
+      "label": "Lower1mm at speed5 before HOME release",
+      "points": [
+        {
+          "X": 312.01,
+          "Y": -65.48,
+          "Z": 72.72,
+          "Rz": 89.77
+        }
+      ],
+      "speed": 5,
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "executor": "lua_queue",
+        "points": 1,
+        "zone": -1,
+        "endpoint": {
+          "X": 312.01,
+          "Y": -65.48,
+          "Z": 72.72,
+          "Rz": 89.77
+        },
+        "grouping": null
+      }
+    },
+    {
+      "label": "Return empty to HOME clearance",
+      "points": [
+        {
+          "X": 312.01,
+          "Y": -65.48,
+          "Z": 103.72,
+          "Rz": 89.77
+        }
+      ],
+      "speed": 137,
+      "status": "completed",
+      "result": {
+        "ok": true,
+        "executor": "lua_queue",
+        "points": 1,
+        "zone": -1,
+        "endpoint": {
+          "X": 312.01,
+          "Y": -65.48,
+          "Z": 103.72,
+          "Rz": 89.77
+        },
+        "grouping": null
+      }
+    }
+  ],
+  "samples": [
+    {
+      "at": 1794400974.8976498,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 73.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8963286206126213,
+        "E2": 1.7712966496780902
+      }
+    },
+    {
+      "at": 1794400974.9986858,
+      "pose": {
+        "X": 312.009,
+        "Y": -65.48,
+        "Z": 73.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8963286206126213,
+        "E2": 1.7712966496780902
+      }
+    },
+    {
+      "at": 1794400975.6597104,
+      "pose": {
+        "X": 312.009,
+        "Y": -65.48,
+        "Z": 73.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8963286206126213,
+        "E2": 1.7712966496780902
+      }
+    },
+    {
+      "at": 1794400975.9721043,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 73.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8961488753557205,
+        "E2": 1.7740432394980816
+      }
+    },
+    {
+      "at": 1794400976.142029,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 73.719,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8961488753557205,
+        "E2": 1.7712966496780902
+      }
+    },
+    {
+      "at": 1794400976.3114252,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 73.384,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8963286206126213,
+        "E2": 1.7712966496780902
+      }
+    },
+    {
+      "at": 1794400976.4910269,
+      "pose": {
+        "X": 312.009,
+        "Y": -65.48,
+        "Z": 72.771,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8959691300988197,
+        "E2": 1.7712966496780902
+      }
+    },
+    {
+      "at": 1794400976.7122724,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 72.716,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8961488753557205,
+        "E2": 1.7712966496780902
+      }
+    },
+    {
+      "at": 1794400976.7760146,
+      "pose": {
+        "X": 312.009,
+        "Y": -65.48,
+        "Z": 72.717,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.895789384841919,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400977.8291688,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 72.718,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8959691300988197,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400977.8819299,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 72.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 3.8959691300988197,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400978.978543,
+      "pose": {
+        "X": 312.009,
+        "Y": -65.48,
+        "Z": 72.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 28.006969019770622,
+        "E2": 1.7658034700381073
+      }
+    },
+    {
+      "at": 1794400979.0282822,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 72.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 28.006969019770622,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400979.7619402,
+      "pose": {
+        "X": 312.009,
+        "Y": -65.48,
+        "Z": 72.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 28.002116829156876,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400980.1521769,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 72.72,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 28.00031751394272,
+        "E2": 1.7658034700381073
+      }
+    },
+    {
+      "at": 1794400980.3325365,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 73.319,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 28.000138700008392,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400980.4971788,
+      "pose": {
+        "X": 312.011,
+        "Y": -65.48,
+        "Z": 90.07,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.771
+      },
+      "axes": {
+        "E1": 27.999598532915115,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400980.6776056,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 103.31,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 27.999598532915115,
+        "E2": 1.7712966496780902
+      }
+    },
+    {
+      "at": 1794400980.88666,
+      "pose": {
+        "X": 312.009,
+        "Y": -65.48,
+        "Z": 103.724,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 27.99977920949459,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400980.9603605,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 103.723,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 27.99977920949459,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400981.012074,
+      "pose": {
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 103.722,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 27.999958023428917,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794400981.0750966,
+      "pose": {
+        "X": 312.009,
+        "Y": -65.48,
+        "Z": 103.722,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.77
+      },
+      "axes": {
+        "E1": 27.99977920949459,
+        "E2": 1.7685500598580988
+      }
+    }
+  ],
+  "release_dispatched": true,
+  "release_result": {
+    "ok": true,
+    "completion_reply": {
+      "index": 1,
+      "value": 1
+    },
+    "commanded": {
+      "e1": 28,
+      "speed": 5
+    },
+    "gripper": {
+      "e1_position": 28.001,
+      "e1_torque": 188.802,
+      "e1_torque_normalized": 0.708,
+      "joints": {
+        "J1": 413,
+        "J2": -30,
+        "J3": 13,
+        "J4": 97
+      },
+      "telemetry_live": true,
+      "position_error": 0.001,
+      "grip_detected": false
+    }
+  },
+  "final": {
+    "ok": true,
+    "connected": true,
+    "endpoint": "192.168.201.220:56788",
+    "system_state": {
+      "value": 2,
+      "state": "running"
+    },
+    "control_mode": {
+      "value": 1,
+      "mode": "auto"
+    },
+    "enabled": true,
+    "program_state": {
+      "value": 1,
+      "state": "running"
+    },
+    "lua_app_initialized": true,
+    "errors": [],
+    "pose_mm": {
+      "X": 312.009,
+      "Y": -65.48,
+      "Z": 103.722,
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.77
+    },
+    "joints": {
+      "J1": 65.12300712887514,
+      "J2": 41.06899695023335,
+      "J3": 59.075509886594496,
+      "J4": -10.374325175702856
+    },
+    "external_axes": {
+      "E1": 27.999958023428917
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    }
+  },
+  "finished_at": 1794400981.0760808
+}

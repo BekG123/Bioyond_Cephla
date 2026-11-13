@@ -1,0 +1,139 @@
+{
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: Cellvis scanner plan changed: original_envelope",
+        "t": 0.1
+      }
+    ],
+    "name": "cellvis_scanner_transfer",
+    "result": {
+      "error": "Cellvis scanner plan changed: original_envelope",
+      "failure_context": {
+        "captured_at_failure": true,
+        "frames": [
+          {
+            "function": "_run",
+            "line": 431,
+            "path": "operator_ui/sequences.py"
+          },
+          {
+            "function": "execute",
+            "line": 104,
+            "path": "operator_ui/cellvis24_scanner_route.py"
+          }
+        ],
+        "location": {
+          "function": "execute",
+          "line": 104,
+          "path": "operator_ui/cellvis24_scanner_route.py"
+        },
+        "source": "def execute(run,service,cfg,approved):\n    from trajectory_queue import LuaTrajectory\n    fresh=plan(service,cfg,approved['binding']['id'])\n    for key in ('binding','speed','original_envelope','scanner_envelope','implementation'):\n        if fresh[key]!=approved.get(key):raise TransferError('Cellvis scanner plan changed: '+key)\n    near(fresh['start'],approved['start'],.05)\n    if any(abs(fresh['joints'][k]-approved['joints'][k])>.1 for k in ('J1','J2','J3','J4')):\n        raise TransferError('Joint configuration changed before scanner transfer.')\n    folder=RUNS/fresh['binding']['id']/'supervised_grip/proof_lift/scanner_transfer'\n    folder.mkdir(exist_ok=False);path=folder/'run.json'\n    record=dict(status='checking',at=time.time(),plan=approved,samples=[],motion_sent=False,\n                operator_lift_retention_confirmed=True,operator_loaded_route_clear=True,\n                authorization='User confirmed plate secure, scanner route clear, hands clear and E-stop supervised.',\n                release_sent=False,gripper_commands=False,automatic_retries=False)\n    changed=False\n    def save():write_run_record(path,record)\n    holding=CellvisHoldingService(service,fresh['binding'])\n    def monitor(stage,done,total):\n        s=preflight(holding)\n        record['samples'].append(dict(at=time.time(),stage=stage,done=done,total=total,robot=s));save()\n        run.say(f'Cellvis scanner {stage}: {done:.0f}/{total}')\n    try:\n        if run.stopped():raise TransferError('Stopped before scanner dispatch.')\n        changed=True\n        record['envelope_change']=service.set_envelope(*(v for k in ('X','Y','Z') for v in TRIAL[k]));save()\n        if not record['envelope_change'].get('ok'):raise TransferError('Scanner corridor not applied.')\n        prepare_for_service(holding,fresh['start'],fresh['joints'],fresh['binding']['points'],cfg,service.envelope)\n        record['motion_sent']=True;save()\n        result=LuaTrajectory(holding).execute(run,fresh['start'],fresh['joints'],fresh['binding']['points'],cfg,137,\n                                            monitor,reviewed=True,scanner_loaded='cellvis_direct')\n        record['result']=result;save()\n        if result.get('ok') is not True or result.get('recovered'):raise TransferError('Scanner arrival uncertain; no retry.')\n        final=preflight(holding);near(final['pose_mm'],TARGET,.2)\n        record.update(status='completed',final=final,operator_transfer_retention='pending')\n        return dict(ok=True,record=str(path),pose_mm=final['pose_mm'],speed=137,payload='Cellvis plate held')\n    except BaseException as error:\n        record.update(status='stopped_or_uncertain',error=str(error))\n        if record['motion_sent']:\n            try:record['stop_response']=service.program('stop')\n            except Exception as stop:record['stop_error']=str(stop)\n        raise\n    finally:\n        if changed:\n            try:record['envelope_restoration']=service.set_envelope(*(v for k in ('X','Y','Z') for v in ORIGINAL[k]))\n            except Exception as error:record['envelope_restore_error']=str(error)\n            if not record.get('envelope_restoration',{}).get('ok'):record['status']='workspace_restoration_failed'\n        record['finished_at']=time.time();save()\n        run.audit('cellvis_scanner_transfer',record=str(path),status=record['status'])\n        if record['status']=='workspace_restoration_failed':raise TransferError('Scanner workspace restoration failed.')",
+        "source_sha256": "276d06ac74c367c1150f8fe2b38da119273764b0e10adad3509916da90360b31",
+        "source_start_line": 100
+      },
+      "ok": false
+    },
+    "state": "error",
+    "target": null
+  },
+  "state": {
+    "camera": {
+      "age_s": 0.5,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.900283481925726
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 42.12111991433073,
+        "J2": 40.858259303704905,
+        "J3": 59.37587081419419,
+        "J4": -10.113720452691048
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 90.12,
+        "X": 312.8,
+        "Y": -65.98,
+        "Z": 80.72
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "cellvis_scanner_transfer",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1794437477.9750893
+  },
+  "native": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 3.900103736668825,
+      "E2": 1.8124954969779608
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "motion_sent": false,
+  "cause": "Tuple/list envelope equality across JSON; rejected before route dispatch"
+}

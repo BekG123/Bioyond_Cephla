@@ -1,0 +1,129 @@
+{
+  "at": 1794435938.9392087,
+  "record": "operator_ui\\reports\\plate_session\\cellvis24_workflows\\bc7a778234df4e33a875440d6bc04774\\run.json",
+  "status": "stopped_or_uncertain",
+  "motion_sequence_sha256": "4a21771cc58c2671e0cd86ac8d54fcc9a45c8f12877eeaaa9f696546ccef3b6c",
+  "assessment": {
+    "stationary_checks_passed": true,
+    "xy_spread_mm": 0.0615481385883447,
+    "target_xy_spread_mm": 0.16865252864732458,
+    "corner_spread_preview_px": 0.7758754498480984,
+    "yaw_spread_deg": 0.05606492068267244,
+    "motion_authorized": false,
+    "full_calibration_complete": false,
+    "accepted_reference_reused": false,
+    "depth_estimated": false,
+    "bursts": [
+      {
+        "shift_mm": 0.4211728571934218,
+        "yaw_delta_deg": 0.23997564402100124,
+        "calibration_error_mm": 0.3329841573525841
+      },
+      {
+        "shift_mm": 0.4221923398864535,
+        "yaw_delta_deg": 0.2527954013256135,
+        "calibration_error_mm": 0.33424233561400746
+      },
+      {
+        "shift_mm": 0.48083701040590704,
+        "yaw_delta_deg": 0.2960405647036737,
+        "calibration_error_mm": 0.33708609004260176
+      }
+    ],
+    "limits": {
+      "xy_mm": 0.5,
+      "yaw_deg": 0.2,
+      "calibration_error_mm": 0.75
+    },
+    "max_shift_mm": 0.48083701040590704,
+    "max_yaw_delta_deg": 0.2960405647036737,
+    "max_calibration_error_mm": 0.33708609004260176,
+    "xy_limit_straddled": false,
+    "ok": false,
+    "code": "reference_mismatch",
+    "message": "Cellvis camera reference check failed: maximum estimated target shift 0.481 mm (limit 0.500), yaw 0.296 degrees (limit 0.200), center error 0.337 mm (limit 0.750). No descent; inspect the saved measurements and seating."
+  },
+  "grid": [
+    {
+      "wells": 24,
+      "rmse_px": 5.729949097100428
+    },
+    {
+      "wells": 24,
+      "rmse_px": 7.053338551369929
+    },
+    {
+      "wells": 24,
+      "rmse_px": 6.47330340747488
+    }
+  ],
+  "phases_attempted": [
+    "Reach accepted camera observation pose",
+    "Measure Cellvis rim, 4x6 grid and projected disks"
+  ],
+  "robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 27.998879551887512
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 250.53085112072716,
+      "J2": 76.67629239979568,
+      "J3": 45.76592122256076,
+      "J4": -126.32216017602217
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": -3.88,
+      "X": 279.38,
+      "Y": 25.83,
+      "Z": 289.13
+    },
+    "program_state": {
+      "state": "stopped",
+      "value": 0
+    },
+    "system_state": {
+      "state": "enabled",
+      "value": 5
+    }
+  },
+  "native": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 27.998879551887512,
+      "E2": 1.7877761885980386
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "sequence": {
+    "active": false,
+    "name": "cellvis24_workflow",
+    "state": "error"
+  },
+  "alignment_descent_grip_executed": false
+}

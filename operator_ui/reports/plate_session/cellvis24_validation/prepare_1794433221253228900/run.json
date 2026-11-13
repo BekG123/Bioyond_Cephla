@@ -1,0 +1,230 @@
+{
+  "status": "prepared",
+  "authorization": "Continue calibration; operator confirms plate supported in HOME and empty jaws; standing route/hands/E-stop confirmation.",
+  "commands": [
+    {
+      "path": "connect",
+      "body": {
+        "ip": "192.168.201.220"
+      },
+      "status": "returned",
+      "result": {
+        "endpoint": "192.168.201.220:56788",
+        "ok": true
+      }
+    },
+    {
+      "path": "enable",
+      "body": {
+        "confirm": true
+      },
+      "status": "returned",
+      "result": {
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    },
+    {
+      "path": "program",
+      "body": {
+        "action": "start"
+      },
+      "status": "returned",
+      "result": {
+        "gripper_after_start": {
+          "e1_position": 0.027,
+          "e1_torque": 0.8
+        },
+        "notes": [
+          "E1 was reset to ~0 by the controller runtime (plates closed) \u2014 press Open (28) before any grip work"
+        ],
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    }
+  ],
+  "before": {
+    "state": {
+      "camera": {
+        "age_s": null,
+        "device": null,
+        "enabled": true,
+        "error": "",
+        "open": false
+      },
+      "envelope": {
+        "X": {
+          "max": 450.0,
+          "min": 200.0
+        },
+        "Y": {
+          "max": 380.0,
+          "min": -250.0
+        },
+        "Z": {
+          "max": 400.0,
+          "min": 70.0
+        },
+        "enabled": true
+      },
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": false,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.027329946533427574
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 250.52234611666168,
+          "J2": 76.67846736385373,
+          "J3": 45.78287788106837,
+          "J4": -126.33854602482695
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.877,
+          "X": 279.429,
+          "Y": 25.868,
+          "Z": 289.121
+        },
+        "program_state": {
+          "state": "stopped",
+          "value": 0
+        },
+        "system_state": {
+          "state": "idle",
+          "value": 1
+        }
+      },
+      "sequence": {
+        "active": false,
+        "name": "",
+        "state": "idle"
+      },
+      "target": null,
+      "ts": 1794433221.3329692
+    },
+    "native": {
+      "manual": false,
+      "enabled": false,
+      "disabled": true,
+      "moving": false,
+      "emergency": false,
+      "drag": false,
+      "error": false,
+      "firmware": "1.8.2504101654",
+      "external_axes": {
+        "E1": 0.027329946533427574,
+        "E2": 1.9937697847671572
+      },
+      "external_units": {
+        "E1": "mm",
+        "E2": "degrees"
+      }
+    }
+  },
+  "after": {
+    "state": {
+      "camera": {
+        "age_s": null,
+        "device": null,
+        "enabled": true,
+        "error": "",
+        "open": false
+      },
+      "envelope": {
+        "X": {
+          "max": 450.0,
+          "min": 200.0
+        },
+        "Y": {
+          "max": 380.0,
+          "min": -250.0
+        },
+        "Z": {
+          "max": 400.0,
+          "min": 70.0
+        },
+        "enabled": true
+      },
+      "robot": {
+        "connected": true,
+        "control_mode": {
+          "mode": "auto",
+          "value": 1
+        },
+        "enabled": true,
+        "endpoint": "192.168.201.220:56788",
+        "errors": [],
+        "external_axes": {
+          "E1": 0.02679066346900072
+        },
+        "external_axes_source": "native_motion_status",
+        "external_axes_units": {
+          "E1": "mm"
+        },
+        "joints": {
+          "J1": 250.52276099490877,
+          "J2": 76.67844397714343,
+          "J3": 45.78277871932272,
+          "J4": -126.33854602482695
+        },
+        "lua_app_initialized": true,
+        "ok": true,
+        "pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": -3.877,
+          "X": 279.429,
+          "Y": 25.867,
+          "Z": 289.122
+        },
+        "program_state": {
+          "state": "running",
+          "value": 1
+        },
+        "system_state": {
+          "state": "running",
+          "value": 2
+        }
+      },
+      "sequence": {
+        "active": false,
+        "name": "",
+        "state": "idle"
+      },
+      "target": null,
+      "ts": 1794433222.5290961
+    },
+    "native": {
+      "manual": false,
+      "enabled": true,
+      "disabled": false,
+      "moving": false,
+      "emergency": false,
+      "drag": false,
+      "error": false,
+      "firmware": "1.8.2504101654",
+      "external_axes": {
+        "E1": 0.02697042509680614,
+        "E2": 1.9965163745871484
+      },
+      "external_units": {
+        "E1": "mm",
+        "E2": "degrees"
+      }
+    }
+  }
+}

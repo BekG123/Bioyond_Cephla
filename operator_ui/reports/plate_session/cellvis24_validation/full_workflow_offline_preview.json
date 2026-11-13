@@ -1,0 +1,1496 @@
+{
+  "motion_started": false,
+  "calibration_runs": 1,
+  "preparation": "Visit IDLE; open empty jaws28; restore holder1.77",
+  "requires": "Cellvis plate supported in HOME; empty jaws; unchanged fixtures and clear routes",
+  "stations": [
+    "hamilton",
+    "squid"
+  ],
+  "cycles": 5,
+  "acceptance_sha256": "b69b47a7bd1e00d90deae8990441fdbfea37321b38cd4d05670d9e4a743bafc6",
+  "steps": [
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "queue",
+      "label": "Reach accepted camera observation pose"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "vision",
+      "label": "Measure Cellvis rim, 4x6 grid and projected disks"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "align",
+      "label": "Align with accepted Cellvis gripping edges"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "queue",
+      "label": "Fast open-jaw approach"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "queue",
+      "label": "Final open-jaw descent"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "queue",
+      "label": "Proof lift 5 mm at speed 5"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "queue",
+      "label": "Reseat plate in HOME"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "jaws",
+      "label": "Release plate in HOME"
+    },
+    {
+      "cycle": 0,
+      "station": "calibration",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "First10mm descent"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 1,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "First10mm descent"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 2,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "First10mm descent"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 3,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "First10mm descent"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 4,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "hamilton",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination idle and loading setup"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "rotate",
+      "label": "Rotate released HOME holder"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Connect above accepted pickup"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "First10mm descent"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Final pickup descent"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Proof lift5mm"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before delivery"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty HOME clearance"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "instrument",
+      "label": "Check destination before retrieval"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Empty connector to station route"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel forward"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Close jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "observe",
+      "label": "Verify settled grip"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Travel reverse"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Reseat in HOME"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "jaws",
+      "label": "Open jaws"
+    },
+    {
+      "cycle": 5,
+      "station": "squid",
+      "kind": "queue",
+      "label": "Released HOME clearance"
+    }
+  ]
+}

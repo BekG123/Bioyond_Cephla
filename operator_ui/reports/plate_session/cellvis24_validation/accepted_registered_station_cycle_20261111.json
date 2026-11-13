@@ -1,0 +1,69 @@
+{
+  "status": "operator_accepted_success",
+  "operator_accepted": true,
+  "accepted_at": 1794461272.3631647,
+  "operator_observation": "Great success. Log this and save this as a skill.",
+  "plate_id": "SU-PRKL-P-2611-0001",
+  "plate_model": "Cellvis P24-1.5H-N",
+  "workflow": "scan -> HOME -> Hamilton drop-off/retrieval -> HOME -> Squid drop-off/retrieval -> HOME",
+  "completed_cycles": 1,
+  "calibration_runs": 0,
+  "scanner_z_mm": 163.76,
+  "scanner_decode_trigger": 1,
+  "handling_only": true,
+  "final": {
+    "ok": true,
+    "connected": true,
+    "endpoint": "192.168.201.220:56788",
+    "system_state": {
+      "value": 2,
+      "state": "running"
+    },
+    "control_mode": {
+      "value": 1,
+      "mode": "auto"
+    },
+    "enabled": true,
+    "program_state": {
+      "value": 1,
+      "state": "running"
+    },
+    "lua_app_initialized": true,
+    "errors": [],
+    "pose_mm": {
+      "X": 312.5,
+      "Y": -66.3,
+      "Z": 105.721,
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.84
+    },
+    "joints": {
+      "J1": 67.12168308425352,
+      "J2": 40.77100348756933,
+      "J3": 59.31776203123828,
+      "J4": -10.248642229019572
+    },
+    "external_axes": {
+      "E1": 27.999598532915115
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    }
+  },
+  "evidence": [
+    {
+      "path": "operator_ui\\reports\\plate_session\\dna_plate_registration\\lower_scanner_4db4568f941f422cab2d18393cb1fb47.json",
+      "sha256": "6f245cae867b1ecdb65ba9d21a3ab874f6438bd062fc2350dec08e74741c46b8"
+    },
+    {
+      "path": "operator_ui\\reports\\plate_session\\cellvis24_workflows\\aaf786073a944206a9f1736805697afd\\run.json",
+      "sha256": "168ba496a0d12ff770a9e4846b3551d0ff1e458357577dfc7502e408b1511d39"
+    },
+    {
+      "path": "operator_ui\\reports\\plate_session\\cellvis24_validation\\accepted_lower_scanner_20261111.json",
+      "sha256": "747987792d596ac7b6c979db0cb5f85ba109788759402217228186c0ab02efaf"
+    }
+  ]
+}

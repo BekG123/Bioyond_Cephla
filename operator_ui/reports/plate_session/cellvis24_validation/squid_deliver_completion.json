@@ -1,0 +1,124 @@
+{
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Restore released HOME holder to 1.77 degrees for Cellvis long-side pickup.",
+        "t": 0.3
+      },
+      {
+        "level": "info",
+        "msg": "Connect above accepted Cellvis long-side pickup",
+        "t": 2.4
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 2.4
+      },
+      {
+        "level": "info",
+        "msg": "First 10 mm descent",
+        "t": 5.6
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 5.6
+      },
+      {
+        "level": "info",
+        "msg": "Final 20 mm descent",
+        "t": 7.7
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 7.7
+      },
+      {
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: Uncertain grip/opening; no retry or lift.",
+        "t": 16.4
+      }
+    ],
+    "name": "cellvis24_squid",
+    "result": {
+      "error": "Uncertain grip/opening; no retry or lift.",
+      "failure_context": {
+        "captured_at_failure": true,
+        "frames": [
+          {
+            "function": "_run",
+            "line": 431,
+            "path": "operator_ui/sequences.py"
+          },
+          {
+            "function": "execute",
+            "line": 193,
+            "path": "operator_ui/cellvis24_squid_route.py"
+          },
+          {
+            "function": "jaws",
+            "line": 160,
+            "path": "operator_ui/cellvis24_squid_route.py"
+          }
+        ],
+        "location": {
+          "function": "jaws",
+          "line": 160,
+          "path": "operator_ui/cellvis24_squid_route.py"
+        },
+        "source": "    def jaws(target,speed,pose,holder=False):\n        nonlocal expected_e1\n        before,_=check(True,holder);near(before['pose_mm'],pose,.05)\n        step=dict(label='Cellvis jaws',target=target,speed=speed,status='dispatching');record['steps'].append(step)\n        record['motion_sent']=True;save()\n        result=service.move_gripper(target,speed);step['response']=result;save()\n        if (not result.get('ok') or result.get('recovered') or result.get('gripper_warning')\n                or (target<expected_e1 and result.get('gripper',{}).get('grip_detected'))):\n            raise TransferError('Uncertain grip/opening; no retry or lift.')\n        deadline=time.monotonic()+2;stable=0\n        while stable<3:\n            s,n=check(True,holder,False);near(s['pose_mm'],before['pose_mm'],.05)\n            stable=stable+1 if abs(n['external_axes']['E1']-target)<=.07 else 0\n            if time.monotonic()>deadline:raise TransferError('Jaw arrival not verified.')\n            if stable<3:time.sleep(.1)\n        expected_e1=target\n        torque=service.torque_report()\n        if not torque.get('ok') or not torque.get('telemetry_live') or not math.isfinite(torque['e1_torque']) or abs(torque['e1_position']-target)>.07:\n            raise TransferError('Fresh gripper feedback unavailable.')\n        step.update(status='completed',torque_report=torque);save()",
+        "source_sha256": "7240000d7b592de877774011c252f57e460452c7f93dff9252450041ef8316c8",
+        "source_start_line": 152
+      },
+      "ok": false
+    },
+    "state": "error",
+    "target": null
+  },
+  "robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 3.9074737578630447
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 37.12100728034615,
+      "J2": 40.77098010085903,
+      "J3": 59.31776203123828,
+      "J4": -10.248642229019572
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.84,
+      "X": 312.5,
+      "Y": -66.3,
+      "Z": 75.72
+    },
+    "program_state": {
+      "state": "stopped",
+      "value": 0
+    },
+    "system_state": {
+      "state": "enabled",
+      "value": 5
+    }
+  }
+}

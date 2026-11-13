@@ -1,0 +1,45 @@
+{
+  "status": "stopped_or_failed",
+  "at": 1794122901.0983508,
+  "profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+  "endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.7652192188176,
+    "X": 312.0124178577057,
+    "Y": -65.47790542678248,
+    "Z": 73.718
+  },
+  "prior_descent_acceptance": "operator_ui/reports/projected_alignment/descent_accepted_1793731432033015200.json",
+  "prior_descent_acceptance_sha256": "fc5d3b130b432a9c59bf18ca5d9b8c137554d5efbbc27132e5e56094f4dd5e07",
+  "authorization": "Operator requested full calibration repeat, confirmed empty claws, plate in holder and clear route; no routine visual pause.",
+  "new_visual_acceptance_claimed": false,
+  "events": [
+    {
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "err",
+            "msg": "no frame within 3000 ms (0x80000003)",
+            "t": 5.6
+          }
+        ],
+        "name": "plate48_calibrate",
+        "result": {
+          "error": "no frame within 3000 ms (0x80000003)",
+          "ok": false
+        },
+        "state": "error",
+        "target": null
+      }
+    }
+  ],
+  "error": "{'error': 'no frame within 3000 ms (0x80000003)', 'ok': False}",
+  "stop": {
+    "ok": true,
+    "reply": "CmdDone"
+  },
+  "finished_at": 1794122907.368086
+}

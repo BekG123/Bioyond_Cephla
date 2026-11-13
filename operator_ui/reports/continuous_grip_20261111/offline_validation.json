@@ -1,0 +1,45 @@
+{
+  "closure_policy": "continuous_e1_speed5_v1",
+  "hardware_motion_started": false,
+  "physical_trial": "pending",
+  "changed_implementation_files": [
+    "Pick and Hold/Grip/reference_grip.py",
+    "operator_ui/gripper_closure.py",
+    "operator_ui/home_hamilton_exchange.py",
+    "operator_ui/hamilton_holder_dropoff.py",
+    "operator_ui/hamilton_release_20261108.py",
+    "operator_ui/squid_48well_retrieval_trial.py",
+    "operator_ui/pickup_squid_home_20261103.py",
+    "operator_ui/run_accepted_squid_roundtrip.py",
+    "operator_ui/regrip_48well_to_3p9.py",
+    "operator_ui/run_short_side_pickup_to_hamilton.py",
+    "operator_ui/run_short_side_full_sequence01.py",
+    "operator_ui/regrip_lift_trial.py",
+    "operator_ui/lacry_agent.py",
+    "operator_ui/projected_pickup.py",
+    "operator_ui/pickup_squid_for_hamilton_20261109.py",
+    "operator_ui/station_handling_five_20261110.py",
+    "operator_ui/home_squid_transfer.py"
+  ],
+  "test_runs": [
+    {
+      "tests": 102,
+      "passed": true,
+      "seconds": 55.185
+    },
+    {
+      "tests": 103,
+      "passed": true,
+      "seconds": 24.274
+    }
+  ],
+  "tests_use_fake_hardware": true,
+  "lua_implementation": "Existing HostPoint type3: MoveExtJ(..., LVAR5, -1), MOVFINISH, mod_HostPointReport; no republish",
+  "preserved": {
+    "long_side_48well_target_mm": 3.9,
+    "short_side_target_mm": 25,
+    "speed": 5,
+    "release_targets": true,
+    "arrival_and_fault_checks": true
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "status": "stopped_pending_payload_recovery",
+  "cause": "Cellvis route clearance is 293.24 mm; shared runtime monitor incorrectly enforced legacy 291.24 mm ceiling. Software stopped the queue at vertical clearance. No controller fault reported.",
+  "source": "squid_continue_delivery.json",
+  "source_sha256": "ae2a609a04c77bcc405ef0e7e453acc7ebed9585ba8d76f721be4eeb9cc3bcd0",
+  "state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": false,
+      "ok": true
+    },
+    "sequence": {
+      "active": false,
+      "name": "cellvis24_squid",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1794417523.5352027
+  },
+  "native": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 3.8983060512691736,
+      "E2": 1.7658034700381073
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "fix": "Cellvis monitor uses the maximum height of its already hash-bound, IK-checked route. Other Squid profiles retain 291.24 mm. Added asynchronous real-Lua feedback tests and overheight/lateral rejection tests.",
+  "plate_retention_observation": "pending; do not count as successful Squid delivery",
+  "at": 1794417523.5499213,
+  "fix_loaded": true,
+  "offline_tests_passed": 50,
+  "after_host_reload": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.898126306012273
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 254.64104991469372,
+        "J2": 40.77100348756933,
+        "J3": 59.31786119298395,
+        "J4": -10.248642229019572
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.84,
+        "X": 312.5,
+        "Y": -66.3,
+        "Z": 293.24
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "enabled",
+        "value": 5
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "",
+      "state": "idle"
+    },
+    "target": null,
+    "ts": 1794417543.6020527
+  },
+  "native_after_reload": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 3.898126306012273,
+      "E2": 1.7658034700381073
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "code_sha256": {
+    "operator_ui\\trajectory_queue.py": "b76ce280afe3ac3372b1c83a23e7bff1696728ad6faa1d545ce86915bef714b1",
+    "operator_ui\\squid_single_queue.py": "6176656168e65d062fb862f0c23e546ae3de70e35b0788a7cee4aa807c277b80",
+    "operator_ui\\cellvis24_squid_route.py": "b95a81ba52cdf85243ee336af6e50be098e9f5df5c89480201104222d76a2fda"
+  },
+  "lua_start_sent": false
+}

@@ -1,0 +1,49 @@
+{
+  "at": 1793523005.4890776,
+  "parent_sha256": "117ab05cfe1223abe32484277ab8a558429ca64acf9d4706bea97c49811923bc",
+  "endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.7652192188176,
+    "X": 312.0124178577057,
+    "Y": -67.47790542678248,
+    "Z": 73.718
+  },
+  "authorization": "Operator requested +Y 8.4 mm total from original pickup, empty claws, return Home then revised calibration. Stop open before grip.",
+  "status": "stopped_or_failed",
+  "events": [
+    {
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Positioning E2 at 1.77 degrees before calibration.",
+            "t": 6.0
+          },
+          {
+            "level": "err",
+            "msg": "E2 is 1.769 degrees; calibration requires 1.77 to 1.82 degrees.",
+            "t": 7.5
+          }
+        ],
+        "name": "plate48_calibrate",
+        "result": {
+          "error": "E2 is 1.769 degrees; calibration requires 1.77 to 1.82 degrees.",
+          "ok": false
+        },
+        "state": "error",
+        "target": null
+      }
+    }
+  ],
+  "grip_executed": false,
+  "squid_destination_changed": false,
+  "visual_acceptance_pending": true,
+  "error": "{'error': 'E2 is 1.769 degrees; calibration requires 1.77 to 1.82 degrees.', 'ok': False}",
+  "stop": {
+    "ok": true,
+    "reply": "CmdDone"
+  }
+}

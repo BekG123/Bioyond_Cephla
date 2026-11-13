@@ -1,0 +1,118 @@
+{
+  "status": "completed_pending_operator_assessment",
+  "at": 1794284765.0963638,
+  "authorization": "Operator requested full Hamilton -> Home -> Squid drop-off -> empty Home -> Squid pickup -> loaded Home -> Hamilton sequence. Same previously accepted geometry, clear routes and supervised E-stop; Hamilton door open and holder empty/unchanged. No final Hamilton release. Stop on any fault or uncertain completion; no automatic retries or startup.",
+  "initial_robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 3.894171444699168
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 6.601111350199798,
+      "J2": -58.76566534833078,
+      "J3": 136.2657892360737,
+      "J4": -78.59994439003395
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": -1.1,
+      "X": 186.42,
+      "Y": -366.27,
+      "Z": 45.2
+    },
+    "program_state": {
+      "state": "running",
+      "value": 1
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "hamilton": {
+    "serial": "PRPGJ2494",
+    "global_state": "Idle",
+    "parked": true,
+    "pending_errors": []
+  },
+  "phases": [
+    {
+      "name": "hamilton_to_home",
+      "at": 1794284765.0963638
+    },
+    {
+      "name": "squid_dropoff_approach",
+      "at": 1794284772.7535806
+    },
+    {
+      "name": "squid_release_and_empty_home",
+      "at": 1794284790.271029
+    },
+    {
+      "name": "squid_pickup_and_loaded_home",
+      "at": 1794284809.7449858
+    },
+    {
+      "name": "loaded_home_to_hamilton",
+      "at": 1794284859.4176023
+    }
+  ],
+  "automatic_retries": false,
+  "phase": "loaded_home_to_hamilton",
+  "final_robot": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 3.8932727184146643
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 6.598829519840804,
+      "J2": -58.76566534833078,
+      "J3": 136.2657892360737,
+      "J4": -78.60011870757444
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": -1.1,
+      "X": 186.42,
+      "Y": -366.27,
+      "Z": 45.198
+    },
+    "program_state": {
+      "state": "running",
+      "value": 1
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "finished_at": 1794284867.1909523
+}

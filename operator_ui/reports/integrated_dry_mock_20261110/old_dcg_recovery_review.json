@@ -1,0 +1,239 @@
+{
+  "status": "failed_run_resolved_by_subsequent_empty_tool_park",
+  "original_run_remains_failed": true,
+  "original_marker": {
+    "request_id": "dcg48_repeat_683af88d0e764de8b7a8617903ffd172",
+    "action": "falcon48_staged_dcg",
+    "plan_sha256": "e532028afdabdab6a5c3a38538abad05f7721015342571f6e51dddf80854ec2a",
+    "status": "failed_or_uncertain",
+    "rounds_requested": 5,
+    "rounds_completed": 0,
+    "transfers_completed": 0,
+    "write_attempted": true,
+    "operator_confirmation": "Five round trips 3 -> 4 -> 3; original recorded placement at both sites",
+    "original_site3": [
+      62.09500002861023,
+      139.82999801635742,
+      24.1899995803833
+    ],
+    "original_site4": [
+      54.04006282697236,
+      44.166698939616914,
+      24.1899995803833
+    ],
+    "release_clearance_y_mm": 4,
+    "release_mode": "coordinated_open_retreat",
+    "release_outward_mm": 10,
+    "temporal_camera_frames": 5,
+    "cycle": 1,
+    "source_site": 3,
+    "destination_site": 4,
+    "capture_tag": "cycle1_site3_before",
+    "stage": "release_return",
+    "original_scales": [
+      5,
+      5
+    ],
+    "checkpoint": {
+      "positions": {
+        "positions": [
+          {
+            "default_values": false,
+            "channel": 1,
+            "position_x": 54.041507720947266,
+            "position_y": 84.72623443603516,
+            "position_z": 17.18988609313965
+          },
+          {
+            "default_values": false,
+            "channel": 2,
+            "position_x": 54.041507720947266,
+            "position_y": 3.607741117477417,
+            "position_z": 17.19011878967285
+          }
+        ]
+      },
+      "plate_held": true,
+      "tool": {
+        "value": {
+          "default_values": false,
+          "id": 253,
+          "volume": 0.0,
+          "length": 22.899999618530273,
+          "tip_type": 0,
+          "has_filter": false,
+          "is_needle": false,
+          "is_tool": true,
+          "label": "DCG"
+        }
+      }
+    },
+    "error": "Unexpected channel 1 position_z: 18.152; expected 17.190..17.190"
+  },
+  "original_sha256": "4798c6aff6cdb75ed157aa2099f2d9fae710b1cab3d49b4f4e768163d361bed5",
+  "recovery_park": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\hamilton_api\\bare_park_2f758a1fda124a25a9b47a503d1f5d21.jsonl",
+  "recovery_sha256": "238ee2fa801af2642608c596f2f113d2985f6c6bfd6c37aa6913229b902471bc",
+  "live_state": {
+    "available": true,
+    "connected": true,
+    "simulation": false,
+    "serial": "PRPGJ2494",
+    "initialized": true,
+    "global_state": "Idle",
+    "state": "idle",
+    "run": {
+      "protocolId": 0,
+      "runDatalId": null,
+      "isRunInProgress": false,
+      "isSimulation": true,
+      "protocolRunState": 0,
+      "startTime": "2026-11-08T02:31:37.8375247-08:00",
+      "estimatedEndTime": "2026-11-08T02:33:11-08:00",
+      "currentTime": "2026-11-08T02:33:08.6518343-08:00",
+      "pauseSeconds": 0,
+      "endPauseTime": "0001-01-01T00:00:00",
+      "protocolName": null,
+      "currentStep": 33,
+      "preLoadThermalDeviceUsed": "None",
+      "preLoadHepaFiltration": false
+    },
+    "pending_errors": [],
+    "protocol_catalog": [
+      {
+        "id": 7,
+        "name": "Protocol",
+        "favorite": true,
+        "dateModified": "2026-11-08T00:00:17.3276729",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 8,
+        "name": "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:15:26.3343363",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 9,
+        "name": "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:26:03.8078045",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 10,
+        "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:30:01.3603117",
+        "dateRun": "2026-11-08T02:31:37.8295282"
+      },
+      {
+        "id": 11,
+        "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T03:19:50.076936",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 12,
+        "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z",
+        "favorite": true,
+        "dateModified": "2026-11-09T23:39:04.8957091",
+        "dateRun": "0001-01-01T00:00:00"
+      }
+    ],
+    "protocols": [
+      "Protocol",
+      "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+      "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+      "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+      "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z",
+      "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z"
+    ],
+    "recipes": [],
+    "session_id": "ff2ff3563b054da8a4a4e3de97bead4c",
+    "parked": true,
+    "door_automation_ready": true,
+    "ready_for_robot": false,
+    "message": "Hamilton Idle; initialized.",
+    "operation": {
+      "request_id": "dcg48_repeat_683af88d0e764de8b7a8617903ffd172",
+      "action": "falcon48_staged_dcg",
+      "plan_sha256": "e532028afdabdab6a5c3a38538abad05f7721015342571f6e51dddf80854ec2a",
+      "status": "failed_or_uncertain",
+      "rounds_requested": 5,
+      "rounds_completed": 0,
+      "transfers_completed": 0,
+      "write_attempted": true,
+      "operator_confirmation": "Five round trips 3 -> 4 -> 3; original recorded placement at both sites",
+      "original_site3": [
+        62.09500002861023,
+        139.82999801635742,
+        24.1899995803833
+      ],
+      "original_site4": [
+        54.04006282697236,
+        44.166698939616914,
+        24.1899995803833
+      ],
+      "release_clearance_y_mm": 4,
+      "release_mode": "coordinated_open_retreat",
+      "release_outward_mm": 10,
+      "temporal_camera_frames": 5,
+      "cycle": 1,
+      "source_site": 3,
+      "destination_site": 4,
+      "capture_tag": "cycle1_site3_before",
+      "stage": "release_return",
+      "original_scales": [
+        5,
+        5
+      ],
+      "checkpoint": {
+        "positions": {
+          "positions": [
+            {
+              "default_values": false,
+              "channel": 1,
+              "position_x": 54.041507720947266,
+              "position_y": 84.72623443603516,
+              "position_z": 17.18988609313965
+            },
+            {
+              "default_values": false,
+              "channel": 2,
+              "position_x": 54.041507720947266,
+              "position_y": 3.607741117477417,
+              "position_z": 17.19011878967285
+            }
+          ]
+        },
+        "plate_held": true,
+        "tool": {
+          "value": {
+            "default_values": false,
+            "id": 253,
+            "volume": 0.0,
+            "length": 22.899999618530273,
+            "tip_type": 0,
+            "has_filter": false,
+            "is_needle": false,
+            "is_tool": true,
+            "label": "DCG"
+          }
+        }
+      },
+      "error": "Unexpected channel 1 position_z: 18.152; expected 17.190..17.190"
+    },
+    "prompt": null,
+    "polling": {
+      "mode": "normal",
+      "purpose": null,
+      "calibration_default": "reduced",
+      "camera_paused": false
+    }
+  },
+  "live_has_tips": false,
+  "checked_at": 1794296366.580501,
+  "hardware_commands_sent": false
+}

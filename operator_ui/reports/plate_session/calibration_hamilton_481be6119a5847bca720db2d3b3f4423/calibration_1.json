@@ -1,0 +1,2724 @@
+{
+  "status": "calibration_completed_at_HOME",
+  "final": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 27.999958023428917
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 65.12114017676319,
+      "J2": 41.06895017681274,
+      "J3": 59.075311563103185,
+      "J4": -10.374325175702856
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.77,
+      "X": 312.009,
+      "Y": -65.48,
+      "Z": 103.72
+    },
+    "program_state": {
+      "state": "running",
+      "value": 1
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "phases": [
+    {
+      "phase": "calibration",
+      "plan": {
+        "actions": [
+          "classic_pickup"
+        ],
+        "at": 1794385994.4318619,
+        "dispatch": "classic_pickup",
+        "id": "2026-11-11T08:33:14.431861+00:00:1794385994431",
+        "labels": [
+          "Full Calibration"
+        ],
+        "requirements": [
+          "Start at IDLE with empty jaws. The 48-well plate is flat in its accepted HOME holder and orientation.",
+          "Keep the same plate support and camera settings as the reviewed 48-well setup.",
+          "Confirm the observation/alignment sweep, descent, reseating, jaw opening and 30 mm empty-arm rise are clear; supervise the emergency stop.",
+          "Uses well-grid detection and the verified height reference, then the taught descent and accepted 3.9 mm grip.",
+          "After gripping, lift 5 mm at speed 5, lower the same 5 mm at speed 5 into the unchanged supporting holder, open E1 to 28 mm, then raise the empty arm 30 mm at speed 137. No return to IDLE or holder rotation. Changed plate placement stops for review."
+        ],
+        "source": "button",
+        "steps": [
+          {
+            "kind": "classic",
+            "label": "Calibrate the 48-well plate"
+          },
+          {
+            "kind": "classic",
+            "label": "Align with the 48-well plate"
+          },
+          {
+            "kind": "classic",
+            "label": "Descend to the taught 48-well position"
+          },
+          {
+            "kind": "classic",
+            "label": "Grip the 48-well plate"
+          },
+          {
+            "kind": "classic",
+            "label": "Lift the plate 5 mm"
+          },
+          {
+            "kind": "classic",
+            "label": "Lower the plate back into HOME"
+          },
+          {
+            "kind": "classic",
+            "label": "Release the plate at HOME"
+          },
+          {
+            "kind": "classic",
+            "label": "Raise the empty arm 30 mm"
+          }
+        ],
+        "summary": "Calibrate, align, descend, grip, lift 5 mm, reseat and release at HOME, then raise the empty arm 30 mm."
+      },
+      "started_at": 1794385994.432843,
+      "samples": [
+        {
+          "at": 1794385994.9170766,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          }
+        },
+        {
+          "at": 1794385996.0547142,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.631,
+            "Z": 248.02
+          }
+        },
+        {
+          "at": 1794385997.3714187,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          }
+        },
+        {
+          "at": 1794385998.4935126,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          }
+        },
+        {
+          "at": 1794385999.8103483,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          }
+        },
+        {
+          "at": 1794386000.9442313,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02
+          }
+        },
+        {
+          "at": 1794386002.335946,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.218
+          }
+        },
+        {
+          "at": 1794386003.4729207,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 255.146
+          }
+        },
+        {
+          "at": 1794386004.821263,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 260.821
+          }
+        },
+        {
+          "at": 1794386005.9408667,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 267.581
+          }
+        },
+        {
+          "at": 1794386007.3346016,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 273.22
+          }
+        },
+        {
+          "at": 1794386008.454885,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 280.145
+          }
+        },
+        {
+          "at": 1794386009.8560658,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 285.784
+          }
+        },
+        {
+          "at": 1794386010.9888709,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 289.862,
+            "Y": 62.262,
+            "Z": 289.13
+          }
+        },
+        {
+          "at": 1794386012.4143977,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 288.276,
+            "Y": 56.869,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386013.5512128,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 286.278,
+            "Y": 50.076,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386014.9628298,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 284.665,
+            "Y": 44.589,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386016.1001596,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 282.667,
+            "Y": 37.796,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386017.485722,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 281.075,
+            "Y": 32.386,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386018.6031303,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386020.0056484,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386021.1632624,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386022.576795,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386023.7428236,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386025.1627567,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386026.3312013,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386027.7212543,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386028.8857784,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386030.264696,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386031.4126759,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386032.8328826,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386033.9767506,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386035.3726108,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386036.5246432,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386037.9501076,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386039.140025,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386040.5552986,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386041.7089205,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386043.126739,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386044.2668781,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386045.6463115,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.357,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386046.8058531,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386048.216696,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386049.3903027,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386050.7805626,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386051.9556653,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386053.3797598,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386054.5190797,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.357,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386055.9091475,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386057.0364017,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386058.4641838,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386059.6718225,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386061.0429027,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386062.241954,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386063.6650834,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386064.8039155,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386066.2259946,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386067.3900707,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386068.8001113,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386069.941126,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386071.3214898,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386072.4560766,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386073.826836,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386074.9675395,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.357,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386076.3440516,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386077.523259,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386078.8857887,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.357,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386080.0333316,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386081.3946178,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386082.5615704,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386083.9790318,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386085.1273556,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386086.504913,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386087.66906,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386089.0610638,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386090.21355,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386091.6388521,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386092.7888014,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.357,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386094.1576154,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386095.3276002,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386096.7326362,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386097.9709737,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386099.3988452,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386100.567575,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386101.968772,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386103.1348317,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386104.563195,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.303,
+            "Y": 26.358,
+            "Z": 289.129
+          }
+        },
+        {
+          "at": 1794386105.6694658,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.357,
+            "Z": 291.534
+          }
+        },
+        {
+          "at": 1794386107.0534286,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 294.566
+          }
+        },
+        {
+          "at": 1794386108.1858597,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -3.88,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 300.003
+          }
+        },
+        {
+          "at": 1794386109.5615137,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 19.519,
+            "X": 279.302,
+            "Y": 26.358,
+            "Z": 300.003
+          }
+        },
+        {
+          "at": 1794386110.7066398,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 42.916,
+            "X": 279.301,
+            "Y": 26.357,
+            "Z": 300.004
+          }
+        },
+        {
+          "at": 1794386112.08513,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 66.316,
+            "X": 279.301,
+            "Y": 26.357,
+            "Z": 300.004
+          }
+        },
+        {
+          "at": 1794386113.2130163,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 279.321,
+            "Y": 26.278,
+            "Z": 300.004
+          }
+        },
+        {
+          "at": 1794386114.5789475,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 280.695,
+            "Y": 21.01,
+            "Z": 300.002
+          }
+        },
+        {
+          "at": 1794386115.718157,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 281.906,
+            "Y": 16.368,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386117.0905166,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 283.036,
+            "Y": 12.028,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386118.228704,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 284.508,
+            "Y": 6.378,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386119.6137526,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 285.175,
+            "Y": 3.819,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386120.7470272,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 286.929,
+            "Y": -2.916,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386122.111499,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 287.546,
+            "Y": -5.28,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386123.2553797,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 289.26,
+            "Y": -11.861,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386124.6869428,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 289.896,
+            "Y": -14.303,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386125.8124495,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 291.691,
+            "Y": -21.193,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386127.193686,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 292.34,
+            "Y": -23.685,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386128.321874,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 294.021,
+            "Y": -30.138,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386129.6770651,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 294.918,
+            "Y": -33.581,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386130.8063095,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 296.34,
+            "Y": -39.044,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386132.1815877,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 297.52,
+            "Y": -43.571,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386133.3193448,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 298.459,
+            "Y": -47.175,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386134.6694837,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 299.891,
+            "Y": -52.672,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386135.8041534,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 300.779,
+            "Y": -56.082,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386137.1705134,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 302.192,
+            "Y": -61.5,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386138.2906568,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 303.09,
+            "Y": -64.948,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386139.6773603,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 304.501,
+            "Y": -70.368,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386140.8421333,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.714,
+            "X": 305.328,
+            "Y": -73.54,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386142.2298937,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.738,
+            "X": 308.471,
+            "Y": -69.749,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386143.3776,
+          "step": "Align with the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.013,
+            "Y": -65.478,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386144.776432,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386145.9238703,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386147.3742924,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.013,
+            "Y": -65.478,
+            "Z": 300.0
+          }
+        },
+        {
+          "at": 1794386148.552768,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.013,
+            "Y": -65.478,
+            "Z": 129.982
+          }
+        },
+        {
+          "at": 1794386150.0260894,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 93.718
+          }
+        },
+        {
+          "at": 1794386151.1985283,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 91.788
+          }
+        },
+        {
+          "at": 1794386152.6287222,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 90.716
+          }
+        },
+        {
+          "at": 1794386153.800881,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 88.714
+          }
+        },
+        {
+          "at": 1794386155.2251742,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 87.716
+          }
+        },
+        {
+          "at": 1794386156.3658292,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 85.715
+          }
+        },
+        {
+          "at": 1794386157.8314931,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 84.501
+          }
+        },
+        {
+          "at": 1794386159.0403557,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 82.716
+          }
+        },
+        {
+          "at": 1794386160.4816194,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 80.781
+          }
+        },
+        {
+          "at": 1794386161.617746,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 79.596
+          }
+        },
+        {
+          "at": 1794386163.0502784,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 78.715
+          }
+        },
+        {
+          "at": 1794386164.2584076,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 77.81
+          }
+        },
+        {
+          "at": 1794386165.6749015,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 77.216
+          }
+        },
+        {
+          "at": 1794386166.7987049,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 76.215
+          }
+        },
+        {
+          "at": 1794386168.2521596,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 75.716
+          }
+        },
+        {
+          "at": 1794386169.4846437,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 74.715
+          }
+        },
+        {
+          "at": 1794386170.8563876,
+          "step": "Descend to the taught 48-well position",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 74.151
+          }
+        },
+        {
+          "at": 1794386172.0076673,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386173.4008214,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386174.5333087,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386175.9571722,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386177.1450973,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386178.5390139,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386179.6661036,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386181.059086,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386182.202963,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386183.5687237,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386184.6934178,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386186.1046026,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386187.2826834,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386188.6859343,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386189.8013172,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386191.2086926,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386192.3686428,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386193.749248,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386194.9579446,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386196.3678162,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386197.5599277,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386198.9790251,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386200.1210408,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386201.468884,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386202.6350546,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386204.0238988,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386205.2138255,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386206.6046486,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386207.7735665,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386209.1789417,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386210.3197238,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386211.6964726,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.011,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386212.824833,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386214.1957076,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386215.3566067,
+          "step": "Grip the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386216.7372258,
+          "step": "Lift the plate 5 mm",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386217.9260914,
+          "step": "Lift the plate 5 mm",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.765,
+            "X": 312.012,
+            "Y": -65.478,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386219.2902365,
+          "step": "Lift the plate 5 mm",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.769,
+            "X": 312.01,
+            "Y": -65.48,
+            "Z": 77.845
+          }
+        },
+        {
+          "at": 1794386220.4171188,
+          "step": "Lower the plate back into HOME",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.01,
+            "Y": -65.48,
+            "Z": 78.72
+          }
+        },
+        {
+          "at": 1794386221.8278043,
+          "step": "Lower the plate back into HOME",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.009,
+            "Y": -65.48,
+            "Z": 78.587
+          }
+        },
+        {
+          "at": 1794386223.0253892,
+          "step": "Release the plate at HOME",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.009,
+            "Y": -65.48,
+            "Z": 73.718
+          }
+        },
+        {
+          "at": 1794386224.4297833,
+          "step": "Release the plate at HOME",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.01,
+            "Y": -65.48,
+            "Z": 73.72
+          }
+        },
+        {
+          "at": 1794386225.6539433,
+          "step": "Raise the empty arm 30 mm",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.01,
+            "Y": -65.48,
+            "Z": 73.72
+          }
+        },
+        {
+          "at": 1794386227.1057968,
+          "step": "Calibrate the 48-well plate",
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.01,
+            "Y": -65.48,
+            "Z": 103.723
+          }
+        },
+        {
+          "at": 1794386228.2625294,
+          "step": null,
+          "pose": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.009,
+            "Y": -65.48,
+            "Z": 103.72
+          }
+        }
+      ],
+      "dispatch": {
+        "activity": [
+          {
+            "at": "2026-11-11T08:33:14.494811+00:00",
+            "line": "Displayed plan and requirements confirmed by researcher in chat."
+          },
+          {
+            "at": "2026-11-11T08:33:14.494811+00:00",
+            "line": "Confirmed and started: Calibrate, align, descend, grip, lift 5 mm, reseat and release at HOME, then raise the empty arm 30 mm."
+          },
+          {
+            "at": "2026-11-11T08:33:14.431861+00:00",
+            "line": "Plan proposed: Calibrate, align, descend, grip, lift 5 mm, reseat and release at HOME, then raise the empty arm 30 mm."
+          },
+          {
+            "at": "2026-11-11T08:33:14.314517+00:00",
+            "line": "New calibration session: Operator-requested calibration/Hamilton cycle 1 of 5"
+          },
+          {
+            "at": "2026-11-11T08:32:17.927331+00:00",
+            "line": "Returned to saved Home."
+          },
+          {
+            "at": "2026-11-11T08:32:06.882383+00:00",
+            "line": "Displayed plan and requirements confirmed by researcher in chat."
+          },
+          {
+            "at": "2026-11-11T08:32:06.882383+00:00",
+            "line": "Confirmed and started: reviewed Home connection."
+          },
+          {
+            "at": "2026-11-11T08:31:58.488985+00:00",
+            "line": "Plan proposed: Return Home."
+          },
+          {
+            "at": "2026-11-11T08:30:12.315145+00:00",
+            "line": "Plan proposed: Return Home."
+          }
+        ],
+        "busy": false,
+        "capabilities": {
+          "automatic_squid": true
+        },
+        "configured": true,
+        "experiment": {
+          "name": "Full Calibration",
+          "total_steps": 8
+        },
+        "links": {
+          "arm": {
+            "available": true,
+            "connected": true,
+            "message": "Arm connected."
+          },
+          "hamilton": {
+            "available": true,
+            "connected": true,
+            "door_automation_ready": true,
+            "global_state": "Idle",
+            "initialized": true,
+            "message": "Hamilton Idle; initialized.",
+            "operation": null,
+            "parked": true,
+            "pending_errors": [],
+            "polling": {
+              "calibration_default": "reduced",
+              "camera_paused": false,
+              "mode": "normal",
+              "purpose": null
+            },
+            "prompt": null,
+            "protocol_catalog": [
+              {
+                "dateModified": "2026-11-08T00:00:17.3276729",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 7,
+                "name": "Protocol"
+              },
+              {
+                "dateModified": "2026-11-08T02:15:26.3343363",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 8,
+                "name": "Lacry plate transfer 4 to 3 20261108T101236282327Z"
+              },
+              {
+                "dateModified": "2026-11-08T02:26:03.8078045",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 9,
+                "name": "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z"
+              },
+              {
+                "dateModified": "2026-11-08T02:30:01.3603117",
+                "dateRun": "2026-11-08T02:31:37.8295282",
+                "favorite": true,
+                "id": 10,
+                "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z"
+              },
+              {
+                "dateModified": "2026-11-08T03:19:50.076936",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 11,
+                "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z"
+              },
+              {
+                "dateModified": "2026-11-09T23:39:04.8957091",
+                "dateRun": "2026-11-09T23:40:15.4085454",
+                "favorite": true,
+                "id": 12,
+                "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z"
+              },
+              {
+                "dateModified": "2026-11-09T23:56:21.443924",
+                "dateRun": "2026-11-09T23:56:50.7857662",
+                "favorite": true,
+                "id": 13,
+                "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 tips6 20261110T075548Z"
+              },
+              {
+                "dateModified": "2026-11-10T00:09:16.6342697",
+                "dateRun": "0001-01-01T00:00:00",
+                "favorite": true,
+                "id": 14,
+                "name": "DRY MOCK 48 WELL corrected site4 tips6 20261110T080843Z"
+              }
+            ],
+            "protocols": [
+              "Protocol",
+              "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+              "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+              "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+              "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z",
+              "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z",
+              "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 tips6 20261110T075548Z",
+              "DRY MOCK 48 WELL corrected site4 tips6 20261110T080843Z"
+            ],
+            "ready_for_robot": false,
+            "recipes": [],
+            "run": {
+              "currentStep": 47,
+              "currentTime": "2026-11-09T23:58:50.2387981-08:00",
+              "endPauseTime": "0001-01-01T00:00:00",
+              "estimatedEndTime": "2026-11-09T23:58:52-08:00",
+              "isRunInProgress": false,
+              "isSimulation": true,
+              "pauseSeconds": 0,
+              "preLoadHepaFiltration": false,
+              "preLoadThermalDeviceUsed": "None",
+              "protocolId": 0,
+              "protocolName": null,
+              "protocolRunState": 0,
+              "runDatalId": null,
+              "startTime": "2026-11-09T23:56:50.7897671-08:00"
+            },
+            "serial": "PRPGJ2494",
+            "session_id": "f9cc1da8be7b402586534f59ea3c8492",
+            "simulation": false,
+            "state": "idle"
+          },
+          "squid": {
+            "available": true,
+            "completion_confirmed": false,
+            "connected": false,
+            "job": null,
+            "message": "Connect to Squid to follow imaging progress.",
+            "simulation": null,
+            "status": "disconnected"
+          }
+        },
+        "ok": true,
+        "pending": null,
+        "plate_session": {
+          "calibrated": false,
+          "evidence": null,
+          "reason": "A new full-calibration run is starting.",
+          "session_id": "5cfbf6b2824240618be4e54dd65106b3"
+        },
+        "question": null,
+        "review": null,
+        "running": {
+          "active": true,
+          "done": [],
+          "error": "",
+          "message": "Calibrate the 48-well plate running. Keep hands clear.",
+          "ok": null,
+          "step": "Calibrate the 48-well plate"
+        },
+        "transcript": [
+          {
+            "at": "2026-11-11T08:30:12.315145+00:00",
+            "role": "lacry",
+            "text": "Return IDLE from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.\nConfirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop. The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws.\nReply \u201cYes\u201d to confirm these requirements and start, or tell me what to change."
+          },
+          {
+            "at": "2026-11-11T08:31:58.488985+00:00",
+            "role": "lacry",
+            "text": "Return IDLE from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.\nConfirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop. Any held plate is secure and can lift clear of its support. The claw position will stay unchanged.\nReply \u201cYes\u201d to confirm these requirements and start, or tell me what to change."
+          },
+          {
+            "at": "2026-11-11T08:32:06.441031+00:00",
+            "role": "researcher",
+            "text": "Yes"
+          },
+          {
+            "at": "2026-11-11T08:32:06.882383+00:00",
+            "role": "lacry",
+            "text": "Returning IDLE. Keep hands clear."
+          },
+          {
+            "at": "2026-11-11T08:32:17.927331+00:00",
+            "role": "lacry",
+            "text": "Returned to saved IDLE."
+          },
+          {
+            "at": "2026-11-11T08:33:14.431861+00:00",
+            "role": "lacry",
+            "text": "Calibrate, align, descend, grip, lift 5 mm, reseat and release at HOME, then raise the empty arm 30 mm.\nStart at IDLE with empty jaws. The 48-well plate is flat in its accepted HOME holder and orientation. Keep the same plate support and camera settings as the reviewed 48-well setup. Confirm the observation/alignment sweep, descent, reseating, jaw opening and 30 mm empty-arm rise are clear; supervise the emergency stop. Uses well-grid detection and the verified height reference, then the taught descent and accepted 3.9 mm grip. After gripping, lift 5 mm at speed 5, lower the same 5 mm at speed 5 into the unchanged supporting holder, open E1 to 28 mm, then raise the empty arm 30 mm at speed 137. No return to IDLE or holder rotation. Changed plate placement stops for review.\nReply \u201cYes\u201d to confirm these requirements and start, or tell me what to change."
+          },
+          {
+            "at": "2026-11-11T08:33:14.436618+00:00",
+            "role": "researcher",
+            "text": "Yes"
+          },
+          {
+            "at": "2026-11-11T08:33:14.494811+00:00",
+            "role": "lacry",
+            "text": "Running the pickup sequence. Keep hands clear."
+          }
+        ]
+      },
+      "status": "completed",
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+            "t": 0.1
+          },
+          {
+            "level": "info",
+            "msg": "Clearance: upload 1/1.",
+            "t": 0.8
+          },
+          {
+            "level": "info",
+            "msg": "Clearance: motion 0/100.",
+            "t": 1.1
+          },
+          {
+            "level": "info",
+            "msg": "Clearance: motion 0/100.",
+            "t": 1.3
+          },
+          {
+            "level": "info",
+            "msg": "Clearance: motion 19/100.",
+            "t": 1.4
+          },
+          {
+            "level": "info",
+            "msg": "Clearance: motion 81/100.",
+            "t": 1.6
+          },
+          {
+            "level": "info",
+            "msg": "Clearance: motion 99/100.",
+            "t": 1.7
+          },
+          {
+            "level": "info",
+            "msg": "Clearance: motion 100/100.",
+            "t": 1.9
+          }
+        ],
+        "name": "pickup_holder_clearance",
+        "result": {
+          "grasp_verified": false,
+          "ok": true,
+          "payload": "empty",
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.01,
+            "Y": -65.48,
+            "Z": 103.723
+          },
+          "record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\demonstrations\\pickup_holder\\458e38e374214f19bc3bea8b173e81a6.json",
+          "station": "HOME"
+        },
+        "state": "done",
+        "target": {
+          "config": "Wide",
+          "open_claw_trial": false,
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "rz": 89.7652192188176,
+          "x": 312.0124178577057,
+          "y": -65.47790542678248,
+          "z_calibrated": 73.718
+        }
+      },
+      "state": {
+        "camera": {
+          "age_s": 126.7,
+          "device": {
+            "ip": "192.168.201.89",
+            "model": "JHEM600GM-HM",
+            "serial": "457108625727"
+          },
+          "enabled": true,
+          "error": "",
+          "open": true
+        },
+        "envelope": {
+          "X": {
+            "max": 450.0,
+            "min": 200.0
+          },
+          "Y": {
+            "max": 380.0,
+            "min": -250.0
+          },
+          "Z": {
+            "max": 400.0,
+            "min": 70.0
+          },
+          "enabled": true
+        },
+        "robot": {
+          "connected": true,
+          "control_mode": {
+            "mode": "auto",
+            "value": 1
+          },
+          "enabled": true,
+          "endpoint": "192.168.201.220:56788",
+          "errors": [],
+          "external_axes": {
+            "E1": 27.999958023428917
+          },
+          "external_axes_source": "native_motion_status",
+          "external_axes_units": {
+            "E1": "mm"
+          },
+          "joints": {
+            "J1": 65.12114017676319,
+            "J2": 41.06895017681274,
+            "J3": 59.075311563103185,
+            "J4": -10.374325175702856
+          },
+          "lua_app_initialized": true,
+          "ok": true,
+          "pose_mm": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.77,
+            "X": 312.009,
+            "Y": -65.48,
+            "Z": 103.72
+          },
+          "program_state": {
+            "state": "running",
+            "value": 1
+          },
+          "system_state": {
+            "state": "running",
+            "value": 2
+          }
+        },
+        "sequence": {
+          "active": false,
+          "name": "pickup_holder_clearance",
+          "state": "done"
+        },
+        "target": {
+          "config": "Wide",
+          "open_claw_trial": false,
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "rz": 89.7652192188176,
+          "x": 312.0124178577057,
+          "y": -65.47790542678248,
+          "z_calibrated": 73.718
+        },
+        "ts": 1794386228.1539207
+      },
+      "running": {
+        "active": false,
+        "done": [
+          "Calibrate the 48-well plate",
+          "Align with the 48-well plate",
+          "Descend to the taught 48-well position",
+          "Grip the 48-well plate",
+          "Lift the plate 5 mm",
+          "Lower the plate back into HOME",
+          "Release the plate at HOME",
+          "Raise the empty arm 30 mm"
+        ],
+        "error": "",
+        "message": "Full calibration complete. The plate is in the HOME holder; the open arm is 30 mm above it. Holder rotation is the next experiment step.",
+        "ok": true,
+        "step": null
+      },
+      "finished_at": 1794386228.2810528
+    }
+  ]
+}

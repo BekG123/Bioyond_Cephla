@@ -1,0 +1,12 @@
+{
+  "change": "Full 1200x800 final affine refinement for the live height-referenced tracker, with 100 iterations and 1e-7 convergence epsilon; frozen upstream registrations are unchanged.",
+  "saved_images_accepted": 25,
+  "saved_images_breakdown": {"successful_run": 9, "diagnosed_failure_run": 7, "held_out_failure_runs": 9},
+  "held_out_runs": 3,
+  "photometric_variants_accepted": 2,
+  "synthetic_negative_cases_rejected": {"plate_translations": 4, "plate_rotations": 2, "missing_plate": 1, "occluded_plate": 1},
+  "unchanged_limits": {"disk_group_spread_px": 0.8, "extent_group_spread_px": 2, "placement_xy_mm": 0.5, "placement_yaw_degrees": 0.2, "stationary_measurements": 3, "stationary_xy_agreement_mm": 0.25, "stationary_timeout_seconds": 20},
+  "passed_test_counts": {"image_robustness": 6, "grid_pattern": 13, "projected_alignment": 9, "projected_disk_trial": 16},
+  "broader_suite_limitation": "test_plate48_workflow has errors because its fixtures require the current on-disk commissioning profile to contain an accepted grip record. That approval guard was not changed.",
+  "limitations": "Finite saved-image and synthetic evaluation, not a guarantee across arbitrary plates or lighting. Full-resolution fitting uses more CPU. No hardware motion test performed for this change."
+}

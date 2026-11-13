@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-12T03:14:29.200663+00:00",
+  "operator_statement": "No?I did not move or reset it",
+  "vendor_log": "C:\\Bioyond\\RobStudio\\Logs\\20261111182804.log",
+  "vendor_events": [
+    "-DEBUG- 2026-11-11 19:01:04.590  11  BR.PC.BYSDK.RobotStateHandler._device_HeartBeatAction.449  \u5fc3\u8df3\u4fe1\u606f:OperMode:1, MotionState:Paused, LiqSysState:Idle, IsMoving:False,IsInExperiment:False,DoorStatus:0",
+    "-DEBUG- 2026-11-11 19:01:04.590  11  BR.PC.BYSDK.StateMachine.TriggerEvent.325  \u5f53\u524d\u72b6\u6001:Ready,\u89e6\u53d1\u4e8b\u4ef6:PausedEvent",
+    "-DEBUG- 2026-11-11 19:01:04.810  11  BR.PC.BYSDK.RobotStateHandler._luaEngineGetInfoAction.932  Lua\u5f15\u64ce\u4fe1\u606f:McRpc_Cmd_LuaEngineGetInfo_resp { State = 0, Debug = 0, ProgFile = mod_Socket.lua, ProgLine = 80, MotionFile = mod_HostPoint.lua, MotionLine = 23, CurCycleTime = 803448, TotalRunTime = 803448, LastCycleTime = 0, TotalCycleCount = 1 }",
+    "-DEBUG- 2026-11-11 19:01:04.810  11  BR.PC.BYSDK.StateMachine.TriggerEvent.106  \u5f53\u524d\u72b6\u6001:Run,\u89e6\u53d1\u4e8b\u4ef6:StopEvent",
+    "-DEBUG- 2026-11-11 19:04:04.409  03  BR.PC.BYSDK.RobotStateHandler._device_HeartBeatAction.449  \u5fc3\u8df3\u4fe1\u606f:OperMode:1, MotionState:Disable, LiqSysState:Idle, IsMoving:False,IsInExperiment:False,DoorStatus:0",
+    "-DEBUG- 2026-11-11 19:04:04.409  03  BR.PC.BYSDK.StateMachine.TriggerEvent.325  \u5f53\u524d\u72b6\u6001:Paused,\u89e6\u53d1\u4e8b\u4ef6:DisableEvent",
+    " -INFO- 2026-11-11 19:09:11.957  05  BR.PC.BYSDK.Liquid.Control_SetAutoEnable.976  Control_SetAutoEnable:True,id:1",
+    " -INFO- 2026-11-11 19:09:11.973  05  BR.PC.BYSDK.Liquid.Control_SetAutoEnable.999  Control_SetAutoEnable success,cmd:McRpc_Cmd_MotionAutoEnable,isEnable:True,id:1",
+    "-DEBUG- 2026-11-11 19:09:12.454  11  BR.PC.BYSDK.RobotStateHandler._device_HeartBeatAction.449  \u5fc3\u8df3\u4fe1\u606f:OperMode:1, MotionState:Paused, LiqSysState:Idle, IsMoving:False,IsInExperiment:False,DoorStatus:0",
+    "-DEBUG- 2026-11-11 19:09:12.454  11  BR.PC.BYSDK.StateMachine.TriggerEvent.325  \u5f53\u524d\u72b6\u6001:Disable,\u89e6\u53d1\u4e8b\u4ef6:PausedEvent",
+    " -INFO- 2026-11-11 19:09:15.338  22  BR.PC.BYSDK.Liquid.Control_SetAutoEnable.976  Control_SetAutoEnable:False,id:1",
+    " -INFO- 2026-11-11 19:09:15.354  22  BR.PC.BYSDK.Liquid.Control_SetAutoEnable.999  Control_SetAutoEnable success,cmd:McRpc_Cmd_MotionAutoDisable,isEnable:False,id:1",
+    "-DEBUG- 2026-11-11 19:09:15.456  05  BR.PC.BYSDK.RobotStateHandler._device_HeartBeatAction.449  \u5fc3\u8df3\u4fe1\u606f:OperMode:1, MotionState:Disable, LiqSysState:Idle, IsMoving:False,IsInExperiment:False,DoorStatus:0",
+    "-DEBUG- 2026-11-11 19:09:15.456  05  BR.PC.BYSDK.StateMachine.TriggerEvent.325  \u5f53\u524d\u72b6\u6001:Paused,\u89e6\u53d1\u4e8b\u4ef6:DisableEvent"
+  ],
+  "findings": [
+    "Console audit records no recovery enable, program start or gripper move after the failed run.",
+    "Disabled state and nearly closed jaws were present before the 19:07:56 reload.",
+    "Vendor application logged MotionAutoEnable then MotionAutoDisable at 19:09:11 and 19:09:15.",
+    "Cause of original 19:04:04 disable and jaw closure not established."
+  ],
+  "recovery_motion_started": false,
+  "status": "awaiting_control_source_clarification"
+}

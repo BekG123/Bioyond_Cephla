@@ -1,0 +1,78 @@
+{
+  "channelSelection": "TwoChannel",
+  "tipLabwareGroupId": 44,
+  "liquidType": "Aqueous",
+  "newTipsEachTransfer": true,
+  "mixBeforeAspirate": false,
+  "mixAfterDispense": false,
+  "tipReuseOption": "PerTransfer",
+  "tipDiscardLocation": "DiscardToWaste",
+  "dispenseToWaste": false,
+  "aspirateSettings": {
+    "transferVolume": 10.0,
+    "pipettingHeight": 1.0,
+    "retractToWellTop": true,
+    "retractDistance": 0.0,
+    "pipettingHeightStartPoint": "FromContainerBottom",
+    "mixVolume": 0.0,
+    "mixCycles": 0,
+    "mixSpeed": 0,
+    "mixHeight": 0.0,
+    "enableMad": false,
+    "followLiquid": false,
+    "mixHeightStartPoint": "FromContainerBottom",
+    "offset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "useOffset": false
+  },
+  "dispenseSettings": {
+    "transferVolume": 10.0,
+    "pipettingHeight": 2.0,
+    "retractToWellTop": true,
+    "retractDistance": 0.0,
+    "pipettingHeightStartPoint": "FromContainerBottom",
+    "mixVolume": 0.0,
+    "mixCycles": 0,
+    "mixSpeed": 0,
+    "mixHeight": 0.0,
+    "followLiquid": false,
+    "mixHeightStartPoint": "FromContainerBottom",
+    "enableMad": false,
+    "offset": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "useOffset": false
+  },
+  "sources": [
+    {
+      "position": 2,
+      "addresses": [
+        {
+          "row": 1,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "destinations": [
+    {
+      "position": 4,
+      "addresses": [
+        {
+          "row": 1,
+          "column": 2
+        }
+      ]
+    }
+  ],
+  "customizeLiquid": false,
+  "customLiquidSettings": null,
+  "stepType": "TransferSamplesStep",
+  "name": "DRY AIR source A1 to 48-well A2, 10uL",
+  "stepOrder": 2,
+  "disabled": false,
+  "makeNameUnique": false
+}

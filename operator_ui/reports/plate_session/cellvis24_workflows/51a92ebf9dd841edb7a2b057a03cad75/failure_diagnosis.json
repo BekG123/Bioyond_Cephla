@@ -1,0 +1,141 @@
+{
+  "at": 1794440686.7514136,
+  "status": "failed_first_direct_trial",
+  "run_sha256": "20d46df39c325ed254dfbecf30ae441374682c3135e186b80c26d3b46293e8de",
+  "phase": "First fixed-XYZ MoveJ wrist turn above HOME",
+  "hamilton_crossing_started": false,
+  "controller_fault": "axis4 collision detected",
+  "last_valid_sample": {
+    "at": 1794440649.8615649,
+    "pose": {
+      "X": 306.2,
+      "Y": -62.88,
+      "Z": 110.651,
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 37.306
+    },
+    "axes": {
+      "E1": 24.99830722808838,
+      "E2": 90.68090406283673
+    }
+  },
+  "stopped_state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": false,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-11 15:44:09 Motion error: axis 4 collision detected"
+        },
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-11 15:44:09 Motion error: axis 4 collision detected"
+        },
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-11 15:44:09 Motion error: axis 4 collision detected"
+        },
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-11 15:44:09 Motion error: axis 4 collision detected"
+        },
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-11 15:44:09 Motion error: axis 4 collision detected"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-11 15:44:09 Motion error: failed to enable axis 2 servo"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-11 15:44:09 Motion error: failed to enable axis 3 servo"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-11 15:44:09 Motion error: failed to enable axis 4 servo"
+        },
+        {
+          "errCode": 3929,
+          "errMsg": "2026-11-11 15:44:09 Motion error: external axis 1 servo enable failed"
+        },
+        {
+          "errCode": 3929,
+          "errMsg": "2026-11-11 15:44:09 Motion error: external axis 2 servo enable failed"
+        }
+      ],
+      "external_axes": {
+        "E1": 25.34075267612934
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 72.04130933830176,
+        "J2": 70.26957327278113,
+        "J3": 36.9732492350188,
+        "J4": -145.20824546382755
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -37.965,
+        "X": 252.803,
+        "Y": -2.753,
+        "Z": 110.64
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "error",
+        "value": 3
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "cellvis24_workflow",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1794440686.748874
+  },
+  "retries": 0,
+  "fault_cleared": false,
+  "recovery_motion_sent": false,
+  "operator_contact_observation": "pending",
+  "conclusion": "Fault occurred after lift to Z110.65 and during initial wrist rotation, before direct crossing. Telemetry alone does not distinguish physical contact from dynamic loading."
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cephla.accepted-plate-grip.v1",
+  "at": 1793528545.571063,
+  "plate_profile_id": "48_well_projected_20261026",
+  "status": "operator_accepted_supervised_closure_and_loaded_home_transfer",
+  "operator_feedback": "It worked perfectly. Use the same drop off and home then to Squid + pickup back home pipeline. The one we tested and worked",
+  "acceptance_context": "Confirmation after this pickup, loaded Home return and loaded Squid delivery; excludes later Squid retrievals reported tilted.",
+  "plate_retained_during_lift_and_home_operator_confirmed": true,
+  "settings": {
+    "target_e1_mm": 3.9,
+    "closing_speed": 5,
+    "proof_lift_mm": 5,
+    "proof_lift_speed": 5
+  },
+  "taught_endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.7652192188176,
+    "X": 312.0124178577057,
+    "Y": -67.47790542678248,
+    "Z": 73.718
+  },
+  "source_profile_sha256": "cb0ea6f079864aa432e3c073f1123ff5664982624edd4b92c1987e802f3bcdcf",
+  "force_control": false,
+  "force_limits_changed": false,
+  "uninterrupted_full_pipeline": false,
+  "evidence": [
+    {
+      "path": "operator_ui/reports/projected_alignment/positive_y84_b9bdbc5a1efa4f7186e75235a7514d8e/grip_attempt.json",
+      "sha256": "9c1268b5d550df369a5613e7c4ed93f50bd055646007b6d9d077fc82047ade3c"
+    },
+    {
+      "path": "operator_ui/reports/projected_alignment/positive_y84_b9bdbc5a1efa4f7186e75235a7514d8e/proof_lift.json",
+      "sha256": "7f8caaf1efad714028536ffc66673357aaacd602e1c402949319b7a161be3c78"
+    },
+    {
+      "path": "operator_ui/reports/ik_home/1793525450641843900_ae23d0a7cc8b4c8cb4364382a64a0e1d.json",
+      "sha256": "0c15c057a36a477d88b37c16653e928f8ee786fd9485550ce084bda278435ea6"
+    },
+    {
+      "path": "operator_ui/reports/squid_48well_approach/loaded_trial_50e9db8eb2104d939a1c66ca1f75dab3.json",
+      "sha256": "47e3e7577ae8bead2dc8261cbfc2bcf4361c5aabdfcca980a0d795c9da2e73a2"
+    }
+  ]
+}

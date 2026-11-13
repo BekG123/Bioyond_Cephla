@@ -1,0 +1,12 @@
+{
+  "status": "loaded_for_operator_cli_trial",
+  "route_sha256": "f06fe6c51c2ac087e676dfa7c7eba43bbdb6b58e10296ee128a3efa8cb8b28d9",
+  "tests_passed": 20,
+  "backend_pid": 22324,
+  "motion_started": false,
+  "command": ".\\.venv-realsense\\Scripts\\python.exe -B operator_ui\\run_cellvis24_recorded_hamilton.py --full-calibration --opposite-wrist --execute --path-clear",
+  "required_published_capability": 220112,
+  "new_lua_publication_required": false,
+  "operating_requirements": "Start at IDLE or accepted empty HOME clearance with empty jaws, plate flat in HOME, healthy running Auto/Lua; confirm changed loaded sweep with --path-clear. No automatic startup or fault reset.",
+  "delivery": "Calibration/scanner -> HOME release/rotation/short-side pickup -> opposite-wrist Hamilton; ends holding plate, no station release or return."
+}

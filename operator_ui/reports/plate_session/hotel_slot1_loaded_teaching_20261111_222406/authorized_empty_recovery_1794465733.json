@@ -1,0 +1,180 @@
+{
+  "before": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "manual",
+        "value": 0
+      },
+      "enabled": false,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.04207035817671567
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 201.98947389328396,
+        "J2": -25.465936604235303,
+        "J3": 40.95350254400658,
+        "J4": -14.973519163625074
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 0.514,
+        "X": 113.831,
+        "Y": -139.401,
+        "Z": 240.588
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "idle",
+        "value": 1
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "",
+      "state": "idle"
+    },
+    "target": null,
+    "ts": 1794465733.936916
+  },
+  "native": {
+    "manual": true,
+    "enabled": false,
+    "disabled": true,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 0.04207035817671567,
+      "E2": 2.084407035383461
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "authorization": "Route and jaw movement clear; prepare Auto and return HOME",
+  "actions": [
+    {
+      "action": "mode_auto",
+      "result": {
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    }
+  ],
+  "plan": {
+    "at": 1794465734.5218685,
+    "axes": {
+      "E1": 0.042250121623510495,
+      "E2": 2.084407035383461
+    },
+    "candidate_sha256": "9dbd718e7d51726d9f8ff97ac03a0e2eb608ec338fb67b11820ac6fd8288f85c",
+    "cfg": {
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "claw_gap_max_mm": 88.0,
+      "claw_gap_min_mm": 60.0,
+      "extension_margin_mm": 8.0,
+      "inner_reach_mm": 280.0,
+      "j2_margin_deg": 2.0,
+      "j2_min_deg": -95.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j4_hard_abs_deg": 220.0,
+      "j4_pref_abs_deg": 220.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "reach_hard_mm": 460.0
+    },
+    "envelope": {
+      "X": [
+        200,
+        450
+      ],
+      "Y": [
+        -250,
+        380
+      ],
+      "Z": [
+        70,
+        400
+      ]
+    },
+    "id": "2b5870d65f0740189ee774207f9aba99",
+    "joints": {
+      "J1": 201.98947389328396,
+      "J2": -25.465936604235303,
+      "J3": 40.95350254400658,
+      "J4": -14.973693481165547
+    },
+    "points": [
+      {
+        "Rz": 0.514,
+        "X": 205,
+        "Y": -139.401,
+        "Z": 240.588
+      },
+      {
+        "Rz": 0.752,
+        "X": 240.0,
+        "Y": 25.0,
+        "Z": 250.44
+      },
+      {
+        "Rz": 89.84,
+        "X": 312.5,
+        "Y": -66.3,
+        "Z": 105.72
+      }
+    ],
+    "speeds": [
+      5,
+      5,
+      5
+    ],
+    "start": {
+      "Rz": 0.514,
+      "X": 113.831,
+      "Y": -139.401,
+      "Z": 240.588
+    },
+    "workspace_exception": "Only confirmed initial X113.826..200 ingress; global envelope unchanged."
+  }
+}

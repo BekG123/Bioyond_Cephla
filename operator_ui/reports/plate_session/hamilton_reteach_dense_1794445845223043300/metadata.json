@@ -1,0 +1,12 @@
+{
+  "started_at": "2026-11-12T01:10:45.363937+00:00",
+  "source": "http://127.0.0.1:5002/state",
+  "target_interval_s": 0.05,
+  "replay_approved": false,
+  "limitations": [
+    "Polling is not synchronized servo telemetry; request times and gaps are recorded.",
+    "No past movement reconstruction. No automatic replay or learned controller.",
+    "Records arm pose/joints and external-axis feedback when supplied; no contact forces.",
+    "Every segment needs review; collision/contact segments must not be replayed."
+  ]
+}

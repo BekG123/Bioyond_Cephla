@@ -1,0 +1,106 @@
+{
+  "status": "stopped_or_failed",
+  "at": 1794130814.0420153,
+  "authorization": "Operator returned the empty arm and plate to the pickup holder and requested full calibration then the new saved Hamilton path. Use unchanged 48-well pickup and loaded Home. Stop on failure; Hamilton trial is separately checked, with no plate release.",
+  "initial_state": {
+    "camera": {
+      "age_s": 996.0,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.037216810596873984
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.4211879334902,
+        "J2": 84.87686575379037,
+        "J3": 52.05604823491838,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -65.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1794130813.9082255
+  },
+  "pickup_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+  "squid_plan_sha256": "4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81",
+  "events": [
+    {
+      "phase": "calibration_started",
+      "at": 1794130814.0420153
+    }
+  ],
+  "automatic_retries": false,
+  "phase": "calibration_started",
+  "error": "{'error': 'E2 correction did not verify within the accepted 1.769\u20131.82 degree range; no retry.', 'ok': False}",
+  "stop_response": {
+    "ok": true,
+    "reply": "CmdDone"
+  },
+  "finished_at": 1794130821.9805846
+}

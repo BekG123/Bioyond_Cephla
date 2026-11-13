@@ -1,0 +1,328 @@
+{
+  "status": "failed_or_stopped",
+  "at": 1794444374.4164817,
+  "plan_id": "2026-11-12T00:46:13.948653+00:00:1794444373948",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 364.006,
+      "Y": -77.219,
+      "Z": 88.169,
+      "Rz": 51.984
+    },
+    "joints": {
+      "J1": 49.57005140179137,
+      "J2": 33.30234061917605,
+      "J3": 77.44472746110914,
+      "J4": -58.762608283850376
+    },
+    "e1": 0.06454050162574276,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 364.01,
+            "Y": -77.22,
+            "Z": 300.0,
+            "Rz": 51.98
+          },
+          {
+            "X": 322.27,
+            "Y": 45.61,
+            "Z": 300.0,
+            "Rz": 51.98
+          }
+        ]
+      },
+      {
+        "kind": "rotate",
+        "rz": -3.8800000000000026,
+        "queued_pivot": true
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 300.0,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 364.01,
+          "Y": -77.22,
+          "Z": 300.0,
+          "Rz": 51.98
+        },
+        "joints": {
+          "J1": 261.4010514017914,
+          "J2": 33.301686686924796,
+          "J3": 77.44633817946537,
+          "J4": -58.767565069955374
+        }
+      },
+      {
+        "pose": {
+          "X": 322.27,
+          "Y": 45.61,
+          "Z": 300.0,
+          "Rz": 51.98
+        },
+        "joints": {
+          "J1": 261.4010514017914,
+          "J2": 72.83404210195184,
+          "J3": 60.496765876938284,
+          "J4": -81.35034818245532
+        }
+      },
+      {
+        "pose": {
+          "X": 322.27,
+          "Y": 45.61,
+          "Z": 300.0,
+          "Rz": -3.8800000000000026
+        },
+        "joints": {
+          "J1": 261.4010514017914,
+          "J2": 72.83404210195184,
+          "J3": 60.496765876938284,
+          "J4": -137.21034818245533
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 261.4010514017914,
+          "J2": 84.87688206683333,
+          "J3": 52.05596109242008,
+          "J4": -140.81238336281865
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.42105140179137,
+          "J2": 84.87688206683333,
+          "J3": 52.05596109242008,
+          "J4": -140.81238336281865
+        }
+      }
+    ],
+    "preserve_gripper": true,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Move to X364.01 / Y-77.22 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X322.27 / Y45.61 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; queued pivot turn speed 137. Review the physical route before confirming.",
+    "id": "2026-11-12T00:46:13.948653+00:00:1794444373948",
+    "at": 1794444373.9486532,
+    "source": "button",
+    "confirmation_source": "researcher_button"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1794444377.94544,
+  "sequence": {
+    "state": "error",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 0.4,
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 1.1,
+        "level": "info",
+        "msg": "Home: upload 2/2"
+      },
+      {
+        "t": 1.5,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.6,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.8,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.9,
+        "level": "info",
+        "msg": "Home: motion 4/100"
+      },
+      {
+        "t": 2.0,
+        "level": "info",
+        "msg": "Home: motion 9/100"
+      },
+      {
+        "t": 2.2,
+        "level": "info",
+        "msg": "Home: motion 14/100"
+      },
+      {
+        "t": 2.3,
+        "level": "info",
+        "msg": "Home: motion 20/100"
+      },
+      {
+        "t": 3.4,
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: Queued replay stopped by operator."
+      }
+    ],
+    "result": {
+      "ok": false,
+      "error": "Queued replay stopped by operator.",
+      "failure_context": {
+        "frames": [
+          {
+            "path": "operator_ui/sequences.py",
+            "line": 431,
+            "function": "_run"
+          },
+          {
+            "path": "operator_ui/researcher_home.py",
+            "line": 444,
+            "function": "execute"
+          },
+          {
+            "path": "operator_ui/trajectory_queue.py",
+            "line": 479,
+            "function": "execute"
+          },
+          {
+            "path": "operator_ui/robot_service.py",
+            "line": 540,
+            "function": "_locked"
+          },
+          {
+            "path": "operator_ui/trajectory_queue.py",
+            "line": 441,
+            "function": "locked"
+          },
+          {
+            "path": "operator_ui/trajectory_queue.py",
+            "line": 388,
+            "function": "healthy"
+          }
+        ],
+        "location": {
+          "path": "operator_ui/trajectory_queue.py",
+          "line": 388,
+          "function": "healthy"
+        },
+        "source": "            def healthy():\n                if run.stopped(): raise TransferError('Queued replay stopped by operator.')\n                refusal = self.service._preflight()\n                if refusal: raise TransferError(refusal)\n                q = self.service.joints() or {}\n                values = [q.get(k) for k in ('J1','J2','J3','J4')]\n                if any(type(v) not in (int,float) or not math.isfinite(v) for v in values):\n                    raise TransferError('Joint feedback is unavailable.')\n                if abs(q['J2'])>abs(cfg['j2_min_deg'])-cfg['j2_margin_deg'] or abs(q['J4'])>min(cfg['j4_pref_abs_deg'],cfg['j4_hard_abs_deg']-5):\n                    raise TransferError('Measured joints exceed automatic limits.')",
+        "source_start_line": 387,
+        "source_sha256": "de107e94ddcea65a6897436a466809838ddd682e7fec79a986bf120b70d6f9f8",
+        "captured_at_failure": true
+      }
+    },
+    "target": null,
+    "detection_ts": 0.0
+  }
+}

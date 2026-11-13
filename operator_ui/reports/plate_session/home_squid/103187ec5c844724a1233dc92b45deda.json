@@ -1,0 +1,385 @@
+{
+  "status": "plate_released_at_squid",
+  "at": 1794409479.572105,
+  "plan": {
+    "closure_policy": "approach10_final1mm_speed5_v2",
+    "e1": 3.9,
+    "geometry": {
+      "cfg": {
+        "base_x_mm": 126.0,
+        "base_y_mm": 0.0,
+        "claw_gap_max_mm": 88.0,
+        "claw_gap_min_mm": 60.0,
+        "extension_margin_mm": 8.0,
+        "inner_reach_mm": 280.0,
+        "j2_margin_deg": 2.0,
+        "j2_min_deg": -95.0,
+        "j2_offset_deg": 0.0,
+        "j3_offset_deg": 180.0,
+        "j4_hard_abs_deg": 220.0,
+        "j4_pref_abs_deg": 220.0,
+        "link1_mm": 200.0,
+        "link2_mm": 200.0,
+        "reach_hard_mm": 460.0
+      },
+      "clearance": {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 103.72
+      },
+      "envelope": {
+        "X": [
+          200.0,
+          450.0
+        ],
+        "Y": [
+          -250.0,
+          380.0
+        ],
+        "Z": [
+          70.0,
+          400.0
+        ]
+      },
+      "points": [
+        {
+          "Rz": 89.77,
+          "X": 312.01,
+          "Y": -65.48,
+          "Z": 291.24
+        },
+        {
+          "Rz": 49.02,
+          "X": 354.0,
+          "Y": 270.0,
+          "Z": 291.24
+        },
+        {
+          "Rz": 88.34,
+          "X": 223.94,
+          "Y": 373.76,
+          "Z": 291.24
+        },
+        {
+          "Rz": 88.34,
+          "X": 223.94,
+          "Y": 373.76,
+          "Z": 266.77
+        }
+      ],
+      "profile": {
+        "acceptance": "operator_ui/reports/projected_alignment/positive_y104_0a6831631d984aa0bdd44540a0516785/authorization.json",
+        "acceptance_sha256": "39ec46138bfc63679379078b1c26a4ef41dcfd64d71086ac4a1c99e3d1d45704",
+        "accepted_grip_reference": "operator_ui/reports/projected_alignment/long_side_y104_acceptance_20261110/accepted_grip_binding.json",
+        "accepted_grip_reference_sha256": "23316b41410cda3e2c230117c5f72310c7ce736f5e1de17b87b66ff4a014d2d1",
+        "additional_down_mm": 5.0,
+        "additional_outward_correction": "operator_ui/reports/projected_alignment/additional_outward_5mm_1793088900811628000.json",
+        "additional_outward_correction_sha256": "ff5ad09ae3f3075bd3060d861bae94e51e697cbaed86df92f086570b8fd104f0",
+        "alignment_frame": "robot base Cartesian TCP, mm/degrees",
+        "alignment_hover_pose_key": "alignment_pose_mm",
+        "alignment_log": "operator_ui/reports/projected_alignment/20261027_070718_7c272570.jsonl",
+        "alignment_log_sha256": "4d02f9e5a0b2da7aae27bb1dd4a3e52dd6319799b666c4bd8109e1d885014bf4",
+        "alignment_name": "48-well long-side alignment at HOME",
+        "alignment_pose_mm": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.7652192188176,
+          "X": 312.0124178577057,
+          "Y": -65.47790542678248,
+          "Z": 300.0
+        },
+        "alignment_scope": "Original holder orientation near E2=1.77 degrees; +Y10.4 already included, never cumulative.",
+        "alignment_source": "Approved rigid plate-relative transform from fresh reseated-plate measurement",
+        "automatic_lift_enabled": false,
+        "candidate_endpoint": {
+          "Rx": 0.0,
+          "Ry": 0.0,
+          "Rz": 89.7652192188176,
+          "X": 312.0124178577057,
+          "Y": -65.47790542678248,
+          "Z": 73.718
+        },
+        "candidate_z_basis": "Operator-accepted long-side descent/grip endpoint; successful recorded pickup and 5 mm lift.",
+        "correction_feedback": "operator_ui/reports/projected_alignment/restore_even_spacing_request_20261027.json",
+        "correction_feedback_sha256": "01b9a39a9ac2c885f2dbb0e1965d4d0d7ade60ffcd08a29f881d229543fa8144",
+        "current_placement_grip_tested": true,
+        "descent_acceptance": "operator_ui/reports/projected_alignment/descent_accepted_1793731432033015200.json",
+        "descent_acceptance_sha256": "fc5d3b130b432a9c59bf18ca5d9b8c137554d5efbbc27132e5e56094f4dd5e07",
+        "descent_algorithm": "existing ResearcherDescent + LuaDescent; open to E1=28, approach137, final20mm at5",
+        "descent_status": "operator_accepted_open_claw_descent",
+        "forward_adjustment_pending_mm": 0.0,
+        "forward_along_plate_long_edge_mm": 0.0,
+        "full_pickup_verified": false,
+        "grip_algorithm": "existing ReferenceGrip; staged 1.0/0.2/0.1 mm closure at speed5, stop at accepted 48-well E1=3.9",
+        "gripping_edge_height": "Accepted long-side gripping TCP Z73.718 mm at the unchanged HOME holder setup.",
+        "id": "48_well_projected_20261026",
+        "inward_correction_already_applied": false,
+        "jaw_sequence": "Open to E1=28 mm at Z300 before lowering; verify opening before descent.",
+        "long_side_gripping_pose_key": "candidate_endpoint",
+        "outward_correction_already_applied": true,
+        "parent_descent": "Pick and Hold/Descend/corrected_endpoint.json",
+        "parent_descent_sha256": "2a70153b94be720f08724d06eeca2970fcafe512e4b84fd3cf251564d66e206d",
+        "physical_grip_validated_for_plate": true,
+        "pickup_correction": {
+          "direction": "positive_base_y",
+          "distance_mm": 10.4,
+          "parent_profile_sha256": "583b14820fbacae665fb3e66953c87a54bf210fd510dc01035d139e7164357f5",
+          "source_endpoint": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.7652192188176,
+            "X": 312.0124178577057,
+            "Y": -75.87790542678249,
+            "Z": 73.718
+          }
+        },
+        "previous_profile": "operator_ui/reports/projected_alignment/profile_before_full7_reseat_trial_20261027.json",
+        "previous_profile_sha256": "9bc3a4319cbb3f8df7804879f9f0ce81a3200c9297d84a85f690b29e7ec5e054",
+        "schema": "cephla.projected-pickup-profile.v1",
+        "squid_destination_candidate": "operator_ui/reports/squid_48well_approach/destination_calibration_y114_20261101.json",
+        "total_outward_correction_mm": 7
+      },
+      "profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+      "proof": {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 78.72
+      },
+      "seat": {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 73.72
+      },
+      "speeds": [
+        137,
+        137,
+        137,
+        5
+      ],
+      "squid_sha256": "9805c608b92e8efcd2c046f5f06b50d79b63d7ae61ee95dcb6c948af6050d3ff"
+    },
+    "home_seating": null,
+    "id": "103187ec5c844724a1233dc92b45deda",
+    "joints": {
+      "J1": 228.17098799356168,
+      "J2": 90.31151626711558,
+      "J3": 150.00980550783743,
+      "J4": -151.9811791814871
+    },
+    "phase": "release_squid",
+    "reverse": [
+      {
+        "Rz": 88.34,
+        "X": 223.94,
+        "Y": 373.76,
+        "Z": 291.24
+      },
+      {
+        "Rz": 49.02,
+        "X": 354.0,
+        "Y": 270.0,
+        "Z": 291.24
+      },
+      {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 291.24
+      },
+      {
+        "Rz": 89.77,
+        "X": 312.01,
+        "Y": -65.48,
+        "Z": 78.72
+      }
+    ],
+    "reverse_speeds": [
+      5,
+      137,
+      137,
+      137
+    ],
+    "source": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\plate_session\\home_squid\\3ec9fe98a7e64a1f939692c15cf22e19.json",
+    "source_sha256": "769a2a91e6efd49ffb46cce8f6e6a4a43cb03abb475396547fbde6d8d7e01ffe",
+    "start": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 88.34,
+      "X": 223.94,
+      "Y": 373.76,
+      "Z": 266.77
+    }
+  },
+  "phases": [
+    {
+      "label": "Squid jaws",
+      "target": 7,
+      "speed": 5,
+      "status": "completed",
+      "response": {
+        "ok": true,
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "commanded": {
+          "e1": 7,
+          "speed": 5
+        },
+        "gripper": {
+          "e1_position": 6.972,
+          "e1_torque": 123.468,
+          "e1_torque_normalized": 0.463,
+          "joints": {
+            "J1": 426,
+            "J2": -41,
+            "J3": 74,
+            "J4": -127
+          },
+          "telemetry_live": true,
+          "position_error": -0.028,
+          "grip_detected": false
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "at": 1794409479.6615934,
+      "pose": {
+        "X": 223.941,
+        "Y": 373.76,
+        "Z": 266.77,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 88.34
+      },
+      "axes": {
+        "E1": 3.896508365869522,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794409479.71405,
+      "pose": {
+        "X": 223.94,
+        "Y": 373.76,
+        "Z": 266.77,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 88.34
+      },
+      "axes": {
+        "E1": 3.896508365869522,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794409480.9229276,
+      "pose": {
+        "X": 223.941,
+        "Y": 373.759,
+        "Z": 266.77,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 88.339
+      },
+      "axes": {
+        "E1": 7.002960424870253,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794409481.235903,
+      "pose": {
+        "X": 223.938,
+        "Y": 373.761,
+        "Z": 266.77,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 88.34
+      },
+      "axes": {
+        "E1": 7.00242118909955,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794409481.831747,
+      "pose": {
+        "X": 223.941,
+        "Y": 373.759,
+        "Z": 266.77,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 88.34
+      },
+      "axes": {
+        "E1": 7.0013427175581455,
+        "E2": 1.7685500598580988
+      }
+    },
+    {
+      "at": 1794409481.8745697,
+      "pose": {
+        "X": 223.941,
+        "Y": 373.759,
+        "Z": 266.77,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 88.34
+      },
+      "axes": {
+        "E1": 7.001162972301245,
+        "E2": 1.7685500598580988
+      }
+    }
+  ],
+  "operator_retention_result": "pending",
+  "controller_restart": false,
+  "final": {
+    "ok": true,
+    "connected": true,
+    "endpoint": "192.168.201.220:56788",
+    "system_state": {
+      "value": 2,
+      "state": "running"
+    },
+    "control_mode": {
+      "value": 1,
+      "mode": "auto"
+    },
+    "enabled": true,
+    "program_state": {
+      "value": 1,
+      "state": "running"
+    },
+    "lua_app_initialized": true,
+    "errors": [],
+    "pose_mm": {
+      "X": 223.941,
+      "Y": 373.759,
+      "Z": 266.77,
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 88.34
+    },
+    "joints": {
+      "J1": 228.1711954326852,
+      "J2": 90.31153965382588,
+      "J3": 150.00930969910914,
+      "J4": -151.98100486394662
+    },
+    "external_axes": {
+      "E1": 7.001162972301245
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    }
+  },
+  "finished_at": 1794409481.8755414
+}

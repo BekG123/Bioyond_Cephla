@@ -1,0 +1,110 @@
+{
+  "status": "stopped_or_failed",
+  "at": 1794118462.557235,
+  "authorization": "Operator requested another attempt after alignment vision rejection. Plate remains in pickup holder, claws empty, unchanged clear setup. Reviewed empty Home then one full calibration and Squid drop-off/pickup. No imaging, automatic retries, or changed tolerances.",
+  "initial_state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.00683717871652334
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42098049436663,
+        "J2": 84.87684236708007,
+        "J3": 52.05594907317273,
+        "J4": -140.81300299826242
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1794118462.423881
+  },
+  "pickup_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+  "squid_plan_sha256": "4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81",
+  "events": [
+    {
+      "phase": "calibration_started",
+      "at": 1794118462.557235
+    },
+    {
+      "phase": "alignment_descent_completed",
+      "at": 1794118601.1822112
+    },
+    {
+      "phase": "grip_completed",
+      "at": 1794118652.0098808
+    },
+    {
+      "phase": "proof_lift_completed",
+      "at": 1794118654.1956036
+    },
+    {
+      "phase": "calibrated_loaded_home_completed",
+      "at": 1794118666.4956794
+    }
+  ],
+  "automatic_retries": false,
+  "phase": "calibrated_loaded_home_completed",
+  "calibration_folder": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\projected_alignment\\accepted_y104_repeat_79efb28053084686866a3be47e08c8cd",
+  "error": "Grip feedback changed",
+  "stop_response": {
+    "ok": true,
+    "reply": "CmdDone"
+  },
+  "finished_at": 1794118714.198406
+}

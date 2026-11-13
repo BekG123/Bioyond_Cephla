@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-12T03:24:10.489641+00:00",
+  "status": "diagnosed_recovery_pending",
+  "initial_holder_degrees": 90.41448570407123,
+  "target_holder_degrees": 90.71661229181757,
+  "failure": "HOME holder angle changed: measured E2=90.148067 degrees, target 90.716612.",
+  "cause": "The rotate step reused the 0.5 degree monitoring tolerance for pickup setup, skipping centering at 90.414 degrees. Contact deflection then exceeded the existing bound.",
+  "change": "Before pickup, correct the released Hamilton holder to within 0.05 degree; retain 0.5 degree contact tolerance. Verify feedback after the one command; no retry.",
+  "loaded_into_running_backend": false,
+  "hardware_retry_started": false,
+  "recovery_required": "Plate supported and removed from stopped jaws before Lua startup; manually reseat in HOME.",
+  "operator_authorization": "Standing authorization to complete one full Hamilton then Squid handling cycle without repeated approval prompts."
+}

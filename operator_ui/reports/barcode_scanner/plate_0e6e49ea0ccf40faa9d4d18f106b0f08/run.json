@@ -1,0 +1,1170 @@
+{
+  "status": "completed",
+  "plan": {
+    "cfg": {
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "claw_gap_max_mm": 88.0,
+      "claw_gap_min_mm": 60.0,
+      "extension_margin_mm": 8.0,
+      "inner_reach_mm": 280.0,
+      "j2_margin_deg": 2.0,
+      "j2_min_deg": -95.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j4_hard_abs_deg": 220.0,
+      "j4_pref_abs_deg": 220.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "reach_hard_mm": 460.0
+    },
+    "closure_policy": "approach10_final1mm_speed5_v2",
+    "controller_points": [
+      {
+        "Rz": -1.63,
+        "X": 80.88,
+        "Y": -143.51,
+        "Z": 189.16
+      }
+    ],
+    "e1": 4.355618264526129,
+    "id": "0e6e49ea0ccf40faa9d4d18f106b0f08",
+    "joints": {
+      "J1": 209.4211879334902,
+      "J2": 84.87686575379037,
+      "J3": 52.05594907317273,
+      "J4": -140.8128286807219
+    },
+    "original_envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "payload": "same 48-well plate in unchanged HOME holder",
+    "profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+    "proof_lift_speed": 5,
+    "queue_sha256": "1adeb0e074dc2b6789a8e6fd336345d200357968a4349c8b840dddbe387c2ced",
+    "release_at_scanner": false,
+    "scanner_points": [
+      {
+        "Rz": -3.56,
+        "X": 260.1,
+        "Y": 33.18,
+        "Z": 239.61
+      },
+      {
+        "Rz": -3.24,
+        "X": 230.23,
+        "Y": 3.73,
+        "Z": 231.2
+      },
+      {
+        "Rz": -2.92,
+        "X": 200.36,
+        "Y": -25.72,
+        "Z": 222.79
+      },
+      {
+        "Rz": -2.59,
+        "X": 170.49,
+        "Y": -55.16,
+        "Z": 214.39
+      },
+      {
+        "Rz": -2.27,
+        "X": 140.62,
+        "Y": -84.61,
+        "Z": 205.98
+      },
+      {
+        "Rz": -1.95,
+        "X": 110.75,
+        "Y": -114.06,
+        "Z": 197.57
+      },
+      {
+        "Rz": -1.63,
+        "X": 80.88,
+        "Y": -143.51,
+        "Z": 189.16
+      }
+    ],
+    "source_sha256": "8ca47b76c0b3915072624a2bc53954695b430a9335899c0d5cbab3a9538e7381",
+    "speed": 137,
+    "stages": [
+      "Calibrate",
+      "Align",
+      "Descend",
+      "Grip",
+      "Lift 5 mm",
+      "Loaded return to IDLE",
+      "Continuous scanner move"
+    ],
+    "start": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": -3.88,
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02
+    },
+    "trial_envelope": {
+      "X": [
+        80.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    }
+  },
+  "started_at": 1794423187.6768012,
+  "operator_acceptance": "pending",
+  "authorization": "User requested pickup and scanner travel; confirmed unchanged 48-well HOME setup and loaded clearance; E-stop supervised.",
+  "workflow": {
+    "active": false,
+    "step": null,
+    "done": [
+      "Calibrate the 48-well plate",
+      "Align with the 48-well plate",
+      "Descend to the taught 48-well position",
+      "Grip the 48-well plate",
+      "Lift the plate 5 mm",
+      "Return Home",
+      "Continuous loaded scanner move"
+    ],
+    "ok": true,
+    "error": "",
+    "results": [
+      {
+        "step": "Calibrate the 48-well plate",
+        "sequence": "plate48_calibrate",
+        "run_id": "330a3958dbb34ed0abcb0ff792723935",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "plate_profile_id": "48_well_projected_20261026",
+          "calibration_complete": true,
+          "target": {
+            "x": 305.8289912962575,
+            "y": -73.57714391513522,
+            "rz": 89.72294862534363
+          },
+          "context": {
+            "at": 1794423265.6538842,
+            "run_id": "330a3958dbb34ed0abcb0ff792723935",
+            "pose": {
+              "X": 279.303,
+              "Y": 26.358,
+              "Z": 289.129,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": -3.88
+            },
+            "expected_target": {
+              "x": 305.8289912962575,
+              "y": -73.57714391513522,
+              "rz": 89.72294862534363
+            },
+            "profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+            "reference": {
+              "image": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\captures\\projected_grid_burst_1793080996896524900_0036.png",
+              "image_sha256": "2f2100be220b7c5311c6901bac5d1583c2b02c8aea763633e1893e3e48f23bb9",
+              "reference_sha256": "0a130004bb4e5b631c2e0d2ee829e8ac217dcb046bd12ec8e8a5cc454a70adf2"
+            }
+          }
+        },
+        "target": null,
+        "log": [
+          {
+            "t": 8.5,
+            "level": "info",
+            "msg": "Positioning E2 at 1.77 degrees before calibration."
+          },
+          {
+            "t": 9.9,
+            "level": "info",
+            "msg": "E2 verified at 1.774 degrees (target 1.77)."
+          },
+          {
+            "t": 9.9,
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5."
+          },
+          {
+            "t": 18.9,
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5."
+          },
+          {
+            "t": 77.8,
+            "level": "good",
+            "msg": "48-well calibration verified against the taught placement. Alignment is ready."
+          }
+        ]
+      },
+      {
+        "step": "Align with the 48-well plate",
+        "sequence": "projected_alignment",
+        "run_id": "e2ba4f4a49294fa8b041aab0ea69979a",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "pose": {
+            "X": 305.832,
+            "Y": -73.564,
+            "Z": 300.0,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.727
+          },
+          "gripped": false,
+          "alignment_pose_reached": true,
+          "visual_acceptance_pending": false,
+          "full_calibration_complete": false,
+          "descent_executed": false,
+          "grip_executed": false,
+          "grasp_target_created": false,
+          "route": {
+            "target": {
+              "x": 305.8315217713461,
+              "y": -73.56445238639859,
+              "rz": 89.72653982415233
+            },
+            "hover_z": 300.0,
+            "waypoints": [
+              {
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 294.5645,
+                "Rz": -3.88
+              },
+              {
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0,
+                "Rz": -3.88
+              },
+              {
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0,
+                "Rz": 19.52163495603808
+              },
+              {
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0,
+                "Rz": 42.92326991207616
+              },
+              {
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0,
+                "Rz": 66.32490486811425
+              },
+              {
+                "X": 279.303,
+                "Y": 26.358,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 281.9558521771346,
+                "Y": 16.365754761360144,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 284.6087043542692,
+                "Y": 6.373509522720283,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 287.2615565314038,
+                "Y": -3.6187357159195734,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 289.9144087085384,
+                "Y": -13.610980954559434,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 292.567260885673,
+                "Y": -23.603226193199294,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 295.2201130628077,
+                "Y": -33.595471431839144,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 297.8729652399423,
+                "Y": -43.58771667047901,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 300.5258174170769,
+                "Y": -53.579961909118865,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 303.1786695942115,
+                "Y": -63.57220714775873,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              },
+              {
+                "X": 305.8315217713461,
+                "Y": -73.56445238639859,
+                "Z": 300.0,
+                "Rz": 89.72653982415233
+              }
+            ],
+            "translation_speed": 5,
+            "wrist_speed": 30,
+            "descent_authorized": false,
+            "grasp_target_created": false
+          },
+          "log_file": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\projected_alignment\\20261111_105425_5cc73143.jsonl",
+          "plate_profile_id": "48_well_projected_20261026",
+          "profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "accepted_hover": {
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": 89.7652192188176,
+            "X": 312.0124178577057,
+            "Y": -65.47790542678248,
+            "Z": 300.0
+          }
+        },
+        "target": {
+          "x": 312.0124178577057,
+          "y": -65.47790542678248,
+          "rz": 89.7652192188176,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "open_claw_trial": false
+        },
+        "log": [
+          {
+            "t": 31.0,
+            "level": "info",
+            "msg": "Aligning above the 48-well plate; descent and grip remain idle."
+          },
+          {
+            "t": 31.0,
+            "level": "info",
+            "msg": "alignment MoveL to X 279.303 Y 26.358 Z 294.565"
+          },
+          {
+            "t": 32.8,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 294.5645, 'Rz': -3.88}"
+          },
+          {
+            "t": 32.8,
+            "level": "info",
+            "msg": "alignment MoveL to X 279.303 Y 26.358 Z 300.000"
+          },
+          {
+            "t": 34.5,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': -3.88}"
+          },
+          {
+            "t": 34.5,
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 19.522 at Z 300.000"
+          },
+          {
+            "t": 35.6,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': 19.52163495603808}"
+          },
+          {
+            "t": 35.6,
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 42.923 at Z 300.000"
+          },
+          {
+            "t": 36.7,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': 42.92326991207616}"
+          },
+          {
+            "t": 36.7,
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 66.325 at Z 300.000"
+          },
+          {
+            "t": 37.8,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': 66.32490486811425}"
+          },
+          {
+            "t": 37.8,
+            "level": "info",
+            "msg": "alignment wrist-only MoveJ to Rz 89.727 at Z 300.000"
+          },
+          {
+            "t": 38.9,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 279.303, 'Y': 26.358, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 38.9,
+            "level": "info",
+            "msg": "alignment MoveL to X 281.956 Y 16.366 Z 300.000"
+          },
+          {
+            "t": 41.6,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 281.9558521771346, 'Y': 16.365754761360144, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 41.6,
+            "level": "info",
+            "msg": "alignment MoveL to X 284.609 Y 6.374 Z 300.000"
+          },
+          {
+            "t": 44.3,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 284.6087043542692, 'Y': 6.373509522720283, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 44.3,
+            "level": "info",
+            "msg": "alignment MoveL to X 287.262 Y -3.619 Z 300.000"
+          },
+          {
+            "t": 47.0,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 287.2615565314038, 'Y': -3.6187357159195734, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 47.1,
+            "level": "info",
+            "msg": "alignment MoveL to X 289.914 Y -13.611 Z 300.000"
+          },
+          {
+            "t": 49.8,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 289.9144087085384, 'Y': -13.610980954559434, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 49.8,
+            "level": "info",
+            "msg": "alignment MoveL to X 292.567 Y -23.603 Z 300.000"
+          },
+          {
+            "t": 52.5,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 292.567260885673, 'Y': -23.603226193199294, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 52.5,
+            "level": "info",
+            "msg": "alignment MoveL to X 295.220 Y -33.595 Z 300.000"
+          },
+          {
+            "t": 55.2,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 295.2201130628077, 'Y': -33.595471431839144, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 55.2,
+            "level": "info",
+            "msg": "alignment MoveL to X 297.873 Y -43.588 Z 300.000"
+          },
+          {
+            "t": 58.0,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 297.8729652399423, 'Y': -43.58771667047901, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 58.0,
+            "level": "info",
+            "msg": "alignment MoveL to X 300.526 Y -53.580 Z 300.000"
+          },
+          {
+            "t": 60.7,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 300.5258174170769, 'Y': -53.579961909118865, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 60.7,
+            "level": "info",
+            "msg": "alignment MoveL to X 303.179 Y -63.572 Z 300.000"
+          },
+          {
+            "t": 63.4,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 303.1786695942115, 'Y': -63.57220714775873, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 63.4,
+            "level": "info",
+            "msg": "alignment MoveL to X 305.832 Y -73.564 Z 300.000"
+          },
+          {
+            "t": 66.1,
+            "level": "info",
+            "msg": "alignment waypoint reached: {'X': 305.8315217713461, 'Y': -73.56445238639859, 'Z': 300.0, 'Rz': 89.72653982415233}"
+          },
+          {
+            "t": 66.4,
+            "level": "info",
+            "msg": "Applying the accepted absolute jaw alignment; no cumulative offset."
+          }
+        ]
+      },
+      {
+        "step": "Descend to the taught 48-well position",
+        "sequence": "researcher_descend",
+        "run_id": "b0822d12d7b34b16a329b3440fb1ea26",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "breach": false,
+          "at_z": 73.718,
+          "executor": "lua_descent",
+          "approach_speed": 137,
+          "probe_speed": 5,
+          "descent_correction": {
+            "profile_id": "48_well_projected_20261026",
+            "profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+            "start": {
+              "X": 312.012,
+              "Y": -65.478,
+              "Z": 300.0,
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 89.765
+            },
+            "original_target": {
+              "x": 312.0124178577057,
+              "y": -65.47790542678248,
+              "rz": 89.7652192188176,
+              "z_calibrated": 73.718,
+              "config": "Wide",
+              "plate_profile_id": "48_well_projected_20261026",
+              "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+              "open_claw_trial": false
+            },
+            "target": {
+              "x": 312.0124178577057,
+              "y": -65.47790542678248,
+              "rz": 89.7652192188176,
+              "z_calibrated": 73.718,
+              "config": "Wide",
+              "plate_profile_id": "48_well_projected_20261026",
+              "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+              "open_claw_trial": false
+            },
+            "legs": [
+              {
+                "X": 312.012,
+                "Y": -65.478,
+                "Z": 300.0,
+                "Rz": 89.76521921881762
+              },
+              {
+                "X": 312.0124178577057,
+                "Y": -65.47790542678248,
+                "Z": 300.0,
+                "Rz": 89.76521921881762
+              }
+            ],
+            "hover": {
+              "X": 312.0124178577057,
+              "Y": -65.47790542678248,
+              "Z": 300.0,
+              "Rz": 89.76521921881762
+            },
+            "endpoint": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": 89.7652192188176,
+              "X": 312.0124178577057,
+              "Y": -65.47790542678248,
+              "Z": 73.718
+            },
+            "scope": "Current accepted 48-well placement only.",
+            "open_claw_trial": false
+          },
+          "plate_profile_id": "48_well_projected_20261026",
+          "open_claw_trial": false,
+          "gripping_height_acceptance_pending": false
+        },
+        "target": {
+          "x": 312.0124178577057,
+          "y": -65.47790542678248,
+          "rz": 89.7652192188176,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "open_claw_trial": false
+        },
+        "log": [
+          {
+            "t": 0.1,
+            "level": "info",
+            "msg": "Adjusting claw angle above the plate."
+          },
+          {
+            "t": 1.0,
+            "level": "info",
+            "msg": "Centering claws above the plate."
+          },
+          {
+            "t": 3.3,
+            "level": "info",
+            "msg": "Lua descent: approach at 137 to Z 93.72; last 20 mm at 5, torque checked after each 1/0.5 mm step."
+          },
+          {
+            "t": 3.5,
+            "level": "info",
+            "msg": "Lua descent: prepared"
+          },
+          {
+            "t": 3.7,
+            "level": "info",
+            "msg": "Lua descent: fast approach"
+          },
+          {
+            "t": 5.7,
+            "level": "info",
+            "msg": "Lua descent: torque baseline"
+          },
+          {
+            "t": 6.6,
+            "level": "info",
+            "msg": "Lua descent: slow probing"
+          },
+          {
+            "t": 27.8,
+            "level": "info",
+            "msg": "Lua descent: target reached"
+          },
+          {
+            "t": 27.9,
+            "level": "good",
+            "msg": "Lua descent complete; claw remains open. No grip performed."
+          }
+        ]
+      },
+      {
+        "step": "Grip the 48-well plate",
+        "sequence": "position_grip",
+        "run_id": "3e3f3ae21ab744b6b5a18618f3aa6e5e",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "executor": "staged_reference_position",
+          "closure_policy": "approach10_final1mm_speed5_v2",
+          "e1_position": 3.8974073249846697,
+          "target_e1_mm": 3.9,
+          "gripped": false,
+          "grasp_verified": false,
+          "awaiting_inspection": true,
+          "record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\demonstrations\\reference_grip\\20c5a9efbded4b19b033712521645384.json"
+        },
+        "target": {
+          "x": 312.0124178577057,
+          "y": -65.47790542678248,
+          "rz": 89.7652192188176,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "open_claw_trial": false
+        },
+        "log": [
+          {
+            "t": 1.6,
+            "level": "info",
+            "msg": "Grip 1/2: E1 4.898 mm."
+          },
+          {
+            "t": 3.2,
+            "level": "info",
+            "msg": "Grip 2/2: E1 3.922 mm."
+          }
+        ]
+      },
+      {
+        "step": "Lift the plate 5 mm",
+        "sequence": "pickup_slow_lift",
+        "run_id": "c20994c0705c49d591fd5e75d28cc627",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\demonstrations\\scanner_pickup_home\\ecbbcf7e4b4d4abba034c2c168747948.json",
+          "target": {
+            "X": 312.01,
+            "Y": -65.48,
+            "Z": 78.72,
+            "Rz": 89.77
+          },
+          "grasp_verified": false
+        },
+        "target": {
+          "x": 312.0124178577057,
+          "y": -65.47790542678248,
+          "rz": 89.7652192188176,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "open_claw_trial": false
+        },
+        "log": [
+          {
+            "t": 0.0,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 0.7,
+            "level": "info",
+            "msg": "Lift 5 mm: upload 1/1."
+          },
+          {
+            "t": 1.1,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 0/100."
+          },
+          {
+            "t": 1.2,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 0/100."
+          },
+          {
+            "t": 1.4,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 3/100."
+          },
+          {
+            "t": 1.5,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 14/100."
+          },
+          {
+            "t": 1.7,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 30/100."
+          },
+          {
+            "t": 1.8,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 45/100."
+          },
+          {
+            "t": 2.0,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 60/100."
+          },
+          {
+            "t": 2.1,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 75/100."
+          },
+          {
+            "t": 2.3,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 91/100."
+          },
+          {
+            "t": 2.4,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 99/100."
+          },
+          {
+            "t": 2.6,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 99/100."
+          },
+          {
+            "t": 2.7,
+            "level": "info",
+            "msg": "Lift 5 mm: motion 100/100."
+          }
+        ]
+      },
+      {
+        "step": "Return Home",
+        "sequence": "researcher_home",
+        "run_id": "616cbaa61f4942bfbe28cc677d50434c",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "home": {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        },
+        "target": {
+          "x": 312.0124178577057,
+          "y": -65.47790542678248,
+          "rz": 89.7652192188176,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "open_claw_trial": false
+        },
+        "log": [
+          {
+            "t": 0.1,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 0.8,
+            "level": "info",
+            "msg": "Home: upload 1/1"
+          },
+          {
+            "t": 1.2,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 1.4,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 1.5,
+            "level": "info",
+            "msg": "Home: motion 2/100"
+          },
+          {
+            "t": 1.7,
+            "level": "info",
+            "msg": "Home: motion 9/100"
+          },
+          {
+            "t": 1.8,
+            "level": "info",
+            "msg": "Home: motion 17/100"
+          },
+          {
+            "t": 1.9,
+            "level": "info",
+            "msg": "Home: motion 26/100"
+          },
+          {
+            "t": 2.1,
+            "level": "info",
+            "msg": "Home: motion 35/100"
+          },
+          {
+            "t": 2.2,
+            "level": "info",
+            "msg": "Home: motion 43/100"
+          },
+          {
+            "t": 2.3,
+            "level": "info",
+            "msg": "Home: motion 52/100"
+          },
+          {
+            "t": 2.5,
+            "level": "info",
+            "msg": "Home: motion 59/100"
+          },
+          {
+            "t": 2.6,
+            "level": "info",
+            "msg": "Home: motion 68/100"
+          },
+          {
+            "t": 2.7,
+            "level": "info",
+            "msg": "Home: motion 76/100"
+          },
+          {
+            "t": 2.9,
+            "level": "info",
+            "msg": "Home: motion 84/100"
+          },
+          {
+            "t": 3.0,
+            "level": "info",
+            "msg": "Home: motion 92/100"
+          },
+          {
+            "t": 3.1,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 3.3,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 3.4,
+            "level": "info",
+            "msg": "Home: motion 100/100"
+          },
+          {
+            "t": 8.2,
+            "level": "info",
+            "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 9.0,
+            "level": "info",
+            "msg": "Home: upload 2/2"
+          },
+          {
+            "t": 9.4,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 9.5,
+            "level": "info",
+            "msg": "Home: motion 0/100"
+          },
+          {
+            "t": 9.7,
+            "level": "info",
+            "msg": "Home: motion 2/100"
+          },
+          {
+            "t": 9.8,
+            "level": "info",
+            "msg": "Home: motion 9/100"
+          },
+          {
+            "t": 9.9,
+            "level": "info",
+            "msg": "Home: motion 19/100"
+          },
+          {
+            "t": 10.1,
+            "level": "info",
+            "msg": "Home: motion 30/100"
+          },
+          {
+            "t": 10.2,
+            "level": "info",
+            "msg": "Home: motion 40/100"
+          },
+          {
+            "t": 10.3,
+            "level": "info",
+            "msg": "Home: motion 49/100"
+          },
+          {
+            "t": 10.5,
+            "level": "info",
+            "msg": "Home: motion 60/100"
+          },
+          {
+            "t": 10.6,
+            "level": "info",
+            "msg": "Home: motion 69/100"
+          },
+          {
+            "t": 10.8,
+            "level": "info",
+            "msg": "Home: motion 71/100"
+          },
+          {
+            "t": 10.9,
+            "level": "info",
+            "msg": "Home: motion 72/100"
+          },
+          {
+            "t": 11.0,
+            "level": "info",
+            "msg": "Home: motion 75/100"
+          },
+          {
+            "t": 11.2,
+            "level": "info",
+            "msg": "Home: motion 85/100"
+          },
+          {
+            "t": 11.3,
+            "level": "info",
+            "msg": "Home: motion 95/100"
+          },
+          {
+            "t": 11.4,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 11.6,
+            "level": "info",
+            "msg": "Home: motion 99/100"
+          },
+          {
+            "t": 11.7,
+            "level": "info",
+            "msg": "Home: motion 100/100"
+          }
+        ]
+      },
+      {
+        "step": "Continuous loaded scanner move",
+        "sequence": "scanner_plate_trial",
+        "run_id": "138d08cc38ae485ba29cd616b589e06e",
+        "state": "done",
+        "result": {
+          "ok": true,
+          "record": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\barcode_scanner\\plate_0e6e49ea0ccf40faa9d4d18f106b0f08\\loaded_scanner.json",
+          "pose_mm": {
+            "X": 80.88,
+            "Y": -143.51,
+            "Z": 189.158,
+            "Rx": 0.0,
+            "Ry": 0.0,
+            "Rz": -1.63
+          },
+          "payload": "48well_plate",
+          "speed": 137
+        },
+        "target": {
+          "x": 312.0124178577057,
+          "y": -65.47790542678248,
+          "rz": 89.7652192188176,
+          "z_calibrated": 73.718,
+          "config": "Wide",
+          "plate_profile_id": "48_well_projected_20261026",
+          "plate_profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+          "open_claw_trial": false
+        },
+        "log": [
+          {
+            "t": 0.1,
+            "level": "info",
+            "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+          },
+          {
+            "t": 0.8,
+            "level": "info",
+            "msg": "Loaded scanner upload: 1/1"
+          },
+          {
+            "t": 1.2,
+            "level": "info",
+            "msg": "Loaded scanner motion: 0/100"
+          },
+          {
+            "t": 1.3,
+            "level": "info",
+            "msg": "Loaded scanner motion: 0/100"
+          },
+          {
+            "t": 1.5,
+            "level": "info",
+            "msg": "Loaded scanner motion: 3/100"
+          },
+          {
+            "t": 1.7,
+            "level": "info",
+            "msg": "Loaded scanner motion: 12/100"
+          },
+          {
+            "t": 1.9,
+            "level": "info",
+            "msg": "Loaded scanner motion: 21/100"
+          },
+          {
+            "t": 2.1,
+            "level": "info",
+            "msg": "Loaded scanner motion: 30/100"
+          },
+          {
+            "t": 2.3,
+            "level": "info",
+            "msg": "Loaded scanner motion: 40/100"
+          },
+          {
+            "t": 2.5,
+            "level": "info",
+            "msg": "Loaded scanner motion: 48/100"
+          },
+          {
+            "t": 2.7,
+            "level": "info",
+            "msg": "Loaded scanner motion: 57/100"
+          },
+          {
+            "t": 2.9,
+            "level": "info",
+            "msg": "Loaded scanner motion: 65/100"
+          },
+          {
+            "t": 3.1,
+            "level": "info",
+            "msg": "Loaded scanner motion: 75/100"
+          },
+          {
+            "t": 3.3,
+            "level": "info",
+            "msg": "Loaded scanner motion: 83/100"
+          },
+          {
+            "t": 3.5,
+            "level": "info",
+            "msg": "Loaded scanner motion: 91/100"
+          },
+          {
+            "t": 3.7,
+            "level": "info",
+            "msg": "Loaded scanner motion: 99/100"
+          },
+          {
+            "t": 3.9,
+            "level": "info",
+            "msg": "Loaded scanner motion: 99/100"
+          },
+          {
+            "t": 4.0,
+            "level": "info",
+            "msg": "Loaded scanner motion: 100/100"
+          }
+        ]
+      }
+    ],
+    "started_at": 1794423187.8203745,
+    "message": "Plate at nominal scanner pose; grip retained. Operator inspection pending."
+  },
+  "finished_at": 1794423388.7931194
+}

@@ -1,0 +1,110 @@
+{
+  "cause": "New Cellvis adapter rejected immediate grip_detected hint before waiting for settled feedback. Initial report4.121 mm; later native feedback near3.9 mm. Established ReferenceGrip waits for3 settled samples and fresh stationary report.",
+  "failed_run": "squid_deliver.json",
+  "original_failure_preserved": true,
+  "software_fix": "Match ReferenceGrip command acknowledgement,2s settling,3 samples within0.07 mm,fresh position/torque feedback and delayed-fault observation. No force/controller limits changed.",
+  "offline_tests": "9 passed, including transient contact hint vs persistent position error",
+  "fix_loaded": false,
+  "samples": [
+    {
+      "at": 1794416977.6657398,
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 3.900103736668825,
+          "E2": 1.7740432394980816
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794416977.8354237,
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 3.900103736668825,
+          "E2": 1.7712966496780902
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    },
+    {
+      "at": 1794416978.000074,
+      "native": {
+        "manual": false,
+        "enabled": true,
+        "disabled": false,
+        "moving": false,
+        "emergency": false,
+        "drag": false,
+        "error": false,
+        "firmware": "1.8.2504101654",
+        "external_axes": {
+          "E1": 3.900283481925726,
+          "E2": 1.7740432394980816
+        },
+        "external_units": {
+          "E1": "mm",
+          "E2": "degrees"
+        }
+      }
+    }
+  ],
+  "state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": false,
+      "ok": true
+    },
+    "sequence": {
+      "active": false,
+      "name": "cellvis24_squid",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1794416978.1779976
+  },
+  "motion_sent_during_diagnosis": false,
+  "next_required": "Manually open without restarting Lua and remove plate before program startup; startup can close jaws."
+}

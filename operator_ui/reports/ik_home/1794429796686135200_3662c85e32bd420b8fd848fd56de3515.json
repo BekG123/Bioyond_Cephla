@@ -1,0 +1,888 @@
+{
+  "status": "failed_or_stopped",
+  "at": 1794429796.6861353,
+  "plan_id": "2026-11-11T20:43:16.265395+00:00:1794429796265",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 312.5,
+      "Y": -66.3,
+      "Z": 77.359,
+      "Rz": 89.84
+    },
+    "joints": {
+      "J1": 38.76019123461704,
+      "J2": 40.77100348756933,
+      "J3": 59.31786119298395,
+      "J4": -10.248642229019572
+    },
+    "e1": 3.8999239914119244,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 312.5,
+            "Y": -66.3,
+            "Z": 300.0,
+            "Rz": 89.84
+          },
+          {
+            "X": 322.27,
+            "Y": 45.61,
+            "Z": 300.0,
+            "Rz": 89.84
+          }
+        ]
+      },
+      {
+        "kind": "rotate",
+        "rz": -3.8799999999999955,
+        "queued_pivot": true
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 300.0,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 312.5,
+          "Y": -66.3,
+          "Z": 300.0,
+          "Rz": 89.84
+        },
+        "joints": {
+          "J1": 261.40119123461704,
+          "J2": 40.77100416200166,
+          "J3": 59.3178009441069,
+          "J4": -10.248582654574859
+        }
+      },
+      {
+        "pose": {
+          "X": 322.27,
+          "Y": 45.61,
+          "Z": 300.0,
+          "Rz": 89.84
+        },
+        "joints": {
+          "J1": 261.40119123461704,
+          "J2": 72.83404210195185,
+          "J3": 60.49676587693828,
+          "J4": -43.49058552735644
+        }
+      },
+      {
+        "pose": {
+          "X": 322.27,
+          "Y": 45.61,
+          "Z": 300.0,
+          "Rz": -3.8799999999999955
+        },
+        "joints": {
+          "J1": 261.40119123461704,
+          "J2": 72.83404210195185,
+          "J3": 60.49676587693828,
+          "J4": -137.21058552735644
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 261.40119123461704,
+          "J2": 84.87688206683335,
+          "J3": 52.05596109242007,
+          "J4": -140.81262070771973
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.42119123461708,
+          "J2": 84.87688206683335,
+          "J3": 52.05596109242007,
+          "J4": -140.81262070771973
+        }
+      }
+    ],
+    "preserve_gripper": true,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Move to X312.50 / Y-66.30 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X322.27 / Y45.61 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; queued pivot turn speed 137. Review the physical route before confirming.",
+    "id": "2026-11-11T20:43:16.265395+00:00:1794429796265",
+    "at": 1794429796.2653956,
+    "source": "button",
+    "confirmation_source": "researcher_button"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1794429815.1149118,
+  "sequence": {
+    "state": "error",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 0.2,
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 0.9,
+        "level": "info",
+        "msg": "Home: upload 2/2"
+      },
+      {
+        "t": 1.3,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.4,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.6,
+        "level": "info",
+        "msg": "Home: motion 1/100"
+      },
+      {
+        "t": 1.7,
+        "level": "info",
+        "msg": "Home: motion 5/100"
+      },
+      {
+        "t": 1.8,
+        "level": "info",
+        "msg": "Home: motion 10/100"
+      },
+      {
+        "t": 1.9,
+        "level": "info",
+        "msg": "Home: motion 15/100"
+      },
+      {
+        "t": 2.1,
+        "level": "info",
+        "msg": "Home: motion 20/100"
+      },
+      {
+        "t": 2.2,
+        "level": "info",
+        "msg": "Home: motion 26/100"
+      },
+      {
+        "t": 2.3,
+        "level": "info",
+        "msg": "Home: motion 31/100"
+      },
+      {
+        "t": 2.4,
+        "level": "info",
+        "msg": "Home: motion 36/100"
+      },
+      {
+        "t": 2.6,
+        "level": "info",
+        "msg": "Home: motion 43/100"
+      },
+      {
+        "t": 2.7,
+        "level": "info",
+        "msg": "Home: motion 48/100"
+      },
+      {
+        "t": 2.9,
+        "level": "info",
+        "msg": "Home: motion 53/100"
+      },
+      {
+        "t": 3.0,
+        "level": "info",
+        "msg": "Home: motion 59/100"
+      },
+      {
+        "t": 3.2,
+        "level": "info",
+        "msg": "Home: motion 65/100"
+      },
+      {
+        "t": 3.3,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 3.4,
+        "level": "info",
+        "msg": "Home: motion 66/100"
+      },
+      {
+        "t": 3.6,
+        "level": "info",
+        "msg": "Home: motion 68/100"
+      },
+      {
+        "t": 3.7,
+        "level": "info",
+        "msg": "Home: motion 72/100"
+      },
+      {
+        "t": 3.8,
+        "level": "info",
+        "msg": "Home: motion 77/100"
+      },
+      {
+        "t": 3.9,
+        "level": "info",
+        "msg": "Home: motion 83/100"
+      },
+      {
+        "t": 4.1,
+        "level": "info",
+        "msg": "Home: motion 88/100"
+      },
+      {
+        "t": 4.2,
+        "level": "info",
+        "msg": "Home: motion 93/100"
+      },
+      {
+        "t": 4.3,
+        "level": "info",
+        "msg": "Home: motion 98/100"
+      },
+      {
+        "t": 4.5,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 4.6,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 4.7,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      },
+      {
+        "t": 4.7,
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 5.4,
+        "level": "info",
+        "msg": "IDLE pivot: upload 1/1"
+      },
+      {
+        "t": 5.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 5.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 6.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 7.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 7.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 7.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 7.4,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 7.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 7.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 7.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 7.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 8.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 8.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 8.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 8.4,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 8.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 8.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 8.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 9.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 9.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 9.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 9.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 9.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 9.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 9.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 9.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 10.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 10.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 10.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 10.4,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 10.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 10.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 10.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 11.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 11.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 11.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 11.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 11.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 11.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 11.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 11.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 12.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 12.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 12.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 12.4,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 12.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 12.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 12.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 12.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 13.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 13.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 13.4,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 13.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 13.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 13.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 13.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 14.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 14.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 14.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 14.4,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 14.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 14.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 14.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 15.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 15.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 15.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 15.4,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 15.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 15.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 15.8,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 15.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 16.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 16.2,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 16.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 16.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 16.6,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 16.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 16.9,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 17.0,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 17.1,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 17.3,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 17.4,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 17.5,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 17.7,
+        "level": "info",
+        "msg": "IDLE pivot: motion 0/100"
+      },
+      {
+        "t": 18.3,
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: Gripper feedback changed; inspect before continuing."
+      }
+    ],
+    "result": {
+      "ok": false,
+      "error": "Gripper feedback changed; inspect before continuing.",
+      "failure_context": {
+        "frames": [
+          {
+            "path": "operator_ui/sequences.py",
+            "line": 431,
+            "function": "_run"
+          },
+          {
+            "path": "operator_ui/researcher_home.py",
+            "line": 425,
+            "function": "execute"
+          },
+          {
+            "path": "operator_ui/trajectory_queue.py",
+            "line": 458,
+            "function": "execute"
+          },
+          {
+            "path": "operator_ui/robot_service.py",
+            "line": 540,
+            "function": "_locked"
+          },
+          {
+            "path": "operator_ui/trajectory_queue.py",
+            "line": 420,
+            "function": "locked"
+          },
+          {
+            "path": "operator_ui/trajectory_queue.py",
+            "line": 370,
+            "function": "healthy"
+          }
+        ],
+        "location": {
+          "path": "operator_ui/trajectory_queue.py",
+          "line": 370,
+          "function": "healthy"
+        },
+        "source": "            def healthy():\n                if run.stopped(): raise TransferError('Queued replay stopped by operator.')\n                refusal = self.service._preflight()\n                if refusal: raise TransferError(refusal)\n                q = self.service.joints() or {}\n                values = [q.get(k) for k in ('J1','J2','J3','J4')]\n                if any(type(v) not in (int,float) or not math.isfinite(v) for v in values):\n                    raise TransferError('Joint feedback is unavailable.')\n                if abs(q['J2'])>abs(cfg['j2_min_deg'])-cfg['j2_margin_deg'] or abs(q['J4'])>min(cfg['j4_pref_abs_deg'],cfg['j4_hard_abs_deg']-5):\n                    raise TransferError('Measured joints exceed automatic limits.')",
+        "source_start_line": 367,
+        "source_sha256": "99b9ff8fbf684c18653e790c682d5906d2ad072818a58493262cfb5bd09772c9",
+        "captured_at_failure": true
+      }
+    },
+    "target": null,
+    "detection_ts": 0.0
+  }
+}

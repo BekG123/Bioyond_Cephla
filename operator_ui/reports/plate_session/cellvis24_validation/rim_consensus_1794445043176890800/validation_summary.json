@@ -1,0 +1,32 @@
+{
+  "status": "vision_fix_validated_and_loaded",
+  "motion_sent": false,
+  "tests_passed": 40,
+  "original_error": "Edge 3: only 103/160 consistent profiles.",
+  "cause": "Support was tested on a two-profile RANSAC hypothesis before consensus refitting.",
+  "fix": "Bounded deterministic least-squares consensus refit only for rejected hypotheses; converge membership, preserve all gates.",
+  "saved_failure": {
+    "initial_support": 103,
+    "refined_support": 104,
+    "rms_px": 0.5062915563,
+    "target_difference_from_previous_burst_mm": 0.0589797254
+  },
+  "unchanged_successful_history_bursts": 12,
+  "unchanged_commissioned_reference_bursts": 3,
+  "fresh_stationary_bursts": 3,
+  "separate_placement_block": {
+    "distance": 1.0618252511780355,
+    "yaw": 0.34922650111468556,
+    "endpoint": {
+      "X": 313.536195827398,
+      "Y": -66.06811409848312,
+      "Z": 75.72,
+      "Rz": 90.18922650111472
+    }
+  },
+  "backend_reload": "operator_ui/reports/pickup_holder/reload_1794445171980802800",
+  "files": {
+    "Pick and Hold/Align/plate_pose/rim_edges.py": "849998ad2a2088e3e11f76cf2f22ea0920d82fce44b70b4d862a3abb96b574c5",
+    "operator_ui/cellvis24_calibration.py": "026ed3caa2ba7cd3c1972e19fb5149e1e014a1a2d7072680171a07dcbdb1f659"
+  }
+}

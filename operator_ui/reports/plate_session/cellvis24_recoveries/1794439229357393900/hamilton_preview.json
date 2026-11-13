@@ -1,0 +1,329 @@
+{
+    "ok":  true,
+    "plan":  {
+                 "acceptance_sha256":  "b69b47a7bd1e00d90deae8990441fdbfea37321b38cd4d05670d9e4a743bafc6",
+                 "calibration_implementation":  null,
+                 "calibration_motion_sha256":  null,
+                 "calibration_reference_sha256":  null,
+                 "cycles":  1,
+                 "e2":  1.817988463174532,
+                 "full_calibration":  false,
+                 "held_hamilton_roundtrip":  true,
+                 "id":  "fee48b342e4f4655a15917109e2217a9",
+                 "joints":  {
+                                "J1":  67.12085332775933,
+                                "J2":  40.770956714148724,
+                                "J3":  59.31776203123828,
+                                "J4":  -10.248816546560047
+                            },
+                 "measured_target_pending":  false,
+                 "projected_trial":  false,
+                 "source":  "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\plate_session\\cellvis24_recoveries\\1794439229357393900\\reseated_home.json",
+                 "source_sha256":  "84ee6ffd044e1fbdab5f1f5605e971d53e72971b91abe10bc166c5fce8b3b54e",
+                 "start":  {
+                               "Rx":  0.0,
+                               "Ry":  0.0,
+                               "Rz":  89.84,
+                               "X":  312.5,
+                               "Y":  -66.3,
+                               "Z":  105.72
+                           },
+                 "stations":  [
+                                  "hamilton"
+                              ],
+                 "steps":  [
+                               {
+                                   "cycle":  1,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "instrument",
+                                   "label":  "Check destination idle and loading setup",
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "rotate",
+                                   "label":  "Rotate released HOME holder",
+                                   "station":  "hamilton",
+                                   "target":  90.71661229181757
+                               },
+                               {
+                                   "cycle":  1,
+                                   "flags":  {
+                                                 "vertical_runs":  true
+                                             },
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "queue",
+                                   "label":  "Connect above accepted pickup",
+                                   "points":  [
+                                                  {
+                                                      "Rz":  87.88,
+                                                      "X":  306.2,
+                                                      "Y":  -62.88,
+                                                      "Z":  106.37
+                                                  }
+                                              ],
+                                   "speed":  5,
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "flags":  {
+                                                 "home_speed137":  true,
+                                                 "home_transit":  true
+                                             },
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "queue",
+                                   "label":  "Hamilton open-jaw pickup descent",
+                                   "points":  [
+                                                  {
+                                                      "Rz":  87.88,
+                                                      "X":  306.2,
+                                                      "Y":  -62.88,
+                                                      "Z":  76.37
+                                                  }
+                                              ],
+                                   "speed":  137,
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "jaws",
+                                   "label":  "Close jaws",
+                                   "speed":  10,
+                                   "station":  "hamilton",
+                                   "target":  26.0
+                               },
+                               {
+                                   "cycle":  1,
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "jaws",
+                                   "label":  "Close jaws",
+                                   "speed":  5,
+                                   "station":  "hamilton",
+                                   "target":  25
+                               },
+                               {
+                                   "cycle":  1,
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "observe",
+                                   "label":  "Verify settled grip",
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "flags":  {
+                                                 "home_transit":  true
+                                             },
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "queue",
+                                   "label":  "Proof lift5mm",
+                                   "points":  [
+                                                  {
+                                                      "Rz":  87.88,
+                                                      "X":  306.2,
+                                                      "Y":  -62.88,
+                                                      "Z":  81.37
+                                                  }
+                                              ],
+                                   "speed":  5,
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "instrument",
+                                   "label":  "Check destination before delivery",
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "flags":  {
+                                                 "hamilton_short_side":  "cellvis24_rack_forward",
+                                                 "segment_speeds":  [
+                                                                        137,
+                                                                        137,
+                                                                        137,
+                                                                        137,
+                                                                        137,
+                                                                        137,
+                                                                        5
+                                                                    ]
+                                             },
+                                   "holder":  false,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "queue",
+                                   "label":  "Travel forward",
+                                   "points":  [
+                                                  {
+                                                      "Rz":  87.88,
+                                                      "X":  236.19,
+                                                      "Y":  -56.22,
+                                                      "Z":  110.65
+                                                  },
+                                                  {
+                                                      "Rz":  -4.76,
+                                                      "X":  236.19,
+                                                      "Y":  -56.22,
+                                                      "Z":  110.65
+                                                  },
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  236.19,
+                                                      "Y":  -56.22,
+                                                      "Z":  110.65
+                                                  },
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  236.19,
+                                                      "Y":  -56.22,
+                                                      "Z":  77.0
+                                                  },
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  372.43,
+                                                      "Y":  -186.67,
+                                                      "Z":  77.0
+                                                  },
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  372.43,
+                                                      "Y":  -186.67,
+                                                      "Z":  57.0
+                                                  },
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  372.43,
+                                                      "Y":  -186.67,
+                                                      "Z":  53.72
+                                                  }
+                                              ],
+                                   "speed":  137,
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "flags":  {
+                                                 "hamilton_short_side":  "cellvis24_rack_reverse",
+                                                 "segment_speeds":  [
+                                                                        5,
+                                                                        137,
+                                                                        137,
+                                                                        137,
+                                                                        137,
+                                                                        137,
+                                                                        137
+                                                                    ]
+                                             },
+                                   "holder":  false,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "queue",
+                                   "label":  "Travel reverse",
+                                   "points":  [
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  372.43,
+                                                      "Y":  -186.67,
+                                                      "Z":  57.0
+                                                  },
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  372.43,
+                                                      "Y":  -186.67,
+                                                      "Z":  77.0
+                                                  },
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  236.19,
+                                                      "Y":  -56.22,
+                                                      "Z":  77.0
+                                                  },
+                                                  {
+                                                      "Rz":  -93.02,
+                                                      "X":  236.19,
+                                                      "Y":  -56.22,
+                                                      "Z":  110.65
+                                                  },
+                                                  {
+                                                      "Rz":  -4.76,
+                                                      "X":  236.19,
+                                                      "Y":  -56.22,
+                                                      "Z":  110.65
+                                                  },
+                                                  {
+                                                      "Rz":  87.88,
+                                                      "X":  236.19,
+                                                      "Y":  -56.22,
+                                                      "Z":  110.65
+                                                  },
+                                                  {
+                                                      "Rz":  87.88,
+                                                      "X":  306.2,
+                                                      "Y":  -62.88,
+                                                      "Z":  81.37
+                                                  }
+                                              ],
+                                   "speed":  137,
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "flags":  {
+                                                 "home_transit":  true
+                                             },
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "queue",
+                                   "label":  "Reseat in HOME",
+                                   "points":  [
+                                                  {
+                                                      "Rz":  87.88,
+                                                      "X":  306.2,
+                                                      "Y":  -62.88,
+                                                      "Z":  76.37
+                                                  }
+                                              ],
+                                   "speed":  5,
+                                   "station":  "hamilton"
+                               },
+                               {
+                                   "cycle":  1,
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "jaws",
+                                   "label":  "Open jaws",
+                                   "speed":  5,
+                                   "station":  "hamilton",
+                                   "target":  28
+                               },
+                               {
+                                   "cycle":  1,
+                                   "flags":  {
+                                                 "home_speed137":  true,
+                                                 "home_transit":  true
+                                             },
+                                   "holder":  true,
+                                   "holder_angle":  90.71661229181757,
+                                   "kind":  "queue",
+                                   "label":  "Released HOME clearance",
+                                   "points":  [
+                                                  {
+                                                      "Rz":  87.88,
+                                                      "X":  306.2,
+                                                      "Y":  -62.88,
+                                                      "Z":  106.37
+                                                  }
+                                              ],
+                                   "speed":  137,
+                                   "station":  "hamilton"
+                               }
+                           ]
+             }
+}

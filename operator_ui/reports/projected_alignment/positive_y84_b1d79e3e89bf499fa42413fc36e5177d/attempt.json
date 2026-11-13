@@ -1,0 +1,116 @@
+{
+  "at": 1793524610.7138336,
+  "parent_sha256": "117ab05cfe1223abe32484277ab8a558429ca64acf9d4706bea97c49811923bc",
+  "endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.7652192188176,
+    "X": 312.0124178577057,
+    "Y": -67.47790542678248,
+    "Z": 73.718
+  },
+  "authorization": "Operator requested +Y 8.4 mm total from original pickup, empty claws, return Home then revised calibration. Stop open before grip.",
+  "status": "stopped_or_failed",
+  "events": [
+    {
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "info",
+            "msg": "E2 verified at 1.807 degrees (target 1.77).",
+            "t": 5.5
+          },
+          {
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5.",
+            "t": 5.6
+          },
+          {
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5.",
+            "t": 16.4
+          },
+          {
+            "level": "good",
+            "msg": "48-well calibration verified against the taught placement. Alignment is ready.",
+            "t": 45.5
+          }
+        ],
+        "name": "plate48_calibrate",
+        "result": {
+          "calibration_complete": true,
+          "context": {
+            "at": 1793524631.5373914,
+            "expected_target": {
+              "rz": 89.80671598418712,
+              "x": 305.80261189288484,
+              "y": -73.5951727384735
+            },
+            "pose": {
+              "Rx": 0.0,
+              "Ry": 0.0,
+              "Rz": -3.88,
+              "X": 279.303,
+              "Y": 26.358,
+              "Z": 289.129
+            },
+            "profile_sha256": "117ab05cfe1223abe32484277ab8a558429ca64acf9d4706bea97c49811923bc",
+            "reference": {
+              "image": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\captures\\projected_grid_burst_1793080996896524900_0036.png",
+              "image_sha256": "2f2100be220b7c5311c6901bac5d1583c2b02c8aea763633e1893e3e48f23bb9",
+              "reference_sha256": "0a130004bb4e5b631c2e0d2ee829e8ac217dcb046bd12ec8e8a5cc454a70adf2"
+            },
+            "run_id": "91390f47cb1b4ae4a652a3cf4e3867ea"
+          },
+          "ok": true,
+          "plate_profile_id": "48_well_projected_20261026",
+          "target": {
+            "rz": 89.80671598418712,
+            "x": 305.80261189288484,
+            "y": -73.5951727384735
+          }
+        },
+        "state": "done",
+        "target": null
+      }
+    },
+    {
+      "alignment_dispatch": {
+        "ok": true,
+        "started": "projected_alignment"
+      }
+    },
+    {
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "err",
+            "msg": "No three consecutive verified plate observations within 20 seconds; arm remains stopped.",
+            "t": 28.1
+          }
+        ],
+        "name": "projected_alignment",
+        "result": {
+          "error": "No three consecutive verified plate observations within 20 seconds; arm remains stopped.",
+          "grasp_target_created": false,
+          "log_file": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\projected_alignment\\20261101_011711_e2f1c379.jsonl",
+          "ok": false
+        },
+        "state": "error",
+        "target": null
+      }
+    }
+  ],
+  "grip_executed": false,
+  "squid_destination_changed": false,
+  "visual_acceptance_pending": true,
+  "error": "{'error': 'No three consecutive verified plate observations within 20 seconds; arm remains stopped.', 'grasp_target_created': False, 'log_file': 'C:\\\\Users\\\\Cephla\\\\Downloads\\\\Bioyond_Cephla\\\\Bioyond_Cephla\\\\operator_ui\\\\reports\\\\projected_alignment\\\\20261101_011711_e2f1c379.jsonl', 'ok': False}",
+  "stop": {
+    "ok": true,
+    "reply": "CmdDone"
+  }
+}

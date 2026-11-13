@@ -1,0 +1,93 @@
+{
+  "status": "stopped_or_failed",
+  "at": 1794314199.7830465,
+  "authorization": "Operator requested full calibration then an IK-checked HOME-holder return, and confirmed empty jaws, plate flat in HOME holder, clear pickup/return route, arm released, hands clear and supervised E-stop. Prepare Auto and run the accepted calibration/alignment/3.9 mm grip/5 mm proof lift and loaded IDLE return. This wrapper stops at IDLE. HOME seating/release is a separate fresh checked trial; no new visual acceptance is claimed.",
+  "initial_state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.032183495932258666
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.41309780767185,
+        "J2": 84.87429321565719,
+        "J3": 52.054957455716135,
+        "J4": -140.78493787424577
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.856,
+        "X": 289.97,
+        "Y": 62.62,
+        "Z": 248.012
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1794314199.6853704
+  },
+  "pickup_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+  "squid_plan_sha256": "9805c608b92e8efcd2c046f5f06b50d79b63d7ae61ee95dcb6c948af6050d3ff",
+  "events": [
+    {
+      "phase": "calibration_started",
+      "at": 1794314199.784047
+    }
+  ],
+  "automatic_retries": false,
+  "phase": "calibration_started",
+  "error": "{'error': 'E2 correction exceeds the 2-degree commissioning bound; inspect manually.', 'ok': False}",
+  "stop_response": {
+    "ok": true,
+    "reply": "CmdDone"
+  },
+  "finished_at": 1794314207.2261186
+}

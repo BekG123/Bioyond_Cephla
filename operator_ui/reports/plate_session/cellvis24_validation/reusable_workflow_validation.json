@@ -1,0 +1,1078 @@
+{
+  "at": 1794418660.9659133,
+  "status": "offline_tests_and_live_read_only_plan_passed",
+  "motion_started": false,
+  "tests": "58 suite tests passed, then3 CLI tests passed after adding explicit rejection handling (59 distinct tests total)",
+  "skill_validation": "passed",
+  "before": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 27.999958023428917
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 67.12085332775933,
+        "J2": 40.77098010085903,
+        "J3": 59.31766286949263,
+        "J4": -10.248642229019572
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.84,
+        "X": 312.499,
+        "Y": -66.3,
+        "Z": 105.72
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "",
+      "state": "idle"
+    },
+    "target": null,
+    "ts": 1794418657.1314802
+  },
+  "plan": {
+    "ok": true,
+    "plan": {
+      "acceptance_sha256": "b69b47a7bd1e00d90deae8990441fdbfea37321b38cd4d05670d9e4a743bafc6",
+      "cycles": 1,
+      "e2": 1.7712966496780902,
+      "id": "ddeb58d6a0ca47578e9588485b4ff7b9",
+      "joints": {
+        "J1": 67.12085332775933,
+        "J2": 40.770956714148724,
+        "J3": 59.31786119298395,
+        "J4": -10.248642229019572
+      },
+      "source": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\plate_session\\cellvis24_validation\\squid_release_home.json",
+      "source_sha256": "adadcfe4b6f8b67ef71dad12f70831c0ef7eee799695d7b73ab6dfaea5c4b282",
+      "start": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.84,
+        "X": 312.5,
+        "Y": -66.3,
+        "Z": 105.72
+      },
+      "stations": [
+        "hamilton",
+        "squid"
+      ],
+      "steps": [
+        {
+          "cycle": 1,
+          "holder_angle": 90.71661229181757,
+          "kind": "instrument",
+          "label": "Check destination idle and loading setup",
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "holder_angle": 90.71661229181757,
+          "kind": "rotate",
+          "label": "Rotate released HOME holder",
+          "station": "hamilton",
+          "target": 90.71661229181757
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "vertical_runs": true
+          },
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Connect above accepted pickup",
+          "points": [
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 106.37
+            }
+          ],
+          "speed": 5,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "vertical_runs": true
+          },
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Final pickup descent",
+          "points": [
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 76.37
+            }
+          ],
+          "speed": 5,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "jaws",
+          "label": "Close jaws",
+          "speed": 10,
+          "station": "hamilton",
+          "target": 26.0
+        },
+        {
+          "cycle": 1,
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "jaws",
+          "label": "Close jaws",
+          "speed": 5,
+          "station": "hamilton",
+          "target": 25
+        },
+        {
+          "cycle": 1,
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "observe",
+          "label": "Verify settled grip",
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Proof lift5mm",
+          "points": [
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 81.37
+            }
+          ],
+          "speed": 5,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "holder_angle": 90.71661229181757,
+          "kind": "instrument",
+          "label": "Check destination before delivery",
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "hamilton_short_side": "cellvis24_hamilton_forward",
+            "segment_speeds": [
+              137,
+              137,
+              137,
+              137,
+              5
+            ]
+          },
+          "holder": false,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Travel forward",
+          "points": [
+            {
+              "Rz": -56.32,
+              "X": 312.57,
+              "Y": -43.52,
+              "Z": 119.93
+            },
+            {
+              "Rz": -93.02,
+              "X": 312.57,
+              "Y": -43.52,
+              "Z": 139.93
+            },
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 139.93
+            },
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 57.0
+            },
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 53.72
+            }
+          ],
+          "speed": 137,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "holder": false,
+          "holder_angle": 90.71661229181757,
+          "kind": "jaws",
+          "label": "Open jaws",
+          "speed": 5,
+          "station": "hamilton",
+          "target": 28
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "hamilton_short_side": "cellvis24_hamilton_reverse",
+            "segment_speeds": [
+              5,
+              137,
+              137,
+              137,
+              137
+            ]
+          },
+          "holder": false,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Travel reverse",
+          "points": [
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 57.0
+            },
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 139.93
+            },
+            {
+              "Rz": -93.02,
+              "X": 312.57,
+              "Y": -43.52,
+              "Z": 139.93
+            },
+            {
+              "Rz": -56.32,
+              "X": 312.57,
+              "Y": -43.52,
+              "Z": 119.93
+            },
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 81.37
+            }
+          ],
+          "speed": 137,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_speed137": true,
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Empty HOME clearance",
+          "points": [
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 106.37
+            }
+          ],
+          "speed": 137,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "holder_angle": 90.71661229181757,
+          "kind": "instrument",
+          "label": "Check destination before retrieval",
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Empty connector to station route",
+          "points": [
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 81.37
+            }
+          ],
+          "speed": 5,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "hamilton_short_side": "cellvis24_hamilton_forward",
+            "segment_speeds": [
+              137,
+              137,
+              137,
+              137,
+              5
+            ]
+          },
+          "holder": false,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Travel forward",
+          "points": [
+            {
+              "Rz": -56.32,
+              "X": 312.57,
+              "Y": -43.52,
+              "Z": 119.93
+            },
+            {
+              "Rz": -93.02,
+              "X": 312.57,
+              "Y": -43.52,
+              "Z": 139.93
+            },
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 139.93
+            },
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 57.0
+            },
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 53.72
+            }
+          ],
+          "speed": 137,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "holder": false,
+          "holder_angle": 90.71661229181757,
+          "kind": "jaws",
+          "label": "Close jaws",
+          "speed": 10,
+          "station": "hamilton",
+          "target": 26.0
+        },
+        {
+          "cycle": 1,
+          "holder": false,
+          "holder_angle": 90.71661229181757,
+          "kind": "jaws",
+          "label": "Close jaws",
+          "speed": 5,
+          "station": "hamilton",
+          "target": 25
+        },
+        {
+          "cycle": 1,
+          "holder": false,
+          "holder_angle": 90.71661229181757,
+          "kind": "observe",
+          "label": "Verify settled grip",
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "hamilton_short_side": "cellvis24_hamilton_reverse",
+            "segment_speeds": [
+              5,
+              137,
+              137,
+              137,
+              137
+            ]
+          },
+          "holder": false,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Travel reverse",
+          "points": [
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 57.0
+            },
+            {
+              "Rz": -93.02,
+              "X": 372.43,
+              "Y": -186.67,
+              "Z": 139.93
+            },
+            {
+              "Rz": -93.02,
+              "X": 312.57,
+              "Y": -43.52,
+              "Z": 139.93
+            },
+            {
+              "Rz": -56.32,
+              "X": 312.57,
+              "Y": -43.52,
+              "Z": 119.93
+            },
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 81.37
+            }
+          ],
+          "speed": 137,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Reseat in HOME",
+          "points": [
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 76.37
+            }
+          ],
+          "speed": 5,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "jaws",
+          "label": "Open jaws",
+          "speed": 5,
+          "station": "hamilton",
+          "target": 28
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_speed137": true,
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 90.71661229181757,
+          "kind": "queue",
+          "label": "Released HOME clearance",
+          "points": [
+            {
+              "Rz": 87.88,
+              "X": 306.2,
+              "Y": -62.88,
+              "Z": 106.37
+            }
+          ],
+          "speed": 137,
+          "station": "hamilton"
+        },
+        {
+          "cycle": 1,
+          "holder_angle": 1.77,
+          "kind": "instrument",
+          "label": "Check destination idle and loading setup",
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "holder_angle": 1.77,
+          "kind": "rotate",
+          "label": "Rotate released HOME holder",
+          "station": "squid",
+          "target": 1.77
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "vertical_runs": true
+          },
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Connect above accepted pickup",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 105.72
+            }
+          ],
+          "speed": 5,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_speed137": true,
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "First10mm descent",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 95.72
+            }
+          ],
+          "speed": 137,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "vertical_runs": true
+          },
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Final pickup descent",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 75.72
+            }
+          ],
+          "speed": 5,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "jaws",
+          "label": "Close jaws",
+          "speed": 10,
+          "station": "squid",
+          "target": 4.9
+        },
+        {
+          "cycle": 1,
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "jaws",
+          "label": "Close jaws",
+          "speed": 5,
+          "station": "squid",
+          "target": 3.9
+        },
+        {
+          "cycle": 1,
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "observe",
+          "label": "Verify settled grip",
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Proof lift5mm",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 80.72
+            }
+          ],
+          "speed": 5,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "holder_angle": 1.77,
+          "kind": "instrument",
+          "label": "Check destination before delivery",
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "segment_speeds": [
+              137,
+              137,
+              137,
+              5
+            ],
+            "squid_queue": "cellvis24_home_holder"
+          },
+          "holder": false,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Travel forward",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 293.24
+            },
+            {
+              "Rz": 49.02,
+              "X": 354.0,
+              "Y": 270.0,
+              "Z": 293.24
+            },
+            {
+              "Rz": 88.34,
+              "X": 223.94,
+              "Y": 373.76,
+              "Z": 293.24
+            },
+            {
+              "Rz": 88.34,
+              "X": 223.94,
+              "Y": 373.76,
+              "Z": 268.77
+            }
+          ],
+          "speed": 137,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "holder": false,
+          "holder_angle": 1.77,
+          "kind": "jaws",
+          "label": "Open jaws",
+          "speed": 5,
+          "station": "squid",
+          "target": 7
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "segment_speeds": [
+              5,
+              137,
+              137,
+              137
+            ],
+            "squid_queue": "cellvis24_home_holder"
+          },
+          "holder": false,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Travel reverse",
+          "points": [
+            {
+              "Rz": 88.34,
+              "X": 223.94,
+              "Y": 373.76,
+              "Z": 293.24
+            },
+            {
+              "Rz": 49.02,
+              "X": 354.0,
+              "Y": 270.0,
+              "Z": 293.24
+            },
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 293.24
+            },
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 80.72
+            }
+          ],
+          "speed": 137,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_speed137": true,
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Empty HOME clearance",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 105.72
+            }
+          ],
+          "speed": 137,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "holder_angle": 1.77,
+          "kind": "instrument",
+          "label": "Check destination before retrieval",
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Empty connector to station route",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 80.72
+            }
+          ],
+          "speed": 5,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "segment_speeds": [
+              137,
+              137,
+              137,
+              5
+            ],
+            "squid_queue": "cellvis24_home_holder"
+          },
+          "holder": false,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Travel forward",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 293.24
+            },
+            {
+              "Rz": 49.02,
+              "X": 354.0,
+              "Y": 270.0,
+              "Z": 293.24
+            },
+            {
+              "Rz": 88.34,
+              "X": 223.94,
+              "Y": 373.76,
+              "Z": 293.24
+            },
+            {
+              "Rz": 88.34,
+              "X": 223.94,
+              "Y": 373.76,
+              "Z": 268.77
+            }
+          ],
+          "speed": 137,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "holder": false,
+          "holder_angle": 1.77,
+          "kind": "jaws",
+          "label": "Close jaws",
+          "speed": 10,
+          "station": "squid",
+          "target": 4.9
+        },
+        {
+          "cycle": 1,
+          "holder": false,
+          "holder_angle": 1.77,
+          "kind": "jaws",
+          "label": "Close jaws",
+          "speed": 5,
+          "station": "squid",
+          "target": 3.9
+        },
+        {
+          "cycle": 1,
+          "holder": false,
+          "holder_angle": 1.77,
+          "kind": "observe",
+          "label": "Verify settled grip",
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "segment_speeds": [
+              5,
+              137,
+              137,
+              137
+            ],
+            "squid_queue": "cellvis24_home_holder"
+          },
+          "holder": false,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Travel reverse",
+          "points": [
+            {
+              "Rz": 88.34,
+              "X": 223.94,
+              "Y": 373.76,
+              "Z": 293.24
+            },
+            {
+              "Rz": 49.02,
+              "X": 354.0,
+              "Y": 270.0,
+              "Z": 293.24
+            },
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 293.24
+            },
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 80.72
+            }
+          ],
+          "speed": 137,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Reseat in HOME",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 75.72
+            }
+          ],
+          "speed": 5,
+          "station": "squid"
+        },
+        {
+          "cycle": 1,
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "jaws",
+          "label": "Open jaws",
+          "speed": 5,
+          "station": "squid",
+          "target": 28
+        },
+        {
+          "cycle": 1,
+          "flags": {
+            "home_speed137": true,
+            "home_transit": true
+          },
+          "holder": true,
+          "holder_angle": 1.77,
+          "kind": "queue",
+          "label": "Released HOME clearance",
+          "points": [
+            {
+              "Rz": 89.84,
+              "X": 312.5,
+              "Y": -66.3,
+              "Z": 105.72
+            }
+          ],
+          "speed": 137,
+          "station": "squid"
+        }
+      ]
+    }
+  },
+  "after": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 28.000138700008392
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 67.12106076688292,
+        "J2": 40.77098010085903,
+        "J3": 59.31776203123828,
+        "J4": -10.248642229019572
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.84,
+        "X": 312.5,
+        "Y": -66.3,
+        "Z": 105.72
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "",
+      "state": "idle"
+    },
+    "target": null,
+    "ts": 1794418660.964908
+  },
+  "physical_reusable_runner_tested": false
+}

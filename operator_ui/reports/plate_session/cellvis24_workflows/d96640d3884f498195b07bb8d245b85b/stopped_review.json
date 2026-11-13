@@ -1,0 +1,774 @@
+{
+  "at": 1794429654.8018472,
+  "summary": {
+    "status": "stopped_or_uncertain",
+    "error": "HOME holder angle changed: measured E2=1.732844 degrees, target 1.770000.",
+    "calibration_runs": 1,
+    "completed_cycles": 0,
+    "last_steps": [
+      {
+        "kind": "rotate",
+        "station": "squid",
+        "label": "Rotate released HOME holder",
+        "status": "completed"
+      },
+      {
+        "kind": "queue",
+        "station": "squid",
+        "label": "Connect above accepted pickup",
+        "status": "completed"
+      },
+      {
+        "kind": "queue",
+        "station": "squid",
+        "label": "First10mm descent",
+        "status": "completed"
+      },
+      {
+        "kind": "queue",
+        "station": "squid",
+        "label": "Final pickup descent",
+        "status": "completed"
+      },
+      {
+        "kind": "jaws",
+        "station": "squid",
+        "label": "Close jaws",
+        "status": "completed"
+      },
+      {
+        "kind": "jaws",
+        "station": "squid",
+        "label": "Close jaws",
+        "status": "completed"
+      },
+      {
+        "kind": "observe",
+        "station": "squid",
+        "label": "Verify settled grip",
+        "status": "completed"
+      },
+      {
+        "kind": "queue",
+        "station": "squid",
+        "label": "Proof lift5mm",
+        "status": "checking"
+      }
+    ],
+    "current": {
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.84,
+        "X": 312.5,
+        "Y": -66.3,
+        "Z": 77.359
+      },
+      "enabled": true,
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "errors": [],
+      "connected": true
+    },
+    "native": {
+      "manual": false,
+      "enabled": true,
+      "disabled": false,
+      "moving": false,
+      "emergency": false,
+      "drag": false,
+      "error": false,
+      "firmware": "1.8.2504101654",
+      "external_axes": {
+        "E1": 3.900103736668825,
+        "E2": 1.7685500598580988
+      },
+      "external_units": {
+        "E1": "mm",
+        "E2": "degrees"
+      }
+    },
+    "recent_axes": [
+      {
+        "E1": 3.8984857965260744,
+        "E2": 1.7658034700381073
+      },
+      {
+        "E1": 3.898665541782975,
+        "E2": 1.7685500598580988
+      },
+      {
+        "E1": 3.898665541782975,
+        "E2": 1.7685500598580988
+      },
+      {
+        "E1": 3.8990250322967768,
+        "E2": 1.7685500598580988
+      },
+      {
+        "E1": 3.8990250322967768,
+        "E2": 1.7685500598580988
+      },
+      {
+        "E1": 3.8993845228105783,
+        "E2": 1.7712966496780902
+      },
+      {
+        "E1": 3.8992047775536776,
+        "E2": 1.7685500598580988
+      },
+      {
+        "E1": 3.899564268067479,
+        "E2": 1.7685500598580988
+      }
+    ],
+    "duration_s": 195.74593210220337
+  },
+  "state": {
+    "camera": {
+      "age_s": 20.3,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.8999239914119244
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 38.76019123461704,
+        "J2": 40.770956714148724,
+        "J3": 59.31776203123828,
+        "J4": -10.248816546560047
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.84,
+        "X": 312.5,
+        "Y": -66.3,
+        "Z": 77.359
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "enabled",
+        "value": 5
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "cellvis24_workflow",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1794429654.777605
+  },
+  "native": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 3.900103736668825,
+      "E2": 1.7685500598580988
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Reach accepted camera observation pose",
+        "t": 3.2
+      },
+      {
+        "level": "info",
+        "msg": "Executing 2 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 3.3
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Measure Cellvis rim, 4x6 grid and projected disks",
+        "t": 21.4
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Align with accepted Cellvis gripping edges",
+        "t": 30.9
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 279.380 Y 25.830 Z 294.565",
+        "t": 31.1
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 279.38, 'Y': 25.83, 'Z': 294.565, 'Rz': -3.879}",
+        "t": 32.9
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 279.380 Y 25.830 Z 300.000",
+        "t": 32.9
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 279.38, 'Y': 25.83, 'Z': 300.0, 'Rz': -3.879}",
+        "t": 34.6
+      },
+      {
+        "level": "info",
+        "msg": "alignment wrist-only MoveJ to Rz 19.551 at Z 300.000",
+        "t": 34.6
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 279.38, 'Y': 25.83, 'Z': 300.0, 'Rz': 19.550749999999997}",
+        "t": 35.7
+      },
+      {
+        "level": "info",
+        "msg": "alignment wrist-only MoveJ to Rz 42.980 at Z 300.000",
+        "t": 35.7
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 279.38, 'Y': 25.83, 'Z': 300.0, 'Rz': 42.9805}",
+        "t": 36.9
+      },
+      {
+        "level": "info",
+        "msg": "alignment wrist-only MoveJ to Rz 66.410 at Z 300.000",
+        "t": 36.9
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 279.38, 'Y': 25.83, 'Z': 300.0, 'Rz': 66.41024999999999}",
+        "t": 38.1
+      },
+      {
+        "level": "info",
+        "msg": "alignment wrist-only MoveJ to Rz 89.840 at Z 300.000",
+        "t": 38.1
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 279.38, 'Y': 25.83, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 39.2
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 282.692 Y 16.617 Z 300.000",
+        "t": 39.2
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 282.692, 'Y': 16.616999999999997, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 41.8
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 286.004 Y 7.404 Z 300.000",
+        "t": 41.8
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 286.004, 'Y': 7.404, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 44.4
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 289.316 Y -1.809 Z 300.000",
+        "t": 44.4
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 289.316, 'Y': -1.809000000000001, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 47.0
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 292.628 Y -11.022 Z 300.000",
+        "t": 47.0
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 292.628, 'Y': -11.021999999999998, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 49.6
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 295.940 Y -20.235 Z 300.000",
+        "t": 49.6
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 295.94, 'Y': -20.235, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 52.2
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 299.252 Y -29.448 Z 300.000",
+        "t": 52.2
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 299.252, 'Y': -29.448, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 54.9
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 302.564 Y -38.661 Z 300.000",
+        "t": 54.9
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 302.564, 'Y': -38.661, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 57.5
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 305.876 Y -47.874 Z 300.000",
+        "t": 57.5
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 305.876, 'Y': -47.873999999999995, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 60.1
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 309.188 Y -57.087 Z 300.000",
+        "t": 60.1
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 309.188, 'Y': -57.087, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 62.7
+      },
+      {
+        "level": "info",
+        "msg": "alignment MoveL to X 312.500 Y -66.300 Z 300.000",
+        "t": 62.7
+      },
+      {
+        "level": "info",
+        "msg": "alignment waypoint reached: {'X': 312.5, 'Y': -66.3, 'Z': 300.0, 'Rz': 89.83999999999999}",
+        "t": 65.3
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Fast open-jaw approach",
+        "t": 65.4
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 65.5
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Final open-jaw descent",
+        "t": 68.9
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 69.0
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Close jaws",
+        "t": 74.7
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Close jaws",
+        "t": 76.5
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Verify settled grip",
+        "t": 78.2
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Proof lift 5 mm at speed 5",
+        "t": 81.8
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 81.9
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Reseat plate in HOME",
+        "t": 84.6
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 84.7
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Release plate in HOME",
+        "t": 87.5
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle0/1 calibration: Released HOME clearance",
+        "t": 89.4
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 89.5
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Check destination idle and loading setup",
+        "t": 91.6
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Rotate released HOME holder",
+        "t": 92.1
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Connect above accepted pickup",
+        "t": 94.1
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 94.2
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Final pickup descent",
+        "t": 97.3
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 97.4
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Close jaws",
+        "t": 105.2
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Close jaws",
+        "t": 107.0
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Verify settled grip",
+        "t": 109.0
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Proof lift5mm",
+        "t": 112.6
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 112.7
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Check destination before delivery",
+        "t": 115.6
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Travel forward",
+        "t": 116.2
+      },
+      {
+        "level": "info",
+        "msg": "Executing 6 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 117.0
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Open jaws",
+        "t": 124.6
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Travel reverse",
+        "t": 126.4
+      },
+      {
+        "level": "info",
+        "msg": "Executing 6 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 127.2
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Empty HOME clearance",
+        "t": 134.9
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 134.9
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Check destination before retrieval",
+        "t": 136.9
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Empty connector to station route",
+        "t": 137.5
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 137.5
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Travel forward",
+        "t": 144.4
+      },
+      {
+        "level": "info",
+        "msg": "Executing 6 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 145.2
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Close jaws",
+        "t": 152.8
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Close jaws",
+        "t": 154.6
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Verify settled grip",
+        "t": 156.7
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Travel reverse",
+        "t": 160.4
+      },
+      {
+        "level": "info",
+        "msg": "Executing 6 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 161.2
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Reseat in HOME",
+        "t": 168.9
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 169.0
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Open jaws",
+        "t": 171.8
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 hamilton: Released HOME clearance",
+        "t": 173.5
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 173.6
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: Check destination idle and loading setup",
+        "t": 175.5
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: Rotate released HOME holder",
+        "t": 175.7
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: Connect above accepted pickup",
+        "t": 177.8
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 177.9
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: First10mm descent",
+        "t": 181.0
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 181.1
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: Final pickup descent",
+        "t": 183.2
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 183.3
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: Close jaws",
+        "t": 189.5
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: Close jaws",
+        "t": 191.3
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: Verify settled grip",
+        "t": 193.2
+      },
+      {
+        "level": "info",
+        "msg": "Cellvis cycle1/1 squid: Proof lift5mm",
+        "t": 196.8
+      },
+      {
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 196.9
+      },
+      {
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: HOME holder angle changed: measured E2=1.732844 degrees, target 1.770000.",
+        "t": 198.9
+      }
+    ],
+    "name": "cellvis24_workflow",
+    "result": {
+      "error": "HOME holder angle changed: measured E2=1.732844 degrees, target 1.770000.",
+      "failure_context": {
+        "captured_at_failure": true,
+        "frames": [
+          {
+            "function": "_run",
+            "line": 431,
+            "path": "operator_ui/sequences.py"
+          },
+          {
+            "function": "execute",
+            "line": 228,
+            "path": "operator_ui/cellvis24_workflow.py"
+          },
+          {
+            "function": "execute",
+            "line": 458,
+            "path": "operator_ui/trajectory_queue.py"
+          },
+          {
+            "function": "_locked",
+            "line": 540,
+            "path": "operator_ui/robot_service.py"
+          },
+          {
+            "function": "locked",
+            "line": 434,
+            "path": "operator_ui/trajectory_queue.py"
+          },
+          {
+            "function": "<lambda>",
+            "line": 229,
+            "path": "operator_ui/cellvis24_workflow.py"
+          },
+          {
+            "function": "check",
+            "line": 187,
+            "path": "operator_ui/cellvis24_workflow.py"
+          }
+        ],
+        "location": {
+          "function": "check",
+          "line": 187,
+          "path": "operator_ui/cellvis24_workflow.py"
+        },
+        "source": "    def check(stationary=False,holder=False,jaws=True):\n        s=preflight(service);n=native(service);axes=n['external_axes']\n        if run.stopped() or (stationary and n['moving']):raise TransferError('Stopped or unsettled.')\n        if not all(math.isfinite(axes[k]) for k in ('E1','E2')):raise TransferError('Invalid axis feedback.')\n        if jaws and abs(axes['E1']-expected_e1)>.1:raise TransferError('Jaw position changed.')\n        if holder and not angle_ok(axes['E2'],expected_angle):\n            raise TransferError(f\"HOME holder angle changed: measured E2={axes['E2']:.6f} degrees, target {expected_angle:.6f}.\")\n        record['samples'].append(dict(at=time.time(),pose=s['pose_mm'],axes=axes));save();return s,n",
+        "source_sha256": "4ce7a8f2ddc9ccc2a561bedea32d87bb7dbf2524ab555badd062fdd06a22303e",
+        "source_start_line": 181
+      },
+      "ok": false
+    },
+    "state": "error",
+    "target": null
+  }
+}

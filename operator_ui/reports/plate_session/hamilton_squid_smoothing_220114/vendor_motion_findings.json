@@ -1,0 +1,52 @@
+{
+  "status": "read_only_vendor_documentation_review",
+  "motion_sent": false,
+  "production_files_changed": false,
+  "installed_root": "C:/Bioyond/RobStudio",
+  "sources": [
+    {
+      "path": "C:/Bioyond/RobStudio/Config/BYCommand.json",
+      "lines": [776, 782, 785, 786],
+      "command": "MoveL(LP, V, ZP, T0, U0)",
+      "meaning": "Linear motion to Cartesian target. Chinese V describes maximum motion speed. Chinese ZP is 融合区域轨迹长度, meaning trajectory length of the blending region. English calls it zone data. No exact geometric envelope, before/after split, orientation interpolation, acceleration, or jerk contract is specified here."
+    },
+    {
+      "path": "C:/Bioyond/RobStudio/Config/BYCommand.json",
+      "lines": [828, 834, 837, 838],
+      "command": "MoveC(VP, LP, V, ZP, T0, U0)",
+      "meaning": "Circular arc via intermediate point VP to target LP. ZP has the same blend-region trajectory length description. No rule for via-point orientation, wrist winding, orientation interpolation or constant-angular-rate behavior is specified."
+    },
+    {
+      "path": "C:/Bioyond/RobStudio/Odin/user/__lif.lua",
+      "lines": [353, 355, 364, 366],
+      "meaning": "MoveL and MoveC wrap _MOVE_L and _MOVE_C respectively, yielding DelayMS(10) while return is0 or-1. Neither wrapper invokes MOVFINISH. These wrappers do not reveal the native interpolation algorithm."
+    },
+    {
+      "path": "C:/Bioyond/RobStudio/Odin/user/__lif.lua",
+      "lines": [405, 406, 408],
+      "meaning": "MOVFINISH invokes MoveAll then waits until _IS_MOVING no longer reports1. This supports issuing multiple motion commands before one completion barrier; it does not establish nonzero speed at each junction."
+    },
+    {
+      "path": "C:/Bioyond/RobStudio/Odin/user/__lif.lua",
+      "lines": [966, 967, 979, 980, 981],
+      "command": "MoveJump",
+      "meaning": "Vendor portal-path helper begins with MOVFINISH, then queues three MoveL commands using zones h1-h2, h1-h3 and caller zone. It is direct evidence of positive-length zone use around vertical/horizontal transitions. It is not a mathematical guarantee that a zone of5 equals a5mm trim or bounds the rounded path by5mm."
+    },
+    {
+      "path": "C:/Bioyond/RobStudio/Config/BYCommand.json",
+      "lines": [726, 727],
+      "command": "MoveJ",
+      "meaning": "Joint-motion ZJ is described as blend joint-angle range, distinct from the linear-motion ZP trajectory-length description."
+    }
+  ],
+  "proposed_existing_executor_extension": {
+    "forward_zones": [-1, 1, 1, 5, -1, -1],
+    "reverse_zones": [-1, 5, 1, 1, -1, -1],
+    "geometry": "Existing six pinned endpoints in each direction; preserve unwrapped wrist winding, first clearance and final seating phase boundaries.",
+    "supported_by_documents": "Positive MoveL blending zones and queued vertical/horizontal transitions are supported by the installed vendor helpers. No contradiction found with this opt-in pinned pattern.",
+    "not_supported_as_a_guarantee": "Zone5 does not establish an exact quadratic curve or prove final rotation can never begin aboveZ82. The analytic Bezier is an analysis model, not the documented native interpolator. No exact native velocity continuity, constant speed137, acceleration or jerk guarantee was found.",
+    "recommendation": "Implement as a versioned, pinned native-blending candidate with existing legacy behavior preserved. Report geometric/IK checks separately from actual controller interpolation. Validate measured wrist and height behavior in its first supervised trial before recording physical acceptance. Do not label zone5 as a certified5mm envelope or a guaranteed Z82 turn-start limit."
+  },
+  "spline_search": "No spline or Bezier command found in installed BYCommand.json, BYCommandUpdate.json, or the Lua wrapper sources inspected.",
+  "scope_limit": "Native _MOVE_L/_MOVE_C binary implementation was not inspected. No movement, controller call or settings mutation performed."
+}

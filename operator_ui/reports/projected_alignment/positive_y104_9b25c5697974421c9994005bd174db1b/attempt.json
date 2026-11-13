@@ -1,0 +1,59 @@
+{
+  "at": 1793731004.800882,
+  "parent_sha256": "583b14820fbacae665fb3e66953c87a54bf210fd510dc01035d139e7164357f5",
+  "endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.7652192188176,
+    "X": 312.0124178577057,
+    "Y": -65.47790542678248,
+    "Z": 73.718
+  },
+  "authorization": "Operator requested +Y 10.4 mm total from original pickup, empty claws, return Home then revised calibration. Stop open before grip.",
+  "status": "stopped_or_failed",
+  "events": [
+    {
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "info",
+            "msg": "E2 verified at 1.774 degrees (target 1.77).",
+            "t": 6.2
+          },
+          {
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5.",
+            "t": 6.2
+          },
+          {
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5.",
+            "t": 15.2
+          },
+          {
+            "level": "err",
+            "msg": "48-well plate placement changed. Review or reteach before reusing its descent; no automatic endpoint adjustment.",
+            "t": 31.3
+          }
+        ],
+        "name": "plate48_calibrate",
+        "result": {
+          "error": "48-well plate placement changed. Review or reteach before reusing its descent; no automatic endpoint adjustment.",
+          "ok": false
+        },
+        "state": "error",
+        "target": null
+      }
+    }
+  ],
+  "grip_executed": false,
+  "squid_destination_changed": false,
+  "visual_acceptance_pending": true,
+  "error": "{'error': '48-well plate placement changed. Review or reteach before reusing its descent; no automatic endpoint adjustment.', 'ok': False}",
+  "stop": {
+    "ok": true,
+    "reply": "CmdDone"
+  }
+}

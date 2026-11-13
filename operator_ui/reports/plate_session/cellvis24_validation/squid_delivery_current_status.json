@@ -1,0 +1,109 @@
+{
+  "at": 1794417951.2337964,
+  "status": "controller_delivery_completed_pending_first_Cellvis_seating_inspection",
+  "source": "squid_deliver_after_connector_check.json",
+  "source_sha256": "9a873e3ad822872997061737d3c9ad2d16755c71befcad6ccde371a66cd1113d",
+  "state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.898845287039876
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 230.17132346192844,
+        "J2": 90.31146949369496,
+        "J3": 150.00980550783743,
+        "J4": -151.98100486394662
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 88.34,
+        "X": 223.941,
+        "Y": 373.759,
+        "Z": 268.77
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "cellvis24_squid",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1794417951.217216
+  },
+  "native": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 3.898845287039876,
+      "E2": 1.7685500598580988
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "operator_seating_accepted": false,
+  "release_sent": false,
+  "offline_tests": 52,
+  "fixes": [
+    "Wait for settled gripper feedback before interpreting immediate contact hint",
+    "Monitor pinned Cellvis clearance293.24 rather than legacy291.24",
+    "Validate high-clearance connector using existing bounded vertical support before dispatch"
+  ],
+  "failed_trials_preserved": [
+    "squid_deliver.json",
+    "squid_continue_delivery.json",
+    "squid_deliver_after_clearance_stop.json"
+  ]
+}

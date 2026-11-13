@@ -1,0 +1,190 @@
+{
+  "status": "empty_open_after_review",
+  "operator_confirmed_plate_in_holder_jaws_empty": true,
+  "operator_statement": "Plate in HOME holder; jaws empty; hands clear; E-stop supervised",
+  "failed_sha256": "ae2a609a04c77bcc405ef0e7e453acc7ebed9585ba8d76f721be4eeb9cc3bcd0",
+  "steps": [
+    {
+      "enable": {
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    },
+    {
+      "startup": {
+        "gripper_after_start": {
+          "e1_position": 0.049,
+          "e1_torque": 0.8
+        },
+        "notes": [
+          "E1 was reset to ~0 by the controller runtime (plates closed) \u2014 press Open (28) before any grip work"
+        ],
+        "ok": true,
+        "reply": "CmdDone"
+      }
+    },
+    {
+      "opening": {
+        "commanded": {
+          "e1": 28.0,
+          "speed": 5.0
+        },
+        "completion_reply": {
+          "index": 1,
+          "value": 1
+        },
+        "gripper": {
+          "e1_position": 28.003,
+          "e1_torque": 190.936,
+          "e1_torque_normalized": 0.716,
+          "grip_detected": false,
+          "joints": {
+            "J1": 530,
+            "J2": -2,
+            "J3": 11,
+            "J4": -10
+          },
+          "position_error": 0.003,
+          "telemetry_live": true
+        },
+        "ok": true
+      }
+    }
+  ],
+  "error": "",
+  "precheck_note": "Controller disabled, fault-free; first precheck sent no startup or motion. Prepare enable per operator-authorized empty-arm recovery.",
+  "before": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": false,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.049081041652243584
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 254.63192259325763,
+        "J2": 40.77385666622614,
+        "J3": 59.30853998889204,
+        "J4": -10.275835765333849
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 89.807,
+        "X": 312.471,
+        "Y": -66.296,
+        "Z": 293.231
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "idle",
+        "value": 1
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "",
+      "state": "idle"
+    },
+    "target": null,
+    "ts": 1794417695.954829
+  },
+  "enable_sent": true,
+  "startup_sent": true,
+  "opening_sent": true,
+  "final": {
+    "connected": true,
+    "control_mode": {
+      "mode": "auto",
+      "value": 1
+    },
+    "enabled": true,
+    "endpoint": "192.168.201.220:56788",
+    "errors": [],
+    "external_axes": {
+      "E1": 28.00535224378109
+    },
+    "external_axes_source": "native_motion_status",
+    "external_axes_units": {
+      "E1": "mm"
+    },
+    "joints": {
+      "J1": 254.63192259325763,
+      "J2": 40.77388005293644,
+      "J3": 59.308639150637696,
+      "J4": -10.275835765333849
+    },
+    "lua_app_initialized": true,
+    "ok": true,
+    "pose_mm": {
+      "Rx": 0.0,
+      "Ry": 0.0,
+      "Rz": 89.807,
+      "X": 312.472,
+      "Y": -66.296,
+      "Z": 293.231
+    },
+    "program_state": {
+      "state": "running",
+      "value": 1
+    },
+    "system_state": {
+      "state": "running",
+      "value": 2
+    }
+  },
+  "native": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 28.00571173429489,
+      "E2": 1.8976393545108705
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  }
+}

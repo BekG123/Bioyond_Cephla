@@ -1,0 +1,188 @@
+{
+  "actions": [
+    "move_home"
+  ],
+  "labels": [
+    "Return Home"
+  ],
+  "dispatch": "ik_home_return",
+  "start": {
+    "X": 322.274,
+    "Y": 45.608,
+    "Z": 299.977,
+    "Rz": 84.175
+  },
+  "joints": {
+    "J1": 261.37784289101637,
+    "J2": 72.83268656171444,
+    "J3": 60.49798512806613,
+    "J4": -49.15561999312989
+  },
+  "e1": 0.010791923159558792,
+  "cfg": {
+    "reach_hard_mm": 460.0,
+    "j4_pref_abs_deg": 220.0,
+    "j4_hard_abs_deg": 220.0,
+    "inner_reach_mm": 280.0,
+    "claw_gap_min_mm": 60.0,
+    "claw_gap_max_mm": 88.0,
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j2_min_deg": -95.0,
+    "j2_margin_deg": 2.0,
+    "extension_margin_mm": 8.0
+  },
+  "envelope": {
+    "X": [
+      200.0,
+      450.0
+    ],
+    "Y": [
+      -250.0,
+      380.0
+    ],
+    "Z": [
+      70.0,
+      400.0
+    ]
+  },
+  "home": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+  "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+  "stages": [
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 322.27,
+          "Y": 45.61,
+          "Z": 300.0,
+          "Rz": 84.18
+        }
+      ]
+    },
+    {
+      "kind": "rotate",
+      "rz": -3.8799999999999955,
+      "queued_pivot": true
+    },
+    {
+      "kind": "queue",
+      "points": [
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        }
+      ]
+    }
+  ],
+  "checked": [
+    {
+      "pose": {
+        "X": 322.27,
+        "Y": 45.61,
+        "Z": 300.0,
+        "Rz": 84.18
+      },
+      "joints": {
+        "J1": 261.4008428910164,
+        "J2": 72.83404210195184,
+        "J3": 60.49676587693828,
+        "J4": -49.150756282239435
+      }
+    },
+    {
+      "pose": {
+        "X": 322.27,
+        "Y": 45.61,
+        "Z": 300.0,
+        "Rz": -3.8799999999999955
+      },
+      "joints": {
+        "J1": 261.4008428910164,
+        "J2": 72.83404210195184,
+        "J3": 60.49676587693828,
+        "J4": -137.21075628223943
+      }
+    },
+    {
+      "pose": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 300.0,
+        "Rz": -3.88
+      },
+      "joints": {
+        "J1": 261.4008428910164,
+        "J2": 84.87688206683333,
+        "J3": 52.05596109242007,
+        "J4": -140.81279146260272
+      }
+    },
+    {
+      "pose": {
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02,
+        "Rz": -3.88
+      },
+      "joints": {
+        "J1": 209.42084289101638,
+        "J2": 84.87688206683333,
+        "J3": 52.05596109242007,
+        "J4": -140.81279146260272
+      }
+    }
+  ],
+  "preserve_gripper": false,
+  "steps": [
+    {
+      "kind": "home_return",
+      "label": "Move to X322.27 / Y45.61 / Z300.00 mm"
+    },
+    {
+      "kind": "home_return",
+      "label": "Turn the wrist to -3.88 degrees at clearance height"
+    },
+    {
+      "kind": "home_return",
+      "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+    },
+    {
+      "kind": "home_return",
+      "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+    }
+  ],
+  "requirements": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "The gripper is empty. Auto preparation will enable the controller and start its program, which may close the jaws."
+  ],
+  "summary": "Return Home from the current position using IK. Translation speed 137; queued pivot turn speed 137. Review the physical route before confirming.",
+  "id": "bfab968c31ab4456a2061aba577dd1f6",
+  "recovery_of": {
+    "1794428215532422300_bf0bafca374a4ea1980686dc75092b88.json": "a58a524a33f98adef0f4ff3b241180741c0181eaec2ebfd9e12a0bd83736bb44"
+  },
+  "expires_at": 1794429667.1766613,
+  "route_recovery_of": {
+    "1794428215637978400_saved_home.json": "32bb3272b4480b4c3827bbf8475b7bb66344f9840edafc9f497d2ddc1249ee18"
+  },
+  "dense_samples": 267,
+  "physical_clearance_verified": false
+}

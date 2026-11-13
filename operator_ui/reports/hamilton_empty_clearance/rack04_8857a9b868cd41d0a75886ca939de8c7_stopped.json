@@ -1,0 +1,123 @@
+{
+  "at": 1794426038.3187792,
+  "state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": false,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-11 11:40:17 Motion error: axis 3 collision detected"
+        },
+        {
+          "errCode": 3873,
+          "errMsg": "2026-11-11 11:40:17 Motion error: axis 3 collision detected"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-11 11:40:17 Motion error: failed to enable axis 2 servo"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-11 11:40:17 Motion error: failed to enable axis 3 servo"
+        },
+        {
+          "errCode": 3960,
+          "errMsg": "2026-11-11 11:40:17 Motion error: failed to enable axis 4 servo"
+        },
+        {
+          "errCode": 3929,
+          "errMsg": "2026-11-11 11:40:17 Motion error: external axis 1 servo enable failed"
+        },
+        {
+          "errCode": 3929,
+          "errMsg": "2026-11-11 11:40:17 Motion error: external axis 2 servo enable failed"
+        }
+      ],
+      "external_axes": {
+        "E1": 0.02175735244236421
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 28.39570286569885,
+        "J2": 2.2345693461420706,
+        "J3": 100.77361890648086,
+        "J4": -192.9607925018586
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -89.953,
+        "X": 370.866,
+        "Y": -187.069,
+        "Z": 66.994
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "error",
+        "value": 3
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "hamilton_empty_clearance",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1794426038.3092306
+  },
+  "native": {
+    "manual": false,
+    "enabled": false,
+    "disabled": true,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 0.02175735244236421,
+      "E2": 1.9882766051271743
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "reset_or_retry": false
+}

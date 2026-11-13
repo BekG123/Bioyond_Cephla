@@ -1,0 +1,133 @@
+{
+  "authorization": "Operator requested one three-machine physical dry mock using the accepted handling routes; empty Cellvis24 source at site2 A1, transported Falcon48 destination at site4 A1-A6, six fresh 300uL tips site7 A1-A6; five real brightfield images at prior saved single site. Standing route clearance, empty supporting holders, hands clear, E-stop supervision. No actual reagent, PCR chemistry or automatic motion retries.",
+  "initial_state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.8990250322967768
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.4211879334902,
+        "J2": 84.87686575379037,
+        "J3": 52.05604823491838,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "squid_single_queue",
+      "state": "done"
+    },
+    "target": null,
+    "ts": 1794296473.3179567
+  },
+  "squid": {
+    "available": true,
+    "connected": true,
+    "status": "idle",
+    "message": "Squid ready; no imaging run in progress.",
+    "simulation": false,
+    "job": null,
+    "completion_confirmed": false,
+    "real_imaging_complete": false,
+    "checked_at": 1794296474.0092094,
+    "session": {
+      "pid": 20824,
+      "created_at": 1794115650.8333602
+    },
+    "monitoring_only": true,
+    "retrieval_authorized": false,
+    "cleanup": {
+      "version": 1,
+      "status": "idle",
+      "experiment_id": null,
+      "error": ""
+    },
+    "stage_simulated": false,
+    "camera_simulated": false,
+    "controller_serial": "12769210"
+  },
+  "bridge": {
+    "controller_serial": "12769210",
+    "stage_simulated": false,
+    "reference_hash": "6f6c488657c6946f4ecf0c63eb61b238bab787361ad7f7d1acb815f4098c41e2",
+    "dropoff": {
+      "x_mm": 0.5000625,
+      "y_mm": 0.5000625,
+      "z_mm": 0.063984375
+    },
+    "loading_route": "Squid native loading path: retract objective, Y15, X35, loading Y, loading X, restore scanning limits, taught Z",
+    "scan_limits": {
+      "x_mm": [
+        10.0,
+        112.5
+      ],
+      "y_mm": [
+        6.0,
+        76.0
+      ],
+      "z_mm": [
+        0.05,
+        7.0
+      ]
+    },
+    "imaging_lifecycle_version": 1,
+    "state_io_version": 1,
+    "software_directory": "C:\\Users\\Cephla\\Desktop\\squid-latest\\software",
+    "lacry_bridge_directory": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\squid_bridge"
+  },
+  "settings_source": "Operator-approved previous five real brightfield frames at explicit XY; no grid navigation or autofocus",
+  "plan_sha256": "4bb05d70b7276f1995a444fe20d061b5e254e8f9cdf2d38dbe51a67a81f7fa1e",
+  "hardware_motion_started": false
+}

@@ -1,0 +1,160 @@
+{
+  "at": 1794470398.6106284,
+  "state": {
+    "camera": {
+      "age_s": null,
+      "device": null,
+      "enabled": true,
+      "error": "",
+      "open": false
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.898126306012273
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 257.40102745349077,
+        "J2": 11.333005282038886,
+        "J3": 49.50679807752886,
+        "J4": -61.48963188705895
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -0.65,
+        "X": 224.65,
+        "Y": -135.35,
+        "Z": 296.0
+      },
+      "program_state": {
+        "state": "stopped",
+        "value": 0
+      },
+      "system_state": {
+        "state": "enabled",
+        "value": 5
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "hotel_slot2_taught",
+      "state": "error"
+    },
+    "target": null,
+    "ts": 1794470398.5920765
+  },
+  "native": {
+    "manual": false,
+    "enabled": true,
+    "disabled": false,
+    "moving": false,
+    "emergency": false,
+    "drag": false,
+    "error": false,
+    "firmware": "1.8.2504101654",
+    "external_axes": {
+      "E1": 3.8983060512691736,
+      "E2": 1.7685500598580988
+    },
+    "external_units": {
+      "E1": "mm",
+      "E2": "degrees"
+    }
+  },
+  "sequence": {
+    "active": false,
+    "detection_ts": 0.0,
+    "log": [
+      {
+        "level": "info",
+        "msg": "Executing 7 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route.",
+        "t": 2.6
+      },
+      {
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: Jaw feedback differs from required payload state: actual E1=4.117075 mm, expected 3.900000 mm.",
+        "t": 14.8
+      }
+    ],
+    "name": "hotel_slot2_taught",
+    "result": {
+      "error": "Jaw feedback differs from required payload state: actual E1=4.117075 mm, expected 3.900000 mm.",
+      "failure_context": {
+        "captured_at_failure": true,
+        "frames": [
+          {
+            "function": "_run",
+            "line": 431,
+            "path": "operator_ui/sequences.py"
+          },
+          {
+            "function": "execute",
+            "line": 80,
+            "path": "operator_ui/hotel_slot2_trial.py"
+          },
+          {
+            "function": "execute",
+            "line": 491,
+            "path": "operator_ui/trajectory_queue.py"
+          },
+          {
+            "function": "_locked",
+            "line": 540,
+            "path": "operator_ui/robot_service.py"
+          },
+          {
+            "function": "locked",
+            "line": 451,
+            "path": "operator_ui/trajectory_queue.py"
+          },
+          {
+            "function": "healthy",
+            "line": 400,
+            "path": "operator_ui/trajectory_queue.py"
+          }
+        ],
+        "location": {
+          "function": "healthy",
+          "line": 400,
+          "path": "operator_ui/trajectory_queue.py"
+        },
+        "source": "            def healthy():\n                if run.stopped(): raise TransferError('Queued replay stopped by operator.')\n                refusal = self.service._preflight()\n                if refusal: raise TransferError(refusal)\n                q = self.service.joints() or {}\n                values = [q.get(k) for k in ('J1','J2','J3','J4')]\n                if any(type(v) not in (int,float) or not math.isfinite(v) for v in values):\n                    raise TransferError('Joint feedback is unavailable.')\n                if abs(q['J2'])>abs(cfg['j2_min_deg'])-cfg['j2_margin_deg'] or abs(q['J4'])>min(cfg['j4_pref_abs_deg'],cfg['j4_hard_abs_deg']-5):\n                    raise TransferError('Measured joints exceed automatic limits.')",
+        "source_sha256": "a459deea912bc8ef25e05e9449378072cd58934f21ba2ca17cfdc409c79f2c06",
+        "source_start_line": 397
+      },
+      "ok": false
+    },
+    "state": "error",
+    "target": null
+  },
+  "motion_sent": false
+}

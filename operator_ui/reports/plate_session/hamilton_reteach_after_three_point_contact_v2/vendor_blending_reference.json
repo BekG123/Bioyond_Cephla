@@ -1,0 +1,55 @@
+{
+  "source": "C:\\Bioyond\\RobStudio\\Config\\BYCommand.json",
+  "source_sha256": "01916bc53a75daab4b3c788359a4410a3c0d2277d1cc075aee4102b242657152",
+  "command": {
+    "Name": "MoveL",
+    "Category": {
+      "zh-CN": "运动指令",
+      "en-US": "Move"
+    },
+    "Complete": {
+      "CompleteDisplay": "MoveL(LP, V, ZP, T0, U0)",
+      "CompleteInsert": "MoveL(LP,10,0,T0,U0)",
+      "CompleteDescription": {
+        "zh-CN": "直线运动\r\nLP：直线运动目标点\r\nV：最大运动速度\r\nZP：融合区域轨迹长度\r\nT：工具坐标系\r\nU：用户坐标系",
+        "en-US": "Move the robot linearly\r\nLP: cartesian position data\r\nV: speed data\r\nZP: zone data\r\nT: tool frame data\r\nU: user frame data"
+      }
+    },
+    "Parameters": [
+      {
+        "Index": 1,
+        "Type": [
+          "RobTarget"
+        ]
+      },
+      {
+        "Index": 2,
+        "Type": [
+          "float",
+          "int"
+        ]
+      },
+      {
+        "Index": 3,
+        "Type": [
+          "float",
+          "int"
+        ]
+      },
+      {
+        "Index": 4,
+        "Type": [
+          "TOOL"
+        ]
+      },
+      {
+        "Index": 5,
+        "Type": [
+          "USER"
+        ]
+      }
+    ],
+    "ReturnParameterType": []
+  },
+  "interpretation": "ZP: blend-region trajectory length. Exact shape, negative-zone semantics and velocity continuity are not specified here; validate live with small bounded setting."
+}

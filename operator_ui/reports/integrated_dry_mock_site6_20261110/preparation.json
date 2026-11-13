@@ -1,0 +1,317 @@
+{
+  "initial_state": {
+    "available": true,
+    "connected": true,
+    "simulation": false,
+    "serial": "PRPGJ2494",
+    "initialized": true,
+    "global_state": "Idle",
+    "state": "idle",
+    "run": {
+      "protocolId": 0,
+      "runDatalId": null,
+      "isRunInProgress": false,
+      "isSimulation": true,
+      "protocolRunState": 0,
+      "startTime": "2026-11-09T23:40:15.4115627-08:00",
+      "estimatedEndTime": "2026-11-09T23:43:44-08:00",
+      "currentTime": "2026-11-09T23:43:41.875275-08:00",
+      "pauseSeconds": 0,
+      "endPauseTime": "0001-01-01T00:00:00",
+      "protocolName": null,
+      "currentStep": 41,
+      "preLoadThermalDeviceUsed": "None",
+      "preLoadHepaFiltration": false
+    },
+    "pending_errors": [],
+    "protocol_catalog": [
+      {
+        "id": 7,
+        "name": "Protocol",
+        "favorite": true,
+        "dateModified": "2026-11-08T00:00:17.3276729",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 8,
+        "name": "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:15:26.3343363",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 9,
+        "name": "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:26:03.8078045",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 10,
+        "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T02:30:01.3603117",
+        "dateRun": "2026-11-08T02:31:37.8295282"
+      },
+      {
+        "id": 11,
+        "name": "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z",
+        "favorite": true,
+        "dateModified": "2026-11-08T03:19:50.076936",
+        "dateRun": "0001-01-01T00:00:00"
+      },
+      {
+        "id": 12,
+        "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z",
+        "favorite": true,
+        "dateModified": "2026-11-09T23:39:04.8957091",
+        "dateRun": "2026-11-09T23:40:15.4085454"
+      }
+    ],
+    "protocols": [
+      "Protocol",
+      "Lacry plate transfer 4 to 3 20261108T101236282327Z",
+      "SIMULATION ONLY gripper reference 4 to 4 20261108T102530157241Z",
+      "SIMULATION ONLY gripper reference virtual magnet 20261108T102718Z",
+      "SIMULATION ONLY gripper reference virtual magnet 20261108T111916Z",
+      "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 20261110T073831Z"
+    ],
+    "recipes": [],
+    "session_id": "6ec33fef9892456181d6cd1c04970ca0",
+    "parked": true,
+    "door_automation_ready": true,
+    "ready_for_robot": false,
+    "message": "Hamilton Idle; initialized.",
+    "operation": null,
+    "prompt": null,
+    "polling": {
+      "mode": "normal",
+      "purpose": null,
+      "calibration_default": "reduced",
+      "camera_paused": false
+    }
+  },
+  "labware": {
+    "2": {
+      "wellMap": {},
+      "disabledWells": [],
+      "id": 128,
+      "name": "P24w3600dnptmHAM",
+      "containerName": "",
+      "rows": 4,
+      "columns": 6,
+      "volume": 3600.0,
+      "displayName": "Cellvis, 24, Culture Plate, 3.6 mL, Glass Bottom, Black",
+      "imageExtension": null,
+      "imageData": null,
+      "partNumbers": "P24-1.5H-N",
+      "categories": [
+        {
+          "id": 25,
+          "displayName": "24-well",
+          "name": "Well24",
+          "grouping": "Number of Wells",
+          "classification": "plate"
+        },
+        {
+          "id": 1,
+          "displayName": "MTP",
+          "name": "MicrotiterPlate",
+          "grouping": "Plate Type",
+          "classification": "plate"
+        }
+      ],
+      "classification": "plate",
+      "siteAlignments": [
+        "SiteAlignment_Pipetting",
+        "SiteAlignment_Flat",
+        "SiteAlignment_HHC_6601877_01"
+      ],
+      "isFavorite": false,
+      "parts": []
+    },
+    "4": {
+      "wellMap": {},
+      "disabledWells": [],
+      "id": 166,
+      "name": "P48w800kmmtjFAL",
+      "containerName": "",
+      "rows": 6,
+      "columns": 8,
+      "volume": 1300.0,
+      "displayName": "Falcon, 48, Cell Culture Plate, 0.8 mL, Clear",
+      "imageExtension": null,
+      "imageData": null,
+      "partNumbers": "353078",
+      "categories": [
+        {
+          "id": 24,
+          "displayName": "48-well",
+          "name": "Well48",
+          "grouping": "Number of Wells",
+          "classification": "plate"
+        },
+        {
+          "id": 1,
+          "displayName": "MTP",
+          "name": "MicrotiterPlate",
+          "grouping": "Plate Type",
+          "classification": "plate"
+        }
+      ],
+      "classification": "plate",
+      "siteAlignments": [
+        "SiteAlignment_Pipetting",
+        "SiteAlignment_Flat",
+        "WasteAlignment_FrontChute",
+        "WasteAlignment_BackChute",
+        "SiteAlignment_ee_presentation",
+        "EntryExitAlignment_BeamAlignmentEntry",
+        "SiteAlignment_EERAMTP8pos",
+        "SiteAlignment_HHC_6601877_01"
+      ],
+      "isFavorite": false,
+      "parts": []
+    },
+    "6": {
+      "id": 8,
+      "name": "235903",
+      "containerName": "",
+      "rows": 8,
+      "columns": 12,
+      "volume": 300.0,
+      "displayName": "300 \u00b5L Framed Conductive Filtered",
+      "imageExtension": null,
+      "imageData": null,
+      "partNumbers": "235903",
+      "categories": [
+        {
+          "id": 7,
+          "displayName": "300 \u03bcL",
+          "name": "Tip300uL",
+          "grouping": "Tip Size",
+          "classification": "tiprack"
+        },
+        {
+          "id": 31,
+          "displayName": "Black (conductive)",
+          "name": "ConductiveTips",
+          "grouping": "Tip Color (Conductivity)",
+          "classification": "tiprack"
+        },
+        {
+          "id": 5,
+          "displayName": "Filtered",
+          "name": "FilteredTips",
+          "grouping": "Filter",
+          "classification": "tiprack"
+        },
+        {
+          "id": 10,
+          "displayName": "Framed",
+          "name": "FTR",
+          "grouping": "Rack Type",
+          "classification": "tiprack"
+        }
+      ],
+      "classification": "tiprack",
+      "siteAlignments": [
+        "SiteAlignment_Framed",
+        "SiteAlignment_EERAFTR4pos",
+        "SiteAlignment_EERAFTR6pos"
+      ],
+      "isFavorite": false,
+      "parts": []
+    }
+  },
+  "protocol_request": {
+    "name": "DRY MOCK 48 WELL Site2 A1 to Site4 A1-A6 tips6 20261110T075548Z",
+    "makeNameUnique": false,
+    "skipValidation": false,
+    "deck": {
+      "positions": [
+        {
+          "position": 1,
+          "positionName": "Site 1",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        },
+        {
+          "position": 2,
+          "positionName": "Site 2",
+          "labwarePositions": [],
+          "labwareGroup": {
+            "labwareId": 128,
+            "groupName": "EMPTY Cellvis source",
+            "reuseTipsBetweenSteps": false,
+            "liquidName": "",
+            "liquidType": "Water",
+            "liquidVolumeOptions": "CalculateForMe"
+          },
+          "liquidVolume": 0
+        },
+        {
+          "position": 3,
+          "positionName": "Site 3",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        },
+        {
+          "position": 4,
+          "positionName": "Site 4",
+          "labwarePositions": [],
+          "labwareGroup": {
+            "labwareId": 166,
+            "groupName": "Transported EMPTY Falcon 48 well",
+            "reuseTipsBetweenSteps": false,
+            "liquidName": "",
+            "liquidType": "Water",
+            "liquidVolumeOptions": "CalculateForMe"
+          },
+          "liquidVolume": 0
+        },
+        {
+          "position": 5,
+          "positionName": "Site 5",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        },
+        {
+          "position": 6,
+          "positionName": "Site 6",
+          "labwarePositions": [],
+          "labwareGroup": {
+            "labwareId": 8,
+            "groupName": "Six fresh 300uL tips",
+            "reuseTipsBetweenSteps": false,
+            "liquidName": "",
+            "liquidType": "Water",
+            "liquidVolumeOptions": "CalculateForMe"
+          },
+          "liquidVolume": 0
+        },
+        {
+          "position": 7,
+          "positionName": "Site 7",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        },
+        {
+          "position": 8,
+          "positionName": "Site 8",
+          "labwarePositions": [],
+          "labwareGroup": null,
+          "liquidVolume": 0
+        }
+      ]
+    }
+  },
+  "prior_success": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\hamilton_api\\dry_run_60910d1cfa244d2ab20f38ce4b07636a\\result.json",
+  "prior_protocol_sha256": "5210919709c8e6e979ba9610f421996251cd0dde2e281916132aaba26600688c",
+  "operator_authorization": "Dry mock; transported 48-well at site4; empty Cellvis source site2 and six fresh 300uL tips site6 A1-A6 confirmed. Five real brightfield frames at previous saved single site approved.",
+  "hardware_motion_sent": false
+}

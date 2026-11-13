@@ -1,0 +1,88 @@
+{
+  "status": "stopped_or_uncertain",
+  "at": 1794384778.9398756,
+  "planned_cycles": 5,
+  "completed_cycles": 0,
+  "cycles": [],
+  "profile_sha256": "1ddb2a2a3029eacb34317581d204cca62c68fc992420c49140e9b8efee0a09bc",
+  "automatic_retries": false,
+  "operator_visual_result": "Not inferred from controller completion",
+  "initial": {
+    "camera": {
+      "age_s": 1.9,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": false,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.07065237878123298
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 250.51985684717908,
+        "J2": 84.87342790737603,
+        "J3": 52.07102165851282,
+        "J4": -140.76088205366005
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.817,
+        "X": 290.01,
+        "Y": 62.659,
+        "Z": 289.119
+      },
+      "program_state": {
+        "state": "paused",
+        "value": 2
+      },
+      "system_state": {
+        "state": "idle",
+        "value": 1
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "plate48_calibrate",
+      "state": "stopped"
+    },
+    "target": null,
+    "ts": 1794384779.3809733
+  },
+  "error": "Prepare the empty controller first; no automatic startup/reset.",
+  "finished_at": 1794384779.3890069
+}

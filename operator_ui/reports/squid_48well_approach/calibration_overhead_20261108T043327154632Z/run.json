@@ -1,0 +1,203 @@
+{
+  "status": "full_calibration_loaded_home_completed_pending_operator_assessment",
+  "at": 1794112407.3539808,
+  "authorization": "Operator confirmed: empty gripper, plate flat in calibration holder, arm released, pickup/Home/Squid route and hands clear, E-stop supervised; calibrate, pick up, and stop above Squid with plate retained. No release or holder descent.",
+  "initial_state": {
+    "camera": {
+      "age_s": 0.4,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 0.05393459287006408
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.41475732066021,
+        "J2": 84.87763751523032,
+        "J3": 52.06080799870999,
+        "J4": -140.8203243349624
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.882,
+        "X": 289.981,
+        "Y": 62.645,
+        "Z": 248.014
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -65.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1794112407.246757
+  },
+  "pickup_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+  "squid_plan_sha256": "4eb1eaef27adacfd0116b3376bc6765896aba0dbd0c05ac7429e4ff857352c81",
+  "events": [
+    {
+      "phase": "calibration_started",
+      "at": 1794112407.3554845
+    },
+    {
+      "phase": "alignment_descent_completed",
+      "at": 1794112552.6526651
+    },
+    {
+      "phase": "grip_completed",
+      "at": 1794112603.7095046
+    },
+    {
+      "phase": "proof_lift_completed",
+      "at": 1794112605.5946598
+    },
+    {
+      "phase": "calibrated_loaded_home_completed",
+      "at": 1794112619.3169622
+    }
+  ],
+  "automatic_retries": false,
+  "phase": "calibrated_loaded_home_completed",
+  "calibration_folder": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\projected_alignment\\accepted_y104_repeat_50d60a87452a4201815ee72280e31c80",
+  "final_state": {
+    "camera": {
+      "age_s": 0.6,
+      "device": {
+        "ip": "192.168.201.89",
+        "model": "JHEM600GM-HM",
+        "serial": "457108625727"
+      },
+      "enabled": true,
+      "error": "",
+      "open": true
+    },
+    "envelope": {
+      "X": {
+        "max": 450.0,
+        "min": 200.0
+      },
+      "Y": {
+        "max": 380.0,
+        "min": -250.0
+      },
+      "Z": {
+        "max": 400.0,
+        "min": 70.0
+      },
+      "enabled": true
+    },
+    "robot": {
+      "connected": true,
+      "control_mode": {
+        "mode": "auto",
+        "value": 1
+      },
+      "enabled": true,
+      "endpoint": "192.168.201.220:56788",
+      "errors": [],
+      "external_axes": {
+        "E1": 3.897946560755372
+      },
+      "external_axes_source": "native_motion_status",
+      "external_axes_units": {
+        "E1": "mm"
+      },
+      "joints": {
+        "J1": 209.42077305524313,
+        "J2": 84.87688914050068,
+        "J3": 52.05584991142706,
+        "J4": -140.8128286807219
+      },
+      "lua_app_initialized": true,
+      "ok": true,
+      "pose_mm": {
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": -3.88,
+        "X": 289.97,
+        "Y": 62.63,
+        "Z": 248.02
+      },
+      "program_state": {
+        "state": "running",
+        "value": 1
+      },
+      "system_state": {
+        "state": "running",
+        "value": 2
+      }
+    },
+    "sequence": {
+      "active": false,
+      "name": "researcher_home",
+      "state": "done"
+    },
+    "target": {
+      "config": "Wide",
+      "open_claw_trial": true,
+      "plate_profile_id": "48_well_projected_20261026",
+      "plate_profile_sha256": "446d252761215951c2e6ddbc46275998e129f21a9ed1b7333b99b7947954edf2",
+      "rz": 89.7652192188176,
+      "x": 312.0124178577057,
+      "y": -65.47790542678248,
+      "z_calibrated": 73.718
+    },
+    "ts": 1794112619.3144443
+  },
+  "finished_at": 1794112619.3169622
+}

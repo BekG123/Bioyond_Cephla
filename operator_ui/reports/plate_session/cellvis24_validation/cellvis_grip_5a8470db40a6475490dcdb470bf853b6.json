@@ -1,0 +1,41 @@
+{
+  "status": "stopped_or_uncertain",
+  "plan": {
+    "closure_policy": "approach10_final1mm_speed5_v2",
+    "start_e1_mm": 28,
+    "target_e1_mm": 3.9,
+    "commands": [
+      {
+        "from_e1_mm": 28,
+        "target_e1_mm": 4.9,
+        "delta_mm": 23.1,
+        "speed": 10,
+        "phase": "approach"
+      },
+      {
+        "from_e1_mm": 4.9,
+        "target_e1_mm": 3.9,
+        "delta_mm": 1.0000000000000004,
+        "speed": 5,
+        "phase": "finish"
+      }
+    ],
+    "command_count": 2,
+    "approach_speed": 10,
+    "final_speed": 5,
+    "final_distance_mm": 1.0,
+    "dispatch": false
+  },
+  "expected_pose": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.842,
+    "X": 312.495,
+    "Y": -66.304,
+    "Z": 78.718
+  },
+  "steps": [],
+  "lift_sent": false,
+  "force_limits_changed": false,
+  "error": "Controller not ready; no reset/retry"
+}

@@ -1,0 +1,298 @@
+{
+  "status": "failed_or_stopped",
+  "at": 1794129045.0716944,
+  "plan_id": "2026-11-08T09:10:35.754251+00:00:1794129035754",
+  "plan": {
+    "actions": [
+      "move_home"
+    ],
+    "labels": [
+      "Return Home"
+    ],
+    "dispatch": "ik_home_return",
+    "start": {
+      "X": 279.333,
+      "Y": 26.382,
+      "Z": 289.121,
+      "Rz": -3.905
+    },
+    "joints": {
+      "J1": 250.52213867753815,
+      "J2": 76.87227303212377,
+      "J3": 45.7802005139356,
+      "J4": -126.55731453812446
+    },
+    "e1": 0.03236325937905349,
+    "cfg": {
+      "reach_hard_mm": 460.0,
+      "j4_pref_abs_deg": 220.0,
+      "j4_hard_abs_deg": 220.0,
+      "inner_reach_mm": 280.0,
+      "claw_gap_min_mm": 60.0,
+      "claw_gap_max_mm": 88.0,
+      "base_x_mm": 126.0,
+      "base_y_mm": 0.0,
+      "link1_mm": 200.0,
+      "link2_mm": 200.0,
+      "j2_offset_deg": 0.0,
+      "j3_offset_deg": 180.0,
+      "j2_min_deg": -95.0,
+      "j2_margin_deg": 2.0,
+      "extension_margin_mm": 8.0
+    },
+    "envelope": {
+      "X": [
+        200.0,
+        450.0
+      ],
+      "Y": [
+        -250.0,
+        380.0
+      ],
+      "Z": [
+        70.0,
+        400.0
+      ]
+    },
+    "home": {
+      "X": 289.97,
+      "Y": 62.63,
+      "Z": 248.02,
+      "Rz": -3.88
+    },
+    "target_id": "ca6fbce88136a749e1e18af0e46b6ba145fd9b899f9e0cbc60e8f9dc1493dd69",
+    "points_sha256": "1c6d9d0e50344e26d2a692e88a2f5b7e6b6a251d4cdc065797510df95c029ed0",
+    "stages": [
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 279.33,
+            "Y": 26.38,
+            "Z": 300.0,
+            "Rz": -3.9
+          }
+        ]
+      },
+      {
+        "kind": "rotate",
+        "rz": -3.879999999999994
+      },
+      {
+        "kind": "queue",
+        "points": [
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 300.0,
+            "Rz": -3.88
+          },
+          {
+            "X": 289.97,
+            "Y": 62.63,
+            "Z": 248.02,
+            "Rz": -3.88
+          }
+        ]
+      }
+    ],
+    "checked": [
+      {
+        "pose": {
+          "X": 279.33,
+          "Y": 26.38,
+          "Z": 300.0,
+          "Rz": -3.9
+        },
+        "joints": {
+          "J1": 261.40113867753814,
+          "J2": 76.87239964648496,
+          "J3": 45.779218558521166,
+          "J4": -126.55145919707122
+        }
+      },
+      {
+        "pose": {
+          "X": 279.33,
+          "Y": 26.38,
+          "Z": 300.0,
+          "Rz": -3.879999999999994
+        },
+        "joints": {
+          "J1": 261.40113867753814,
+          "J2": 76.87239964648496,
+          "J3": 45.779218558521166,
+          "J4": -126.53145919707121
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 300.0,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 261.40113867753814,
+          "J2": 84.87688206683332,
+          "J3": 52.05596109242009,
+          "J4": -140.8126841513185
+        }
+      },
+      {
+        "pose": {
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 248.02,
+          "Rz": -3.88
+        },
+        "joints": {
+          "J1": 209.42113867753818,
+          "J2": 84.87688206683332,
+          "J3": 52.05596109242009,
+          "J4": -140.81268415131854
+        }
+      }
+    ],
+    "preserve_gripper": true,
+    "steps": [
+      {
+        "kind": "home_return",
+        "label": "Move to X279.33 / Y26.38 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Turn the wrist to -3.88 degrees at clearance height"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z300.00 mm"
+      },
+      {
+        "kind": "home_return",
+        "label": "Move to X289.97 / Y62.63 / Z248.02 mm"
+      }
+    ],
+    "requirements": [
+      "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+      "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+    ],
+    "summary": "Return Home from the current position using IK. Translation speed 137; wrist speed 30. Review the physical route before confirming.",
+    "id": "2026-11-08T09:10:35.754251+00:00:1794129035754",
+    "at": 1794129035.754251,
+    "source": "button",
+    "confirmation_source": "researcher_button"
+  },
+  "requirements_confirmed": [
+    "Confirm the lift, full wrist/arm/claw sweep, crossing and lowering shown below are clear; release the arm, keep hands clear and supervise the E-stop.",
+    "Any held plate is secure and can lift clear of its support. The claw position will stay unchanged."
+  ],
+  "physical_clearance_confirmed": true,
+  "dispatch_requested": true,
+  "response": {
+    "ok": true,
+    "message": "Returning Home. Keep hands clear."
+  },
+  "finished_at": 1794129047.1593654,
+  "sequence": {
+    "state": "error",
+    "name": "researcher_home",
+    "active": false,
+    "log": [
+      {
+        "t": 0.2,
+        "level": "info",
+        "msg": "Executing 1 explicitly approved points; 2 mm / 2 degree monitoring is relative to this reviewed route."
+      },
+      {
+        "t": 0.8,
+        "level": "info",
+        "msg": "Home: upload 1/1"
+      },
+      {
+        "t": 1.1,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.3,
+        "level": "info",
+        "msg": "Home: motion 0/100"
+      },
+      {
+        "t": 1.4,
+        "level": "info",
+        "msg": "Home: motion 6/100"
+      },
+      {
+        "t": 1.5,
+        "level": "info",
+        "msg": "Home: motion 52/100"
+      },
+      {
+        "t": 1.7,
+        "level": "info",
+        "msg": "Home: motion 94/100"
+      },
+      {
+        "t": 1.8,
+        "level": "info",
+        "msg": "Home: motion 99/100"
+      },
+      {
+        "t": 1.9,
+        "level": "info",
+        "msg": "Home: motion 100/100"
+      },
+      {
+        "t": 2.0,
+        "level": "err",
+        "msg": "SEQUENCE ERROR: TransferError: Home transit must keep wrist angle fixed; rotate separately."
+      }
+    ],
+    "result": {
+      "ok": false,
+      "error": "Home transit must keep wrist angle fixed; rotate separately.",
+      "failure_context": {
+        "frames": [
+          {
+            "path": "operator_ui/sequences.py",
+            "line": 431,
+            "function": "_run"
+          },
+          {
+            "path": "operator_ui/researcher_home.py",
+            "line": 415,
+            "function": "execute"
+          },
+          {
+            "path": "operator_ui/trajectory_queue.py",
+            "line": 221,
+            "function": "execute"
+          },
+          {
+            "path": "operator_ui/trajectory_queue.py",
+            "line": 71,
+            "function": "prepare_points"
+          },
+          {
+            "path": "operator_ui/straight_transfer.py",
+            "line": 22,
+            "function": "validate_home_transit"
+          }
+        ],
+        "location": {
+          "path": "operator_ui/straight_transfer.py",
+          "line": 22,
+          "function": "validate_home_transit"
+        },
+        "source": "def validate_home_transit(start, points):\n    \"\"\"Home translation batches: lift, level travel at >=300 mm, descent.\n\n    Wrist-only rotation is handled separately by the existing guarded executor.\n    This shape check does not establish physical clearance.\n    \"\"\"\n    if not 1 <= len(points) <= 3 or any(type(p.get(k)) not in (int,float) or not math.isfinite(p[k])\n                                       for p in [start]+list(points) for k in KEYS):\n        raise TransferError('Home transit requires one to three finite points.')\n    previous, phase = start, -1\n    for point in points:\n        xy=math.hypot(point['X']-previous['X'],point['Y']-previous['Y'])\n        dz=point['Z']-previous['Z']\n        if abs(wrap(point['Rz']-previous['Rz']))>.02:\n            raise TransferError('Home transit must keep wrist angle fixed; rotate separately.')\n        if xy<=.02 and .001<abs(dz)<=300:\n            next_phase=0 if dz>0 else 2\n        elif .001<xy<=500 and abs(dz)<=.02 and min(point['Z'],previous['Z'])>=299.99:\n            next_phase=1\n        else:\n            raise TransferError('Home transit must lift vertically, cross at clearance height, then descend vertically.')\n        if next_phase<=phase:\n            raise TransferError('Home transit has a repeated stage or reversal.')\n        phase,previous=next_phase,point",
+        "source_start_line": 8,
+        "source_sha256": "63b5c65308f9a4c4ee07c728acf15b2d333a8c0c91bdc982d3170b5ffeab5749",
+        "captured_at_failure": true
+      }
+    },
+    "target": null,
+    "detection_ts": 0.0
+  }
+}

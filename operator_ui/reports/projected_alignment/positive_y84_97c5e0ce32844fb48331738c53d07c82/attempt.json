@@ -1,0 +1,64 @@
+{
+  "at": 1793523298.319169,
+  "parent_sha256": "117ab05cfe1223abe32484277ab8a558429ca64acf9d4706bea97c49811923bc",
+  "endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.7652192188176,
+    "X": 312.0124178577057,
+    "Y": -67.47790542678248,
+    "Z": 73.718
+  },
+  "authorization": "Operator requested +Y 8.4 mm total from original pickup, empty claws, return Home then revised calibration. Stop open before grip.",
+  "status": "stopped_or_failed",
+  "events": [
+    {
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Positioning E2 at 1.77 degrees before calibration.",
+            "t": 4.9
+          },
+          {
+            "level": "info",
+            "msg": "E2 verified at 1.774 degrees (target 1.77).",
+            "t": 6.1
+          },
+          {
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5.",
+            "t": 6.2
+          },
+          {
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5.",
+            "t": 17.0
+          },
+          {
+            "level": "err",
+            "msg": "No three consecutive verified plate observations within 20 seconds; arm remains stopped.",
+            "t": 48.0
+          }
+        ],
+        "name": "plate48_calibrate",
+        "result": {
+          "error": "No three consecutive verified plate observations within 20 seconds; arm remains stopped.",
+          "ok": false
+        },
+        "state": "error",
+        "target": null
+      }
+    }
+  ],
+  "grip_executed": false,
+  "squid_destination_changed": false,
+  "visual_acceptance_pending": true,
+  "error": "{'error': 'No three consecutive verified plate observations within 20 seconds; arm remains stopped.', 'ok': False}",
+  "stop": {
+    "ok": true,
+    "reply": "CmdDone"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "successful_runs_compared": 12,
+  "successful_observations": 108,
+  "successful_processing_seconds": {
+    "min": 0.236632,
+    "median": 1.5891440000000001,
+    "max": 4.752924
+  },
+  "failed_processing_seconds": [
+    [
+      14.534137,
+      6.340743
+    ],
+    [
+      18.318596
+    ],
+    [
+      14.213693,
+      6.204175
+    ]
+  ],
+  "immediate_cause": "The 20-second wall-clock deadline includes capture, median/PNG creation, image registration, pose/fault queries, and logging. It expires after 1-2 accepted observations, before the required third.",
+  "correction_to_earlier_explanation": "Audit timestamps bracket processing plus post-measurement pose checks and event overhead, not pure vision CPU time. Pure offline measurement is much faster.",
+  "offline_result": "Same stored images and validated dependencies: first measurement about 3.3 s, second 1.5 s, third 0.2 s. ECC accounts for about 2.7 s of the initial 3.3 s. Thread counts 1/4/24 and main/worker execution preserve identical results; 1 thread was slower.",
+  "placement": {
+    "reference": {
+      "x": 305.42956369830483,
+      "y": -73.40583994565065,
+      "rz": 89.72472486215486
+    },
+    "first_measured": {
+      "x": 305.96384793122024,
+      "y": -73.64374486258268,
+      "rz": 89.87332460799962
+    },
+    "lateral_error_mm": 0.5848575818457364,
+    "yaw_error_deg": 0.14859974584476277,
+    "lateral_reuse_limit_mm": 0.5,
+    "yaw_reuse_limit_deg": 0.2
+  },
+  "uncertainty": "Exact source of live-console slowdown is not isolated by current logs. Offline replay does not reproduce 14-18 s. There is no evidence that changing CPU thread count fixes it. Current images may represent plate/camera registration shift; this does not independently prove physical displacement.",
+  "recommended_next_steps": [
+    "Instrument capture, fitting, post-fit controller checks, and audit durations separately in the live observation path before another hardware run.",
+    "Budget bounded stationary acquisition explicitly while retaining three fresh consistent observations, fault checks, and pose stability checks.",
+    "Resolve the measured placement discrepancy by reseating/rechecking or a separately reviewed correction; do not silently reuse the taught endpoint."
+  ],
+  "hardware_actions_during_investigation": [],
+  "production_code_changed": false
+}

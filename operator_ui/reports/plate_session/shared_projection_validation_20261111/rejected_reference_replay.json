@@ -1,0 +1,207 @@
+{
+  "motion_started": false,
+  "hardware_accessed": false,
+  "ik_checked": true,
+  "source": "C:\\Users\\Cephla\\Downloads\\Bioyond_Cephla\\Bioyond_Cephla\\operator_ui\\reports\\plate_session\\cellvis24_workflows\\bc7a778234df4e33a875440d6bc04774\\run.json",
+  "source_sha256": "8797f15c5003027f3a8b88cbc6055e39ef1c9481e8908830821a36ea6581decd",
+  "camera_reference_sha256": "7296c9a7fbdabb3e60dfc778dbfef5a90d60bea9996c3585eb186421bda7efbb",
+  "taught_sequence_sha256": "4a21771cc58c2671e0cd86ac8d54fcc9a45c8f12877eeaaa9f696546ccef3b6c",
+  "implementation": {
+    "operator_ui/projected_plate_calibration.py": "879e27d72456b459d724a93cb45ca72ae10dc38426fd1a3a40d4fe2da1a26858",
+    "operator_ui/cellvis24_calibration.py": "4e0f214e0d3c8c03152ea64481fc4300cf0f722865aac4db6ee414814e27cad1",
+    "operator_ui/cellvis24_observation.py": "2733c8084536e7272807abe13a72c64eee0d7e957a41accfd0cb8f2d68b1ee05",
+    "operator_ui/cellvis24_image_pipeline.py": "c07463dadb588b07c52e16a214547a36b53eefa567492128131f10d6317f3d51",
+    "operator_ui/cellvis24_workflow.py": "2a826fc4051f91becf96de6974921ad7a532002a0686ebcdf46b5f3ee44c8413",
+    "Pick and Hold/Align/plate_pose/grid_preview.py": "677e07259ed135fec8f2cb9494e8e8eb448a11404f8bae87a2fb18994b54a274"
+  },
+  "old_fixed_reference_assessment": {
+    "stationary_checks_passed": true,
+    "xy_spread_mm": 0.0615481385883447,
+    "target_xy_spread_mm": 0.16865252864732458,
+    "corner_spread_preview_px": 0.7758754498480984,
+    "yaw_spread_deg": 0.05606492068267244,
+    "motion_authorized": false,
+    "full_calibration_complete": false,
+    "accepted_reference_reused": false,
+    "depth_estimated": false,
+    "bursts": [
+      {
+        "shift_mm": 0.4211728571934218,
+        "yaw_delta_deg": 0.23997564402100124,
+        "calibration_error_mm": 0.3329841573525841
+      },
+      {
+        "shift_mm": 0.4221923398864535,
+        "yaw_delta_deg": 0.2527954013256135,
+        "calibration_error_mm": 0.33424233561400746
+      },
+      {
+        "shift_mm": 0.48083701040590704,
+        "yaw_delta_deg": 0.2960405647036737,
+        "calibration_error_mm": 0.33708609004260176
+      }
+    ],
+    "limits": {
+      "xy_mm": 0.5,
+      "yaw_deg": 0.2,
+      "calibration_error_mm": 0.75
+    },
+    "max_shift_mm": 0.48083701040590704,
+    "max_yaw_delta_deg": 0.2960405647036737,
+    "max_calibration_error_mm": 0.33708609004260176,
+    "xy_limit_straddled": false,
+    "ok": false,
+    "code": "reference_mismatch",
+    "message": "Cellvis camera reference check failed: maximum estimated target shift 0.481 mm (limit 0.500), yaw 0.296 degrees (limit 0.200), center error 0.337 mm (limit 0.750). No descent; inspect the saved measurements and seating."
+  },
+  "solution": {
+    "plate_id": "cellvis_p24_1_5h_n",
+    "grid": [
+      4,
+      6
+    ],
+    "measured_target": {
+      "x": 306.21260489839244,
+      "y": -73.93365682415278,
+      "rz": 90.05399120034872
+    },
+    "reference_target": {
+      "x": 305.9226624550145,
+      "y": -74.24054402067104,
+      "rz": 89.8011957990231
+    },
+    "taught_endpoint": {
+      "X": 312.5,
+      "Y": -66.3,
+      "Z": 75.72,
+      "Rz": 89.84
+    },
+    "endpoint": {
+      "X": 312.7548439672614,
+      "Y": -65.96417023525292,
+      "Z": 75.72,
+      "Rz": 90.09279540132559
+    },
+    "endpoint_shift_mm": 0.42157689516814906,
+    "yaw_delta_deg": 0.2527954013256135,
+    "grip_e1_mm": 3.9,
+    "quality": {
+      "target_xy_spread_mm": 0.16865252864732458,
+      "xy_spread_mm": 0.0615481385883447,
+      "corner_spread_preview_px": 0.7758754498480984,
+      "yaw_spread_deg": 0.05606492068267244
+    },
+    "method": "projected-two-disks-vendor-wide+taught-rigid-grasp-v1",
+    "depth_estimated": false,
+    "correction_applied_once": true,
+    "physical_acceptance": "pending",
+    "grip_authorized": false
+  },
+  "steps": [
+    {
+      "cycle": 0,
+      "flags": {},
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Reach accepted camera observation pose",
+      "points": [
+        {
+          "Rz": -3.88,
+          "X": 289.97,
+          "Y": 62.63,
+          "Z": 289.129
+        },
+        {
+          "Rz": -3.88,
+          "X": 279.379,
+          "Y": 25.829,
+          "Z": 289.129
+        }
+      ],
+      "speed": 5,
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "vision",
+      "label": "Measure Cellvis rim, 4x6 grid and projected disks",
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "holder": true,
+      "holder_angle": 1.77,
+      "hover_z": 300,
+      "kind": "align",
+      "label": "Align with accepted Cellvis gripping edges",
+      "station": "calibration",
+      "target": {
+        "x": 312.7548439672614,
+        "y": -65.96417023525292,
+        "rz": 90.09279540132559,
+        "z_calibrated": 75.72
+      },
+      "translation_speed": 15
+    },
+    {
+      "cycle": 0,
+      "flags": {
+        "home_speed137": true,
+        "home_transit": true
+      },
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Fast open-jaw approach",
+      "points": [
+        {
+          "Rz": 90.09279540132559,
+          "X": 312.7548439672614,
+          "Y": -65.96417023525292,
+          "Z": 95.72
+        }
+      ],
+      "speed": 137,
+      "station": "calibration"
+    },
+    {
+      "cycle": 0,
+      "flags": {
+        "vertical_runs": true
+      },
+      "holder": true,
+      "holder_angle": 1.77,
+      "kind": "queue",
+      "label": "Final open-jaw descent",
+      "points": [
+        {
+          "Rz": 90.09279540132559,
+          "X": 312.7548439672614,
+          "Y": -65.96417023525292,
+          "Z": 75.72
+        }
+      ],
+      "speed": 5,
+      "station": "calibration"
+    }
+  ],
+  "final": {
+    "pose_mm": {
+      "Rz": 90.09279540132559,
+      "X": 312.7548439672614,
+      "Y": -65.96417023525292,
+      "Z": 75.72
+    },
+    "joints": {
+      "J1": 37.12098049436665,
+      "J2": 40.86612763157537,
+      "J3": 59.3600164283298,
+      "J4": -10.133287356543576
+    }
+  },
+  "physical_acceptance": "pending",
+  "grip_authorized": false
+}

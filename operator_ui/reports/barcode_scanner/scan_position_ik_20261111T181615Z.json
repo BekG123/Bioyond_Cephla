@@ -1,0 +1,85 @@
+{
+  "at": "2026-11-11T18:16:15.440783+00:00",
+  "purpose": "Empty-gripper scanner positioning feasibility; no motion",
+  "payload": "empty per user",
+  "source": "controller/main.bin:main/modScan.lua",
+  "source_sha256": "1550dcae23b18792853b359991ae7c476e0a840cbb3587b1158cbb4af79c6970",
+  "target": {
+    "X": 80.882,
+    "Y": -143.514,
+    "Z": 189.162,
+    "Rz": -1.633
+  },
+  "target_note": "Nominal vendor LP1; object-specific VAR7 Z adjustment not applied; physical scanner alignment unverified",
+  "start": {
+    "X": 289.97,
+    "Y": 62.63,
+    "Z": 248.02,
+    "Rz": -3.88
+  },
+  "start_joints": {
+    "J1": 209.4211879334902,
+    "J2": 84.87684236708007,
+    "J3": 52.05594907317273,
+    "J4": -140.8128286807219
+  },
+  "start_evidence": "Last successful console state read in this turn; connection subsequently lost. Not a fresh dispatch pose.",
+  "current_robot": {
+    "connected": false,
+    "ok": true
+  },
+  "params": {
+    "base_x_mm": 126.0,
+    "base_y_mm": 0.0,
+    "claw_gap_max_mm": 88.0,
+    "claw_gap_min_mm": 60.0,
+    "extension_margin_mm": 8.0,
+    "inner_reach_mm": 280.0,
+    "j2_margin_deg": 2.0,
+    "j2_min_deg": -95.0,
+    "j2_offset_deg": 0.0,
+    "j3_offset_deg": 180.0,
+    "j4_hard_abs_deg": 220.0,
+    "j4_pref_abs_deg": 220.0,
+    "link1_mm": 200.0,
+    "link2_mm": 200.0,
+    "reach_hard_mm": 460.0
+  },
+  "envelope": {
+    "X": [
+      200.0,
+      450.0
+    ],
+    "Y": [
+      -250.0,
+      380.0
+    ],
+    "Z": [
+      70.0,
+      400.0
+    ]
+  },
+  "endpoint_ik": {
+    "J1": 150.56318793349018,
+    "J2": -39.5442959007229,
+    "J3": 44.18433223414617,
+    "J4": -6.273073573892361
+  },
+  "workspace_violations": [
+    {
+      "axis": "X",
+      "target": 80.882,
+      "allowed": [
+        200.0,
+        450.0
+      ]
+    }
+  ],
+  "direct_path": {
+    "passed": false,
+    "reason": "path outside X envelope"
+  },
+  "motion_sent": false,
+  "limits_changed": false,
+  "collision_clearance_verified": false
+}

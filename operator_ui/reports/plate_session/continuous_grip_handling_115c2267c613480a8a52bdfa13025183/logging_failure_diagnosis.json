@@ -1,0 +1,32 @@
+{
+  "recorded_at": 1794399168.8591871,
+  "failure": "Windows error 5 replacing run.tmp with run.json",
+  "component": "Host run-record persistence",
+  "finding": "Final failure record was saved later; consistent with transient replacement lock. Lock-owning process not identified.",
+  "completed_cycles": 0,
+  "phase": "Hamilton delivery / short-side pickup",
+  "action": "Runner requested stop; no motion retried by this fix.",
+  "fix": {
+    "writer": "operator_ui/run_record_io.py",
+    "underlying": "operator_ui/squid_bridge/state_io.py",
+    "file_replacement_retry_delays_s": [
+      0.02,
+      0.04,
+      0.08,
+      0.16,
+      0.2,
+      0.2
+    ],
+    "unique_tempfile": true,
+    "atomic_replacement": true,
+    "motion_retry": false,
+    "persistent_failure": "Propagates; existing stop handling remains."
+  },
+  "validation": {
+    "passed": 36,
+    "skipped": 1,
+    "tests": 37,
+    "hardware_motion": false
+  },
+  "original_run_record_preserved": true
+}

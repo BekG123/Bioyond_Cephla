@@ -1,0 +1,64 @@
+{
+  "at": 1793535695.932905,
+  "parent_sha256": "44dcec1ffe290b3cb5d1d8f905f9f62811fed8335fa835b0b83c856a90ff4c89",
+  "endpoint": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": 89.7652192188176,
+    "X": 312.0124178577057,
+    "Y": -63.37790542678249,
+    "Z": 73.718
+  },
+  "authorization": "Operator requested +Y 12.5 mm total from original pickup, empty claws, return Home then revised calibration. Stop open before grip.",
+  "status": "stopped_or_failed",
+  "events": [
+    {
+      "sequence": {
+        "active": false,
+        "detection_ts": 0.0,
+        "log": [
+          {
+            "level": "info",
+            "msg": "Positioning E2 at 1.77 degrees before calibration.",
+            "t": 5.7
+          },
+          {
+            "level": "info",
+            "msg": "E2 verified at 1.774 degrees (target 1.77).",
+            "t": 7.0
+          },
+          {
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5.",
+            "t": 7.0
+          },
+          {
+            "level": "info",
+            "msg": "Moving to the reviewed 48-well observation position at speed 5.",
+            "t": 16.0
+          },
+          {
+            "level": "err",
+            "msg": "48-well plate placement changed. Review or reteach before reusing its descent; no automatic endpoint adjustment.",
+            "t": 31.8
+          }
+        ],
+        "name": "plate48_calibrate",
+        "result": {
+          "error": "48-well plate placement changed. Review or reteach before reusing its descent; no automatic endpoint adjustment.",
+          "ok": false
+        },
+        "state": "error",
+        "target": null
+      }
+    }
+  ],
+  "grip_executed": false,
+  "squid_destination_changed": false,
+  "visual_acceptance_pending": true,
+  "error": "{'error': '48-well plate placement changed. Review or reteach before reusing its descent; no automatic endpoint adjustment.', 'ok': False}",
+  "stop": {
+    "ok": true,
+    "reply": "CmdDone"
+  }
+}

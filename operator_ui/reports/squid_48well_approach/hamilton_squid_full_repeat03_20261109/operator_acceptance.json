@@ -1,0 +1,59 @@
+{
+  "schema": "cephla.operator-accepted-workflow.v1",
+  "recorded_at_utc": "2026-11-10T05:17:14.341230+00:00",
+  "operator_statement": "Save this full workflow as a skill, it worked succesfully",
+  "outcome": "Operator accepted full Hamilton/Squid drop-off and retrieval round trip",
+  "elapsed_s": 102.09,
+  "completed_round_trips": 1,
+  "final_pose": {
+    "Rx": 0.0,
+    "Ry": 0.0,
+    "Rz": -1.1,
+    "X": 186.42,
+    "Y": -366.27,
+    "Z": 45.198
+  },
+  "final_e1_mm": 3.8932727184146643,
+  "controller_errors": [],
+  "final_plate_state": "Held at Hamilton; no final release",
+  "sequence": [
+    "Hamilton",
+    "Home",
+    "Squid release",
+    "empty Home",
+    "Squid pickup",
+    "loaded Home",
+    "Hamilton"
+  ],
+  "artifact_sha256": {
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/dropoff/dropoff_approach_plan_20261103.json": "a3d98218cb0dbba0a059ccb3cffcf275d567364c66c995510f7d52dc8d55c92a",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/dropoff/dropoff_approach_trial_20261103.json": "060ddf461e589fc8851dd1561f4bf79e6ef629b9cb30bd6f71c0677ec093b61d",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/dropoff/empty_return_plan_20261103.json": "7ca8326828221fc2c58ac3fa3167a9da4971dca5b649343161137a3158a08eba",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/dropoff/empty_return_trial_20261103.json": "002fb508c34ad7d91106fb93c770d096ab07ff0d6d7b4a4753d7e399ee9958cf",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/dropoff/release_empty_home_20261103.json": "8b2d6ba3729486d9b560d722af57626d6c9f69c49cb3f9fbadd83c798756bfe0",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/final_hamilton.json": "acb2e28c54558088ff6722c8129252cc9eb238b8f9d1f341f81c005bbea83b1b",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/forward_dispatch.json": "4c5860971dcedf1c9704c059fbb5ee6f7dd799c181c7b0a7429614211d397c32",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/initial_home.json": "aa582e67c1a718fa8dff7c8b080214709fe5510c5171a3d5006cbc2a25b08d0f",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/pickup/pickup_approach_plan_20261103.json": "aa90c9c107c7e31fa1690528812a39e2bd17f9393d40d62680a763de7d032ccb",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/pickup/pickup_approach_trial_20261103.json": "a773ec09145de839fcaf5d3a7ad1e5c2eca68d926b27c2c2120559acf2cc9d5b",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/pickup/pickup_home_trial_20261103.json": "77a488fc5b582f5ca6dc1d45fd5c8b4ed0639a343699095a075df68282bb12b0",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/pickup/pickup_loaded_return_plan_20261103.json": "9ca437fde95f659e69ef5a28c141f4b5b54579fb26b2747f4aba42cc6c7b0723",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/pickup/pickup_loaded_return_trial_20261103.json": "915bd4e7fc83cc0936ee7ce8045c4ade4c4e81221ba360682709453fa7f45474",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/reverse_dispatch.json": "4c5860971dcedf1c9704c059fbb5ee6f7dd799c181c7b0a7429614211d397c32",
+    "operator_ui/reports/squid_48well_approach/hamilton_squid_full_repeat03_20261109/run.json": "44686bd83253b50f471469635a502ed69b71a9647ad3f18c829ba774bf78eb83",
+    "operator_ui/reports/trajectory_smoothing/hamilton_reteach_20261108/reverse_squid_full_repeat03_20261109.json": "880fa7f164c9c18f83de8071ee3a3d96e7a4cc673bbc089c0f00d555c3036a0e",
+    "operator_ui/reports/trajectory_smoothing/hamilton_reteach_20261108/forward_squid_full_repeat03_20261109.json": "610b9768cf0bab8334ad79b34c4b93191e687106cfbf95e87203a883cbd8412b"
+  },
+  "implementation_sha256": {
+    "operator_ui/hamilton_squid_full_repeat03_20261109.py": "68558542daa9faf2cae81e87aa1e85ffc21a97d22d5abb2d56d628ac50aae078",
+    "operator_ui/hamilton_reteach_trial.py": "dd565665aa3c1d507b9a6a07050581f4fb1dd43dfb88d1e36ca29b3309515c5f",
+    "operator_ui/squid_handling_route.py": "5ca53d0f07870a2db1eee3ee2ee47eccb827e344447c7f90edb29e260e6cb49c",
+    "operator_ui/dropoff_approach_20261103.py": "c37815645cb031bcf4f6d1a677bf6531c9ee41d5c20c9f953eeedc387ac071f7",
+    "operator_ui/release_empty_home_20261103.py": "297f56f2e61e5e49f3c36c5411cc3855313fa4b5a5b2dbffe65bae44959b302e",
+    "operator_ui/pickup_squid_home_20261103.py": "4d06bfef4fbd57b77e36c03e425fc06aa4995cb7a1e0983a86d9ef513b0ccb4e",
+    "operator_ui/execute_continuous_squid_return_20261103.py": "433e0f8266d8f5fee1c75e496029cd70520197f05c60550286bd78513238fe52"
+  },
+  "telemetry_modified": false,
+  "skill": "Codex SKILLS/hamilton-squid-roundtrip-v1",
+  "runtime_dependencies": "Existing local Flask owner, published Lua trajectory program, robot configuration and pinned November 8 station geometry; this record does not certify a clean deployment."
+}
